@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
 
-class SplashController extends GetxController {
-  //TODO: Implement SplashController
+import '../../../database/auth_database.dart';
+import '../../../routes/app_pages.dart';
 
-  final count = 0.obs;
+class SplashController extends GetxController {
   @override
   void onInit() {
+    print('init calling');
+    navNextPage();
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void navNextPage() async {
+    await 900.milliseconds.delay();
+    AuthDatabase authDatabase = AuthDatabase.instance;
+    if (authDatabase.auth()) {
+      Get.offAndToNamed(Routes.HOME);
+    } else {
+      Get.offAndToNamed(Routes.HOME);
+    }
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
