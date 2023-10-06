@@ -64,7 +64,6 @@ class LoginView extends GetView<LoginController> {
               10.verticalSpacing,
               CustomTextFormField(
                 iconOnTap: () {
-
                 },
                 // obsCureText: passwordVisible,
                 fillColor: const Color(0xFFF4EBFC),
