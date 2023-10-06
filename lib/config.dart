@@ -1,4 +1,6 @@
 
+import 'package:flutter_single_getx_api_v2/config/app_config.dart';
+
 /// app development state
 class Environments {
   static const String PRODUCTION = 'prod';
@@ -20,7 +22,7 @@ class ConfigEnvironments {
     },
     {
       'env': Environments.DEV,
-      'url': 'https://salesmaster.pixelcoder.net/',
+      'url': '${AppConfig.domainName}/',
     },
     {
       'env': Environments.QAS,
