@@ -24,7 +24,7 @@ class LoginView extends GetView<LoginController> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              50.verticalSpacing,
+
               Image.asset(
                 ImagePath.appLogo,
                 height: 37,
