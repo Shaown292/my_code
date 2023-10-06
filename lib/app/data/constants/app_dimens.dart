@@ -25,5 +25,7 @@ class AppDimens{
   static const radius8 = 8.0;
   static const radius7 = 7.0;
   static const radius6 = 6.0;
+  static const radius5 = 6.0;
   static const radius4 = 4.0;
+  static const radius3 = 4.0;
 }
