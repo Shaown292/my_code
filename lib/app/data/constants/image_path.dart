@@ -11,7 +11,6 @@ class ImagePath {
   static const  splashTopLine         = "assets/config/splash_top_line.png";
 
 
-
   static const  timeline = "assets/images/timeline.png" ;
   static const  attendance = "assets/images/attendance.png" ;
   static const  examination = "assets/images/examination.png" ;
