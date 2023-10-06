@@ -16,4 +16,9 @@ class AppColors {
   static const homeTextColor = Color(0xFF943AE3);
   static const homeIconBackgroundColor = Color(0xFFF4EBFC);
 
+
+  /// Home Colors
+
+  static const dividerColorSelected = Color(0xFFEBD8FC);
+
 }
