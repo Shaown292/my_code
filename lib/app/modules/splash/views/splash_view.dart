@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
@@ -15,7 +16,7 @@ class SplashView extends GetView<SplashController> {
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/splash_bg.png"),
+                image: AssetImage(ImagePath.logo),
                 fit: BoxFit.fill
             )
         ),
@@ -23,13 +24,15 @@ class SplashView extends GetView<SplashController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset("assets/images/logo.svg"),
+            SvgPicture.asset(ImagePath.splashBackground),
             const Text(
               "ULTIMATE EDUCATION ERP",
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 15,
-                  color: Colors.white
+                  color: Colors.white,
+                fontFamily: 'poppins_medium'
+
               ),
             )
           ],

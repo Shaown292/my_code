@@ -31,7 +31,7 @@ flutter:
 
 
 fonts:
-  - family: popins
+  - family: poppins
     fonts:
       - asset: fonts/poppins_medium.ttf
         weight: 100
