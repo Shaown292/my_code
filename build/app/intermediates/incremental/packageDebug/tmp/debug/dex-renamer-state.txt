@@ -1,4 +1,0 @@
-#Mon Oct 09 09:27:17 BDT 2023
-base.0=/Applications/MAMP/htdocs/Flutter_Projects/101_flutter_single_getx_api_v2/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
