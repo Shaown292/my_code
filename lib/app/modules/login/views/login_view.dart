@@ -16,71 +16,100 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.secondaryColor,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-
-              Image.asset(
-                ImagePath.appLogo,
-                height: 37,
-                width: 130,
-              ),
-              20.verticalSpacing,
-              Row(
-                children: <Widget>[
-                  CustomElevatedButton(
-                    onPressed: () {},
-                    text: 'Student',
-                    topLeft: 8.0,
-                    bottomLeft: 8.0,
-                  ),
-                  CustomElevatedButton(
-                    onPressed: () {},
-                    text: 'Teacher',
-                  ),
-                  CustomElevatedButton(
-                    onPressed: () {},
-                    text: 'Parent',
-                    topRight: 8.0,
-                    bottomRight: 8.0,
-                  ),
-                ],
-              ),
-              30.verticalSpacing,
-              const CustomTextFormField(
-                fillColor: Color(0xFFFDFBFF),
-                focusBorderActive: true,
-                enableBorderActive: true,
-                suffixIcon: Icon(
-                  Icons.email,
-                  color: AppColors.loginIconColor,
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColors.primaryColor, AppColors.appBackgroundColor],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: Container(
+                    height: 38,
+                    width: 130,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(ImagePath.appLogo),
+                      )
+                    ),
+                  )
                 ),
-              ),
-              10.verticalSpacing,
-              CustomTextFormField(
-                iconOnTap: () {
-                },
-                // obsCureText: passwordVisible,
-                fillColor: const Color(0xFFF4EBFC),
-                focusBorderActive: true,
-                enableBorderActive: true,
-                suffixIcon: const Icon(
-                  Icons.lock,
-                  // passwordVisible ? Icons.lock : Icons.lock_open,
-                  color: AppColors.loginIconColor,
+                Container(
+                  height: 500,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+                    color: Colors.white
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      30.verticalSpacing,
+                      Row(
+                        children: <Widget>[
+                          CustomElevatedButton(
+                            onPressed: () {},
+                            text: 'Student',
+                            topLeft: 8.0,
+                            bottomLeft: 8.0,
+                          ),
+                          CustomElevatedButton(
+                            onPressed: () {},
+                            text: 'Teacher',
+                          ),
+                          CustomElevatedButton(
+                            onPressed: () {},
+                            text: 'Parent',
+                            topRight: 8.0,
+                            bottomRight: 8.0,
+                          ),
+                        ],
+                      ),
+                      30.verticalSpacing,
+                      const CustomTextFormField(
+                        fillColor: Color(0xFFFDFBFF),
+                        focusBorderActive: true,
+                        enableBorderActive: true,
+                        hintText: "Email",
+                        suffixIcon: Icon(
+                          Icons.email,
+                          color: AppColors.loginIconColor,
+                        ),
+                      ),
+                      10.verticalSpacing,
+                      CustomTextFormField(
+                        iconOnTap: () {
+                        },
+                        // obsCureText: passwordVisible,
+                        fillColor: const Color(0xFFF4EBFC),
+                        hintText: "Password",
+                        focusBorderActive: true,
+                        enableBorderActive: true,
+                        suffixIcon: const Icon(
+                          Icons.lock,
+                          // passwordVisible ? Icons.lock : Icons.lock_open,
+                          color: AppColors.loginIconColor,
+                        ),
+                      ),
+                      60.verticalSpacing,
+                      PrimaryButton(
+                        onTap: () => Get.offAndToNamed(Routes.PROFILE),
+                        text: 'Login',
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              20.verticalSpacing,
-              PrimaryButton(
-                onTap: () => Get.offAndToNamed(Routes.HOME),
-                text: 'Login',
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

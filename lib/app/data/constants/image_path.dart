@@ -9,6 +9,9 @@ class ImagePath {
   static const  splashBackground      = "assets/config/splash_bg.png";
   static const  splashLogo            = "assets/config/splash_logo.png";
   static const  splashTopLine         = "assets/config/splash_top_line.png";
+  static const  messenger             = "assets/config/messenger.png";
+  static const  logout                = "assets/config/logout.png";
+  static const  edit                  = "assets/config/edit.png";
 
 
 
@@ -32,5 +35,10 @@ class ImagePath {
   static String examination         = "assets/svg/student/examination.svg";
   static String leave               = "assets/svg/student/leave.svg";
 
+
+  ///Profile Detail Icon
+
+
+  static String calender            = "assets/images/calendar.png";
 
 }

@@ -27,7 +27,7 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: fillColor ?? const Color(0xFFFDFBFF),
-        hintText: 'Enter text',
+        hintText: hintText ?? 'Enter text',
         suffixIcon:
             InkWell(
               onTap: iconOnTap,
@@ -35,13 +35,13 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: focusBorderActive
             ? OutlineInputBorder(
                 borderSide: const BorderSide(color: Color(0xFFEBDAF9)),
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(8.0),
               )
             : null,
         enabledBorder: enableBorderActive
             ? OutlineInputBorder(
                 borderSide: const BorderSide(color: Color(0xFFEBDAF9)),
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(8.0),
               )
             : null,
       ),

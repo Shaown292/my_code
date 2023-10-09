@@ -10,6 +10,7 @@ class AppColors {
   static const boxBorderColor     = Color(0x4C67329B);
   static const dividerColor       = Color(0xFFEBD8FC);
   static const smallCardColor     = Color(0xFFF4EBFC);
+  static const appBackgroundColor = Color(0xFF6100B8);
 
  /// Text Colors
 

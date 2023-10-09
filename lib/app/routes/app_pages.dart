@@ -1,3 +1,5 @@
+import 'package:flutter_single_getx_api_v2/app/modules/profile/bindings/profile_bindings.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }
