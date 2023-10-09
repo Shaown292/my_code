@@ -14,17 +14,13 @@ class ImagePath {
   static const  edit                  = "assets/config/edit.png";
 
 
-  static const  homework = "assets/images/homework.png" ;
-  static const  studyMaterials = "assets/images/studyMaterials.png" ;
-  static const  onlineExamination = "assets/images/onlineExam.png" ;
-
   /// Student Tile Icons
   static String homeWork            = "assets/svg/student/homework.svg";
   static String library             = "assets/svg/student/library.svg";
   static String notice              = "assets/svg/student/notice.svg";
-  static String online_exam         = "assets/svg/student/online_exam.svg";
+  static String onlineExam         = "assets/svg/student/online_exam.svg";
   static String settings            = "assets/svg/student/settings.svg";
-  static String study_materials     = "assets/svg/student/study_materials.svg";
+  static String studyMaterials     = "assets/svg/student/study_materials.svg";
   static String subjects            = "assets/svg/student/subjects.svg";
   static String teacher             = "assets/svg/student/teacher.svg";
   static String timeline            = "assets/svg/student/timeline.svg";

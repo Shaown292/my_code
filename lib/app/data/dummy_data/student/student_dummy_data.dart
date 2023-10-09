@@ -14,11 +14,11 @@ class StudentTileModelClass {
 
 List<StudentTileModelClass> student = [
   StudentTileModelClass(icon: ImagePath.homeWork, title: 'HomeWork', value: 'HomeWork'),
-  StudentTileModelClass(icon: ImagePath.study_materials, title: 'Study Materials', value: 'Study Materials'),
+  StudentTileModelClass(icon: ImagePath.studyMaterials, title: 'Study Materials', value: 'Study Materials'),
   StudentTileModelClass(icon: ImagePath.timeline, title: 'Timeline', value: 'Timeline'),
   StudentTileModelClass(icon: ImagePath.attendance, title: 'Attendance', value: 'Attendance'),
   StudentTileModelClass(icon: ImagePath.examination, title: 'Examination', value: 'Examination'),
-  StudentTileModelClass(icon: ImagePath.online_exam, title: 'Online Exam', value: 'Online Exam'),
+  StudentTileModelClass(icon: ImagePath.onlineExam, title: 'Online Exam', value: 'Online Exam'),
   StudentTileModelClass(icon: ImagePath.leave, title: 'Leave', value: 'Leave'),
   StudentTileModelClass(icon: ImagePath.notice, title: 'Notice', value: 'Notice'),
   StudentTileModelClass(icon: ImagePath.subjects, title: 'Subjects', value: 'Subjects'),
