@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
@@ -45,10 +46,11 @@ class ProfileView extends GetView<ProfileController>{
             child:  Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: 15,
@@ -60,23 +62,29 @@ class ProfileView extends GetView<ProfileController>{
                         ),
                       ),
                       10.horizontalSpacing,
-                      const Column(
+                       const Column(
                         children: [
                           Text(
                             "Date of birth",
                             style: TextStyle(
-                              color: Color(0xFF8489AB)
+                              color: AppColors.profileSecondaryColor
                             ),
                           ),
                           Text(
-                            "Date of birth",
+                            AppText.dateOfBirth,
                             style: TextStyle(
-                                color: Color(0xFF8489AB)
+                                color: AppColors.profileHighlightedColor
                             ),
                           ),
+
                         ],
                       ),
                     ],
+                  ),
+                  10.verticalSpacing,
+                  const Divider(
+                    thickness: 2,
+                    color: AppColors.profileDividerColor,
                   ),
 
                 ],

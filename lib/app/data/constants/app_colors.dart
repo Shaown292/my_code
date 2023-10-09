@@ -22,4 +22,14 @@ class AppColors {
 
   static const dividerColorSelected = Color(0xFFEBD8FC);
 
+
+
+  /// Profile Colors
+
+  static const profileTopContainerColor = Color(0xFFF4EBFC);
+  static const profilePrimaryColor = Color(0xFF67329B);
+  static const profileSecondaryColor = Color(0xFF8489AB);
+  static const profileHighlightedColor = Color(0xFF646988);
+  static const profileDividerColor = Color(0xFFEBDAF9);
+
 }

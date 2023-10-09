@@ -38,7 +38,6 @@ class ImagePath {
 
   ///Profile Detail Icon
 
-
   static String calender            = "assets/images/calendar.png";
 
 }
