@@ -30,6 +30,7 @@ flutter:
     - assets/images/
     - assets/config/
     - assets/icons/
+    - assets/svg/student/
 
 
 fonts:

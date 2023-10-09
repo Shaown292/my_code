@@ -11,10 +11,25 @@ class ImagePath {
   static const  splashTopLine         = "assets/config/splash_top_line.png";
 
 
-  static const  timeline = "assets/images/timeline.png" ;
-  static const  attendance = "assets/images/attendance.png" ;
-  static const  examination = "assets/images/examination.png" ;
   static const  homework = "assets/images/homework.png" ;
   static const  studyMaterials = "assets/images/studyMaterials.png" ;
   static const  onlineExamination = "assets/images/onlineExam.png" ;
+
+  /// Student Tile Icons
+  static String homeWork            = "assets/svg/student/homework.svg";
+  static String library             = "assets/svg/student/library.svg";
+  static String notice              = "assets/svg/student/notice.svg";
+  static String online_exam         = "assets/svg/student/online_exam.svg";
+  static String settings            = "assets/svg/student/settings.svg";
+  static String study_materials     = "assets/svg/student/study_materials.svg";
+  static String subjects            = "assets/svg/student/subjects.svg";
+  static String teacher             = "assets/svg/student/teacher.svg";
+  static String timeline            = "assets/svg/student/timeline.svg";
+  static String transport           = "assets/svg/student/transport.svg";
+  static String dormitory           = "assets/svg/student/dormitory.svg";
+  static String attendance          = "assets/svg/student/attendance.svg";
+  static String examination         = "assets/svg/student/examination.svg";
+  static String leave               = "assets/svg/student/leave.svg";
+
+
 }

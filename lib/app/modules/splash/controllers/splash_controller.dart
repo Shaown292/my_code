@@ -28,7 +28,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
   }
 
   void navNextPage() async {
-    await 2000.milliseconds.delay();
+    await 3000.milliseconds.delay();
     // Get.offAndToNamed(Routes.SECONDARY_SPLASH);
     AuthDatabase authDatabase = AuthDatabase.instance;
     if (authDatabase.auth()) {

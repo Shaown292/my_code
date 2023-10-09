@@ -1,0 +1,4 @@
+#Mon Oct 09 09:01:30 BDT 2023
+base.0=/Users/dev09/Desktop/flutter/Core_Project_New/101_flutter_single_getx_api_v2/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
