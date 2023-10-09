@@ -5,6 +5,7 @@ import 'config/language/controller/language_controller.dart';
 import 'config/language/controller/language_selection.dart';
 import 'initializer.dart';
 
+
 void main() async {
   await Initializer.init();
   runApp(
