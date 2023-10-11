@@ -27,7 +27,7 @@ class AppColors {
   /// Profile Colors
 
   static const profileTopContainerColor = Color(0xFFF4EBFC);
-  static const parentsIconCardBackgroundColor = Color(0xFF67329B);
+  static const parentsIconCardBackgroundColor = Color(0xFF953BE4);
   static const parentsCardBorderColor = Color(0xFFF2F0F6);
   static const parentsDesignationColor = Color(0xFFF2F0F6);
   static const profileTitleColor = Color(0xFF635976);

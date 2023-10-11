@@ -15,4 +15,13 @@ class AppText {
   static const String phoneNumber = '+8801949414663';
   static const String email = 'spn16@spondonit.com';
   static const String presentAddress = 'Kemp House 152 – 160 City Road London EC1V 2NX';
+  static const String transportRoute = 'Route';
+  static const String transportVehicleNo = 'Vehicle Number';
+  static const String transportDriverName = 'Driver Name';
+  static const String transportDriverPhoneNo = 'Driver Phone Number';
+  static const String transportDormitory = 'Dormitory Name';
+  static const String profileClass = 'Class';
+  static const String profileSection = 'Section:';
+  static const String profileAdmission = 'Admission No:';
+  static const String profileRoll= 'Roll:';
 }

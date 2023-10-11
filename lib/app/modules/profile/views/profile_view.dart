@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profile_controller.dart';
@@ -49,7 +50,8 @@ class ProfileView extends GetView<ProfileController> {
                     elevation: 5,
                     margin: EdgeInsets.zero,
                     child: Container(
-                      height: 150,
+                      height: Get.height * 0.2,
+                      width: Get.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -58,7 +60,7 @@ class ProfileView extends GetView<ProfileController> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              height: 100,
+                              height: Get.height *0.12,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color: AppColors.profileCardBackgroundColor),
@@ -74,8 +76,8 @@ class ProfileView extends GetView<ProfileController> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Container(
-                                          height: 75,
-                                          width: 75,
+                                          height: Get.height * 0.1,
+                                          width: Get.height * 0.1,
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image: AssetImage(ImagePath.dp),
@@ -100,7 +102,7 @@ class ProfileView extends GetView<ProfileController> {
                                             Row(
                                               children: [
                                                 const Text(
-                                                  "Class",
+                                                  AppText.profileClass,
                                                   style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
@@ -115,7 +117,7 @@ class ProfileView extends GetView<ProfileController> {
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
-                                                  "Section:",
+                                                  AppText.profileSection,
                                                   style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
@@ -128,7 +130,7 @@ class ProfileView extends GetView<ProfileController> {
                                             Row(
                                               children: [
                                                 const Text(
-                                                  "Admission No:",
+                                                  AppText.profileAdmission,
                                                   style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
@@ -143,7 +145,7 @@ class ProfileView extends GetView<ProfileController> {
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
-                                                  "Roll:",
+                                                  AppText.profileRoll,
                                                   style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
@@ -160,8 +162,8 @@ class ProfileView extends GetView<ProfileController> {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        height: 20,
-                                        width: 20,
+                                        height: Get.width * 0.04,
+                                        width: Get.width * 0.04,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                           image: AssetImage(ImagePath.camera),
@@ -183,7 +185,9 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                     ),
                   ),
+
                   30.verticalSpacing,
+
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
