@@ -42,4 +42,9 @@ class ImagePath {
   static String dp                  = "assets/images/dp.png";
   static String camera              = "assets/images/camera.png";
 
+
+  /// Other File Path
+  static String noInternetConnection              = "assets/images/no_internet.json";
+
+
 }
