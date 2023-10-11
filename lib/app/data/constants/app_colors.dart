@@ -28,12 +28,14 @@ class AppColors {
 
   static const profileTopContainerColor = Color(0xFFF4EBFC);
   static const parentsIconCardBackgroundColor = Color(0xFF67329B);
-  static const parentsCardBackgroundColor = Color(0xFFF2F0F6);
+  static const parentsCardBorderColor = Color(0xFFF2F0F6);
   static const parentsDesignationColor = Color(0xFFF2F0F6);
-  static const profileTitleColor = Color(0xFF8489AB);
-  static const profileValueColor = Color(0xFF646988);
-  static const profileDividerColor = Color(0xFF635976);
+  static const profileTitleColor = Color(0xFF635976);
+  static const profileValueColor = Color(0xFF412C56);
+  static Color profileDividerColor = const Color(0xFF635976).withOpacity(0.2);
   static const profilePicBackgroundColor = Color(0xFF556080);
-  static const profileCardBackgroundColor = Color(0xFF6D0EC2);
+  static const profileCardBackgroundColor = Color(0xFF412C56);
+  static const profileCardTextColor = Color(0xFFF2F0F6);
+  static const profileIndicatorColor = Color(0xFFB844D1);
 
 }

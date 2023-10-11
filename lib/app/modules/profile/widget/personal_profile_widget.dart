@@ -24,6 +24,7 @@ class PersonalProfileWidget extends StatelessWidget {
             children: [
               Column(
                 children: [
+                  7.verticalSpacing,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -39,14 +40,14 @@ class PersonalProfileWidget extends StatelessWidget {
                         children: [
                           Text(
                              studentInfo[index].title,
-                            style: const TextStyle(
+                            style:  const TextStyle(
                                 color: AppColors.profileTitleColor,
                                 fontSize: 10,
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
                             studentInfo[index].value,
-                            style: const TextStyle(
+                            style:  const TextStyle(
                                 color: AppColors.profileValueColor,
                                 fontSize: 10,
                                 fontWeight: FontWeight.w500),
