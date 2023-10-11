@@ -34,5 +34,12 @@ class ImagePath {
   ///Profile Detail Icon
 
   static String calender            = "assets/images/calendar.png";
+  static String age                 = "assets/images/age.png";
+  static String mail                = "assets/images/mailIcon.png";
+  static String phone               = "assets/images/phoneNumber.png";
+  static String address             = "assets/images/addressIcon.png";
+  static String parentsProfile      = "assets/images/parentsProfileIcon.png";
+  static String dp                  = "assets/images/dp.png";
+  static String camera              = "assets/images/camera.png";
 
 }

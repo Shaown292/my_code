@@ -1,23 +1,11 @@
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController{
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  PageController profilePageController = PageController();
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  RxInt pageIndex = 0.obs;
 }
