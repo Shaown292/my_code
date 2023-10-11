@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final TextEditingController? controller;
   final Color? fillColor;
   final String? hintText;
   final bool focusBorderActive;
@@ -10,7 +11,7 @@ class CustomTextFormField extends StatelessWidget {
   final Function()? iconOnTap;
 
   const CustomTextFormField({
-    super.key,
+    this.controller,
     this.fillColor,
     this.hintText,
     this.focusBorderActive = false,
@@ -18,11 +19,13 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.iconOnTap,
     this.obsCureText = false,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       obscureText: obsCureText,
       decoration: InputDecoration(
         filled: true,

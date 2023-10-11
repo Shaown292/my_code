@@ -19,14 +19,14 @@ class AuthDatabase {
   }
 
   Future<bool> saveAuthInfo({
-    required ProfileModelUI profileModel,
-    String? token,
+    required ProfileInfoModel profileInfoModelModel,
+    // String? token,
   }) async {
     try {
       final storage = GetStorage(AuthDBKeys.dbName);
-      await storage.write(AuthDBKeys.data, jsonEncode(profileModel));
-      if (token != null) {
-        await storage.write(AuthDBKeys.token, token);
+      await storage.write(AuthDBKeys.data, jsonEncode(profileInfoModelModel));
+      if (profileInfoModelModel.data.accessToken != null) {
+        await storage.write(AuthDBKeys.token, profileInfoModelModel.data.accessToken);
       }
       await storage.save();
       return true;
@@ -34,12 +34,12 @@ class AuthDatabase {
       return false;
     }
   }
-  ProfileModelUI? getUserInfo() {
+  ProfileInfoModel? getUserInfo() {
     try {
       final storage = GetStorage(AuthDBKeys.dbName);
       var data = storage.read(AuthDBKeys.data);
       if (data != null) {
-        return ProfileModelUI.fromJson(jsonDecode(data));
+        return ProfileInfoModel.fromJson(jsonDecode(data));
       } else {
         return null;
       }

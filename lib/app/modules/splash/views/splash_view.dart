@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
-import 'package:flutter_svg/svg.dart';
-
 import 'package:get/get.dart';
-
 import '../../../../config/app_config.dart';
 import '../controllers/splash_controller.dart';
 
@@ -17,8 +14,8 @@ class SplashView extends GetView<SplashController> {
         children: <Widget>[
           Positioned.fill(
             child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+              height: Get.height,
+              width: Get.width,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(ImagePath.splashBackground),
@@ -30,7 +27,7 @@ class SplashView extends GetView<SplashController> {
           Align(
             alignment: Alignment.topCenter,
             child: SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
+              height: Get.height / 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
