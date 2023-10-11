@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/parents_item_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 import '../../../../data/constants/app_colors.dart';
@@ -18,10 +19,10 @@ class ParentsInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      elevation: 3,
+      margin: EdgeInsets.zero,
       child: Container(
-        height: Get.height * 0.15,
-        width: Get.width,
+        height: Get.height * 0.135,
         decoration:  BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(4),
@@ -30,7 +31,7 @@ class ParentsInfo extends StatelessWidget {
             )
         ),
         child: Padding(
-          padding:  EdgeInsets.all(Get.width * 0.03),
+          padding:  const EdgeInsets.all(5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,53 +80,14 @@ class ParentsInfo extends StatelessWidget {
               ),
              SizedBox(width: Get.width * 0.05,),
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    name,
-                    style:  const TextStyle(
-                        color: AppColors.profileTitleColor,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  5.verticalSpacing,
-                  CustomDivider(
-                    color: AppColors.profileDividerColor,
-                      width: Get.width * 0.55
-                  ),
-                  10.verticalSpacing,
-                  Text(
-                    phone,
-                    style:  const TextStyle(
-                        color: AppColors.profileTitleColor,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  5.verticalSpacing,
-                  CustomDivider(
-                    color: AppColors.profileDividerColor,
-                      width: Get.width * 0.55
-                  ),
-                  10.verticalSpacing,
-                  Text(
-                    occupation,
-                    style:  const TextStyle(
-                        color: AppColors.profileTitleColor,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  5.verticalSpacing,
-                  Expanded(
-                    child: Row(
-                      children: [
-                        CustomDivider(
-                          color: AppColors.profileDividerColor,
-                          width: Get.width * 0.55,
-                        ),
-                      ],
-                    ),
-                  ),
+                   ParentsItemWidget(title: name),
+                   10.verticalSpacing,
+                   ParentsItemWidget(title: phone),
+                   10.verticalSpacing,
+                   ParentsItemWidget(title: occupation),
                 ],
               ),
             ],

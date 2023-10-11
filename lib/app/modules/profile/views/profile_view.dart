@@ -190,7 +190,7 @@ class ProfileView extends GetView<ProfileController> {
 
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: PageView(
                         controller: controller.profilePageController,
                         physics: const BouncingScrollPhysics(),

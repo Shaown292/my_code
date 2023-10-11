@@ -15,20 +15,20 @@ class ImagePath {
 
 
   /// Student Tile Icons
-  static String homeWork            = "assets/svg/student/homework.svg";
-  static String library             = "assets/svg/student/library.svg";
-  static String notice              = "assets/svg/student/notice.svg";
-  static String onlineExam         = "assets/svg/student/online_exam.svg";
-  static String settings            = "assets/svg/student/settings.svg";
-  static String studyMaterials     = "assets/svg/student/study_materials.svg";
-  static String subjects            = "assets/svg/student/subjects.svg";
-  static String teacher             = "assets/svg/student/teacher.svg";
-  static String timeline            = "assets/svg/student/timeline.svg";
-  static String transport           = "assets/svg/student/transport.svg";
-  static String dormitory           = "assets/svg/student/dormitory.svg";
-  static String attendance          = "assets/svg/student/attendance.svg";
-  static String examination         = "assets/svg/student/examination.svg";
-  static String leave               = "assets/svg/student/leave.svg";
+  static String homeWork            = "assets/icons/student/homework.svg";
+  static String library             = "assets/icons/student/library.svg";
+  static String notice              = "assets/icons/student/notice.svg";
+  static String onlineExam          = "assets/icons/student/online_exam.svg";
+  static String settings            = "assets/icons/student/settings.svg";
+  static String studyMaterials      = "assets/icons/student/study_materials.svg";
+  static String subjects            = "assets/icons/student/subjects.svg";
+  static String teacher             = "assets/icons/student/teacher.svg";
+  static String timeline            = "assets/icons/student/timeline.svg";
+  static String transport           = "assets/icons/student/transport.svg";
+  static String dormitory           = "assets/icons/student/dormitory.svg";
+  static String attendance          = "assets/icons/student/attendance.svg";
+  static String examination         = "assets/icons/student/examination.svg";
+  static String leave               = "assets/icons/student/leave.svg";
 
 
   ///Profile Detail Icon
