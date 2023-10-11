@@ -60,7 +60,6 @@ class LoginController extends GetxController {
       );
 
       profileInfoModel = ProfileInfoModel.fromJson(response);
-
       if (profileInfoModel.success == true) {
         isLoading.value = false;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
