@@ -222,7 +222,7 @@
         <entry key="flutter">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../../Flutter_SDK/flutter/packages/flutter/lib" />
+              <option value="$USER_HOME$/Documents/flutter/packages/flutter/lib" />
             </list>
           </value>
         </entry>
@@ -250,7 +250,7 @@
         <entry key="flutter_test">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../../Flutter_SDK/flutter/packages/flutter_test/lib" />
+              <option value="$USER_HOME$/Documents/flutter/packages/flutter_test/lib" />
             </list>
           </value>
         </entry>
@@ -656,7 +656,7 @@
         <entry key="sky_engine">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../../Flutter_SDK/flutter/bin/cache/pkg/sky_engine/lib" />
+              <option value="$USER_HOME$/Documents/flutter/bin/cache/pkg/sky_engine/lib" />
             </list>
           </value>
         </entry>
@@ -887,9 +887,6 @@
       </option>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../Flutter_SDK/flutter/bin/cache/pkg/sky_engine/lib" />
-      <root url="file://$PROJECT_DIR$/../../Flutter_SDK/flutter/packages/flutter/lib" />
-      <root url="file://$PROJECT_DIR$/../../Flutter_SDK/flutter/packages/flutter_test/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-61.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/analyzer-5.13.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/ansicolor-2.0.1/lib" />
@@ -1013,6 +1010,9 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xdg_directories-1.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xml-6.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/yaml-3.1.2/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter/bin/cache/pkg/sky_engine/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter/packages/flutter/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter/packages/flutter_test/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
