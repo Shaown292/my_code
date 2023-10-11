@@ -1,9 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/widgets/no_internet/InternetController.dart';
 import '../../../database/auth_database.dart';

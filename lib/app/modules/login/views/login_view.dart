@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
-import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_internet/InternetController.dart';
-
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-
 import '../../../data/constants/app_colors.dart';
 import '../../../utilities/message/snack_bars.dart';
 import '../../../utilities/widgets/common_widgets/custom_elevated_button.dart';
@@ -29,7 +25,6 @@ class LoginView extends GetView<LoginController> {
       backgroundColor: AppColors.secondaryColor,
       body: SafeArea(
         child: SingleChildScrollView(
-
           child: Container(
             height: Get.height,
             decoration: const BoxDecoration(
