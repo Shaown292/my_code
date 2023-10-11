@@ -326,10 +326,22 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "logger",
+      "rootUri": "file:///Users/dev09/.pub-cache/hosted/pub.dev/logger-2.0.2+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "logging",
       "rootUri": "file:///Users/dev09/.pub-cache/hosted/pub.dev/logging-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
+    },
+    {
+      "name": "lottie",
+      "rootUri": "file:///Users/dev09/.pub-cache/hosted/pub.dev/lottie-2.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "matcher",
@@ -752,7 +764,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-10-09T04:37:24.946911Z",
+  "generated": "2023-10-10T06:24:21.653684Z",
   "generator": "pub",
   "generatorVersion": "3.1.3"
 }

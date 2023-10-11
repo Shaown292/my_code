@@ -1,106 +1,198 @@
+// import 'dart:convert';
+//
+// import '../../utils/json_utils.dart';
+//
+// class ProfileModelUI {
+//   num id;
+//   String fullName;
+//   String phoneNumber;
+//   int roleId;
+//   int schoolId;
+//   String isAdministrator;
+//   int rtlLtl;
+//   String firstName;
+//   String avatarUrl;
+//   bool blockedByMe;
+//
+//
+//   ProfileModelUI({
+//     required this.id,
+//     required this.fullName,
+//     required this.phoneNumber,
+//     required this.roleId,
+//     required this.schoolId,
+//     required this.isAdministrator,
+//     required this.rtlLtl,
+//     required this.firstName,
+//     required this.avatarUrl,
+//     required this.blockedByMe,
+//   });
+//
+//   factory ProfileModelUI.fromJson(Map<String, dynamic> j) => ProfileModelUI(
+//     id: getSafeValue<num>(j, 'id', 0),
+//     fullName: getSafeValue<String>(j, 'full_name', ''),
+//     phoneNumber: getSafeValue<String>(j, 'phone_number', ''),
+//     roleId: getSafeValue<int>(j, 'role_id', 0),
+//     schoolId: getSafeValue<int>(j, 'school_id', 0),
+//     isAdministrator: getSafeValue<String>(j, 'is_administrator', ''),
+//     rtlLtl: getSafeValue<int>(j, 'rtl_ltl', 0),
+//     firstName: getSafeValue<String>(j, 'first_name', ''),
+//     avatarUrl: getSafeValue<String>(j, 'avatar_url', ''),
+//     blockedByMe: getSafeValue<bool>(j, 'blocked_by_me', false),
+//   );
+//
+//   Map<String, dynamic> toJson() {
+//     final data = <String, dynamic>{};
+//     data['id'] = id;
+//     data['full_name'] = fullName;
+//     data['phone_number'] = phoneNumber;
+//     data['role_id'] = roleId;
+//     data['school_id'] = schoolId;
+//     data['is_administrator'] = isAdministrator;
+//     data['rtl_ltl'] = rtlLtl;
+//     data['first_name'] = firstName;
+//     data['avatar_url'] = avatarUrl;
+//     data['blocked_by_me'] = blockedByMe;
+//     return data;
+//   }
+//
+//   @override
+//   String toString() => const JsonEncoder.withIndent(' ').convert(toJson());
+// }
+//
+
+
+
+// To parse this JSON data, do
+//
+//     final profileInfoModel = profileInfoModelFromJson(jsonString);
+
 import 'dart:convert';
 
 import '../../utils/json_utils.dart';
 
-class ProfileModelUI {
-  num id;
-  int organizationId;
-  int isSaasAdmin;
-  String activePanel;
-  String name;
-  String username;
-  int roleId;
-  int currentCompanyId;
-  int currentShowroomId;
-  String email;
-  bool isActive;
-  String avatar;
-  String referralCode;
-  Organization organization;
+ProfileInfoModel profileInfoModelFromJson(String str) => ProfileInfoModel.fromJson(json.decode(str));
 
-  ProfileModelUI({
-    required this.id,
-    required this.organizationId,
-    required this.isSaasAdmin,
-    required this.activePanel,
-    required this.name,
-    required this.username,
-    required this.roleId,
-    required this.currentCompanyId,
-    required this.currentShowroomId,
-    required this.email,
-    required this.isActive,
-    required this.avatar,
-    required this.referralCode,
-    required this.organization,
+String profileInfoModelToJson(ProfileInfoModel data) => json.encode(data.toJson());
+
+class ProfileInfoModel {
+  bool success;
+  Data data;
+  String message;
+
+  ProfileInfoModel({
+    required this.success,
+    required this.data,
+    required this.message,
   });
 
-  factory ProfileModelUI.fromJson(Map<String, dynamic> j) => ProfileModelUI(
-    id: getSafeValue<num>(j, 'id', 0),
-    organizationId: getSafeValue<int>(j, 'organization_id', 0),
-    isSaasAdmin: getSafeValue<int>(j, 'is_saas_admin', 0),
-    activePanel: getSafeValue<String>(j, 'active_panel', ''),
-    name: getSafeValue<String>(j, 'name', ''),
-    username: getSafeValue<String>(j, 'username', ''),
-    roleId: getSafeValue<int>(j, 'role_id', 0),
-    currentCompanyId: getSafeValue<int>(j, 'current_company_id', 0),
-    currentShowroomId: getSafeValue<int>(j, 'current_showroom_id', 0),
-    email: getSafeValue<String>(j, 'email', ''),
-    isActive: getSafeValue<bool>(j, 'is_active', false),
-    avatar: getSafeValue<String>(j, 'avatar', ''),
-    referralCode: getSafeValue<String>(j, 'referral_code', ''),
-    organization: getSafeValue<Organization>(
-      j,
-      'organization',
-      Organization.fromJson({}),
-      decoder: (json) => Organization.fromJson(json),
-    ),
+  factory ProfileInfoModel.fromJson(Map<String, dynamic> json) => ProfileInfoModel(
+    success: json["success"],
+    data: Data.fromJson(json["data"]),
+    message: json["message"],
   );
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['organization_id'] = organizationId;
-    data['is_saas_admin'] = isSaasAdmin;
-    data['active_panel'] = activePanel;
-    data['name'] = name;
-    data['username'] = username;
-    data['role_id'] = roleId;
-    data['current_company_id'] = currentCompanyId;
-    data['current_showroom_id'] = currentShowroomId;
-    data['email'] = email;
-    data['is_active'] = isActive;
-    data['avatar'] = avatar;
-    data['referral_code'] = referralCode;
-    data['organization'] = organization.toJson();
-    return data;
-  }
-
-  @override
-  String toString() => const JsonEncoder.withIndent(' ').convert(toJson());
+  Map<String, dynamic> toJson() => {
+    "success": success,
+    "data": data.toJson(),
+    "message": message,
+  };
 }
 
-class Organization {
-  num id;
-  String domain;
+class Data {
+  int unreadNotifications;
+  User user;
+  String ttlRtlStatus;
+  String accessToken;
 
-  Organization({
-    required this.id,
-    required this.domain,
+  Data({
+    required this.unreadNotifications,
+    required this.user,
+    required this.ttlRtlStatus,
+    required this.accessToken,
   });
 
-  factory Organization.fromJson(Map<String, dynamic> j) => Organization(
-    id: getSafeValue<num>(j, 'id', 0),
-    domain: getSafeValue<String>(j, 'domain', ''),
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    unreadNotifications: json["unread_notifications"],
+    user: User.fromJson(json["user"]),
+    ttlRtlStatus: json["TTL_RTL_status"],
+    accessToken: json["accessToken"],
   );
 
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['domain'] = domain;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "unread_notifications": unreadNotifications,
+    "user": user.toJson(),
+    "TTL_RTL_status": ttlRtlStatus,
+    "accessToken": accessToken,
+  };
+}
 
-  @override
-  String toString() => const JsonEncoder.withIndent(' ').convert(toJson());
+class User {
+  int id;
+  String fullName;
+  String phoneNumber;
+  int roleId;
+  int schoolId;
+  String isAdministrator;
+  int rtlLtl;
+  String firstName;
+  String avatarUrl;
+  bool blockedByMe;
+  int studentId;
+
+  User({
+    required this.id,
+    required this.fullName,
+    required this.phoneNumber,
+    required this.roleId,
+    required this.schoolId,
+    required this.isAdministrator,
+    required this.rtlLtl,
+    required this.firstName,
+    required this.avatarUrl,
+    required this.blockedByMe,
+    required this.studentId,
+  });
+
+    factory User.fromJson(Map<String, dynamic> j) => User(
+    id: getSafeValue<int>(j, 'id', 0),
+    fullName: getSafeValue<String>(j, 'full_name', ''),
+    phoneNumber: getSafeValue<String>(j, 'phone_number', ''),
+    roleId: getSafeValue<int>(j, 'role_id', 0),
+    schoolId: getSafeValue<int>(j, 'school_id', 0),
+    isAdministrator: getSafeValue<String>(j, 'is_administrator', ''),
+    rtlLtl: getSafeValue<int>(j, 'rtl_ltl', 0),
+    firstName: getSafeValue<String>(j, 'first_name', ''),
+    avatarUrl: getSafeValue<String>(j, 'avatar_url', ''),
+    blockedByMe: getSafeValue<bool>(j, 'blocked_by_me', false),
+    studentId: getSafeValue<int>(j, 'blocked_by_me', 0),
+  );
+
+  // factory User.fromJson(Map<String, dynamic> json) => User(
+  //   id: json["id"] ?? 0,
+  //   fullName: json["full_name"] ?? '',
+  //   phoneNumber: json["phone_number"] ?? '',
+  //   roleId: json["role_id"] ?? '',
+  //   schoolId: json["school_id"] ?? '',
+  //   isAdministrator: json["is_administrator"] ?? '',
+  //   rtlLtl: json["rtl_ltl"] ?? 0,
+  //   firstName: json["first_name"] ?? '',
+  //   avatarUrl: json["avatar_url"] ?? '',
+  //   blockedByMe: json["blocked_by_me"] ?? '',
+  //   studentId: json["student_id"] ?? '',
+  // );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "full_name": fullName,
+    "phone_number": phoneNumber,
+    "role_id": roleId,
+    "school_id": schoolId,
+    "is_administrator": isAdministrator,
+    "rtl_ltl": rtlLtl,
+    "first_name": firstName,
+    "avatar_url": avatarUrl,
+    "blocked_by_me": blockedByMe,
+    "student_id": studentId,
+  };
 }

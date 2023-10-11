@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -35,7 +36,7 @@ class Initializer {
     AuthDatabase authDatabase = AuthDatabase.instance;
 
     String? url;
-    String? baseUrl = authDatabase.getUserInfo()?.organization.domain;
+    String? baseUrl = AppConfig.domainName;
 
     if (baseUrl == null) {
       url = ConfigEnvironments.getEnvironments()['url'] ?? '';

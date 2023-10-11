@@ -33,6 +33,7 @@ class ImagePath {
 
   ///Profile Detail Icon
 
-  static String calender            = "assets/images/calendar.png";
+  static String calender                        = "assets/images/calendar.png";
+  static String noInternetConnection            = "assets/images/no_internet.json";
 
 }
