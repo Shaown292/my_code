@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profile_controller.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/profile/widget/page_indicator.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/profile/widget/pages_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/pages_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/parents_profile_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/personal_profile_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/transport_profile_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_colors.dart';
 import '../../../data/dummy_data/student/student_info_dummy_data.dart';
-import '../widget/parents_profile_widget.dart';
-import '../widget/personal_profile_widget.dart';
-import '../widget/transport_profile_widget.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
@@ -101,52 +101,27 @@ class ProfileView extends GetView<ProfileController> {
                                               children: [
                                                 const Text(
                                                   "Class",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
                                                   "XI-B",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
                                                   "|",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
                                                   "Section:",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
                                                   "D",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                               ],
                                             ),
@@ -154,52 +129,27 @@ class ProfileView extends GetView<ProfileController> {
                                               children: [
                                                 const Text(
                                                   "Admission No:",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
                                                   "8776",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
                                                   "|",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
                                                   "Roll:",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                                 5.horizontalSpacing,
                                                 const Text(
                                                   "04",
-                                                  style: TextStyle(
-                                                      color: AppColors
-                                                          .profileCardTextColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                  style: AppTextStyle.fontSize14LightPinkW400,
                                                 ),
                                               ],
                                             ),
@@ -239,7 +189,7 @@ class ProfileView extends GetView<ProfileController> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: PageView(
                         controller: controller.profilePageController,
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         children: [
                           PersonalProfileWidget(studentInfo: studentInfo),
                           const ParentsProfileWidget(),

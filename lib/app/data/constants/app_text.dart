@@ -5,6 +5,7 @@ class AppText {
 
   static const String noInternetConnection = 'No Internet Connection';
   static const String tryAgainLater = 'Try Again Later';
+  static const String logoutWarningMsg = 'Are you sure,\n you want to logout?';
 
 
   /// Profile

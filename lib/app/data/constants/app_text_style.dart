@@ -32,4 +32,12 @@ class AppTextStyle{
     fontWeight: FontWeight.w500,
   );
 
+  /// Profile
+  static const fontSize14LightPinkW400 = TextStyle(
+      color: AppColors
+          .profileCardTextColor,
+      fontSize: 14,
+      fontWeight:
+      FontWeight.w400);
+
 }

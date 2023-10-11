@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/views/widgets/custom_dashboard_card_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/icon_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -39,7 +41,7 @@ class HomeView extends GetView<HomeController> {
           CustomIconButton(
             icon: FontAwesomeIcons.facebookMessenger,
             onPressed: () {
-              debugPrint('Messenger');
+              Get.toNamed(Routes.PROFILE);
             },
           ),
           CustomIconButton(
@@ -51,7 +53,7 @@ class HomeView extends GetView<HomeController> {
                     controller.logout();
                   },
                   title: 'Confirmation',
-                  subTitle: 'Are you sure,\n you want to logout?',
+                  subTitle: AppText.logoutWarningMsg,
                   noText: 'cancel',
                   yesText: 'logout',
                 ),
