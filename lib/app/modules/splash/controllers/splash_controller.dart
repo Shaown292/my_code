@@ -34,7 +34,6 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
     await 3000.milliseconds.delay();
 
     if (authDatabase.auth()) {
-
       int roleId = authDatabase.getUserInfo()!.data.user.roleId;
       AppFunctions().getFunctions(roleId);
 
