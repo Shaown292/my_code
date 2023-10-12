@@ -165,7 +165,7 @@ class User {
     firstName: getSafeValue<String>(j, 'first_name', ''),
     avatarUrl: getSafeValue<String>(j, 'avatar_url', ''),
     blockedByMe: getSafeValue<bool>(j, 'blocked_by_me', false),
-    studentId: getSafeValue<int>(j, 'blocked_by_me', 0),
+    studentId: getSafeValue<int>(j, 'student_id', 0),
   );
 
   // factory User.fromJson(Map<String, dynamic> json) => User(

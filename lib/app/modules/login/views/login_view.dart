@@ -98,7 +98,7 @@ class LoginView extends GetView<LoginController> {
                         ),
                         30.verticalSpacing,
 
-                        /// Text field
+                        /// Email Text field
                         CustomTextFormField(
                           controller: emailTextController,
                           fillColor: const Color(0xFFFDFBFF),
@@ -111,17 +111,20 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                         10.verticalSpacing,
+
+                        /// Password Text field
                         CustomTextFormField(
                           iconOnTap: () {
+                            controller.isObscureText.value = !controller.isObscureText.value;
                           },
                           controller: passwordTextController,
+                          obsCureText: controller.isObscureText.value,
                           fillColor: const Color(0xFFF4EBFC),
                           hintText: "Password",
                           focusBorderActive: true,
                           enableBorderActive: true,
-                          suffixIcon: const Icon(
-                            Icons.lock,
-                            // passwordVisible ? Icons.lock : Icons.lock_open,
+                          suffixIcon: Icon(
+                            controller.isObscureText.value ? Icons.lock : Icons.lock_open,
                             color: AppColors.loginIconColor,
                           ),
                         ),

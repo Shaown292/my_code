@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		I/zguTq7l/MWePOP5FOoolH6wEY=
+		7mXv2GrPrOh7+8BxiYpiSJcA4dg=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		wvrAfCQojYDSHFU5vV5rsZO1rmY=
+		9lRIdAtc2F07AiRinkhYI5m0anY=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -72,6 +72,14 @@
 		<data>
 		HTVTY8aq+0Xeq0oUGNkCsgknclg=
 		</data>
+		<key>flutter_assets/assets/images/addressIcon.png</key>
+		<data>
+		lsYk813TBqL1rWyID08v/BGmX3w=
+		</data>
+		<key>flutter_assets/assets/images/age.png</key>
+		<data>
+		eTBFKT8M5ddfP36cWnbWwXEoSLI=
+		</data>
 		<key>flutter_assets/assets/images/attendance.png</key>
 		<data>
 		1TpL97/Ul9gcOMO05xSSq5d7veY=
@@ -87,6 +95,14 @@
 		<key>flutter_assets/assets/images/calendar.png</key>
 		<data>
 		rfc37NL1qERdUR6Z3h8tmVTI3IM=
+		</data>
+		<key>flutter_assets/assets/images/camera.png</key>
+		<data>
+		/N/bp3PhvxsUd7g9EvSO2ajINWk=
+		</data>
+		<key>flutter_assets/assets/images/dp.png</key>
+		<data>
+		NmyRvAfO13qkhvFlPlJyuFEslZM=
 		</data>
 		<key>flutter_assets/assets/images/examination.png</key>
 		<data>
@@ -108,6 +124,10 @@
 		<data>
 		aZoshf2uxK1dFpQkwKBG64FIwbY=
 		</data>
+		<key>flutter_assets/assets/images/mailIcon.png</key>
+		<data>
+		/YhG923I8W6z/byhqUX4LUoMO9E=
+		</data>
 		<key>flutter_assets/assets/images/no_internet.json</key>
 		<data>
 		OI0GJuOZnQ2eC6cCIZ6IrPL3gis=
@@ -119,6 +139,14 @@
 		<key>flutter_assets/assets/images/onlineExam.png</key>
 		<data>
 		ubfNPZspUSiB1nTbsmivL0DA1jg=
+		</data>
+		<key>flutter_assets/assets/images/parentsProfileIcon.png</key>
+		<data>
+		pJ8+hQxE6lGBmTJ3RTM5181uQck=
+		</data>
+		<key>flutter_assets/assets/images/phoneNumber.png</key>
+		<data>
+		VcmnMCeD1xaQolTXQDQRN+wTHOQ=
 		</data>
 		<key>flutter_assets/assets/images/splash_bg_2.png</key>
 		<data>
@@ -198,7 +226,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		1nY5NkFiYoapsRWSrpn++SZfLqw=
+		bgB8MQ+Wnk+gAr/VbqrGZgOU8Fk=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -231,14 +259,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xJIsGwKYu5GF+UmebgdwThgYpHwRVhTY+xx/PMmfLrU=
+			mvnN8x5roLRFOUKZezAGkUY4MvTmAAnXz4yNEYJ/NKg=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GJm13+aEA5kN4ymQKLJrTBfOOePX1mOYmDc6J3XcyU8=
+			TwnuY29b45jKnb1XshAnzvx9YSx7eOtlodAWL54jq4Q=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -339,6 +367,20 @@
 			25L51jop5JfDvK0xYms5MfAVauAkfuB6rupVIA0/1Tg=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/addressIcon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			nvcfj1bwrZtArWZ9vl4HMhW7z+SwsGz2nME+H9aRWPU=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/age.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RMSt+gH3flQhClenceNtaMLXa4ACtw1R6rQXt5+cgGo=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/attendance.png</key>
 		<dict>
 			<key>hash2</key>
@@ -365,6 +407,20 @@
 			<key>hash2</key>
 			<data>
 			O+c2Efma1A3SXp7MxUSX82nQud83BphYSzyU3Nb9nS0=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/camera.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			uBUAig15UYCYjW78UxIwhuv4NnRFCmNTWtL8HsPiXh4=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/dp.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Weh/XP4/nHVHUikmNZjz0nl67i0ht66PiuZ6XBqMJsI=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/examination.png</key>
@@ -402,6 +458,13 @@
 			7uAcB+0irqcfISU6B0OEsXI1b8cG7+6hnB7D8QswsAE=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/mailIcon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			6PRnIZl+x/2JuA85EEO9m7tX4EcxXPYzM/zqEFY2Itc=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/no_internet.json</key>
 		<dict>
 			<key>hash2</key>
@@ -421,6 +484,20 @@
 			<key>hash2</key>
 			<data>
 			EEvKtTUf9PLtNvWZxmSGd5VZ9vGeIC/PGXNFSpCf8JE=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/parentsProfileIcon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			t2IE6MfUBalmC5OyYF6pucFHvR0XrshuUstf3rFQNIs=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/phoneNumber.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			WLyAds3juqys/g4lbmhcdLUIQfVj2TSkLKIJUPRRAgk=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/splash_bg_2.png</key>
@@ -560,7 +637,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2Su2FzvJLe+AuJEqoUgjPX6LJFEyzv5rXXpWqzqNZ/g=
+			28z7gipJcNsATRlduHg2MZETa9h/47AHpzFEtJDh7jI=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

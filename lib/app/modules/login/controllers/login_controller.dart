@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
 import 'package:get/get.dart';
 import '../../../../domain/base_client/base_client.dart';
@@ -9,7 +11,10 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/message/snack_bars.dart';
 
 class LoginController extends GetxController {
+
   RxBool isLoading = false.obs;
+  RxBool isObscureText = true.obs;
+  GlobalVariableController globalVariableController = Get.put(GlobalVariableController());
 
   void userLogin({required String email, required String password}) async {
     ProfileInfoModel profileInfoModel;
@@ -33,7 +38,10 @@ class LoginController extends GetxController {
         );
 
         if (status) {
-          Get.offAllNamed(Routes.HOME);
+          AppFunctions().getFunctions(profileInfoModel.data.user.roleId);
+          Get.offAllNamed(Routes.HOME, arguments:{
+            'homeListTile' : GlobalVariableController.homeTileList,
+          });
         }
       } else {
         isLoading.value = false;
@@ -65,7 +73,10 @@ class LoginController extends GetxController {
         );
 
         if (status) {
-          Get.offAllNamed(Routes.HOME);
+          AppFunctions().getFunctions(profileInfoModel.data.user.roleId);
+          Get.offAllNamed(Routes.HOME, arguments:{
+            'homeListTile' : GlobalVariableController.homeTileList,
+          });
         }
       } else {
         isLoading.value = false;
