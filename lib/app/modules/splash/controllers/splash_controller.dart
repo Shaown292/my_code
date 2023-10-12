@@ -37,6 +37,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
       int roleId = authDatabase.getUserInfo()!.data.user.roleId;
       AppFunctions().getFunctions(roleId);
 
+
       Get.offAndToNamed(Routes.HOME, arguments: {
         'homeListTile': GlobalVariableController.homeTileList,
       });
