@@ -13,12 +13,10 @@ class CustomDashboardTile extends StatefulWidget {
 
 class _CustomDashboardTileState extends State<CustomDashboardTile> {
 
-  int selectIndex = 0;
+  int selectIndex = -1;
 
   @override
   Widget build(BuildContext context) {
-
-    // final isSelected = ref.watch(passwordVisibleProvider);
 
     return GridView.builder(
       shrinkWrap: true,
@@ -31,8 +29,6 @@ class _CustomDashboardTileState extends State<CustomDashboardTile> {
         return CustomCardTile(icon: widget.listItems[index].icon, title: widget.listItems[index].title, onTap: (){
           setState(() {
             selectIndex = index;
-            print(selectIndex);
-            print(selectIndex == index);
           });
         },isSelected: selectIndex == index,);
 

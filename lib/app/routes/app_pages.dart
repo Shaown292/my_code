@@ -3,7 +3,6 @@ import 'package:flutter_single_getx_api_v2/app/modules/profile/views/profile_vie
 import 'package:flutter_single_getx_api_v2/app/modules/syllabus/bindings/syllabus_bindings.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/syllabus/views/syllabus_views.dart';
 import 'package:get/get.dart';
-
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -12,14 +11,12 @@ import '../modules/secondary_splash/bindings/secondary_splash_binding.dart';
 import '../modules/secondary_splash/views/secondary_splash_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
-
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
   static const INITIAL = Routes.SPLASH;
-
   static final routes = [
     GetPage(
       name: _Paths.HOME,
@@ -30,6 +27,7 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+
     ),
     GetPage(
       name: _Paths.SECONDARY_SPLASH,

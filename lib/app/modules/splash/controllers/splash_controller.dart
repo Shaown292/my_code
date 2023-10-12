@@ -1,4 +1,6 @@
 import 'package:flutter/animation.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import '../../../database/auth_database.dart';
 import '../../../routes/app_pages.dart';
@@ -28,11 +30,17 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
   }
 
   void navNextPage() async {
-    await 3000.milliseconds.delay();
-    // Get.offAndToNamed(Routes.SECONDARY_SPLASH);
     AuthDatabase authDatabase = AuthDatabase.instance;
+    await 3000.milliseconds.delay();
+
     if (authDatabase.auth()) {
-      Get.offAndToNamed(Routes.HOME);
+      int roleId = authDatabase.getUserInfo()!.data.user.roleId;
+      AppFunctions().getFunctions(roleId);
+
+
+      Get.offAndToNamed(Routes.HOME, arguments: {
+        'homeListTile': GlobalVariableController.homeTileList,
+      });
     } else {
       Get.offAndToNamed(Routes.LOGIN);
     }
