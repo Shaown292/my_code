@@ -8,6 +8,7 @@ abstract class Routes {
   static const SECONDARY_SPLASH = _Paths.SECONDARY_SPLASH;
   static const LOGIN = _Paths.LOGIN;
   static const PROFILE = _Paths.PROFILE;
+  static const SYLLABUS = _Paths.SYLLABUS;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const SECONDARY_SPLASH = '/secondary-splash';
   static const LOGIN = '/login';
   static const PROFILE = '/profile';
+  static const SYLLABUS = '/syllabus';
 }

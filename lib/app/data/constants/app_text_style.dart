@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-class AppTextStyle{
-
+class AppTextStyle {
   static const textStyle12WhiteW500 = TextStyle(
     color: Colors.white,
     fontSize: 12,
@@ -34,10 +33,23 @@ class AppTextStyle{
 
   /// Profile
   static const fontSize14LightPinkW400 = TextStyle(
-      color: AppColors
-          .profileCardTextColor,
+      color: AppColors.profileCardTextColor,
       fontSize: 14,
-      fontWeight:
-      FontWeight.w400);
+      fontWeight: FontWeight.w400);
 
+  /// Syllabus
+  static const fontSize14BlackW500 = TextStyle(
+      color: AppColors.syllabusTextColorBlack,
+      fontSize: 14,
+      fontWeight: FontWeight.w500);
+
+  static const syllabusFontSize14W400 = TextStyle(
+      color: AppColors.syllabusTextColor635976,
+      fontSize: 14,
+      fontWeight: FontWeight.w400);
+
+  static const syllabusFontSize16W500 = TextStyle(
+      color: AppColors.syllabusTextColor412C56,
+      fontSize: 16,
+      fontWeight: FontWeight.w500);
 }

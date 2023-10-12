@@ -15,20 +15,20 @@ class ImagePath {
 
 
   /// Student Tile Icons
-  static String homeWork            = "assets/icons/student/homework.svg";
-  static String library             = "assets/icons/student/library.svg";
-  static String notice              = "assets/icons/student/notice.svg";
-  static String onlineExam          = "assets/icons/student/online_exam.svg";
-  static String settings            = "assets/icons/student/settings.svg";
-  static String studyMaterials      = "assets/icons/student/study_materials.svg";
-  static String subjects            = "assets/icons/student/subjects.svg";
-  static String teacher             = "assets/icons/student/teacher.svg";
-  static String timeline            = "assets/icons/student/timeline.svg";
-  static String transport           = "assets/icons/student/transport.svg";
-  static String dormitory           = "assets/icons/student/dormitory.svg";
-  static String attendance          = "assets/icons/student/attendance.svg";
-  static String examination         = "assets/icons/student/examination.svg";
-  static String leave               = "assets/icons/student/leave.svg";
+  static String homeWork            = "assets/svg/student/homework.svg";
+  static String library             = "assets/svg/student/library.svg";
+  static String notice              = "assets/svg/student/notice.svg";
+  static String onlineExam          = "assets/svg/student/online_exam.svg";
+  static String settings            = "assets/svg/student/settings.svg";
+  static String studyMaterials      = "assets/svg/student/study_materials.svg";
+  static String subjects            = "assets/svg/student/subjects.svg";
+  static String teacher             = "assets/svg/student/teacher.svg";
+  static String timeline            = "assets/svg/student/timeline.svg";
+  static String transport           = "assets/svg/student/transport.svg";
+  static String dormitory           = "assets/svg/student/dormitory.svg";
+  static String attendance          = "assets/svg/student/attendance.svg";
+  static String examination         = "assets/svg/student/examination.svg";
+  static String leave               = "assets/svg/student/leave.svg";
 
 
   ///Profile Detail Icon
@@ -47,4 +47,48 @@ class ImagePath {
   static String noInternetConnection              = "assets/images/no_internet.json";
 
 
+  /// Student Icon
+
+
+  static String studentAttendance   = "assets/icons/student/student_attendance.png";
+  static String studentClass        = "assets/icons/student/student_class.png";
+  static String studentDormitory    = "assets/icons/student/student_dormitory.png";
+  static String studentExamination  = "assets/icons/student/student_examination.png";
+  static String studentHomeWork     = "assets/icons/student/student_homework.png";
+  static String studentLeave        = "assets/icons/student/student_leave.png";
+  static String studentLesson       = "assets/icons/student/student_lesson.png";
+  static String studentLibrary      = "assets/icons/student/student_library.png";
+  static String studentNotice       = "assets/icons/student/student_notice.png";
+  static String studentOnlineExam   = "assets/icons/student/student_onlineexam.png";
+  static String studentSettings     = "assets/icons/student/student_settings.png";
+  static String studentStudyMaterials    = "assets/icons/student/student_studymaterials.png";
+  static String studentSubjects     = "assets/icons/student/student_subjects.png";
+  static String studentTeacher      = "assets/icons/student/student_teacher.png";
+  static String studentTimeline     = "assets/icons/student/student_timeline.png";
+  static String studentTransport    = "assets/icons/student/student_transport.png";
+  static String studentWallet       = "assets/icons/student/student_wallet.png";
+
+
+
+
+  /// Parents Icon
+
+  static String parentsAbout       = "assets/icons/student/parents_about.png";
+  static String parentsChild       = "assets/icons/student/parents_child.png";
+  static String parentsSettings    = "assets/icons/student/parents_settings.png";
+
+
+  /// Teacher Icon
+
+  static String teacherAbout       = "assets/icons/student/teacher_about.png";
+  static String teacherAcademics   = "assets/icons/student/teacher_academics.png";
+  static String teacherClass       = "assets/icons/student/teacher_class.png";
+  static String teacherClassAttendance       = "assets/icons/student/teacher_classattendance.png";
+  static String teacherContents    = "assets/icons/student/teacher_contents.png";
+  static String teacherHomework    = "assets/icons/student/teacher_homework.png";
+  static String teacherLeave       = "assets/icons/student/teacher_leave.png";
+  static String teacherLibrary     = "assets/icons/student/teacher_library.png";
+  static String teacherNotice      = "assets/icons/student/teacher_notice.png";
+  static String teacherSettings    = "assets/icons/student/teacher_settings.png";
+  static String teacherStudents    = "assets/icons/student/teacher_students.png";
 }

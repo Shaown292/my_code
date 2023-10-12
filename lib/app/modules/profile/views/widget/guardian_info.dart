@@ -38,7 +38,7 @@ class GuardianInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: Get.height * 0.195,
+              height: Get.height * 0.185,
               width: Get.width * 0.16,
               decoration:  BoxDecoration(
                 color: AppColors.parentsIconCardBackgroundColor,

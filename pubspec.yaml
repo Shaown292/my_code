@@ -32,6 +32,8 @@ flutter:
     - assets/images/
     - assets/config/
     - assets/icons/student/
+    - assets/icons/teacher/
+    - assets/icons/parents/
     - assets/svg/student/
 
 

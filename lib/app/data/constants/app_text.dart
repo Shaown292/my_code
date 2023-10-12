@@ -24,4 +24,7 @@ class AppText {
   static const String profileSection = 'Section:';
   static const String profileAdmission = 'Admission No:';
   static const String profileRoll= 'Roll:';
+  static const String profileFather= 'Father';
+  static const String profileGuardian= 'Guardian';
+  static const String profileMother= 'Mother';
 }

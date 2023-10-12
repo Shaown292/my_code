@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_container_widget.dart';
+import 'package:get/get.dart';
+
+import '../../../../utilities/widgets/button/main_button.dart';
+
+class SyllabusTopicWise extends StatelessWidget {
+
+  final String subject;
+  final String topic;
+  final String? date;
+  const SyllabusTopicWise({super.key, required this.subject, required this.topic,  this.date});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CustomContainerWidget(
+        height: Get.height * 0.17,
+          borderColor: const Color(0xFFEAE7F0),
+          requiredWidget: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomContainerWidget(
+                      height: 30,
+                      width: 100,
+                      color: const Color(0xFFF2F0F6),
+                      requiredWidget: Center(
+                        child: Text(
+                          subject,
+                          style: AppTextStyle.fontSize14BlackW500,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          "Date: ",
+                          style: AppTextStyle.syllabusFontSize14W400,
+                        ),
+                        Text(
+                          date ?? "",
+                          style: AppTextStyle.syllabusFontSize14W400,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                10.verticalSpacing,
+                 Text(
+                  topic,
+                  style: AppTextStyle.syllabusFontSize16W500,
+                ),
+                20.verticalSpacing,
+                const CustomContainerWidget(
+                  height: 30,
+                    color: Color(0xFF953BE4),
+                    radius: 6,
+                    requiredWidget: Center(child: Text(
+                        "Download",
+                      style: AppTextStyle.textStyle12WhiteW500,
+                    )),
+                ),
+              ],
+            ),
+          )),
+    );
+  }
+}

@@ -38,4 +38,10 @@ class AppColors {
   static const profileCardTextColor = Color(0xFFF2F0F6);
   static const profileIndicatorColor = Color(0xFFB844D1);
 
+
+  /// Syllabus
+
+  static const syllabusTextColorBlack = Color(0xFF412C56);
+  static const syllabusTextColor635976 = Color(0xFF635976);
+  static const syllabusTextColor412C56 = Color(0xFF412C56);
 }

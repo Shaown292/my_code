@@ -1,5 +1,7 @@
 import 'package:flutter_single_getx_api_v2/app/modules/profile/bindings/profile_bindings.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/profile_view.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/syllabus/bindings/syllabus_bindings.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/syllabus/views/syllabus_views.dart';
 import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.SYLLABUS,
+      page: () => const SyllabusView(),
+      binding: SyllabusBinding(),
     ),
   ];
 }
