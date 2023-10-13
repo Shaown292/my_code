@@ -1,6 +1,6 @@
-import 'package:get/get.dart';
 
-import '../../app/data/module_data/student/student_dummy_data.dart';
+import '../../app/data/module_data/home_data/home_dummy_data.dart';
+
 
 // class GlobalVariableController extends GetxController{
 //

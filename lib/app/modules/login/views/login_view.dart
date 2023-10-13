@@ -105,6 +105,7 @@ class LoginView extends GetView<LoginController> {
                           focusBorderActive: true,
                           enableBorderActive: true,
                           hintText: "Email",
+                          textInputType: TextInputType.text,
                           suffixIcon: const Icon(
                             Icons.email,
                             color: AppColors.loginIconColor,

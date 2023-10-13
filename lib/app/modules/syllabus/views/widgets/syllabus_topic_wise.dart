@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_container_widget.dart';
 import 'package:get/get.dart';
 
-import '../../../../utilities/widgets/button/main_button.dart';
 
 class SyllabusTopicWise extends StatelessWidget {
 

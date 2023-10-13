@@ -9,6 +9,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool obsCureText;
   final Widget? suffixIcon;
   final Function()? iconOnTap;
+  final TextInputType? textInputType;
 
   const CustomTextFormField({
     this.controller,
@@ -19,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.iconOnTap,
     this.obsCureText = false,
+    this.textInputType,
     super.key,
   });
 
@@ -27,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obsCureText,
+      keyboardType: textInputType,
       decoration: InputDecoration(
         filled: true,
         fillColor: fillColor ?? const Color(0xFFFDFBFF),

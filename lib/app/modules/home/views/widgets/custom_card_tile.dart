@@ -57,7 +57,7 @@ class CustomCardTile extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: SvgPicture.asset(
+                      child: Image.asset(
                         icon,
                         height: 40,
                         width: 40,

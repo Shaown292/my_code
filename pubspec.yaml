@@ -34,6 +34,7 @@ flutter:
     - assets/icons/student/
     - assets/icons/teacher/
     - assets/icons/parents/
+    - assets/icons/admin/
     - assets/svg/student/
 
 
