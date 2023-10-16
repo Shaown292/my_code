@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  badges:
+    dependency: "direct main"
+    description:
+      name: badges
+      sha256: a7b6bbd60dce418df0db3058b53f9d083c22cdb5132a052145dc267494df0b84
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
   basic_utils:
     dependency: transitive
     description:
@@ -571,6 +579,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
+  persistent_bottom_nav_bar_v2:
+    dependency: "direct main"
+    description:
+      name: persistent_bottom_nav_bar_v2
+      sha256: "2fbaf1e8b18108d8a303304a306d68bcfb78abfd553295f489a8a315dff479e2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.8"
   petitparser:
     dependency: transitive
     description:
@@ -856,6 +872,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.3"
+  themify_flutter:
+    dependency: "direct main"
+    description:
+      path: themify_flutter
+      relative: true
+    source: path
+    version: "1.0.0"
   typed_data:
     dependency: transitive
     description:

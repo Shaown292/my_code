@@ -52,12 +52,21 @@ class CustomCardTile extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppDimens.radius3),
                     ),
+<<<<<<< HEAD
                   ),
                   child: Center(
                     child: SvgPicture.asset(
                       icon,
                       height: 40,
                       width: 40,
+=======
+                    child: Center(
+                      child: Image.asset(
+                        icon,
+                        height: 40,
+                        width: 40,
+                      ),
+>>>>>>> dev_sifat1
                     ),
                   ),
                 ),

@@ -10,6 +10,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
   void onInit() {
     _animation();
     navNextPage();
+    // _getUserInformation();
     super.onInit();
   }
 
@@ -34,15 +35,17 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
     await 3000.milliseconds.delay();
 
     if (authDatabase.auth()) {
-      int roleId = authDatabase.getUserInfo()!.data.user.roleId;
-      AppFunctions().getFunctions(roleId);
+      GlobalVariableController.roleId = authDatabase.getUserInfo()!.data.user.roleId;
+      AppFunctions().getFunctions(GlobalVariableController.roleId!);
 
-
-      Get.offAndToNamed(Routes.HOME, arguments: {
-        'homeListTile': GlobalVariableController.homeTileList,
-      });
     } else {
       Get.offAndToNamed(Routes.LOGIN);
     }
   }
+
+  // _getUserInformation(){
+  //   AuthDatabase authDatabase = AuthDatabase.instance;
+  //   GlobalVariableController.roleId = authDatabase.getUserInfo()!.data.user.roleId;
+  // }
+
 }

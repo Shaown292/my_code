@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/login/controllers/login_controller.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/splash/controllers/splash_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
+import '../../data/module_data/home_data/home_dummy_data.dart';
+import '../../routes/app_pages.dart';
 
-import '../../data/module_data/student/student_dummy_data.dart';
 
 class AppFunctions {
 
@@ -15,26 +14,39 @@ class AppFunctions {
     switch (rule) {
       case 1:
         GlobalVariableController.homeTileList = adminList;
+        Get.offAndToNamed(Routes.HOME, arguments: {
+          'homeListTile': GlobalVariableController.homeTileList,
+        });
         break;
       case 2:
         GlobalVariableController.homeTileList = studentList;
-        // for(int i = 0; i < globalVariableController.homeTileList.length; i++){
-        //   print(globalVariableController.homeTileList[i].value);
-        // }
+        Get.offAndToNamed(Routes.DASHBOARD, arguments: {
+          'homeListTile': GlobalVariableController.homeTileList,
+        });
         break;
       case 3:
         GlobalVariableController.homeTileList = parentList;
+        Get.offAndToNamed(Routes.HOME, arguments: {
+          'homeListTile': GlobalVariableController.homeTileList,
+        });
         break;
       case 4:
         GlobalVariableController.homeTileList = teacherList;
+        Get.offAndToNamed(Routes.DASHBOARD, arguments: {
+          'homeListTile': GlobalVariableController.homeTileList,
+        });
         break;
       case 5:
         GlobalVariableController.homeTileList = adminList;
+        Get.offAndToNamed(Routes.HOME, arguments: {
+          'homeListTile': GlobalVariableController.homeTileList,
+        });
         break;
       case 9:
         GlobalVariableController.homeTileList = adminList;
-        print('driver::::::::::::::::');
-
+        Get.offAndToNamed(Routes.HOME, arguments: {
+          'homeListTile': GlobalVariableController.homeTileList,
+        });
         break;
     }
   }
