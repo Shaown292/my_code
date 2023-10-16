@@ -12,6 +12,7 @@ class ImagePath {
   static const  messenger             = "assets/config/messenger.png";
   static const  logout                = "assets/config/logout.png";
   static const  edit                  = "assets/config/edit.png";
+  static const  back                  = "assets/config/back_arrow.png";
 
 
   /// Student Tile Icons
@@ -71,6 +72,9 @@ class ImagePath {
 
 
 
+
+
+
   /// Parents Icon
 
   static String parentsAbout       = "assets/icons/student/parents_about.png";
@@ -91,4 +95,8 @@ class ImagePath {
   static String teacherNotice      = "assets/icons/student/teacher_notice.png";
   static String teacherSettings    = "assets/icons/student/teacher_settings.png";
   static String teacherStudents    = "assets/icons/student/teacher_students.png";
+
+
+  /// Notification
+  static String noNotification     = "assets/images/noNotification.png";
 }

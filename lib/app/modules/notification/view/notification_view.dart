@@ -1,0 +1,55 @@
+
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/notification/controller/notification_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/notification/view/widget/NotificationListWidget.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/notification/view/widget/notification_app_bar_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:get/get.dart';
+
+import '../../../data/constants/app_text.dart';
+import '../../../data/constants/app_text_style.dart';
+import '../../../utilities/widgets/button/primary_button.dart';
+
+class NotificationView extends GetView<NotificationController>{
+  const NotificationView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return   CustomScaffoldWidget(
+
+      appBar: const NotificationAppBarWidget(),
+
+      bodyWidget: CustomBackground(
+
+          customWidget: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "You have 0 New notification",
+                      style: AppTextStyle.notificationText,
+                    ),
+                    PrimaryButton(
+                      title: AppText.notificationRaed,
+                      width: 110,
+                    )
+                  ],
+                ),
+              ),
+              const NotificationListWidget(),
+              30.verticalSpacing
+            ],
+          )
+      ),
+    );
+  }
+
+}

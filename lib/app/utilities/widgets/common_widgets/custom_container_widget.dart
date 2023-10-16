@@ -22,7 +22,7 @@ class CustomContainerWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius ?? 8),
         color: color ?? Colors.white,
-        border: Border.all( color: borderColor ?? Colors.white, width: borderWidth ?? 1)
+        border: Border.all( color: borderColor ?? Colors.white, width: borderWidth ?? 0)
       ),
       child: requiredWidget,
     );
