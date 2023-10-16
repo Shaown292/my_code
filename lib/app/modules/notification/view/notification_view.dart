@@ -1,8 +1,4 @@
-
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/notification/controller/notification_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/notification/view/widget/NotificationListWidget.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/notification/view/widget/notification_app_bar_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
@@ -13,6 +9,7 @@ import 'package:get/get.dart';
 import '../../../data/constants/app_text.dart';
 import '../../../data/constants/app_text_style.dart';
 import '../../../utilities/widgets/button/primary_button.dart';
+import '../controllers/notification_controller.dart';
 
 class NotificationView extends GetView<NotificationController>{
   const NotificationView({super.key});

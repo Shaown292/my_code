@@ -107,23 +107,9 @@ class ImagePath {
   static String adminStudents           = "assets/icons/admin/admin_students.png";
   static String adminTransport          = "assets/icons/admin/admin_transport.png";
 
-<<<<<<< HEAD
-  static String teacherAbout       = "assets/icons/student/teacher_about.png";
-  static String teacherAcademics   = "assets/icons/student/teacher_academics.png";
-  static String teacherClass       = "assets/icons/student/teacher_class.png";
-  static String teacherClassAttendance       = "assets/icons/student/teacher_classattendance.png";
-  static String teacherContents    = "assets/icons/student/teacher_contents.png";
-  static String teacherHomework    = "assets/icons/student/teacher_homework.png";
-  static String teacherLeave       = "assets/icons/student/teacher_leave.png";
-  static String teacherLibrary     = "assets/icons/student/teacher_library.png";
-  static String teacherNotice      = "assets/icons/student/teacher_notice.png";
-  static String teacherSettings    = "assets/icons/student/teacher_settings.png";
-  static String teacherStudents    = "assets/icons/student/teacher_students.png";
 
 
   /// Notification
   static String noNotification     = "assets/images/noNotification.png";
 }
-=======
-}
->>>>>>> dev_sifat1
+

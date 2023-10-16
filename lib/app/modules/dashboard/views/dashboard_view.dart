@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/views/home_view.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/profile_view.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-
-import '../../notification/views/notification_view.dart';
+import '../../notification/view/notification_view.dart';
 import '../controllers/dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {

@@ -9,11 +9,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_app_bar/primary_app_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
-import '../../../data/constants/app_colors.dart';
-import '../../../data/module_data/student/student_dummy_data.dart';
-=======
->>>>>>> dev_sifat1
+
 import '../../../utilities/widgets/common_widgets/alert_dialog.dart';
 import '../controllers/home_controller.dart';
 
@@ -69,19 +65,6 @@ class HomeView extends GetView<HomeController> {
 
         ),
       ),
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> dev_sifat1
     );
   }
 }
