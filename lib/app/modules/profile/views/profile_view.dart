@@ -46,13 +46,11 @@ class ProfileView extends GetView<ProfileController> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
                                     height: Get.height * 0.1,
@@ -61,88 +59,27 @@ class ProfileView extends GetView<ProfileController> {
                                         image: DecorationImage(
                                           image: AssetImage(ImagePath.dp),
                                         ),
-                                        borderRadius:
-                                        BorderRadius.circular(8)),
+                                        borderRadius: BorderRadius.circular(8)),
                                   ),
                                   10.horizontalSpacing,
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Text(
+                                      Text(
                                         "Akshay Syal",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
+                                        style: AppTextStyle.fontSize18WhiteW500,
                                       ),
-                                      Row(
-                                        children: [
-                                          const Text(
-                                            AppText.profileClass,
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                          5.horizontalSpacing,
-                                          const Text(
-                                            "XI-B",
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                          5.horizontalSpacing,
-                                          const Text(
-                                            "|",
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                          5.horizontalSpacing,
-                                          const Text(
-                                            AppText.profileSection,
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                          5.horizontalSpacing,
-                                          const Text(
-                                            "D",
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                        ],
+                                      Text(
+                                        '${AppText.profileClass} XI-B  |  ${AppText.profileSection} D',
+                                        style: AppTextStyle
+                                            .fontSize14LightPinkW400,
                                       ),
-                                      Row(
-                                        children: [
-                                          const Text(
-                                            AppText.profileAdmission,
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                          5.horizontalSpacing,
-                                          const Text(
-                                            "8776",
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                          5.horizontalSpacing,
-                                          const Text(
-                                            "|",
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                          5.horizontalSpacing,
-                                          const Text(
-                                            AppText.profileRoll,
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                          5.horizontalSpacing,
-                                          const Text(
-                                            "04",
-                                            style: AppTextStyle
-                                                .fontSize14LightPinkW400,
-                                          ),
-                                        ],
+                                      Text(
+                                        '${AppText.profileAdmission} 8776  |  ${AppText.profileRoll} 04',
+                                        style: AppTextStyle
+                                            .fontSize14LightPinkW400,
                                       ),
                                     ],
                                   ),
@@ -155,8 +92,8 @@ class ProfileView extends GetView<ProfileController> {
                                   width: Get.width * 0.04,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
-                                        image: AssetImage(ImagePath.camera),
-                                      )),
+                                    image: AssetImage(ImagePath.camera),
+                                  )),
                                 ),
                               ),
                             ],
@@ -166,8 +103,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     10.verticalSpacing,
                     Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: PageWidget(
                         controller: controller,
                       ),
@@ -182,10 +118,12 @@ class ProfileView extends GetView<ProfileController> {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: PageView(
                   controller: controller.profilePageController,
-                  physics: const BouncingScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     PersonalProfileWidget(studentInfo: studentInfo),
                     const ParentsProfileWidget(),
+                    const TransportProfileWidget(),
+                    const TransportProfileWidget(),
                     const TransportProfileWidget(),
                   ],
                 ),

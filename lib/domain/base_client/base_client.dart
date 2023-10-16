@@ -34,7 +34,7 @@ class BaseClient {
   }
 
   Future<dynamic> postData({
-    required Map<String, dynamic> payload,
+     Map<String, dynamic>? payload,
     required String url,
     required Map<String, String> header,
   }) async {
