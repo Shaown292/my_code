@@ -43,25 +43,21 @@ class CustomCardTile extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                Container(
                   width: 74,
                   height: 74,
-                  child: Container(
-                    width: 74,
-                    height: 74,
-                    decoration: ShapeDecoration(
-                      color:
-                          isSelected ? Colors.white : AppColors.smallCardColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppDimens.radius3),
-                      ),
+                  decoration: ShapeDecoration(
+                    color:
+                        isSelected ? Colors.white : AppColors.smallCardColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppDimens.radius3),
                     ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        icon,
-                        height: 40,
-                        width: 40,
-                      ),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      icon,
+                      height: 40,
+                      width: 40,
                     ),
                   ),
                 ),

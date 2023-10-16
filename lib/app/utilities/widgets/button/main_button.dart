@@ -10,6 +10,7 @@ class MainButton extends StatelessWidget {
   final bool loading;
   final Color backgroundColor;
   final double? borderRadius;
+  final double? buttonHeight;
 
   const MainButton({
     required this.title,
@@ -17,7 +18,7 @@ class MainButton extends StatelessWidget {
     this.loading = false,
     this.backgroundColor = AppColors.primaryColor,
     this.borderRadius,
-    Key? key,
+    Key? key, this.buttonHeight,
   }) : super(key: key);
 
   @override
@@ -27,6 +28,8 @@ class MainButton extends StatelessWidget {
       style: mainButtonStyle(
         mainColor: backgroundColor,
         borderRadius: borderRadius ?? AppDimens.radius12,
+
+
       ),
       child: Center(
         child: Stack(

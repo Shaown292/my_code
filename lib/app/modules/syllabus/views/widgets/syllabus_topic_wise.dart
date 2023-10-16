@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_container_widget.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +22,7 @@ class SyllabusTopicWise extends StatelessWidget {
       child: CustomContainerWidget(
         height: Get.height * 0.17,
           borderColor: const Color(0xFFEAE7F0),
+          borderWidth: 1,
           requiredWidget: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
@@ -45,11 +47,11 @@ class SyllabusTopicWise extends StatelessWidget {
                       children: [
                         const Text(
                           "Date: ",
-                          style: AppTextStyle.syllabusFontSize14W400,
+                          style: AppTextStyle.blackFontSize14W400,
                         ),
                         Text(
                           date ?? "",
-                          style: AppTextStyle.syllabusFontSize14W400,
+                          style: AppTextStyle.blackFontSize14W400,
                         ),
                       ],
                     )
@@ -61,14 +63,9 @@ class SyllabusTopicWise extends StatelessWidget {
                   style: AppTextStyle.syllabusFontSize16W500,
                 ),
                 20.verticalSpacing,
-                const CustomContainerWidget(
-                  height: 30,
-                    color: Color(0xFF953BE4),
-                    radius: 6,
-                    requiredWidget: Center(child: Text(
-                        "Download",
-                      style: AppTextStyle.textStyle12WhiteW500,
-                    )),
+                const PrimaryButton(
+                  title: "Download",
+
                 ),
               ],
             ),

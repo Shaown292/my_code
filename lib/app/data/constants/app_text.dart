@@ -27,4 +27,9 @@ class AppText {
   static const String profileFather= 'Father';
   static const String profileGuardian= 'Guardian';
   static const String profileMother= 'Mother';
+
+  /// Notification
+  static const String notificationRaed= 'Mark all as read';
+  static const String notificationData= 'No data available.';
+  static const String notificationTitle= 'Notification';
 }
