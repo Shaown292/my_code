@@ -59,6 +59,7 @@ class AppPages {
         DashboardBinding(),
         ProfileBinding(),
         HomeBinding(),
+        NotificationBinding(),
       ],
     ),
     GetPage(

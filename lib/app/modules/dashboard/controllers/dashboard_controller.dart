@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -72,16 +73,16 @@ PersistentBottomNavBarItem navItem({required IconData icon, title,bool isNotific
 
 Widget notificationBell(){
 
-  return Stack(
+  return  Stack(
 
     alignment: Alignment.center,
     children: [
+       const Positioned(
+        top: 5,
+          right: 5,
+          child: Center(child: Text("12",style: AppTextStyle.cardTextStyle14PurpleW500,))
+      ),
       SvgPicture.asset("assets/svg/student/notification_bell.svg"),
-      Positioned(
-        top: 10,
-          right: 0,
-          child: Text("12",style: TextStyle(fontSize: 20),)
-      )
     ],
 
   );
