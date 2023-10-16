@@ -26,16 +26,16 @@ class NotificationView extends GetView<NotificationController>{
 
           customWidget: Column(
             children: [
-               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+               const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "You have ${controller.notificationModel!.data!.unreadNotificationsCount} New notification",
+                      "You have 0 New notification",
                       style: AppTextStyle.notificationText,
                     ),
-                    const PrimaryButton(
+                    PrimaryButton(
                       title: AppText.notificationRaed,
                       width: 110,
                     )

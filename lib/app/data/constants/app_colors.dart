@@ -34,6 +34,7 @@ class AppColors {
   static const profileCardBackgroundColor = Color(0xFF412C56);
   static const profileCardTextColor = Color(0xFFF2F0F6);
   static const profileIndicatorColor = Color(0xFFB844D1);
+  static const editProfileTextFieldLabelColor = Color(0xFF8489AB);
 
   /// Syllabus
   static const syllabusTextColorBlack = Color(0xFF412C56);
@@ -42,6 +43,8 @@ class AppColors {
 
   /// Notification Color
   static const notificationColor = Color(0xFFED00FF);
+
+
 
 
 

@@ -81,4 +81,9 @@ class AppTextStyle {
       color: AppColors.syllabusTextColor412C56,
       fontSize: 10,
       fontWeight: FontWeight.w400);
+
+  static const labelText = TextStyle(
+      color: AppColors.editProfileTextFieldLabelColor,
+      fontSize: 8,
+      fontWeight: FontWeight.w400);
 }

@@ -32,4 +32,12 @@ class AppText {
   static const String notificationRaed= 'Mark all as read';
   static const String notificationData= 'No data available.';
   static const String notificationTitle= 'Notification';
+
+  /// Edit Profile
+  static const String editProfileFirstName       = 'First Name';
+  static const String editProfileLastName        = 'Last Name';
+  static const String editProfilePhoneNumber     = 'Phone Number';
+  static const String editProfileEmail           = 'Email';
+  static const String editProfileDateOfBirth     = 'Date of Birth';
+  static const String editProfileCurrentAddress  = 'Current Address';
 }
