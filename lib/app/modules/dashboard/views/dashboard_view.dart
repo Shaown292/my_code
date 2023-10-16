@@ -8,6 +8,7 @@ import '../../notification/view/notification_view.dart';
 import '../controllers/dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
+
   const DashboardView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
