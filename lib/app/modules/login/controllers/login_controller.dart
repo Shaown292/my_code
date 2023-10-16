@@ -39,9 +39,6 @@ class LoginController extends GetxController {
 
         if (status) {
           AppFunctions().getFunctions(profileInfoModel.data.user.roleId);
-          Get.offAllNamed(Routes.HOME, arguments:{
-            'homeListTile' : GlobalVariableController.homeTileList,
-          });
         }
       } else {
         isLoading.value = false;
@@ -74,9 +71,6 @@ class LoginController extends GetxController {
 
         if (status) {
           AppFunctions().getFunctions(profileInfoModel.data.user.roleId);
-          Get.offAllNamed(Routes.HOME, arguments:{
-            'homeListTile' : GlobalVariableController.homeTileList,
-          });
         }
       } else {
         isLoading.value = false;
