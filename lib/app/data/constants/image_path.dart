@@ -12,6 +12,7 @@ class ImagePath {
   static const  messenger             = "assets/config/messenger.png";
   static const  logout                = "assets/config/logout.png";
   static const  edit                  = "assets/config/edit.png";
+  static const  editBlack             = "assets/config/edit_black.png";
   static const  back                  = "assets/config/back_arrow.png";
 
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
@@ -6,8 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-import 'package:badges/badges.dart' as badges;
-import 'package:themify_flutter/themify_flutter.dart';
+
 
 class DashboardController extends GetxController {
   final PersistentTabController tabIndexController =
@@ -56,7 +56,7 @@ class DashboardController extends GetxController {
 
 PersistentBottomNavBarItem navItem({required IconData icon, title,bool isNotification = false}) {
   return PersistentBottomNavBarItem(
-    inactiveIcon: isNotification ? notificationBell() : Icon(
+    inactiveIcon: isNotification ? const NotificationBell() : Icon(
       icon,
       size: 30,
     ),
@@ -71,22 +71,66 @@ PersistentBottomNavBarItem navItem({required IconData icon, title,bool isNotific
   );
 }
 
-Widget notificationBell(){
 
-  return  Stack(
+class NotificationBell extends StatelessWidget {
+  const NotificationBell({super.key});
 
-    alignment: Alignment.center,
-    children: [
-       const Positioned(
-        top: 5,
-          right: 5,
-          child: Center(child: Text("12",style: AppTextStyle.cardTextStyle14PurpleW500,))
-      ),
-      SvgPicture.asset("assets/svg/student/notification_bell.svg"),
-    ],
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Stack(
+          children: <Widget>[
 
-  );
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset("assets/svg/student/notification_bell.svg"),
+            ),
+            Positioned(
+              top: 10,
+              right: 10,
+              child: Container(
+                height: 15,
+                width: 15,
+                decoration:  const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primaryColor,
+                ),
+                child:  const Center(
+                  child: Text(
+                    "0",
+                    style: TextStyle(
+                        decoration: TextDecoration.none,
+                        fontSize: 13,
+                        color: Colors.white
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+
+        ),
+      ],
+    );
+  }
 }
+
+// Widget notificationBell(){
+//
+//   return  Stack(
+//
+//     children: [
+//        const Positioned(
+//         top: 5,
+//           right: 5,
+//           child: Center(child: Text("12",style: AppTextStyle.cardTextStyle14PurpleW500,))
+//       ),
+//       SvgPicture.asset("assets/svg/student/notification_bell.svg"),
+//     ],
+//
+//   );
+// }
 
 
 

@@ -60,6 +60,6 @@ class PageWidget extends StatelessWidget {
         ),
 
       ],
-    ),);
+    ));
   }
 }

@@ -19,69 +19,69 @@ class NotificationView extends GetView<NotificationController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => CustomScaffoldWidget(
+          () => CustomScaffoldWidget(
         appBar: NotificationAppBarWidget(
           notificationCount: controller.unreadNotificationCount,
         ),
         bodyWidget: CustomBackground(
             customWidget: RefreshIndicator(
-          onRefresh: () async {
-            controller.fetchNotifications();
-          },
-          child: Column(
-            children: [
-              Padding(
-                padding:
+              onRefresh: () async {
+                controller.fetchNotifications();
+              },
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "You have ${controller.unreadNotificationCount} New notification",
-                      style: AppTextStyle.notificationText,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "You have ${controller.unreadNotificationCount} New notification",
+                          style: AppTextStyle.notificationText,
+                        ),
+                        const PrimaryButton(
+                          title: AppText.notificationRaed,
+                          width: 110,
+                        )
+                      ],
                     ),
-                    const PrimaryButton(
-                      title: AppText.notificationRaed,
-                      width: 110,
-                    )
-                  ],
-                ),
-              ),
-              controller.isLoading.value
-                  ? const Center(
+                  ),
+                  controller.isLoading.value
+                      ? const Center(
                       child: CircularProgressIndicator(
-                      color: AppColors.primaryColor,
-                    ))
-                  : controller.unReadNotificationList.isEmpty
+                        color: AppColors.primaryColor,
+                      ))
+                      : controller.unReadNotificationList.isEmpty
                       ? const NoDataAvailableWidget()
                       : Expanded(
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount:
-                                  controller.unReadNotificationList.length,
-                              itemBuilder: (context, index) {
-                                UnreadNotifications? notificationsItem =
-                                    controller.unReadNotificationList[index];
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount:
+                        controller.unReadNotificationList.length,
+                        itemBuilder: (context, index) {
+                          UnreadNotifications? notificationsItem =
+                          controller.unReadNotificationList[index];
 
-                                return NotificationListTile(
-                                  message: notificationsItem.message ?? '',
-                                  notificationDate: formatTimeAgo(DateTime.parse(notificationsItem.createdAt ?? '')),
-                                  userPhoto: notificationsItem.userPhoto,
-                                );
-                              }),
-                        ),
-              30.verticalSpacing
-            ],
-          ),
-        )),
+                          return NotificationListTile(
+                            message: notificationsItem.message ?? '',
+                            notificationDate: formatTimeAgo(DateTime.parse(notificationsItem.createdAt ?? '')),
+                            userPhoto: notificationsItem.userPhoto,
+                          );
+                        }),
+                  ),
+                  30.verticalSpacing
+                ],
+              ),
+            )),
       ),
     );
   }
 
-  /// Time Ago Calculator
   String formatTimeAgo(DateTime date) {
     final now = DateTime.now();
     final difference = now.difference(date);
+    print(difference);
 
     if (difference.inSeconds < 60) {
       return 'a few moments ago';
@@ -102,5 +102,4 @@ class NotificationView extends GetView<NotificationController> {
       return '$years year${years != 1 ? 's' : ''} ago';
     }
   }
-
 }

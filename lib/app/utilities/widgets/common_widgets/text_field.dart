@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
@@ -10,6 +11,9 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Function()? iconOnTap;
   final TextInputType? textInputType;
+  final String? label;
+  final TextStyle? labelTextStyle;
+  final Color? enableBorderActiveColor;
 
   const CustomTextFormField({
     this.controller,
@@ -21,6 +25,9 @@ class CustomTextFormField extends StatelessWidget {
     this.iconOnTap,
     this.obsCureText = false,
     this.textInputType,
+    this.label,
+    this.labelTextStyle,
+    this.enableBorderActiveColor,
     super.key,
   });
 
@@ -30,8 +37,12 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       obscureText: obsCureText,
       keyboardType: textInputType,
+      minLines: 1,
+      maxLines: 5,
       decoration: InputDecoration(
         filled: true,
+        labelText: label ?? "label",
+        labelStyle: labelTextStyle ?? AppTextStyle.labelText,
         fillColor: fillColor ?? const Color(0xFFFDFBFF),
         hintText: hintText ?? 'Enter text',
         suffixIcon:
@@ -40,13 +51,13 @@ class CustomTextFormField extends StatelessWidget {
                 child: suffixIcon ?? const SizedBox()),
         focusedBorder: focusBorderActive
             ? OutlineInputBorder(
-                borderSide: const BorderSide(color: Color(0xFFEBDAF9)),
+                borderSide:  BorderSide(color: const Color(0xFF635976).withOpacity(0.2)),
                 borderRadius: BorderRadius.circular(8.0),
               )
             : null,
         enabledBorder: enableBorderActive
             ? OutlineInputBorder(
-                borderSide: const BorderSide(color: Color(0xFFEBDAF9)),
+                borderSide:  BorderSide(color: enableBorderActiveColor ?? const Color(0xFF635976).withOpacity(0.2)),
                 borderRadius: BorderRadius.circular(8.0),
               )
             : null,
