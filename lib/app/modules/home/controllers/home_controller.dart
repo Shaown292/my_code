@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
