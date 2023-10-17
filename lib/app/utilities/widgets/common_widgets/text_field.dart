@@ -14,8 +14,9 @@ class CustomTextFormField extends StatelessWidget {
   final String? label;
   final TextStyle? labelTextStyle;
   final Color? enableBorderActiveColor;
+  final int? maxLine;
 
-  const CustomTextFormField({
+  const CustomTextFormField ({
     this.controller,
     this.fillColor,
     this.hintText,
@@ -28,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
     this.label,
     this.labelTextStyle,
     this.enableBorderActiveColor,
-    super.key,
+    super.key, this.maxLine,
   });
 
   @override
@@ -38,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obsCureText,
       keyboardType: textInputType,
       minLines: 1,
-      maxLines: 5,
+      maxLines: maxLine ?? 1,
       decoration: InputDecoration(
         filled: true,
         labelText: label ?? "label",
