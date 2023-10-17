@@ -7,7 +7,8 @@ class EditProfileTextField extends StatelessWidget {
 
   final String? hintText;
   final String? labelText;
-  const EditProfileTextField({super.key, this.hintText, this.labelText});
+  final TextEditingController? controller;
+  const EditProfileTextField({super.key, this.hintText, this.labelText, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,9 @@ class EditProfileTextField extends StatelessWidget {
       focusBorderActive: true,
      hintText: hintText,
       label: labelText,
+      maxLine: 2,
+      controller: controller,
+
       suffixIcon: Container(
         width: Get.width * 0.02,
         decoration: const BoxDecoration(

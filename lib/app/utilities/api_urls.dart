@@ -30,6 +30,9 @@ class InfixApi {
   static String login() {
     return '${baseApi}login';
   }
+  static String editProfile(String studentId) {
+    return '${baseApi}student-profile-edit/$studentId';
+  }
 
   static String demoLogin(String role) {
     return '${baseApi}user-demo-login/$role';
