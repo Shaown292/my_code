@@ -12,12 +12,12 @@ class NotificationModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -32,19 +32,19 @@ class Data {
     if (json['unread_notifications'] != null) {
       unreadNotifications = <UnreadNotifications>[];
       json['unread_notifications'].forEach((v) {
-        unreadNotifications!.add(new UnreadNotifications.fromJson(v));
+        unreadNotifications!.add(UnreadNotifications.fromJson(v));
       });
     }
     unreadNotificationsCount = json['unread_notifications_count'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.unreadNotifications != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (unreadNotifications != null) {
       data['unread_notifications'] =
-          this.unreadNotifications!.map((v) => v.toJson()).toList();
+          unreadNotifications!.map((v) => v.toJson()).toList();
     }
-    data['unread_notifications_count'] = this.unreadNotificationsCount;
+    data['unread_notifications_count'] = unreadNotificationsCount;
     return data;
   }
 }
@@ -52,18 +52,21 @@ class Data {
 class UnreadNotifications {
   String? message;
   String? createdAt;
+  String? userPhoto;
 
-  UnreadNotifications({this.message, this.createdAt});
+  UnreadNotifications({this.message, this.createdAt, this.userPhoto,});
 
   UnreadNotifications.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     createdAt = json['created_at'];
+    userPhoto = json['user_photo'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['created_at'] = this.createdAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    data['created_at'] = createdAt;
+    data['user_photo'] = userPhoto;
     return data;
   }
 }

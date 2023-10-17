@@ -6,6 +6,7 @@ class AppText {
   static const String noInternetConnection = 'No Internet Connection';
   static const String tryAgainLater = 'Try Again Later';
   static const String logoutWarningMsg = 'Are you sure,\n you want to logout?';
+  static const String connectInternetMessage = 'Connect with Internet and Restart your App.';
 
 
   /// Profile
@@ -30,6 +31,6 @@ class AppText {
 
   /// Notification
   static const String notificationRaed= 'Mark all as read';
-  static const String notificationData= 'No data available.';
+  static const String noDataAvailable= 'No data available.';
   static const String notificationTitle= 'Notification';
 }

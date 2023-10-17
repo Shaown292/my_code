@@ -26,7 +26,7 @@ class InternetController extends GetxController{
   var internetController             = Get.put(InternetController());
 
 void internetConnectionChecker() {
-  const oneSec = Duration(seconds: 3);
+  const oneSec = Duration(seconds: 1);
   Timer.periodic(oneSec, (Timer t) {
     internetController.internetConnection();
   });

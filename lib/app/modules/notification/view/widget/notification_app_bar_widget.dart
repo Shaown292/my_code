@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
@@ -10,10 +9,10 @@ import 'package:get/get.dart';
 import '../../../../data/constants/image_path.dart';
 
 class NotificationAppBarWidget extends StatelessWidget {
-   NotificationAppBarWidget({super.key});
+  final int? notificationCount;
+   const NotificationAppBarWidget({super.key, this.notificationCount,});
 
-  NotificationController notificationController = NotificationController();
-  @override
+   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 60),
@@ -33,9 +32,9 @@ class NotificationAppBarWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: AppColors.notificationColor,
                     ),
-                    child:  const Center(
+                    child:  Center(
                       child: Text(
-                        "0",
+                        '${notificationCount ?? 0}',
                         style: AppTextStyle.textStyle7WhiteW500,
                       ),
                     ),

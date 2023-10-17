@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -19,16 +20,18 @@ class NoInternetConnection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height ?? Get.height,
-      color: backgroundColor ?? Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Lottie.asset(lottieFilePath ?? ImagePath.noInternetConnection),
-          Text(message ?? 'Connect with Internet and Restart App.')
-        ],
+    return Scaffold(
+      body: Container(
+        height: height ?? Get.height,
+        color: backgroundColor ?? Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset(lottieFilePath ?? ImagePath.noInternetConnection),
+            Text(message ?? AppText.connectInternetMessage)
+          ],
+        ),
       ),
     );
   }

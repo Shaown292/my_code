@@ -14,16 +14,15 @@ class NotificationController extends GetxController {
     super.onInit();
   }
 
-  RxBool isLoading = true.obs;
-  RxBool isNotificationEmpty = false.obs;
+  RxBool isLoading = false.obs;
 
- NotificationModel? notificationModel;
+
+ List<UnreadNotifications> unReadNotificationList = [];
+ int unreadNotificationCount = 0;
 
   void fetchNotifications() async {
 
     isLoading.value = true;
-  //  isNotificationEmpty.value = false;
-
 
     try {
       final res = await BaseClient().getData(
@@ -40,12 +39,14 @@ class NotificationController extends GetxController {
       NotificationModel notificationModel = NotificationModel.fromJson(res);
 
       if (notificationModel.success == true) {
+        unreadNotificationCount = notificationModel.data?.unreadNotificationsCount ?? 0;
+        if (notificationModel.data?.unreadNotifications != null && notificationModel.data!.unreadNotifications!.isNotEmpty) {
+          for (int i = 0; i < notificationModel.data!.unreadNotifications!.length; i++) {
+            unReadNotificationList.add(notificationModel.data!.unreadNotifications![i]);
+          }
+        }
 
-        this.notificationModel = notificationModel;
-        update();
         isLoading.value = false;
-
-        showBasicSuccessSnackBar(message: "${notificationModel.message}");
 
 
       } else {
