@@ -78,10 +78,10 @@ class NotificationView extends GetView<NotificationController> {
     );
   }
 
+  /// Time Ago Calculator
   String formatTimeAgo(DateTime date) {
     final now = DateTime.now();
     final difference = now.difference(date);
-    print(difference);
 
     if (difference.inSeconds < 60) {
       return 'a few moments ago';
@@ -102,4 +102,5 @@ class NotificationView extends GetView<NotificationController> {
       return '$years year${years != 1 ? 's' : ''} ago';
     }
   }
+
 }
