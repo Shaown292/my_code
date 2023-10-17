@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/edit%20profile/edit_profile.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile_edit/views/profile_edit_view.dart';
 import 'package:get/get.dart';
 
 class EditProfileRoute extends StatelessWidget {
@@ -10,7 +10,7 @@ class EditProfileRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return  InkWell(
       onTap: (){
-      Get.to(const EditProfile());
+      Get.to(const ProfileEditView());
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),

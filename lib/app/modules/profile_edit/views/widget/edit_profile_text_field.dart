@@ -17,7 +17,7 @@ class EditProfileTextField extends StatelessWidget {
      hintText: hintText,
       label: labelText,
       suffixIcon: Container(
-        width: Get.width * 0.01,
+        width: Get.width * 0.02,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ImagePath.editBlack)

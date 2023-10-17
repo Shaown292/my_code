@@ -11,6 +11,7 @@ abstract class Routes {
   static const SYLLABUS = _Paths.SYLLABUS;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const NOTIFICATION = _Paths.NOTIFICATION;
+  static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const SYLLABUS = '/syllabus';
   static const DASHBOARD = '/dashboard';
   static const NOTIFICATION = '/notification';
+  static const PROFILE_EDIT = '/profile-edit';
 }

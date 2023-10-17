@@ -3,7 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profile_controller.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/edit%20profile/widget/edit_profile_route.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile_edit/views/widget/edit_profile_route.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/pages_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/parents_profile_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/personal_profile_widget.dart';
