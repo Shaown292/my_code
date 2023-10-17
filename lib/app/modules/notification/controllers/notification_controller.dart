@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/database/auth_database.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/notification/notification_model.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,7 @@ class NotificationController extends GetxController {
 
 
  List<UnreadNotifications> unReadNotificationList = [];
- int unreadNotificationCount = 0;
+ // int unreadNotificationCount = 0;
 
   void fetchNotifications() async {
 
@@ -39,7 +40,7 @@ class NotificationController extends GetxController {
       NotificationModel notificationModel = NotificationModel.fromJson(res);
 
       if (notificationModel.success == true) {
-        unreadNotificationCount = notificationModel.data?.unreadNotificationsCount ?? 0;
+        GlobalVariableController.notificationCount = notificationModel.data?.unreadNotificationsCount ?? 0;
         if (notificationModel.data?.unreadNotifications != null && notificationModel.data!.unreadNotifications!.isNotEmpty) {
           for (int i = 0; i < notificationModel.data!.unreadNotifications!.length; i++) {
             unReadNotificationList.add(notificationModel.data!.unreadNotifications![i]);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/splash/controllers/splash_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -58,10 +59,10 @@ PersistentBottomNavBarItem navItem({required IconData icon, title,bool isNotific
   return PersistentBottomNavBarItem(
     inactiveIcon: isNotification ? const NotificationBell() : Icon(
       icon,
-      size: 30,
+      size: 18,
     ),
 
-    icon: Icon(
+    icon: isNotification ? const NotificationBell() :  Icon(
       icon,
       size: 18,
     ),
@@ -77,41 +78,37 @@ class NotificationBell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Stack(
-          children: <Widget>[
+    return Stack(
+      children: <Widget>[
 
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: SvgPicture.asset("assets/svg/student/notification_bell.svg"),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: SvgPicture.asset("assets/svg/student/notification_bell.svg",),
+        ),
+        Positioned(
+          top: 8,
+          right: 8,
+          child: Container(
+            height: 20,
+            width: 20,
+            decoration:  const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.primaryColor,
             ),
-            Positioned(
-              top: 10,
-              right: 10,
-              child: Container(
-                height: 15,
-                width: 15,
-                decoration:  const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.primaryColor,
-                ),
-                child:  const Center(
-                  child: Text(
-                    "0",
-                    style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 13,
-                        color: Colors.white
-                    ),
-                  ),
+            child:  Center(
+              child: Text(
+                GlobalVariableController.notificationCount.toString(),
+                style: const TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 12,
+                    color: Colors.white
                 ),
               ),
             ),
-          ],
-
+          ),
         ),
       ],
+
     );
   }
 }

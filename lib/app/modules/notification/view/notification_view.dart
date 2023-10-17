@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/notification/view/widget/
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import '../../../../domain/core/model/notification/notification_model.dart';
 import '../../../data/constants/app_text.dart';
@@ -21,7 +22,7 @@ class NotificationView extends GetView<NotificationController> {
     return Obx(
           () => CustomScaffoldWidget(
         appBar: NotificationAppBarWidget(
-          notificationCount: controller.unreadNotificationCount,
+          notificationCount: GlobalVariableController.notificationCount,
         ),
         bodyWidget: CustomBackground(
             customWidget: RefreshIndicator(
@@ -37,7 +38,7 @@ class NotificationView extends GetView<NotificationController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "You have ${controller.unreadNotificationCount} New notification",
+                          "You have ${GlobalVariableController.notificationCount} New notification",
                           style: AppTextStyle.notificationText,
                         ),
                         const PrimaryButton(

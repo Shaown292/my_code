@@ -32,6 +32,7 @@ class LoginController extends GetxController {
       profileInfoModel = ProfileInfoModel.fromJson(res);
       if (profileInfoModel.success == true) {
         isLoading.value = false;
+        GlobalVariableController.notificationCount = profileInfoModel.data.unreadNotifications;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
@@ -64,6 +65,7 @@ class LoginController extends GetxController {
       profileInfoModel = ProfileInfoModel.fromJson(response);
       if (profileInfoModel.success == true) {
         isLoading.value = false;
+        GlobalVariableController.notificationCount = profileInfoModel.data.unreadNotifications;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,

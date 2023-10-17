@@ -21,24 +21,24 @@ class HomeController extends GetxController {
     LoadingController loadingController = Get.find();
     try {
 
-      var headers = {
-        'Authorization': GlobalVariableController.token!,
-      };
-      var request = http.Request('POST', Uri.parse('https://spondan.com/infixedu/api/v2/auth/logout'));
-
-      request.headers.addAll(headers);
-
-      http.StreamedResponse response = await request.send();
-
-      if (response.statusCode == 200) {
-        print('::::::::::::::');
-        print(await response.stream.bytesToString());
-      }
-      else {
-        print('falseeeeeee');
-        print(response.statusCode);
-        print(response.reasonPhrase);
-      }
+      // var headers = {
+      //   'Authorization': GlobalVariableController.token!,
+      // };
+      // var request = http.Request('POST', Uri.parse('https://spondan.com/infixedu/api/v2/auth/logout'));
+      //
+      // request.headers.addAll(headers);
+      //
+      // http.StreamedResponse response = await request.send();
+      //
+      // if (response.statusCode == 200) {
+      //   print('::::::::::::::');
+      //   print(await response.stream.bytesToString());
+      // }
+      // else {
+      //   print('falseeeeeee');
+      //   print(response.statusCode);
+      //   print(response.reasonPhrase);
+      // }
 
 
       // // loadingController.isLoading = true;
@@ -58,10 +58,10 @@ class HomeController extends GetxController {
       debugPrint(e.toString());
       debugPrint(t.toString());
     } finally {
-      // await _authDatabase.logOut();
-      // loadingController.isLoading = false;
-      // Get.offAndToNamed(Routes.SPLASH);
-      // loadingController.isLoading = false;
+      await _authDatabase.logOut();
+      loadingController.isLoading = false;
+      Get.offAndToNamed(Routes.SPLASH);
+      loadingController.isLoading = false;
     }
   }
 }

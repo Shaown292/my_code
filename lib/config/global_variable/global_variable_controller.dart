@@ -13,5 +13,6 @@ class GlobalVariableController {
  static List<HomeTileModelClass> homeTileList = [];
  static int? roleId;
  static String? token;
+ static int notificationCount = 0;
 
 }
