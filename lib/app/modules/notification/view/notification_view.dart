@@ -20,61 +20,65 @@ class NotificationView extends GetView<NotificationController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => CustomScaffoldWidget(
-        appBar: NotificationAppBarWidget(
-          notificationCount: GlobalVariableController.notificationCount,
-        ),
+      () => CustomScaffoldWidget(
+        title: 'Notification',
+        leadingIcon: const SizedBox(),
         bodyWidget: CustomBackground(
             customWidget: RefreshIndicator(
-              onRefresh: () async {
-                controller.fetchNotifications();
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding:
+          onRefresh: () async {
+            controller.fetchNotifications();
+          },
+          child: Column(
+            children: [
+              Padding(
+                padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "You have ${GlobalVariableController.notificationCount} New notification",
-                          style: AppTextStyle.notificationText,
-                        ),
-                        const PrimaryButton(
-                          title: AppText.notificationRaed,
-                          width: 110,
-                        )
-                      ],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "You have ${GlobalVariableController.notificationCount} New notification",
+                      style: AppTextStyle.notificationText,
                     ),
-                  ),
-                  controller.isLoading.value
-                      ? const Center(
+                    controller.unReadNotificationList.isNotEmpty ? controller.loadingController.isLoading ? const CircularProgressIndicator() : PrimaryButton(
+                      onTap: (){
+                        controller.readAllNotifications();
+                      },
+                      title: AppText.notificationMarkAsRaed,
+                      width: 110,
+                    ) : const SizedBox(),
+                  ],
+                ),
+              ),
+              controller.isLoading.value
+                  ? const Center(
                       child: CircularProgressIndicator(
-                        color: AppColors.primaryColor,
-                      ))
-                      : controller.unReadNotificationList.isEmpty
+                      color: AppColors.primaryColor,
+                    ))
+                  : controller.unReadNotificationList.isEmpty
                       ? const NoDataAvailableWidget()
                       : Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount:
-                        controller.unReadNotificationList.length,
-                        itemBuilder: (context, index) {
-                          UnreadNotifications? notificationsItem =
-                          controller.unReadNotificationList[index];
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount:
+                                  controller.unReadNotificationList.length,
+                              itemBuilder: (context, index) {
+                                UnreadNotifications? notificationsItem =
+                                    controller.unReadNotificationList[index];
 
-                          return NotificationListTile(
-                            message: notificationsItem.message ?? '',
-                            notificationDate: formatTimeAgo(DateTime.parse(notificationsItem.createdAt ?? '')),
-                            userPhoto: notificationsItem.userPhoto,
-                          );
-                        }),
-                  ),
-                  30.verticalSpacing
-                ],
-              ),
-            )),
+                                return NotificationListTile(
+                                  message: notificationsItem?.message ?? '',
+                                  notificationDate: formatTimeAgo(
+                                      DateTime.parse(
+                                          notificationsItem?.createdAt ?? '')),
+                                  userPhoto: notificationsItem?.userPhoto,
+                                );
+                              }),
+                        ),
+              30.verticalSpacing
+            ],
+          ),
+        )),
       ),
     );
   }

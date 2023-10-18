@@ -30,7 +30,7 @@ class AppText {
   static const String profileMother= 'Mother';
 
   /// Notification
-  static const String notificationRaed= 'Mark all as read';
+  static const String notificationMarkAsRaed= 'Mark all as read';
   static const String noDataAvailable= 'No data available.';
   static const String notificationTitle= 'Notification';
 

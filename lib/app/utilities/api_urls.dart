@@ -38,6 +38,10 @@ class InfixApi {
     return '${baseApi}user-demo-login/$role';
   }
 
+  static String readAllNotification(String role) {
+    return '${baseApi}view/all/notification/$role';
+  }
+
   static String getFeesUrl(dynamic id) {
     return '${baseApi}fees-collect-student-wise/$id';
   }
@@ -287,9 +291,9 @@ class InfixApi {
     return "${baseApi}viewNotification/$userID/$notificationID";
   }
 
-  static String readAllNotification(dynamic userID) {
-    return "${baseApi}viewAllNotification/$userID";
-  }
+  // static String readAllNotification(dynamic userID) {
+  //   return "${baseApi}viewAllNotification/$userID";
+  // }
 
   static String changePassword(String currentPassword, String newPassword,
       String confirmPassword, String userID) {

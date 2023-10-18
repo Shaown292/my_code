@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/database/auth_database.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/default_response_model/default_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/notification/notification_model.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/message/snack_bars.dart';
@@ -16,9 +22,10 @@ class NotificationController extends GetxController {
   }
 
   RxBool isLoading = false.obs;
+  LoadingController loadingController = Get.find();
 
 
- List<UnreadNotifications> unReadNotificationList = [];
+ RxList unReadNotificationList = [].obs;
  // int unreadNotificationCount = 0;
 
   void fetchNotifications() async {
@@ -40,6 +47,8 @@ class NotificationController extends GetxController {
       NotificationModel notificationModel = NotificationModel.fromJson(res);
 
       if (notificationModel.success == true) {
+        AuthDatabase authDatabase = AuthDatabase.instance;
+        authDatabase.saveUnReadNotification(unReadNotification: notificationModel.data?.unreadNotificationsCount ?? 0);
         GlobalVariableController.notificationCount = notificationModel.data?.unreadNotificationsCount ?? 0;
         if (notificationModel.data?.unreadNotifications != null && notificationModel.data!.unreadNotifications!.isNotEmpty) {
           for (int i = 0; i < notificationModel.data!.unreadNotifications!.length; i++) {
@@ -62,5 +71,33 @@ class NotificationController extends GetxController {
     }
   }
 
+  void readAllNotifications() async {
+    AuthDatabase authDatabase = AuthDatabase.instance;
+
+    try{
+      loadingController.isLoading = true;
+      final response = await BaseClient().getData(url: InfixApi.readAllNotification(GlobalVariableController.roleId.toString()), header: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': GlobalVariableController.token!,
+      });
+
+    DefaultResponseModel defaultResponseModel = DefaultResponseModel.fromJson(response);
+
+      if(defaultResponseModel.success == true){
+        unReadNotificationList.clear();
+        GlobalVariableController.notificationCount = 0;
+        authDatabase.saveUnReadNotification(unReadNotification: 0);
+      }
+
+
+    } catch(e, t){
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally{
+      loadingController.isLoading = false;
+    }
+
+  }
 
 }

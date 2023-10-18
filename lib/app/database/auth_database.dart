@@ -27,6 +27,8 @@ class AuthDatabase {
       await storage.write(AuthDBKeys.data, jsonEncode(profileInfoModelModel));
       if (profileInfoModelModel.data.accessToken != null) {
         await storage.write(AuthDBKeys.token, profileInfoModelModel.data.accessToken);
+        await storage.write(AuthDBKeys.notificationCount, profileInfoModelModel.data.unreadNotifications);
+
       }
       await storage.save();
       return true;
@@ -34,6 +36,31 @@ class AuthDatabase {
       return false;
     }
   }
+
+  Future<bool> saveUnReadNotification({
+    required int unReadNotification,
+  }) async {
+    try {
+      final storage = GetStorage(AuthDBKeys.dbName);
+      await storage.write(AuthDBKeys.notificationCount, unReadNotification);
+      await storage.save();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+
+  int? getUnReadNotification() {
+    try {
+      final storage = GetStorage(AuthDBKeys.dbName);
+      debugPrint('Your Notification is:::: ${storage.read(AuthDBKeys.notificationCount)}');
+      return storage.read(AuthDBKeys.notificationCount);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   ProfileInfoModel? getUserInfo() {
     try {
       final storage = GetStorage(AuthDBKeys.dbName);
@@ -86,4 +113,5 @@ class AuthDBKeys {
   static const dbName = 'authDb';
   static const data = 'userInfo';
   static const token = 'token';
+  static const notificationCount = 'notification_count';
 }
