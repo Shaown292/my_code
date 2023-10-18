@@ -42,8 +42,6 @@ class CustomTextFormField extends StatelessWidget {
       maxLines: maxLine ?? 1,
       decoration: InputDecoration(
         filled: true,
-        labelText: label ?? "label",
-        labelStyle: labelTextStyle ?? AppTextStyle.labelText,
         fillColor: fillColor ?? const Color(0xFFFDFBFF),
         hintText: hintText ?? 'Enter text',
         suffixIcon:

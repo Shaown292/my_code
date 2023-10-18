@@ -7,6 +7,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:get/get.dart';
 import '../../../../data/constants/app_text_style.dart';
+import '../../../../utilities/widgets/image_view/cache_image_view.dart';
 
 
 class NotificationListTile extends StatelessWidget {
@@ -25,15 +26,14 @@ class NotificationListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
 
-              Container(
+              SizedBox(
                 height: 50,
                 width: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: userPhoto != null && userPhoto!.isNotEmpty
-                        ? NetworkImage('${AppConfig.imageBaseUrl}$userPhoto' ?? '')
-                        : Image.asset(ImagePath.parentsProfile).image,
+                child: ClipRRect(
+                  borderRadius: 100.circularRadius,
+                  child: CacheImageView(
+                    url: '${AppConfig.imageBaseUrl}$userPhoto',
+                    errorImageLocal: 'assets/image/production/avatar.png',
                   ),
                 ),
               ),
