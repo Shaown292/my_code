@@ -4,11 +4,8 @@ import 'package:get/get.dart';
 import '../../data/module_data/home_data/home_dummy_data.dart';
 import '../../routes/app_pages.dart';
 
-
 class AppFunctions {
-
-
-   void getFunctions(int rule) {
+  void getFunctions(int rule) {
     Route route;
 
     switch (rule) {
@@ -51,4 +48,48 @@ class AppFunctions {
     }
   }
 
+  static void getStudentDashboardNavigation({required String title}) {
+    print(title);
+    switch (title) {
+      case 'Profile':
+        break;
+      case 'Wallet':
+        break;
+      case 'Routine':
+        break;
+      case 'Homework':
+        Get.toNamed(Routes.STUDENT_HOMEWORK);
+        break;
+      case 'Study Materials':
+        break;
+      case 'Leave':
+        break;
+      case 'Dormitory':
+        break;
+      case 'Transport':
+        break;
+      case 'Subjects':
+        break;
+      case 'Teacher':
+        break;
+      case 'Library':
+        break;
+      case 'Notice':
+        break;
+      case 'Timeline':
+        break;
+      case 'Examination':
+        break;
+      case 'Online Exam':
+        break;
+      case 'Attendance':
+        break;
+      case 'Settings':
+        break;
+      case 'Lesson':
+        break;
+      case 'Class':
+        break;
+    }
+  }
 }

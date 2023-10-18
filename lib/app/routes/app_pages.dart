@@ -16,6 +16,8 @@ import '../modules/secondary_splash/bindings/secondary_splash_binding.dart';
 import '../modules/secondary_splash/views/secondary_splash_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/student_homework/bindings/student_homework_binding.dart';
+import '../modules/student_homework/views/student_homework_view.dart';
 import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
 
@@ -75,6 +77,11 @@ class AppPages {
       name: _Paths.PROFILE_EDIT,
       page: () => const ProfileEditView(),
       binding: ProfileEditBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENT_HOMEWORK,
+      page: () => const StudentHomeworkView(),
+      binding: StudentHomeworkBinding(),
     ),
   ];
 }

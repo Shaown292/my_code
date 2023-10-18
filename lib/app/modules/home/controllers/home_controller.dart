@@ -11,6 +11,7 @@ import '../../../utilities/widgets/loader/loading.controller.dart';
 class HomeController extends GetxController {
   late ProfileInfoModel profileInfoModel;
   final AuthDatabase _authDatabase = AuthDatabase.instance;
+  final selectIndex = RxInt(-1);
 
   void _getUserInfo() {
     profileInfoModel = _authDatabase.getUserInfo()!;

@@ -10,10 +10,14 @@ class ImagePath {
   static const  splashLogo            = "assets/config/splash_logo.png";
   static const  splashTopLine         = "assets/config/splash_top_line.png";
   static const  messenger             = "assets/config/messenger.png";
-  static const  logout                = "assets/config/logout.png";
-  static const  edit                  = "assets/config/edit.png";
-  static const  editBlack             = "assets/config/edit_black.png";
-  static const  back                  = "assets/config/back_arrow.png";
+
+
+  /// Others assets
+  static const  logout                = "assets/images/logout.png";
+  static const  edit                  = "assets/images/edit.png";
+  static const  editBlack             = "assets/images/edit_black.png";
+  static const  back                  = "assets/images/back_arrow.png";
+
 
 
   /// Student Tile Icons
