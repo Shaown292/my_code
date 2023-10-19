@@ -34,7 +34,6 @@ class HomeworkCardTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height * 0.25,
       color: backgroundColor,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -74,10 +73,11 @@ class HomeworkCardTile extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     columnTile("Created", created ?? ""),
                     columnTile("Submission", submission ?? ""),
-                    columnTile("Evaluation", evaluation ?? ""),
+                    columnTile("Evaluation", evaluation ?? "N/A"),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -85,7 +85,7 @@ class HomeworkCardTile extends StatelessWidget {
                           "Status",
                           style: AppTextStyle.homeworkElements,
                         ),
-                        5.verticalSpacing,
+
                         StatusWidget(
                           value: status ?? "",
                           color: statusColor,
@@ -114,10 +114,13 @@ Widget columnTile(String title, String value) {
         title,
         style: AppTextStyle.homeworkElements,
       ),
-      5.verticalSpacing,
-      Text(
-        value,
-        style: AppTextStyle.homeworkElements,
+      8.verticalSpacing,
+      SizedBox(
+        height: Get.height * 0.025,
+        child: Text(
+          value,
+          style: AppTextStyle.homeworkElements,
+        ),
       ),
     ],
   );
