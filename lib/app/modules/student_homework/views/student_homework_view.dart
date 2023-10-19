@@ -29,6 +29,7 @@ class StudentHomeworkView extends GetView<StudentHomeworkController> {
                 var data = controller.studentHomeworkList[index];
                 String createdAt = DateTimeConverter().convertISOToDesiredFormat(data.createdAt ?? '');
                 return Column(
+
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),

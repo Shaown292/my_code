@@ -11,8 +11,8 @@ class StatusWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
-      width: Get.width * 0.17,
+      padding: const EdgeInsets.all(4),
+
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(3),
           color: color ?? AppColors.homeworkStatusRedColor

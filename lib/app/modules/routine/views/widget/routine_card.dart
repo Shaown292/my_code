@@ -51,8 +51,7 @@ class RoutineCard extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  height: Get.height * 0.06,
-                  width: Get.width * 0.3,
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
                       color: AppColors.parentsCardBorderColor),
