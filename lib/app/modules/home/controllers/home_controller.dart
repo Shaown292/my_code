@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import '../../../../domain/base_client/base_client.dart';
 import '../../../database/auth_database.dart';
 import '../../../routes/app_pages.dart';
-import '../../../utilities/api_urls.dart';
 import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class HomeController extends GetxController {
