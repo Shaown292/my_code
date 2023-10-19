@@ -9,8 +9,8 @@ import 'guardian_info.dart';
 
 
 
-class ParentsProfileWidget extends StatelessWidget {
-  const ParentsProfileWidget({super.key});
+class ProfileParentsWidget extends StatelessWidget {
+  const ProfileParentsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

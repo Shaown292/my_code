@@ -65,17 +65,17 @@ class HomeView extends GetView<HomeController> {
                   ),
                   itemBuilder: (context, index) {
                     return Obx(() => CustomCardTile(
-                          icon: list[index].icon,
-                          title: list[index].title,
-                          onTap: () {
-                            controller.selectIndex.value = index;
-                            AppFunctions.getStudentDashboardNavigation(title: list[index].value);
-                            // Get.toNamed(
-                            //   Routes.HOMEWORK,
-                            // );
-                          },
-                          isSelected: controller.selectIndex.value == index,
-                        ));
+                      icon: list[index].icon,
+                      title: list[index].title,
+                      onTap: () {
+                        controller.selectIndex.value = index;
+                        AppFunctions.getStudentDashboardNavigation(title: list[index].value);
+                        // Get.toNamed(
+                        //   Routes.HOMEWORK,
+                        // );
+                      },
+                      isSelected: controller.selectIndex.value == index,
+                    ));
                   },
                 )
               ],

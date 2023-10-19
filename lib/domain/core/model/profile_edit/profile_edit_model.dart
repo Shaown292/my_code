@@ -7,12 +7,12 @@ class ProfileEditModel {
 
   ProfileEditModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ?  Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
@@ -23,37 +23,27 @@ class ProfileEditModel {
 }
 
 class Data {
-  StudentDetail? studentDetail;
-  List<EditPermission>? editPermission;
+  ProfilePersonalUpdate? profilePersonalUpdate;
 
-  Data({this.studentDetail, this.editPermission});
+  Data({this.profilePersonalUpdate});
 
   Data.fromJson(Map<String, dynamic> json) {
-    studentDetail = json['student_detail'] != null
-        ?  StudentDetail.fromJson(json['student_detail'])
+    profilePersonalUpdate = json['profilePersonal'] != null
+        ? ProfilePersonalUpdate.fromJson(json['profilePersonal'])
         : null;
-    if (json['edit_permission'] != null) {
-      editPermission = <EditPermission>[];
-      json['edit_permission'].forEach((v) {
-        editPermission!.add( EditPermission.fromJson(v));
-      });
-    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
-    if (studentDetail != null) {
-      data['student_detail'] = studentDetail!.toJson();
-    }
-    if (editPermission != null) {
-      data['edit_permission'] =
-          editPermission!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (profilePersonalUpdate != null) {
+      data['profilePersonal'] = profilePersonalUpdate!.toJson();
     }
     return data;
   }
 }
 
-class StudentDetail {
+class ProfilePersonalUpdate {
+  int? id;
   String? studentPhoto;
   String? firstName;
   String? lastName;
@@ -63,9 +53,13 @@ class StudentDetail {
   String? mobile;
   String? email;
   String? currentAddress;
+  String? permanentAddress;
+  String? bloodGroup;
+  String? religion;
 
-  StudentDetail(
-      {this.studentPhoto,
+  ProfilePersonalUpdate(
+      {this.id,
+        this.studentPhoto,
         this.firstName,
         this.lastName,
         this.admissionNo,
@@ -73,9 +67,13 @@ class StudentDetail {
         this.age,
         this.mobile,
         this.email,
-        this.currentAddress});
+        this.currentAddress,
+        this.permanentAddress,
+        this.bloodGroup,
+        this.religion});
 
-  StudentDetail.fromJson(Map<String, dynamic> json) {
+  ProfilePersonalUpdate.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     studentPhoto = json['student_photo'];
     firstName = json['first_name'];
     lastName = json['last_name'];
@@ -85,10 +83,14 @@ class StudentDetail {
     mobile = json['mobile'];
     email = json['email'];
     currentAddress = json['current_address'];
+    permanentAddress = json['permanent_address'];
+    bloodGroup = json['blood_group'];
+    religion = json['religion'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['student_photo'] = studentPhoto;
     data['first_name'] = firstName;
     data['last_name'] = lastName;
@@ -98,25 +100,9 @@ class StudentDetail {
     data['mobile'] = mobile;
     data['email'] = email;
     data['current_address'] = currentAddress;
-    return data;
-  }
-}
-
-class EditPermission {
-  String? fieldName;
-  int? studentEdit;
-
-  EditPermission({this.fieldName, this.studentEdit});
-
-  EditPermission.fromJson(Map<String, dynamic> json) {
-    fieldName = json['field_name'];
-    studentEdit = json['student_edit'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['field_name'] = fieldName;
-    data['student_edit'] = studentEdit;
+    data['permanent_address'] = permanentAddress;
+    data['blood_group'] = bloodGroup;
+    data['religion'] = religion;
     return data;
   }
 }

@@ -11,7 +11,6 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Function()? iconOnTap;
   final TextInputType? textInputType;
-  final String? label;
   final TextStyle? labelTextStyle;
   final Color? enableBorderActiveColor;
   final int? maxLine;
@@ -26,7 +25,6 @@ class CustomTextFormField extends StatelessWidget {
     this.iconOnTap,
     this.obsCureText = false,
     this.textInputType,
-    this.label,
     this.labelTextStyle,
     this.enableBorderActiveColor,
     super.key, this.maxLine,

@@ -33,6 +33,15 @@ class InfixApi {
   static String editProfile(String studentId) {
     return '${baseApi}student-profile-edit/$studentId';
   }
+  static String profilePersonal() {
+    return '${baseApi}profile-personal';
+  }
+  static String profileParents() {
+    return '${baseApi}profile-parents';
+  }
+  static String profileTransport() {
+    return '${baseApi}profile-transport';
+  }
 
   static String demoLogin(String role) {
     return '${baseApi}user-demo-login/$role';
