@@ -11,11 +11,11 @@ class AppText {
 
   /// Profile
 
-  static const String dateOfBirth = '2021-11-11';
-  static const String age = '28 Years';
-  static const String phoneNumber = '+8801949414663';
-  static const String email = 'spn16@spondonit.com';
-  static const String presentAddress = 'Kemp House 152 – 160 City Road London EC1V 2NX';
+  static const String dateOfBirth = 'Date of birth';
+  static const String age = 'Age';
+  static const String phoneNumber = 'Phone number';
+  static const String email = 'Email address';
+  static const String presentAddress = 'Present address';
   static const String transportRoute = 'Route';
   static const String transportVehicleNo = 'Vehicle Number';
   static const String transportDriverName = 'Driver Name';
@@ -28,6 +28,7 @@ class AppText {
   static const String profileFather= 'Father';
   static const String profileGuardian= 'Guardian';
   static const String profileMother= 'Mother';
+  static const String profileNoDataAvailable= 'No data available.';
 
   /// Notification
   static const String notificationRaed= 'Mark all as read';

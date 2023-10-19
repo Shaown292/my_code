@@ -2,11 +2,11 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 
 class StudentInfoPersonalModelClass {
-  final String icon;
-  final String title;
-  final String value;
+  final String? icon;
+  final String? title;
+  final String? value;
 
-  StudentInfoPersonalModelClass({required this.icon, required this.title, required this.value});
+  StudentInfoPersonalModelClass({ this.icon,  this.title,  this.value});
 
 }
 

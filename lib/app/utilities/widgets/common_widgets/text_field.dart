@@ -11,7 +11,6 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Function()? iconOnTap;
   final TextInputType? textInputType;
-  final String? label;
   final TextStyle? labelTextStyle;
   final Color? enableBorderActiveColor;
   final int? maxLine;
@@ -26,7 +25,6 @@ class CustomTextFormField extends StatelessWidget {
     this.iconOnTap,
     this.obsCureText = false,
     this.textInputType,
-    this.label,
     this.labelTextStyle,
     this.enableBorderActiveColor,
     super.key, this.maxLine,
@@ -42,7 +40,6 @@ class CustomTextFormField extends StatelessWidget {
       maxLines: maxLine ?? 1,
       decoration: InputDecoration(
         filled: true,
-        labelText: label ?? "label",
         labelStyle: labelTextStyle ?? AppTextStyle.labelText,
         fillColor: fillColor ?? const Color(0xFFFDFBFF),
         hintText: hintText ?? 'Enter text',

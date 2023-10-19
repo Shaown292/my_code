@@ -33,8 +33,8 @@ class ProfileEditView extends GetView<ProfileEditController> {
                    decoration:  BoxDecoration(
                      shape: BoxShape.circle,
                      image: DecorationImage(
-                         image: AssetImage(ImagePath.parentsProfile),
-                       fit: BoxFit.fill
+                         image: AssetImage(ImagePath.editProfileImage),
+                       fit: BoxFit.contain
                      )
                    ),
                  ),

@@ -12,6 +12,8 @@ import '../modules/profile/bindings/profile_bindings.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_edit/bindings/profile_edit_binding.dart';
 import '../modules/profile_edit/views/profile_edit_view.dart';
+import '../modules/routine/bindings/routine_binding.dart';
+import '../modules/routine/views/routine_view.dart';
 import '../modules/secondary_splash/bindings/secondary_splash_binding.dart';
 import '../modules/secondary_splash/views/secondary_splash_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -75,6 +77,11 @@ class AppPages {
       name: _Paths.PROFILE_EDIT,
       page: () => const ProfileEditView(),
       binding: ProfileEditBinding(),
+    ),
+    GetPage(
+      name: _Paths.ROUTINE,
+      page: () => const RoutineView(),
+      binding: RoutineBinding(),
     ),
   ];
 }

@@ -82,8 +82,31 @@ class AppTextStyle {
       fontSize: 10,
       fontWeight: FontWeight.w400);
 
+
   static const labelText = TextStyle(
       color: AppColors.editProfileTextFieldLabelColor,
       fontSize: 8,
       fontWeight: FontWeight.w400);
+
+  static const fontSize14VioletW600 = TextStyle(
+      color: AppColors.parentsIconCardBackgroundColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w600);
+  static const fontSize14GreyW400 = TextStyle(
+  color: AppColors.profileTitleColor,
+  fontSize: 12,
+  fontWeight: FontWeight.w400);
+
+  static const fontSize12lightViolateW400 = TextStyle(
+      color: AppColors.profileValueColor,
+      fontSize: 12,
+      fontWeight: FontWeight.w400);
+
+  static const fontSize14lightViolateW400 = TextStyle(
+      color: AppColors.profileValueColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w400);
+
+
+
 }

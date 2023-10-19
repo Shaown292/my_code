@@ -112,5 +112,9 @@ class ImagePath {
 
   /// Notification
   static String noNotification     = "assets/images/noNotification.png";
+
+
+  /// others
+  static String editProfileImage     = "assets/images/edit_profile_image.png";
 }
 
