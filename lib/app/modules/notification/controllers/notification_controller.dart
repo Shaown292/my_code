@@ -35,11 +35,7 @@ class NotificationController extends GetxController {
     try {
       final res = await BaseClient().getData(
         url: "https://spondan.com/infixedu/api/v2/all-notification-list",
-        header: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': GlobalVariableController.token!,
-        },
+        header: GlobalVariableController.header,
 
       );
 
@@ -76,11 +72,7 @@ class NotificationController extends GetxController {
 
     try{
       loadingController.isLoading = true;
-      final response = await BaseClient().getData(url: InfixApi.readAllNotification(GlobalVariableController.roleId.toString()), header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': GlobalVariableController.token!,
-      });
+      final response = await BaseClient().getData(url: InfixApi.readAllNotification(GlobalVariableController.roleId.toString()), header: GlobalVariableController.header,);
 
     DefaultResponseModel defaultResponseModel = DefaultResponseModel.fromJson(response);
 
