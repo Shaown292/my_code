@@ -13,11 +13,11 @@ import '../controllers/profile_edit_controller.dart';
 class ProfileEditView extends GetView<ProfileEditController> {
 
 
-   const ProfileEditView({Key? key}) : super(key: key);
+  const ProfileEditView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
 
-    controller.fetchProfileData();
+    controller.initialize();
     return CustomScaffoldWidget(
       title: "Edit Profile",
       actions: const [SizedBox()],
@@ -41,14 +41,14 @@ class ProfileEditView extends GetView<ProfileEditController> {
                  EditProfileTextField(
                   labelText: AppText.editProfileFirstName,
                   hintText: AppText.editProfileFirstName,
-                  controller: controller.firstNameController,
+                  controller: controller.firstName,
 
                 ),
                 15.verticalSpacing,
                  EditProfileTextField(
                   labelText: AppText.editProfileLastName,
                   hintText: AppText.editProfileLastName,
-                  controller: controller.lastNameController,
+                  controller: controller.lastName,
                 ),
                 15.verticalSpacing,
                  EditProfileTextField(

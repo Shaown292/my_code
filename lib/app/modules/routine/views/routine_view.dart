@@ -27,56 +27,70 @@ class RoutineView extends GetView<RoutineController> {
             ),
             10.verticalSpacing,
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: PageView(
-                  controller: controller.routinePageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: const [
-                    Column(
-                      children: [
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        LeaveCard(
-                          startingTime: "2:00 pm",
-                          endingTime: "2:30 pm",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
+              child: PageView(
+                controller: controller.routinePageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  Column(
+                    children: [
+                      RoutineCard(
+                        subject: "Computer Science",
+                        startingTime: "8:15 am",
+                        endingTime: "9:00 am",
+                        roomNumber: "201",
+                        buildingName: "East Building",
+                        instructorName: "James Anderson",
+                      ),
+                      RoutineCard(
+                        subject: "Computer Science",
+                        startingTime: "8:15 am",
+                        endingTime: "9:00 am",
+                        roomNumber: "201",
+                        buildingName: "East Building",
+                        instructorName: "James Anderson",
+                      ),
+                      LeaveCard(
+                        startingTime: "2:00 pm",
+                        endingTime: "2:30 pm",
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
 
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        LeaveCard(
-                          startingTime: "2:00 pm",
-                          endingTime: "2:30 pm",
-                        ),
-                      ],
-                    ),
+                      RoutineCard(
+                        subject: "Computer Science",
+                        startingTime: "8:15 am",
+                        endingTime: "9:00 am",
+                        roomNumber: "201",
+                        buildingName: "East Building",
+                        instructorName: "James Anderson",
+                      ),
+                      LeaveCard(
+                        startingTime: "2:00 pm",
+                        endingTime: "2:30 pm",
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
 
-                  ],
-                ),
+                      RoutineCard(
+                        subject: "Computer Science",
+                        startingTime: "8:15 am",
+                        endingTime: "9:00 am",
+                        roomNumber: "201",
+                        buildingName: "East Building",
+                        instructorName: "James Anderson",
+                      ),
+                      LeaveCard(
+                        startingTime: "2:00 pm",
+                        endingTime: "2:30 pm",
+                      ),
+                    ],
+                  ),
+
+                ],
               ),
             ),
 

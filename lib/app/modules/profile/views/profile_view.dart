@@ -23,8 +23,8 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffoldWidget(
-      actions: const [
-        EditProfileRoute(),
+      actions: [
+        EditProfileRoute(profilePersonal: controller.profilePersonal),
       ],
       leadingIcon: const SizedBox(),
       title: "Profile",
