@@ -27,11 +27,7 @@ class StudentHomeworkController extends GetxController {
 
     try{
       loadingController.isLoading = true;
-      final response = await BaseClient().getData(url: InfixApi.getStudentHomeWork(1), header: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': GlobalVariableController.token!,
-      });
+      final response = await BaseClient().getData(url: InfixApi.getStudentHomeWork(GlobalVariableController.studentRecordId!), header: GlobalVariableController.header);
 
       StudentHomeWorkModel studentHomeWorkModel = StudentHomeWorkModel.fromJson(response);
 
@@ -42,10 +38,6 @@ class StudentHomeworkController extends GetxController {
             studentHomeworkList.add(studentHomeWorkModel.data!.homeworkLists![i]);
           }
         }
-
-        // for(int i = 0; i < studentHomeworkList.length; i++){
-        //   print(studentHomeworkList[i].subject);
-        // }
 
       }
 

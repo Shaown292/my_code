@@ -33,6 +33,7 @@ class LoginController extends GetxController {
       if (profileInfoModel.success == true) {
         isLoading.value = false;
         GlobalVariableController.notificationCount = profileInfoModel.data.unreadNotifications;
+        GlobalVariableController.token = profileInfoModel.data.accessToken;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
@@ -66,6 +67,7 @@ class LoginController extends GetxController {
       if (profileInfoModel.success == true) {
         isLoading.value = false;
         GlobalVariableController.notificationCount = profileInfoModel.data.unreadNotifications;
+        GlobalVariableController.token = profileInfoModel.data.accessToken;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,

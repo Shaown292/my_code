@@ -51,6 +51,14 @@ class InfixApi {
     return '${baseApi}view/all/notification/$role';
   }
 
+  static String getStudentRecord = "${baseApi}student-record";
+
+
+
+
+
+
+  //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {
     return '${baseApi}fees-collect-student-wise/$id';
   }

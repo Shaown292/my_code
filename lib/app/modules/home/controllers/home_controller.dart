@@ -1,13 +1,23 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/student_record/student_record_response_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../../domain/base_client/base_client.dart';
 import '../../../database/auth_database.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class HomeController extends GetxController {
+
+  @override
+  void onInit() {
+    getStudentRecord();
+    super.onInit();
+  }
+
   late ProfileInfoModel profileInfoModel;
   final AuthDatabase _authDatabase = AuthDatabase.instance;
   final selectIndex = RxInt(-1);
@@ -63,4 +73,23 @@ class HomeController extends GetxController {
       loadingController.isLoading = false;
     }
   }
+  
+  void getStudentRecord() async {
+
+    try{
+
+      final response = await BaseClient().getData(url: InfixApi.getStudentRecord, header: GlobalVariableController.header);
+
+      StudentRecordResponseModel studentRecordResponseModel = StudentRecordResponseModel.fromJson(response);
+      if(studentRecordResponseModel.success){
+        GlobalVariableController.studentRecordId = studentRecordResponseModel.data.studentRecords.first.id;
+      }
+
+    } catch(e, t){
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally{}
+    
+  }
+  
 }

@@ -11,7 +11,6 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
   void onInit() {
     _animation();
     navNextPage();
-    // _getUserInformation();
     super.onInit();
   }
 
@@ -45,10 +44,5 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
       Get.offAndToNamed(Routes.LOGIN);
     }
   }
-
-  // _getUserInformation(){
-  //   AuthDatabase authDatabase = AuthDatabase.instance;
-  //   GlobalVariableController.roleId = authDatabase.getUserInfo()!.data.user.roleId;
-  // }
 
 }
