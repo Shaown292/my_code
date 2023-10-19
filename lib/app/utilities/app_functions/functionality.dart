@@ -48,8 +48,9 @@ class AppFunctions {
     }
   }
 
+  /// Student List Tile Navigation
   static void getStudentDashboardNavigation({required String title}) {
-    print(title);
+    debugPrint(title);
     switch (title) {
       case 'Profile':
         break;
@@ -61,6 +62,7 @@ class AppFunctions {
         Get.toNamed(Routes.STUDENT_HOMEWORK);
         break;
       case 'Study Materials':
+        Get.toNamed(Routes.STUDY_MATERIALS);
         break;
       case 'Leave':
         break;
@@ -89,6 +91,9 @@ class AppFunctions {
       case 'Lesson':
         break;
       case 'Class':
+        break;
+      case 'Assignment':
+        Get.toNamed(Routes.ASSIGNMENT);
         break;
     }
   }

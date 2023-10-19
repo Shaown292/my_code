@@ -20,7 +20,7 @@ class CustomAppBar extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 55.0),
+      padding: const EdgeInsets.only(top: 70.0, bottom: 20, left: 10, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

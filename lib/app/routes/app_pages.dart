@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/assignment/bindings/assignment_binding.dart';
+import '../modules/assignment/views/assignment_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -20,6 +22,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/student_homework/bindings/student_homework_binding.dart';
 import '../modules/student_homework/views/student_homework_view.dart';
+import '../modules/study_materials/bindings/study_materials_binding.dart';
+import '../modules/study_materials/views/study_materials_view.dart';
 import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
 
@@ -84,12 +88,21 @@ class AppPages {
       name: _Paths.STUDENT_HOMEWORK,
       page: () => const StudentHomeworkView(),
       binding: StudentHomeworkBinding(),
-  ),
-
-  GetPage(
+    ),
+    GetPage(
       name: _Paths.ROUTINE,
       page: () => const RoutineView(),
       binding: RoutineBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDY_MATERIALS,
+      page: () => const StudyMaterialsView(),
+      binding: StudyMaterialsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ASSIGNMENT,
+      page: () => const AssignmentView(),
+      binding: AssignmentBinding(),
     ),
   ];
 }

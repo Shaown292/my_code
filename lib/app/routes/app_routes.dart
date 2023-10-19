@@ -14,7 +14,8 @@ abstract class Routes {
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
   static const STUDENT_HOMEWORK = _Paths.STUDENT_HOMEWORK;
   static const ROUTINE = _Paths.ROUTINE;
-
+  static const STUDY_MATERIALS = _Paths.STUDY_MATERIALS;
+  static const ASSIGNMENT = _Paths.ASSIGNMENT;
 }
 
 abstract class _Paths {
@@ -30,5 +31,6 @@ abstract class _Paths {
   static const PROFILE_EDIT = '/profile-edit';
   static const STUDENT_HOMEWORK = '/student-homework';
   static const ROUTINE = '/routine';
-
+  static const STUDY_MATERIALS = '/study-materials';
+  static const ASSIGNMENT = '/assignment';
 }
