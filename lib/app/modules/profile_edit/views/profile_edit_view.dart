@@ -18,10 +18,10 @@ class ProfileEditView extends GetView<ProfileEditController> {
   Widget build(BuildContext context) {
 
     controller.fetchProfileData();
-    return CustomScaffoldWidget(
+    return InfixEduScaffold(
       title: "Edit Profile",
       actions: const [SizedBox()],
-      bodyWidget: CustomBackground(
+      body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: SingleChildScrollView(

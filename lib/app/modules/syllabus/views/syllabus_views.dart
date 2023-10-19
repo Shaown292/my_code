@@ -16,9 +16,9 @@ class SyllabusView extends GetView<GetxController>{
   @override
   Widget build(BuildContext context) {
 
-    return CustomScaffoldWidget(
+    return InfixEduScaffold(
       title: "Syllabus",
-      bodyWidget: CustomBackground(
+      body: CustomBackground(
         customWidget: Column(
           children: [
             const SyllabusTopicWise(subject:  "Mathematics", topic: 'Trigonometry For Class Seven Final Part', date: "10 Nov 2023",),

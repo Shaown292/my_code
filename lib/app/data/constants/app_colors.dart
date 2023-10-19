@@ -45,6 +45,13 @@ class AppColors {
   static const notificationColor = Color(0xFFED00FF);
 
 
+  /// Others
+  static const homeworkSubjectColor = Color(0xFF373F6B);
+  static const homeworkViewColor = Color(0xFF67329B);
+  static const homeworkStatusRedColor = Color(0xFFF95452);
+  static const homeworkStatusGreenColor = Color(0xFF06A83C);
+  static const homeworkWidgetColor = Color(0xFFF2F0F6);
+
 
 
 

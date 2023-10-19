@@ -38,7 +38,7 @@ class NotificationController extends GetxController {
         header: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': "${AuthDatabase.instance.getToken()}"
+          'Authorization': GlobalVariableController.token!,
         },
 
       );

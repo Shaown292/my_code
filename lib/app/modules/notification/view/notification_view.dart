@@ -20,10 +20,10 @@ class NotificationView extends GetView<NotificationController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => CustomScaffoldWidget(
+      () => InfixEduScaffold(
         title: 'Notification',
         leadingIcon: const SizedBox(),
-        bodyWidget: CustomBackground(
+        body: CustomBackground(
             customWidget: RefreshIndicator(
           onRefresh: () async {
             controller.fetchNotifications();
@@ -86,7 +86,6 @@ class NotificationView extends GetView<NotificationController> {
   String formatTimeAgo(DateTime date) {
     final now = DateTime.now();
     final difference = now.difference(date);
-    print(difference);
 
     if (difference.inSeconds < 60) {
       return 'a few moments ago';

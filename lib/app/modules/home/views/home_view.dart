@@ -22,7 +22,7 @@ class HomeView extends GetView<HomeController> {
     var data = Get.arguments;
     List<HomeTileModelClass> list = data["homeListTile"];
 
-    return CustomScaffoldWidget(
+    return InfixEduScaffold(
       appBar: PrimaryAppBar(
         title: 'Welcome to our school',
         actions: [
@@ -50,7 +50,7 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
-      bodyWidget: SafeArea(
+      body: SafeArea(
         child: CustomBackground(
           customWidget: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),

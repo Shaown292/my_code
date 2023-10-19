@@ -1,18 +1,23 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/appbar/custom_appbar.dart';
 import 'package:get/get.dart';
 
-class CustomScaffoldWidget extends StatelessWidget {
-
+class InfixEduScaffold extends StatelessWidget {
   final String? title;
   final Widget? leadingIcon;
-  final Widget? bodyWidget;
+  final Widget? body;
   final Widget? appBar;
   final List<Widget>? actions;
-  const CustomScaffoldWidget({super.key, this.title, this.bodyWidget, this.appBar, this.leadingIcon, this.actions,});
+
+  const InfixEduScaffold({
+    super.key,
+    this.title,
+    this.body,
+    this.appBar,
+    this.leadingIcon,
+    this.actions,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +26,25 @@ class CustomScaffoldWidget extends StatelessWidget {
         gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-          colors: [AppColors.backgroundPrimaryColor, AppColors.backgroundSecondaryColor]
-        ),
+            colors: [
+              AppColors.backgroundPrimaryColor,
+              AppColors.backgroundSecondaryColor
+            ]),
       ),
       height: Get.height,
       width: Get.width,
-      child:  Scaffold(
+      child: Scaffold(
         backgroundColor: Colors.white.withOpacity(0),
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(80),
-            child: appBar ?? CustomAppBar(
-              leadingIcon: leadingIcon,
-              title: title,
-              actions: actions,
-
-            ),
+          preferredSize: const Size.fromHeight(80),
+          child: appBar ??
+              CustomAppBar(
+                leadingIcon: leadingIcon,
+                title: title,
+                actions: actions,
+              ),
         ),
-        body: bodyWidget,
+        body: body,
       ),
     );
   }

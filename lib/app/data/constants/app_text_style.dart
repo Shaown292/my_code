@@ -86,4 +86,21 @@ class AppTextStyle {
       color: AppColors.editProfileTextFieldLabelColor,
       fontSize: 8,
       fontWeight: FontWeight.w400);
+
+  ///Homework
+  static const homeworkSubject = TextStyle(
+      color: AppColors.homeworkSubjectColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w500);
+
+  static const homeworkElements = TextStyle(
+      color: AppColors.editProfileTextFieldLabelColor,
+      fontSize: 10,
+      fontWeight: FontWeight.w400);
+
+  static const homeworkView = TextStyle(
+      color: AppColors.homeworkViewColor,
+      fontSize: 14,
+      // decoration: TextDecoration.underline,
+      fontWeight: FontWeight.w500);
 }

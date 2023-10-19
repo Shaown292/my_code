@@ -20,13 +20,13 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffoldWidget(
+    return InfixEduScaffold(
       actions: const [
         EditProfileRoute(),
       ],
       leadingIcon: const SizedBox(),
       title: "Profile",
-      bodyWidget: CustomBackground(
+      body: CustomBackground(
         customWidget: Column(
           children: [
             Card(
