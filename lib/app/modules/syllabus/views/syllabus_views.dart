@@ -21,6 +21,7 @@ class SyllabusView extends GetView<GetxController>{
       body: CustomBackground(
         customWidget: Column(
           children: [
+
             const SyllabusTopicWise(subject:  "Mathematics", topic: 'Trigonometry For Class Seven Final Part', date: "10 Nov 2023",),
             10.verticalSpacing,
             const SyllabusTopicWise(subject:  "Mathematics", topic: 'Trigonometry For Class Seven Final Part', date: "10 Nov 2023",),
