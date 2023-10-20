@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-
 import 'package:get/get.dart';
-
 import '../../../data/constants/app_text.dart';
 import '../../../utilities/widgets/common_widgets/custom_background.dart';
 import '../../../utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -18,7 +16,8 @@ class ProfileEditView extends GetView<ProfileEditController> {
   Widget build(BuildContext context) {
 
 
-    controller.initialize();
+    // controller.initialize();
+    // controller.userProfileInfoUpdate();
     return InfixEduScaffold(
 
       title: "Edit Profile",
@@ -42,9 +41,8 @@ class ProfileEditView extends GetView<ProfileEditController> {
                  ),
                  EditProfileTextField(
                   labelText: AppText.editProfileFirstName,
-                  hintText: AppText.editProfileFirstName,
                   controller: controller.firstName,
-
+                   iconOnTap: ()=> controller.userProfileInfoUpdate(),
                 ),
                 15.verticalSpacing,
                  EditProfileTextField(

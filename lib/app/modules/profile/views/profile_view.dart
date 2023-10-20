@@ -25,7 +25,7 @@ class ProfileView extends GetView<ProfileController> {
 
     return InfixEduScaffold(
       actions: [
-        EditProfileRoute(profilePersonal: controller.profilePersonal),
+        EditProfileRoute(controller: controller),
       ],
       leadingIcon: const SizedBox(),
       title: "Profile",

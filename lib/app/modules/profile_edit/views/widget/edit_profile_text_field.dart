@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/profile_edit/controllers/profile_edit_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/constants/image_path.dart';
@@ -18,6 +19,7 @@ class EditProfileTextField extends StatelessWidget {
   final TextStyle? labelTextStyle;
   final Color? enableBorderActiveColor;
   final int? maxLine;
+
 
   const EditProfileTextField ({
     this.controller,
@@ -50,9 +52,7 @@ class EditProfileTextField extends StatelessWidget {
         fillColor: fillColor ?? const Color(0xFFFDFBFF),
         hintText: hintText ?? 'Enter text',
         suffixIcon: InkWell(
-          onTap: (){
-            print("Profile Edited");
-          },
+          onTap: iconOnTap,
           child: Container(
             width: Get.width * 0.02,
             decoration: const BoxDecoration(
