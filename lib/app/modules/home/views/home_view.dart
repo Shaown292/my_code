@@ -70,9 +70,6 @@ class HomeView extends GetView<HomeController> {
                       onTap: () {
                         controller.selectIndex.value = index;
                         AppFunctions.getStudentDashboardNavigation(title: list[index].value);
-                        // Get.toNamed(
-                        //   Routes.HOMEWORK,
-                        // );
                       },
                       isSelected: controller.selectIndex.value == index,
                     ));
