@@ -31,6 +31,7 @@ class SyllabusView extends GetView<SyllabusController> {
             onTap: (){
               controller.downloadFile('https://spondan.com/infixedu/api/v2/student-assignment-file-download/1', '/sdcard/download/');
 
+
             },
           ),
         ),
