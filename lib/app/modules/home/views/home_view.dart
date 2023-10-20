@@ -72,7 +72,6 @@ class HomeView extends GetView<HomeController> {
                         controller.selectIndex.value = index;
                         AppFunctions.getStudentDashboardNavigation(title: list[index].value);
 
-
                       },
                       isSelected: controller.selectIndex.value == index,
                     ));
