@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import '../controllers/routine_controller.dart';
 
 class RoutineView extends GetView<RoutineController> {
+
   const RoutineView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
