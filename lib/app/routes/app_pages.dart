@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -63,6 +62,7 @@ class AppPages {
       name: _Paths.SYLLABUS,
       page: () => const SyllabusView(),
       binding: SyllabusBinding(),
+      transition: Transition.fade
     ),
     GetPage(
       name: _Paths.DASHBOARD,
@@ -72,6 +72,7 @@ class AppPages {
         ProfileBinding(),
         HomeBinding(),
         NotificationBinding(),
+        RoutineBinding(),
       ],
     ),
     GetPage(
@@ -88,6 +89,7 @@ class AppPages {
       name: _Paths.STUDENT_HOMEWORK,
       page: () => const StudentHomeworkView(),
       binding: StudentHomeworkBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ROUTINE,
@@ -98,11 +100,13 @@ class AppPages {
       name: _Paths.STUDY_MATERIALS,
       page: () => const StudyMaterialsView(),
       binding: StudyMaterialsBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.ASSIGNMENT,
       page: () => const AssignmentView(),
       binding: AssignmentBinding(),
+      transition: Transition.fade,
     ),
   ];
 }

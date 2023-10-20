@@ -53,6 +53,10 @@ class InfixApi {
 
   static String getStudentRecord = "${baseApi}student-record";
 
+  static String getSyllabusList(int studentRecordId) {
+    return '${baseApi}student-syllabus/$studentRecordId';
+  }
+
 
 
 
