@@ -30,6 +30,7 @@ class SyllabusView extends GetView<GetxController>{
             10.verticalSpacing,
             const SyllabusTopicWise(subject:  "Mathematics", topic: 'Trigonometry For Class Seven Final Part', date: "10 Nov 2023",),
 
+
           ],
         ),
       ),
