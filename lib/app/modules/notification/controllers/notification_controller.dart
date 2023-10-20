@@ -54,7 +54,6 @@ class NotificationController extends GetxController {
 
         isLoading.value = false;
 
-
       } else {
         isLoading.value = false;
         showBasicFailedSnackBar(message: "${notificationModel.message}");

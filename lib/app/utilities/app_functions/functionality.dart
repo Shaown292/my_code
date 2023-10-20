@@ -95,6 +95,9 @@ class AppFunctions {
       case 'Assignment':
         Get.toNamed(Routes.ASSIGNMENT);
         break;
+      case 'Syllabus':
+        Get.toNamed(Routes.SYLLABUS);
+        break;
     }
   }
 }

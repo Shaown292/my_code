@@ -8,14 +8,17 @@ import 'package:get/get.dart';
 
 class SyllabusTopicWise extends StatelessWidget {
 
-  final String subject;
+  final String contentTitle;
   final String topic;
   final String? date;
-  const SyllabusTopicWise({super.key, required this.subject, required this.topic,  this.date});
+  final Function()? onTap;
+
+  const SyllabusTopicWise(
+      {super.key, required this.contentTitle, required this.topic, this.date, this.onTap,});
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomContainerWidget(
           borderColor: const Color(0xFFEAE7F0),
@@ -26,7 +29,7 @@ class SyllabusTopicWise extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomContainerWidget(
@@ -35,7 +38,7 @@ class SyllabusTopicWise extends StatelessWidget {
                       color: const Color(0xFFF2F0F6),
                       requiredWidget: Center(
                         child: Text(
-                          subject,
+                          contentTitle,
                           style: AppTextStyle.fontSize14BlackW500,
                         ),
                       ),
@@ -55,12 +58,13 @@ class SyllabusTopicWise extends StatelessWidget {
                   ],
                 ),
                 10.verticalSpacing,
-                 Text(
+                Text(
                   topic,
                   style: AppTextStyle.syllabusFontSize16W500,
                 ),
                 20.verticalSpacing,
-                const PrimaryButton(
+                PrimaryButton(
+                  onTap: onTap,
                   title: "Download",
 
                 ),
