@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_edit/profile_edit_model.dart';
 
@@ -32,7 +33,7 @@ class ProfileEditController extends GetxController {
   TextEditingController dateOfBirth = TextEditingController();
   TextEditingController currentAddress = TextEditingController();
 
-  RxBool isLoading = false.obs;
+  LoadingController loadingController = Get.find();
 
 
   void initialize(){
@@ -53,8 +54,9 @@ class ProfileEditController extends GetxController {
     ProfileEditModel? profileEditModel;
 
     try {
+      print(firstName.text);
       final res = await BaseClient().postData(
-        url: InfixApi.editProfile(GlobalVariableController.studentRecordId!),
+        url: InfixApi.updateProfile(GlobalVariableController.roleId!),
         header: GlobalVariableController.header,
         payload: {
           "first_name": firstName.text,
@@ -67,18 +69,20 @@ class ProfileEditController extends GetxController {
 
       profileEditModel = ProfileEditModel.fromJson(res);
       if (profileEditModel.success == true) {
-        isLoading.value = false;
-
+        loadingController.isLoading = false;
+        showBasicSuccessSnackBar(message: profileEditModel.message ?? 'Profile Updated Successfully');
+        print("data $firstName");
+        print("data $lastName");
 
       } else {
-        isLoading.value = false;
+        loadingController.isLoading = false;
         showBasicFailedSnackBar(message: profileEditModel.message!);
       }
     } catch (e, t) {
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      isLoading.value = false;
+      loadingController.isLoading = false;
     }
   }
 

@@ -36,8 +36,6 @@ class AssignmentCard extends StatelessWidget {
                   color: AppColors.syllabusTextColor635976,
                   fontSize: 12,
                   fontWeight: FontWeight.w400),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
             ),
             10.verticalSpacing,
             Row(

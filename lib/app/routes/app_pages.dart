@@ -91,7 +91,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ROUTINE,
-      page: () => const RoutineView(),
+      page: () =>  RoutineView(),
       binding: RoutineBinding(),
     ),
     GetPage(

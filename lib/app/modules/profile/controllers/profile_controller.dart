@@ -30,7 +30,7 @@ class ProfileController extends GetxController{
   ProfilePersonal? profilePersonal;
   ProfileParents? profileParents;
   ProfileTransport? profileTransport;
-
+  String? firstName ;
 
 
   void fetchProfilePersonalData() async {
@@ -57,8 +57,6 @@ class ProfileController extends GetxController{
 
         profilePersonal = profilePersonalModel.data?.profilePersonal;
         isLoading.value = false;
-
-
 
       } else {
         isLoading.value = false;

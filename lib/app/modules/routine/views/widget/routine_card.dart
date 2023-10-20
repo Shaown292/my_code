@@ -6,7 +6,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:get/get.dart';
 
 class RoutineCard extends StatelessWidget {
-
   final String? subject;
   final String? startingTime;
   final String? endingTime;
@@ -33,42 +32,44 @@ class RoutineCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                     Text(
-                      subject ?? "",
-                      style: AppTextStyle.fontSize14VioletW600,
+                    Expanded(
+                      child: Text(
+                        subject ?? "",
+                        style: AppTextStyle.fontSize14VioletW600,
+                      ),
                     ),
-                    5.verticalSpacing,
-                     Text(
-                      "$startingTime - $endingTime",
-                      style: AppTextStyle.fontSize14GreyW400,
+                    10.horizontalSpacing,
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: AppColors.parentsCardBorderColor),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Room - $roomNumber",
+                            style: AppTextStyle.fontSize14GreyW400,
+                          ),
+                          5.verticalSpacing,
+                          Text(
+                            buildingName ?? "",
+                            style: AppTextStyle.fontSize12lightViolateW400,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: AppColors.parentsCardBorderColor),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                       Text(
-                        "Room - $roomNumber",
-                        style: AppTextStyle.fontSize14GreyW400,
-                      ),
-                      5.verticalSpacing,
-                       Text(
-                        buildingName ?? "",
-                        style: AppTextStyle.fontSize12lightViolateW400,
-                      ),
-                    ],
-                  ),
+                5.verticalSpacing,
+                Text(
+                  "$startingTime - $endingTime",
+                  style: AppTextStyle.fontSize14GreyW400,
                 ),
               ],
             ),
@@ -77,7 +78,7 @@ class RoutineCard extends StatelessWidget {
               width: Get.width,
             ),
             10.verticalSpacing,
-             Text(
+            Text(
               instructorName ?? "",
               style: AppTextStyle.fontSize14lightViolateW400,
             )

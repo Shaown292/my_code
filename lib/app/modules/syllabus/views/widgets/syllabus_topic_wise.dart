@@ -18,7 +18,6 @@ class SyllabusTopicWise extends StatelessWidget {
     return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomContainerWidget(
-        height: Get.height * 0.17,
           borderColor: const Color(0xFFEAE7F0),
           borderWidth: 1,
           requiredWidget: Padding(
