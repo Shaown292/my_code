@@ -22,6 +22,7 @@ class RoutineView extends GetView<RoutineController> {
       length: 6,
       child: InfixEduScaffold(
         title: "Routine",
+        leadingIcon: const SizedBox(),
         body: CustomBackground(
             customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -56,119 +57,66 @@ class RoutineView extends GetView<RoutineController> {
                 child: TabBarView(
                   controller: controller.tabController,
                   physics: const NeverScrollableScrollPhysics(),
-                  children: const [
-                    Column(
-                      children: [
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        LeaveCard(
-                          startingTime: "2:00 pm",
-                          endingTime: "2:30 pm",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        LeaveCard(
-                          startingTime: "2:00 pm",
-                          endingTime: "2:30 pm",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        LeaveCard(
-                          startingTime: "2:00 pm",
-                          endingTime: "2:30 pm",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        LeaveCard(
-                          startingTime: "2:00 pm",
-                          endingTime: "2:30 pm",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        LeaveCard(
-                          startingTime: "2:00 pm",
-                          endingTime: "2:30 pm",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        RoutineCard(
-                          subject: "Computer Science",
-                          startingTime: "8:15 am",
-                          endingTime: "9:00 am",
-                          roomNumber: "201",
-                          buildingName: "East Building",
-                          instructorName: "James Anderson",
-                        ),
-                        LeaveCard(
-                          startingTime: "2:00 pm",
-                          endingTime: "2:30 pm",
-                        ),
-                      ],
-                    ),
+                  children:  [
+                   ListView.builder(
+                     shrinkWrap: true,
+                     itemCount: 2,
+                       itemBuilder: (context , index){
+                       return const Column(
+                         children: [
+                           RoutineCard(
+                             subject: "Computer Science",
+                             startingTime: "8:15 am",
+                             endingTime: "9:00 am",
+                             roomNumber: "201",
+                             buildingName: "East Building",
+                             instructorName: "James Anderson",
+                           ),
+                           RoutineCard(
+                             subject: "Lunch Break",
+                             startingTime: "8:15 am",
+                             endingTime: "9:00 am",
+                             isLunchBreak: true,
+                           ),
+                         ],
+                       );
+
+                       }
+                   ),
+                   ListView.builder(
+                     itemCount: 2,
+                       itemBuilder: (context , index){
+
+                       return const Column(
+                         children: [
+                           RoutineCard(
+                             subject: "Computer Science",
+                             startingTime: "8:15 am",
+                             endingTime: "9:00 am",
+                             roomNumber: "201",
+                             buildingName: "East Building",
+                             instructorName: "James Anderson",
+                           ),
+                           RoutineCard(
+                             subject: "Lunch Break",
+                             startingTime: "8:15 am",
+                             endingTime: "9:00 am",
+                             isLunchBreak: true,
+                           ),
+                           RoutineCard(
+                             subject: "Computer Science",
+                             startingTime: "8:15 am",
+                             endingTime: "9:00 am",
+                             roomNumber: "201",
+                             buildingName: "East Building",
+                             instructorName: "James Anderson",
+                           ),
+                         ],
+                       );
+
+                       }
+                   ),
+
                   ],
                 ),
               ),
