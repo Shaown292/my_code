@@ -35,6 +35,7 @@ import '../modules/syllabus/views/syllabus_views.dart';
 
 part 'app_routes.dart';
 
+
 class AppPages {
   AppPages._();
 
