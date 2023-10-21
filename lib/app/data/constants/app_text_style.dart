@@ -67,18 +67,23 @@ class AppTextStyle {
       fontSize: 14,
       fontWeight: FontWeight.w500);
 
+  static const fontSize14BlackW400 = TextStyle(
+      color: AppColors.syllabusTextColorBlack,
+      fontSize: 14,
+      fontWeight: FontWeight.w400);
+
   static const blackFontSize14W400 = TextStyle(
       color: AppColors.syllabusTextColor635976,
       fontSize: 14,
       fontWeight: FontWeight.w400);
 
   static const syllabusFontSize16W500 = TextStyle(
-      color: AppColors.syllabusTextColor412C56,
+      color: AppColors.syllabusTextColorBlack,
       fontSize: 16,
       fontWeight: FontWeight.w500);
 
   static const notificationText = TextStyle(
-      color: AppColors.syllabusTextColor412C56,
+      color: AppColors.syllabusTextColorBlack,
       fontSize: 10,
       fontWeight: FontWeight.w400);
 
@@ -110,10 +115,16 @@ class AppTextStyle {
       color: AppColors.parentsIconCardBackgroundColor,
       fontSize: 14,
       fontWeight: FontWeight.w600);
-  static const fontSize14GreyW400 = TextStyle(
+
+  static const fontSize12GreyW400 = TextStyle(
   color: AppColors.profileTitleColor,
   fontSize: 12,
   fontWeight: FontWeight.w400);
+
+  static const fontSize10GreyW300 = TextStyle(
+      color: AppColors.profileTitleColor,
+      fontSize: 10,
+      fontWeight: FontWeight.w300);
 
   static const fontSize12lightViolateW400 = TextStyle(
       color: AppColors.profileValueColor,

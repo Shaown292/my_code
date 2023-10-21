@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
+
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
+import '../modules/change_password/bindings/change_password_binding.dart';
+import '../modules/change_password/views/change_password_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -15,8 +18,12 @@ import '../modules/profile_edit/bindings/profile_edit_binding.dart';
 import '../modules/profile_edit/views/profile_edit_view.dart';
 import '../modules/routine/bindings/routine_binding.dart';
 import '../modules/routine/views/routine_view.dart';
+import '../modules/schedule/bindings/schedule_binding.dart';
+import '../modules/schedule/views/schedule_view.dart';
 import '../modules/secondary_splash/bindings/secondary_splash_binding.dart';
 import '../modules/secondary_splash/views/secondary_splash_view.dart';
+import '../modules/settings/bindings/settings_binding.dart';
+import '../modules/settings/views/settings_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/student_homework/bindings/student_homework_binding.dart';
@@ -59,11 +66,10 @@ class AppPages {
       binding: ProfileBinding(),
     ),
     GetPage(
-      name: _Paths.SYLLABUS,
-      page: () => const SyllabusView(),
-      binding: SyllabusBinding(),
-      transition: Transition.fade
-    ),
+        name: _Paths.SYLLABUS,
+        page: () => const SyllabusView(),
+        binding: SyllabusBinding(),
+        transition: Transition.fade),
     GetPage(
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
@@ -93,7 +99,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ROUTINE,
-      page: () =>  RoutineView(),
+      page: () => RoutineView(),
       binding: RoutineBinding(),
     ),
     GetPage(
@@ -107,6 +113,21 @@ class AppPages {
       page: () => const AssignmentView(),
       binding: AssignmentBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.SETTINGS,
+      page: () => const SettingsView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_PASSWORD,
+      page: () => ChangePasswordView(),
+      binding: ChangePasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHEDULE,
+      page: () => const ScheduleView(),
+      binding: ScheduleBinding(),
     ),
   ];
 }

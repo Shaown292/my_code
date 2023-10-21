@@ -60,7 +60,7 @@ class RoutineCard extends StatelessWidget {
                           10.verticalSpacing,
                           Text(
                             "$startingTime - $endingTime",
-                            style: AppTextStyle.fontSize14GreyW400,
+                            style: AppTextStyle.fontSize12GreyW400,
                           ),
                         ],
                       ),
@@ -75,7 +75,7 @@ class RoutineCard extends StatelessWidget {
                         children: [
                           Text(
                             "Room - $roomNumber",
-                            style: AppTextStyle.fontSize14GreyW400,
+                            style: AppTextStyle.fontSize12GreyW400,
                           ),
                           5.verticalSpacing,
                           Text(

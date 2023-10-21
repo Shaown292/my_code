@@ -16,6 +16,9 @@ abstract class Routes {
   static const ROUTINE = _Paths.ROUTINE;
   static const STUDY_MATERIALS = _Paths.STUDY_MATERIALS;
   static const ASSIGNMENT = _Paths.ASSIGNMENT;
+  static const SETTINGS = _Paths.SETTINGS;
+  static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
+  static const SCHEDULE = _Paths.SCHEDULE;
 }
 
 abstract class _Paths {
@@ -33,4 +36,7 @@ abstract class _Paths {
   static const ROUTINE = '/routine';
   static const STUDY_MATERIALS = '/study-materials';
   static const ASSIGNMENT = '/assignment';
+  static const SETTINGS = '/settings';
+  static const CHANGE_PASSWORD = '/change-password';
+  static const SCHEDULE = '/schedule';
 }

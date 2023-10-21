@@ -87,6 +87,7 @@ class AppFunctions {
       case 'Attendance':
         break;
       case 'Settings':
+        Get.toNamed(Routes.SETTINGS);
         break;
       case 'Lesson':
         break;

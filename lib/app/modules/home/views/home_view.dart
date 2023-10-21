@@ -29,7 +29,7 @@ class HomeView extends GetView<HomeController> {
           CustomIconButton(
             icon: FontAwesomeIcons.facebookMessenger,
             onPressed: () {
-              Get.toNamed(Routes.SYLLABUS);
+              Get.toNamed(Routes.SCHEDULE);
             },
           ),
           CustomIconButton(
@@ -68,11 +68,8 @@ class HomeView extends GetView<HomeController> {
                       icon: list[index].icon,
                       title: list[index].title,
                       onTap: () {
-
                         controller.selectIndex.value = index;
                         AppFunctions.getStudentDashboardNavigation(title: list[index].value);
-
-
                       },
                       isSelected: controller.selectIndex.value == index,
                     ));

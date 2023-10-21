@@ -34,7 +34,7 @@ class LeaveCard extends StatelessWidget {
                     5.verticalSpacing,
                     Text(
                       "$startingTime - $endingTime",
-                      style: AppTextStyle.fontSize14GreyW400,
+                      style: AppTextStyle.fontSize12GreyW400,
                     ),
                   ],
                 ),

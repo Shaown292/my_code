@@ -107,5 +107,7 @@ class ImagePath {
 
   /// others
   static String editProfileImage     = "assets/images/edit_profile_image.png";
+  static String settingLanguage     = "assets/images/language.png";
+  static String changePassword     = "assets/images/change_password.png";
 }
 

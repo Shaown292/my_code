@@ -39,7 +39,8 @@ class AppColors {
   /// Syllabus
   static const syllabusTextColorBlack = Color(0xFF412C56);
   static const syllabusTextColor635976 = Color(0xFF635976);
-  static const syllabusTextColor412C56 = Color(0xFF412C56);
+
+
 
   /// Notification Color
   static const notificationColor = Color(0xFFED00FF);

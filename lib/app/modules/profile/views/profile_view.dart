@@ -36,7 +36,6 @@ class ProfileView extends GetView<ProfileController> {
               elevation: 5,
               margin: EdgeInsets.zero,
               child: Container(
-                height: Get.height * 0.2,
                 width: Get.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -44,14 +43,13 @@ class ProfileView extends GetView<ProfileController> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(7.0),
                       child: Container(
-                        height: Get.height * 0.12,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: AppColors.profileCardBackgroundColor),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(7.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,10 +91,8 @@ class ProfileView extends GetView<ProfileController> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(7.0),
                                 child: Container(
-                                  height: Get.width * 0.04,
-                                  width: Get.width * 0.04,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                     image: AssetImage(ImagePath.camera),
@@ -115,6 +111,7 @@ class ProfileView extends GetView<ProfileController> {
                         controller: controller,
                       ),
                     ),
+                    5.verticalSpacing,
                   ],
                 ),
               ),
