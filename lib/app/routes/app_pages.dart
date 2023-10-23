@@ -2,8 +2,6 @@ import 'package:get/get.dart';
 
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
-import '../modules/change_password/bindings/change_password_binding.dart';
-import '../modules/change_password/views/change_password_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -120,11 +118,7 @@ class AppPages {
       page: () => const SettingsView(),
       binding: SettingsBinding(),
     ),
-    GetPage(
-      name: _Paths.CHANGE_PASSWORD,
-      page: () => ChangePasswordView(),
-      binding: ChangePasswordBinding(),
-    ),
+
     GetPage(
       name: _Paths.SCHEDULE,
       page: () => const ScheduleView(),

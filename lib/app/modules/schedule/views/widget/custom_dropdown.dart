@@ -52,11 +52,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
         ),
         dropdownStyleData: const DropdownStyleData(
           maxHeight: 200,
-          // scrollbarTheme: ScrollbarThemeData(
-          //   radius: const Radius.circular(40),
-          //   thickness: MaterialStateProperty.all<double>(6),
-          //   thumbVisibility: MaterialStateProperty.all<bool>(true),
-          // ),
+
         ),
         menuItemStyleData: const MenuItemStyleData(
           height: 40,

@@ -57,7 +57,7 @@ class StudentHomeworkController extends GetxController {
       Get.bottomSheet(
         SizedBox(
           height: Get.height*0.3,
-          child: Column(
+          child: Column (
             children: [
               Text(studentHomeworkList[index].subject ?? ''),
               Text(studentHomeworkList[index].status ?? ''),
