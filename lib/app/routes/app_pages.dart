@@ -16,6 +16,8 @@ import '../modules/profile/bindings/profile_bindings.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_edit/bindings/profile_edit_binding.dart';
 import '../modules/profile_edit/views/profile_edit_view.dart';
+import '../modules/result/bindings/result_binding.dart';
+import '../modules/result/views/result_view.dart';
 import '../modules/routine/bindings/routine_binding.dart';
 import '../modules/routine/views/routine_view.dart';
 import '../modules/schedule/bindings/schedule_binding.dart';
@@ -128,6 +130,11 @@ class AppPages {
       name: _Paths.CHANGE_PASSWORD,
       page: () => const ChangePasswordView(),
       binding: ChangePasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESULT,
+      page: () => const ResultView(),
+      binding: ResultBinding(),
     ),
   ];
 }

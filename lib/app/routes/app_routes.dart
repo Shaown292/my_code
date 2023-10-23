@@ -19,6 +19,7 @@ abstract class Routes {
   static const SETTINGS = _Paths.SETTINGS;
   static const SCHEDULE = _Paths.SCHEDULE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
+  static const RESULT = _Paths.RESULT;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const SETTINGS = '/settings';
   static const SCHEDULE = '/schedule';
   static const CHANGE_PASSWORD = '/change-password';
+  static const RESULT = '/result';
 }

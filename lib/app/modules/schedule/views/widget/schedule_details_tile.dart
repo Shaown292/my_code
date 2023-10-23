@@ -3,6 +3,8 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 
+import '../../../../utilities/widgets/colum_tile/column_tile.dart';
+
 class ScheduleDetailsTile extends StatelessWidget {
   final String? date;
   final String? subject;
@@ -49,52 +51,21 @@ class ScheduleDetailsTile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Room Number",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                  5.verticalSpacing,
-                  Text(
-                    roomNo ?? "",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                ],
+              ColumnTile(
+                title: "Room Number",
+                value: roomNo,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Class (Section)",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                  5.verticalSpacing,
-                  Text(
-                    section ?? "",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                ],
+              ColumnTile(
+                title: "Class (Section)",
+                value: section,
               ),
-              SizedBox(
-                width: Get.width * 0.3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Teacher",
-                      style: AppTextStyle.fontSize10GreyW300,
-                    ),
-                    5.verticalSpacing,
-                     Text(
-                      teacher ?? "",
-                      style: AppTextStyle.fontSize10GreyW300,
-                    ),
-                  ],
-                ),
+              ColumnTile(
+                title: "Teacher",
+                value: teacher,
               ),
+
+
+
             ],
           ),
           5.verticalSpacing,
