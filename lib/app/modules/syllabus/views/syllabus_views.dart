@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/syllabus/views/widgets/syllabus_topic_wise.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/appbar/custom_appbar.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -29,7 +30,7 @@ class SyllabusView extends GetView<SyllabusController> {
             topic: controller.syllabusList[index].description ?? '',
             date: controller.syllabusList[index].uploadDate ?? '',
             onTap: (){
-              controller.downloadFile('https://spondan.com/infixedu/api/v2/student-assignment-file-download/1', '/sdcard/download/');
+              controller.downloadFile(InfixApi.syllabusDownloadUrl(controller.syllabusList[index].id!), controller.syllabusList[index].contentTitle ?? '');
 
 
             },
