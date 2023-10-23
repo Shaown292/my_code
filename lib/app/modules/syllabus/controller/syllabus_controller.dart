@@ -66,7 +66,7 @@ class SyllabusController extends GetxController {
 
     print(url);
     String dirloc = "";
-    var received;
+    double received;
     var progress = ''.obs;
     if (Platform.isAndroid) {
       dirloc = "/sdcard/download/";
