@@ -81,7 +81,7 @@ class HomeworkCardTile extends StatelessWidget {
                       "Status",
                       style: AppTextStyle.homeworkElements,
                     ),
-
+                    5.verticalSpacing,
                     StatusWidget(
                       value: status ?? "",
                       color: statusColor,

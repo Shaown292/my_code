@@ -29,7 +29,7 @@ class HomeView extends GetView<HomeController> {
           CustomIconButton(
             icon: FontAwesomeIcons.facebookMessenger,
             onPressed: () {
-              Get.toNamed(Routes.SCHEDULE);
+              Get.toNamed(Routes.ACTIVE_EXAM);
             },
           ),
           CustomIconButton(

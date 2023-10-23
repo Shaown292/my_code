@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/active_exam/bindings/active_exam_binding.dart';
+import '../modules/active_exam/views/active_exam_view.dart';
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
@@ -135,6 +137,11 @@ class AppPages {
       name: _Paths.RESULT,
       page: () => const ResultView(),
       binding: ResultBinding(),
+    ),
+    GetPage(
+      name: _Paths.ACTIVE_EXAM,
+      page: () => const ActiveExamView(),
+      binding: ActiveExamBinding(),
     ),
   ];
 }

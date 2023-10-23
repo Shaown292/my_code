@@ -20,6 +20,7 @@ abstract class Routes {
   static const SCHEDULE = _Paths.SCHEDULE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const RESULT = _Paths.RESULT;
+  static const ACTIVE_EXAM = _Paths.ACTIVE_EXAM;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const SCHEDULE = '/schedule';
   static const CHANGE_PASSWORD = '/change-password';
   static const RESULT = '/result';
+  static const ACTIVE_EXAM = '/active-exam';
 }

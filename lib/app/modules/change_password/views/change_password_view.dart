@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -23,18 +24,21 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                 const CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
+                  enableBorderActiveColor: AppColors.pinkColor,
                   hintText: "Current Password",
                 ),
                 10.verticalSpacing,
                 const CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
+                  enableBorderActiveColor: AppColors.pinkColor,
                   hintText: "New Password",
                 ),
                 10.verticalSpacing,
                 const CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
+                  enableBorderActiveColor: AppColors.pinkColor,
                   hintText: "Confirm Password",
                 ),
                 10.verticalSpacing,

@@ -51,7 +51,7 @@ class AppColors {
   static const homeworkStatusRedColor = Color(0xFFF95452);
   static const homeworkStatusGreenColor = Color(0xFF06A83C);
   static const homeworkWidgetColor = Color(0xFFF2F0F6);
-
+  static const homeworkStatusBlueColor = Color(0xFF404FB6);
 
 
 

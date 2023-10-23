@@ -27,15 +27,21 @@ class ResultView extends GetView<ResultController> {
              Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const StudyButton(
+                 StudyButton(
                   title: "Class One (A)",
+                  onItemTap: (){
+                    debugPrint("Class One (a) pressed");
+                  },
                 ),
                 10.horizontalSpacing,
-                const StudyButton(
-                  title: "Class One (A)",
+                 StudyButton(
+                  title: "Class One (B)",
                   color: Colors.white,
                   textStyle: AppTextStyle.cardTextStyle12PurpleW400,
                   borderColor: AppColors.primaryColor,
+                   onItemTap: (){
+                    debugPrint("Class One (B) pressed");
+                   },
                 ),
               ],
             ),

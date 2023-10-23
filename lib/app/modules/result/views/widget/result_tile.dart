@@ -31,7 +31,7 @@ class ResultTile extends StatelessWidget {
         children: [
           Text(
             title ?? "Pair Match Test",
-            style: AppTextStyle.fontSize14lightViolateW400,
+
           ),
           10.verticalSpacing,
           Row(
@@ -41,17 +41,17 @@ class ResultTile extends StatelessWidget {
                 title: "Subject",
                 value: subject ?? "",
               ),
-              5.horizontalSpacing,
+
               ColumnTile(
                 title: "Marks",
                 value: marks ?? "",
               ),
-              5.horizontalSpacing,
+
               ColumnTile(
                 title: "Obtain",
                 value: obtain ?? "",
               ),
-              5.horizontalSpacing,
+
               ColumnTile(
                 title: "Grade",
                 value: grade ?? "",
