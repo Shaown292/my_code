@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
@@ -30,10 +31,13 @@ class SettingsView extends GetView<SettingsController> {
                 },
               ),
               10.verticalSpacing,
-              const SettingsTile(
+               SettingsTile(
                 icon: FontAwesomeIcons.lock,
                 title: "Change Password",
                 isLanguage: false,
+                onTileTap: (){
+                  Get.toNamed(Routes.CHANGE_PASSWORD);
+                },
               ),
             ],
           ),

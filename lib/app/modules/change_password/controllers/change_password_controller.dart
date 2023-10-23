@@ -1,15 +1,7 @@
 import 'package:get/get.dart';
 
-class ScheduleController extends GetxController {
-  //TODO: Implement ScheduleController
-
-  List<String> dropdownList = [
-    "Sun",
-    "Mon",
-    "Wed",
-  ];
-
-  RxString dropdownValue = "Sun".obs;
+class ChangePasswordController extends GetxController {
+  //TODO: Implement ChangePasswordController
 
   final count = 0.obs;
   @override
