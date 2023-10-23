@@ -57,6 +57,10 @@ class InfixApi {
     return '${baseApi}student-syllabus/$studentRecordId';
   }
 
+  static String syllabusDownloadUrl(int syllabusId) {
+    return '${baseApi}student-assignment-file-download/$syllabusId';
+  }
+
 
 
 

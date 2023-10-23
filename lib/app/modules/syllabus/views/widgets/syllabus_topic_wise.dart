@@ -5,16 +5,19 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_container_widget.dart';
 import 'package:get/get.dart';
 
-
 class SyllabusTopicWise extends StatelessWidget {
-
   final String contentTitle;
   final String topic;
   final String? date;
   final Function()? onTap;
 
-  const SyllabusTopicWise(
-      {super.key, required this.contentTitle, required this.topic, this.date, this.onTap,});
+  const SyllabusTopicWise({
+    super.key,
+    required this.contentTitle,
+    required this.topic,
+    this.date,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +69,6 @@ class SyllabusTopicWise extends StatelessWidget {
                 PrimaryButton(
                   onTap: onTap,
                   title: "Download",
-
                 ),
               ],
             ),
