@@ -33,7 +33,6 @@ class SyllabusView extends GetView<SyllabusController> {
             topic: controller.syllabusList[index].description ?? '',
             date: controller.syllabusList[index].uploadDate ?? '',
             onTap: () {
-              print('object""""""""""');
               // controller.downloadFile(url: InfixApi.syllabusDownloadUrl(controller.syllabusList[index].id!), filename: controller.syllabusList[index].contentTitle ?? '');
               // PermissionCheck().checkPermissions(context);
               // controller.downloadFile(InfixApi.syllabusDownloadUrl(controller.syllabusList[index].id!), controller.syllabusList[index].contentTitle ?? '');
