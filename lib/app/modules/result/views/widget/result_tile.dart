@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/result/views/widget/flexible_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/column_tile.dart';
 
@@ -28,34 +29,128 @@ class ResultTile extends StatelessWidget {
       decoration: BoxDecoration(color: color),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
           Text(
             title ?? "Pair Match Test",
 
           ),
           10.verticalSpacing,
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FlexibleText(
+                text: "Subject",
+              ),
+              FlexibleText(
+                text: "Marks",
+              ),
+              FlexibleText(
+                text: "Obtain",
+              ),
+              FlexibleText(
+                text: "Grade",
+              ),
+
+
+           // Column(
+           //      crossAxisAlignment: CrossAxisAlignment.start,
+           //      mainAxisAlignment: MainAxisAlignment.start,
+           //      children: [
+           //        const Text(
+           //         "Subject",
+           //          style: AppTextStyle.homeworkElements,
+           //        ),
+           //        const Text(
+           //          "Marks",
+           //          style: AppTextStyle.homeworkElements,
+           //        ),
+           //        const Text(
+           //          "Obtain",
+           //          style: AppTextStyle.homeworkElements,
+           //        ),
+           //        const Text(
+           //          "Grade",
+           //          style: AppTextStyle.homeworkElements,
+           //        ),
+           //        8.verticalSpacing,
+           //
+           //      ],
+           //    ),
+           // Column(
+           //      crossAxisAlignment: CrossAxisAlignment.start,
+           //      mainAxisAlignment: MainAxisAlignment.start,
+           //      children: [
+           //        const Text(
+           //         "Marks",
+           //          style: AppTextStyle.homeworkElements,
+           //        ),
+           //        8.verticalSpacing,
+           //        Flexible(
+           //          child: Text(
+           //            marks ?? "",
+           //            style: AppTextStyle.homeworkElements,
+           //            overflow: TextOverflow.ellipsis,
+           //          ),
+           //        ),
+           //      ],
+           //    ),
+           // Column(
+           //      crossAxisAlignment: CrossAxisAlignment.start,
+           //      mainAxisAlignment: MainAxisAlignment.start,
+           //      children: [
+           //        const Text(
+           //         "Obtain",
+           //          style: AppTextStyle.homeworkElements,
+           //        ),
+           //        8.verticalSpacing,
+           //        Text(
+           //          obtain ?? "",
+           //          style: AppTextStyle.homeworkElements,
+           //        ),
+           //      ],
+           //    ),  // ColumnTile(
+           // Column(
+           //      crossAxisAlignment: CrossAxisAlignment.start,
+           //      mainAxisAlignment: MainAxisAlignment.start,
+           //      children: [
+           //        const Text(
+           //         "Grade",
+           //          style: AppTextStyle.homeworkElements,
+           //        ),
+           //        8.verticalSpacing,
+           //        Text(
+           //          grade ?? "",
+           //          style: AppTextStyle.homeworkElements,
+           //          overflow: TextOverflow.ellipsis,
+           //        ),
+           //      ],
+           //    ),
+
+            
+            ],
+          ),
+            10.verticalSpacing,
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ColumnTile(
-                title: "Subject",
-                value: subject ?? "",
+              FlexibleText(
+                text: subject ?? "",
+              ),
+              FlexibleText(
+                text: marks ?? "",
+              ),
+              FlexibleText(
+                text: obtain ?? "",
+              ),
+              FlexibleText(
+                text: grade ?? "",
               ),
 
-              ColumnTile(
-                title: "Marks",
-                value: marks ?? "",
-              ),
 
-              ColumnTile(
-                title: "Obtain",
-                value: obtain ?? "",
-              ),
 
-              ColumnTile(
-                title: "Grade",
-                value: grade ?? "",
-              ),
+
             ],
           ),
         ],
@@ -63,3 +158,4 @@ class ResultTile extends StatelessWidget {
     );
   }
 }
+

@@ -50,12 +50,12 @@ class ResultView extends GetView<ResultController> {
               child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (context , index){
-                    return  ResultTile(
+                    return ResultTile(
                       title: "Match",
-                      subject: "Bangla",
+                      subject: "BanglaBanglaBanglaBanglaBanglaBanglaBangla",
                       marks: "100",
                       obtain: "81",
-                      grade: "A",
+                      grade: "BanglaBanglaBanglaBanglaBanglaBanglaBangla",
                       color: index % 2 == 0 ? AppColors.profileCardTextColor : Colors.white,
                     );
                   }),

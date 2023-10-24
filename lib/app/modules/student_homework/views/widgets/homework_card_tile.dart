@@ -37,7 +37,7 @@ class HomeworkCardTile extends StatelessWidget {
     return Container(
       color: backgroundColor,
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,

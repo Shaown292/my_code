@@ -7,17 +7,19 @@ import '../../../data/constants/app_text_style.dart';
 class ColumnTile extends StatelessWidget {
   final String? title;
   final String? value;
+  final double? width;
 
   const ColumnTile({
     super.key,
     this.title,
     this.value,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: Get.width * 0.21,
+      width: width ?? Get.width * 0.24,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,

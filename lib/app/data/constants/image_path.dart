@@ -118,5 +118,9 @@ class ImagePath {
   /// Online Exam
   static String onlineActiveExam  = "assets/images/active_exam.png";
   static String onlineExamResult  = "assets/images/exam_result.png";
+
+  /// Leave
+  static String applyLeave  = "assets/images/apply_leave.png";
+  static String leaveList  = "assets/images/leave_list.png";
 }
 

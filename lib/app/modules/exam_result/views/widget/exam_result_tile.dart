@@ -6,6 +6,7 @@ import '../../../../data/constants/app_text_style.dart';
 import '../../../../utilities/widgets/colum_tile/column_tile.dart';
 
 class ExamResultTile extends StatelessWidget {
+  final String? subject;
   final String? title;
   final String? startingTime;
   final String? endingTime;
@@ -16,6 +17,7 @@ class ExamResultTile extends StatelessWidget {
   const ExamResultTile({
     super.key,
     this.color,
+    this.subject,
     this.startingTime,
     this.endingTime,
     this.activeStatus,
@@ -37,6 +39,7 @@ class ExamResultTile extends StatelessWidget {
           10.verticalSpacing,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ColumnTile(
                 title: "Title",

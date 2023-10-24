@@ -50,7 +50,7 @@ class ExamResultView extends GetView<ExamResultController> {
                   itemCount: 5,
                   itemBuilder: (context , index){
                     return   ExamResultTile(
-                      title: "Pair Match Test",
+                      title: "Pair Match TestPair Match TestPair Match TestPair Match Test",
                       startingTime: "21/03/2023\n(12:35)am",
                       endingTime: "21/03/2023\n(3:35)am",
                       activeStatus: "Passed",

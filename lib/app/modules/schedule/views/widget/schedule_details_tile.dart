@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:get/get.dart';
 
 import '../../../../utilities/widgets/colum_tile/column_tile.dart';
+import '../../../result/views/widget/flexible_text.dart';
 
 class ScheduleDetailsTile extends StatelessWidget {
   final String? date;
@@ -48,27 +49,43 @@ class ScheduleDetailsTile extends StatelessWidget {
             style: AppTextStyle.fontSize14BlackW400,
           ),
           5.verticalSpacing,
-          Row(
+           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ColumnTile(
-                title: "Room Number",
-                value: roomNo,
+              FlexibleText(
+                text: "Subject",
               ),
-              ColumnTile(
-                title: "Class (Section)",
-                value: section,
+              FlexibleText(
+                text: "Marks",
               ),
-              ColumnTile(
-                title: "Teacher",
-                value: teacher,
+              FlexibleText(
+                text: "Obtain",
               ),
+
+
+            ],
+          ),
+          10.verticalSpacing,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FlexibleText(
+                text: subject ?? "",
+              ),
+              FlexibleText(
+                text: roomNo ?? "",
+              ),
+              FlexibleText(
+                text: teacher ?? "",
+              ),
+
+
 
 
 
             ],
           ),
-          5.verticalSpacing,
         ],
       ),
     );
