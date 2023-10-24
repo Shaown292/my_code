@@ -6,8 +6,8 @@ import '../../../../data/constants/app_colors.dart';
 import '../../../../data/constants/app_text_style.dart';
 
 class ActiveExamTile extends StatelessWidget {
-
   final String? subject;
+  final String? title;
   final String? startingTime;
   final String? endingTime;
   final String? activeStatus;
@@ -22,6 +22,7 @@ class ActiveExamTile extends StatelessWidget {
     this.endingTime,
     this.activeStatus,
     this.activeStatusColor,
+    this.title,
   });
 
   @override
@@ -32,8 +33,8 @@ class ActiveExamTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "New Exam",
+           Text(
+            title ?? "title",
             style: AppTextStyle.fontSize14lightViolateW400,
           ),
           10.verticalSpacing,
@@ -64,7 +65,8 @@ class ActiveExamTile extends StatelessWidget {
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
-                        color: activeStatusColor ?? AppColors.homeworkStatusRedColor),
+                        color: activeStatusColor ??
+                            AppColors.homeworkStatusRedColor),
                     child: Center(
                       child: Text(
                         activeStatus ?? "",

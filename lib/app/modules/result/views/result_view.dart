@@ -56,7 +56,7 @@ class ResultView extends GetView<ResultController> {
                       marks: "100",
                       obtain: "81",
                       grade: "A",
-                      color: index % 2 == 0 ? Colors.white : AppColors.profileCardTextColor,
+                      color: index % 2 == 0 ? AppColors.profileCardTextColor : Colors.white,
                     );
                   }),
             )
