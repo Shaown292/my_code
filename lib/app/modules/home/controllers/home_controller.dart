@@ -68,7 +68,7 @@ class HomeController extends GetxController {
       debugPrint(t.toString());
     } finally {
       await _authDatabase.logOut();
-      loadingController.isLoading = false;
+      // loadingController.isLoading = false;
       Get.offAndToNamed(Routes.SPLASH);
       loadingController.isLoading = false;
     }
