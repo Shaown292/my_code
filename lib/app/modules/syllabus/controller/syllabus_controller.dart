@@ -91,7 +91,6 @@ class SyllabusController extends GetxController {
   // }
   // dirloc + AppFunction.getExtention(url)
 
-
   LoadingController loadingController = Get.find();
   List<SyllabusList> syllabusList = [];
 
@@ -122,7 +121,6 @@ class SyllabusController extends GetxController {
             syllabusList.add(syllabusResponseModel.data![i]);
           }
         }
-
       }
 
     } catch (e, t) {
