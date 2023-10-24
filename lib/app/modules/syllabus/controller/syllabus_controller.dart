@@ -91,7 +91,6 @@ class SyllabusController extends GetxController {
   // }
   // dirloc + AppFunction.getExtention(url)
 
-
   LoadingController loadingController = Get.find();
   List<SyllabusList> syllabusList = [];
 
