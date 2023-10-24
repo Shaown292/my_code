@@ -121,7 +121,6 @@ class SyllabusController extends GetxController {
             syllabusList.add(syllabusResponseModel.data![i]);
           }
         }
-
       }
 
     } catch (e, t) {
