@@ -7,6 +7,7 @@ class AppText {
   static const String tryAgainLater = 'Try Again Later';
   static const String logoutWarningMsg = 'Are you sure,\n you want to logout?';
   static const String connectInternetMessage = 'Connect with Internet and Restart your App.';
+  static const String deleteAccountWarning = 'Are you sure,\n you want to deleteF';
 
 
   /// Profile

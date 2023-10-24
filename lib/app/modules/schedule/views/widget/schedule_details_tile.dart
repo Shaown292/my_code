@@ -3,6 +3,9 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 
+import '../../../../utilities/widgets/colum_tile/column_tile.dart';
+import '../../../result/views/widget/flexible_text.dart';
+
 class ScheduleDetailsTile extends StatelessWidget {
   final String? date;
   final String? subject;
@@ -46,58 +49,43 @@ class ScheduleDetailsTile extends StatelessWidget {
             style: AppTextStyle.fontSize14BlackW400,
           ),
           5.verticalSpacing,
-          Row(
+           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Room Number",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                  5.verticalSpacing,
-                  Text(
-                    roomNo ?? "",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                ],
+              FlexibleText(
+                text: "Subject",
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Class (Section)",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                  5.verticalSpacing,
-                  Text(
-                    section ?? "",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                ],
+              FlexibleText(
+                text: "Marks",
               ),
-              SizedBox(
-                width: Get.width * 0.3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Teacher",
-                      style: AppTextStyle.fontSize10GreyW300,
-                    ),
-                    5.verticalSpacing,
-                     Text(
-                      teacher ?? "",
-                      style: AppTextStyle.fontSize10GreyW300,
-                    ),
-                  ],
-                ),
+              FlexibleText(
+                text: "Obtain",
               ),
+
+
             ],
           ),
-          5.verticalSpacing,
+          10.verticalSpacing,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FlexibleText(
+                text: subject ?? "",
+              ),
+              FlexibleText(
+                text: roomNo ?? "",
+              ),
+              FlexibleText(
+                text: teacher ?? "",
+              ),
+
+
+
+
+
+            ],
+          ),
         ],
       ),
     );

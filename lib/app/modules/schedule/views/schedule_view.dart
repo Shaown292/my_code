@@ -21,7 +21,7 @@ class ScheduleView extends GetView<ScheduleController> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                  const EdgeInsets.only(left: 20, right: 20, top: 20),
               child: Obx(
                 () => CustomDropdown(
                   dropdownValue: controller.dropdownValue.value,
