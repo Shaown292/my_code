@@ -38,6 +38,7 @@ class StudyButton extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Center(
             child: Text(
+
               title ?? "Button",
               style: textStyle ?? AppTextStyle.textStyle12WhiteW500,
             ),
