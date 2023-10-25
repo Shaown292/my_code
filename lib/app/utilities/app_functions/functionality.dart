@@ -87,6 +87,7 @@ class AppFunctions {
         Get.toNamed(Routes.ONLINE_EXAM);
         break;
       case 'Attendance':
+        Get.toNamed(Routes.ATTENDANCE);
         break;
       case 'Settings':
         Get.toNamed(Routes.SETTINGS);

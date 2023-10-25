@@ -147,6 +147,9 @@ class AppTextStyle {
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
   );
-
+  static const fontSize14GreyW400 = TextStyle(
+      color: AppColors.profileTitleColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w400);
 
 }
