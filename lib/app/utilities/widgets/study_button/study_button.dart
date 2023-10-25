@@ -24,6 +24,7 @@ class StudyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onItemTap,
+
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),

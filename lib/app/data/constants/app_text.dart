@@ -31,6 +31,7 @@ class AppText {
   static const String profileMother= 'Mother';
   static const String profileNoDataAvailable= 'No data available.';
 
+
   /// Notification
   static const String notificationMarkAsRaed= 'Mark all as read';
   static const String noDataAvailable= 'No data available.';

@@ -35,6 +35,7 @@ class ActiveExamTile extends StatelessWidget {
         children: [
            Text(
             title ?? "title",
+
             style: AppTextStyle.fontSize14lightViolateW400,
           ),
           10.verticalSpacing,

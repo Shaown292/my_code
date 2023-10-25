@@ -34,6 +34,7 @@ class ExamResultTile extends StatelessWidget {
         children: [
            Text(
             title ?? "Title",
+
             style: AppTextStyle.fontSize14lightViolateW400,
           ),
           10.verticalSpacing,

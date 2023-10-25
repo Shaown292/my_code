@@ -4,7 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:get/get.dart';
 
 import '../../../../utilities/widgets/colum_tile/column_tile.dart';
-import '../../../result/views/widget/flexible_text.dart';
+
 
 class ScheduleDetailsTile extends StatelessWidget {
   final String? date;
