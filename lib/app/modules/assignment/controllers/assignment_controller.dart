@@ -34,10 +34,6 @@ class AssignmentController extends GetxController {
             studentAssignmentList.add(studentAssignmentResponseModel.data![i]);
           }
 
-          // for(int i = 0; i < studentAssignmentList.length; i++) {
-          //   print(studentAssignmentList[i].contentTitle);
-          // }
-
         }
       }
 
