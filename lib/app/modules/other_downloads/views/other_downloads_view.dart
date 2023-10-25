@@ -9,19 +9,22 @@ import '../controllers/other_downloads_controller.dart';
 
 class OtherDownloadsView extends GetView<OtherDownloadsController> {
   const OtherDownloadsView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       title: "Other Downloads",
       body: CustomBackground(
-          customWidget: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return const OtherDownloadsTile(
-                  contentTitle: "contentTitle",
-                  topic: "topic",
-                );
-              })),
+        customWidget: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            return const OtherDownloadsTile(
+              contentTitle: "contentTitle",
+              topic: "topic",
+            );
+          },
+        ),
+      ),
     );
   }
 }
