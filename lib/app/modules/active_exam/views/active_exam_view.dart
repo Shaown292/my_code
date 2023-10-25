@@ -21,19 +21,24 @@ class ActiveExamView extends GetView<ActiveExamController> {
           children: [
             20.verticalSpacing,
             Expanded(
-              child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return  ActiveExamTile(
-                      title: "New Exam",
-                      subject: "Bangla",
-                      startingTime: "21/03/2023\n(12:35)am",
-                      endingTime: "21/03/2023\n(3:35)am",
-                      activeStatus: "Closed",
-                      activeStatusColor: AppColors.activeExamStatusBlueColor,
-                      color: index % 2 == 0? Colors.white : AppColors.homeworkWidgetColor,
-                    );
-                  }),
+              child: RefreshIndicator(
+                onRefresh: ()async{
+
+                },
+                child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return  ActiveExamTile(
+                        title: "New Exam",
+                        subject: "Bangla",
+                        startingTime: "21/03/2023\n(12:35)am",
+                        endingTime: "21/03/2023\n(3:35)am",
+                        activeStatus: "Closed",
+                        activeStatusColor: AppColors.activeExamStatusBlueColor,
+                        color: index % 2 == 0? Colors.white : AppColors.homeworkWidgetColor,
+                      );
+                    }),
+              ),
             )
           ],
         ),

@@ -19,7 +19,7 @@ class ColumnTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? Get.width * 0.24,
+      width: width ?? Get.width * 0.22,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,

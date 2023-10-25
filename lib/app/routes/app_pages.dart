@@ -20,6 +20,8 @@ import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/view/notification_view.dart';
 import '../modules/online_exam/bindings/online_exam_binding.dart';
 import '../modules/online_exam/views/online_exam_view.dart';
+import '../modules/other_downloads/bindings/other_downloads_binding.dart';
+import '../modules/other_downloads/views/other_downloads_view.dart';
 import '../modules/profile/bindings/profile_bindings.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_edit/bindings/profile_edit_binding.dart';
@@ -160,12 +162,15 @@ class AppPages {
         page: () => const OnlineExamView(),
         binding: OnlineExamBinding(),
         transition: Transition.fade),
-
     GetPage(
-      name: _Paths.EXAM_RESULT,
-      page: () => const ExamResultView(),
-      binding: ExamResultBinding(),
-      transition: Transition.fadeIn
+        name: _Paths.EXAM_RESULT,
+        page: () => const ExamResultView(),
+        binding: ExamResultBinding(),
+        transition: Transition.fadeIn),
+    GetPage(
+      name: _Paths.OTHER_DOWNLOADS,
+      page: () => const OtherDownloadsView(),
+      binding: OtherDownloadsBinding(),
     ),
   ];
 }

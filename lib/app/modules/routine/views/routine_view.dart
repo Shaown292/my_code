@@ -50,6 +50,7 @@ class RoutineView extends GetView<RoutineController> {
                       title: controller.days[index],
                     ),
                   ),
+
                 ),
               ),
               10.verticalSpacing,
@@ -58,7 +59,7 @@ class RoutineView extends GetView<RoutineController> {
                   controller: controller.tabController,
                   physics: const NeverScrollableScrollPhysics(),
                   children:  [
-                   ListView.builder(
+                    ListView.builder(
                      shrinkWrap: true,
                      itemCount: 2,
                        itemBuilder: (context , index){
@@ -83,7 +84,7 @@ class RoutineView extends GetView<RoutineController> {
 
                        }
                    ),
-                   ListView.builder(
+                    ListView.builder(
                      itemCount: 2,
                        itemBuilder: (context , index){
 
@@ -116,7 +117,122 @@ class RoutineView extends GetView<RoutineController> {
 
                        }
                    ),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 2,
+                        itemBuilder: (context , index){
+                          return const Column(
+                            children: [
+                              RoutineCard(
+                                subject: "Computer Science",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                roomNumber: "201",
+                                buildingName: "East Building",
+                                instructorName: "James Anderson",
+                              ),
+                              RoutineCard(
+                                subject: "Lunch Break",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                isLunchBreak: true,
+                              ),
+                            ],
+                          );
 
+                        }
+                    ),
+                    ListView.builder(
+                        itemCount: 2,
+                        itemBuilder: (context , index){
+
+                          return const Column(
+                            children: [
+                              RoutineCard(
+                                subject: "Computer Science",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                roomNumber: "201",
+                                buildingName: "East Building",
+                                instructorName: "James Anderson",
+                              ),
+                              RoutineCard(
+                                subject: "Lunch Break",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                isLunchBreak: true,
+                              ),
+                              RoutineCard(
+                                subject: "Computer Science",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                roomNumber: "201",
+                                buildingName: "East Building",
+                                instructorName: "James Anderson",
+                              ),
+                            ],
+                          );
+
+                        }
+                    ),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 2,
+                        itemBuilder: (context , index){
+                          return const Column(
+                            children: [
+                              RoutineCard(
+                                subject: "Computer Science",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                roomNumber: "201",
+                                buildingName: "East Building",
+                                instructorName: "James Anderson",
+                              ),
+                              RoutineCard(
+                                subject: "Lunch Break",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                isLunchBreak: true,
+                              ),
+                            ],
+                          );
+
+                        }
+                    ),
+                    ListView.builder(
+                        itemCount: 2,
+                        itemBuilder: (context , index){
+
+                          return const Column(
+                            children: [
+                              RoutineCard(
+                                subject: "Computer Science",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                roomNumber: "201",
+                                buildingName: "East Building",
+                                instructorName: "James Anderson",
+                              ),
+                              RoutineCard(
+                                subject: "Lunch Break",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                isLunchBreak: true,
+                              ),
+                              RoutineCard(
+                                subject: "Computer Science",
+                                startingTime: "8:15 am",
+                                endingTime: "9:00 am",
+                                roomNumber: "201",
+                                buildingName: "East Building",
+                                instructorName: "James Anderson",
+                              ),
+                            ],
+                          );
+
+                        }
+                    ),
                   ],
                 ),
               ),

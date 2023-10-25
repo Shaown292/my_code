@@ -113,6 +113,9 @@ class AppFunctions {
       case 'Exam Result':
         Get.toNamed(Routes.EXAM_RESULT);
         break;
+      case 'Other Downloads':
+        Get.toNamed(Routes.OTHER_DOWNLOADS);
+        break;
 
     }
   }
