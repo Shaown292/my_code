@@ -9,59 +9,64 @@ class AssignmentCard extends StatelessWidget {
   final String? dueDate;
   final String? assignmentTile;
   final String? assignmentDetails;
+  final Function()? onTap;
   const AssignmentCard({
     super.key,
     this.dueDate,
     this.assignmentTile,
     this.assignmentDetails,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-             Text(
-             assignmentTile ?? "",
-              style: AppTextStyle.fontSize16lightViolateW500,
-            ),
-            5.verticalSpacing,
-             Text(
-              assignmentDetails ?? "",
-              style: const TextStyle(
-                  color: AppColors.syllabusTextColor635976,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400),
-            ),
-            10.verticalSpacing,
-            Row(
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: const Color(0xFFFE3E3E)),
-                  child:  Center(
-                    child: Text(
-                      "Due - $dueDate",
-                      style: AppTextStyle.cardTextStyle14WhiteW500,
+    return InkWell(
+      onTap: onTap,
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+               Text(
+               assignmentTile ?? "",
+                style: AppTextStyle.fontSize16lightViolateW500,
+              ),
+              5.verticalSpacing,
+               Text(
+                assignmentDetails ?? "",
+                style: const TextStyle(
+                    color: AppColors.syllabusTextColor635976,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400),
+              ),
+              10.verticalSpacing,
+              Row(
+                children: [
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: const Color(0xFFFE3E3E)),
+                    child:  Center(
+                      child: Text(
+                        "Due - $dueDate",
+                        style: AppTextStyle.cardTextStyle14WhiteW500,
+                      ),
                     ),
                   ),
-                ),
-                5.horizontalSpacing,
-                const Expanded(
-                  child: PrimaryButton(
-                    title: "DOWNLOAD",
-                  ),
-                )
-              ],
-            )
-          ],
+                  5.horizontalSpacing,
+                  const Expanded(
+                    child: PrimaryButton(
+                      title: "DOWNLOAD",
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
