@@ -4,6 +4,8 @@ import '../modules/active_exam/bindings/active_exam_binding.dart';
 import '../modules/active_exam/views/active_exam_view.dart';
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
+import '../modules/attendance/bindings/attendance_binding.dart';
+import '../modules/attendance/views/attendance_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -171,6 +173,11 @@ class AppPages {
       name: _Paths.OTHER_DOWNLOADS,
       page: () => const OtherDownloadsView(),
       binding: OtherDownloadsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ATTENDANCE,
+      page: () => const AttendanceView(),
+      binding: AttendanceBinding(),
     ),
   ];
 }
