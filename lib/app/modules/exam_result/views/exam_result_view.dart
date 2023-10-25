@@ -48,7 +48,7 @@ class ExamResultView extends GetView<ExamResultController> {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () async {
-
+                  debugPrint("Refresh");
                 },
                 child: ListView.builder(
                     itemCount: 5,
