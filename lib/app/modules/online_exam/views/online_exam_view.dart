@@ -27,6 +27,7 @@ class OnlineExamView extends GetView<OnlineExamController> {
               itemBuilder: (context, index) {
                 return Obx(
                       () => CustomCardTile(
+
                     icon: controller.onlineExamTileList[index].icon,
                     title: controller.onlineExamTileList[index].title,
                     onTap: () {

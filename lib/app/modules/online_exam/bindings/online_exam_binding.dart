@@ -5,8 +5,8 @@ import '../controllers/online_exam_controller.dart';
 class OnlineExamBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<OnlineExamController>(
-      () => OnlineExamController(),
+    Get.put<OnlineExamController>(
+       OnlineExamController(),
     );
   }
 }

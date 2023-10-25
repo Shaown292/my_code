@@ -18,8 +18,6 @@ class ImagePath {
   static const  editBlack             = "assets/images/edit_black.png";
   static const  back                  = "assets/images/back_arrow.png";
 
-
-
   ///Profile Detail Icon
   static String calender            = "assets/images/calendar.png";
   static String age                 = "assets/images/age.png";

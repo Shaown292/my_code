@@ -12,6 +12,7 @@ class AppText {
 
   /// Profile
 
+
   static const String dateOfBirth = 'Date of birth';
   static const String age = 'Age';
   static const String phoneNumber = 'Phone number';
