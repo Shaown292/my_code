@@ -29,7 +29,7 @@ class ScheduleDetailsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(top: 20, bottom: 20, left: 20),
       decoration: BoxDecoration(color: color),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,43 +49,65 @@ class ScheduleDetailsTile extends StatelessWidget {
             style: AppTextStyle.fontSize14BlackW400,
           ),
           5.verticalSpacing,
-           const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FlexibleText(
-                text: "Subject",
-              ),
-              FlexibleText(
-                text: "Marks",
-              ),
-              FlexibleText(
-                text: "Obtain",
-              ),
 
-
-            ],
-          ),
-          10.verticalSpacing,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FlexibleText(
-                text: subject ?? "",
+              ColumnTile(
+                title: "Room Number",
+                value: roomNo ?? "",
+
               ),
-              FlexibleText(
-                text: roomNo ?? "",
+              ColumnTile(
+                title: "Class (Section)",
+                value: section ?? "",
               ),
-              FlexibleText(
-                text: teacher ?? "",
+              ColumnTile(
+                title: "Teacher",
+                value: teacher ?? "",
               ),
-
-
-
-
-
             ],
-          ),
+          )
+
+          //  const Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     FlexibleText(
+          //       text: "Room Number",
+          //     ),
+          //     FlexibleText(
+          //       text: "Class (Section)",
+          //     ),
+          //     FlexibleText(
+          //       text: "Teacher",
+          //     ),
+          //
+          //
+          //   ],
+          // ),
+          // 10.verticalSpacing,
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     FlexibleText(
+          //       text: roomNo ?? "",
+          //     ),
+          //     FlexibleText(
+          //       text: roomNo ?? "",
+          //     ),
+          //     FlexibleText(
+          //       text: teacher ?? "",
+          //     ),
+          //
+          //
+          //
+          //
+          //
+          //   ],
+          // ),
         ],
       ),
     );

@@ -13,12 +13,8 @@ class RoutineController extends GetxController {
     'Fri',
     'Sat',
   ];
-  @override
-  void onInit() {
 
-    super.onInit();
-  }
 
-  final count = 0.obs;
+
   RxInt pageIndex = 0.obs;
 }

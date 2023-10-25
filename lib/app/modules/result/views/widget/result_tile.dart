@@ -25,14 +25,15 @@ class ResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+
+      padding: const EdgeInsets.only(top: 20, left: 30, bottom: 20),
       decoration: BoxDecoration(color: color),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
           Text(
-            title ?? "Pair Match Test",
+            title ?? "",
 
           ),
           10.verticalSpacing,
@@ -51,88 +52,11 @@ class ResultTile extends StatelessWidget {
               FlexibleText(
                 text: "Grade",
               ),
-
-
-           // Column(
-           //      crossAxisAlignment: CrossAxisAlignment.start,
-           //      mainAxisAlignment: MainAxisAlignment.start,
-           //      children: [
-           //        const Text(
-           //         "Subject",
-           //          style: AppTextStyle.homeworkElements,
-           //        ),
-           //        const Text(
-           //          "Marks",
-           //          style: AppTextStyle.homeworkElements,
-           //        ),
-           //        const Text(
-           //          "Obtain",
-           //          style: AppTextStyle.homeworkElements,
-           //        ),
-           //        const Text(
-           //          "Grade",
-           //          style: AppTextStyle.homeworkElements,
-           //        ),
-           //        8.verticalSpacing,
-           //
-           //      ],
-           //    ),
-           // Column(
-           //      crossAxisAlignment: CrossAxisAlignment.start,
-           //      mainAxisAlignment: MainAxisAlignment.start,
-           //      children: [
-           //        const Text(
-           //         "Marks",
-           //          style: AppTextStyle.homeworkElements,
-           //        ),
-           //        8.verticalSpacing,
-           //        Flexible(
-           //          child: Text(
-           //            marks ?? "",
-           //            style: AppTextStyle.homeworkElements,
-           //            overflow: TextOverflow.ellipsis,
-           //          ),
-           //        ),
-           //      ],
-           //    ),
-           // Column(
-           //      crossAxisAlignment: CrossAxisAlignment.start,
-           //      mainAxisAlignment: MainAxisAlignment.start,
-           //      children: [
-           //        const Text(
-           //         "Obtain",
-           //          style: AppTextStyle.homeworkElements,
-           //        ),
-           //        8.verticalSpacing,
-           //        Text(
-           //          obtain ?? "",
-           //          style: AppTextStyle.homeworkElements,
-           //        ),
-           //      ],
-           //    ),  // ColumnTile(
-           // Column(
-           //      crossAxisAlignment: CrossAxisAlignment.start,
-           //      mainAxisAlignment: MainAxisAlignment.start,
-           //      children: [
-           //        const Text(
-           //         "Grade",
-           //          style: AppTextStyle.homeworkElements,
-           //        ),
-           //        8.verticalSpacing,
-           //        Text(
-           //          grade ?? "",
-           //          style: AppTextStyle.homeworkElements,
-           //          overflow: TextOverflow.ellipsis,
-           //        ),
-           //      ],
-           //    ),
-
-            
             ],
           ),
             10.verticalSpacing,
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FlexibleText(
@@ -147,7 +71,6 @@ class ResultTile extends StatelessWidget {
               FlexibleText(
                 text: grade ?? "",
               ),
-
 
 
 
