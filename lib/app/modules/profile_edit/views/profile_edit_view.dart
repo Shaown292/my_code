@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
@@ -28,17 +29,51 @@ class ProfileEditView extends GetView<ProfileEditController> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                 Container(
-                   height: Get.height * 0.3,
-                   width: Get.width * 0.3,
-                   decoration:  BoxDecoration(
-                     shape: BoxShape.circle,
-                     image: DecorationImage(
-                         image: AssetImage(ImagePath.editProfileImage),
-                       fit: BoxFit.contain
-                     )
-                   ),
-                 ),
+                50.verticalSpacing,
+
+                Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration:  BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: AssetImage(ImagePath.editProfileImage),
+                              fit: BoxFit.contain
+                          )
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 8,
+                      right: 6,
+                      child: InkWell(
+                        onTap: (){
+                          debugPrint("DP Changed");
+                        },
+                        child: Container(
+                          height: 20,
+                          width: 20,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.primaryColor
+                          ),
+                          child: Center(
+                            child: Image.asset(ImagePath.edit, height: 10, width: 10,),
+                          )
+                        ),
+                      ) //Icon
+                    ),
+
+
+
+                  ], //<Widget>[]
+                ),
+                //
+                30.verticalSpacing,
+
                  EditProfileTextField(
                   labelText: AppText.editProfileFirstName,
                   controller: controller.firstName,

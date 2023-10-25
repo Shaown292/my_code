@@ -81,8 +81,10 @@ class AppFunctions {
       case 'Timeline':
         break;
       case 'Examination':
+        Get.toNamed(Routes.EXAMINATION);
         break;
       case 'Online Exam':
+        Get.toNamed(Routes.ONLINE_EXAM);
         break;
       case 'Attendance':
         break;
@@ -99,6 +101,22 @@ class AppFunctions {
       case 'Syllabus':
         Get.toNamed(Routes.SYLLABUS);
         break;
+      case 'Schedule':
+        Get.toNamed(Routes.SCHEDULE);
+        break;
+      case 'Result':
+        Get.toNamed(Routes.RESULT);
+        break;
+      case 'Active Exam':
+        Get.toNamed(Routes.ACTIVE_EXAM);
+        break;
+      case 'Exam Result':
+        Get.toNamed(Routes.EXAM_RESULT);
+        break;
+      case 'Other Downloads':
+        Get.toNamed(Routes.OTHER_DOWNLOADS);
+        break;
+
     }
   }
 }

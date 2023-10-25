@@ -3,6 +3,9 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 
+import '../../../../utilities/widgets/colum_tile/column_tile.dart';
+import '../../../result/views/widget/flexible_text.dart';
+
 class ScheduleDetailsTile extends StatelessWidget {
   final String? date;
   final String? subject;
@@ -26,7 +29,7 @@ class ScheduleDetailsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(top: 20, bottom: 20, left: 20),
       decoration: BoxDecoration(color: color),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,58 +49,65 @@ class ScheduleDetailsTile extends StatelessWidget {
             style: AppTextStyle.fontSize14BlackW400,
           ),
           5.verticalSpacing,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Room Number",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                  5.verticalSpacing,
-                  Text(
-                    roomNo ?? "",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                ],
+              ColumnTile(
+                title: "Room Number",
+                value: roomNo ?? "",
+
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Class (Section)",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                  5.verticalSpacing,
-                  Text(
-                    section ?? "",
-                    style: AppTextStyle.fontSize10GreyW300,
-                  ),
-                ],
+              ColumnTile(
+                title: "Class (Section)",
+                value: section ?? "",
               ),
-              SizedBox(
-                width: Get.width * 0.3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Teacher",
-                      style: AppTextStyle.fontSize10GreyW300,
-                    ),
-                    5.verticalSpacing,
-                     Text(
-                      teacher ?? "",
-                      style: AppTextStyle.fontSize10GreyW300,
-                    ),
-                  ],
-                ),
+              ColumnTile(
+                title: "Teacher",
+                value: teacher ?? "",
               ),
             ],
-          ),
-          5.verticalSpacing,
+          )
+
+          //  const Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     FlexibleText(
+          //       text: "Room Number",
+          //     ),
+          //     FlexibleText(
+          //       text: "Class (Section)",
+          //     ),
+          //     FlexibleText(
+          //       text: "Teacher",
+          //     ),
+          //
+          //
+          //   ],
+          // ),
+          // 10.verticalSpacing,
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     FlexibleText(
+          //       text: roomNo ?? "",
+          //     ),
+          //     FlexibleText(
+          //       text: roomNo ?? "",
+          //     ),
+          //     FlexibleText(
+          //       text: teacher ?? "",
+          //     ),
+          //
+          //
+          //
+          //
+          //
+          //   ],
+          // ),
         ],
       ),
     );

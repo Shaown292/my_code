@@ -1,21 +1,33 @@
 import 'package:get/get.dart';
 
+import '../modules/active_exam/bindings/active_exam_binding.dart';
+import '../modules/active_exam/views/active_exam_view.dart';
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/exam_result/bindings/exam_result_binding.dart';
+import '../modules/exam_result/views/exam_result_view.dart';
+import '../modules/examination/bindings/examination_binding.dart';
+import '../modules/examination/views/examination_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/view/notification_view.dart';
+import '../modules/online_exam/bindings/online_exam_binding.dart';
+import '../modules/online_exam/views/online_exam_view.dart';
+import '../modules/other_downloads/bindings/other_downloads_binding.dart';
+import '../modules/other_downloads/views/other_downloads_view.dart';
 import '../modules/profile/bindings/profile_bindings.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_edit/bindings/profile_edit_binding.dart';
 import '../modules/profile_edit/views/profile_edit_view.dart';
+import '../modules/result/bindings/result_binding.dart';
+import '../modules/result/views/result_view.dart';
 import '../modules/routine/bindings/routine_binding.dart';
 import '../modules/routine/views/routine_view.dart';
 import '../modules/schedule/bindings/schedule_binding.dart';
@@ -99,7 +111,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ROUTINE,
-      page: () => RoutineView(),
+      page: () => const RoutineView(),
       binding: RoutineBinding(),
     ),
     GetPage(
@@ -115,19 +127,50 @@ class AppPages {
       transition: Transition.fade,
     ),
     GetPage(
-      name: _Paths.SETTINGS,
-      page: () => const SettingsView(),
-      binding: SettingsBinding(),
-    ),
+        name: _Paths.SETTINGS,
+        page: () => const SettingsView(),
+        binding: SettingsBinding(),
+        transition: Transition.fade),
     GetPage(
-      name: _Paths.SCHEDULE,
-      page: () => const ScheduleView(),
-      binding: ScheduleBinding(),
-    ),
+        name: _Paths.SCHEDULE,
+        page: () => const ScheduleView(),
+        binding: ScheduleBinding(),
+        transition: Transition.fadeIn),
     GetPage(
       name: _Paths.CHANGE_PASSWORD,
       page: () => const ChangePasswordView(),
       binding: ChangePasswordBinding(),
+    ),
+    GetPage(
+        name: _Paths.RESULT,
+        page: () => const ResultView(),
+        binding: ResultBinding(),
+        transition: Transition.fadeIn),
+    GetPage(
+        name: _Paths.ACTIVE_EXAM,
+        page: () => const ActiveExamView(),
+        binding: ActiveExamBinding(),
+        transition: Transition.fadeIn),
+    GetPage(
+      name: _Paths.EXAMINATION,
+      page: () => const ExaminationView(),
+      binding: ExaminationBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+        name: _Paths.ONLINE_EXAM,
+        page: () => const OnlineExamView(),
+        binding: OnlineExamBinding(),
+        transition: Transition.fade),
+    GetPage(
+        name: _Paths.EXAM_RESULT,
+        page: () => const ExamResultView(),
+        binding: ExamResultBinding(),
+        transition: Transition.fadeIn),
+    GetPage(
+      name: _Paths.OTHER_DOWNLOADS,
+      page: () => const OtherDownloadsView(),
+      binding: OtherDownloadsBinding(),
     ),
   ];
 }

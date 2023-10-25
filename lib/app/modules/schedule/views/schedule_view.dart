@@ -20,35 +20,44 @@ class ScheduleView extends GetView<ScheduleController> {
         customWidget: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
               child: Obx(
                 () => CustomDropdown(
                   dropdownValue: controller.dropdownValue.value,
                   scheduleList: controller.dropdownList,
                   changeDropdownValue: (v) {
                     controller.dropdownValue.value = v!;
+
+                    debugPrint(v);
                   },
                 ),
               ),
             ),
+
             Expanded(
-                child: ListView.builder(
-                    itemCount: scheduleData.length,
-                    itemBuilder: (context, index) {
-                      return ScheduleDetailsTile(
-                        date: scheduleData[index].date,
-                        subject: scheduleData[index].subject,
-                        time: scheduleData[index].time,
-                        roomNo: scheduleData[index].roomNo,
-                        section: scheduleData[index].section,
-                        teacher: scheduleData[index].teacher,
-                        color: index % 2 == 0
-                            ? Colors.white
-                            : AppColors.profileCardTextColor,
-                      );
-                    }))
+                child: RefreshIndicator(
+                  onRefresh: ()async {
+
+                  },
+                  child: ListView.builder(
+                      itemCount: scheduleData.length,
+                      itemBuilder: (context, index) {
+                        return ScheduleDetailsTile(
+                          date: scheduleData[index].date,
+                          subject: scheduleData[index].subject,
+                          time: scheduleData[index].time,
+                          roomNo: scheduleData[index].roomNo,
+                          section: scheduleData[index].section,
+                          teacher: scheduleData[index].teacher,
+                          color: index % 2 == 0
+                              ? AppColors.profileCardTextColor
+                              : Colors.white,
+                        );
+                      }),
+                ))
+
           ],
+
         ),
       ),
     );

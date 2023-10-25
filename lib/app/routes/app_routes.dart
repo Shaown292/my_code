@@ -19,6 +19,12 @@ abstract class Routes {
   static const SETTINGS = _Paths.SETTINGS;
   static const SCHEDULE = _Paths.SCHEDULE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
+  static const RESULT = _Paths.RESULT;
+  static const ACTIVE_EXAM = _Paths.ACTIVE_EXAM;
+  static const EXAMINATION = _Paths.EXAMINATION;
+  static const ONLINE_EXAM = _Paths.ONLINE_EXAM;
+  static const EXAM_RESULT = _Paths.EXAM_RESULT;
+  static const OTHER_DOWNLOADS = _Paths.OTHER_DOWNLOADS;
 }
 
 abstract class _Paths {
@@ -39,4 +45,10 @@ abstract class _Paths {
   static const SETTINGS = '/settings';
   static const SCHEDULE = '/schedule';
   static const CHANGE_PASSWORD = '/change-password';
+  static const RESULT = '/result';
+  static const ACTIVE_EXAM = '/active-exam';
+  static const EXAMINATION = '/examination';
+  static const ONLINE_EXAM = '/online-exam';
+  static const EXAM_RESULT = '/exam-result';
+  static const OTHER_DOWNLOADS = '/other-downloads';
 }
