@@ -15,6 +15,7 @@ class StudyMaterialsView extends GetView<StudyMaterialsController> {
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       title: 'Study Materials',
+
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -26,18 +27,15 @@ class StudyMaterialsView extends GetView<StudyMaterialsController> {
                 crossAxisCount: 2,
               ),
               itemBuilder: (context, index) {
-                return Obx(
-                  () => CustomCardTile(
-                    icon: controller.studyMaterialTileList[index].icon,
-                    title: controller.studyMaterialTileList[index].title,
-                    onTap: () {
-                      controller.selectIndex.value = index;
-                      AppFunctions.getStudentDashboardNavigation(
-                          title: controller.studyMaterialTileList[index].value);
-                    },
-                    isSelected: controller.selectIndex.value == index,
-                  ),
-                );
+                return Obx(() => CustomCardTile(
+                  icon: controller.studyMaterialTileList[index].icon,
+                  title: controller.studyMaterialTileList[index].title,
+                  onTap: () {
+                    controller.selectIndex.value = index;
+                    AppFunctions.getStudentDashboardNavigation(title: controller.studyMaterialTileList[index].value);
+                  },
+                  isSelected: controller.selectIndex.value == index,
+                ));
               },
             ),
           ],

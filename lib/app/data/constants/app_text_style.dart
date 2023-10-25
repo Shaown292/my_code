@@ -141,11 +141,4 @@ class AppTextStyle {
       fontSize: 16,
       fontWeight: FontWeight.w500);
 
-  static const cardTextStyle12PurpleW400 = TextStyle(
-    color: AppColors.primaryColor,
-    fontSize: 12,
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.w400,
-  );
-
 }
