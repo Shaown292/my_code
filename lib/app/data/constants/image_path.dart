@@ -109,6 +109,11 @@ class ImagePath {
   static String changePassword       = "assets/images/change_password.png";
   static String delete               = "assets/images/delete.png";
 
+
+  /// Leave
+  static String applyLeave  = "assets/images/apply_leave.png";
+  static String leaveList  = "assets/images/leave_list.png";
+
   /// Examination
   static String examinationResult    = "assets/images/result.png";
   static String examinationSchedule  = "assets/images/schedule.png";
@@ -116,9 +121,5 @@ class ImagePath {
   /// Online Exam
   static String onlineActiveExam  = "assets/images/active_exam.png";
   static String onlineExamResult  = "assets/images/exam_result.png";
-
-  /// Leave
-  static String applyLeave  = "assets/images/apply_leave.png";
-  static String leaveList  = "assets/images/leave_list.png";
 }
 
