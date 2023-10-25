@@ -13,14 +13,18 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
     return InfixEduScaffold(
       title: "Other Downloads",
       body: CustomBackground(
-        customWidget: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return const OtherDownloadsTile(
-              contentTitle: "contentTitle",
-              topic: "topic",
-            );
-          },
+        customWidget: RefreshIndicator(
+          onRefresh: ()async{},
+          child: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return const OtherDownloadsTile(
+                contentTitle: "Content Title",
+                topic: "Topic",
+                date: "21/02/2023",
+              );
+            },
+          ),
         ),
       ),
     );

@@ -34,11 +34,13 @@ class OtherDownloadsTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomContainerWidget(
-
-                      width: 100,
-                      color: const Color(0xFFF2F0F6),
-                      requiredWidget: Center(
+                    Container(
+                      padding: const EdgeInsets.all(7),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: const Color(0xFFF2F0F6),
+                      ),
+                      child: Center(
                         child: Text(
                           contentTitle,
                           style: AppTextStyle.fontSize14BlackW500,

@@ -21,7 +21,7 @@ class AssignmentView extends GetView<AssignmentController> {
           child: Column(
             children: [
 
-              controller.loadingController.isLoading ? const LoadingWidget() : Expanded(
+              controller.loadingController.isLoading ? const LoadingWidget() : controller.studentAssignmentList.isNotEmpty ? Expanded(
                 child: ListView.builder(
                   itemCount: controller.studentAssignmentList.length,
                   shrinkWrap: true,
@@ -37,7 +37,7 @@ class AssignmentView extends GetView<AssignmentController> {
                       dueDate: controller.studentAssignmentList[index].uploadDate,
                     );
                   },),
-              )
+              ) : const NoDataAvailableWidget()
 
             ],
           ),
