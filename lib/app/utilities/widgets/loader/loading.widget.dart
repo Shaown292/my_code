@@ -14,8 +14,7 @@ class LoadingWidget extends GetWidget<LoadingController> {
       return controller.isLoading
           ? WillPopScope(
               onWillPop: () => Future.value(false),
-              child: SizedBox(
-                height: Get.height,
+              child: Expanded(
                 child: Stack(
                   children: <Widget>[
                     ModalBarrier(

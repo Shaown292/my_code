@@ -5,8 +5,8 @@ import '../controllers/assignment_controller.dart';
 class AssignmentBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AssignmentController>(
-      () => AssignmentController(),
+    Get.put<AssignmentController>(
+      AssignmentController(),
     );
   }
 }

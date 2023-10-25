@@ -69,6 +69,10 @@ class InfixApi {
     return '${baseApi}student-assignment-file-download/$syllabusId';
   }
 
+  static String getAssignmentList(int studentRecordId) {
+    return '${baseApi}student-assignment/$studentRecordId';
+  }
+
 
 
 
