@@ -20,7 +20,6 @@ class AssignmentView extends GetView<AssignmentController> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-
               controller.loadingController.isLoading ? const LoadingWidget() : controller.studentAssignmentList.isNotEmpty ? Expanded(
                 child: ListView.builder(
                   itemCount: controller.studentAssignmentList.length,
