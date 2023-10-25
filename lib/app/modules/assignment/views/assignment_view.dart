@@ -26,7 +26,6 @@ class AssignmentView extends GetView<AssignmentController> {
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, int index) {
-                    print(controller.studentAssignmentList.length);
                     return AssignmentCard(
                       onTap: (){
                         controller.showStudentAssignmentDetailsBottomSheet(index: index);
