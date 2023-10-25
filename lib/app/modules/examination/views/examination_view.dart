@@ -26,6 +26,7 @@ class ExaminationView extends GetView<ExaminationController> {
               ),
               itemBuilder: (context, index) {
                 return Obx(
+
                       () => CustomCardTile(
                     icon: controller.examinationTileList[index].icon,
                     title: controller.examinationTileList[index].title,
