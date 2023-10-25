@@ -74,6 +74,11 @@ class InfixApi {
   }
 
 
+  static String getStudentOthersDownloadList(int studentRecordId) {
+    return '${baseApi}student-others-download/$studentRecordId';
+  }
+
+
 
 
 
@@ -507,9 +512,6 @@ class InfixApi {
     return "${baseApi}studentSyllabus/$id/$recordId";
   }
 
-  static String getStudentOtherDownloads(dynamic id, int recordId) {
-    return "${baseApi}studentOtherDownloads/$id/$recordId";
-  }
 
   static String getSubjectsUrl(dynamic userId, int recordId) {
     return "${baseApi}studentSubject/$userId/$recordId";

@@ -15,29 +15,35 @@ class AssignmentView extends GetView<AssignmentController> {
   Widget build(BuildContext context) {
     return Obx(() => InfixEduScaffold(
       title: "Assignment",
-      body: CustomBackground(
-        customWidget: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              controller.loadingController.isLoading ? const LoadingWidget() : controller.studentAssignmentList.isNotEmpty ? Expanded(
-                child: ListView.builder(
-                  itemCount: controller.studentAssignmentList.length,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, int index) {
-                    return AssignmentCard(
-                      onTap: (){
-                        controller.showStudentAssignmentDetailsBottomSheet(index: index);
-                      },
-                      assignmentTile: controller.studentAssignmentList[index].contentTitle,
-                      assignmentDetails: "Assigned to ${controller.studentAssignmentList[index].availableFor}",
-                      dueDate: controller.studentAssignmentList[index].uploadDate,
-                    );
-                  },),
-              ) : const NoDataAvailableWidget()
+      body: RefreshIndicator(
+        onRefresh: () async {
+          controller.studentAssignmentList.clear();
+          controller.getStudentAssignmentList();
+        },
+        child: CustomBackground(
+          customWidget: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                controller.loadingController.isLoading ? const LoadingWidget() : controller.studentAssignmentList.isNotEmpty ? Expanded(
+                  child: ListView.builder(
+                    itemCount: controller.studentAssignmentList.length,
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, int index) {
+                      return AssignmentCard(
+                        onTap: (){
+                          controller.showStudentAssignmentDetailsBottomSheet(index: index);
+                        },
+                        assignmentTile: controller.studentAssignmentList[index].contentTitle,
+                        assignmentDetails: "Assigned to ${controller.studentAssignmentList[index].availableFor}",
+                        dueDate: controller.studentAssignmentList[index].uploadDate,
+                      );
+                    },),
+                ) : const NoDataAvailableWidget()
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

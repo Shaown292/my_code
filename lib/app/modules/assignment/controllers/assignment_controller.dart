@@ -14,7 +14,7 @@ class AssignmentController extends GetxController {
   LoadingController loadingController = Get.find();
   List<StudentAssignmentData> studentAssignmentList = [];
 
-  void getAssignmentList() async {
+  void getStudentAssignmentList() async {
     try {
 
       loadingController.isLoading = true;
@@ -66,7 +66,7 @@ class AssignmentController extends GetxController {
 
   @override
   void onInit() {
-    getAssignmentList();
+    getStudentAssignmentList();
     super.onInit();
   }
 

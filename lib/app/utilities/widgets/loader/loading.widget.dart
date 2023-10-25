@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:get/get.dart';
 
 import 'loading.controller.dart';
@@ -24,12 +26,12 @@ class LoadingWidget extends GetWidget<LoadingController> {
                     Center(
                       child: Platform.isIOS
                           ? const CupertinoActivityIndicator(
-                              color: Colors.redAccent,
+                              color: AppColors.primaryColor,
                               radius: 24,
                             )
                           : const CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation(
-                                Colors.redAccent,
+                                AppColors.primaryColor,
                               ),
                             ),
                     ),
