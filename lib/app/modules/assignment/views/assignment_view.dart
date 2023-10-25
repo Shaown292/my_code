@@ -39,7 +39,6 @@ class AssignmentView extends GetView<AssignmentController> {
                   },),
               )
 
-
             ],
           ),
         ),
