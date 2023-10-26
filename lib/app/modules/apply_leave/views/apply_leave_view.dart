@@ -14,7 +14,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
       body: const Center(
         child: Text(
           'ApplyLeaveView is working',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 20, color: Colors.black),
         ),
       ),
     );
