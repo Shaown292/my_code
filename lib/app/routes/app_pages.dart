@@ -1,3 +1,4 @@
+import 'package:flutter_single_getx_api_v2/app/modules/attendance/bindings/attendance_binding.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/attendance/views/attendance_view.dart';
 import 'package:get/get.dart';
 
@@ -204,7 +205,7 @@ class AppPages {
     GetPage(
       name: _Paths.ATTENDANCE,
       page: () => const AttendanceView(),
-      binding: ActiveExamBinding(),
+      binding: AttendanceBinding(),
     ),
   ];
 }
