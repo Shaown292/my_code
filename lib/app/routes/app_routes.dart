@@ -25,7 +25,10 @@ abstract class Routes {
   static const ONLINE_EXAM = _Paths.ONLINE_EXAM;
   static const EXAM_RESULT = _Paths.EXAM_RESULT;
   static const OTHER_DOWNLOADS = _Paths.OTHER_DOWNLOADS;
-  static const ATTENDANCE = _Paths.ATTENDANCE;
+  static const DORMITORY = _Paths.DORMITORY;
+  static const APPLY_LEAVE = _Paths.APPLY_LEAVE;
+  static const LEAVE_LIST = _Paths.LEAVE_LIST;
+  static const LEAVE = _Paths.LEAVE;
 }
 
 abstract class _Paths {
@@ -52,5 +55,8 @@ abstract class _Paths {
   static const ONLINE_EXAM = '/online-exam';
   static const EXAM_RESULT = '/exam-result';
   static const OTHER_DOWNLOADS = '/other-downloads';
-  static const ATTENDANCE = '/attendance';
+  static const DORMITORY = '/dormitory';
+  static const APPLY_LEAVE = '/apply-leave';
+  static const LEAVE_LIST = '/leave-list';
+  static const LEAVE = '/leave';
 }
