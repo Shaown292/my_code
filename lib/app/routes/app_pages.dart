@@ -1,21 +1,29 @@
+import 'package:flutter_single_getx_api_v2/app/modules/attendance/bindings/attendance_binding.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/attendance/views/attendance_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/active_exam/bindings/active_exam_binding.dart';
 import '../modules/active_exam/views/active_exam_view.dart';
+import '../modules/apply_leave/bindings/apply_leave_binding.dart';
+import '../modules/apply_leave/views/apply_leave_view.dart';
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
-import '../modules/attendance/bindings/attendance_binding.dart';
-import '../modules/attendance/views/attendance_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/dormitory/bindings/dormitory_binding.dart';
+import '../modules/dormitory/views/dormitory_view.dart';
 import '../modules/exam_result/bindings/exam_result_binding.dart';
 import '../modules/exam_result/views/exam_result_view.dart';
 import '../modules/examination/bindings/examination_binding.dart';
 import '../modules/examination/views/examination_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/leave/bindings/leave_binding.dart';
+import '../modules/leave/views/leave_view.dart';
+import '../modules/leave_list/bindings/leave_list_binding.dart';
+import '../modules/leave_list/views/leave_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
@@ -174,6 +182,26 @@ class AppPages {
       name: _Paths.OTHER_DOWNLOADS,
       page: () => const OtherDownloadsView(),
       binding: OtherDownloadsBinding(),
+    ),
+    GetPage(
+      name: _Paths.DORMITORY,
+      page: () => const DormitoryView(),
+      binding: DormitoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.APPLY_LEAVE,
+      page: () => const ApplyLeaveView(),
+      binding: ApplyLeaveBinding(),
+    ),
+    GetPage(
+      name: _Paths.LEAVE_LIST,
+      page: () => const LeaveListView(),
+      binding: LeaveListBinding(),
+    ),
+    GetPage(
+      name: _Paths.LEAVE,
+      page: () => const LeaveView(),
+      binding: LeaveBinding(),
     ),
     GetPage(
       name: _Paths.ATTENDANCE,
