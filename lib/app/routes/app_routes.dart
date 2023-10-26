@@ -26,6 +26,8 @@ abstract class Routes {
   static const EXAM_RESULT = _Paths.EXAM_RESULT;
   static const OTHER_DOWNLOADS = _Paths.OTHER_DOWNLOADS;
   static const DORMITORY = _Paths.DORMITORY;
+  static const APPLY_LEAVE = _Paths.APPLY_LEAVE;
+  static const LEAVE_LIST = _Paths.LEAVE_LIST;
 }
 
 abstract class _Paths {
@@ -53,4 +55,6 @@ abstract class _Paths {
   static const EXAM_RESULT = '/exam-result';
   static const OTHER_DOWNLOADS = '/other-downloads';
   static const DORMITORY = '/dormitory';
+  static const APPLY_LEAVE = '/apply-leave';
+  static const LEAVE_LIST = '/leave-list';
 }
