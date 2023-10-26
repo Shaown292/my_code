@@ -3,80 +3,19 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/attendance/views/widget/display_dot.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 
 import 'event_status.dart';
 
 class DisplayCalender extends StatelessWidget {
-  static final presentEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    height: 5.0,
-    width: 5.0,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFF00C106),
-    ),
-  );
 
-  static final Container halfDayEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFF5057FC),
-    ),
-    height: 5.0,
-    width: 5.0,
-  );
 
-  static final lateEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    height: 5.0,
-    width: 5.0,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFFFF6F00),
-    ),
-  );
 
-  static final absentEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    height: 5.0,
-    width: 5.0,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFFF32E21),
-    ),
-  );
+  EventList<Event>? eventList ;
 
-  static final holidayEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    height: 5.0,
-    width: 5.0,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFF462564),
-    ),
-  );
-
-  EventList<Event> markedDateMap = EventList<Event> (
-    events: {
-      DateTime(2023, 10, 15): [
-        Event(date: DateTime(2023, 1, 15), dot: presentEvent),
-        Event(date: DateTime(2023, 1, 15), title: 'Event 1', dot: holidayEvent),
-      ],
-      DateTime(2023, 10, 16): [
-        Event(date: DateTime(2023, 1, 15), title: 'Event 1', dot: halfDayEvent),
-        Event(date: DateTime(2023, 1, 15), title: 'Event 3', dot: lateEvent),
-        Event(date: DateTime(2023, 1, 15), title: 'Event 3', dot: absentEvent),
-      ],
-      DateTime(2023, 10, 31): [
-        Event(date: DateTime(2023, 1, 15), title: 'Event 1', dot: halfDayEvent),
-      ]
-    },
-  );
-
-  DisplayCalender({super.key});
+  DisplayCalender({super.key, this.eventList});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -118,7 +57,7 @@ class DisplayCalender extends StatelessWidget {
               // headerText: DateFormat('EEEE').format(DateTime.now()),
               headerTextStyle: AppTextStyle.homeworkSubject,
               weekdayTextStyle: AppTextStyle.fontSize14GreyW400,
-              markedDatesMap: markedDateMap,
+              markedDatesMap: eventList,
 
               leftButtonIcon: const Icon(
                 Icons.arrow_back_ios_new,
