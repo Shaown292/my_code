@@ -18,6 +18,8 @@ import '../modules/examination/bindings/examination_binding.dart';
 import '../modules/examination/views/examination_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/leave/bindings/leave_binding.dart';
+import '../modules/leave/views/leave_view.dart';
 import '../modules/leave_list/bindings/leave_list_binding.dart';
 import '../modules/leave_list/views/leave_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -192,6 +194,11 @@ class AppPages {
       name: _Paths.LEAVE_LIST,
       page: () => const LeaveListView(),
       binding: LeaveListBinding(),
+    ),
+    GetPage(
+      name: _Paths.LEAVE,
+      page: () => const LeaveView(),
+      binding: LeaveBinding(),
     ),
   ];
 }

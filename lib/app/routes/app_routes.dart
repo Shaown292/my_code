@@ -28,6 +28,7 @@ abstract class Routes {
   static const DORMITORY = _Paths.DORMITORY;
   static const APPLY_LEAVE = _Paths.APPLY_LEAVE;
   static const LEAVE_LIST = _Paths.LEAVE_LIST;
+  static const LEAVE = _Paths.LEAVE;
 }
 
 abstract class _Paths {
@@ -57,4 +58,5 @@ abstract class _Paths {
   static const DORMITORY = '/dormitory';
   static const APPLY_LEAVE = '/apply-leave';
   static const LEAVE_LIST = '/leave-list';
+  static const LEAVE = '/leave';
 }
