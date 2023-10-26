@@ -29,6 +29,7 @@ abstract class Routes {
   static const APPLY_LEAVE = _Paths.APPLY_LEAVE;
   static const LEAVE_LIST = _Paths.LEAVE_LIST;
   static const LEAVE = _Paths.LEAVE;
+  static const ATTENDANCE = _Paths.ATTENDANCE;
 }
 
 abstract class _Paths {
@@ -59,4 +60,5 @@ abstract class _Paths {
   static const APPLY_LEAVE = '/apply-leave';
   static const LEAVE_LIST = '/leave-list';
   static const LEAVE = '/leave';
+  static const ATTENDANCE = '/attendance';
 }
