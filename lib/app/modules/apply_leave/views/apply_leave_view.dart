@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/apply_leave_controller.dart';
 
 class ApplyLeaveView extends GetView<ApplyLeaveController> {
