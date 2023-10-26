@@ -26,7 +26,7 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                controller.loadingController.isLoading ? const LoadingWidget() : controller.studentOthersDownloadList.isEmpty ? Expanded(
+                controller.loadingController.isLoading ? const LoadingWidget() : controller.studentOthersDownloadList.isNotEmpty ? Expanded(
                   child: ListView.builder(
                     itemCount: controller.studentOthersDownloadList.length,
                     shrinkWrap: true,

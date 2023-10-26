@@ -1,27 +1,13 @@
-.DS_Store
-.atom/
-.idea
-.packages
-.dart_tool/
-.metadata
-.pub/
-build/
-ios/.generated/
-android/.gradle/
-packages
-pubspec.lock
-flutter_single_getx_api_v2.iml
-
-
 # Miscellaneous
 *.class
 *.log
 *.pyc
 *.swp
+.DS_Store
+.atom/
 .buildlog/
 .history
 .svn/
-migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -33,3 +19,24 @@ migrate_working_dir/
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
 #.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+server/node_modules/
+
+# Web related
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
