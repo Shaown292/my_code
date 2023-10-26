@@ -8,6 +8,8 @@ import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/dormitory/bindings/dormitory_binding.dart';
+import '../modules/dormitory/views/dormitory_view.dart';
 import '../modules/exam_result/bindings/exam_result_binding.dart';
 import '../modules/exam_result/views/exam_result_view.dart';
 import '../modules/examination/bindings/examination_binding.dart';
@@ -171,6 +173,11 @@ class AppPages {
       name: _Paths.OTHER_DOWNLOADS,
       page: () => const OtherDownloadsView(),
       binding: OtherDownloadsBinding(),
+    ),
+    GetPage(
+      name: _Paths.DORMITORY,
+      page: () => const DormitoryView(),
+      binding: DormitoryBinding(),
     ),
   ];
 }

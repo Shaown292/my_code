@@ -25,6 +25,7 @@ abstract class Routes {
   static const ONLINE_EXAM = _Paths.ONLINE_EXAM;
   static const EXAM_RESULT = _Paths.EXAM_RESULT;
   static const OTHER_DOWNLOADS = _Paths.OTHER_DOWNLOADS;
+  static const DORMITORY = _Paths.DORMITORY;
 }
 
 abstract class _Paths {
@@ -51,4 +52,5 @@ abstract class _Paths {
   static const ONLINE_EXAM = '/online-exam';
   static const EXAM_RESULT = '/exam-result';
   static const OTHER_DOWNLOADS = '/other-downloads';
+  static const DORMITORY = '/dormitory';
 }
