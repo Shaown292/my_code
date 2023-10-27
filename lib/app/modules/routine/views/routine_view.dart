@@ -18,14 +18,18 @@ class RoutineView extends GetView<RoutineController> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: controller.daysOfWeek.length,
-      child: Obx(() => InfixEduScaffold(
-            title: "Routine",
-            leadingIcon: const SizedBox(),
-            body: CustomBackground(
-                customWidget: Padding(
+      child: Obx(
+        () => InfixEduScaffold(
+          title: "Routine",
+          leadingIcon: const SizedBox(),
+          body: CustomBackground(
+            customWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: controller.loadingController.isLoading
-                  ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,))
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                    ))
                   : Column(
                       children: [
                         const Text(
@@ -36,7 +40,8 @@ class RoutineView extends GetView<RoutineController> {
                         Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: AppColors.profileCardTextColor)),
+                              border: Border.all(
+                                  color: AppColors.profileCardTextColor)),
                           child: TabBar(
                             labelColor: Colors.white,
                             unselectedLabelColor: Colors.black,
@@ -66,31 +71,40 @@ class RoutineView extends GetView<RoutineController> {
                                       controller.daysOfWeek[index])
                                   .toList();
 
-                              return routineList.isEmpty ? const NoDataAvailableWidget() : ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: routineList.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      RoutineCard(
-                                        subject: routineList[index].subject,
-                                        startingTime: routineList[index].startTime,
-                                        endingTime: routineList[index].endTime,
-                                        roomNumber: routineList[index].room,
-                                        buildingName: 'Building Name',
-                                        instructorName: routineList[index].teacher,
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                              return routineList.isEmpty
+                                  ? const NoDataAvailableWidget()
+                                  : ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: routineList.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            RoutineCard(
+                                              subject:
+                                                  routineList[index].subject,
+                                              startingTime:
+                                                  routineList[index].startTime,
+                                              endingTime:
+                                                  routineList[index].endTime,
+                                              roomNumber:
+                                                  routineList[index].room,
+                                              buildingName: 'Building Name',
+                                              instructorName:
+                                                  routineList[index].teacher,
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
                             }),
                           ),
                         ),
                       ],
                     ),
-            )),
-          )),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
