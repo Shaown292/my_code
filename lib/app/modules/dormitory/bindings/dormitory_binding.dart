@@ -5,8 +5,8 @@ import '../controllers/dormitory_controller.dart';
 class DormitoryBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<DormitoryController>(
-      () => DormitoryController(),
+    Get.put<DormitoryController>(
+      DormitoryController(),
     );
   }
 }

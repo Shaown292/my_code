@@ -25,14 +25,14 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
 
   _animation(){
     animationController =
-        AnimationController(duration: const Duration(seconds: 3), vsync: this);
+        AnimationController(duration: const Duration(seconds: 4), vsync: this);
     animation = Tween(begin: 60.0, end: 120.0).animate(animationController!);
     animationController?.forward();
   }
 
   void navNextPage() async {
     AuthDatabase authDatabase = AuthDatabase.instance;
-    await 3000.milliseconds.delay();
+    await 4000.milliseconds.delay();
 
     if (authDatabase.auth()) {
       GlobalVariableController.roleId = authDatabase.getUserInfo()!.data.user.roleId;

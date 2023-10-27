@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -6,6 +7,7 @@ import '../controllers/dormitory_controller.dart';
 
 class DormitoryView extends GetView<DormitoryController> {
   const DormitoryView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,12 +15,16 @@ class DormitoryView extends GetView<DormitoryController> {
         title: const Text('DormitoryView'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'DormitoryView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      body: Obx(() => Column(
+        children: [
+          controller.loadingController.isLoading ? LoadingWidget() : Expanded(
+            child: ListView.builder(
+              itemCount: controller.dormitoryList.length*200,
+              itemBuilder: (itemBuilder, int index) => Text('jhjhd'),
+            ),
+          )
+        ],
+      )),
     );
   }
 }

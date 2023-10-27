@@ -74,7 +74,7 @@ class RoutineCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Room - $roomNumber",
+                            "Room - ${roomNumber ?? ''}",
                             style: AppTextStyle.fontSize12GreyW400,
                           ),
                           5.verticalSpacing,

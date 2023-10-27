@@ -100,7 +100,7 @@ class ImagePath {
 
 
   /// Notification
-  static String noNotification     = "assets/images/noNotification.png";
+  static String noNotification     = "assets/images/no_data_available.png";
 
 
   /// others

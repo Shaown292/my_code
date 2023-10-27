@@ -14,6 +14,7 @@ class InfixApi {
   static String studentDormitoryList = "${baseApi}student-dormitory";
 
   static String bookList = "${baseApi}book-list";
+  static String studentDormitory = "${baseApi}student-dormitory";
 
   static String uploadContent = "${baseApi}teacher-upload-content";
   static String currentPermission = "${baseApi}privacy-permission-status";
@@ -76,6 +77,10 @@ class InfixApi {
 
   static String getStudentOthersDownloadList(int studentRecordId) {
     return '${baseApi}student-others-download/$studentRecordId';
+  }
+
+  static String getStudentRoutineList(int roleId ,int studentRecordId) {
+    return '${baseApi}student-class-routine/$roleId/$studentRecordId';
   }
 
 

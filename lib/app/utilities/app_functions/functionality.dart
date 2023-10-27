@@ -67,6 +67,7 @@ class AppFunctions {
       case 'Leave':
         break;
       case 'Dormitory':
+        Get.toNamed(Routes.DORMITORY);
         break;
       case 'Transport':
         break;

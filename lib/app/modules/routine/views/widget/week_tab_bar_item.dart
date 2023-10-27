@@ -26,7 +26,7 @@ class WeekTabBarItem extends StatelessWidget {
               color: color,
               fontSize: 12,
               fontFamily: 'Poppins',
-              fontWeight: FontWeight.w600),
+              fontWeight: FontWeight.w500),
         ),
       ),
     );

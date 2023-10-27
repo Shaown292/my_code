@@ -68,6 +68,7 @@ class LoginController extends GetxController {
         isLoading.value = false;
         GlobalVariableController.notificationCount = profileInfoModel.data.unreadNotifications;
         GlobalVariableController.token = profileInfoModel.data.accessToken;
+        GlobalVariableController.roleId = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
