@@ -9,6 +9,7 @@ import '../../../data/module_data/home_data/home_dummy_data.dart';
 import '../../../utilities/api_urls.dart';
 
 class ExaminationController extends GetxController {
+
   final selectIndex = RxInt(-1);
 
   List<HomeTileModelClass> examinationTileList = [
