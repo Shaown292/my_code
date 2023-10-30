@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_routine_model/StudentRoutineResponseModel.dart';
 import 'package:get/get.dart';
-
 import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/api_urls.dart';
@@ -11,8 +10,6 @@ class RoutineController extends GetxController {
 
   TabController? tabController;
   List<ClassRoutine> classRoutineList = [];
-
-  // TabController tabController = TabController(length: length, vsync: vsync)
 
   LoadingController loadingController = Get.find();
 
