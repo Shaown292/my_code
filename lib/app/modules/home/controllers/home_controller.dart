@@ -21,6 +21,7 @@ class HomeController extends GetxController {
   late ProfileInfoModel profileInfoModel;
   final AuthDatabase _authDatabase = AuthDatabase.instance;
   final selectIndex = RxInt(-1);
+  List<StudentRecord> studentRecordList = [];
 
   void _getUserInfo() {
     profileInfoModel = _authDatabase.getUserInfo()!;
@@ -83,6 +84,11 @@ class HomeController extends GetxController {
       StudentRecordResponseModel studentRecordResponseModel = StudentRecordResponseModel.fromJson(response);
       if(studentRecordResponseModel.success){
         GlobalVariableController.studentRecordId = studentRecordResponseModel.data.studentRecords.first.id;
+        if(studentRecordResponseModel.data.studentRecords.isNotEmpty){
+          for(int i = 0; i < studentRecordResponseModel.data.studentRecords.length; i++) {
+            studentRecordList.add(studentRecordResponseModel.data.studentRecords[i]);
+          }
+        }
       }
 
     } catch(e, t){

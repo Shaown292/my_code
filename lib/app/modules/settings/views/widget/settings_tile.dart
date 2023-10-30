@@ -13,6 +13,7 @@ class SettingsTile extends StatelessWidget {
   final double? iconHeight;
   final double? iconWidth;
   final bool isLanguage;
+  final Color? backgroundColor;
   final Function()? onTileTap;
 
   const SettingsTile({
@@ -24,6 +25,7 @@ class SettingsTile extends StatelessWidget {
     this.iconColor,
     this.iconHeight,
     this.iconWidth,
+    this.backgroundColor,
   });
 
   @override
@@ -40,9 +42,9 @@ class SettingsTile extends StatelessWidget {
                   Container(
                     height: 36,
                     width: 36,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.homeTextColor,
+                      color: backgroundColor ?? AppColors.homeTextColor,
                     ),
                     child: Center(
                       child: Image.asset(
