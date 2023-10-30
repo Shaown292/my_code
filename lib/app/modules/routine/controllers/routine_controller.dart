@@ -22,6 +22,7 @@ class RoutineController extends GetxController {
   }
 
 
+
   List<String> daysOfWeek = <String>[
     'Sat',
     'Sun',
