@@ -17,17 +17,16 @@ class WeekTabBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 30,
-      child: Center(
-        child: Text(
-          title,
-          style: TextStyle(
-              color: color,
-              fontSize: 12,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500),
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        title,
+        style: TextStyle(
+            color: color,
+            fontSize: 12,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w500),
+
       ),
     );
   }

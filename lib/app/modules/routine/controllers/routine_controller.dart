@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_routine_model/StudentRoutineResponseModel.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/api_urls.dart';
@@ -11,6 +12,14 @@ class RoutineController extends GetxController {
   TabController? tabController;
   List<ClassRoutine> classRoutineList = [];
   LoadingController loadingController = Get.find();
+  RxInt selectIndex = 1.obs;
+
+  @override
+  void onInit() {
+    getSyllabusList();
+    selectTab();
+    super.onInit();
+  }
 
   List<String> daysOfWeek = <String>[
     'Sat',
@@ -21,6 +30,9 @@ class RoutineController extends GetxController {
     'Thu',
     'Fri',
   ];
+
+  String formattedDate = DateFormat("dd MMMM yyyy").format(DateTime.now());
+  String today = DateFormat.E().format(DateTime.now());
 
   void getSyllabusList() async {
     try {
@@ -56,9 +68,12 @@ class RoutineController extends GetxController {
     }
   }
 
-  @override
-  void onInit() {
-    getSyllabusList();
-    super.onInit();
+  void selectTab(){
+
+     selectIndex.value = daysOfWeek.indexOf(today);
+
+
   }
+
+
 }
