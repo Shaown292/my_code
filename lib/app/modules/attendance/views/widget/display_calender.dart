@@ -3,7 +3,6 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/attendance/views/widget/display_dot.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 
@@ -34,8 +33,7 @@ class DisplayCalender extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(8)),
             child: CalendarCarousel<Event>(
-              weekendTextStyle: AppTextStyle.fontSize14GreyW400,
-              thisMonthDayBorderColor: Colors.grey,
+
               customDayBuilder: (
                 /// you can provide your own build function to make custom day containers
                 bool isSelectable,
@@ -51,13 +49,18 @@ class DisplayCalender extends StatelessWidget {
                 return null;
               },
               height: Get.height * 0.5,
-              todayButtonColor: Colors.white,
+              todayButtonColor: Colors.transparent,
+              todayBorderColor: Colors.transparent,
               daysTextStyle: AppTextStyle.fontSize14GreyW400,
               todayTextStyle: AppTextStyle.fontSize14GreyW400,
-              // headerText: DateFormat('EEEE').format(DateTime.now()),
               headerTextStyle: AppTextStyle.homeworkSubject,
               weekdayTextStyle: AppTextStyle.fontSize14GreyW400,
+              weekDayPadding: EdgeInsets.zero,
               markedDatesMap: eventList,
+              selectedDateTime: DateTime.now(),
+              selectedDayButtonColor: Colors.white,
+              weekendTextStyle: AppTextStyle.fontSize14GreyW400,
+              thisMonthDayBorderColor: Colors.grey,
 
               leftButtonIcon: const Icon(
                 Icons.arrow_back_ios_new,
@@ -70,9 +73,6 @@ class DisplayCalender extends StatelessWidget {
                 color: AppColors.editProfileTextFieldLabelColor,
               ),
 
-              // selectedDateTime: _currentDate,
-              // markedDateShowIcon: true,
-              // markedDateIconMaxShown: 1,
             ),
           ),
           10.verticalSpacing,
