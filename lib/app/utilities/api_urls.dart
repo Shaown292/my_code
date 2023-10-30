@@ -83,9 +83,15 @@ class InfixApi {
     return '${baseApi}student-class-routine/$roleId/$studentRecordId';
   }
 
-  static String profileOthers() {
-    return '${baseApi}profile-others';
+  static String getStudentExamResultList({required int examId, required int recordId}) {
+    return '${baseApi}exam-result/$examId/$recordId';
   }
+
+  static String getStudentExamSchedule(int recordId) {
+    return '${baseApi}student-exam/$recordId';
+  }
+
+
 
 
 
@@ -433,11 +439,6 @@ class InfixApi {
     return "${baseApi}school/$schoolId/notice-list";
   }
 
-  static String getStudentExamSchedule(
-      var id,
-      ) {
-    return "${baseApi}student-exam-schedule/$id";
-  }
 
   static String getStudentRoutineReport = "${baseApi}exam-routine-report";
 

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/result/views/widget/flexible_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/column_tile.dart';
 
 class ResultTile extends StatelessWidget {
   final String? title;
   final String? subject;
-  final String? obtain;
-  final String? marks;
+  final int? obtainMarks;
+  final int? totalMarks;
   final String? grade;
   final Color? color;
 
@@ -16,8 +14,8 @@ class ResultTile extends StatelessWidget {
     super.key,
     this.title,
     this.subject,
-    this.obtain,
-    this.marks,
+    this.obtainMarks,
+    this.totalMarks,
     this.grade,
     this.color,
   });
@@ -63,10 +61,10 @@ class ResultTile extends StatelessWidget {
                 text: subject ?? "",
               ),
               FlexibleText(
-                text: marks ?? "",
+                text: '${totalMarks ?? ""}',
               ),
               FlexibleText(
-                text: obtain ?? "",
+                text: '${obtainMarks ?? ""}',
               ),
               FlexibleText(
                 text: grade ?? "",
