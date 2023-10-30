@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/settings/views/widget/language_bottom_sheet.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/settings/views/widget/settings_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
@@ -23,7 +24,7 @@ class SettingsView extends GetView<SettingsController> {
           child: Column(
             children: [
                SettingsTile(
-                icon: FontAwesomeIcons.language,
+                icon: ImagePath.settingLanguage,
                 title: "Change Language",
                 isLanguage: true,
                 onTileTap: (){
@@ -32,8 +33,27 @@ class SettingsView extends GetView<SettingsController> {
               ),
               10.verticalSpacing,
                SettingsTile(
-                icon: FontAwesomeIcons.lock,
+                icon: ImagePath.changePassword,
                 title: "Change Password",
+                isLanguage: false,
+                onTileTap: (){
+                  Get.toNamed(Routes.CHANGE_PASSWORD);
+                },
+              ),
+              10.verticalSpacing,
+              SettingsTile(
+                icon: ImagePath.changePassword,
+                title: "Forget Password",
+                isLanguage: false,
+                onTileTap: (){
+
+                },
+              ),
+              10.verticalSpacing,
+              SettingsTile(
+                icon: ImagePath.delete,
+                title: "Delete Account",
+                iconColor: Colors.redAccent,
                 isLanguage: false,
                 onTileTap: (){
                   Get.toNamed(Routes.CHANGE_PASSWORD);

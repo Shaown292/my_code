@@ -7,20 +7,28 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:get/get.dart';
 
 class SettingsTile extends StatelessWidget {
-  final IconData? icon;
+  final String? icon;
+  final Color? iconColor;
   final String? title;
+  final double? iconHeight;
+  final double? iconWidth;
   final bool isLanguage;
   final Function()? onTileTap;
+
   const SettingsTile({
     super.key,
     this.icon,
     this.title,
-     this.isLanguage = true, this.onTileTap,
+    this.isLanguage = true,
+    this.onTileTap,
+    this.iconColor,
+    this.iconHeight,
+    this.iconWidth,
   });
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         InkWell(
           onTap: onTileTap,
@@ -32,14 +40,17 @@ class SettingsTile extends StatelessWidget {
                   Container(
                     height: 36,
                     width: 36,
-                    decoration:  const BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColors.homeTextColor,
                     ),
-                    child: Icon(
-                     icon,
-                      color: Colors.white,
-                      size: 20,
+                    child: Center(
+                      child: Image.asset(
+                        icon ?? "",
+                        color: iconColor ?? Colors.white,
+                        height: iconHeight ?? 20,
+                        width: iconWidth ?? 20,
+                      ),
                     ),
                   ),
                   10.horizontalSpacing,
@@ -49,21 +60,24 @@ class SettingsTile extends StatelessWidget {
                   ),
                 ],
               ),
-              isLanguage ? Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: AppColors.homeTextColor,
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-                  child: Center(
-                    child: Text(
-                      "English",
-                      style: AppTextStyle.textStyle12WhiteW500,
-                    ),
-                  ),
-                ),
-              ) : const SizedBox(),
+              isLanguage
+                  ? Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.homeTextColor,
+                      ),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                        child: Center(
+                          child: Text(
+                            "English",
+                            style: AppTextStyle.textStyle12WhiteW500,
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),

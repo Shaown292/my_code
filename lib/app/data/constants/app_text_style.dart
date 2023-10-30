@@ -151,5 +151,16 @@ class AppTextStyle {
       color: AppColors.profileTitleColor,
       fontSize: 14,
       fontWeight: FontWeight.w400);
+  static const fontSize12LightViolateW500 = TextStyle(
+      color: AppColors.homeworkViewColor,
+      fontSize: 12,
+      // decoration: TextDecoration.underline,
+      fontWeight: FontWeight.w500);
+
+  static const fontSize12LightGreyW500 = TextStyle(
+      color: AppColors.loginIconColor,
+      fontSize: 12,
+      // decoration: TextDecoration.underline,
+      fontWeight: FontWeight.w300);
 
 }

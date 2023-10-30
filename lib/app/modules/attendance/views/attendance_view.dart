@@ -17,7 +17,9 @@ class AttendanceView extends GetView<AttendanceController> {
       body: CustomBackground(
         customWidget: Column(
           children: [
-            DisplayCalender()
+            DisplayCalender(
+              eventList: controller.eventList,
+            )
           ],
         ),
       ),

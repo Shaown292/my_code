@@ -14,37 +14,42 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Change Passowrd",
+      title: "Change Password",
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: Column(
-            children: [
-              20.verticalSpacing,
-              const CustomTextFormField(
-                enableBorderActive: true,
-                focusBorderActive: true,
-                hintText: "Current Password",
-              ),
-              10.verticalSpacing,
-              const CustomTextFormField(
-                enableBorderActive: true,
-                focusBorderActive: true,
-                hintText: "New Password",
-              ),
-              10.verticalSpacing,
-              const CustomTextFormField(
-                enableBorderActive: true,
-                focusBorderActive: true,
-                hintText: "Confirm Password",
-              ),
-              10.verticalSpacing,
-              const PrimaryButton(
-                title: "Save",
-                height: 40,
-                radius: 20,
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                20.verticalSpacing,
+                const CustomTextFormField(
+                  enableBorderActive: true,
+                  focusBorderActive: true,
+                  hintText: "Current Password",
+                  fillColor: Colors.white,
+                ),
+                10.verticalSpacing,
+                const CustomTextFormField(
+                  enableBorderActive: true,
+                  focusBorderActive: true,
+                  hintText: "New Password",
+                  fillColor: Colors.white,
+                ),
+                10.verticalSpacing,
+                const CustomTextFormField(
+                  enableBorderActive: true,
+                  focusBorderActive: true,
+                  hintText: "Confirm Password",
+                  fillColor: Colors.white,
+                ),
+                10.verticalSpacing,
+                 PrimaryButton(
+                  title: "Save",
+                  height: Get.height * 0.05,
+                  radius: 30,
+                )
+              ],
+            ),
           ),
         ),
       ),

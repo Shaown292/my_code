@@ -36,13 +36,13 @@ class RoutineController extends GetxController {
       );
 
       StudentRoutineResponseModel studentRoutineResponseModel =
-          StudentRoutineResponseModel.fromJson(response);
+      StudentRoutineResponseModel.fromJson(response);
       if (studentRoutineResponseModel.success == true) {
         loadingController.isLoading = false;
         if (studentRoutineResponseModel.data.classRoutines.isNotEmpty) {
           for (int i = 0;
-              i < studentRoutineResponseModel.data.classRoutines.length;
-              i++) {
+          i < studentRoutineResponseModel.data.classRoutines.length;
+          i++) {
             classRoutineList
                 .add(studentRoutineResponseModel.data.classRoutines[i]);
           }

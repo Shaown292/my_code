@@ -9,74 +9,12 @@ import 'package:get/get.dart';
 import 'event_status.dart';
 
 class DisplayCalender extends StatelessWidget {
-  static final presentEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    height: 5.0,
-    width: 5.0,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFF00C106),
-    ),
-  );
 
-  static final Container halfDayEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFF5057FC),
-    ),
-    height: 5.0,
-    width: 5.0,
-  );
 
-  static final lateEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    height: 5.0,
-    width: 5.0,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFFFF6F00),
-    ),
-  );
 
-  static final absentEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    height: 5.0,
-    width: 5.0,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFFF32E21),
-    ),
-  );
+  EventList<Event>? eventList ;
 
-  static final holidayEvent = Container(
-    margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    height: 5.0,
-    width: 5.0,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      color: Color(0xFF462564),
-    ),
-  );
-
-  EventList<Event> markedDateMap = EventList<Event> (
-    events: {
-      DateTime(2023, 10, 15): [
-        Event(date: DateTime(2023, 1, 15), dot: presentEvent),
-        Event(date: DateTime(2023, 1, 15), title: 'Event 1', dot: holidayEvent),
-      ],
-      DateTime(2023, 10, 16): [
-        Event(date: DateTime(2023, 1, 15), title: 'Event 1', dot: halfDayEvent),
-        Event(date: DateTime(2023, 1, 15), title: 'Event 3', dot: lateEvent),
-        Event(date: DateTime(2023, 1, 15), title: 'Event 3', dot: absentEvent),
-      ],
-      DateTime(2023, 10, 31): [
-        Event(date: DateTime(2023, 1, 15), title: 'Event 1', dot: halfDayEvent),
-      ]
-    },
-  );
-
-  DisplayCalender({super.key});
+  DisplayCalender({super.key, this.eventList});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -95,8 +33,7 @@ class DisplayCalender extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(8)),
             child: CalendarCarousel<Event>(
-              weekendTextStyle: AppTextStyle.fontSize14GreyW400,
-              thisMonthDayBorderColor: Colors.grey,
+
               customDayBuilder: (
                 /// you can provide your own build function to make custom day containers
                 bool isSelectable,
@@ -112,13 +49,18 @@ class DisplayCalender extends StatelessWidget {
                 return null;
               },
               height: Get.height * 0.5,
-              todayButtonColor: Colors.white,
+              todayButtonColor: Colors.transparent,
+              todayBorderColor: Colors.transparent,
               daysTextStyle: AppTextStyle.fontSize14GreyW400,
               todayTextStyle: AppTextStyle.fontSize14GreyW400,
-              // headerText: DateFormat('EEEE').format(DateTime.now()),
               headerTextStyle: AppTextStyle.homeworkSubject,
               weekdayTextStyle: AppTextStyle.fontSize14GreyW400,
-              markedDatesMap: markedDateMap,
+              weekDayPadding: EdgeInsets.zero,
+              markedDatesMap: eventList,
+              selectedDateTime: DateTime.now(),
+              selectedDayButtonColor: Colors.white,
+              weekendTextStyle: AppTextStyle.fontSize14GreyW400,
+              thisMonthDayBorderColor: Colors.grey,
 
               leftButtonIcon: const Icon(
                 Icons.arrow_back_ios_new,
@@ -131,9 +73,6 @@ class DisplayCalender extends StatelessWidget {
                 color: AppColors.editProfileTextFieldLabelColor,
               ),
 
-              // selectedDateTime: _currentDate,
-              // markedDateShowIcon: true,
-              // markedDateIconMaxShown: 1,
             ),
           ),
           10.verticalSpacing,
