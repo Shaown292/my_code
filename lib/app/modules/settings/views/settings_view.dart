@@ -56,7 +56,7 @@ class SettingsView extends GetView<SettingsController> {
                 iconColor: Colors.redAccent,
                 isLanguage: false,
                 onTileTap: (){
-                  Get.toNamed(Routes.CHANGE_PASSWORD);
+
                 },
               ),
             ],

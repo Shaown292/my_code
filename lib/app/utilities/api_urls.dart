@@ -83,7 +83,9 @@ class InfixApi {
     return '${baseApi}student-class-routine/$roleId/$studentRecordId';
   }
 
-
+  static String profileOthers() {
+    return '${baseApi}profile-others';
+  }
 
 
 

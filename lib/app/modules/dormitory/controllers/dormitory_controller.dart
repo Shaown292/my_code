@@ -29,6 +29,7 @@ class DormitoryController extends GetxController {
           for(int i = 0; i < dormitoryResponseModel.data!.length; i++) {
             dormitoryList.add(dormitoryResponseModel.data![i]);
           }
+          debugPrint("Dormitory Data ${dormitoryResponseModel.data}");
         }
       }
 

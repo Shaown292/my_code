@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 import '../../../../data/constants/app_colors.dart';
+import '../../../../data/constants/app_text_style.dart';
 import '../../../../utilities/widgets/common_widgets/custom_divider.dart';
 
 class TransportWidget extends StatelessWidget {
@@ -21,19 +22,12 @@ class TransportWidget extends StatelessWidget {
               width: Get.width / 2,
               child: Text(
                 title,
-                style: const TextStyle(
-                    color: AppColors.profileTitleColor,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500),
+                  style: AppTextStyle.fontSize10GreyW500
               ),
             ),
             Text(
               value,
-              style: const TextStyle(
-                  color: AppColors.profileTitleColor,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w500),
-            ),
+                style: AppTextStyle.fontSize10GreyW500            ),
           ],
         ),
         10.verticalSpacing,

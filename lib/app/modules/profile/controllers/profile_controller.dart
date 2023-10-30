@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/profile/profile_others_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile/profile_parents_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile/profile_personal_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile/profile_transport_model.dart';
@@ -21,6 +22,7 @@ class ProfileController extends GetxController{
     fetchProfilePersonalData();
     fetchProfileParentsData();
     fetchProfileTransportData();
+    fetchProfileOthersData();
     super.onInit();
   }
 
@@ -30,6 +32,7 @@ class ProfileController extends GetxController{
   ProfilePersonal? profilePersonal;
   ProfileParents? profileParents;
   ProfileTransport? profileTransport;
+  ProfileOthers? profileOthers;
   String? firstName ;
 
 
@@ -42,11 +45,7 @@ class ProfileController extends GetxController{
     try {
       final res = await BaseClient().getData(
         url: InfixApi.profilePersonal(),
-        header: {
-          'Authorization': "${GlobalVariableController.token}",
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        header: GlobalVariableController.header,
 
       );
 
@@ -57,6 +56,7 @@ class ProfileController extends GetxController{
 
         profilePersonal = profilePersonalModel.data?.profilePersonal;
         isLoading.value = false;
+        debugPrint("Roll number is:::::: ${profilePersonal?.roll}");
 
       } else {
         isLoading.value = false;
@@ -79,11 +79,8 @@ class ProfileController extends GetxController{
     try {
       final res = await BaseClient().getData(
         url: InfixApi.profileParents(),
-        header: {
-          'Authorization': "${GlobalVariableController.token}",
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        header: GlobalVariableController.header,
+
 
       );
 
@@ -94,6 +91,7 @@ class ProfileController extends GetxController{
 
         profileParents = profileParentsModel.data?.profileParents;
         isLoading.value = false;
+
 
 
 
@@ -118,11 +116,7 @@ class ProfileController extends GetxController{
     try {
       final res = await BaseClient().getData(
         url: InfixApi.profileTransport(),
-        header: {
-          'Authorization': "${GlobalVariableController.token}",
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+        header: GlobalVariableController.header,
 
       );
 
@@ -139,6 +133,41 @@ class ProfileController extends GetxController{
       } else {
         isLoading.value = false;
         showBasicFailedSnackBar(message: "${profileTransportModel.message}");
+      }
+    } catch (e, t) {
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void fetchProfileOthersData() async {
+
+
+    isLoading.value = true;
+
+
+    try {
+      final res = await BaseClient().getData(
+        url: InfixApi.profileOthers(),
+        header:GlobalVariableController.header
+
+      );
+
+
+      ProfileOthersModel profileOthersModel = ProfileOthersModel.fromJson(res);
+
+      if (profileOthersModel.success == true) {
+
+        profileOthers = profileOthersModel.data?.profileOthers;
+        isLoading.value = false;
+
+
+
+      } else {
+        isLoading.value = false;
+        showBasicFailedSnackBar(message: "${profileOthersModel.message}");
       }
     } catch (e, t) {
       debugPrint('$e');

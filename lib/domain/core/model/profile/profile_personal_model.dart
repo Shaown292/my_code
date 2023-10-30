@@ -67,6 +67,9 @@ class ProfilePersonal {
   String? permanentAddress;
   String? bloodGroup;
   String? religion;
+  int? roll;
+  String? studentClass;
+  String? section;
 
   ProfilePersonal(
       {this.id,
@@ -81,7 +84,11 @@ class ProfilePersonal {
         this.currentAddress,
         this.permanentAddress,
         this.bloodGroup,
-        this.religion});
+        this.religion,
+        this.roll,
+        this.studentClass,
+        this.section,
+      });
 
   ProfilePersonal.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -97,6 +104,9 @@ class ProfilePersonal {
     permanentAddress = json['permanent_address'];
     bloodGroup = json['blood_group'];
     religion = json['religion'];
+    roll= json['roll'];
+    studentClass = json['class'];
+    section = json['section'];
   }
 
   Map<String, dynamic> toJson() {
@@ -114,6 +124,9 @@ class ProfilePersonal {
     data['permanent_address'] = permanentAddress;
     data['blood_group'] = bloodGroup;
     data['religion'] = religion;
+    data['roll'] = roll;
+    data['class'] = studentClass;
+    data['section'] = section;
     return data;
   }
 }

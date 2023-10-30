@@ -162,5 +162,9 @@ class AppTextStyle {
       fontSize: 12,
       // decoration: TextDecoration.underline,
       fontWeight: FontWeight.w300);
+  static const fontSize10GreyW500 = TextStyle(
+      color: AppColors.profileTitleColor,
+      fontSize: 10,
+      fontWeight: FontWeight.w500);
 
 }

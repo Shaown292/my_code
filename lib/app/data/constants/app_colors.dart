@@ -55,6 +55,7 @@ class AppColors {
   static const homeworkWidgetColor = Color(0xFFF2F0F6);
 
   static const activeExamStatusBlueColor = Color(0xFF404FB6);
+  static const dormitoryDividerColor = Color(0xFFE5E4EA);
 
 
 
