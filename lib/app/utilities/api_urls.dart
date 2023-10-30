@@ -91,6 +91,9 @@ class InfixApi {
     return '${baseApi}student-exam/$recordId';
   }
 
+  static String profileOthers() {
+    return '${baseApi}profile-others';
+  }
 
 
 
@@ -385,17 +388,20 @@ class InfixApi {
 
   static String bankList = "${baseApi}banks";
 
-  static String userLeaveType(id) {
+  static String userLeaveType(id)
+  {
     return "${baseApi}my-leave-type/$id";
   }
 
   static String userApplyLeaveStore = '${baseApi}student-apply-leave-store';
 
-  static String studentApplyLeave(id) {
+  static String studentApplyLeave(id)
+  {
     return "${baseApi}student-apply-leave/$id";
   }
 
-  static String approvedLeaves(id) {
+  static String approvedLeaves(id)
+  {
     return "${baseApi}approve-leave/$id";
   }
 
@@ -403,7 +409,8 @@ class InfixApi {
     return "${baseApi}pending-leave/$id?purpose=$purpose";
   }
 
-  static String rejectedLeaves(id) {
+  static String rejectedLeaves(id)
+  {
     return "${baseApi}reject-leave/$id";
   }
 
@@ -444,7 +451,7 @@ class InfixApi {
 
   static String getDayWiseRoutine = "${baseApi}day-wise-class-routine";
 
-  //** Chats */
+  //* Chats /
 
   static String getChatOpen = "${baseApi}chat/open";
 
