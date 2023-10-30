@@ -55,6 +55,7 @@ import '../modules/study_materials/views/study_materials_view.dart';
 import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
 
+
 part 'app_routes.dart';
 
 class AppPages {
@@ -207,5 +208,6 @@ class AppPages {
       page: () => const AttendanceView(),
       binding: AttendanceBinding(),
     ),
+
   ];
 }

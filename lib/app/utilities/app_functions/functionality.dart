@@ -65,6 +65,7 @@ class AppFunctions {
         Get.toNamed(Routes.STUDY_MATERIALS);
         break;
       case 'Leave':
+        Get.toNamed(Routes.LEAVE);
         break;
       case 'Dormitory':
         Get.toNamed(Routes.DORMITORY);
@@ -117,6 +118,12 @@ class AppFunctions {
         break;
       case 'Other Downloads':
         Get.toNamed(Routes.OTHER_DOWNLOADS);
+        break;
+      case 'Apply Leave':
+        Get.toNamed(Routes.APPLY_LEAVE);
+        break;
+      case 'Leave List':
+        Get.toNamed(Routes.LEAVE_LIST);
         break;
 
     }

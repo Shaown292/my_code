@@ -33,31 +33,30 @@ class ScheduleView extends GetView<ScheduleController> {
                 ),
               ),
             ),
-
-            Expanded(
-                child: RefreshIndicator(
-                  onRefresh: ()async {
-
-                  },
-                  child: ListView.builder(
-                      itemCount: scheduleData.length,
-                      itemBuilder: (context, index) {
-                        return ScheduleDetailsTile(
-                          date: scheduleData[index].date,
-                          subject: scheduleData[index].subject,
-                          time: scheduleData[index].time,
-                          roomNo: scheduleData[index].roomNo,
-                          section: scheduleData[index].section,
-                          teacher: scheduleData[index].teacher,
-                          color: index % 2 == 0
-                              ? AppColors.profileCardTextColor
-                              : Colors.white,
-                        );
-                      }),
-                ))
-
+            Obx(() => controller.dropdownValue.value == "Mon"
+                ? Expanded(
+                    child: RefreshIndicator(
+                      onRefresh: () async {},
+                      child: ListView.builder(
+                        itemCount: scheduleData.length,
+                        itemBuilder: (context, index) {
+                          return ScheduleDetailsTile(
+                            date: scheduleData[index].date,
+                            subject: scheduleData[index].subject,
+                            time: scheduleData[index].time,
+                            roomNo: scheduleData[index].roomNo,
+                            section: scheduleData[index].section,
+                            teacher: scheduleData[index].teacher,
+                            color: index % 2 == 0
+                                ? AppColors.profileCardTextColor
+                                : Colors.white,
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                : const SizedBox()),
           ],
-
         ),
       ),
     );
