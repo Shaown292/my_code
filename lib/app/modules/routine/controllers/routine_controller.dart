@@ -10,7 +10,6 @@ class RoutineController extends GetxController {
 
   TabController? tabController;
   List<ClassRoutine> classRoutineList = [];
-
   LoadingController loadingController = Get.find();
 
   List<String> daysOfWeek = <String>[

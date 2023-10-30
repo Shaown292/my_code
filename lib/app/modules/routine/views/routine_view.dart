@@ -57,6 +57,7 @@ class RoutineView extends GetView<RoutineController> {
                       ),
                     ),
                   ),
+
                   10.verticalSpacing,
                   Expanded(
                     child: TabBarView(
