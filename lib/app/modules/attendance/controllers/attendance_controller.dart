@@ -27,8 +27,6 @@ class AttendanceController extends GetxController {
 
   void setEventData() {
 
-
-
     customEventList[DateTime(2023, 10, 26)] = [Event(date: DateTime(2023, 10, 26), dot: presentEvent)];
     customEventList = {
 

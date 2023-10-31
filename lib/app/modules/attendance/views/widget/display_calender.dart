@@ -5,16 +5,12 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
-
 import 'event_status.dart';
 
 class DisplayCalender extends StatelessWidget {
+  final EventList<Event>? eventList ;
+  const DisplayCalender({Key? key, this.eventList}) : super(key: key);
 
-
-
-  EventList<Event>? eventList ;
-
-  DisplayCalender({super.key, this.eventList});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -35,17 +31,17 @@ class DisplayCalender extends StatelessWidget {
             child: CalendarCarousel<Event>(
 
               customDayBuilder: (
-                /// you can provide your own build function to make custom day containers
-                bool isSelectable,
-                int index,
-                bool isSelectedDay,
-                bool isToday,
-                bool isPrevMonthDay,
-                TextStyle textStyle,
-                bool isNextMonthDay,
-                bool isThisMonthDay,
-                DateTime day,
-              ) {
+                  /// you can provide your own build function to make custom day containers
+                  bool isSelectable,
+                  int index,
+                  bool isSelectedDay,
+                  bool isToday,
+                  bool isPrevMonthDay,
+                  TextStyle textStyle,
+                  bool isNextMonthDay,
+                  bool isThisMonthDay,
+                  DateTime day,
+                  ) {
                 return null;
               },
               height: Get.height * 0.5,
@@ -110,3 +106,4 @@ class DisplayCalender extends StatelessWidget {
     );
   }
 }
+

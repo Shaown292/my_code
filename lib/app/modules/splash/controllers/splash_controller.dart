@@ -25,7 +25,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
 
   _animation(){
     animationController =
-        AnimationController(duration: const Duration(seconds: 4), vsync: this);
+        AnimationController(duration: const Duration(seconds: 3), vsync: this);
     animation = Tween(begin: 60.0, end: 120.0).animate(animationController!);
     animationController?.forward();
   }
