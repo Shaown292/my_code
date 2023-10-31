@@ -1,5 +1,3 @@
-import 'package:flutter_single_getx_api_v2/app/modules/attendance/bindings/attendance_binding.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/attendance/views/attendance_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/active_exam/bindings/active_exam_binding.dart';
@@ -8,6 +6,8 @@ import '../modules/apply_leave/bindings/apply_leave_binding.dart';
 import '../modules/apply_leave/views/apply_leave_view.dart';
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
+import '../modules/attendance/bindings/attendance_binding.dart';
+import '../modules/attendance/views/attendance_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -26,6 +26,8 @@ import '../modules/leave_list/bindings/leave_list_binding.dart';
 import '../modules/leave_list/views/leave_list_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/notice/bindings/notice_binding.dart';
+import '../modules/notice/views/notice_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/view/notification_view.dart';
 import '../modules/online_exam/bindings/online_exam_binding.dart';
@@ -52,9 +54,12 @@ import '../modules/student_homework/bindings/student_homework_binding.dart';
 import '../modules/student_homework/views/student_homework_view.dart';
 import '../modules/study_materials/bindings/study_materials_binding.dart';
 import '../modules/study_materials/views/study_materials_view.dart';
+import '../modules/subjects/bindings/subjects_binding.dart';
+import '../modules/subjects/views/subjects_view.dart';
 import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
-
+import '../modules/teacher/bindings/teacher_binding.dart';
+import '../modules/teacher/views/teacher_view.dart';
 
 part 'app_routes.dart';
 
@@ -208,6 +213,20 @@ class AppPages {
       page: () => const AttendanceView(),
       binding: AttendanceBinding(),
     ),
-
+    GetPage(
+      name: _Paths.NOTICE,
+      page: () => const NoticeView(),
+      binding: NoticeBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUBJECTS,
+      page: () => const SubjectsView(),
+      binding: SubjectsBinding(),
+    ),
+    GetPage(
+      name: _Paths.TEACHER,
+      page: () => const TeacherView(),
+      binding: TeacherBinding(),
+    ),
   ];
 }

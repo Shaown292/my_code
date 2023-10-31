@@ -30,7 +30,9 @@ abstract class Routes {
   static const LEAVE_LIST = _Paths.LEAVE_LIST;
   static const LEAVE = _Paths.LEAVE;
   static const ATTENDANCE = _Paths.ATTENDANCE;
-
+  static const NOTICE = _Paths.NOTICE;
+  static const SUBJECTS = _Paths.SUBJECTS;
+  static const TEACHER = _Paths.TEACHER;
 }
 
 abstract class _Paths {
@@ -62,5 +64,7 @@ abstract class _Paths {
   static const LEAVE_LIST = '/leave-list';
   static const LEAVE = '/leave';
   static const ATTENDANCE = '/attendance';
-
+  static const NOTICE = '/notice';
+  static const SUBJECTS = '/subjects';
+  static const TEACHER = '/teacher';
 }
