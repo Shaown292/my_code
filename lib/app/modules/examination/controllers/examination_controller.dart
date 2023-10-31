@@ -21,6 +21,7 @@ class ExaminationController extends GetxController {
         icon: ImagePath.examinationResult, title: 'Result', value: 'Result'),
   ];
 
+
   List<ExamDataList> examDropdownList = [];
 
   void getStudentExamList() async {
