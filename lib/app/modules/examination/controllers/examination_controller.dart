@@ -61,6 +61,7 @@ class ExaminationController extends GetxController {
   @override
   void onInit() {
     if(homeController.studentRecordList.isNotEmpty){
+
       getStudentExamList(recordId: homeController.studentRecordList[0].id);
 
     }
