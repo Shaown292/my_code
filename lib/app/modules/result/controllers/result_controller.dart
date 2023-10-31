@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/examination/controllers/examination_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
@@ -14,8 +15,18 @@ class ResultController extends GetxController {
   LoadingController loadingController = Get.find();
   ExaminationController examinationController = Get.find();
   HomeController homeController = Get.find();
+  final selectIndex = RxInt(0);
+  RxBool isSelected = false.obs;
 
 
+
+  List<String> classInfo = <String>[
+    'Class(A)',
+    'Class(B)',
+    'Class(C)',
+    'Class(D)',
+    'Class(E)',
+  ];
   List<ExamResult> examResultList = [];
   int? currentExamId;
   int? currentRecordId;

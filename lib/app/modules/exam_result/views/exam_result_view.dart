@@ -23,26 +23,29 @@ class ExamResultView extends GetView<ExamResultController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             20.verticalSpacing,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                StudyButton(
-                  title: "Class One (A)",
-                  onItemTap: (){
-                    debugPrint("Class One (a) pressed");
-                  },
-                ),
-                10.horizontalSpacing,
-                StudyButton(
-                  title: "Class One (B)",
-                  color: Colors.white,
-                  textStyle: AppTextStyle.cardTextStyle12PurpleW400,
-                  borderColor: AppColors.primaryColor,
-                  onItemTap: (){
-                    debugPrint("Class One (B) pressed");
-                  },
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: SizedBox(
+                height: 50,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 20,
+                    itemBuilder: (context, index){
+
+                      RxBool select = false.obs;
+                      return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Obx(()=> StudyButton(
+                            title: "Class(A)",
+                            onItemTap: () {
+                              controller.selectIndex.value = index;
+                            },
+                            isSelected: controller.selectIndex.value == index,
+                          ),)
+
+                      );
+                    }),
+              ),
             ),
             20.verticalSpacing,
             Expanded(
