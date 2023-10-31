@@ -22,7 +22,9 @@ class ResultView extends GetView<ResultController> {
             customWidget: RefreshIndicator(
               onRefresh: () async {
                 controller.examResultList.clear();
-                controller.getStudentExamResultList();
+                controller.getStudentExamResultList(
+                    examId: controller.currentExamId!,
+                    recordId: controller.currentRecordId!);
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -30,59 +32,72 @@ class ResultView extends GetView<ResultController> {
                 children: [
                   20.verticalSpacing,
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 0),
                     child: SizedBox(
                       height: 50,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: controller.homeController.studentRecordList.length,
-                          itemBuilder: (context, index){
-
+                          itemCount: controller
+                              .homeController.studentRecordList.length,
+                          itemBuilder: (context, index) {
                             RxBool select = false.obs;
                             return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Obx(()=> StudyButton(
-                                title: "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                                onItemTap: () {
-                                  controller.selectIndex.value = index;
-                                },
-                                isSelected: controller.selectIndex.value == index,
-                              ),)
-
-                            );
+                                padding: const EdgeInsets.all(8.0),
+                                child: Obx(
+                                  () => StudyButton(
+                                    title:
+                                        "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                    onItemTap: () {
+                                      controller.selectIndex.value = index;
+                                      print(controller.homeController
+                                          .studentRecordList[index].id);
+                                      controller.getStudentExamResultList(
+                                          examId: controller
+                                              .examinationController
+                                              .examList[index]
+                                              .id!,
+                                          recordId: controller.homeController
+                                              .studentRecordList[index].id);
+                                    },
+                                    isSelected:
+                                        controller.selectIndex.value == index,
+                                  ),
+                                ));
                           }),
                     ),
                   ),
-
                   20.verticalSpacing,
                   controller.loadingController.isLoading
                       ? const LoadingWidget()
                       : controller.examResultList.isNotEmpty
-                      ? Expanded(
-                    child: ListView.builder(
-                      itemCount: controller.examResultList.length,
-                      shrinkWrap: true,
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, int index) {
-                        return ResultTile(
-                          title: controller
-                              .examResultList[index].examName,
-                          subject: controller
-                              .examResultList[index].subjectName,
-                          totalMarks: controller
-                              .examResultList[index].totalMarks,
-                          obtainMarks: controller
-                              .examResultList[index].obtainedMarks,
-                          grade:
-                          controller.examResultList[index].grade,
-                          color: index % 2 == 0
-                              ? AppColors.profileCardTextColor
-                              : Colors.white,
-                        );
-                      },
-                    ),
-                  )
-                      : const Center(child: NoDataAvailableWidget())
+                          ? Expanded(
+                              child: ListView.builder(
+                                itemCount: controller.examResultList.length,
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (context, int index) {
+                                  return ResultTile(
+                                    title: controller
+                                        .examResultList[index].examName,
+                                    subject: controller
+                                        .examResultList[index].subjectName,
+                                    totalMarks: controller
+                                        .examResultList[index].totalMarks,
+                                    obtainMarks: controller
+                                        .examResultList[index].obtainedMarks,
+                                    grade:
+                                        controller.examResultList[index].grade,
+                                    color: index % 2 == 0
+                                        ? AppColors.profileCardTextColor
+                                        : Colors.white,
+                                  );
+                                },
+                              ),
+                            )
+                          : const Center(
+                              child: NoDataAvailableWidget(),
+                            ),
                 ],
               ),
             ),

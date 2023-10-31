@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/widgets/no_internet/InternetController.dart';
 import '../../../database/auth_database.dart';
-import '../../../routes/app_pages.dart';
 import '../../../utilities/api_urls.dart';
 import '../../../utilities/message/snack_bars.dart';
 
@@ -14,7 +13,6 @@ class LoginController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxBool isObscureText = true.obs;
-  GlobalVariableController globalVariableController = Get.put(GlobalVariableController());
 
   void userLogin({required String email, required String password}) async {
     ProfileInfoModel profileInfoModel;

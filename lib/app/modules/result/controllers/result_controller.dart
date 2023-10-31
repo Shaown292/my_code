@@ -11,14 +11,11 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class ResultController extends GetxController {
-
   LoadingController loadingController = Get.find();
   ExaminationController examinationController = Get.find();
   HomeController homeController = Get.find();
   final selectIndex = RxInt(0);
   RxBool isSelected = false.obs;
-
-
 
   List<String> classInfo = <String>[
     'Class(A)',
@@ -31,36 +28,41 @@ class ResultController extends GetxController {
   int? currentExamId;
   int? currentRecordId;
 
-  void _initializeId(){
-    if(examinationController.examList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
+  void _initializeId() {
+    if (examinationController.examList.isNotEmpty &&
+        homeController.studentRecordList.isNotEmpty) {
       currentExamId = examinationController.examList[0].id;
       currentRecordId = homeController.studentRecordList[0].id;
-      print('${examinationController.examList[0].id} ::::::: ${homeController.studentRecordList[0].id}');
     }
   }
 
-  void getStudentExamResultList() async {
+  void getStudentExamResultList(
+      {required int examId, required int recordId}) async {
     try {
-
       loadingController.isLoading = true;
 
-      if(examinationController.examList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
+      if (examinationController.examList.isNotEmpty &&
+          homeController.studentRecordList.isNotEmpty) {
         final response = await BaseClient().getData(
-          url: InfixApi.getStudentExamResultList(examId: currentExamId!, recordId: currentRecordId!),
+          url: InfixApi.getStudentExamResultList(
+              examId: examId, recordId: recordId),
           header: GlobalVariableController.header,
         );
 
-        StudentExamResultResponseModel studentExamResultResponseModel = StudentExamResultResponseModel.fromJson(response);
-        if(studentExamResultResponseModel.success == true){
+        StudentExamResultResponseModel studentExamResultResponseModel =
+            StudentExamResultResponseModel.fromJson(response);
+        if (studentExamResultResponseModel.success == true) {
           loadingController.isLoading = false;
-          if(studentExamResultResponseModel.data!.examResult!.isNotEmpty){
-            for(int i = 0; i < studentExamResultResponseModel.data!.examResult!.length; i++) {
-              examResultList.add(studentExamResultResponseModel.data!.examResult![i]);
+          if (studentExamResultResponseModel.data!.examResult!.isNotEmpty) {
+            for (int i = 0;
+                i < studentExamResultResponseModel.data!.examResult!.length;
+                i++) {
+              examResultList
+                  .add(studentExamResultResponseModel.data!.examResult![i]);
             }
           }
         }
       }
-
     } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
@@ -70,12 +72,12 @@ class ResultController extends GetxController {
     }
   }
 
-
   @override
   void onInit() {
     _initializeId();
-    getStudentExamResultList();
+    getStudentExamResultList(
+        examId: examinationController.examList[0].id!,
+        recordId: homeController.studentRecordList[0].id);
     super.onInit();
   }
-
 }
