@@ -22,6 +22,8 @@ class HomeController extends GetxController {
   final AuthDatabase _authDatabase = AuthDatabase.instance;
   final selectIndex = RxInt(-1);
   List<StudentRecord> studentRecordList = [];
+  List<String> studentRecordDropdownList = [];
+  List<int> studentRecordIdList = [];
 
   void _getUserInfo() {
     profileInfoModel = _authDatabase.getUserInfo()!;
@@ -87,7 +89,10 @@ class HomeController extends GetxController {
         if(studentRecordResponseModel.data.studentRecords.isNotEmpty){
           for(int i = 0; i < studentRecordResponseModel.data.studentRecords.length; i++) {
             studentRecordList.add(studentRecordResponseModel.data.studentRecords[i]);
+            studentRecordDropdownList.add('Class ${studentRecordResponseModel.data.studentRecords[i].studentRecordClass} (${studentRecordResponseModel.data.studentRecords[i].section})');
+            studentRecordIdList.add(studentRecordResponseModel.data.studentRecords[i].id);
           }
+
         }
       }
 

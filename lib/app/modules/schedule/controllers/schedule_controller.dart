@@ -20,6 +20,7 @@ class ScheduleController extends GetxController {
   // List<String> dropdownList = [];
   List<ScheduleData> scheduleList = [];
   RxString dropdownValue = "".obs;
+  RxString recordDropdownValue = "".obs;
 
 
   void getStudentExamScheduleList({required int examId, required recordId}) async {
@@ -58,7 +59,13 @@ class ScheduleController extends GetxController {
     if(examinationController.examList.isNotEmpty){
       // dropdownList = examinationController.examDropdownList;
       dropdownValue.value = examinationController.examDropdownList[0];
+      recordDropdownValue.value = homeController.studentRecordDropdownList[0];
+
       getStudentExamScheduleList(examId: examinationController.examList[0].id!, recordId: homeController.studentRecordList[0].id);
+
+      for(int i = 0; i< homeController.studentRecordDropdownList.length; i++){
+        print('::::::: ${homeController.studentRecordDropdownList[i]}');
+      }
     }
 
     super.onInit();

@@ -25,21 +25,21 @@ class ScheduleView extends GetView<ScheduleController> {
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 20),
                     child: CustomDropdown(
-                      dropdownValue: controller.dropdownValue.value,
+                      dropdownValue: controller.recordDropdownValue.value,
                       scheduleList:
-                          controller.examinationController.examDropdownList,
+                          controller.homeController.studentRecordDropdownList,
                       changeDropdownValue: (v) {
-                        controller.dropdownValue.value = v!;
-                        controller.scheduleList.clear();
-                        controller.getStudentExamScheduleList(
-                            examId: controller.examinationController.examDropdownIdList[controller.examinationController.examDropdownList.indexOf(v)], recordId: controller.homeController.studentRecordList[0].id,);
+                        controller.recordDropdownValue.value = v!;
+                        controller.examinationController.examDropdownList.clear();
+                        int recordId = controller.homeController.studentRecordIdList[controller.homeController.studentRecordDropdownList.indexOf(v)];
+                        controller.examinationController.getStudentExamList(recordId: recordId);
                       },
                     ),
                   ),
 
                   Padding(
                     padding:
-                    const EdgeInsets.only(left: 20, right: 20, top: 20),
+                    const EdgeInsets.only(left: 20, right: 20, top: 0),
                     child: CustomDropdown(
                       dropdownValue: controller.dropdownValue.value,
                       scheduleList:
@@ -47,8 +47,10 @@ class ScheduleView extends GetView<ScheduleController> {
                       changeDropdownValue: (v) {
                         controller.dropdownValue.value = v!;
                         controller.scheduleList.clear();
+                        int examId = controller.examinationController.examDropdownIdList[controller.examinationController.examDropdownList.indexOf(v)];
+                        int recordId = controller.homeController.studentRecordList[0].id;
                         controller.getStudentExamScheduleList(
-                          examId: controller.examinationController.examDropdownIdList[controller.examinationController.examDropdownList.indexOf(v)], recordId: controller.homeController.studentRecordList[0].id,);
+                          examId: examId, recordId: recordId,);
                       },
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:get/get.dart';
 import '../../../../config/global_variable/global_variable_controller.dart';
@@ -9,6 +10,9 @@ import '../../../data/module_data/home_data/home_dummy_data.dart';
 import '../../../utilities/api_urls.dart';
 
 class ExaminationController extends GetxController {
+
+  HomeController homeController = Get.find();
+
   final selectIndex = RxInt(-1);
 
   List<HomeTileModelClass> examinationTileList = [
@@ -28,10 +32,10 @@ class ExaminationController extends GetxController {
   List<String> examDropdownList = [];
   List<int> examDropdownIdList = [];
 
-  void getStudentExamList() async {
+  void getStudentExamList({required int recordId}) async {
     try {
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentExamList(GlobalVariableController.roleId!),
+        url: InfixApi.getStudentExamList(recordId),
         header: GlobalVariableController.header,
       );
 
@@ -56,7 +60,11 @@ class ExaminationController extends GetxController {
 
   @override
   void onInit() {
-    getStudentExamList();
+    if(homeController.studentRecordList.isNotEmpty){
+      getStudentExamList(recordId: homeController.studentRecordList[0].id);
+
+    }
+
     super.onInit();
   }
 }

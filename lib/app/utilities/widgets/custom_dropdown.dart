@@ -31,7 +31,7 @@ class CustomDropdown extends StatelessWidget {
                 ),)
             .toList(),
         value: dropdownValue,
-        iconSize: 16,
+        iconSize: 26,
         iconEnabledColor: const Color(0xFFA6ABCE),
         onChanged:changeDropdownValue
 
