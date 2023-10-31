@@ -21,7 +21,7 @@ class ScheduleView extends GetView<ScheduleController> {
             child: CustomBackground(
               customWidget: Column(
                 children: [
-                  Padding(
+                  controller.examinationController.loadingController.isLoading ? const LoadingWidget() : Padding(
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 20),
                     child: CustomDropdown(
@@ -33,17 +33,17 @@ class ScheduleView extends GetView<ScheduleController> {
                         controller.examinationController.examDropdownList.clear();
                         int recordId = controller.homeController.studentRecordIdList[controller.homeController.studentRecordDropdownList.indexOf(v)];
                         controller.examinationController.getStudentExamList(recordId: recordId);
+
                       },
                     ),
                   ),
 
-                  Padding(
+                  controller.examinationController.loadingController.isLoading ? const LoadingWidget() : Padding(
                     padding:
                     const EdgeInsets.only(left: 20, right: 20, top: 0),
                     child: CustomDropdown(
                       dropdownValue: controller.dropdownValue.value,
-                      scheduleList:
-                      controller.examinationController.examDropdownList,
+                      scheduleList: controller.examinationController.examDropdownList.map((item) => item.toString()).toList(),
                       changeDropdownValue: (v) {
                         controller.dropdownValue.value = v!;
                         controller.scheduleList.clear();
