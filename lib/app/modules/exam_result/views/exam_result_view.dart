@@ -3,11 +3,8 @@ import 'package:flutter_single_getx_api_v2/app/modules/exam_result/views/widget/
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-
 import 'package:get/get.dart';
-
 import '../../../data/constants/app_colors.dart';
-import '../../../data/constants/app_text_style.dart';
 import '../../../utilities/widgets/study_button/study_button.dart';
 import '../controllers/exam_result_controller.dart';
 
@@ -32,7 +29,6 @@ class ExamResultView extends GetView<ExamResultController> {
                     itemCount: 20,
                     itemBuilder: (context, index){
 
-                      RxBool select = false.obs;
                       return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Obx(()=> StudyButton(

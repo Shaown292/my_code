@@ -32,10 +32,10 @@ class ResultController extends GetxController {
   int? currentRecordId;
 
   void _initializeId(){
-    if(examinationController.examDropdownList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
-      currentExamId = examinationController.examDropdownList[0].id;
+    if(examinationController.examList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
+      currentExamId = examinationController.examList[0].id;
       currentRecordId = homeController.studentRecordList[0].id;
-      print('${examinationController.examDropdownList[0].id} ::::::: ${homeController.studentRecordList[0].id}');
+      print('${examinationController.examList[0].id} ::::::: ${homeController.studentRecordList[0].id}');
     }
   }
 
@@ -44,7 +44,7 @@ class ResultController extends GetxController {
 
       loadingController.isLoading = true;
 
-      if(examinationController.examDropdownList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
+      if(examinationController.examList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
         final response = await BaseClient().getData(
           url: InfixApi.getStudentExamResultList(examId: currentExamId!, recordId: currentRecordId!),
           header: GlobalVariableController.header,

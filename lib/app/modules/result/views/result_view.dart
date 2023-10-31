@@ -30,19 +30,19 @@ class ResultView extends GetView<ResultController> {
                 children: [
                   20.verticalSpacing,
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
                     child: SizedBox(
                       height: 50,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 2,
+                          itemCount: controller.homeController.studentRecordList.length,
                           itemBuilder: (context, index){
 
                             RxBool select = false.obs;
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Obx(()=> StudyButton(
-                                title: "Class(A)",
+                                title: "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                 onItemTap: () {
                                   controller.selectIndex.value = index;
                                 },

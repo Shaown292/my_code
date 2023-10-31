@@ -19,6 +19,7 @@ class CustomDropdown extends StatelessWidget {
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         isExpanded: true,
+
         items: scheduleList!
             .map((String item) => DropdownMenuItem<String>(
                   value: item,
@@ -27,7 +28,7 @@ class CustomDropdown extends StatelessWidget {
                     style: AppTextStyle.fontSize14lightViolateW400,
                     overflow: TextOverflow.ellipsis,
                   ),
-                ))
+                ),)
             .toList(),
         value: dropdownValue,
         iconSize: 16,

@@ -9,38 +9,44 @@ import '../../../data/module_data/home_data/home_dummy_data.dart';
 import '../../../utilities/api_urls.dart';
 
 class ExaminationController extends GetxController {
-
   final selectIndex = RxInt(-1);
 
   List<HomeTileModelClass> examinationTileList = [
     HomeTileModelClass(
-        icon: ImagePath.examinationSchedule,
-        title: 'Schedule',
-        value: 'Schedule'),
+      icon: ImagePath.examinationSchedule,
+      title: 'Schedule',
+      value: 'Schedule',
+    ),
     HomeTileModelClass(
-        icon: ImagePath.examinationResult, title: 'Result', value: 'Result'),
+      icon: ImagePath.examinationResult,
+      title: 'Result',
+      value: 'Result',
+    ),
   ];
 
-
-  List<ExamDataList> examDropdownList = [];
+  List<ExamDataList> examList = [];
+  List<String> examDropdownList = [];
+  List<int> examDropdownIdList = [];
 
   void getStudentExamList() async {
     try {
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentExamSchedule(GlobalVariableController.roleId!),
+        url: InfixApi.getStudentExamList(GlobalVariableController.roleId!),
         header: GlobalVariableController.header,
       );
 
       ExamDropdownResponseModel examDropdownResponseModel =
           ExamDropdownResponseModel.fromJson(response);
       if (examDropdownResponseModel.success == true) {
-        if (examDropdownResponseModel.data.isNotEmpty) {
-          for (int i = 0; i < examDropdownResponseModel.data.length; i++) {
-            examDropdownList.add(examDropdownResponseModel.data[i]);
+        if (examDropdownResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < examDropdownResponseModel.data!.length; i++) {
+            examList.add(examDropdownResponseModel.data![i]);
+            examDropdownList.add(examDropdownResponseModel.data![i].title!);
+            examDropdownIdList.add(examDropdownResponseModel.data![i].id!);
           }
         }
       } else {
-        showBasicFailedSnackBar(message: examDropdownResponseModel.message);
+        showBasicFailedSnackBar(message: examDropdownResponseModel.message ?? 'Failed to load data.');
       }
     } catch (e, t) {
       debugPrint('$e');

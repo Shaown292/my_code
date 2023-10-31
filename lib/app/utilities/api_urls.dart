@@ -87,8 +87,12 @@ class InfixApi {
     return '${baseApi}exam-result/$examId/$recordId';
   }
 
-  static String getStudentExamSchedule(int recordId) {
-    return '${baseApi}student-exam/$recordId';
+  static String getStudentExamList(int recordId) {
+    return '${baseApi}student-exam-type/$recordId';
+  }
+
+  static String getStudentExamSchedule(int examTypeId, int recordId) {
+    return '${baseApi}student-exam-schedule?exam_type_id=$examTypeId&record_id=$recordId';
   }
 
   static String profileOthers() {
