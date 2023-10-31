@@ -34,6 +34,7 @@ class ExaminationController extends GetxController {
   // List<String> examDropdownList = [];
   // List<int> examDropdownIdList = [];
 
+
   RxList examList = <ExamDataList>[].obs;
   RxList examDropdownList = <String>[].obs;
   RxList examDropdownIdList = <int>[].obs;
