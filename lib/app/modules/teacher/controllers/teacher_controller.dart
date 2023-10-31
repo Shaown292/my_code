@@ -1,23 +1,8 @@
 import 'package:get/get.dart';
 
+import '../../../utilities/widgets/loader/loading.controller.dart';
+
 class TeacherController extends GetxController {
-  //TODO: Implement TeacherController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  LoadingController loadingController = Get.find();
 }
