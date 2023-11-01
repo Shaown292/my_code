@@ -9,23 +9,25 @@ import '../../../../utilities/widgets/common_widgets/custom_divider.dart';
 class LeaveDetails extends StatelessWidget {
   final Color? color;
   final Color? statusColor;
-  final String? title;
+  final String? leaveType;
   final String? statusText;
   final String? applyDate;
   final String? leaveFrom;
   final String? leaveUntil;
   final String? status;
+  final Function()? onTap;
 
   const LeaveDetails({
     super.key,
     this.color,
-    this.title,
+    this.leaveType,
     this.applyDate,
     this.leaveFrom,
     this.leaveUntil,
     this.status,
     this.statusColor,
     this.statusText,
+    this.onTap,
   });
 
   @override
@@ -40,11 +42,12 @@ class LeaveDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                title ?? "title",
+                leaveType ?? "title",
                 style: AppTextStyle.fontSize14lightViolateW400,
               ),
-              const InkWell(
-                child:  Column(
+               InkWell(
+                onTap: onTap,
+                child: const Column(
                   children: [
                     Text(
                       "View",
@@ -63,6 +66,7 @@ class LeaveDetails extends StatelessWidget {
           10.verticalSpacing,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ColumnTile(
                 title: "Apply Date",

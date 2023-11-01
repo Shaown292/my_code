@@ -8,41 +8,57 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:get/get.dart';
 
 import '../../../utilities/widgets/loader/loading.widget.dart';
+import '../../../utilities/widgets/no_data_available/no_data_available_widget.dart';
 import '../controllers/teacher_controller.dart';
 
 class TeacherView extends GetView<TeacherController> {
   const TeacherView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       title: "Teacher",
-      body: CustomBackground(
-
+      body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: CustomBackground(
           customWidget: RefreshIndicator(
-            onRefresh: () async {},
+            color: AppColors.primaryColor,
+            onRefresh: () async {
+              controller.teacherList.clear();
+              controller.getAllTeacherList(
+                  recordId: controller.homeController.studentRecordList[0].id);
+            },
             child: Column(
               children: [
                 10.verticalSpacing,
-                controller.loadingController.isLoading
-                    ? const LoadingWidget()
-                    : Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                            itemCount: 50,
-                            itemBuilder: (context, index) {
-                              return TeacherTile(
-                                color: index % 2 == 0
-                                    ? Colors.white :AppColors.profileCardTextColor
-                                    ,
-                                teachersName: "Lomor",
-                                teachersEmail: "lomor@gmail.com",
-                                teachersPhoneNo: "0187881781",
-                              );
-                            }),
-                      ),
+                Obx(
+                  () => controller.loadingController.isLoading
+                      ? const LoadingWidget()
+                      : controller.teacherList.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: controller.teacherList.length,
+                              itemBuilder: (context, index) {
+                                return TeacherTile(
+                                  color: index % 2 == 0
+                                      ? Colors.white
+                                      : AppColors.profileCardTextColor,
+                                  teachersName:
+                                      controller.teacherList[index].fullName,
+                                  teachersEmail:
+                                      controller.teacherList[index].email,
+                                  teachersPhoneNo:
+                                      controller.teacherList[index].mobile,
+                                );
+                              },
+                            )
+                          : const Center(child: NoDataAvailableWidget()),
+                )
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

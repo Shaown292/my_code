@@ -15,21 +15,30 @@ class NoticeView extends GetView<NoticeController> {
   Widget build(BuildContext context) {
     return  InfixEduScaffold(
       title: "Notice",
-      body: CustomBackground(
-        customWidget: Obx(()=>controller.loadingController.isLoading ? const LoadingWidget(): controller.allNoticeList.isNotEmpty ?
-        ListView.builder(
-            itemCount: controller.allNoticeList.length,
-            itemBuilder: (context, index){
-              return  NoticeCard(
-                noticeTitle: controller.allNoticeList[index].noticeTitle,
-                noticeDetails: controller.allNoticeList[index].noticeMessage,
-                noticeDate:controller.allNoticeList[index].publishOn,
-                onTap: (){
-                  controller.showNoticeDetailsBottomSheet(index: index);
-                },
+      body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: CustomBackground(
+          customWidget: RefreshIndicator(
+            onRefresh: () async{
+              controller.allNoticeList.clear();
+              controller.getAllNoticeList();
+            },
+            child: Obx(()=>controller.loadingController.isLoading ? const LoadingWidget(): controller.allNoticeList.isNotEmpty ?
+            ListView.builder(
+                itemCount: controller.allNoticeList.length,
+                itemBuilder: (context, index){
+                  return  NoticeCard(
+                    noticeTitle: controller.allNoticeList[index].noticeTitle,
+                    noticeDetails: controller.allNoticeList[index].noticeMessage,
+                    noticeDate:controller.allNoticeList[index].publishOn,
+                    onTap: (){
+                      controller.showNoticeDetailsBottomSheet(index: index);
+                    },
 
-              );
-            }) : const NoDataAvailableWidget())
+                  );
+                }) : const Center(child: NoDataAvailableWidget())),
+          )
+        ),
       ),
     );
   }

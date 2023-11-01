@@ -102,7 +102,12 @@ class InfixApi {
     return '${baseApi}profile-others';
   }
 
-
+  static String getStudentTeacherList(int roleId) {
+    return '${baseApi}student-teacher/$roleId';
+  }
+  static String getStudentLeaveList(int studentId) {
+    return '${baseApi}apply-leave?student_id=$studentId';
+  }
 
 
 
