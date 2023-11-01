@@ -48,6 +48,7 @@ dynamic returnResponse(http.Response response) {
       return responseJson;
     case HttpStatus.unauthorized:
     case HttpStatus.forbidden:
+    showBasicFailedSnackBar(message: json.decode(response.body.toString())["message"]);
       throw UnauthorisedException(response.body.toString());
     case HttpStatus.internalServerError:
     default:

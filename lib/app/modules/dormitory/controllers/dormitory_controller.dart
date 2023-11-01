@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:get/get.dart';
-
 import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../../domain/base_client/base_client.dart';
 import '../../../../domain/core/model/dormitory_model/dormitory_response_model.dart';
@@ -18,7 +17,7 @@ class DormitoryController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.studentDormitory,
+        url: InfixApi.studentDormitory(studentId: GlobalVariableController.studentId!),
         header: GlobalVariableController.header,
       );
 
@@ -29,7 +28,6 @@ class DormitoryController extends GetxController {
           for(int i = 0; i < dormitoryResponseModel.data!.length; i++) {
             dormitoryList.add(dormitoryResponseModel.data![i]);
           }
-          debugPrint("Dormitory Data ${dormitoryResponseModel.data}");
         }
       }
 
@@ -44,7 +42,10 @@ class DormitoryController extends GetxController {
 
   @override
   void onInit() {
-    getDormitoryList();
+    if(GlobalVariableController.roleId == 2){
+      getDormitoryList();
+    }
+
     super.onInit();
   }
 

@@ -11,10 +11,11 @@ class InfixApi {
 
   static String uploadHomework = "${baseApi}save-homework-data";
 
-  static String studentDormitoryList = "${baseApi}student-dormitory";
+  static String studentDormitory({required int studentId}) {
+    return '${baseApi}student-dormitory?student_id=$studentId';
+  }
 
   static String bookList = "${baseApi}book-list";
-  static String studentDormitory = "${baseApi}student-dormitory";
   static String studentAllNotice = "${baseApi}student-noticeboard";
 
   static String uploadContent = "${baseApi}teacher-upload-content";
