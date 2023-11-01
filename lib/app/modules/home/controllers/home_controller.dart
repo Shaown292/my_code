@@ -14,6 +14,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    debugPrint('Role ID: ${GlobalVariableController.roleId} :::: Record ID: ${GlobalVariableController.studentId}');
     if(GlobalVariableController.roleId == 2){
       getStudentRecord();
     }
