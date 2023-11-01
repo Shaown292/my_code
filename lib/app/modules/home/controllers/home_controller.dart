@@ -82,6 +82,7 @@ class HomeController extends GetxController {
   
   void getStudentRecord() async {
 
+
     try{
 
       final response = await BaseClient().getData(url: InfixApi.getStudentRecord(studentId: GlobalVariableController.studentId!), header: GlobalVariableController.header);
