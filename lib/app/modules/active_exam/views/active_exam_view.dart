@@ -70,6 +70,17 @@ class ActiveExamView extends GetView<ActiveExamController> {
                                   itemCount:
                                       controller.onlineActiveExamList.length,
                                   itemBuilder: (context, index) {
+                                    String colorCode = '';
+                                    if(controller.onlineActiveExamList[index].status == 'Closed'){
+                                      colorCode = '0xFFF95452';
+                                    } else if(controller.onlineActiveExamList[index].status == 'Already Submitted'){
+                                      colorCode = '0xFF404FB6';
+                                    } else if(controller.onlineActiveExamList[index].status == 'Take Exam'){
+                                      colorCode = '0xFF943AE3';
+                                    } else{
+                                      colorCode = '0xFF412C56';
+                                    }
+
                                     return ActiveExamTile(
                                       title: controller
                                           .onlineActiveExamList[index].title,
@@ -82,12 +93,7 @@ class ActiveExamView extends GetView<ActiveExamController> {
                                           .onlineActiveExamList[index].endTime,
                                       activeStatus: controller
                                           .onlineActiveExamList[index].status,
-                                      activeStatusColor: controller
-                                                  .onlineActiveExamList[index]
-                                                  .status ==
-                                              'Closed'
-                                          ? AppColors.homeworkStatusRedColor
-                                          : AppColors.activeExamStatusBlueColor,
+                                      activeStatusColor: Color(int.tryParse(colorCode)!),
                                       color: index % 2 == 0
                                           ? Colors.white
                                           : AppColors.homeworkWidgetColor,

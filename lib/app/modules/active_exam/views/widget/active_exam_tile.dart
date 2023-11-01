@@ -63,7 +63,7 @@ class ActiveExamTile extends StatelessWidget {
                     style: AppTextStyle.homeworkElements,
                   ),
                   5.verticalSpacing,
-                  Container(
+                  activeStatus != null ?  Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
@@ -75,7 +75,7 @@ class ActiveExamTile extends StatelessWidget {
                         style: AppTextStyle.textStyle10WhiteW400,
                       ),
                     ),
-                  )
+                  ) : const SizedBox(),
                 ],
               ),
             ],
