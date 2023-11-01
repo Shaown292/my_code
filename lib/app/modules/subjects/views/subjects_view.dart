@@ -4,17 +4,17 @@ import 'package:flutter_single_getx_api_v2/app/modules/subjects/views/widget/sub
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:get/get.dart';
-
 import '../../../data/constants/app_text_style.dart';
 import '../controllers/subjects_controller.dart';
 
 class SubjectsView extends GetView<SubjectsController> {
   const SubjectsView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return    InfixEduScaffold(
+    return InfixEduScaffold(
       title: "Subjects",
       body: CustomBackground(
         customWidget: Column(
@@ -26,14 +26,11 @@ class SubjectsView extends GetView<SubjectsController> {
                 padding: const EdgeInsets.all(15),
                 height: Get.height * 0.07,
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8)
-                  ),
-                  color: AppColors.profileCardTextColor
-                ),
-                child:   Row(
-
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8)),
+                    color: AppColors.profileCardTextColor),
+                child: Row(
                   children: [
                     SizedBox(
                       width: Get.width * 0.25,
@@ -58,25 +55,28 @@ class SubjectsView extends GetView<SubjectsController> {
                         style: AppTextStyle.fontSize14BlackW500,
                       ),
                     ),
-
                   ],
                 ),
               ),
             ),
             10.verticalSpacing,
-            Expanded(
-              child: ListView.builder(
-                itemCount: 20,
-                  itemBuilder: (context, index){
-                  return const SubjectTile(
-                    subject: "Bangla (Eng 101)",
-                    teacher: "Christiano Ronaldo",
-                    lectureType: "Theory",
-                  );
-                  } ),
-            )
-
-
+            controller.loadingController.isLoading
+                ? const LoadingWidget()
+                : Expanded(
+                    child: RefreshIndicator(
+                      onRefresh: () async {},
+                      child: ListView.builder(
+                        itemCount: 20,
+                        itemBuilder: (context, index) {
+                          return const SubjectTile(
+                            subject: "Bangla (Eng 101)",
+                            teacher: "Christiano Ronaldo",
+                            lectureType: "Theory",
+                          );
+                        },
+                      ),
+                    ),
+                  )
           ],
         ),
       ),

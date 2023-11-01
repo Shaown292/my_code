@@ -14,7 +14,7 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
   Widget build(BuildContext context) {
 
     return Obx(() => InfixEduScaffold(
-      title: "Assignment",
+      title: "Other Downloads",
       body: RefreshIndicator(
 
         onRefresh: () async {
