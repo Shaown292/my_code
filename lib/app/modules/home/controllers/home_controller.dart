@@ -17,7 +17,6 @@ class HomeController extends GetxController {
     if(GlobalVariableController.roleId == 2){
       getStudentRecord();
     }
-
     super.onInit();
   }
 
