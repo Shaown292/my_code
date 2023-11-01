@@ -10,7 +10,7 @@ class ExamResultTile extends StatelessWidget {
   final String? title;
   final String? startingTime;
   final String? endingTime;
-  final String? activeStatus;
+  final String? result;
   final Color? color;
   final Color? activeStatusColor;
 
@@ -20,7 +20,7 @@ class ExamResultTile extends StatelessWidget {
     this.subject,
     this.startingTime,
     this.endingTime,
-    this.activeStatus,
+    this.result,
     this.activeStatusColor, this.title,
   });
 
@@ -63,6 +63,7 @@ class ExamResultTile extends StatelessWidget {
                   ),
                   5.verticalSpacing,
                   Container(
+                    width: 60,
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
@@ -70,7 +71,7 @@ class ExamResultTile extends StatelessWidget {
                             AppColors.homeworkStatusRedColor),
                     child: Center(
                       child: Text(
-                        activeStatus ?? "",
+                        result ?? "",
                         style: AppTextStyle.textStyle10WhiteW400,
                       ),
                     ),

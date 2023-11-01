@@ -106,6 +106,9 @@ class InfixApi {
   static String getStudentOnlineActiveExam({required int recordId}) {
     return '${baseApi}student-online-exam/$recordId';
   }
+  static String getStudentOnlineExamResult({required int studentId}) {
+    return '${baseApi}student-view-result?student_id=$studentId';
+  }
 
 
 

@@ -14,7 +14,7 @@ class ActiveExamController extends GetxController {
   List<ActiveExamData> onlineActiveExamList = [];
   final selectIndex = RxInt(0);
 
-  void getStudentActiveExamList({required int recordId}) async {
+  Future<StudentOnlineActiveExamResponseModel> getStudentActiveExamList({required int recordId}) async {
     try {
       loadingController.isLoading = true;
 
@@ -46,6 +46,7 @@ class ActiveExamController extends GetxController {
     } finally {
       loadingController.isLoading = false;
     }
+    return StudentOnlineActiveExamResponseModel();
   }
 
   @override
