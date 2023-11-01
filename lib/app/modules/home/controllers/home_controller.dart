@@ -14,7 +14,10 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    getStudentRecord();
+    if(GlobalVariableController.roleId == 2){
+      getStudentRecord();
+    }
+
     super.onInit();
   }
 
@@ -81,7 +84,7 @@ class HomeController extends GetxController {
 
     try{
 
-      final response = await BaseClient().getData(url: InfixApi.getStudentRecord, header: GlobalVariableController.header);
+      final response = await BaseClient().getData(url: InfixApi.getStudentRecord(studentId: GlobalVariableController.studentId!), header: GlobalVariableController.header);
 
       StudentRecordResponseModel studentRecordResponseModel = StudentRecordResponseModel.fromJson(response);
       if(studentRecordResponseModel.success){

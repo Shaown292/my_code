@@ -6,7 +6,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/study_button/study_button.dart';
 import 'package:get/get.dart';
-import '../../../data/constants/app_text_style.dart';
 import '../../../utilities/widgets/loader/loading.widget.dart';
 import '../../../utilities/widgets/no_data_available/no_data_available_widget.dart';
 import '../controllers/result_controller.dart';
@@ -20,6 +19,7 @@ class ResultView extends GetView<ResultController> {
           title: "Result",
           body: CustomBackground(
             customWidget: RefreshIndicator(
+              color: AppColors.primaryColor,
               onRefresh: () async {
                 controller.examResultList.clear();
                 controller.getStudentExamResultList(
@@ -41,13 +41,12 @@ class ResultView extends GetView<ResultController> {
                           itemCount: controller
                               .homeController.studentRecordList.length,
                           itemBuilder: (context, index) {
-                            RxBool select = false.obs;
                             return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Obx(
-                                  () => StudyButton(
+                                      () => StudyButton(
                                     title:
-                                        "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                    "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                     onItemTap: () {
                                       controller.selectIndex.value = index;
                                       print(controller.homeController
@@ -61,7 +60,7 @@ class ResultView extends GetView<ResultController> {
                                               .studentRecordList[index].id);
                                     },
                                     isSelected:
-                                        controller.selectIndex.value == index,
+                                    controller.selectIndex.value == index,
                                   ),
                                 ));
                           }),
@@ -71,35 +70,35 @@ class ResultView extends GetView<ResultController> {
                   controller.loadingController.isLoading
                       ? const LoadingWidget()
                       : controller.examResultList.isNotEmpty
-                          ? Expanded(
-                              child: ListView.builder(
-                                itemCount: controller.examResultList.length,
-                                shrinkWrap: true,
-                                physics: const BouncingScrollPhysics(),
-                                itemBuilder: (context, int index) {
-                                  return ResultTile(
-                                    title: controller
-                                        .examResultList[index].examName,
-                                    subject: controller
-                                        .examResultList[index].subjectName,
-                                    totalMarks: controller
-                                        .examResultList[index].totalMarks,
-                                    obtainMarks: controller
-                                        .examResultList[index].obtainedMarks,
-                                    grade:
-                                        controller.examResultList[index].grade,
-                                    color: index % 2 == 0
-                                        ? AppColors.profileCardTextColor
-                                        : Colors.white,
-                                  );
-                                },
-                              ),
-                            )
-                          : const Center(
-                              child: NoDataAvailableWidget(),
-                            ),
+                      ? Expanded(
+                    child: ListView.builder(
+                      itemCount: controller.examResultList.length,
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, int index) {
+                        return ResultTile(
+                          title: controller
+                              .examResultList[index].examName,
+                          subject: controller
+                              .examResultList[index].subjectName,
+                          totalMarks: controller
+                              .examResultList[index].totalMarks,
+                          obtainMarks: controller
+                              .examResultList[index].obtainedMarks,
+                          grade:
+                          controller.examResultList[index].grade,
+                          color: index % 2 == 0
+                              ? AppColors.profileCardTextColor
+                              : Colors.white,
+                        );
+                      },
+                    ),
+                  )
+                      : const Center(
+                    child: NoDataAvailableWidget(),
+                  ),
                 ],
-              ),
+              )
             ),
           ),
         ));

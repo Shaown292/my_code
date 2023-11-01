@@ -60,7 +60,9 @@ class InfixApi {
     return '${baseApi}view/all/notification/$role';
   }
 
-  static String getStudentRecord = "${baseApi}student-record";
+  static String getStudentRecord({required int studentId}) {
+    return "${baseApi}student-record?student_id=$studentId";
+  }
 
   static String getSyllabusList(int studentRecordId) {
     return '${baseApi}student-syllabus/$studentRecordId';
@@ -513,9 +515,7 @@ class InfixApi {
 
   static String chatGetBlockedUsers = "${baseApi}chat/users/blocked";
 
-  static String studentRecord(int studentId) {
-    return "${baseApi}student-record/$studentId";
-  }
+
 
   static String getStudentHomeWork(int roleId) {
     return "${baseApi}student-homework/$roleId";

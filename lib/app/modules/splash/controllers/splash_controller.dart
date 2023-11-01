@@ -1,5 +1,4 @@
 import 'package:flutter/animation.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/notification/controllers/notification_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
@@ -39,6 +38,9 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
       GlobalVariableController.notificationCount = authDatabase.getUnReadNotification() ?? 0;
       GlobalVariableController.token = authDatabase.getToken();
       AppFunctions().getFunctions(GlobalVariableController.roleId!);
+      if(authDatabase.getUserInfo()!.data.user.roleId == 2){
+        GlobalVariableController.studentId = authDatabase.getUserInfo()!.data.user.studentId;
+      }
 
     } else {
       Get.offAndToNamed(Routes.LOGIN);

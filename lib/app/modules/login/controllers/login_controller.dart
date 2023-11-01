@@ -32,10 +32,14 @@ class LoginController extends GetxController {
         isLoading.value = false;
         GlobalVariableController.notificationCount = profileInfoModel.data.unreadNotifications;
         GlobalVariableController.token = profileInfoModel.data.accessToken;
+        GlobalVariableController.roleId = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
+        if(profileInfoModel.data.user.roleId == 2){
+          GlobalVariableController.studentId = profileInfoModel.data.user.studentId;
+        }
 
         if (status) {
           AppFunctions().getFunctions(profileInfoModel.data.user.roleId);
@@ -71,6 +75,9 @@ class LoginController extends GetxController {
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
+        if(profileInfoModel.data.user.roleId == 2){
+          GlobalVariableController.studentId = profileInfoModel.data.user.studentId;
+        }
 
         if (status) {
           AppFunctions().getFunctions(profileInfoModel.data.user.roleId);

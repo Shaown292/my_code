@@ -75,9 +75,12 @@ class ResultController extends GetxController {
   @override
   void onInit() {
     _initializeId();
-    getStudentExamResultList(
-        examId: examinationController.examList[0].id!,
-        recordId: homeController.studentRecordList[0].id);
+    if(examinationController.examList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
+      getStudentExamResultList(
+          examId: examinationController.examList[0].id!,
+          recordId: homeController.studentRecordList[0].id);
+    }
+
     super.onInit();
   }
 }

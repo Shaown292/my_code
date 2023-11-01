@@ -9,6 +9,7 @@ class GlobalVariableController {
  static String? token;
  static int notificationCount = 0;
  static int? studentRecordId;
+ static int? studentId;
 
  static Map<String, String> header = {
  'Content-Type': 'application/json',
