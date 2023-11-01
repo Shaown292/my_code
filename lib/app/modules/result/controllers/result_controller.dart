@@ -17,13 +17,8 @@ class ResultController extends GetxController {
   final selectIndex = RxInt(0);
   RxBool isSelected = false.obs;
 
-  List<String> classInfo = <String>[
-    'Class(A)',
-    'Class(B)',
-    'Class(C)',
-    'Class(D)',
-    'Class(E)',
-  ];
+  RxString dropdownValue = "".obs;
+
   List<ExamResult> examResultList = [];
   int? currentExamId;
   int? currentRecordId;
@@ -76,6 +71,7 @@ class ResultController extends GetxController {
   void onInit() {
     _initializeId();
     if(examinationController.examList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
+      dropdownValue.value = examinationController.examDropdownList[0];
       getStudentExamResultList(
           examId: examinationController.examList[0].id!,
           recordId: homeController.studentRecordList[0].id);
