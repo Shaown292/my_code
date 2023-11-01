@@ -103,6 +103,9 @@ class InfixApi {
     return '${baseApi}profile-others';
   }
 
+  static String getStudentOnlineActiveExam({required int recordId}) {
+    return '${baseApi}student-online-exam/$recordId';
+  }
 
 
 
@@ -548,9 +551,6 @@ class InfixApi {
     return "${baseApi}exam-result/$id/$examId/$recordId";
   }
 
-  static String getStudentOnlineActiveExam(var id, int recordId) {
-    return "${baseApi}student-online-exam/$id/$recordId";
-  }
 
   static String getStudentOnlineActiveExamName(var id, int recordId) {
     return "${baseApi}choose-exam/$id/$recordId";

@@ -41,6 +41,7 @@ class ActiveExamTile extends StatelessWidget {
           10.verticalSpacing,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ColumnTile(
                 title: "Subject",
