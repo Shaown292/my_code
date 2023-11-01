@@ -15,6 +15,7 @@ class InfixApi {
 
   static String bookList = "${baseApi}book-list";
   static String studentDormitory = "${baseApi}student-dormitory";
+  static String studentAllNotice = "${baseApi}student-noticeboard";
 
   static String uploadContent = "${baseApi}teacher-upload-content";
   static String currentPermission = "${baseApi}privacy-permission-status";

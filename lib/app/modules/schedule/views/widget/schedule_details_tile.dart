@@ -46,7 +46,7 @@ class ScheduleDetailsTile extends StatelessWidget {
           5.verticalSpacing,
           Text(
             "Time: ${time ?? ""}",
-            style: AppTextStyle.fontSize14BlackW400,
+            style: AppTextStyle.fontSize14BlackW500,
           ),
           5.verticalSpacing,
 

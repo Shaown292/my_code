@@ -23,7 +23,6 @@ class ResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       padding: const EdgeInsets.only(top: 20, left: 30, bottom: 20),
       decoration: BoxDecoration(color: color),
       child: Column(

@@ -73,12 +73,16 @@ class AppFunctions {
       case 'Transport':
         break;
       case 'Subjects':
+        Get.toNamed(Routes.SUBJECTS);
         break;
       case 'Teacher':
+        Get.toNamed(Routes.TEACHER);
         break;
       case 'Library':
+        Get.toNamed(Routes.LIBRARY);
         break;
       case 'Notice':
+        Get.toNamed(Routes.NOTICE);
         break;
       case 'Timeline':
         break;
@@ -124,6 +128,9 @@ class AppFunctions {
         break;
       case 'Leave List':
         Get.toNamed(Routes.LEAVE_LIST);
+        break;
+      case 'Book List':
+        Get.toNamed(Routes.BOOK_LIST);
         break;
 
     }

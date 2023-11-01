@@ -33,6 +33,8 @@ abstract class Routes {
   static const NOTICE = _Paths.NOTICE;
   static const SUBJECTS = _Paths.SUBJECTS;
   static const TEACHER = _Paths.TEACHER;
+  static const LIBRARY = _Paths.LIBRARY;
+  static const BOOK_LIST = _Paths.BOOK_LIST;
 }
 
 abstract class _Paths {
@@ -67,4 +69,6 @@ abstract class _Paths {
   static const NOTICE = '/notice';
   static const SUBJECTS = '/subjects';
   static const TEACHER = '/teacher';
+  static const LIBRARY = '/library';
+  static const BOOK_LIST = '/book-list';
 }

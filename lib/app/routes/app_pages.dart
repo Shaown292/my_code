@@ -8,6 +8,8 @@ import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
 import '../modules/attendance/bindings/attendance_binding.dart';
 import '../modules/attendance/views/attendance_view.dart';
+import '../modules/book_list/bindings/book_list_binding.dart';
+import '../modules/book_list/views/book_list_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -24,6 +26,8 @@ import '../modules/leave/bindings/leave_binding.dart';
 import '../modules/leave/views/leave_view.dart';
 import '../modules/leave_list/bindings/leave_list_binding.dart';
 import '../modules/leave_list/views/leave_list_view.dart';
+import '../modules/library/bindings/library_binding.dart';
+import '../modules/library/views/library_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notice/bindings/notice_binding.dart';
@@ -227,6 +231,16 @@ class AppPages {
       name: _Paths.TEACHER,
       page: () => const TeacherView(),
       binding: TeacherBinding(),
+    ),
+    GetPage(
+      name: _Paths.LIBRARY,
+      page: () => const LibraryView(),
+      binding: LibraryBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_LIST,
+      page: () => const BookListView(),
+      binding: BookListBinding(),
     ),
   ];
 }

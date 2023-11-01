@@ -121,5 +121,8 @@ class ImagePath {
   /// Online Exam
   static String onlineActiveExam  = "assets/images/active_exam.png";
   static String onlineExamResult  = "assets/images/exam_result.png";
+
+  /// Teacher
+  static String teacher  = "assets/images/teacher.png";
 }
 
