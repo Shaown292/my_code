@@ -30,8 +30,10 @@ class StudentOnlineExamResultResponseModel {
 class OnlineExamResultData {
   int? id;
   String? title;
-  String? examDate;
+  String? startDate;
+  String? endDate;
   String? examTime;
+  String? endTime;
   int? totalMarks;
   int? obtainedMarks;
   String? result;
@@ -39,8 +41,10 @@ class OnlineExamResultData {
   OnlineExamResultData(
       {this.id,
         this.title,
-        this.examDate,
+        this.startDate,
+        this.endDate,
         this.examTime,
+        this.endTime,
         this.totalMarks,
         this.obtainedMarks,
         this.result});
@@ -48,8 +52,10 @@ class OnlineExamResultData {
   OnlineExamResultData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    examDate = json['exam_date'];
+    startDate = json['start_date'];
+    endDate = json['end_date'];
     examTime = json['exam_time'];
+    endTime = json['end_time'];
     totalMarks = json['total_marks'];
     obtainedMarks = json['obtained_marks'];
     result = json['result'];
@@ -59,11 +65,14 @@ class OnlineExamResultData {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['title'] = title;
-    data['exam_date'] = examDate;
+    data['start_date'] = startDate;
+    data['end_date'] = endDate;
     data['exam_time'] = examTime;
+    data['end_time'] = endTime;
     data['total_marks'] = totalMarks;
     data['obtained_marks'] = obtainedMarks;
     data['result'] = result;
     return data;
   }
 }
+

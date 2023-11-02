@@ -23,38 +23,38 @@ class ExamResultView extends GetView<ExamResultController> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              20.verticalSpacing,
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: SizedBox(
-                  height: 50,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount:
-                    controller.homeController.studentRecordList.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Obx(
-                                () => StudyButton(
-                              title:
-                              "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                              onItemTap: () {
-                                controller.onlineExamResultList.clear();
-                                // int recordId = controller.homeController
-                                //     .studentRecordList[index].id;
-                                controller.getStudentExamResultList(
-                                    studentId: GlobalVariableController.studentId!);
-                              },
-                              isSelected:
-                              controller.selectIndex.value == index,
-                            ),
-                          ));
-                    },
-                  ),
-                ),
-              ),
+              // 20.verticalSpacing,
+              // Padding(
+              //   padding:
+              //       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              //   child: SizedBox(
+              //     height: 50,
+              //     child: ListView.builder(
+              //       scrollDirection: Axis.horizontal,
+              //       itemCount:
+              //       controller.homeController.studentRecordList.length,
+              //       itemBuilder: (context, index) {
+              //         return Padding(
+              //             padding: const EdgeInsets.all(8.0),
+              //             child: Obx(
+              //                   () => StudyButton(
+              //                 title:
+              //                 "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+              //                 onItemTap: () {
+              //                   controller.onlineExamResultList.clear();
+              //                   // int recordId = controller.homeController
+              //                   //     .studentRecordList[index].id;
+              //                   controller.getStudentExamResultList(
+              //                       studentId: GlobalVariableController.studentId!);
+              //                 },
+              //                 isSelected:
+              //                 controller.selectIndex.value == index,
+              //               ),
+              //             ));
+              //       },
+              //     ),
+              //   ),
+              // ),
               20.verticalSpacing,
               controller.loadingController.isLoading
                   ? const LoadingWidget()
@@ -71,8 +71,8 @@ class ExamResultView extends GetView<ExamResultController> {
                                 itemBuilder: (context, index) {
                                   return ExamResultTile(
                                     title: controller.onlineExamResultList[index].title,
-                                    startingTime: controller.onlineExamResultList[index].examTime,
-                                    endingTime: controller.onlineExamResultList[index].examTime,
+                                    startingTime: '${controller.onlineExamResultList[index].startDate}\n ${controller.onlineExamResultList[index].examTime}',
+                                    endingTime: '${controller.onlineExamResultList[index].endDate}\n ${controller.onlineExamResultList[index].endTime}',
                                     result: controller.onlineExamResultList[index].result,
                                     activeStatusColor: controller.onlineExamResultList[index].result == 'Fail' ? AppColors.homeworkStatusRedColor : AppColors.homeworkStatusGreenColor,
                                     color: index % 2 == 0
