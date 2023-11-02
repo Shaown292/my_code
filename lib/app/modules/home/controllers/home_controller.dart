@@ -32,6 +32,7 @@ class HomeController extends GetxController {
     profileInfoModel = _authDatabase.getUserInfo()!;
   }
 
+
   void logout() async {
     LoadingController loadingController = Get.find();
     try {
