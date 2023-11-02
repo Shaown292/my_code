@@ -35,6 +35,7 @@ class HomeController extends GetxController {
   void logout() async {
     LoadingController loadingController = Get.find();
     try {
+
       // var headers = {
       //   'Authorization': GlobalVariableController.token!,
       // };
