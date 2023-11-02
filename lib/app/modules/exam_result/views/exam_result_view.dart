@@ -61,7 +61,8 @@ class ExamResultView extends GetView<ExamResultController> {
                   : Expanded(
                       child: RefreshIndicator(
                         onRefresh: () async {
-                          debugPrint("Refresh");
+                          controller.onlineExamResultList.clear();
+                          controller.getStudentExamResultList(studentId: GlobalVariableController.studentId!);
                         },
                         child: controller.onlineExamResultList.isNotEmpty
                             ? ListView.builder(
