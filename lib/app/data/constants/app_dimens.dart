@@ -20,6 +20,8 @@ class AppDimens{
 
   ///radius
   static const primaryRadius = 10.0;
+  static const radius100 = 100.0;
+  static const radius50 = 50.0;
   static const radius22 = 22.0;
   static const radius12 = 12.0;
   static const radius8 = 8.0;

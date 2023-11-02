@@ -122,12 +122,14 @@ class AppPages {
       name: _Paths.PROFILE_EDIT,
       page: () => const ProfileEditView(),
       binding: ProfileEditBinding(),
+      transition: Transition.rightToLeft
     ),
     GetPage(
       name: _Paths.STUDENT_HOMEWORK,
       page: () => const StudentHomeworkView(),
       binding: StudentHomeworkBinding(),
       transition: Transition.fade,
+      transitionDuration: Duration(microseconds: 500)
     ),
     GetPage(
       name: _Paths.ROUTINE,

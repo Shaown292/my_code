@@ -57,17 +57,41 @@ class ProfileView extends GetView<ProfileController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
+
                                       Container(
                                         height: Get.height * 0.1,
                                         width: Get.height * 0.1,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
-                                            image: AssetImage(ImagePath.dp),
+                                            image: controller.profileDataController.profilePhoto.value.isEmpty || controller.profileDataController.profilePhoto.value == '' ? AssetImage(ImagePath.dp) : NetworkImage(controller.profileDataController.profilePhoto.value) as ImageProvider,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                          BorderRadius.circular(8),
                                         ),
                                       ),
+
+                                      // controller.profileDataController.profilePhoto.value != '' || controller.profileDataController.profilePhoto.value != null ? Container(
+                                      //   height: Get.height * 0.1,
+                                      //   width: Get.height * 0.1,
+                                      //   decoration: BoxDecoration(
+                                      //     image: DecorationImage(
+                                      //       image: controller.profileDataController.profilePhoto.value != '' || controller.profileDataController.profilePhoto.value != null ? AssetImage(ImagePath.dp) : NetworkImage(controller.profileDataController.profilePhoto.value) as ImageProvider,
+                                      //     ),
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(8),
+                                      //   ),
+                                      // ) : Container(
+                                      //   height: Get.height * 0.1,
+                                      //   width: Get.height * 0.1,
+                                      //   decoration: BoxDecoration(
+                                      //     image: DecorationImage(
+                                      //       image: NetworkImage(controller.profileDataController.profilePhoto.value),
+                                      //     ),
+                                      //     borderRadius:
+                                      //     BorderRadius.circular(8),
+                                      //   ),
+                                      // ) ,
+
                                       10.horizontalSpacing,
                                       Column(
                                         crossAxisAlignment:
@@ -75,10 +99,7 @@ class ProfileView extends GetView<ProfileController> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            controller.profilePersonal
-                                                    ?.firstName ??
-                                                "",
+                                          Text('${controller.profileDataController.firstName}',
                                             style: AppTextStyle
                                                 .fontSize18WhiteW500,
                                           ),
@@ -137,29 +158,31 @@ class ProfileView extends GetView<ProfileController> {
                             : Column(
                                 children: [
                                   ProfilePersonalWidget(
-                                      icon: ImagePath.calender,
-                                      title: AppText.dateOfBirth,
-                                      value: controller
-                                          .profilePersonal?.dateOfBirth),
+                                    icon: ImagePath.calender,
+                                    title: AppText.dateOfBirth,
+                                    value:
+                                        '${controller.profileDataController.dateOfBirth}',
+                                  ),
                                   ProfilePersonalWidget(
                                       icon: ImagePath.age,
                                       title: AppText.age,
                                       value: controller.profilePersonal?.age
                                           .toString()),
                                   ProfilePersonalWidget(
-                                      icon: ImagePath.mail,
-                                      title: AppText.phoneNumber,
-                                      value:
-                                          controller.profilePersonal?.mobile),
+                                    icon: ImagePath.mail,
+                                    title: AppText.phoneNumber,
+                                    value: '${controller.profileDataController.phoneNumber}',
+                                  ),
                                   ProfilePersonalWidget(
-                                      icon: ImagePath.phone,
-                                      title: AppText.email,
-                                      value: controller.profilePersonal?.email),
+                                    icon: ImagePath.phone,
+                                    title: AppText.email,
+                                    value: '${controller.profileDataController.email}',
+                                  ),
                                   ProfilePersonalWidget(
-                                      icon: ImagePath.address,
-                                      title: AppText.presentAddress,
-                                      value: controller
-                                          .profilePersonal?.currentAddress),
+                                    icon: ImagePath.address,
+                                    title: AppText.presentAddress,
+                                    value: '${controller.profileDataController.presentAddress}',
+                                  ),
                                 ],
                               ),
                         controller.isLoading.value
