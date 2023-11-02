@@ -56,6 +56,7 @@ class HomeController extends GetxController {
       // }
 
 
+
       // // loadingController.isLoading = true;
       // // bool result = await _authRepository.signOut();
       //
