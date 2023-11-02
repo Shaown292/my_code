@@ -21,18 +21,19 @@ class TeacherView extends GetView<TeacherController> {
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: CustomBackground(
-          customWidget: RefreshIndicator(
-            color: AppColors.primaryColor,
-            onRefresh: () async {
-              controller.teacherList.clear();
-              controller.getAllTeacherList(
-                  recordId: controller.homeController.studentRecordList[0].id);
-            },
-            child: Column(
-              children: [
-                10.verticalSpacing,
-                Obx(
-                  () => controller.loadingController.isLoading
+          customWidget: Obx(
+            () => RefreshIndicator(
+              color: AppColors.primaryColor,
+              onRefresh: () async {
+                controller.teacherList.clear();
+                controller.getAllTeacherList(
+                    recordId:
+                        controller.homeController.studentRecordList[0].id);
+              },
+              child: Column(
+                children: [
+                  10.verticalSpacing,
+                  controller.loadingController.isLoading
                       ? const LoadingWidget()
                       : controller.teacherList.isNotEmpty
                           ? ListView.builder(
@@ -53,8 +54,8 @@ class TeacherView extends GetView<TeacherController> {
                               },
                             )
                           : const Center(child: NoDataAvailableWidget()),
-                )
-              ],
+                ],
+              ),
             ),
           ),
         ),
