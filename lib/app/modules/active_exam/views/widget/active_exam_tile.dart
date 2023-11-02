@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/colu
 
 import '../../../../data/constants/app_colors.dart';
 import '../../../../data/constants/app_text_style.dart';
+import '../../../../utilities/widgets/time_date_tile.dart';
 
 class ActiveExamTile extends StatelessWidget {
   final String? subject;
@@ -13,6 +14,8 @@ class ActiveExamTile extends StatelessWidget {
   final String? activeStatus;
   final Color? color;
   final Color? activeStatusColor;
+  final String? startDate;
+  final String? endDate;
 
   const ActiveExamTile({
     super.key,
@@ -23,6 +26,8 @@ class ActiveExamTile extends StatelessWidget {
     this.activeStatus,
     this.activeStatusColor,
     this.title,
+    this.startDate,
+    this.endDate,
   });
 
   @override
@@ -33,9 +38,8 @@ class ActiveExamTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Text(
+          Text(
             title ?? "title",
-
             style: AppTextStyle.fontSize14lightViolateW400,
           ),
           10.verticalSpacing,
@@ -47,13 +51,15 @@ class ActiveExamTile extends StatelessWidget {
                 title: "Subject",
                 value: subject,
               ),
-              ColumnTile(
+              TimeAndDateTile(
                 title: "Start",
-                value: startingTime,
+                date: startDate ?? "",
+                time: "(${startingTime ?? ''})",
               ),
-              ColumnTile(
+              TimeAndDateTile(
                 title: "End",
-                value: endingTime,
+                date: endDate ?? "",
+                time: "(${endingTime ?? ''})",
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,19 +69,21 @@ class ActiveExamTile extends StatelessWidget {
                     style: AppTextStyle.homeworkElements,
                   ),
                   5.verticalSpacing,
-                  activeStatus != null ?  Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        color: activeStatusColor ??
-                            AppColors.homeworkStatusRedColor),
-                    child: Center(
-                      child: Text(
-                        activeStatus ?? "",
-                        style: AppTextStyle.textStyle10WhiteW400,
-                      ),
-                    ),
-                  ) : const SizedBox(),
+                  activeStatus != null
+                      ? Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: activeStatusColor ??
+                                  AppColors.homeworkStatusRedColor),
+                          child: Center(
+                            child: Text(
+                              activeStatus ?? "",
+                              style: AppTextStyle.textStyle10WhiteW400,
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ],

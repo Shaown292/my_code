@@ -8,11 +8,10 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_availab
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_colors.dart';
-import '../../../utilities/widgets/study_button/study_button.dart';
 import '../controllers/exam_result_controller.dart';
 
 class ExamResultView extends GetView<ExamResultController> {
-  const ExamResultView({Key? key}) : super(key: key);
+  const ExamResultView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +70,10 @@ class ExamResultView extends GetView<ExamResultController> {
                                 itemBuilder: (context, index) {
                                   return ExamResultTile(
                                     title: controller.onlineExamResultList[index].title,
-                                    startingTime: '${controller.onlineExamResultList[index].startDate}\n ${controller.onlineExamResultList[index].examTime}',
-                                    endingTime: '${controller.onlineExamResultList[index].endDate}\n ${controller.onlineExamResultList[index].endTime}',
+                                    startingTime: controller.onlineExamResultList[index].examTime,
+                                    endingTime: controller.onlineExamResultList[index].endTime,
+                                    startDate: controller.onlineExamResultList[index].startDate,
+                                    endDate: controller.onlineExamResultList[index].endDate,
                                     result: controller.onlineExamResultList[index].result,
                                     activeStatusColor: controller.onlineExamResultList[index].result == 'Fail' ? AppColors.homeworkStatusRedColor : AppColors.homeworkStatusGreenColor,
                                     color: index % 2 == 0

@@ -3,6 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import '../../../../data/constants/app_colors.dart';
 import '../../../../data/constants/app_text_style.dart';
 import '../../../../utilities/widgets/colum_tile/column_tile.dart';
+import '../../../../utilities/widgets/time_date_tile.dart';
 
 class ExamResultTile extends StatelessWidget {
   final String? subject;
@@ -12,6 +13,8 @@ class ExamResultTile extends StatelessWidget {
   final String? result;
   final Color? color;
   final Color? activeStatusColor;
+  final String? startDate;
+  final String? endDate;
 
   const ExamResultTile({
     super.key,
@@ -20,7 +23,10 @@ class ExamResultTile extends StatelessWidget {
     this.startingTime,
     this.endingTime,
     this.result,
-    this.activeStatusColor, this.title,
+    this.activeStatusColor,
+    this.title,
+    this.startDate,
+    this.endDate,
   });
 
   @override
@@ -31,9 +37,8 @@ class ExamResultTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Text(
+          Text(
             title ?? "Title",
-
             style: AppTextStyle.fontSize14lightViolateW400,
           ),
           10.verticalSpacing,
@@ -45,13 +50,15 @@ class ExamResultTile extends StatelessWidget {
                 title: "Title",
                 value: title,
               ),
-              ColumnTile(
+              TimeAndDateTile(
                 title: "Start",
-                value: startingTime,
+                date: startDate ?? "",
+                time: "(${startingTime ?? ''})",
               ),
-              ColumnTile(
+              TimeAndDateTile(
                 title: "End",
-                value: endingTime,
+                date: endDate ?? "",
+                time: "(${endingTime ?? ''})",
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

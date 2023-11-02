@@ -1,3 +1,4 @@
+
 class StudentOnlineActiveExamResponseModel {
   bool? success;
   List<ActiveExamData>? data;
@@ -32,7 +33,8 @@ class ActiveExamData {
   String? title;
   String? classSection;
   String? subject;
-  String? examDate;
+  String? startDate;
+  String? endDate;
   String? startTime;
   String? endTime;
   String? duration;
@@ -43,7 +45,8 @@ class ActiveExamData {
         this.title,
         this.classSection,
         this.subject,
-        this.examDate,
+        this.startDate,
+        this.endDate,
         this.startTime,
         this.endTime,
         this.duration,
@@ -54,7 +57,8 @@ class ActiveExamData {
     title = json['title'];
     classSection = json['class_section'];
     subject = json['subject'];
-    examDate = json['exam_date'];
+    startDate = json['start_date'];
+    endDate = json['end_date'];
     startTime = json['start_time'];
     endTime = json['end_time'];
     duration = json['duration'];
@@ -67,7 +71,8 @@ class ActiveExamData {
     data['title'] = title;
     data['class_section'] = classSection;
     data['subject'] = subject;
-    data['exam_date'] = examDate;
+    data['start_date'] = startDate;
+    data['end_date'] = endDate;
     data['start_time'] = startTime;
     data['end_time'] = endTime;
     data['duration'] = duration;
