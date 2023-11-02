@@ -37,7 +37,6 @@ class NoticeController extends GetxController {
           for(int i = 0; i < noticeListResponseModel.data!.allNotices!.length; i++) {
             allNoticeList.add(noticeListResponseModel.data!.allNotices![i]);
           }
-          debugPrint("Notice Data::::: ${noticeListResponseModel.data}");
         }
       }
 

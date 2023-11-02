@@ -54,7 +54,6 @@ class ProfileEditController extends GetxController {
     ProfileEditModel? profileEditModel;
 
     try {
-      print(firstName.text);
       final res = await BaseClient().postData(
         url: InfixApi.updateProfile(GlobalVariableController.roleId!),
         header: GlobalVariableController.header,
@@ -71,8 +70,7 @@ class ProfileEditController extends GetxController {
       if (profileEditModel.success == true) {
         loadingController.isLoading = false;
         showBasicSuccessSnackBar(message: profileEditModel.message ?? 'Profile Updated Successfully');
-        print("data $firstName");
-        print("data $lastName");
+
 
       } else {
         loadingController.isLoading = false;

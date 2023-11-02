@@ -26,6 +26,7 @@ class NotificationView extends GetView<NotificationController> {
         body: CustomBackground(
             customWidget: RefreshIndicator(
           onRefresh: () async {
+            controller.unReadNotificationList.clear();
             controller.fetchNotifications();
           },
           child: Column(
