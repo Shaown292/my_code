@@ -17,7 +17,7 @@ class DormitoryController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.studentDormitory(studentId: GlobalVariableController.studentId!),
+        url: InfixApi.getStudentDormitory(studentId: GlobalVariableController.studentId!),
         header: GlobalVariableController.header,
       );
 
