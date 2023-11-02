@@ -95,7 +95,6 @@ class HomeController extends GetxController {
             studentRecordDropdownList.add('Class ${studentRecordResponseModel.data.studentRecords[i].studentRecordClass} (${studentRecordResponseModel.data.studentRecords[i].section})');
             studentRecordIdList.add(studentRecordResponseModel.data.studentRecords[i].id);
           }
-
         }
       }
 
