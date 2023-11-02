@@ -11,9 +11,7 @@ class InfixApi {
 
   static String uploadHomework = "${baseApi}save-homework-data";
 
-  static String studentDormitory({required int studentId}) {
-    return '${baseApi}student-dormitory?student_id=$studentId';
-  }
+
 
   static String bookList = "${baseApi}book-list";
   static String studentAllNotice = "${baseApi}student-noticeboard";
@@ -103,15 +101,24 @@ class InfixApi {
     return '${baseApi}profile-others';
   }
 
-  static String getStudentOnlineActiveExam({required int recordId}) {
-    return '${baseApi}student-online-exam/$recordId';
+  static String getStudentTeacherList(int roleId) {
+    return '${baseApi}student-teacher/$roleId';
   }
+  static String getStudentLeaveList(int studentId) {
+    return '${baseApi}apply-leave?student_id=$studentId';
+  }
+
   static String getStudentOnlineExamResult({required int studentId}) {
-    return '${baseApi}student-view-result?student_id=$studentId';
+    return "${baseApi}student-view-result?student_id=$studentId";
   }
 
+  static String getStudentOnlineActiveExam({required int recordId}) {
+    return "${baseApi}student-online-exam/$recordId";
+  }
 
-
+  static String getStudentDormitory({required int studentId}) {
+    return "${baseApi}student-dormitory?student_id=$studentId";
+  }
 
 
 
@@ -555,6 +562,7 @@ class InfixApi {
       var id, dynamic examId, int recordId) {
     return "${baseApi}exam-result/$id/$examId/$recordId";
   }
+
 
 
   static String getStudentOnlineActiveExamName(var id, int recordId) {
