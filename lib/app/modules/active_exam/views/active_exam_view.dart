@@ -13,7 +13,7 @@ import '../../../utilities/widgets/study_button/study_button.dart';
 import '../controllers/active_exam_controller.dart';
 
 class ActiveExamView extends GetView<ActiveExamController> {
-  const ActiveExamView({Key? key}) : super(key: key);
+  const ActiveExamView({super.key});
 
   @override
   Widget build(BuildContext context) {

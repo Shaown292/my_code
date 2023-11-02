@@ -13,7 +13,7 @@ class InfixApi {
 
 
 
-  static String bookList = "${baseApi}book-list";
+  static String bookList = "${baseApi}student-library";
   static String studentAllNotice = "${baseApi}student-noticeboard";
 
   static String uploadContent = "${baseApi}teacher-upload-content";

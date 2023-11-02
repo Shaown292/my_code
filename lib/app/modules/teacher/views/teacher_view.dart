@@ -12,7 +12,7 @@ import '../../../utilities/widgets/no_data_available/no_data_available_widget.da
 import '../controllers/teacher_controller.dart';
 
 class TeacherView extends GetView<TeacherController> {
-  const TeacherView({Key? key}) : super(key: key);
+  const TeacherView({super.key});
 
   @override
   Widget build(BuildContext context) {

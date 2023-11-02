@@ -9,7 +9,7 @@ class BookListTile extends StatelessWidget {
   final String? subject;
   final int? quantity;
   final String? bookNumber;
-  final double? price;
+  final int? price;
   final String? rackNo;
   final String? category;
   final Color? color;

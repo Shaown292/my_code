@@ -15,7 +15,8 @@ class TeacherController extends GetxController {
 
   List<TeacherData> teacherList = [];
 
-  void getAllTeacherList({required int recordId}) async {
+  Future<TeacherResponseModel?> getAllTeacherList({required int recordId}) async {
+
     try {
 
       loadingController.isLoading = true;
