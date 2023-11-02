@@ -112,7 +112,6 @@ class ProfileEditController extends GetxController {
     }
 
 
-
   }
 
 
