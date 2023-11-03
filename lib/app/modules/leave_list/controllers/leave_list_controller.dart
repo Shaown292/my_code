@@ -20,6 +20,7 @@ class LeaveListController extends GetxController {
   List<LeaveListData> leaveList = [];
   List<LeaveListPending> pendingList = [];
   List<LeaveListRejected> rejectedList = [];
+  List<LeaveListApproved> approvedList = [];
 
   List<String> status = <String>[
     'Pending',
@@ -53,6 +54,14 @@ class LeaveListController extends GetxController {
           i < leaveListResponseModel.data!.rejected!.length;
           i++) {
             rejectedList.add(leaveListResponseModel.data!.rejected![i]);
+          }
+        }
+
+        if (leaveListResponseModel.data!.approved!.isNotEmpty) {
+          for (int i = 0;
+          i < leaveListResponseModel.data!.approved!.length;
+          i++) {
+            approvedList.add(leaveListResponseModel.data!.approved![i]);
           }
         }
       }

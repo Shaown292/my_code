@@ -20,7 +20,8 @@ class NoticeController extends GetxController {
     getAllNoticeList();
     super.onInit();
   }
-  void getAllNoticeList() async {
+  Future<NoticeListResponseModel?> getAllNoticeList() async {
+
     try {
 
       loadingController.isLoading = true;

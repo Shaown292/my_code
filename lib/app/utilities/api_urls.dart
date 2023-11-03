@@ -13,7 +13,7 @@ class InfixApi {
 
 
 
-  static String bookList = "${baseApi}book-list";
+  static String bookList = "${baseApi}student-library";
   static String studentAllNotice = "${baseApi}student-noticeboard";
 
   static String uploadContent = "${baseApi}teacher-upload-content";
@@ -120,7 +120,9 @@ class InfixApi {
     return "${baseApi}student-dormitory?student_id=$studentId";
   }
 
-
+  static String getStudentTransport({required int studentId}) {
+    return "${baseApi}student-transport?student_id=$studentId";
+  }
 
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {

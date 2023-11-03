@@ -1,36 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/book_list_response_model/book_list_response_model.dart';
 import 'package:get/get.dart';
 
 import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../../domain/base_client/base_client.dart';
+import '../../../../domain/core/model/transport_response_model/transport_response_model.dart';
 import '../../../utilities/api_urls.dart';
 
-class BookListController extends GetxController {
+class TransportController extends GetxController {
 
   LoadingController loadingController = Get.find();
-  List<BookListData> bookListData = [];
 
+  List<TransportDataList> transportDataList = [];
 
-  Future<BookListResponsiveModel?> getAllBookList() async {
+  Future<TransportResponseModel?> getAllTransportList({required int studentId}) async {
 
     try {
 
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.bookList,
+        url: InfixApi.getStudentTransport(studentId: studentId),
         header: GlobalVariableController.header,
       );
 
-      BookListResponsiveModel bookListResponsiveModel = BookListResponsiveModel.fromJson(response);
-      if(bookListResponsiveModel.success == true){
+
+      TransportResponseModel transportResponseModel = TransportResponseModel.fromJson(response);
+      if(transportResponseModel.success == true){
         loadingController.isLoading = false;
-        if(bookListResponsiveModel.data!.isNotEmpty){
-          for(int i = 0; i < bookListResponsiveModel.data!.length; i++) {
-            bookListData.add(bookListResponsiveModel.data![i]);
+        if(transportResponseModel.data!.isNotEmpty){
+          for(int i = 0; i < transportResponseModel.data!.length; i++) {
+            transportDataList.add(transportResponseModel.data![i]);
           }
+
         }
       }
 
@@ -41,11 +43,12 @@ class BookListController extends GetxController {
     } finally {
       loadingController.isLoading = false;
     }
+    return TransportResponseModel();
   }
-
   @override
   void onInit() {
-    getAllBookList();
+    getAllTransportList(studentId: GlobalVariableController.studentId!);
     super.onInit();
   }
+
 }

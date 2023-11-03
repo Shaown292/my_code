@@ -57,6 +57,7 @@ class AppColors {
   static const activeExamStatusBlueColor = Color(0xFF404FB6);
   static const dormitoryDividerColor = Color(0xFFE5E4EA);
   static const teacherTextColor = Color(0xFF646988);
+  static const transportDividerColor = Color(0xFFEAE7F0);
 
 
 

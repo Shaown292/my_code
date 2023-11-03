@@ -35,6 +35,8 @@ abstract class Routes {
   static const TEACHER = _Paths.TEACHER;
   static const LIBRARY = _Paths.LIBRARY;
   static const BOOK_LIST = _Paths.BOOK_LIST;
+  static const BOOK_ISSUED = _Paths.BOOK_ISSUED;
+  static const TRANSPORT = _Paths.TRANSPORT;
 }
 
 abstract class _Paths {
@@ -71,4 +73,6 @@ abstract class _Paths {
   static const TEACHER = '/teacher';
   static const LIBRARY = '/library';
   static const BOOK_LIST = '/book-list';
+  static const BOOK_ISSUED = '/book-issued';
+  static const TRANSPORT = '/transport';
 }

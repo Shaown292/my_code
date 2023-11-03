@@ -8,6 +8,8 @@ import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
 import '../modules/attendance/bindings/attendance_binding.dart';
 import '../modules/attendance/views/attendance_view.dart';
+import '../modules/book_issued/bindings/book_issued_binding.dart';
+import '../modules/book_issued/views/book_issued_view.dart';
 import '../modules/book_list/bindings/book_list_binding.dart';
 import '../modules/book_list/views/book_list_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
@@ -64,6 +66,8 @@ import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
 import '../modules/teacher/bindings/teacher_binding.dart';
 import '../modules/teacher/views/teacher_view.dart';
+import '../modules/transport/bindings/transport_binding.dart';
+import '../modules/transport/views/transport_view.dart';
 
 part 'app_routes.dart';
 
@@ -243,6 +247,16 @@ class AppPages {
       name: _Paths.BOOK_LIST,
       page: () => const BookListView(),
       binding: BookListBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_ISSUED,
+      page: () => const BookIssuedView(),
+      binding: BookIssuedBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSPORT,
+      page: () => const TransportView(),
+      binding: TransportBinding(),
     ),
   ];
 }

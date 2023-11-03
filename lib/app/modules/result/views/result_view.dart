@@ -12,7 +12,7 @@ import '../../../utilities/widgets/no_data_available/no_data_available_widget.da
 import '../controllers/result_controller.dart';
 
 class ResultView extends GetView<ResultController> {
-  const ResultView({Key? key}) : super(key: key);
+  const ResultView({super.key});
 
   @override
   Widget build(BuildContext context) {
