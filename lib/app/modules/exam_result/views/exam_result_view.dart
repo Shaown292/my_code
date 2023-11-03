@@ -12,7 +12,7 @@ import '../../../utilities/widgets/study_button/study_button.dart';
 import '../controllers/exam_result_controller.dart';
 
 class ExamResultView extends GetView<ExamResultController> {
-  const ExamResultView({Key? key}) : super(key: key);
+  const ExamResultView({super.key});
 
   @override
   Widget build(BuildContext context) {

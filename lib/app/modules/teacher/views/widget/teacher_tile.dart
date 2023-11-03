@@ -22,61 +22,62 @@ class TeacherTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      decoration: BoxDecoration(
-        color: color,
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                ImagePath.teacher,
-                height: 20,
-                width: 20,
-              ),
-              10.horizontalSpacing,
-               Text(
-                teachersName ?? AppText.noDataAvailable,
-                style: AppTextStyle.fontSize13GreyW500,
-              )
-            ],
-          ),
-          10.verticalSpacing,
-          Row(
-            children: [
-              Image.asset(
-                ImagePath.mail,
-                height: 20,
-                width: 20,
-                color: AppColors.profileValueColor,
-              ),
-              10.horizontalSpacing,
-               Text(
-                 teachersEmail ?? AppText.noDataAvailable,
-                style: AppTextStyle.fontSize13GreyW300,
-              )
-            ],
-          ),
-          10.verticalSpacing,
-          Row(
-            children: [
-              Image.asset(
-                ImagePath.phone,
-                height: 20,
-                width: 20,
-                color: AppColors.profileValueColor,
-              ),
-              10.horizontalSpacing,
-               Text(
-                 teachersPhoneNo ?? AppText.noDataAvailable,
-                style: AppTextStyle.fontSize13GreyW300,
-              )
-            ],
-          ),
-          10.verticalSpacing,
-        ],
+    return Card(
+      elevation: 5,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Image.asset(
+                  ImagePath.teacher,
+                  height: 20,
+                  width: 20,
+                ),
+                10.horizontalSpacing,
+                Text(
+                  teachersName ?? AppText.noDataAvailable,
+                  style: AppTextStyle.fontSize13GreyW500,
+                )
+              ],
+            ),
+
+            15.verticalSpacing,
+            Row(
+              children: [
+                Image.asset(
+                  ImagePath.mail,
+                  height: 20,
+                  width: 20,
+                  color: AppColors.profileValueColor,
+                ),
+                10.horizontalSpacing,
+                Text(
+                  teachersEmail ?? AppText.noDataAvailable,
+                  style: AppTextStyle.fontSize13GreyW300,
+                )
+              ],
+            ),
+            15.verticalSpacing,
+            Row(
+              children: [
+                Image.asset(
+                  ImagePath.phone,
+                  height: 20,
+                  width: 20,
+                  color: AppColors.profileValueColor,
+                ),
+                10.horizontalSpacing,
+                Text(
+                  teachersPhoneNo ?? AppText.noDataAvailable,
+                  style: AppTextStyle.fontSize13GreyW300,
+                )
+              ],
+            ),
+
+          ],
+        ),
       ),
     );
   }

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../utilities/widgets/loader/loading.widget.dart';
 import '../../../utilities/widgets/no_data_available/no_data_available_widget.dart';
+import '../../../utilities/widgets/study_button/study_button.dart';
 import '../controllers/teacher_controller.dart';
 
 class TeacherView extends GetView<TeacherController> {
@@ -33,6 +34,39 @@ class TeacherView extends GetView<TeacherController> {
               child: Column(
                 children: [
                   10.verticalSpacing,
+                  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: SizedBox(
+                      height: 50,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:
+                        controller.homeController.studentRecordList.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Obx(
+                                    () => StudyButton(
+                                  title:
+                                  "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                  onItemTap: () {
+                                    controller.teacherList.clear();
+                                    int recordId = controller.homeController
+                                        .studentRecordList[index].id;
+                                    controller.getAllTeacherList(
+                                        recordId:recordId);
+                                  },
+                                  isSelected:
+                                  controller.selectIndex.value == index,
+                                ),
+                              ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  10.verticalSpacing,
                   controller.loadingController.isLoading
                       ? const LoadingWidget()
                       : controller.teacherList.isNotEmpty
@@ -40,16 +74,19 @@ class TeacherView extends GetView<TeacherController> {
                               shrinkWrap: true,
                               itemCount: controller.teacherList.length,
                               itemBuilder: (context, index) {
-                                return TeacherTile(
-                                  color: index % 2 == 0
-                                      ? Colors.white
-                                      : AppColors.profileCardTextColor,
-                                  teachersName:
-                                      controller.teacherList[index].fullName,
-                                  teachersEmail:
-                                      controller.teacherList[index].email,
-                                  teachersPhoneNo:
-                                      controller.teacherList[index].mobile,
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                                  child: TeacherTile(
+                                    color: index % 2 == 0
+                                        ? Colors.white
+                                        : AppColors.profileCardTextColor,
+                                    teachersName:
+                                        controller.teacherList[index].fullName,
+                                    teachersEmail:
+                                        controller.teacherList[index].email,
+                                    teachersPhoneNo:
+                                        controller.teacherList[index].mobile,
+                                  ),
                                 );
                               },
                             )

@@ -120,7 +120,9 @@ class InfixApi {
     return "${baseApi}student-dormitory?student_id=$studentId";
   }
 
-
+  static String getStudentTransport({required int studentId}) {
+    return "${baseApi}student-transport?student_id=$studentId";
+  }
 
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {

@@ -12,8 +12,10 @@ class TeacherController extends GetxController {
 
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
-
+  final selectIndex = RxInt(0);
   List<TeacherData> teacherList = [];
+
+
 
   Future<TeacherResponseModel?> getAllTeacherList({required int recordId}) async {
 
@@ -44,6 +46,7 @@ class TeacherController extends GetxController {
     } finally {
       loadingController.isLoading = false;
     }
+    return TeacherResponseModel();
   }
 
   @override

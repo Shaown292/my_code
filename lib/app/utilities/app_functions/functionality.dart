@@ -71,6 +71,7 @@ class AppFunctions {
         Get.toNamed(Routes.DORMITORY);
         break;
       case 'Transport':
+        Get.toNamed(Routes.TRANSPORT);
         break;
       case 'Subjects':
         Get.toNamed(Routes.SUBJECTS);
@@ -131,6 +132,9 @@ class AppFunctions {
         break;
       case 'Book List':
         Get.toNamed(Routes.BOOK_LIST);
+        break;
+      case 'Book Issued':
+        Get.toNamed(Routes.BOOK_ISSUED);
         break;
 
     }
