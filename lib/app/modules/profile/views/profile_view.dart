@@ -14,7 +14,9 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:get/get.dart';
+import '../../../../config/app_config.dart';
 import '../../../data/constants/app_colors.dart';
+import '../../../utilities/widgets/image_view/cache_image_view.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
@@ -57,41 +59,35 @@ class ProfileView extends GetView<ProfileController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-
-                                      Container(
-                                        height: Get.height * 0.1,
-                                        width: Get.height * 0.1,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: controller.profileDataController.profilePhoto.value.isEmpty || controller.profileDataController.profilePhoto.value == '' ? AssetImage(ImagePath.dp) : NetworkImage(controller.profileDataController.profilePhoto.value) as ImageProvider,
-                                          ),
-                                          borderRadius:
-                                          BorderRadius.circular(8),
-                                        ),
-                                      ),
-
-                                      // controller.profileDataController.profilePhoto.value != '' || controller.profileDataController.profilePhoto.value != null ? Container(
-                                      //   height: Get.height * 0.1,
-                                      //   width: Get.height * 0.1,
-                                      //   decoration: BoxDecoration(
-                                      //     image: DecorationImage(
-                                      //       image: controller.profileDataController.profilePhoto.value != '' || controller.profileDataController.profilePhoto.value != null ? AssetImage(ImagePath.dp) : NetworkImage(controller.profileDataController.profilePhoto.value) as ImageProvider,
-                                      //     ),
-                                      //     borderRadius:
-                                      //         BorderRadius.circular(8),
-                                      //   ),
-                                      // ) : Container(
-                                      //   height: Get.height * 0.1,
-                                      //   width: Get.height * 0.1,
-                                      //   decoration: BoxDecoration(
-                                      //     image: DecorationImage(
-                                      //       image: NetworkImage(controller.profileDataController.profilePhoto.value),
-                                      //     ),
-                                      //     borderRadius:
-                                      //     BorderRadius.circular(8),
-                                      //   ),
-                                      // ) ,
-
+                                      controller.profileDataController
+                                                  .profilePhoto.value.isEmpty ||
+                                              controller.profileDataController
+                                                      .profilePhoto.value ==
+                                                  ''
+                                          ? Container(
+                                              height: Get.height * 0.1,
+                                              width: Get.height * 0.1,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        ImagePath.dp)),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                            )
+                                          : SizedBox(
+                                              height: 50,
+                                              width: 50,
+                                              child: ClipRRect(
+                                                borderRadius: 6.circularRadius,
+                                                child: CacheImageView(
+                                                  url:
+                                                      '${AppConfig.imageBaseUrl}${controller.profileDataController.profilePhoto.toString()}',
+                                                  errorImageLocal:
+                                                      'assets/image/production/avatar.png',
+                                                ),
+                                              ),
+                                            ),
                                       10.horizontalSpacing,
                                       Column(
                                         crossAxisAlignment:
@@ -99,7 +95,8 @@ class ProfileView extends GetView<ProfileController> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text('${controller.profileDataController.firstName}',
+                                          Text(
+                                            '${controller.profileDataController.firstName}',
                                             style: AppTextStyle
                                                 .fontSize18WhiteW500,
                                           ),
@@ -171,17 +168,20 @@ class ProfileView extends GetView<ProfileController> {
                                   ProfilePersonalWidget(
                                     icon: ImagePath.mail,
                                     title: AppText.phoneNumber,
-                                    value: '${controller.profileDataController.phoneNumber}',
+                                    value:
+                                        '${controller.profileDataController.phoneNumber}',
                                   ),
                                   ProfilePersonalWidget(
                                     icon: ImagePath.phone,
                                     title: AppText.email,
-                                    value: '${controller.profileDataController.email}',
+                                    value:
+                                        '${controller.profileDataController.email}',
                                   ),
                                   ProfilePersonalWidget(
                                     icon: ImagePath.address,
                                     title: AppText.presentAddress,
-                                    value: '${controller.profileDataController.presentAddress}',
+                                    value:
+                                        '${controller.profileDataController.presentAddress}',
                                   ),
                                 ],
                               ),
