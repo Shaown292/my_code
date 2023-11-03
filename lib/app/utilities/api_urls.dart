@@ -120,6 +120,10 @@ class InfixApi {
     return "${baseApi}student-dormitory?student_id=$studentId";
   }
 
+  static String studentProfilePhotoUpdate({required int studentId}) {
+    return "${baseApi}student-profile-img-update/$studentId";
+  }
+
 
 
   //////////////////////////.......................................///////////////////////////////////

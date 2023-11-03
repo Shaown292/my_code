@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/profile_edit/controllers/profile_edit_controller.dart';
-import 'package:get/get.dart';
 
 import '../../../../data/constants/image_path.dart';
 
@@ -53,14 +51,12 @@ class EditProfileTextField extends StatelessWidget {
         hintText: hintText ?? 'Enter text',
         suffixIcon: InkWell(
           onTap: iconOnTap,
-          child: Container(
-            width: Get.width * 0.02,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(ImagePath.editBlack)
-                )
-            ),
-      ),
+          child: Image.asset(
+            ImagePath.editBlack,
+            height: 10,
+            width: 10,
+            scale: 3,
+          ),
         ),
         focusedBorder: focusBorderActive
             ? OutlineInputBorder(
@@ -78,23 +74,3 @@ class EditProfileTextField extends StatelessWidget {
     );
   }
 }
-
-// class CustomTextFormField extends StatelessWidget {
-//   const CustomTextFormField({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextFormField(
-//       decoration: InputDecoration(
-//         filled: true,
-//         fillColor: Color(0xFFF4EBFC), // Light pink background color
-//         hintText: 'Enter text',
-//         suffixIcon: Icon(Icons.email), // Suffix icon
-//         border: OutlineInputBorder(
-//           borderSide: BorderSide.none,
-//           borderRadius: BorderRadius.circular(10.0), // Optional: Add rounded corners
-//         ),
-//       ),
-//     );
-//   }
-// }
