@@ -12,7 +12,7 @@ import '../../../data/constants/app_colors.dart';
 import '../controllers/notice_controller.dart';
 
 class NoticeView extends GetView<NoticeController> {
-  const NoticeView({Key? key}) : super(key: key);
+  const NoticeView({super.key});
 
   @override
   Widget build(BuildContext context) {

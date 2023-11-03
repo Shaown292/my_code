@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/transport/views/widget/transport_tile.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
@@ -32,44 +31,44 @@ class TransportView extends GetView<TransportController> {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                  height: Get.height * 0.07,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(8), topLeft: Radius.circular(8)),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(8),
+                        topLeft: Radius.circular(8)),
                     color: AppColors.profileCardBackgroundColor,
                   ),
                   child: Row(
                     children: [
-                      10.verticalSpacing,
-                      const Text(
-                        "Vehicle" ,
-                        style: AppTextStyle.textStyle12WhiteW500,
-                      ),
                       SizedBox(
-                        height: Get.height * 0.04,
-                        child: const VerticalDivider(
-                          color: AppColors.profileTitleColor,
-                          thickness: 1,
+                        width: Get.width * 0.1,
+                        child: const Text(
+                          "Vehicle",
+                          style: AppTextStyle.textStyle12WhiteW500,
                         ),
+                      ),
+                      const VerticalDivider(
+                        color: AppColors.profileTitleColor,
+                        thickness: 1,
                       ),
                       Container(
-                        width: Get.width * 0.2,
+                        width: Get.width * 0.23,
                         padding: const EdgeInsets.all(10),
-
-                        child:  const Center(
-                            child: Text(
-                              "Status" ,
-                              style: AppTextStyle.textStyle12WhiteW500,
-                            )),
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.04,
-                        child: const VerticalDivider(
-                          color: AppColors.profileTitleColor,
-                          thickness: 1,
+                        child: const Center(
+                          child: Text(
+                            "Status",
+                            style: AppTextStyle.textStyle12WhiteW500,
+                          ),
                         ),
                       ),
+                      const VerticalDivider(
+                        color: AppColors.profileTitleColor,
+                        thickness: 1,
+                      ),
                       const Text(
-                        "Route" ,
+                        "Route",
                         style: AppTextStyle.textStyle12WhiteW500,
                       )
                     ],
@@ -81,6 +80,7 @@ class TransportView extends GetView<TransportController> {
                         ? const LoadingWidget()
                         : controller.transportDataList.isNotEmpty
                             ? ListView.builder(
+                                shrinkWrap: true,
                                 itemCount: controller.transportDataList.length,
                                 itemBuilder: (context, index) {
                                   return TransportTile(
@@ -90,6 +90,9 @@ class TransportView extends GetView<TransportController> {
                                         .transportDataList[index].status,
                                     route: controller
                                         .transportDataList[index].route,
+                                    onTap: () => controller
+                                        .showTransportDetailsBottomSheet(
+                                            index: index),
                                   );
                                 },
                               )

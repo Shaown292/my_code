@@ -11,7 +11,6 @@ import '../../../style/bottom_sheet/bottom_sheet_shpe.dart';
 import '../../../utilities/api_urls.dart';
 
 class NoticeController extends GetxController {
-
   LoadingController loadingController = Get.find();
   List<AllNotices> allNoticeList = [];
 
@@ -20,10 +19,9 @@ class NoticeController extends GetxController {
     getAllNoticeList();
     super.onInit();
   }
+
   Future<NoticeListResponseModel?> getAllNoticeList() async {
-
     try {
-
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
@@ -31,16 +29,18 @@ class NoticeController extends GetxController {
         header: GlobalVariableController.header,
       );
 
-     NoticeListResponseModel noticeListResponseModel = NoticeListResponseModel.fromJson(response);
-      if(noticeListResponseModel.success == true){
+      NoticeListResponseModel noticeListResponseModel =
+          NoticeListResponseModel.fromJson(response);
+      if (noticeListResponseModel.success == true) {
         loadingController.isLoading = false;
-        if(noticeListResponseModel.data!.allNotices!.isNotEmpty){
-          for(int i = 0; i < noticeListResponseModel.data!.allNotices!.length; i++) {
+        if (noticeListResponseModel.data!.allNotices!.isNotEmpty) {
+          for (int i = 0;
+              i < noticeListResponseModel.data!.allNotices!.length;
+              i++) {
             allNoticeList.add(noticeListResponseModel.data!.allNotices![i]);
           }
         }
       }
-
     } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
@@ -53,20 +53,22 @@ class NoticeController extends GetxController {
   void showNoticeDetailsBottomSheet({required int index}) {
     Get.bottomSheet(
       Container(
-        padding: const EdgeInsets.all(20),
-        height: Get.height*0.45,
-        child: allNoticeList[index].noticeMessage != null ? Center(
-          child: Text(
-            allNoticeList[index].noticeMessage ?? "",
-            style: AppTextStyle.fontSize13BlackW400,
-            textAlign: TextAlign.justify,),
-        ) : const Center(
-          child: Text(
-            "No Details Available",
-            style: AppTextStyle.fontSize16lightViolateW500,
-          ),
-        )
-      ),
+          padding: const EdgeInsets.all(20),
+          height: Get.height * 0.45,
+          child: allNoticeList[index].noticeMessage != null
+              ? Center(
+                  child: Text(
+                    allNoticeList[index].noticeMessage ?? "",
+                    style: AppTextStyle.fontSize13BlackW400,
+                    textAlign: TextAlign.justify,
+                  ),
+                )
+              : const Center(
+                  child: Text(
+                    "No Details Available",
+                    style: AppTextStyle.fontSize16lightViolateW500,
+                  ),
+                )),
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );

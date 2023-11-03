@@ -37,13 +37,10 @@ class BookListView extends GetView<BookListController> {
                       itemCount: controller.bookListData.length,
                       itemBuilder: (context, index) {
                         return BookListTile(
-                          title: controller.bookListData[index].bookTitle,
-                          category: controller.bookListData[index].category,
+                          bookName: controller.bookListData[index].bookTitle,
                           subject: controller.bookListData[index].subject,
                           bookNumber: controller.bookListData[index].bookNumber,
-                          price: controller.bookListData[index].price,
-                          quantity: controller.bookListData[index].quantity,
-                          rackNo: controller.bookListData[index].rackNo,
+
                         );
                       }),
                 ) : const NoDataAvailableWidget(),

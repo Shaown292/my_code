@@ -58,6 +58,7 @@ class AppColors {
   static const dormitoryDividerColor = Color(0xFFE5E4EA);
   static const teacherTextColor = Color(0xFF646988);
   static const transportDividerColor = Color(0xFFEAE7F0);
+  static Color bottomSheetDividerColor = const Color(0xFF635976).withOpacity(0.1);
 
 
 
