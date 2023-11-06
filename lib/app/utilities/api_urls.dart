@@ -94,6 +94,10 @@ class InfixApi {
     return '${baseApi}student-exam-schedule?exam_type_id=$examTypeId&record_id=$recordId';
   }
 
+  static String getStudentApplyLeaveType({required int roleId}) {
+    return '${baseApi}leave-type?role_id=$roleId';
+  }
+
   static String profileOthers() {
     return '${baseApi}profile-others';
   }
@@ -126,6 +130,7 @@ class InfixApi {
   }
 
   static String bookList = "${baseApi}student-library";
+  static String studentApplyLeave = "${baseApi}student-leave-store";
 
 
 
@@ -425,10 +430,6 @@ class InfixApi {
 
   static String userApplyLeaveStore = '${baseApi}student-apply-leave-store';
 
-  static String studentApplyLeave(id)
-  {
-    return "${baseApi}student-apply-leave/$id";
-  }
 
   static String approvedLeaves(id)
   {

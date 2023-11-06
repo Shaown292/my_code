@@ -54,8 +54,8 @@ class Data {
 }
 
 class ProfileOthers {
-  double? height;
-  double? weight;
+  String? height;
+  String? weight;
   String? nationalIdNo;
   String? localIdNo;
   String? bankName;

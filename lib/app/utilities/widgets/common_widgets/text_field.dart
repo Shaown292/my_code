@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
@@ -14,8 +13,10 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle? labelTextStyle;
   final Color? enableBorderActiveColor;
   final int? maxLine;
+  final Function()? onTap;
+  final bool readOnly;
 
-  const CustomTextFormField ({
+  const CustomTextFormField({
     this.controller,
     this.fillColor,
     this.hintText,
@@ -27,37 +28,45 @@ class CustomTextFormField extends StatelessWidget {
     this.textInputType,
     this.labelTextStyle,
     this.enableBorderActiveColor,
-    super.key, this.maxLine,
+    this.maxLine,
+    this.onTap,
+    this.readOnly = false,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obsCureText,
-      keyboardType: textInputType,
-      minLines: 1,
-      maxLines: maxLine ?? 1,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: fillColor ?? const Color(0xFFFDFBFF),
-        hintText: hintText ?? 'Enter text',
-        suffixIcon:
-            InkWell(
-              onTap: iconOnTap,
-                child: suffixIcon ?? const SizedBox()),
-        focusedBorder: focusBorderActive
-            ? OutlineInputBorder(
-                borderSide:  BorderSide(color: const Color(0xFF635976).withOpacity(0.2)),
-                borderRadius: BorderRadius.circular(8.0),
-              )
-            : null,
-        enabledBorder: enableBorderActive
-            ? OutlineInputBorder(
-                borderSide:  BorderSide(color: enableBorderActiveColor ?? const Color(0xFF635976).withOpacity(0.2)),
-                borderRadius: BorderRadius.circular(8.0),
-              )
-            : null,
+    return InkWell(
+      onTap: onTap,
+      child: TextFormField(
+        controller: controller,
+        obscureText: obsCureText,
+        keyboardType: textInputType,
+        minLines: 1,
+        maxLines: maxLine ?? 1,
+        readOnly: readOnly,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: fillColor ?? const Color(0xFFFDFBFF),
+          hintText: hintText ?? 'Enter text',
+          suffixIcon:
+              InkWell(onTap: iconOnTap, child: suffixIcon ?? const SizedBox()),
+          focusedBorder: focusBorderActive
+              ? OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: const Color(0xFF635976).withOpacity(0.2)),
+                  borderRadius: BorderRadius.circular(8.0),
+                )
+              : null,
+          enabledBorder: enableBorderActive
+              ? OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: enableBorderActiveColor ??
+                          const Color(0xFF635976).withOpacity(0.2)),
+                  borderRadius: BorderRadius.circular(8.0),
+                )
+              : null,
+        ),
       ),
     );
   }
