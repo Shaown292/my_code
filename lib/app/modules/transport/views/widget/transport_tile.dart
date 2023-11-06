@@ -24,77 +24,81 @@ class TransportTile extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-          child: SizedBox(
-            height: Get.height * 0.04,
-            child: Row(
-              children: [
-                Container(
-                  width: Get.width * 0.1,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: AppColors.profileCardBackgroundColor),
-                  child: Center(
-                    child: Text(
-                      vehicle ?? "",
-                      style: AppTextStyle.textStyle12WhiteW400,
-                    ),
+          child: Row(
+            children: [
+              Container(
+                width: Get.width * 0.1,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2),
+                    color: AppColors.profileCardBackgroundColor),
+                child: Center(
+                  child: Text(
+                    vehicle ?? "",
+                    style: AppTextStyle.textStyle12WhiteW400,
                   ),
                 ),
-                const VerticalDivider(
+              ),
+              SizedBox(
+                height: Get.height * 0.04,
+                child: const VerticalDivider(
                   color: AppColors.transportDividerColor,
                   thickness: 1,
                 ),
-                Container(
-                  padding: EdgeInsets.zero,
-                  width: Get.width * 0.23,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: AppColors.homeworkStatusGreenColor),
-                  child: Center(
-                    child: Text(
-                      status ?? "",
-                      style: AppTextStyle.textStyle12WhiteW400,
-                    ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                width: Get.width * 0.2,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2),
+                    color: AppColors.homeworkStatusGreenColor),
+                child: Center(
+                  child: Text(
+                    status ?? "",
+                    style: AppTextStyle.textStyle12WhiteW400,
                   ),
                 ),
-                const VerticalDivider(
+              ),
+              SizedBox(
+                height: Get.height * 0.04,
+                child: const VerticalDivider(
                   color: AppColors.transportDividerColor,
                   thickness: 1,
                 ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: Get.width * 0.27,
-                        child: Text(
-                          route ?? "",
-                          style: const TextStyle(
-                              color: AppColors.profileTitleColor,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400),
-                        ),
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: Get.width * 0.27,
+                      child: Text(
+                        route ?? "",
+                        style: const TextStyle(
+                            color: AppColors.profileTitleColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400),
                       ),
-                      InkWell(
-                        onTap: onTap,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: AppColors.appButtonColor),
-                          child: const Center(
-                            child: Text(
-                              "View",
-                              style: AppTextStyle.textStyle12WhiteW400,
-                            ),
+                    ),
+                    InkWell(
+                      onTap: onTap,
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: AppColors.appButtonColor),
+                        child: const Center(
+                          child: Text(
+                            "View",
+                            style: AppTextStyle.textStyle12WhiteW400,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
         CustomDivider(

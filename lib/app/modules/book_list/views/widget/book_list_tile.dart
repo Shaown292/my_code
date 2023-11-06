@@ -8,6 +8,7 @@ class BookListTile extends StatelessWidget {
   final String? bookName;
   final String? subject;
   final String? bookNumber;
+  final String? view;
   final Color? color;
   final Function()? onTap;
 
@@ -16,7 +17,9 @@ class BookListTile extends StatelessWidget {
     this.bookName,
     this.subject,
     this.bookNumber,
-    this.color, this.onTap,
+    this.color,
+    this.onTap,
+    this.view,
   });
 
   @override
@@ -26,11 +29,11 @@ class BookListTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
           child: SizedBox(
-            height: Get.height * 0.04,
             child: Row(
               children: [
                 Container(
-                  width: Get.width * 0.1,
+                  width: Get.width * 0.12,
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       color: AppColors.profileCardBackgroundColor),
@@ -41,13 +44,16 @@ class BookListTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const VerticalDivider(
-                  color: AppColors.transportDividerColor,
-                  thickness: 1,
+                SizedBox(
+                  height: Get.height * 0.04,
+                  child: const VerticalDivider(
+                    color: AppColors.transportDividerColor,
+                    thickness: 1,
+                  ),
                 ),
                 Container(
-                  padding: EdgeInsets.zero,
-                  width: Get.width * 0.23,
+                  padding: const EdgeInsets.all(10),
+                  width: Get.width * 0.2,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       color: AppColors.homeworkStatusGreenColor),
@@ -58,9 +64,12 @@ class BookListTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const VerticalDivider(
-                  color: AppColors.transportDividerColor,
-                  thickness: 1,
+                SizedBox(
+                  height: Get.height * 0.04,
+                  child: const VerticalDivider(
+                    color: AppColors.transportDividerColor,
+                    thickness: 1,
+                  ),
                 ),
                 Expanded(
                   child: Row(
@@ -79,13 +88,13 @@ class BookListTile extends StatelessWidget {
                       InkWell(
                         onTap: onTap,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2),
                               color: AppColors.appButtonColor),
-                          child: const Center(
+                          child:  Center(
                             child: Text(
-                              "View",
+                              view ?? "View",
                               style: AppTextStyle.textStyle12WhiteW400,
                             ),
                           ),
@@ -104,7 +113,5 @@ class BookListTile extends StatelessWidget {
         )
       ],
     );
-
-
   }
 }

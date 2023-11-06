@@ -102,7 +102,7 @@ class AppTextStyle {
 
   static const homeworkElements = TextStyle(
       color: AppColors.editProfileTextFieldLabelColor,
-      fontSize: 10,
+      fontSize: 12,
       fontWeight: FontWeight.w400);
 
   static const homeworkView = TextStyle(

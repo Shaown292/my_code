@@ -54,13 +54,11 @@ class TransportView extends GetView<TransportController> {
                         thickness: 1,
                       ),
                       Container(
-                        width: Get.width * 0.23,
+                        width: Get.width * 0.2,
                         padding: const EdgeInsets.all(10),
-                        child: const Center(
-                          child: Text(
-                            "Status",
-                            style: AppTextStyle.textStyle12WhiteW500,
-                          ),
+                        child: const Text(
+                          "Status",
+                          style: AppTextStyle.textStyle12WhiteW500,
                         ),
                       ),
                       const VerticalDivider(

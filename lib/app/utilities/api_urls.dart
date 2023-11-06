@@ -124,6 +124,10 @@ class InfixApi {
     return "${baseApi}student-transport?student_id=$studentId";
   }
 
+  static String getBookSearch({required String bookName}) {
+    return "${baseApi}student-library?book_title=$bookName";
+  }
+
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {
     return '${baseApi}fees-collect-student-wise/$id';
