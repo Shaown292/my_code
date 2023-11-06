@@ -128,6 +128,12 @@ class InfixApi {
     return "${baseApi}student-library?book_title=$bookName";
   }
 
+  static String getStudentRemainingLeave(int studentId) {
+    return "${baseApi}remaining-leave?student_id=$studentId";
+  }
+
+
+
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {
     return '${baseApi}fees-collect-student-wise/$id';

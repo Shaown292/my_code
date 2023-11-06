@@ -30,7 +30,7 @@ class ColumnTile extends StatelessWidget {
           ),
           8.verticalSpacing,
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Text(
               value ?? "",
               style: AppTextStyle.homeworkElements,

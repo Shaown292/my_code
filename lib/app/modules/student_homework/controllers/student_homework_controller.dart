@@ -9,7 +9,10 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/student_homework_re
 import 'package:get/get.dart';
 
 import '../../../../domain/utils/datetime_converter.dart';
+import '../../../data/constants/app_colors.dart';
+import '../../../data/constants/app_text_style.dart';
 import '../../../style/bottom_sheet/bottom_sheet_shpe.dart';
+import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 
 class StudentHomeworkController extends GetxController {
 
@@ -51,27 +54,56 @@ class StudentHomeworkController extends GetxController {
 
   }
 
-
-
-    void showHomeworkDetailsBottomSheet({required int index}) {
-      Get.bottomSheet(
-        SizedBox(
-          height: Get.height*0.3,
-          child: Column (
-            children: [
-              Text(studentHomeworkList[index].subject ?? ''),
-              Text(studentHomeworkList[index].status ?? ''),
-              Text(DateTimeConverter().convertISOToDesiredFormat(studentHomeworkList[index].createdAt ?? '')),
-              Text(studentHomeworkList[index].submissionDate ?? ''),
-              Text(studentHomeworkList[index].marks.toString()),
-
-            ],
+  void showHomeworkDetailsBottomSheet({required int index}) {
+    Get.bottomSheet(
+      SizedBox(
+        height: Get.height * 0.55,
+        child: studentHomeworkList.isNotEmpty
+            ? Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            10.verticalSpacing,
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(studentHomeworkList[index].subject ?? "", style:  AppTextStyle.fontSize14BlackW500,),
+            ),
+            BottomSheetTile(
+              title: "Created at",
+              value: studentHomeworkList[index].createdAt,
+              color: AppColors.homeworkWidgetColor ,
+            ),
+            BottomSheetTile(
+              title: "Submission",
+              value: studentHomeworkList[index].submissionDate,
+              color:  Colors.white,
+            ),
+            BottomSheetTile(
+              title: "Evaluation",
+              value: studentHomeworkList[index].evaluationDate,
+              color: AppColors.homeworkWidgetColor ,
+            ),
+            BottomSheetTile(
+              title: "Obtained Marks",
+              value: studentHomeworkList[index].marks.toString(),
+              color:  Colors.white,
+            ),
+          ],
+        )
+            : const Center(
+          child: Text(
+            "No Details Available",
+            style: AppTextStyle.fontSize16lightViolateW500,
           ),
         ),
-        backgroundColor: Colors.white,
-        shape: defaultBottomSheetShape(),
-      );
-    }
+      ),
+      backgroundColor: Colors.white,
+      shape: defaultBottomSheetShape(),
+    );
+  }
+
+
+
+
 
 
 

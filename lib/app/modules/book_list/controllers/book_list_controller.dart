@@ -21,7 +21,7 @@ class BookListController extends GetxController {
   bool isTextFieldEmpty = false;
 
   TextEditingController searchController = TextEditingController();
-  List<String>? results = ['Adam', 'Addi', 'Adrey'];
+  List<String>? bottomSheetTitle = ['Book No', 'ISBN No', 'Category', 'Subject', 'Publisher Name'];
   String input = '';
 
   Future<BookListResponseModel?> getAllBookList() async {

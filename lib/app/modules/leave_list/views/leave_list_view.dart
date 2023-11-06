@@ -11,6 +11,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_availab
 import 'package:get/get.dart';
 
 import '../../../../config/global_variable/global_variable_controller.dart';
+import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 import '../controllers/leave_list_controller.dart';
 
 class LeaveListView extends GetView<LeaveListController> {
@@ -25,73 +26,90 @@ class LeaveListView extends GetView<LeaveListController> {
 
           child: CustomBackground(
             customWidget: Obx(
-              () => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Card(
-                    margin: EdgeInsets.zero,
-                    elevation: 8,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(8),
-                            topLeft: Radius.circular(8))),
-                    child: Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.all(10),
-                      child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "My Leave",
-                            style: AppTextStyle.fontSize12LightViolateW500,
-                          ),
-                        ],
+              () => RefreshIndicator(
+                onRefresh: () async {
+                  controller.pendingList.clear();
+                  controller.remainingLeaveList.clear();
+                  controller.getRemainingLeave(studentId: GlobalVariableController.studentId!);
+                  controller.getAllNoticeList(
+                      studentId: GlobalVariableController.studentId!);
+                },
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Card(
+                      margin: EdgeInsets.zero,
+                      elevation: 5,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(8),
+                              topLeft: Radius.circular(8))),
+                      child: Container(
+                        width: Get.width,
+                        padding: const EdgeInsets.all(10),
+                        child:   Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "My Remaining Leave",
+                              style: AppTextStyle.fontSize14BlackW500,
+                            ),
+                            10.verticalSpacing,
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: controller.remainingLeaveList.length,
+                                itemBuilder: (context, index){
+                                return  BottomSheetTile(
+                                  title: controller.remainingLeaveList[index].leaveType,
+                                  value: controller.remainingLeaveList[index].remainingDays.toString(),
+                                  color: index % 2 == 0 ? AppColors.homeworkWidgetColor : Colors.white ,
+                                );
+                                },
+                            )
+
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  30.verticalSpacing,
-                  const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      "Leave List",
-                      style: AppTextStyle.fontSize12LightViolateW500,
+                    30.verticalSpacing,
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        "Leave List",
+                        style: AppTextStyle.fontSize12LightViolateW500,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: TabBar(
-                      labelColor: AppColors.profileValueColor,
-                      unselectedLabelColor: Colors.black,
-                      unselectedLabelStyle:
-                          AppTextStyle.fontSize12LightGreyW500,
-                      indicatorColor: AppColors.profileIndicatorColor,
-                      controller: controller.tabController,
-                      tabs: List.generate(
-                        controller.status.length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Text(
-                            controller.status[index],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: TabBar(
+                        labelColor: AppColors.profileValueColor,
+                        unselectedLabelColor: Colors.black,
+                        unselectedLabelStyle:
+                            AppTextStyle.fontSize12LightGreyW500,
+                        indicatorColor: AppColors.profileIndicatorColor,
+                        controller: controller.tabController,
+                        tabs: List.generate(
+                          controller.status.length,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              controller.status[index],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  10.verticalSpacing,
-                  Expanded(
-                    child: TabBarView(
-                      controller: controller.tabController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
+                    10.verticalSpacing,
+                    Expanded(
+                      child: TabBarView(
+                        controller: controller.tabController,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
 
-                        ///Pending
-                        RefreshIndicator(
-                          onRefresh: () async {
-                            controller.pendingList.clear();
-                            controller.getAllNoticeList(
-                                studentId: GlobalVariableController.studentId!);
-                          },
-                          child: controller.loadingController.isLoading
+                          ///Pending
+
+                          controller.loadingController.isLoading
                               ? const LoadingWidget()
                               : controller.pendingList.isNotEmpty
                                   ? Expanded(
@@ -115,7 +133,7 @@ class LeaveListView extends GetView<LeaveListController> {
                                                 statusColor: AppColors.activeExamStatusBlueColor,
                                                 onTap: () {
                                                   controller
-                                                      .showLeaveListDetailsBottomSheet(
+                                                      .showPendingListDetailsBottomSheet(
                                                           index: index);
                                                 },
                                               )
@@ -126,16 +144,10 @@ class LeaveListView extends GetView<LeaveListController> {
                                   : const Center(
                                       child: NoDataAvailableWidget(),
                                     ),
-                        ),
 
-                        /// Approved
-                        RefreshIndicator(
-                          onRefresh: () async {
-                            controller.approvedList.clear();
-                            controller.getAllNoticeList(
-                                studentId: GlobalVariableController.studentId!);
-                          },
-                          child: controller.loadingController.isLoading
+                          /// Approved
+
+                          controller.loadingController.isLoading
                               ? const LoadingWidget()
                               : controller.approvedList.isNotEmpty
                               ? Expanded(
@@ -159,7 +171,7 @@ class LeaveListView extends GetView<LeaveListController> {
                                         statusColor: AppColors.primaryColor,
                                         onTap: () {
                                           controller
-                                              .showLeaveListDetailsBottomSheet(
+                                              .showApprovedListDetailsBottomSheet(
                                               index: index);
                                         },
                                       )
@@ -170,16 +182,10 @@ class LeaveListView extends GetView<LeaveListController> {
                               : const Center(
                             child: NoDataAvailableWidget(),
                           ),
-                        ),
 
-                        /// Rejected
-                        RefreshIndicator(
-                          onRefresh: () async {
-                            controller.rejectedList.clear();
-                            controller.getAllNoticeList(
-                                studentId: GlobalVariableController.studentId!);
-                          },
-                          child: controller.loadingController.isLoading
+                          /// Rejected
+
+                          controller.loadingController.isLoading
                               ? const LoadingWidget()
                               : controller.rejectedList.isNotEmpty
                                   ? Expanded(
@@ -205,7 +211,7 @@ class LeaveListView extends GetView<LeaveListController> {
 
                                                 onTap: () {
                                                   controller
-                                                      .showLeaveListDetailsBottomSheet(
+                                                      .showRejectedListDetailsBottomSheet(
                                                           index: index);
                                                 },
                                               )
@@ -217,11 +223,11 @@ class LeaveListView extends GetView<LeaveListController> {
                                   : const Center(
                                       child: NoDataAvailableWidget(),
                                     ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
