@@ -1,16 +1,16 @@
-class BookListResponseModel {
+class BookSearchModel {
   bool? success;
-  List<BookListData>? data;
+  List<BookSearchListData>? data;
   String? message;
 
-  BookListResponseModel({this.success, this.data, this.message});
+  BookSearchModel({this.success, this.data, this.message});
 
-  BookListResponseModel.fromJson(Map<String, dynamic> json) {
+  BookSearchModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
-      data = <BookListData>[];
+      data = <BookSearchListData>[];
       json['data'].forEach((v) {
-        data!.add(BookListData.fromJson(v));
+        data!.add(BookSearchListData.fromJson(v));
       });
     }
     message = json['message'];
@@ -27,7 +27,7 @@ class BookListResponseModel {
   }
 }
 
-class BookListData {
+class BookSearchListData {
   int? id;
   String? bookTitle;
   String? bookNumber;
@@ -40,7 +40,7 @@ class BookListData {
   int? price;
   String? rackNumber;
 
-  BookListData(
+  BookSearchListData(
       {this.id,
         this.bookTitle,
         this.bookNumber,
@@ -53,7 +53,7 @@ class BookListData {
         this.price,
         this.rackNumber});
 
-  BookListData.fromJson(Map<String, dynamic> json) {
+  BookSearchListData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     bookTitle = json['book_title'];
     bookNumber = json['book_number'];

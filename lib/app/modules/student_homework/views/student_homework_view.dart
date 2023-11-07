@@ -10,7 +10,7 @@ import '../../../utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import '../controllers/student_homework_controller.dart';
 
 class StudentHomeworkView extends GetView<StudentHomeworkController> {
-  const StudentHomeworkView({Key? key}) : super(key: key);
+  const StudentHomeworkView({super.key});
   // controller.loadingController.isLoading == false ? const Center(child: CircularProgressIndicator()) :
   @override
   Widget build(BuildContext context) {

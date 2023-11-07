@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:get/get.dart';
 
 import '../../../../data/constants/app_colors.dart';
+import '../../../../utilities/widgets/colum_tile/column_tile.dart';
 
 class HomeworkCardTile extends StatelessWidget {
   final String? subject;
@@ -75,9 +76,18 @@ class HomeworkCardTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    columnTile("Created", created ?? ""),
-                    columnTile("Submission", submission ?? ""),
-                    columnTile("Evaluation", evaluation ?? "N/A"),
+                    ColumnTile(
+                      title: "Created",
+                      value: created,
+                    ),
+                    ColumnTile(
+                      title: "Submission",
+                      value: submission,
+                    ),
+                    ColumnTile(
+                      title: "Evaluation",
+                      value: evaluation,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -85,20 +95,32 @@ class HomeworkCardTile extends StatelessWidget {
                           "Status",
                           style: AppTextStyle.homeworkElements,
                         ),
-
-                        StatusWidget(
-                          value: status ?? "",
-                          color: statusColor,
-                        )
+                        5.verticalSpacing,
+                        status != null
+                            ? Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3),
+                                    color: statusColor),
+                                child: Center(
+                                  child: Text(
+                                    status ?? "",
+                                    style: AppTextStyle.textStyle10WhiteW400,
+                                  ),
+                                ),
+                              )
+                            : const SizedBox(),
                       ],
                     ),
                   ],
                 ),
                 10.verticalSpacing,
-                columnTile("Marks", marks ?? ""),
+                ColumnTile(
+                  title: "Marks",
+                  value: marks,
+                ),
               ],
             ),
-            20.verticalSpacing,
           ],
         ),
       ),
@@ -106,22 +128,4 @@ class HomeworkCardTile extends StatelessWidget {
   }
 }
 
-Widget columnTile(String title, String value) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        title,
-        style: AppTextStyle.homeworkElements,
-      ),
-      8.verticalSpacing,
-      SizedBox(
-        height: Get.height * 0.025,
-        child: Text(
-          value,
-          style: AppTextStyle.homeworkElements,
-        ),
-      ),
-    ],
-  );
-}
+

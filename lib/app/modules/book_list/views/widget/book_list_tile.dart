@@ -1,94 +1,117 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-
-import '../../../result/views/widget/flexible_text.dart';
+import 'package:get/get.dart';
+import '../../../../data/constants/app_colors.dart';
+import '../../../../utilities/widgets/common_widgets/custom_divider.dart';
 
 class BookListTile extends StatelessWidget {
-  final String? title;
+  final String? bookName;
   final String? subject;
-  final int? quantity;
   final String? bookNumber;
-  final int? price;
-  final String? rackNo;
-  final String? category;
+  final String? view;
   final Color? color;
+  final Function()? onTap;
 
   const BookListTile({
     super.key,
-    this.title,
+    this.bookName,
     this.subject,
-    this.quantity,
     this.bookNumber,
-    this.price,
     this.color,
-    this.rackNo, this.category,
+    this.onTap,
+    this.view,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 20, left: 30, bottom: 20),
-      decoration: BoxDecoration(color: color),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title ?? "",
-            style: AppTextStyle.homeworkView,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+          child: SizedBox(
+            child: Row(
+              children: [
+                Container(
+                  width: Get.width * 0.12,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: AppColors.profileCardBackgroundColor),
+                  child: Center(
+                    child: Text(
+                      bookNumber ?? "",
+                      style: AppTextStyle.textStyle12WhiteW400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.04,
+                  child: const VerticalDivider(
+                    color: AppColors.transportDividerColor,
+                    thickness: 1,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  width: Get.width * 0.2,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: AppColors.homeworkStatusGreenColor),
+                  child: Center(
+                    child: Text(
+                      subject ?? "",
+                      style: AppTextStyle.textStyle12WhiteW400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.04,
+                  child: const VerticalDivider(
+                    color: AppColors.transportDividerColor,
+                    thickness: 1,
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: Get.width * 0.27,
+                        child: Text(
+                          bookName ?? "",
+                          style: const TextStyle(
+                              color: AppColors.profileTitleColor,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: onTap,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2),
+                              color: AppColors.appButtonColor),
+                          child:  Center(
+                            child: Text(
+                              view ?? "View",
+                              style: AppTextStyle.textStyle12WhiteW400,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-          10.verticalSpacing,
-          Text(
-            category ?? "",
-            style: AppTextStyle.homeworkElements,
-          ),
-          10.verticalSpacing,
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FlexibleText(
-                text: "Subject",
-              ),
-              FlexibleText(
-                text: "Book",
-              ),
-              FlexibleText(
-                text: "Quantity",
-              ),
-              FlexibleText(
-                text: "Price",
-              ),
-              FlexibleText(
-                text: "Rack no",
-              ),
-            ],
-          ),
-          10.verticalSpacing,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              FlexibleText(
-                text: subject ?? "",
-              ),
-              FlexibleText(
-                text: bookNumber ?? "",
-              ),
-              FlexibleText(
-                text: '${quantity ?? ""}',
-              ),
-              FlexibleText(
-                text: "${price ?? " "}",
-              ),
-              FlexibleText(
-                text: rackNo ?? "",
-              ),
-            ],
-          ),
-        ],
-      ),
+        ),
+        CustomDivider(
+          width: Get.width,
+          color: AppColors.transportDividerColor,
+        )
+      ],
     );
-
-
   }
 }

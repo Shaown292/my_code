@@ -14,13 +14,15 @@ class AttendanceView extends GetView<AttendanceController> {
   Widget build(BuildContext context) {
     return  InfixEduScaffold(
       title: "Attendance",
-      body: CustomBackground(
-        customWidget: Column(
-          children: [
-            DisplayCalender(
-              eventList: controller.eventList,
-            )
-          ],
+      body: SingleChildScrollView(
+        child: CustomBackground(
+          customWidget: Column(
+            children: [
+              DisplayCalender(
+                eventList: controller.eventList,
+              )
+            ],
+          ),
         ),
       ),
     );

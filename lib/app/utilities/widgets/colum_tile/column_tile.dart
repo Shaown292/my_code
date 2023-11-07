@@ -29,9 +29,12 @@ class ColumnTile extends StatelessWidget {
             style: AppTextStyle.homeworkElements,
           ),
           8.verticalSpacing,
-          Text(
-            value ?? "",
-            style: AppTextStyle.homeworkElements,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Text(
+              value ?? "",
+              style: AppTextStyle.homeworkElements,
+            ),
           ),
         ],
       ),

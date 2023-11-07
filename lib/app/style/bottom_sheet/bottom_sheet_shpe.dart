@@ -6,10 +6,10 @@ ShapeBorder defaultBottomSheetShape() {
   return const RoundedRectangleBorder(
     borderRadius: BorderRadius.only(
       topLeft: Radius.circular(
-        AppDimens.primaryRadius,
+        AppDimens.radius8,
       ),
       topRight: Radius.circular(
-        AppDimens.primaryRadius,
+        AppDimens.radius8,
       ),
     ),
   );
