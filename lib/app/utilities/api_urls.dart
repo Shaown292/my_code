@@ -132,6 +132,14 @@ class InfixApi {
   static String bookList = "${baseApi}student-library";
   static String studentApplyLeave = "${baseApi}student-leave-store";
 
+  static String getStudentRemainingLeave(int studentId) {
+    return "${baseApi}remaining-leave?student_id=$studentId";
+  }
+
+  static String getBookSearch({required String bookName}) {
+    return "${baseApi}student-library?book_title=$bookName";
+  }
+
 
 
   //////////////////////////.......................................///////////////////////////////////
