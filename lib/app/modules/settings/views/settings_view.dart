@@ -5,11 +5,13 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:get/get.dart';
+import '../../../data/constants/app_text.dart';
 import '../../../routes/app_pages.dart';
+import '../../../utilities/widgets/common_widgets/alert_dialog.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
-  const SettingsView({Key? key}) : super(key: key);
+  const SettingsView({super.key});
   @override
   Widget build(BuildContext context) {
     return  InfixEduScaffold(
@@ -51,7 +53,17 @@ class SettingsView extends GetView<SettingsController> {
                 title: "Delete Account",
                 isLanguage: false,
                 onTileTap: (){
-
+                  Get.dialog(
+                    AccountDeleteDialogue(
+                      onYesTap: () {
+                        // controller.logout();
+                      },
+                      title: 'Confirmation',
+                      subTitle: AppText.deleteAccountWarningMsg,
+                      noText: 'cancel',
+                      yesText: 'delete',
+                    ),
+                  );
                 },
               ),
             ],

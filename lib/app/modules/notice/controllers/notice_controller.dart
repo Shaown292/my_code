@@ -48,6 +48,7 @@ class NoticeController extends GetxController {
     } finally {
       loadingController.isLoading = false;
     }
+    return NoticeListResponseModel();
   }
 
   void showNoticeDetailsBottomSheet({required int index}) {

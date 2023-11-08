@@ -141,6 +141,12 @@ class InfixApi {
   }
 
 
+  static String getStudentSubjects(int recordId) {
+    return "${baseApi}student-subject/$recordId";
+  }
+
+
+
 
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {

@@ -5,12 +5,13 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_text_style.dart';
 import '../controllers/subjects_controller.dart';
 
 class SubjectsView extends GetView<SubjectsController> {
-  const SubjectsView({Key? key}) : super(key: key);
+  const SubjectsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,25 +35,34 @@ class SubjectsView extends GetView<SubjectsController> {
                   children: [
                     SizedBox(
                       width: Get.width * 0.25,
-                      child: const Text(
-                        "Subject",
-                        style: AppTextStyle.fontSize14BlackW500,
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Text(
+                          "Subject",
+                          style: AppTextStyle.fontSize14BlackW500,
+                        ),
                       ),
                     ),
                     5.horizontalSpacing,
                     SizedBox(
                       width: Get.width * 0.25,
-                      child: const Text(
-                        "Teacher",
-                        style: AppTextStyle.fontSize14BlackW500,
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Text(
+                          "Teacher",
+                          style: AppTextStyle.fontSize14BlackW500,
+                        ),
                       ),
                     ),
                     5.horizontalSpacing,
                     SizedBox(
                       width: Get.width * 0.25,
-                      child: const Text(
-                        "Type",
-                        style: AppTextStyle.fontSize14BlackW500,
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Text(
+                          "Type",
+                          style: AppTextStyle.fontSize14BlackW500,
+                        ),
                       ),
                     ),
                   ],
@@ -60,23 +70,33 @@ class SubjectsView extends GetView<SubjectsController> {
               ),
             ),
             10.verticalSpacing,
-            controller.loadingController.isLoading
-                ? const LoadingWidget()
-                : Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: () async {},
-                      child: ListView.builder(
-                        itemCount: 20,
-                        itemBuilder: (context, index) {
-                          return const SubjectTile(
-                            subject: "Bangla (Eng 101)",
-                            teacher: "Christiano Ronaldo",
-                            lectureType: "Theory",
-                          );
-                        },
-                      ),
-                    ),
-                  )
+            Obx(
+              () => controller.loadingController.isLoading
+                  ? const LoadingWidget()
+                  : controller.subjectList.isNotEmpty
+                      ? Expanded(
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              controller.subjectList.clear();
+                              controller.getAllSubjectList(recordId: controller.homeController.studentRecordIdList[0]);
+                            },
+                            child: ListView.builder(
+                              itemCount: controller.subjectList.length,
+                              itemBuilder: (context, index) {
+                                return SubjectTile(
+                                  subject:
+                                      controller.subjectList[index].subject,
+                                  teacher:
+                                      controller.subjectList[index].teacher,
+                                  lectureType:
+                                      controller.subjectList[index].type,
+                                );
+                              },
+                            ),
+                          ),
+                        )
+                      : const NoDataAvailableWidget(),
+            )
           ],
         ),
       ),

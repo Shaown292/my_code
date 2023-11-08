@@ -37,6 +37,7 @@ abstract class Routes {
   static const BOOK_LIST = _Paths.BOOK_LIST;
   static const BOOK_ISSUED = _Paths.BOOK_ISSUED;
   static const TRANSPORT = _Paths.TRANSPORT;
+  static const FEES = _Paths.FEES;
 }
 
 abstract class _Paths {
@@ -75,4 +76,5 @@ abstract class _Paths {
   static const BOOK_LIST = '/book-list';
   static const BOOK_ISSUED = '/book-issued';
   static const TRANSPORT = '/transport';
+  static const FEES = '/fees';
 }
