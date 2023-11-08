@@ -26,6 +26,7 @@ class SyllabusController extends GetxController {
 
   void getSyllabusList() async {
     try {
+
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
