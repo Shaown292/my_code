@@ -11,7 +11,6 @@ class PermissionCheck{
 
   Future<void> checkPermissions(BuildContext context) async {
     PermissionStatus permissionStatus = await Permission.storage.request();
-    print('Permission:::::::: $permissionStatus');
     if (await Permission.storage.request().isGranted) {
       // Either the permission was already granted before or the user just granted it.
     }

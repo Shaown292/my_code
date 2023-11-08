@@ -1,16 +1,14 @@
 class AppText {
-
   static const String welcomeTo = 'Welcome to';
   static const String ultimateEducation = 'ULTIMATE EDUCATION ERP';
 
   static const String noInternetConnection = 'No Internet Connection';
   static const String tryAgainLater = 'Try Again Later';
   static const String logoutWarningMsg = 'Are you sure,\n you want to logout?';
-  static const String connectInternetMessage = 'Connect with Internet and Restart your App.';
-
+  static const String connectInternetMessage =
+      'Connect with Internet and Restart your App.';
 
   /// Profile
-
 
   static const String dateOfBirth = 'Date of birth';
   static const String age = 'Age';
@@ -25,23 +23,27 @@ class AppText {
   static const String profileClass = 'Class';
   static const String profileSection = 'Section:';
   static const String profileAdmission = 'Admission No:';
-  static const String profileRoll= 'Roll:';
-  static const String profileFather= 'Father';
-  static const String profileGuardian= 'Guardian';
-  static const String profileMother= 'Mother';
-  static const String profileNoDataAvailable= 'No data available.';
-
+  static const String profileRoll = 'Roll:';
+  static const String profileFather = 'Father';
+  static const String profileGuardian = 'Guardian';
+  static const String profileMother = 'Mother';
+  static const String profileNoDataAvailable = 'No data available.';
 
   /// Notification
-  static const String notificationMarkAsRaed= 'Mark all as read';
-  static const String noDataAvailable= 'No data available.';
-  static const String notificationTitle= 'Notification';
+  static const String notificationMarkAsRaed = 'Mark all as read';
+  static const String noDataAvailable = 'No data available.';
+  static const String notificationTitle = 'Notification';
 
   /// Edit Profile
-  static const String editProfileFirstName       = 'First Name';
-  static const String editProfileLastName        = 'Last Name';
-  static const String editProfilePhoneNumber     = 'Phone Number';
-  static const String editProfileEmail           = 'Email';
-  static const String editProfileDateOfBirth     = 'Date of Birth';
-  static const String editProfileCurrentAddress  = 'Current Address';
+  static const String editProfileFirstName = 'First Name';
+  static const String editProfileLastName = 'Last Name';
+  static const String editProfilePhoneNumber = 'Phone Number';
+  static const String editProfileEmail = 'Email';
+  static const String editProfileDateOfBirth = 'Date of Birth';
+  static const String editProfileCurrentAddress = 'Current Address';
+
+
+  /// Others
+  static const String downloadMessage = 'Would you like to download the file?';
+
 }

@@ -30,6 +30,12 @@
 @import path_provider_foundation;
 #endif
 
+#if __has_include(<pdf_flutter/PdfFlutterPlugin.h>)
+#import <pdf_flutter/PdfFlutterPlugin.h>
+#else
+@import pdf_flutter;
+#endif
+
 #if __has_include(<permission_handler_apple/PermissionHandlerPlugin.h>)
 #import <permission_handler_apple/PermissionHandlerPlugin.h>
 #else
@@ -49,6 +55,7 @@
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [OpenFilePlugin registerWithRegistrar:[registry registrarForPlugin:@"OpenFilePlugin"]];
   [PathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"PathProviderPlugin"]];
+  [PdfFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"PdfFlutterPlugin"]];
   [PermissionHandlerPlugin registerWithRegistrar:[registry registrarForPlugin:@"PermissionHandlerPlugin"]];
   [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
 }

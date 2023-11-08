@@ -32,14 +32,22 @@ class SyllabusList {
   String? uploadDate;
   String? contentTitle;
   String? description;
+  String? uploadFile;
 
-  SyllabusList({this.id, this.uploadDate, this.contentTitle, this.description});
+  SyllabusList({
+    this.id,
+    this.uploadDate,
+    this.contentTitle,
+    this.description,
+    this.uploadFile,
+  });
 
   SyllabusList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     uploadDate = json['upload_date'];
     contentTitle = json['content_title'];
     description = json['description'];
+    uploadFile = json['upload_file'];
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +56,7 @@ class SyllabusList {
     data['upload_date'] = uploadDate;
     data['content_title'] = contentTitle;
     data['description'] = description;
+    data['upload_file'] = uploadFile;
     return data;
   }
 }

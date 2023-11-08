@@ -736,6 +736,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
+  pdf_flutter:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "7db7d815c0d5c45e69883049be10c6ce851f33ef"
+      url: "https://github.com/erluxman/pdf_flutter"
+    source: git
+    version: "2.1.0"
   permission_handler:
     dependency: "direct main"
     description:

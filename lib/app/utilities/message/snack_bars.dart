@@ -11,7 +11,7 @@ void showBasicSuccessSnackBar({
   String buttonText = '',
   double time = 2,
   String? title,
-  bool positionTop = true,
+  bool positionTop = false,
 }) {
   if (Get.isSnackbarOpen) {
     return;
