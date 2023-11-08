@@ -37,7 +37,8 @@ class SyllabusView extends GetView<SyllabusController> {
                         AccountDeleteDialogue(
                           onYesTap: () {
                             Navigator.pop(context);
-                            controller.syllabusList[index].uploadFile!.isNotEmpty
+                            controller
+                                    .syllabusList[index].uploadFile!.isNotEmpty
                                 ? FileDownloadUtils().downloadFile(
                                     url: controller
                                         .syllabusList[index].uploadFile!,
