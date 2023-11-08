@@ -132,6 +132,10 @@ class InfixApi {
     return "${baseApi}remaining-leave?student_id=$studentId";
   }
 
+  static String getStudentSubjects(int recordId) {
+    return "${baseApi}student-subject/$recordId";
+  }
+
 
 
   //////////////////////////.......................................///////////////////////////////////
@@ -561,8 +565,8 @@ class InfixApi {
   }
 
 
-  static String getSubjectsUrl(dynamic userId, int recordId) {
-    return "${baseApi}studentSubject/$userId/$recordId";
+  static String getStudentSubjectsUrl(int recordId) {
+    return "${baseApi}student-subject/$recordId";
   }
 
   static String getStudentTeacherUrl(

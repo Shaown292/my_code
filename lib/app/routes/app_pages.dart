@@ -22,6 +22,8 @@ import '../modules/exam_result/bindings/exam_result_binding.dart';
 import '../modules/exam_result/views/exam_result_view.dart';
 import '../modules/examination/bindings/examination_binding.dart';
 import '../modules/examination/views/examination_view.dart';
+import '../modules/fees/bindings/fees_binding.dart';
+import '../modules/fees/views/fees_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/leave/bindings/leave_binding.dart';
@@ -123,18 +125,16 @@ class AppPages {
       binding: NotificationBinding(),
     ),
     GetPage(
-      name: _Paths.PROFILE_EDIT,
-      page: () => const ProfileEditView(),
-      binding: ProfileEditBinding(),
-      transition: Transition.rightToLeft
-    ),
+        name: _Paths.PROFILE_EDIT,
+        page: () => const ProfileEditView(),
+        binding: ProfileEditBinding(),
+        transition: Transition.rightToLeft),
     GetPage(
-      name: _Paths.STUDENT_HOMEWORK,
-      page: () => const StudentHomeworkView(),
-      binding: StudentHomeworkBinding(),
-      transition: Transition.fade,
-      transitionDuration: Duration(microseconds: 500)
-    ),
+        name: _Paths.STUDENT_HOMEWORK,
+        page: () => const StudentHomeworkView(),
+        binding: StudentHomeworkBinding(),
+        transition: Transition.fade,
+        transitionDuration: Duration(microseconds: 500)),
     GetPage(
       name: _Paths.ROUTINE,
       page: () => const RoutineView(),
@@ -257,6 +257,11 @@ class AppPages {
       name: _Paths.TRANSPORT,
       page: () => const TransportView(),
       binding: TransportBinding(),
+    ),
+    GetPage(
+      name: _Paths.FEES,
+      page: () => const FeesView(),
+      binding: FeesBinding(),
     ),
   ];
 }

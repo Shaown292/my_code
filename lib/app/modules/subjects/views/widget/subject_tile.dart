@@ -22,32 +22,41 @@ class SubjectTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 10, left: 15, right: 15),
       child: Column(
         children: [
           Row(
             children: [
               SizedBox(
                 width: Get.width * 0.25,
-                child:  Text(
-                  subject ?? "",
-                  style: AppTextStyle.fontSize13BlackW400,
+                child:  Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Text(
+                    subject ?? "",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
                 ),
               ),
               5.horizontalSpacing,
               SizedBox(
                 width: Get.width * 0.25,
-                child:  Text(
-                  teacher ?? "",
-                  style: AppTextStyle.fontSize13BlackW400,
+                child:  Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Text(
+                    teacher ?? "",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
                 ),
               ),
               5.horizontalSpacing,
               SizedBox(
                 width: Get.width * 0.25,
-                child:  Text(
-                  lectureType ?? "",
-                  style: AppTextStyle.fontSize13BlackW400,
+                child:  Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Text(
+                    lectureType ?? "",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
                 ),
               ),
             ],

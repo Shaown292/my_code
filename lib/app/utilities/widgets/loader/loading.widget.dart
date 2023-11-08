@@ -8,7 +8,7 @@ import 'loading.controller.dart';
 import 'dart:io' show Platform;
 
 class LoadingWidget extends GetWidget<LoadingController> {
-  const LoadingWidget({Key? key}) : super(key: key);
+  const LoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,27 +16,25 @@ class LoadingWidget extends GetWidget<LoadingController> {
       return controller.isLoading
           ? WillPopScope(
               onWillPop: () => Future.value(false),
-              child: Expanded(
-                child: Stack(
-                  children: <Widget>[
-                    ModalBarrier(
-                      dismissible: false,
-                      color: Colors.grey.withOpacity(.25),
-                    ),
-                    Center(
-                      child: Platform.isIOS
-                          ? const CupertinoActivityIndicator(
-                              color: AppColors.primaryColor,
-                              radius: 24,
-                            )
-                          : const CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(
-                                AppColors.primaryColor,
-                              ),
+              child: Stack(
+                children: <Widget>[
+                  ModalBarrier(
+                    dismissible: false,
+                    color: Colors.grey.withOpacity(.25),
+                  ),
+                  Center(
+                    child: Platform.isIOS
+                        ? const CupertinoActivityIndicator(
+                            color: AppColors.primaryColor,
+                            radius: 24,
+                          )
+                        : const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(
+                              AppColors.primaryColor,
                             ),
-                    ),
-                  ],
-                ),
+                          ),
+                  ),
+                ],
               ),
             )
           : const SizedBox();
