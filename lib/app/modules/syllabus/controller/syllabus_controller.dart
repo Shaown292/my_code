@@ -101,8 +101,10 @@ class SyllabusController extends GetxController {
         }
       });
     } catch (e, t) {
+
       debugPrint(e.toString());
       debugPrint(t.toString());
+
     }
   }
 }
