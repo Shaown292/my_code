@@ -111,7 +111,9 @@ class LeaveListView extends GetView<LeaveListController> {
                           ///Pending
                           
                           controller.loadingController.isLoading
-                              ? const LoadingWidget()
+                              ? const Center(child: CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          ))
                               : controller.pendingList.isNotEmpty
                                   ? ListView.builder(
                                       shrinkWrap: true,

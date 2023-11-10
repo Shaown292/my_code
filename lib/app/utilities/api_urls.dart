@@ -102,6 +102,7 @@ class InfixApi {
     return '${baseApi}profile-others';
   }
 
+
   static String getStudentTeacherList(int roleId) {
     return '${baseApi}student-teacher/$roleId';
   }
@@ -131,6 +132,7 @@ class InfixApi {
 
   static String bookList = "${baseApi}student-library";
   static String studentApplyLeave = "${baseApi}student-leave-store";
+  static String studentUploadDocuments = "${baseApi}profile-documents-store";
 
   static String getStudentRemainingLeave(int studentId) {
     return "${baseApi}remaining-leave?student_id=$studentId";
@@ -145,7 +147,16 @@ class InfixApi {
     return "${baseApi}student-subject/$recordId";
   }
 
+  static String getStudentFeesDetails() {
+    return "${baseApi}fees-invoice-view/1";
+  }
 
+  static String profileDocumentGet() {
+    return '${baseApi}profile-documents';
+  }
+  static String profileDocumentDelete({required documentId}) {
+    return '${baseApi}profile-documents-delete/$documentId';
+  }
 
 
   //////////////////////////.......................................///////////////////////////////////

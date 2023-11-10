@@ -14,6 +14,8 @@ import '../modules/book_list/bindings/book_list_binding.dart';
 import '../modules/book_list/views/book_list_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
+import '../modules/chat/bindings/chat_binding.dart';
+import '../modules/chat/views/chat_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/dormitory/bindings/dormitory_binding.dart';
@@ -117,6 +119,7 @@ class AppPages {
         HomeBinding(),
         NotificationBinding(),
         RoutineBinding(),
+        FeesBinding(),
       ],
     ),
     GetPage(
@@ -262,6 +265,11 @@ class AppPages {
       name: _Paths.FEES,
       page: () => const FeesView(),
       binding: FeesBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () => const ChatView(),
+      binding: ChatBinding(),
     ),
   ];
 }

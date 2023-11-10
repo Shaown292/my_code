@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/fees/views/fees_view.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/views/home_view.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/profile_view.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/routine/views/routine_view.dart';
@@ -22,9 +23,11 @@ class DashboardView extends GetView<DashboardController> {
             : const HomeView(),
 
         const NotificationView(),
+
         GlobalVariableController.roleId == 4
             ? const ProfileView()
-            : const HomeView(),
+            : const FeesView(),
+
 
         GlobalVariableController.roleId == 4
             ? const ProfileView()

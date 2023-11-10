@@ -45,11 +45,12 @@ class ProfileEditView extends GetView<ProfileEditController> {
                                     height: 100,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                ImagePath.editProfileImage),
-                                            fit: BoxFit.cover)),
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              ImagePath.editProfileImage),
+                                          fit: BoxFit.cover),
+                                    ),
                                   )
                                 : SizedBox(
                                     height: 100,
@@ -101,23 +102,23 @@ class ProfileEditView extends GetView<ProfileEditController> {
                                     }
                                   },
                                   fromCamera: () async {
-                                    controller.profileDataController
-                                            .profilePickedImage.value =
-                                        await FlutterImagePickerUtils
-                                            .getImageCamera(
-                                      context,
-                                    );
-                                    if (controller
-                                        .profileDataController
-                                        .profilePickedImage
-                                        .value
-                                        .path
-                                        .isNotEmpty) {
-                                      controller.profilePhotoUpdate(
-                                          file: controller.profileDataController
-                                              .profilePickedImage.value.path);
-                                    }
-                                  },
+                                  controller.profileDataController
+                                      .profilePickedImage.value =
+                                  await FlutterImagePickerUtils
+                                      .getImageCamera(
+                                    context,
+                                  );
+                                  if (controller
+                                      .profileDataController
+                                      .profilePickedImage
+                                      .value
+                                      .path
+                                      .isNotEmpty) {
+                                    controller.profilePhotoUpdate(
+                                        file: controller.profileDataController
+                                            .profilePickedImage.value.path);
+                                  }
+                                },
                                 );
                               },
                               child: Container(
