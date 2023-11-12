@@ -9,7 +9,7 @@ import 'event_status.dart';
 
 class DisplayCalender extends StatelessWidget {
   final EventList<Event>? eventList ;
-  const DisplayCalender({Key? key, this.eventList}) : super(key: key);
+  const DisplayCalender({super.key, this.eventList});
 
   @override
   Widget build(BuildContext context) {
