@@ -64,6 +64,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/student_homework/bindings/student_homework_binding.dart';
 import '../modules/student_homework/views/student_homework_view.dart';
+import '../modules/student_lesson_plan/bindings/student_lesson_plan_binding.dart';
+import '../modules/student_lesson_plan/views/student_lesson_plan_view.dart';
 import '../modules/student_search_attendance/bindings/student_search_attendance_binding.dart';
 import '../modules/student_search_attendance/views/student_search_attendance_view.dart';
 import '../modules/study_materials/bindings/study_materials_binding.dart';
@@ -284,6 +286,11 @@ class AppPages {
       name: _Paths.STUDENT_SEARCH_ATTENDANCE,
       page: () => const StudentSearchAttendanceView(),
       binding: StudentSearchAttendanceBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENT_LESSON_PLAN,
+      page: () => const StudentLessonPlanView(),
+      binding: StudentLessonPlanBinding(),
     ),
   ];
 }
