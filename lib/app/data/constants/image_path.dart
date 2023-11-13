@@ -108,6 +108,7 @@ class ImagePath {
   static String settingLanguage      = "assets/images/language.png";
   static String changePassword       = "assets/images/change_password.png";
   static String delete               = "assets/images/delete.png";
+  static String download             = "assets/images/download.png";
 
 
   /// Leave

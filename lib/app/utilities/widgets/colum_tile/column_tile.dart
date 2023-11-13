@@ -9,6 +9,7 @@ class ColumnTile extends StatelessWidget {
   final String? value;
   final double? width;
 
+
   const ColumnTile({
     super.key,
     this.title,

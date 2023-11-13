@@ -38,6 +38,8 @@ abstract class Routes {
   static const BOOK_ISSUED = _Paths.BOOK_ISSUED;
   static const TRANSPORT = _Paths.TRANSPORT;
   static const FEES = _Paths.FEES;
+  static const CHAT = _Paths.CHAT;
+  static const CHAT_SEARCH = _Paths.CHAT_SEARCH;
 }
 
 abstract class _Paths {
@@ -77,4 +79,6 @@ abstract class _Paths {
   static const BOOK_ISSUED = '/book-issued';
   static const TRANSPORT = '/transport';
   static const FEES = '/fees';
+  static const CHAT = '/chat';
+  static const CHAT_SEARCH = '/chat-search';
 }

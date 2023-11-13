@@ -15,7 +15,7 @@ import '../../../utilities/widgets/common_widgets/alert_dialog.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class HomeView extends GetView<HomeController> {
           CustomIconButton(
             icon: FontAwesomeIcons.facebookMessenger,
             onPressed: () {
-              Get.toNamed(Routes.SCHEDULE);
+
             },
           ),
           CustomIconButton(

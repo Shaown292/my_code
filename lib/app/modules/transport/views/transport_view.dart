@@ -31,9 +31,8 @@ class TransportView extends GetView<TransportController> {
             child: Column(
               children: [
                 Container(
-                  height: Get.height * 0.07,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(8),
@@ -49,9 +48,12 @@ class TransportView extends GetView<TransportController> {
                           style: AppTextStyle.textStyle12WhiteW500,
                         ),
                       ),
-                      const VerticalDivider(
-                        color: AppColors.profileTitleColor,
-                        thickness: 1,
+                      SizedBox(
+                        height: Get.height * 0.05,
+                        child: const VerticalDivider(
+                          color: AppColors.profileTitleColor,
+                          thickness: 1,
+                        ),
                       ),
                       Container(
                         width: Get.width * 0.2,
@@ -61,9 +63,12 @@ class TransportView extends GetView<TransportController> {
                           style: AppTextStyle.textStyle12WhiteW500,
                         ),
                       ),
-                      const VerticalDivider(
-                        color: AppColors.profileTitleColor,
-                        thickness: 1,
+                      SizedBox(
+                        height: Get.height * 0.05,
+                        child: const VerticalDivider(
+                          color: AppColors.profileTitleColor,
+                          thickness: 1,
+                        ),
                       ),
                       const Text(
                         "Route",
@@ -72,12 +77,12 @@ class TransportView extends GetView<TransportController> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Obx(
-                    () => controller.loadingController.isLoading
-                        ? const LoadingWidget()
-                        : controller.transportDataList.isNotEmpty
-                            ? ListView.builder(
+                Obx(
+                  () => controller.loadingController.isLoading
+                      ? const LoadingWidget()
+                      : controller.transportDataList.isNotEmpty
+                          ? Expanded(
+                            child: ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: controller.transportDataList.length,
                                 itemBuilder: (context, index) {
@@ -93,11 +98,11 @@ class TransportView extends GetView<TransportController> {
                                             index: index),
                                   );
                                 },
-                              )
-                            : const Center(
-                                child: NoDataAvailableWidget(),
                               ),
-                  ),
+                          )
+                          : const Center(
+                              child: NoDataAvailableWidget(),
+                            ),
                 ),
               ],
             ),

@@ -84,11 +84,11 @@ class NotificationBell extends StatelessWidget {
           child: SvgPicture.asset("assets/svg/student/notification_bell.svg",),
         ),
         Positioned(
-          top: 8,
-          right: 8,
+          top: 5,
+          right: 0,
           child: Container(
-            height: 20,
-            width: 20,
+            height: 25,
+            width: 25,
             decoration:  const BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.primaryColor,
