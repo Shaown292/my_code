@@ -40,6 +40,7 @@ abstract class Routes {
   static const FEES = _Paths.FEES;
   static const CHAT = _Paths.CHAT;
   static const CHAT_SEARCH = _Paths.CHAT_SEARCH;
+  static const STUDENT_SEARCH_ATTENDANCE = _Paths.STUDENT_SEARCH_ATTENDANCE;
 }
 
 abstract class _Paths {
@@ -81,4 +82,5 @@ abstract class _Paths {
   static const FEES = '/fees';
   static const CHAT = '/chat';
   static const CHAT_SEARCH = '/chat-search';
+  static const STUDENT_SEARCH_ATTENDANCE = '/student-search-attendance';
 }

@@ -25,9 +25,7 @@ class InfixApi {
   //   return '${baseApi}login?email=$email&password=$password';
   // }
 
-  static String login() {
-    return '${baseApi}login';
-  }
+  static String login() => '${baseApi}login';
 
   static String editProfile(int studentId) {
     return '${baseApi}student-profile-edit/$studentId';
@@ -73,16 +71,16 @@ class InfixApi {
     return '${baseApi}student-assignment/$studentRecordId';
   }
 
-
   static String getStudentOthersDownloadList(int studentRecordId) {
     return '${baseApi}student-others-download/$studentRecordId';
   }
 
-  static String getStudentRoutineList(int roleId ,int studentRecordId) {
+  static String getStudentRoutineList(int roleId, int studentRecordId) {
     return '${baseApi}student-class-routine/$roleId/$studentRecordId';
   }
 
-  static String getStudentExamResultList({required int examId, required int recordId}) {
+  static String getStudentExamResultList(
+      {required int examId, required int recordId}) {
     return '${baseApi}exam-result/$examId/$recordId';
   }
 
@@ -102,17 +100,26 @@ class InfixApi {
     return '${baseApi}profile-others';
   }
 
-
   static String getStudentTeacherList(int roleId) {
     return '${baseApi}student-teacher/$roleId';
   }
+
   static String getStudentLeaveList(int studentId) {
     return '${baseApi}apply-leave?student_id=$studentId';
   }
 
-  static String getStudentAttendance({required int recordId, required int studentId}) {
-    return '${baseApi}student-attendance?record_id=1&student_id=2';
+  static String getStudentAttendance(
+      {required int recordId, required int studentId}) {
+    return '${baseApi}student-attendance?record_id=$recordId&student_id=$studentId';
   }
+
+  static String getStudentAttendanceWithDate({
+    required int recordId,
+    required int studentId,
+    required int year,
+    required int month,
+  }) =>
+      '${baseApi}student-attendance?year=$year&month=$month&record_id=$recordId&student_id=$studentId';
 
   static String getStudentOnlineExamResult({required int studentId}) {
     return "${baseApi}student-view-result?student_id=$studentId";
@@ -146,7 +153,6 @@ class InfixApi {
     return "${baseApi}student-library?book_title=$bookName";
   }
 
-
   static String getStudentSubjects(int recordId) {
     return "${baseApi}student-subject/$recordId";
   }
@@ -158,10 +164,10 @@ class InfixApi {
   static String profileDocumentGet() {
     return '${baseApi}profile-documents';
   }
+
   static String profileDocumentDelete({required documentId}) {
     return '${baseApi}profile-documents-delete/$documentId';
   }
-
 
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {
@@ -435,14 +441,14 @@ class InfixApi {
   }
 
   static String childFeeChequePayment(
-      String amount,
-      dynamic classID,
-      dynamic sectionID,
-      String userID,
-      dynamic feeTypeID,
-      String paymentMode,
-      String paymentDate,
-      ) {
+    String amount,
+    dynamic classID,
+    dynamic sectionID,
+    String userID,
+    dynamic feeTypeID,
+    String paymentMode,
+    String paymentDate,
+  ) {
     return "${baseApi}child-bank-slip-store?amount=$amount&class_id=$classID&section_id=$sectionID&user_id=$userID&fees_type_id=$feeTypeID&payment_mode=$paymentMode&date=$paymentDate";
   }
 
@@ -452,16 +458,13 @@ class InfixApi {
 
   static String bankList = "${baseApi}banks";
 
-  static String userLeaveType(id)
-  {
+  static String userLeaveType(id) {
     return "${baseApi}my-leave-type/$id";
   }
 
   static String userApplyLeaveStore = '${baseApi}student-apply-leave-store';
 
-
-  static String approvedLeaves(id)
-  {
+  static String approvedLeaves(id) {
     return "${baseApi}approve-leave/$id";
   }
 
@@ -469,8 +472,7 @@ class InfixApi {
     return "${baseApi}pending-leave/$id?purpose=$purpose";
   }
 
-  static String rejectedLeaves(id)
-  {
+  static String rejectedLeaves(id) {
     return "${baseApi}reject-leave/$id";
   }
 
@@ -494,6 +496,7 @@ class InfixApi {
   }
 
   static String paymentDataSave = "${baseApi}payment-data-save";
+
   // static String paymentSuccessCallback = baseApi + "payment-success-callback";
 
   static String paymentSuccessCallback(status, paymentRef, amount) {
@@ -505,7 +508,6 @@ class InfixApi {
   static String notice(var schoolId) {
     return "${baseApi}school/$schoolId/notice-list";
   }
-
 
   static String getStudentRoutineReport = "${baseApi}exam-routine-report";
 
@@ -569,8 +571,6 @@ class InfixApi {
 
   static String chatGetBlockedUsers = "${baseApi}chat/users/blocked";
 
-
-
   static String getStudentHomeWork(int roleId) {
     return "${baseApi}student-homework/$roleId";
   }
@@ -585,7 +585,6 @@ class InfixApi {
     return "${baseApi}studentSyllabus/$id/$recordId";
   }
 
-
   static String getSubjectsUrl(dynamic userId, int recordId) {
     return "${baseApi}studentSubject/$userId/$recordId";
   }
@@ -599,8 +598,6 @@ class InfixApi {
       var id, dynamic examId, int recordId) {
     return "${baseApi}exam-result/$id/$examId/$recordId";
   }
-
-
 
   static String getStudentOnlineActiveExamName(var id, int recordId) {
     return "${baseApi}choose-exam/$id/$recordId";

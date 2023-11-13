@@ -10,7 +10,7 @@ import '../../../utilities/app_functions/functionality.dart';
 import '../controllers/study_materials_controller.dart';
 
 class StudyMaterialsView extends GetView<StudyMaterialsController> {
-  const StudyMaterialsView({Key? key}) : super(key: key);
+  const StudyMaterialsView({super.key});
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(

@@ -136,6 +136,12 @@ class AppFunctions {
       case 'Book Issued':
         Get.toNamed(Routes.BOOK_ISSUED);
         break;
+      case 'Search Attendance':
+        Get.toNamed(Routes.STUDENT_SEARCH_ATTENDANCE);
+        break;
+      case 'Search Sub Attendance':
+        Get.toNamed(Routes.STUDENT_SEARCH_ATTENDANCE);
+        break;
 
 
     }

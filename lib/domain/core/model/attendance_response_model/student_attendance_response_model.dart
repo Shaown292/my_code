@@ -24,21 +24,23 @@ class StudentAttendanceResponseModel {
 
 class Data {
   List<Attendances>? attendances;
-  PreviousMonthDetails? previousMonthDetails;
-  int? days;
-  int? year;
-  int? month;
   String? currentDay;
   String? status;
+  int? present;
+  int? late;
+  int? absent;
+  int? holidayDay;
+  int? halfDay;
 
   Data(
       {this.attendances,
-        this.previousMonthDetails,
-        this.days,
-        this.year,
-        this.month,
         this.currentDay,
-        this.status});
+        this.status,
+        this.present,
+        this.late,
+        this.absent,
+        this.holidayDay,
+        this.halfDay});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['attendances'] != null) {
@@ -47,14 +49,13 @@ class Data {
         attendances!.add(Attendances.fromJson(v));
       });
     }
-    previousMonthDetails = json['previousMonthDetails'] != null
-        ? PreviousMonthDetails.fromJson(json['previousMonthDetails'])
-        : null;
-    days = json['days'];
-    year = json['year'];
-    month = json['month'];
     currentDay = json['current_day'];
     status = json['status'];
+    present = json['P'];
+    late = json['L'];
+    absent = json['A'];
+    holidayDay = json['H'];
+    halfDay = json['F'];
   }
 
   Map<String, dynamic> toJson() {
@@ -62,14 +63,13 @@ class Data {
     if (attendances != null) {
       data['attendances'] = attendances!.map((v) => v.toJson()).toList();
     }
-    if (previousMonthDetails != null) {
-      data['previousMonthDetails'] = previousMonthDetails!.toJson();
-    }
-    data['days'] = days;
-    data['year'] = year;
-    data['month'] = month;
     data['current_day'] = currentDay;
     data['status'] = status;
+    data['P'] = present;
+    data['L'] = late;
+    data['A'] = absent;
+    data['H'] = holidayDay;
+    data['F'] = halfDay;
     return data;
   }
 }
@@ -89,28 +89,6 @@ class Attendances {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['attendance_type'] = attendanceType;
     data['attendance_date'] = attendanceDate;
-    return data;
-  }
-}
-
-class PreviousMonthDetails {
-  String? date;
-  int? day;
-  String? weekName;
-
-  PreviousMonthDetails({this.date, this.day, this.weekName});
-
-  PreviousMonthDetails.fromJson(Map<String, dynamic> json) {
-    date = json['date'];
-    day = json['day'];
-    weekName = json['week_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['date'] = date;
-    data['day'] = day;
-    data['week_name'] = weekName;
     return data;
   }
 }

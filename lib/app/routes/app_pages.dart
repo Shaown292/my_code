@@ -64,6 +64,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/student_homework/bindings/student_homework_binding.dart';
 import '../modules/student_homework/views/student_homework_view.dart';
+import '../modules/student_search_attendance/bindings/student_search_attendance_binding.dart';
+import '../modules/student_search_attendance/views/student_search_attendance_view.dart';
 import '../modules/study_materials/bindings/study_materials_binding.dart';
 import '../modules/study_materials/views/study_materials_view.dart';
 import '../modules/subjects/bindings/subjects_binding.dart';
@@ -277,6 +279,11 @@ class AppPages {
       name: _Paths.CHAT_SEARCH,
       page: () => const ChatSearchView(),
       binding: ChatSearchBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENT_SEARCH_ATTENDANCE,
+      page: () => const StudentSearchAttendanceView(),
+      binding: StudentSearchAttendanceBinding(),
     ),
   ];
 }
