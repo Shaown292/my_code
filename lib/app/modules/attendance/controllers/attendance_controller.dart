@@ -18,7 +18,8 @@ class AttendanceController extends GetxController {
 
   @override
   void onInit() {
-    setEventData();
+    getAttendanceList(recordId: homeController.studentRecordList[0].id, studentId: GlobalVariableController.studentId!).then((value) => setEventData());
+    // setEventData();
     super.onInit();
   }
 
@@ -28,6 +29,12 @@ class AttendanceController extends GetxController {
   static const absentEvent = DisplayDot(color: Color(0xFFF32E21));
   static const holidayEvent = DisplayDot(color: Color(0xFF462564));
 
+  RxInt present = 0.obs;
+  RxInt halfDay = 0.obs;
+  RxInt late = 0.obs;
+  RxInt absent = 0.obs;
+  RxInt holiday = 0.obs;
+
 
 
   Map<DateTime, List<Event>> customEventList = {};
@@ -35,21 +42,8 @@ class AttendanceController extends GetxController {
   List<Attendances> attendanceList = [];
 
   void setEventData() {
-
-    customEventList[DateTime(2023, 10, 26)] = [Event(date: DateTime(2023, 10, 26), dot: presentEvent)];
-    customEventList = {
-
-      DateTime(2023, 10, 26): [Event(date: DateTime(2023, 10, 26), dot: presentEvent)],
-      DateTime(2023, 10, 27): [Event(date: DateTime(2023, 10, 27), dot: lateEvent)],
-      DateTime(2023, 10, 2): [Event(date: DateTime(2023, 10, 2), dot: holidayEvent)],
-      DateTime(2023, 10, 28): [Event(date: DateTime(2023, 10, 28), dot: halfDayEvent)],
-
-      DateTime(2023, 11, 26): [Event(date: DateTime(2023, 11, 26), dot: presentEvent)],
-      DateTime(2023, 11, 27): [Event(date: DateTime(2023, 11, 27), dot: lateEvent)],
-      DateTime(2023, 11, 2): [Event(date: DateTime(2023, 11, 2), dot: holidayEvent)],
-      DateTime(2023, 11, 28): [Event(date: DateTime(2023, 11, 28), dot: halfDayEvent)],
-
-    };
+    // customEventList[DateTime(2023, 11, 9)] = [Event(date: DateTime(2023, 11, 9), dot: presentEvent)];
+    customEventList[DateTime(attendanceList[0].attendanceDate!.year, attendanceList[0].attendanceDate!.month, attendanceList[0].attendanceDate!.day)] = [Event(date: DateTime(attendanceList[0].attendanceDate!.year, attendanceList[0].attendanceDate!.month, attendanceList[0].attendanceDate!.day), dot: presentEvent)];
 
     eventList = EventList<Event>(events: customEventList);
 
@@ -74,8 +68,12 @@ class AttendanceController extends GetxController {
           for (int i = 0;
           i < attendanceResponseModel.data!.attendances!.length; i++) {
             attendanceList.add(attendanceResponseModel.data!.attendances![i]);
+            customEventList[DateTime(attendanceList[i].attendanceDate!.year, attendanceList[i].attendanceDate!.month, attendanceList[i].attendanceDate!.day)] = [Event(date: DateTime(attendanceList[i].attendanceDate!.year, attendanceList[i].attendanceDate!.month, attendanceList[i].attendanceDate!.day), dot: presentEvent)];
+            getAttendanceCount(attendanceList[i].attendanceType!);
           }
         }
+
+
 
       }
 
@@ -90,6 +88,26 @@ class AttendanceController extends GetxController {
     return StudentAttendanceResponseModel();
   }
 
+  void getAttendanceCount(String status){
+    switch (status) {
+      case 'P':
+        present++;
+        break;
+      case 'A':
+        absent++;
+        break;
+      case 'L':
+        late++;
+        break;
+      case 'F':
+        halfDay++;
+        break;
+      case 'H':
+        holiday++;
+        break;
+
+    }
+  }
 
 }
 

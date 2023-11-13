@@ -20,27 +20,24 @@ class EventStatus extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 50,
-                height: 20,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(3), color: color),
-              ),
-              10.horizontalSpacing,
-              Text(
-                title ?? "",
-                style: AppTextStyle.fontSize14GreyW400,
-              )
-            ],
+          Container(
+            width: 50,
+            height: 20,
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(3), color: color),
           ),
+          10.horizontalSpacing,
+          Text(
+            title ?? "",
+            style: AppTextStyle.fontSize14GreyW400,
+          ),
+          const Spacer(),
           Text(
             "$numberOfDays days",
             style: AppTextStyle.fontSize14GreyW400,
-          )
+          ),
+
         ],
       ),
     );

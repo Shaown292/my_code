@@ -76,13 +76,13 @@ class Data {
 
 class Attendances {
   String? attendanceType;
-  String? attendanceDate;
+  DateTime? attendanceDate;
 
   Attendances({this.attendanceType, this.attendanceDate});
 
   Attendances.fromJson(Map<String, dynamic> json) {
     attendanceType = json['attendance_type'];
-    attendanceDate = json['attendance_date'];
+    attendanceDate = DateTime.tryParse(json['attendance_date']);
   }
 
   Map<String, dynamic> toJson() {
