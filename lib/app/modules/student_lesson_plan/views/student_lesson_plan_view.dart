@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/student_lesson_plan_controller.dart';
 
 class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
-  const StudentLessonPlanView({Key? key}) : super(key: key);
+  const StudentLessonPlanView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
