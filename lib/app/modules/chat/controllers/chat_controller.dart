@@ -32,7 +32,7 @@ class ChatController extends GetxController {
 
   String? changeActiveStatusColor (){
     String colorCode = '';
-    String status = activeStatus.toString();
+    String status = dropdownValue.value;
     if (status == 'ACTIVE') {
       colorCode = '0xFF12AE01';
     } else if (status == 'INACTIVE') {

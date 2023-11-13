@@ -74,9 +74,20 @@ class ChatSearchView extends GetView<ChatSearchController> {
                     ),
                   ),
                 ),
-                const Icon(
-                  Icons.more_vert,
+                PopupMenuButton(
+                  padding: EdgeInsets.zero,
                   color: Colors.white,
+                  onSelected: (value) {
+                    if (value == 1) {
+
+                    }
+                  },
+                  itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      value: 1,
+                      child: Text("Blocked Users"),
+                    ),
+                  ],
                 ),
               ],
             ),
