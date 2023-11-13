@@ -35,22 +35,23 @@ class ActiveExamView extends GetView<ActiveExamController> {
                           controller.homeController.studentRecordList.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Obx(
-                              () => StudyButton(
-                                title:
-                                    "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                                onItemTap: () {
-                                  controller.onlineActiveExamList.clear();
-                                  int recordId = controller.homeController
-                                      .studentRecordList[index].id;
-                                  controller.getStudentActiveExamList(
-                                      recordId: recordId);
-                                },
-                                isSelected:
-                                    controller.selectIndex.value == index,
-                              ),
-                            ));
+                          padding: const EdgeInsets.all(8.0),
+                          child: Obx(
+                            () => StudyButton(
+                              title:
+                                  "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                              onItemTap: () {
+                                controller.onlineActiveExamList.clear();
+                                controller.selectIndex.value = index;
+                                int recordId = controller
+                                    .homeController.studentRecordList[index].id;
+                                controller.getStudentActiveExamList(
+                                    recordId: recordId);
+                              },
+                              isSelected: controller.selectIndex.value == index,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -71,13 +72,21 @@ class ActiveExamView extends GetView<ActiveExamController> {
                                       controller.onlineActiveExamList.length,
                                   itemBuilder: (context, index) {
                                     String colorCode = '';
-                                    if(controller.onlineActiveExamList[index].status == 'Closed'){
+                                    if (controller.onlineActiveExamList[index]
+                                            .status ==
+                                        'Closed') {
                                       colorCode = '0xFFF95452';
-                                    } else if(controller.onlineActiveExamList[index].status == 'Already Submitted'){
+                                    } else if (controller
+                                            .onlineActiveExamList[index]
+                                            .status ==
+                                        'Already Submitted') {
                                       colorCode = '0xFF404FB6';
-                                    } else if(controller.onlineActiveExamList[index].status == 'Take Exam'){
+                                    } else if (controller
+                                            .onlineActiveExamList[index]
+                                            .status ==
+                                        'Take Exam') {
                                       colorCode = '0xFF943AE3';
-                                    } else{
+                                    } else {
                                       colorCode = '0xFF412C56';
                                     }
 
@@ -89,13 +98,17 @@ class ActiveExamView extends GetView<ActiveExamController> {
                                       startingTime: controller
                                           .onlineActiveExamList[index]
                                           .startTime,
-                                      startDate: controller.onlineActiveExamList[index].startDate,
-                                      endDate: controller.onlineActiveExamList[index].endDate,
+                                      startDate: controller
+                                          .onlineActiveExamList[index]
+                                          .startDate,
+                                      endDate: controller
+                                          .onlineActiveExamList[index].endDate,
                                       endingTime: controller
                                           .onlineActiveExamList[index].endTime,
                                       activeStatus: controller
                                           .onlineActiveExamList[index].status,
-                                      activeStatusColor: Color(int.tryParse(colorCode)!),
+                                      activeStatusColor:
+                                          Color(int.tryParse(colorCode)!),
                                       color: index % 2 == 0
                                           ? Colors.white
                                           : AppColors.homeworkWidgetColor,

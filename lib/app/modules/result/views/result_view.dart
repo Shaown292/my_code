@@ -50,6 +50,7 @@ class ResultView extends GetView<ResultController> {
                                 title:
                                     "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                 onItemTap: () {
+                                  controller.selectIndex.value = index;
                                   controller
                                       .examinationController.examDropdownList
                                       .clear();

@@ -8,6 +8,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/icon_but
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_app_bar/primary_app_bar.dart';
+import 'package:flutter_single_getx_api_v2/test_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -29,7 +30,7 @@ class HomeView extends GetView<HomeController> {
           CustomIconButton(
             icon: FontAwesomeIcons.facebookMessenger,
             onPressed: () {
-
+              Get.to(const TestScreen());
             },
           ),
           CustomIconButton(

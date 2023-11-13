@@ -48,19 +48,18 @@ class DisplayCalender extends StatelessWidget {
             // onLeftArrowPressed: onCalendarChange,
 
             height: Get.height * 0.5,
-            todayButtonColor: Colors.transparent,
-            todayBorderColor: Colors.transparent,
             daysTextStyle: AppTextStyle.fontSize14GreyW400,
             todayTextStyle: AppTextStyle.fontSize14GreyW400,
             headerTextStyle: AppTextStyle.homeworkSubject,
             weekdayTextStyle: AppTextStyle.fontSize14GreyW400,
             weekDayPadding: EdgeInsets.zero,
             markedDatesMap: eventList,
-            selectedDateTime: DateTime.now(),
+           selectedDayBorderColor: Colors.transparent,
             selectedDayButtonColor: Colors.white,
+            selectedDateTime: DateTime.now(),
+            daysHaveCircularBorder: false,
             weekendTextStyle: AppTextStyle.fontSize14GreyW400,
-            thisMonthDayBorderColor: Colors.grey,
-
+            thisMonthDayBorderColor: Colors.transparent,
             leftButtonIcon: const Icon(
               Icons.arrow_back_ios_new,
               size: 13,

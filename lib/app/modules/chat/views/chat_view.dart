@@ -40,6 +40,7 @@ class ChatView extends GetView<ChatController> {
                   dropdownColor: AppColors.activeExamStatusBlueColor,
                 ),
               );
+
             }
           ),
           10.horizontalSpacing,
@@ -53,13 +54,22 @@ class ChatView extends GetView<ChatController> {
             ),
           ),
           5.horizontalSpacing,
-          InkWell(
-            onTap: () {},
-            child: const Icon(
-              Icons.more_vert,
-              color: Colors.white,
-            ),
+          PopupMenuButton(
+            padding: EdgeInsets.zero,
+            color: Colors.white,
+            onSelected: (value) {
+              if (value == 1) {
+
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 1,
+                child: Text("Blocked Users"),
+              ),
+            ],
           ),
+
         ],
         body: CustomBackground(
           customWidget: Column(

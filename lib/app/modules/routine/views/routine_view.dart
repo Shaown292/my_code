@@ -6,9 +6,11 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/show_week_tile/show_week_tile.dart';
 import 'package:get/get.dart';
 import '../../../../domain/core/model/student_routine_model/StudentRoutineResponseModel.dart';
 import '../../../data/constants/app_colors.dart';
+import '../../../utilities/widgets/student_class_details_card/student_calss_details_card.dart';
 import '../controllers/routine_controller.dart';
 
 class RoutineView extends GetView<RoutineController> {
@@ -55,7 +57,7 @@ class RoutineView extends GetView<RoutineController> {
                                 color: AppColors.appButtonColor),
                             tabs: List.generate(
                               controller.daysOfWeek.length,
-                              (index) => WeekTabBarItem(
+                              (index) => ShowWeekTile(
                                 title: controller.daysOfWeek[index],
                               ),
                             ),
@@ -81,22 +83,18 @@ class RoutineView extends GetView<RoutineController> {
                                         shrinkWrap: true,
                                         itemCount: routineList.length,
                                         itemBuilder: (context, index) {
-                                          return Column(
-                                            children: [
-                                              RoutineCard(
-                                                subject:
-                                                    routineList[index].subject,
-                                                startingTime: routineList[index]
-                                                    .startTime,
-                                                endingTime:
-                                                    routineList[index].endTime,
-                                                roomNumber:
-                                                    routineList[index].room,
-                                                buildingName: 'Building Name',
-                                                instructorName:
-                                                    routineList[index].teacher,
-                                              ),
-                                            ],
+                                          return StudentClassDetailsCard(
+                                            subject:
+                                                routineList[index].subject,
+                                            startingTime: routineList[index]
+                                                .startTime,
+                                            endingTime:
+                                                routineList[index].endTime,
+                                            roomNumber:
+                                                routineList[index].room,
+                                            buildingName: 'Building Name',
+                                            instructorName:
+                                                routineList[index].teacher,
                                           );
                                         },
                                       );
