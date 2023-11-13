@@ -109,6 +109,10 @@ class InfixApi {
     return '${baseApi}apply-leave?student_id=$studentId';
   }
 
+  static String getStudentAttendance({required int recordId, required int studentId}) {
+    return '${baseApi}student-attendance?record_id=1&student_id=2';
+  }
+
   static String getStudentOnlineExamResult({required int studentId}) {
     return "${baseApi}student-view-result?student_id=$studentId";
   }
