@@ -40,7 +40,7 @@ class TransportTile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.04,
+                height: Get.height * 0.05,
                 child: const VerticalDivider(
                   color: AppColors.transportDividerColor,
                   thickness: 1,
@@ -60,7 +60,7 @@ class TransportTile extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.04,
+                height: Get.height * 0.05,
                 child: const VerticalDivider(
                   color: AppColors.transportDividerColor,
                   thickness: 1,

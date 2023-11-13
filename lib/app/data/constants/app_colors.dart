@@ -59,6 +59,8 @@ class AppColors {
   static const teacherTextColor = Color(0xFF646988);
   static const transportDividerColor = Color(0xFFEAE7F0);
   static Color bottomSheetDividerColor = const Color(0xFF635976).withOpacity(0.1);
+  static const activeStatusColor = Color(0xFF12AE01);
+  static const unreadChat = Color(0xFF8124D3);
 
 
 

@@ -39,6 +39,7 @@ abstract class Routes {
   static const TRANSPORT = _Paths.TRANSPORT;
   static const FEES = _Paths.FEES;
   static const CHAT = _Paths.CHAT;
+  static const CHAT_SEARCH = _Paths.CHAT_SEARCH;
 }
 
 abstract class _Paths {
@@ -79,4 +80,5 @@ abstract class _Paths {
   static const TRANSPORT = '/transport';
   static const FEES = '/fees';
   static const CHAT = '/chat';
+  static const CHAT_SEARCH = '/chat-search';
 }

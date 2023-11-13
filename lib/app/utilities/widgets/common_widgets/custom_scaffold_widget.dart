@@ -10,6 +10,7 @@ class InfixEduScaffold extends StatelessWidget {
   final Widget? appBar;
   final List<Widget>? actions;
   final Widget? bottomNavBar;
+  final Widget? floatingActionButton;
 
   const InfixEduScaffold({
     super.key,
@@ -19,6 +20,7 @@ class InfixEduScaffold extends StatelessWidget {
     this.leadingIcon,
     this.actions,
     this.bottomNavBar,
+    this.floatingActionButton,
   });
 
   @override
@@ -48,6 +50,7 @@ class InfixEduScaffold extends StatelessWidget {
         ),
         body: body,
         bottomNavigationBar: bottomNavBar,
+        floatingActionButton: floatingActionButton,
       ),
     );
   }

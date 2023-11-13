@@ -16,6 +16,8 @@ import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
+import '../modules/chat_search/bindings/chat_search_binding.dart';
+import '../modules/chat_search/views/chat_search_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/dormitory/bindings/dormitory_binding.dart';
@@ -270,6 +272,11 @@ class AppPages {
       name: _Paths.CHAT,
       page: () => const ChatView(),
       binding: ChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_SEARCH,
+      page: () => const ChatSearchView(),
+      binding: ChatSearchBinding(),
     ),
   ];
 }

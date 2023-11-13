@@ -49,9 +49,12 @@ class FeesTile extends StatelessWidget {
                 onTap: onTap,
                 child: const Column(
                   children: [
-                    Text(
-                      "View",
-                      style: AppTextStyle.homeworkView,
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "View",
+                        style: AppTextStyle.homeworkView,
+                      ),
                     ),
                     CustomDivider(
                       width: 35,

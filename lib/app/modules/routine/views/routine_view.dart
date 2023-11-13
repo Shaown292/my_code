@@ -12,18 +12,18 @@ import '../../../data/constants/app_colors.dart';
 import '../controllers/routine_controller.dart';
 
 class RoutineView extends GetView<RoutineController> {
-  const RoutineView({Key? key}) : super(key: key);
+  const RoutineView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: controller.selectIndex.value,
       length: controller.daysOfWeek.length,
-      child: Obx(
-        () => InfixEduScaffold(
-          title: "Routine",
-          leadingIcon: const SizedBox(),
-          body: CustomBackground(
+      child: InfixEduScaffold(
+        title: "Routine",
+        leadingIcon: const SizedBox(),
+        body: Obx(
+          () => CustomBackground(
             customWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: controller.loadingController.isLoading
