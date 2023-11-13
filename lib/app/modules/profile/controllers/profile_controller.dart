@@ -30,21 +30,12 @@ class ProfileController extends GetxController {
   ProfileDataController profileDataController =
       Get.put(ProfileDataController());
   LoadingController loadingController = Get.find();
-  List<ProfileDocuments> documentsData = [];
+  List<ProfileDocuments> documentsDataList = [];
 
   Rx<File> file = File('').obs;
-  TextEditingController titleController = TextEditingController();
-  TextEditingController documentController = TextEditingController();
 
-  @override
-  void onInit() {
-    fetchProfilePersonalData();
-    fetchProfileParentsData();
-    fetchProfileTransportData();
-    fetchProfileOthersData();
-    getAllDocumentList();
-    super.onInit();
-  }
+  TextEditingController titleTextController = TextEditingController();
+
 
   RxInt pageIndex = 0.obs;
   RxBool isLoading = false.obs;
@@ -198,7 +189,7 @@ class ProfileController extends GetxController {
           for (int i = 0;
           i < studentDocumentsResponseModel.data!.profileDocuments!.length;
           i++) {
-            documentsData.add(studentDocumentsResponseModel.data!.profileDocuments![i]);
+            documentsDataList.add(studentDocumentsResponseModel.data!.profileDocuments![i]);
           }
         }
       }
@@ -215,7 +206,7 @@ class ProfileController extends GetxController {
   /// Documents bottom sheet
   void showUploadDocumentsBottomSheet({required Function() onTap, Function()? onTapForSave}) {
     Get.bottomSheet(
-      SizedBox(
+      Obx(() => SizedBox(
           height: Get.height * 0.45,
           child: SingleChildScrollView(
             child: Column(
@@ -257,7 +248,8 @@ class ProfileController extends GetxController {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      const CustomTextFormField(
+                      CustomTextFormField(
+                        controller: titleTextController,
                         enableBorderActive: true,
                         focusBorderActive: true,
                         hintText: "Title",
@@ -266,7 +258,6 @@ class ProfileController extends GetxController {
                       CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        controller: documentController,
                         hintText: "${file.value.path.isNotEmpty ? file : 'Select File'}",
                         readOnly: true,
                         suffixIcon: InkWell(
@@ -306,7 +297,7 @@ class ProfileController extends GetxController {
                         borderColor: AppColors.primaryColor,
                         onTap: () => Get.back(),
                       ),
-                      PrimaryButton(
+                      isLoading.value == true ? const CircularProgressIndicator(color: AppColors.primaryColor,) : PrimaryButton(
                         width: Get.width * 0.2,
                         title: "Save",
                         textStyle: AppTextStyle.textStyle12WhiteW500,
@@ -317,7 +308,7 @@ class ProfileController extends GetxController {
                 )
               ],
             ),
-          )),
+          ))),
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );
@@ -341,40 +332,45 @@ class ProfileController extends GetxController {
   /// Documents Post
   void uploadDocuments() async {
     try {
-      loadingController.isLoading = true;
+      isLoading.value = true;
       final request =
       http.MultipartRequest('POST', Uri.parse(InfixApi.studentUploadDocuments));
       request.headers['Authorization'] = GlobalVariableController.token!;
 
       if (file.value.path.isNotEmpty) {
         request.files.add(
-            await http.MultipartFile.fromPath('attach_file', file.value.path));
+            await http.MultipartFile.fromPath('photo', file.value.path));
       }
 
 
       request.fields['student_id'] = '${GlobalVariableController.studentId!}';
-      request.fields['title'] = titleController.text;
+      request.fields['title'] = titleTextController.text;
 
 
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
       final decodedResponse = json.decode(responseBody);
+      print(decodedResponse);
 
       if (response.statusCode == 200) {
-        loadingController.isLoading = false;
+        isLoading.value = false;
+        Get.back();
         showBasicSuccessSnackBar(message: decodedResponse['message']);
 
-        titleController.clear();
+        documentsDataList.add(ProfileDocuments(title: titleTextController.text, file: file.value.toString()));
+        titleTextController.clear();
         file.value = File('');
+
       } else {
-        loadingController.isLoading = false;
+        isLoading.value = false;
+        showBasicSuccessSnackBar(message: decodedResponse['message']);
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+      isLoading.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      isLoading.value = false;
     }
   }
 
@@ -395,7 +391,7 @@ class ProfileController extends GetxController {
           for (int i = 0;
           i < studentDocumentsResponseModel.data!.profileDocuments!.length;
           i++) {
-            documentsData.add(studentDocumentsResponseModel.data!.profileDocuments![i]);
+            documentsDataList.add(studentDocumentsResponseModel.data!.profileDocuments![i]);
           }
         }
       }
@@ -408,4 +404,15 @@ class ProfileController extends GetxController {
     }
     return StudentDocumentsResponseModel();
   }
+
+  @override
+  void onInit() {
+    fetchProfilePersonalData();
+    fetchProfileParentsData();
+    fetchProfileTransportData();
+    fetchProfileOthersData();
+    getAllDocumentList();
+    super.onInit();
+  }
+
 }

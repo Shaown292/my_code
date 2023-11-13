@@ -327,6 +327,7 @@ class ProfileView extends GetView<ProfileController> {
                                     ],
                                   ),
 
+                            /// Documents Section
                             controller.isLoading.value ? const LoadingWidget() :
                             Column(
                                     crossAxisAlignment:
@@ -373,19 +374,21 @@ class ProfileView extends GetView<ProfileController> {
                                         ),
                                       ),
                                       10.verticalSpacing,
-                                      controller.loadingController.isLoading ? const LoadingWidget() : controller.documentsData.isNotEmpty ?
+
+                                      /// Documents Tiles
+                                      controller.loadingController.isLoading ? const LoadingWidget() : controller.documentsDataList.isNotEmpty ?
                                       Expanded(
                                         child: ListView.builder(
                                           physics: const BouncingScrollPhysics(),
                                           shrinkWrap: true,
-                                          itemCount: controller.documentsData.length,
+                                          itemCount: controller.documentsDataList.length,
                                           itemBuilder: (context, index) {
                                             return  DocumentsCard(
-                                              title: "${index+1}. ${controller.documentsData[index].title}",
-                                              fileName: controller.documentsData[index].file,
+                                              title: "${index+1}. ${controller.documentsDataList[index].title}",
+                                              fileName: controller.documentsDataList[index].file,
                                               tapDelete: (){
-                                                controller.deleteDocumentList(controller.documentsData[index].id!);
-                                                controller.documentsData.clear();
+                                                controller.deleteDocumentList(controller.documentsDataList[index].id!);
+                                                controller.documentsDataList.clear();
                                                 controller.getAllDocumentList();
                                               },
                                             );
