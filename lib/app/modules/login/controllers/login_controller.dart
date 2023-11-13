@@ -49,6 +49,7 @@ class LoginController extends GetxController {
         showBasicFailedSnackBar(message: profileInfoModel.message);
       }
     } catch (e, t) {
+      isLoading.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
