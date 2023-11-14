@@ -68,6 +68,8 @@ import '../modules/student_lesson_plan/bindings/student_lesson_plan_binding.dart
 import '../modules/student_lesson_plan/views/student_lesson_plan_view.dart';
 import '../modules/student_search_attendance/bindings/student_search_attendance_binding.dart';
 import '../modules/student_search_attendance/views/student_search_attendance_view.dart';
+import '../modules/student_search_subject_attendance/bindings/student_search_subject_attendance_binding.dart';
+import '../modules/student_search_subject_attendance/views/student_search_subject_attendance_view.dart';
 import '../modules/study_materials/bindings/study_materials_binding.dart';
 import '../modules/study_materials/views/study_materials_view.dart';
 import '../modules/subjects/bindings/subjects_binding.dart';
@@ -291,6 +293,11 @@ class AppPages {
       name: _Paths.STUDENT_LESSON_PLAN,
       page: () => const StudentLessonPlanView(),
       binding: StudentLessonPlanBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENT_SEARCH_SUBJECT_ATTENDANCE,
+      page: () => const StudentSearchSubjectAttendanceView(),
+      binding: StudentSearchSubjectAttendanceBinding(),
     ),
   ];
 }

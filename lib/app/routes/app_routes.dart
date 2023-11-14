@@ -42,6 +42,8 @@ abstract class Routes {
   static const CHAT_SEARCH = _Paths.CHAT_SEARCH;
   static const STUDENT_SEARCH_ATTENDANCE = _Paths.STUDENT_SEARCH_ATTENDANCE;
   static const STUDENT_LESSON_PLAN = _Paths.STUDENT_LESSON_PLAN;
+  static const STUDENT_SEARCH_SUBJECT_ATTENDANCE =
+      _Paths.STUDENT_SEARCH_SUBJECT_ATTENDANCE;
 }
 
 abstract class _Paths {
@@ -85,4 +87,6 @@ abstract class _Paths {
   static const CHAT_SEARCH = '/chat-search';
   static const STUDENT_SEARCH_ATTENDANCE = '/student-search-attendance';
   static const STUDENT_LESSON_PLAN = '/student-lesson-plan';
+  static const STUDENT_SEARCH_SUBJECT_ATTENDANCE =
+      '/student-search-subject-attendance';
 }

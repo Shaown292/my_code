@@ -17,39 +17,11 @@ class DashboardController extends GetxController {
     navItem(icon :FontAwesomeIcons.house, title:'Home'),
     navItem(icon :FontAwesomeIcons.bell, title:'Notification', isNotification: true),
 
-    PersistentBottomNavBarItem(
-      inactiveIcon: GlobalVariableController.roleId == 4
-          ? Image.asset(
-              ImagePath.studentWallet,
-              width: 25,
-              height: 25,
-              color: Colors.white,
-            )
-          : Image.asset(
-              ImagePath.studentWallet,
-              width: 25,
-              height: 25,
-              color: Colors.white,
-            ),
-      icon: GlobalVariableController.roleId == 2
-          ? Image.asset(
-              ImagePath.studentWallet,
-              width: 25,
-              height: 25,
-              color: Colors.white,
-            )
-          : Image.asset(
-              ImagePath.studentWallet,
-              width: 25,
-              height: 25,
-              color: Colors.white,
-            ),
-      title: GlobalVariableController.roleId == 4 ? "Attendance" : "Fees",
-      activeColorPrimary: Colors.deepPurple.withOpacity(0.9),
-      inactiveColorPrimary: Colors.grey.withOpacity(0.9),
-    ),
-    navItem(icon : FontAwesomeIcons.stubber, title:  'Routine'),
-    navItem(icon : FontAwesomeIcons.person, title: 'Profile'),
+    GlobalVariableController.roleId == 4 ? navItemWithImageIcon(imagePath: ImagePath.studentAttendance, title: 'Attendance')
+        : navItemWithImageIcon(imagePath: ImagePath.studentWallet, title: 'Fees'),
+
+    GlobalVariableController.roleId == 4 ? navItem(icon : FontAwesomeIcons.userGraduate, title:  'Academic') : navItem(icon : FontAwesomeIcons.clipboardList, title:  'Routine'),
+    GlobalVariableController.roleId == 4 ? navItem(icon : FontAwesomeIcons.book, title: 'Homework') : navItem(icon : FontAwesomeIcons.user, title: 'Profile'),
   ];
 }
 
@@ -63,6 +35,26 @@ PersistentBottomNavBarItem navItem({required IconData icon, title,bool isNotific
     icon: isNotification ? const NotificationBell() :  Icon(
       icon,
       size: 18,
+    ),
+    title: title,
+    activeColorPrimary: Colors.deepPurple.withOpacity(0.9),
+    inactiveColorPrimary: Colors.grey.withOpacity(0.9),
+  );
+}
+
+PersistentBottomNavBarItem navItemWithImageIcon({required String imagePath, required String title,}) {
+  return PersistentBottomNavBarItem(
+    inactiveIcon: Image.asset(
+      imagePath,
+      width: 25,
+      height: 25,
+      color: Colors.white,
+    ),
+    icon: Image.asset(
+      imagePath,
+      width: 25,
+      height: 25,
+      color: Colors.white,
     ),
     title: title,
     activeColorPrimary: Colors.deepPurple.withOpacity(0.9),

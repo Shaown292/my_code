@@ -109,6 +109,8 @@ class ImagePath {
   static String changePassword       = "assets/images/change_password.png";
   static String delete               = "assets/images/delete.png";
   static String download             = "assets/images/download.png";
+  static String profileIcon             = "assets/images/profile_icon.png";
+  static String routineNavIcon             = "assets/images/routine_nav_icon.png";
 
 
   /// Leave
