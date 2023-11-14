@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:get/get.dart';
 
 import '../../../data/constants/app_colors.dart';
@@ -14,6 +15,8 @@ class StudentClassDetailsCard extends StatelessWidget {
   final String? buildingName;
   final String? instructorName;
   final bool isLunchBreak;
+  final bool hasDetails;
+  final Function()? onTap;
 
   const StudentClassDetailsCard({
     super.key,
@@ -24,6 +27,8 @@ class StudentClassDetailsCard extends StatelessWidget {
     this.buildingName,
     this.instructorName,
     this.isLunchBreak = false,
+    this.onTap,
+    this.hasDetails = false,
   });
 
   @override
@@ -102,13 +107,29 @@ class StudentClassDetailsCard extends StatelessWidget {
             isLunchBreak
                 ? const SizedBox()
                 : Row(
-                  children: [
-                    Text(
+                    children: [
+                      Text(
                         instructorName ?? "",
                         style: AppTextStyle.fontSize14lightViolateW400,
                       ),
-                  ],
-                ),
+                      const Spacer(),
+                      hasDetails ?
+                      InkWell(
+                        onTap: onTap,
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: AppColors.primaryColor,
+                          ),
+                          child: const Text(
+                            "Details",
+                            style: AppTextStyle.textStyle12WhiteW400,
+                          ),
+                        ),
+                      ) : const SizedBox()
+                    ],
+                  ),
           ],
         ),
       ),

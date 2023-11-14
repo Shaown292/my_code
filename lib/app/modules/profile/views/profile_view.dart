@@ -385,7 +385,7 @@ class ProfileView extends GetView<ProfileController> {
                                               fileName: controller.documentsData[index].file,
                                               tapDelete: (){
                                                 controller.deleteDocumentList(controller.documentsData[index].id!);
-                                                controller.documentsData.clear();
+                                                controller.documentsData.removeAt(index);
                                                 controller.getAllDocumentList();
                                               },
                                             );
