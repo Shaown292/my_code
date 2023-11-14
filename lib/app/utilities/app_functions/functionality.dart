@@ -94,6 +94,7 @@ class AppFunctions {
         Get.toNamed(Routes.ONLINE_EXAM);
         break;
       case 'Attendance':
+        print('search attendance');
         Get.toNamed(Routes.ATTENDANCE);
         break;
       case 'Settings':
@@ -137,7 +138,9 @@ class AppFunctions {
         Get.toNamed(Routes.BOOK_ISSUED);
         break;
       case 'Search Attendance':
-        Get.toNamed(Routes.STUDENT_SEARCH_ATTENDANCE);
+        Get.toNamed(Routes.STUDENT_SEARCH_ATTENDANCE, arguments: {
+        "from": false
+        });
         break;
       case 'Search Sub Attendance':
         Get.toNamed(Routes.STUDENT_SEARCH_SUBJECT_ATTENDANCE);

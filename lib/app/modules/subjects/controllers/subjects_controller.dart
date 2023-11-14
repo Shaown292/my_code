@@ -12,9 +12,12 @@ class SubjectsController extends GetxController {
 
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
+
+
   List<SubjectListData> subjectList = [];
 
   Future<SubjectResponseModel?> getAllSubjectList({required int recordId}) async {
+    subjectList.clear();
     try {
       loadingController.isLoading = true;
 
