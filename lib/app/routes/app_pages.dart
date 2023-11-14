@@ -114,10 +114,11 @@ class AppPages {
       binding: ProfileBinding(),
     ),
     GetPage(
-        name: _Paths.SYLLABUS,
-        page: () => const SyllabusView(),
-        binding: SyllabusBinding(),
-        transition: Transition.fade),
+      name: _Paths.SYLLABUS,
+      page: () => const SyllabusView(),
+      binding: SyllabusBinding(),
+      transition: Transition.fade,
+    ),
     GetPage(
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
@@ -145,7 +146,7 @@ class AppPages {
         page: () => const StudentHomeworkView(),
         binding: StudentHomeworkBinding(),
         transition: Transition.fade,
-        transitionDuration: Duration(microseconds: 500)),
+        transitionDuration: const Duration(microseconds: 500)),
     GetPage(
       name: _Paths.ROUTINE,
       page: () => const RoutineView(),
@@ -195,10 +196,11 @@ class AppPages {
       transition: Transition.fade,
     ),
     GetPage(
-        name: _Paths.ONLINE_EXAM,
-        page: () => const OnlineExamView(),
-        binding: OnlineExamBinding(),
-        transition: Transition.fade),
+      name: _Paths.ONLINE_EXAM,
+      page: () => const OnlineExamView(),
+      binding: OnlineExamBinding(),
+      transition: Transition.fade,
+    ),
     GetPage(
         name: _Paths.EXAM_RESULT,
         page: () => const ExamResultView(),
@@ -233,6 +235,7 @@ class AppPages {
       name: _Paths.ATTENDANCE,
       page: () => const AttendanceView(),
       binding: AttendanceBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.NOTICE,
@@ -278,6 +281,7 @@ class AppPages {
       name: _Paths.CHAT,
       page: () => const ChatView(),
       binding: ChatBinding(),
+      transition: Transition.upToDown,
     ),
     GetPage(
       name: _Paths.CHAT_SEARCH,
@@ -288,16 +292,19 @@ class AppPages {
       name: _Paths.STUDENT_SEARCH_ATTENDANCE,
       page: () => const StudentSearchAttendanceView(),
       binding: StudentSearchAttendanceBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.STUDENT_LESSON_PLAN,
       page: () => const StudentLessonPlanView(),
       binding: StudentLessonPlanBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.STUDENT_SEARCH_SUBJECT_ATTENDANCE,
       page: () => const StudentSearchSubjectAttendanceView(),
       binding: StudentSearchSubjectAttendanceBinding(),
+      transition: Transition.fade,
     ),
   ];
 }

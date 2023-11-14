@@ -140,7 +140,7 @@ class AppFunctions {
         Get.toNamed(Routes.STUDENT_SEARCH_ATTENDANCE);
         break;
       case 'Search Sub Attendance':
-        Get.toNamed(Routes.STUDENT_SEARCH_ATTENDANCE);
+        Get.toNamed(Routes.STUDENT_SEARCH_SUBJECT_ATTENDANCE);
         break;
 
 
