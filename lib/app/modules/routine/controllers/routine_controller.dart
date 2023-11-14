@@ -8,7 +8,6 @@ import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/api_urls.dart';
 
 class RoutineController extends GetxController {
-
   TabController? tabController;
   List<ClassRoutine> classRoutineList = [];
   LoadingController loadingController = Get.find();
@@ -20,8 +19,6 @@ class RoutineController extends GetxController {
     selectTab();
     super.onInit();
   }
-
-
 
   List<String> daysOfWeek = <String>[
     'Sat',
@@ -49,13 +46,13 @@ class RoutineController extends GetxController {
       );
 
       StudentRoutineResponseModel studentRoutineResponseModel =
-      StudentRoutineResponseModel.fromJson(response);
+          StudentRoutineResponseModel.fromJson(response);
       if (studentRoutineResponseModel.success == true) {
         loadingController.isLoading = false;
         if (studentRoutineResponseModel.data.classRoutines.isNotEmpty) {
           for (int i = 0;
-          i < studentRoutineResponseModel.data.classRoutines.length;
-          i++) {
+              i < studentRoutineResponseModel.data.classRoutines.length;
+              i++) {
             classRoutineList
                 .add(studentRoutineResponseModel.data.classRoutines[i]);
           }
@@ -70,12 +67,7 @@ class RoutineController extends GetxController {
     }
   }
 
-  void selectTab(){
-
-     selectIndex.value = daysOfWeek.indexOf(today);
-
-
+  void selectTab() {
+    selectIndex.value = daysOfWeek.indexOf(today);
   }
-
-
 }

@@ -100,6 +100,8 @@ class AppFunctions {
         Get.toNamed(Routes.SETTINGS);
         break;
       case 'Lesson':
+        Get.toNamed(Routes.STUDENT_LESSON_PLAN);
+        break;
         break;
       case 'Class':
         break;
