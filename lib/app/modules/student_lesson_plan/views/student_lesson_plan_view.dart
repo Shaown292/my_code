@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/student_lesson_plan_response_model/student_lesson_plan_response_model.dart';
 
 import 'package:get/get.dart';
 
@@ -26,31 +30,32 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Column(
               children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
-                  child: SizedBox(
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          controller.homeController.studentRecordList.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount:
+                        controller.homeController.studentRecordList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                          padding: const EdgeInsets.only(
+                              right: 8.0, top: 8, bottom: 8),
                           child: Obx(
                             () => StudyButton(
                               title:
                                   "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                               onItemTap: () {
+                                controller.weeksList.clear();
+                                int recordId = controller
+                                    .homeController.studentRecordList[index].id;
+                                controller.getLessonPlanList(
+                                    GlobalVariableController.userId!, recordId);
                                 controller.selectIndex.value = index;
                               },
                               isSelected: controller.selectIndex.value == index,
                             ),
-                          ),
-                        );
-                      },
-                    ),
+                          ));
+                    },
                   ),
                 ),
                 20.verticalSpacing,
@@ -87,24 +92,33 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                     children: List.generate(
                       controller.daysOfWeek.length,
                       (index) {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: 5,
-                          itemBuilder: (context, index) {
-                            return StudentClassDetailsCard(
-                              subject: "Bangla 1st Paper",
-                              startingTime: "3:50 AM",
-                              endingTime: "3:50 AM",
-                              roomNumber: "103",
-                              buildingName: 'Building Name',
-                              instructorName: "Teacher Three",
-                              hasDetails: true,
-                              onTap: () =>
-                                  controller.showLessonPlanDetailsBottomSheet(
-                                      index: index),
-                            );
-                          },
-                        );
+                        return Obx(() => controller.loadingController.isLoading
+                            ? const LoadingWidget()
+                            : controller
+                                    .weeksList[index].classRoutine!.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: controller
+                                        .weeksList[index].classRoutine!.length,
+                                    itemBuilder: (context, routineIndex) {
+                                      ClassRoutine classRoutine = controller
+                                          .weeksList[index]
+                                          .classRoutine![routineIndex];
+                                      return StudentClassDetailsCard(
+                                        subject: classRoutine.subjectName,
+                                        startingTime: classRoutine.startTime,
+                                        endingTime: classRoutine.endTime,
+                                        roomNumber: classRoutine.room,
+                                        buildingName: "Building No",
+                                        instructorName: classRoutine.teacher,
+                                        hasDetails: true,
+                                        onTap: () => controller
+                                            .showLessonPlanDetailsBottomSheet(
+                                                index: index),
+                                      );
+                                    },
+                                  )
+                                : const NoDataAvailableWidget());
                       },
                     ),
                   ),

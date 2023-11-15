@@ -8,6 +8,7 @@ class AppText {
   static const String connectInternetMessage =
       'Connect with Internet and Restart your App.';
   static const String deleteAccountWarningMsg = 'Are you sure,\n you want to delete your account?';
+  static const String deleteDocumentsWarningMsg = 'Are you sure,\n you want to delete your document?';
 
   /// Profile
 

@@ -19,6 +19,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_availab
 import 'package:get/get.dart';
 import '../../../../config/app_config.dart';
 import '../../../data/constants/app_colors.dart';
+import '../../../utilities/widgets/common_widgets/alert_dialog.dart';
 import '../../../utilities/widgets/image_view/cache_image_view.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -328,22 +329,20 @@ class ProfileView extends GetView<ProfileController> {
                                   ),
 
                             /// Documents Section
-                            controller.isLoading.value ? const LoadingWidget() :
-                            Column(
+                            controller.isLoading.value
+                                ? const LoadingWidget()
+                                : Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
                                       InkWell(
-                                        onTap: () => controller.showUploadDocumentsBottomSheet(
-                                          onTap:  (){
-                                            controller.pickFile();
-
-                                          },
-                                          onTapForSave: (){
-
-                                            controller.uploadDocuments();
-                                          }
-                                        ),
+                                        onTap: () => controller
+                                            .showUploadDocumentsBottomSheet(
+                                                onTap: () {
+                                          controller.pickFile();
+                                        }, onTapForSave: () {
+                                          controller.uploadDocuments();
+                                        }),
                                         child: Container(
                                           width: 200,
                                           padding: const EdgeInsets.symmetric(
@@ -376,27 +375,57 @@ class ProfileView extends GetView<ProfileController> {
                                       10.verticalSpacing,
 
                                       /// Documents Tiles
-                                      controller.loadingController.isLoading ? const LoadingWidget() : controller.documentsDataList.isNotEmpty ?
-                                      Expanded(
-                                        child: ListView.builder(
-                                          physics: const BouncingScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemCount: controller.documentsDataList.length,
-                                          itemBuilder: (context, index) {
-                                            return  DocumentsCard(
-                                              title: "${index+1}. ${controller.documentsDataList[index].title}",
-                                              fileName: controller.documentsDataList[index].file,
-                                              tapDelete: (){
-                                                controller.deleteDocumentList(controller.documentsDataList[index].id!);
-                                                controller.documentsDataList.clear();
-                                                controller.getAllDocumentList();
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ) : const NoDataAvailableWidget(
-                                        message: "No Document Available",
-                                      ),
+                                      controller.loadingController.isLoading
+                                          ? const LoadingWidget()
+                                          : controller
+                                                  .documentsDataList.isNotEmpty
+                                              ? Expanded(
+                                                  child: ListView.builder(
+                                                    physics:
+                                                        const BouncingScrollPhysics(),
+                                                    shrinkWrap: true,
+                                                    itemCount: controller
+                                                        .documentsDataList
+                                                        .length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return DocumentsCard(
+                                                        title:
+                                                            "${index + 1}. ${controller.documentsDataList[index].title}",
+                                                        fileName: controller
+                                                            .documentsDataList[
+                                                                index]
+                                                            .file,
+                                                        tapDelete: () =>
+                                                            Get.dialog(
+                                                          AccountDeleteDialogue(
+                                                            onYesTap: () async {
+                                                              await controller
+                                                                  .deleteDocumentList(
+                                                                      controller
+                                                                          .documentsDataList[
+                                                                              index]
+                                                                          .id!);
+                                                              await controller
+                                                                  .getAllDocumentList();
+                                                            },
+                                                            title:
+                                                                'Confirmation',
+                                                            subTitle: AppText
+                                                                .logoutWarningMsg,
+                                                            noText: 'cancel',
+                                                            yesText: 'logout',
+                                                          ),
+                                                        ),
+                                                        tapDownload: () {},
+                                                      );
+                                                    },
+                                                  ),
+                                                )
+                                              : const NoDataAvailableWidget(
+                                                  message:
+                                                      "No Document Available",
+                                                ),
                                     ],
                                   )
                           ],

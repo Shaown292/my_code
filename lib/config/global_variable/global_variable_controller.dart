@@ -10,6 +10,7 @@ class GlobalVariableController {
  static int notificationCount = 0;
  static int? studentRecordId;
  static int? studentId;
+ static int? userId;
 
  static Map<String, String> header = {
  'Content-Type': 'application/json',
