@@ -184,6 +184,10 @@ class InfixApi {
     return '${baseApi}profile-documents-delete/$documentId';
   }
 
+  static String getStudentLessonPlan({required int userId, required int recordId}) => '${baseApi}student-lesson-plan?user_id=$userId&record_id=$recordId';
+  static String getStudentLessonPlanDetails({required int lessonPlanId, }) => '${baseApi}view-lesson-plan-lesson/$lessonPlanId';
+  static String forgetPassword = "${baseApi}forget-password";
+
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {
     return '${baseApi}fees-collect-student-wise/$id';

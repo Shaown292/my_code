@@ -5,9 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
-
 import 'package:get/get.dart';
-
 import '../../../data/constants/app_colors.dart';
 import '../../../utilities/widgets/study_button/study_button.dart';
 import '../controllers/active_exam_controller.dart';

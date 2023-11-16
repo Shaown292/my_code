@@ -7,48 +7,83 @@ class BottomSheetTile extends StatelessWidget {
   final String? title;
   final String? value;
   final Color? color;
+  final bool hasMultipleData;
+  final Widget? listview;
 
   const BottomSheetTile({
     super.key,
     this.title,
     this.value,
     this.color,
+    this.hasMultipleData = false,
+    this.listview,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Get.height * 0.05,
-      decoration: BoxDecoration(
-        border: Border.all(
-            color: AppColors.homeworkWidgetColor,
-        ),
-        color: color,
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            width: Get.width * 0.3,
-            child: Text(
-              title ?? "",
-              style: AppTextStyle.fontSize12lightViolateW400,
+    return hasMultipleData == true
+        ? Container(
+            height: Get.height * 0.05,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.homeworkWidgetColor,
+              ),
+              color: color,
             ),
-          ),
-          VerticalDivider(
-            color: AppColors.bottomSheetDividerColor,
-            thickness: 1,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(
-              value ?? "",
-              style: AppTextStyle.blackFontSize12W400,
-              textAlign: TextAlign.justify,
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  width: Get.width * 0.3,
+                  child: Text(
+                    title ?? "",
+                    style: AppTextStyle.fontSize12lightViolateW400,
+                  ),
+                ),
+                VerticalDivider(
+                  color: AppColors.bottomSheetDividerColor,
+                  thickness: 1,
+                ),
+                Container(
+                  width: Get.width * 0.5,
+                  padding: const EdgeInsets.only(top: 10),
+                  child: listview,
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : Container(
+            height: Get.height * 0.05,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.homeworkWidgetColor,
+              ),
+              color: color,
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  width: Get.width * 0.3,
+                  child: Text(
+                    title ?? "",
+                    style: AppTextStyle.fontSize12lightViolateW400,
+                  ),
+                ),
+                VerticalDivider(
+                  color: AppColors.bottomSheetDividerColor,
+                  thickness: 1,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Text(
+                    value ?? "",
+                    style: AppTextStyle.blackFontSize12W400,
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+          );
   }
 }

@@ -176,6 +176,7 @@ class ProfileController extends GetxController {
   Future<StudentDocumentsResponseModel?> getAllDocumentList() async {
     try {
       loadingController.isLoading = true;
+      documentsDataList.clear();
 
       final response = await BaseClient().getData(
         url: InfixApi.profileDocumentGet(),
@@ -354,10 +355,10 @@ class ProfileController extends GetxController {
 
       if (response.statusCode == 200) {
         isLoading.value = false;
-        Get.back();
         showBasicSuccessSnackBar(message: decodedResponse['message']);
 
-        documentsDataList.add(ProfileDocuments(title: titleTextController.text, file: file.value.toString()));
+        //documentsDataList.add(ProfileDocuments(title: titleTextController.text, file: file.value.toString()));
+        getAllDocumentList();
         titleTextController.clear();
         file.value = File('');
 
@@ -378,7 +379,6 @@ class ProfileController extends GetxController {
   Future<StudentDocumentsResponseModel?> deleteDocumentList(int documentId) async {
     try {
       loadingController.isLoading = true;
-
       final response = await BaseClient().getData(
         url: InfixApi.profileDocumentDelete(documentId: documentId),
         header: GlobalVariableController.header,

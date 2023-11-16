@@ -8,6 +8,7 @@ class AppText {
   static const String connectInternetMessage =
       'Connect with Internet and Restart your App.';
   static const String deleteAccountWarningMsg = 'Are you sure,\n you want to delete your account?';
+  static const String deleteDocumentsWarningMsg = 'Are you sure,\n you want to delete your document?';
 
   /// Profile
 
@@ -46,5 +47,9 @@ class AppText {
 
   /// Others
   static const String downloadMessage = 'Would you like to download the file?';
+
+
+  /// Forget Password
+  static const String enterYourMailText = "Please enter the recovery email address which is used for this account";
 
 }

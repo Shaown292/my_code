@@ -11,12 +11,12 @@ class AccountDeleteDialogue extends StatelessWidget {
 
   const AccountDeleteDialogue({
     this.onYesTap,
-    Key? key,
+    super.key,
     this.title,
     required this.subTitle,
     required this.noText,
     required this.yesText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

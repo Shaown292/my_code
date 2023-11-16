@@ -28,6 +28,8 @@ import '../modules/examination/bindings/examination_binding.dart';
 import '../modules/examination/views/examination_view.dart';
 import '../modules/fees/bindings/fees_binding.dart';
 import '../modules/fees/views/fees_view.dart';
+import '../modules/forget_password/bindings/forget_password_binding.dart';
+import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/leave/bindings/leave_binding.dart';
@@ -305,6 +307,11 @@ class AppPages {
       page: () => const StudentSearchSubjectAttendanceView(),
       binding: StudentSearchSubjectAttendanceBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.FORGET_PASSWORD,
+      page: () =>  ForgetPasswordView(),
+      binding: ForgetPasswordBinding(),
     ),
   ];
 }

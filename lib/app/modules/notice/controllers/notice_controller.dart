@@ -14,11 +14,7 @@ class NoticeController extends GetxController {
   LoadingController loadingController = Get.find();
   List<AllNotices> allNoticeList = [];
 
-  @override
-  void onInit() {
-    getAllNoticeList();
-    super.onInit();
-  }
+
 
   Future<NoticeListResponseModel?> getAllNoticeList() async {
     try {
@@ -73,5 +69,11 @@ class NoticeController extends GetxController {
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );
+  }
+
+  @override
+  void onInit() {
+    getAllNoticeList();
+    super.onInit();
   }
 }

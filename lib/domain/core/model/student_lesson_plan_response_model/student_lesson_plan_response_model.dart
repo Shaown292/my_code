@@ -1,13 +1,13 @@
 class StudentLessonPlanResponseModel {
   bool? success;
-  Data? data;
+  StudentLessonData? data;
   String? message;
 
   StudentLessonPlanResponseModel({this.success, this.data, this.message});
 
   StudentLessonPlanResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? StudentLessonData.fromJson(json['data']) : null;
     message = json['message'];
   }
 
@@ -22,13 +22,13 @@ class StudentLessonPlanResponseModel {
   }
 }
 
-class Data {
+class StudentLessonData {
   String? thisWeek;
   List<Weeks>? weeks;
 
-  Data({this.thisWeek, this.weeks});
+  StudentLessonData({this.thisWeek, this.weeks});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  StudentLessonData.fromJson(Map<String, dynamic> json) {
     thisWeek = json['this_week'];
     if (json['weeks'] != null) {
       weeks = <Weeks>[];
