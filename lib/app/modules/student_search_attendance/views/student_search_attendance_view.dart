@@ -72,12 +72,23 @@ class StudentSearchAttendanceView
                           eventList: controller.eventList,
                           onCalendarChanged: (DateTime date) {
                             controller.eventList!.clear();
-                            controller.getAttendanceListWithDate(
-                              recordId: controller.recordId.toInt(),
-                              studentId: GlobalVariableController.studentId!,
-                              year: date.year,
-                              month: date.month,
-                            );
+
+                            if (controller.fromStatus.value) {
+                              controller.getSearchSubjectAttendanceListWithDate(
+                                  recordId: controller.recordId.toInt(),
+                                  studentId:
+                                      GlobalVariableController.studentId!,
+                                  year: date.year,
+                                  month: date.month,
+                                  subjectId: controller.subjectId!);
+                            } else {
+                              controller.getAttendanceListWithDate(
+                                recordId: controller.recordId.toInt(),
+                                studentId: GlobalVariableController.studentId!,
+                                year: date.year,
+                                month: date.month,
+                              );
+                            }
                           },
                         ),
                         EventStatus(

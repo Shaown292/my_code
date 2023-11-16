@@ -113,6 +113,21 @@ class InfixApi {
     return '${baseApi}student-attendance?record_id=$recordId&student_id=$studentId';
   }
 
+  static String getStudentSubjectSearchAttendance(
+          {required int subjectId,
+          required int recordId,
+          required int studentId}) =>
+      '${baseApi}subject-wise-attendance?subject_id=$subjectId&record_id=$recordId&student_id=$studentId';
+
+  static String getStudentSubjectSearchAttendanceWithDate({
+    required int subjectId,
+    required int recordId,
+    required int studentId,
+    required int month,
+    required int year,
+  }) =>
+      '${baseApi}subject-wise-attendance?subject_id=$subjectId&record_id=$recordId&student_id=$studentId&month=$month&year=$year';
+
   static String getStudentAttendanceWithDate({
     required int recordId,
     required int studentId,

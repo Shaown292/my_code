@@ -16,27 +16,25 @@ class LoadingWidget extends GetWidget<LoadingController> {
       return controller.isLoading
           ? WillPopScope(
               onWillPop: () => Future.value(false),
-              child: Expanded(
-                child: Stack(
-                  children: <Widget>[
-                    ModalBarrier(
-                      dismissible: false,
-                      color: Colors.grey.withOpacity(.25),
-                    ),
-                    Center(
-                      child: Platform.isIOS
-                          ? const CupertinoActivityIndicator(
-                              color: AppColors.primaryColor,
-                              radius: 24,
-                            )
-                          : const CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(
-                                AppColors.primaryColor,
-                              ),
+              child: Stack(
+                children: <Widget>[
+                  ModalBarrier(
+                    dismissible: false,
+                    color: Colors.grey.withOpacity(.25),
+                  ),
+                  Center(
+                    child: Platform.isIOS
+                        ? const CupertinoActivityIndicator(
+                            color: AppColors.primaryColor,
+                            radius: 24,
+                          )
+                        : const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(
+                              AppColors.primaryColor,
                             ),
-                    ),
-                  ],
-                ),
+                          ),
+                  ),
+                ],
               ),
             )
           : const SizedBox();

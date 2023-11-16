@@ -1,23 +1,25 @@
+import 'package:flutter_single_getx_api_v2/app/modules/subjects/controllers/subjects_controller.dart';
 import 'package:get/get.dart';
 
-class StudentSearchSubjectAttendanceController extends GetxController {
-  //TODO: Implement StudentSearchSubjectAttendanceController
+import '../../../utilities/widgets/loader/loading.controller.dart';
+import '../../home/controllers/home_controller.dart';
 
-  final count = 0.obs;
+class StudentSearchSubjectAttendanceController extends GetxController {
+
+  LoadingController loadingController = Get.find();
+  HomeController homeController = Get.find();
+  SubjectsController subjectsController = Get.put(SubjectsController());
+
+
+  final selectIndex = RxInt(0);
+
+  RxInt recordId = 0.obs;
+
   @override
   void onInit() {
+    recordId.value = homeController.studentRecordList[0].id;
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
