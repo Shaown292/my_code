@@ -92,7 +92,7 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                           itemCount: 5,
                           itemBuilder: (context, index) {
                             return StudentClassDetailsCard(
-                              subject: "Bangla 1st Paper",
+                              subject: "Bangle 1st Paper",
                               startingTime: "3:50 AM",
                               endingTime: "3:50 AM",
                               roomNumber: "103",
