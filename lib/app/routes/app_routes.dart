@@ -44,6 +44,7 @@ abstract class Routes {
   static const STUDENT_LESSON_PLAN = _Paths.STUDENT_LESSON_PLAN;
   static const STUDENT_SEARCH_SUBJECT_ATTENDANCE =
       _Paths.STUDENT_SEARCH_SUBJECT_ATTENDANCE;
+  static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
 }
 
 abstract class _Paths {
@@ -89,4 +90,5 @@ abstract class _Paths {
   static const STUDENT_LESSON_PLAN = '/student-lesson-plan';
   static const STUDENT_SEARCH_SUBJECT_ATTENDANCE =
       '/student-search-subject-attendance';
+  static const FORGET_PASSWORD = '/forget-password';
 }

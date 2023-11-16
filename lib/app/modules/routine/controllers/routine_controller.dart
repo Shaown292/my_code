@@ -14,7 +14,7 @@ class RoutineController extends GetxController {
   RxInt selectIndex = 1.obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     getSyllabusList();
     selectTab();
     super.onInit();
@@ -55,6 +55,7 @@ class RoutineController extends GetxController {
               i++) {
             classRoutineList
                 .add(studentRoutineResponseModel.data.classRoutines[i]);
+            debugPrint("SJJS:::::: $today");
           }
         }
       }

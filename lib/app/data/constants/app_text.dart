@@ -48,4 +48,8 @@ class AppText {
   /// Others
   static const String downloadMessage = 'Would you like to download the file?';
 
+
+  /// Forget Password
+  static const String enterYourMailText = "Please enter the recovery email address which is used for this account";
+
 }

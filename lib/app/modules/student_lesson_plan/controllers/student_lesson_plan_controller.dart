@@ -29,7 +29,13 @@ class StudentLessonPlanController extends GetxController {
 
 
   final selectIndex = RxInt(0);
-  RxString recordDropdownValue = "Sat".obs;
+  RxInt selectTabIndex = 1.obs;
+
+
+
+  String formattedDate = DateFormat("dd MMMM yyyy").format(DateTime.now());
+  String today = DateFormat.E().format(DateTime.now());
+  String formatDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
 
 
   bool status = true;
@@ -46,8 +52,7 @@ class StudentLessonPlanController extends GetxController {
 
 
 
-  String formattedDate = DateFormat("dd MMMM yyyy").format(DateTime.now());
-  String today = DateFormat.E().format(DateTime.now());
+
 
   Future<StudentLessonPlanResponseModel?> getLessonPlanList(int userId, int recordId) async {
     try {
@@ -281,7 +286,12 @@ class StudentLessonPlanController extends GetxController {
     );
   }
 
-  String formatDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+
+
+
+  void selectTab() {
+    selectTabIndex.value = daysOfWeek.indexOf(today);
+  }
 
   @override
   void onInit() async {
@@ -296,6 +306,7 @@ class StudentLessonPlanController extends GetxController {
       await getLessonPlanListDetails(weeksList[weekIndex].id!);
 
     }
+    selectTab();
     super.onInit();
   }
 }

@@ -12,6 +12,7 @@ class InfixEduScaffold extends StatelessWidget {
   final Widget? bottomNavBar;
   final Widget? floatingActionButton;
 
+
   const InfixEduScaffold({
     super.key,
     this.title,

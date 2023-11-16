@@ -355,9 +355,6 @@ class ProfileController extends GetxController {
 
       if (response.statusCode == 200) {
         isLoading.value = false;
-        Get.back();
-
-
         showBasicSuccessSnackBar(message: decodedResponse['message']);
 
         //documentsDataList.add(ProfileDocuments(title: titleTextController.text, file: file.value.toString()));
@@ -382,7 +379,6 @@ class ProfileController extends GetxController {
   Future<StudentDocumentsResponseModel?> deleteDocumentList(int documentId) async {
     try {
       loadingController.isLoading = true;
-
       final response = await BaseClient().getData(
         url: InfixApi.profileDocumentDelete(documentId: documentId),
         header: GlobalVariableController.header,

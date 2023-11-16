@@ -15,6 +15,8 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLine;
   final Function()? onTap;
   final bool readOnly;
+  final EdgeInsets? contentPadding;
+  final TextStyle? hintTextStyle;
 
   const CustomTextFormField({
     this.controller,
@@ -31,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLine,
     this.onTap,
     this.readOnly = false,
-    super.key,
+    super.key, this.contentPadding, this.hintTextStyle,
   });
 
   @override
@@ -49,6 +51,7 @@ class CustomTextFormField extends StatelessWidget {
           filled: true,
           fillColor: fillColor ?? const Color(0xFFFDFBFF),
           hintText: hintText ?? 'Enter text',
+          hintStyle: hintTextStyle,
           suffixIcon:
               InkWell(onTap: iconOnTap, child: suffixIcon ?? const SizedBox()),
           focusedBorder: focusBorderActive
@@ -66,7 +69,9 @@ class CustomTextFormField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 )
               : null,
+          contentPadding: contentPadding
         ),
+
       ),
     );
   }

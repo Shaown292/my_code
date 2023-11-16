@@ -400,6 +400,7 @@ class ProfileView extends GetView<ProfileController> {
                                                             Get.dialog(
                                                           AccountDeleteDialogue(
                                                             onYesTap: () async {
+                                                              Get.back();
                                                               await controller
                                                                   .deleteDocumentList(
                                                                       controller
@@ -408,13 +409,14 @@ class ProfileView extends GetView<ProfileController> {
                                                                           .id!);
                                                               await controller
                                                                   .getAllDocumentList();
+
                                                             },
                                                             title:
                                                                 'Confirmation',
                                                             subTitle: AppText
-                                                                .logoutWarningMsg,
+                                                                .deleteDocumentsWarningMsg,
                                                             noText: 'cancel',
-                                                            yesText: 'logout',
+                                                            yesText: 'delete',
                                                           ),
                                                         ),
                                                         tapDownload: () {},

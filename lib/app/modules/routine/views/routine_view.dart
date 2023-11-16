@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/routine/views/widget/routine_card.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/routine/views/widget/week_tab_bar_item.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
