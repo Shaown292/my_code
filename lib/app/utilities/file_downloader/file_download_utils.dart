@@ -10,8 +10,9 @@ import '../message/snack_bars.dart';
 class FileDownloadUtils {
   Future<void> downloadFile(
       {required String url, required String title}) async {
-    var dir = await getApplicationDocumentsDirectory();
-    showBasicSuccessSnackBar(message: '$dir');
+    var directory = await getApplicationDocumentsDirectory();
+    debugPrint('Location:::: $directory');
+    showBasicSuccessSnackBar(message: '$directory');
     var request = await HttpClient().getUrl(Uri.parse(url));
     var response = await request.close();
     var bytes = await consolidateHttpClientResponseBytes(response);

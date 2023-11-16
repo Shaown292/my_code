@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:file_utils/file_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
@@ -17,11 +18,16 @@ import 'package:path_provider/path_provider.dart';
 class SyllabusController extends GetxController {
   @override
   void onInit() {
-    getSyllabusList();
+    if(homeController.studentRecordList.isNotEmpty){
+      getSyllabusList();
+    }
+
     super.onInit();
   }
 
   LoadingController loadingController = Get.find();
+  HomeController homeController = Get.find();
+
   List<SyllabusList> syllabusList = [];
 
   void getSyllabusList() async {
@@ -66,11 +72,13 @@ class SyllabusController extends GetxController {
     var progress = ''.obs;
     if (Platform.isAndroid) {
       dirLocation = "/sdcard/download/";
+      debugPrint('Location:::: ${FileUtils.mkdir([dirLocation])}');
+      debugPrint('Location:::: $dirLocation');
     } else {
       dirLocation = (await getApplicationSupportDirectory()).path;
     }
+    showBasicSuccessSnackBar(message: dirLocation);
 
-    showBasicSuccessSnackBar(message: 'Location:::: $dirLocation');
 
     try {
       FileUtils.mkdir([dirLocation]);

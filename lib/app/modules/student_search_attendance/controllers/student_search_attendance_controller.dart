@@ -312,9 +312,7 @@ class StudentSearchAttendanceController extends GetxController {
     }
 
     if (fromStatus.value) {
-      print('dhukeeeeeeeeeee');
       subjectId = Get.arguments["subjectID"];
-      print('subjectId : $subjectId');
 
       getSearchSubjectAttendanceList(
               recordId: recordId.toInt(),
