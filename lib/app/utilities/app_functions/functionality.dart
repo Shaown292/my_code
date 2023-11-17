@@ -6,7 +6,6 @@ import '../../routes/app_pages.dart';
 
 class AppFunctions {
   void getFunctions(int rule) {
-    Route route;
 
     switch (rule) {
       case 1:
