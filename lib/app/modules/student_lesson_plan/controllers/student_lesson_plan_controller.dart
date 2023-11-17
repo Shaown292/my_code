@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_lesson_plan_details_response_model/students_lesson_plan_details_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_lesson_plan_response_model/student_lesson_plan_response_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../../domain/base_client/base_client.dart';
@@ -20,22 +22,17 @@ class StudentLessonPlanController extends GetxController {
   HomeController homeController = Get.find();
   LoadingController loadingController = Get.find();
   TabController? tabController;
-  StudentLessonPlanDetailsData? studentLessonPlanDetailsData;
 
   List<Weeks> weeksList = [];
   List<ClassRoutine> classRoutineList = [];
 
-
   final selectIndex = RxInt(0);
   RxInt selectTabIndex = 0.obs;
-  bool onDetailsButtonTapped = false;
-
-
+  RxBool isLoading = false.obs;
 
   String formattedDate = DateFormat("dd MMMM yyyy").format(DateTime.now());
   String today = DateFormat.E().format(DateTime.now());
   String formatDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
-
 
   bool status = true;
   List<String> daysOfWeek = <String>[
@@ -48,12 +45,8 @@ class StudentLessonPlanController extends GetxController {
     'Fri',
   ];
 
-
-
-
-
-
-  Future<StudentLessonPlanResponseModel?> getLessonPlanList(int userId, int recordId) async {
+  Future<StudentLessonPlanResponseModel?> getLessonPlanList(
+      int userId, int recordId) async {
     try {
       loadingController.isLoading = true;
 
@@ -62,20 +55,17 @@ class StudentLessonPlanController extends GetxController {
         header: GlobalVariableController.header,
       );
 
-     StudentLessonPlanResponseModel studentLessonPlanResponseModel = StudentLessonPlanResponseModel.fromJson(response);
+      StudentLessonPlanResponseModel studentLessonPlanResponseModel =
+          StudentLessonPlanResponseModel.fromJson(response);
       if (studentLessonPlanResponseModel.success == true) {
         loadingController.isLoading = false;
         if (studentLessonPlanResponseModel.data!.weeks!.isNotEmpty) {
           for (int i = 0;
-          i < studentLessonPlanResponseModel.data!.weeks!.length;
-          i++) {
+              i < studentLessonPlanResponseModel.data!.weeks!.length;
+              i++) {
             weeksList.add(studentLessonPlanResponseModel.data!.weeks![i]);
-
           }
-
         }
-
-
       }
     } catch (e, t) {
       loadingController.isLoading = false;
@@ -87,38 +77,66 @@ class StudentLessonPlanController extends GetxController {
     return StudentLessonPlanResponseModel();
   }
 
-
-  Future<void> getLessonPlanListDetails(int lessonPlanId) async {
+  Future<void> getLessonPlanListDetails(
+      {required int lessonPlanId, required BuildContext context}) async {
     try {
-      loadingController.isLoading = true;
+      ///Show Loader Dialog
+
+      AlertDialog alert = AlertDialog(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconColor: Colors.transparent,
+        content: Center(child: Lottie.asset('assets/images/loader.json')),
+      );
+
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        barrierColor: AppColors.secondaryColor.withOpacity(0.15),
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+
+      isLoading.value = true;
+      debugPrint("Details ::::::: $isLoading");
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentLessonPlanDetails(lessonPlanId: lessonPlanId),
         header: GlobalVariableController.header,
       );
 
-      StudentLessonPlanDetailsResponseModel studentLessonPlanDetailsResponseModel = StudentLessonPlanDetailsResponseModel.fromJson(response);
+      StudentLessonPlanDetailsResponseModel
+          studentLessonPlanDetailsResponseModel =
+          StudentLessonPlanDetailsResponseModel.fromJson(response);
 
       if (studentLessonPlanDetailsResponseModel.success == true) {
+        Get.back();
 
-
-        studentLessonPlanDetailsData = studentLessonPlanDetailsResponseModel.data;
-
+        // studentLessonPlanDetailsData = studentLessonPlanDetailsResponseModel.data;
+        if (studentLessonPlanDetailsResponseModel.data == null) {
+          showBasicFailedSnackBar(message: 'No Details Available');
+        } else {
+          showLessonPlanDetailsBottomSheet(
+              studentLessonPlanDetailsData:
+                  studentLessonPlanDetailsResponseModel.data!);
+        }
+      } else {
+        showBasicFailedSnackBar(message: studentLessonPlanDetailsResponseModel.message ?? 'Something went wrong.');
+        Get.back();
       }
     } catch (e, t) {
-
+      Get.back();
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      isLoading.value = false;
+      debugPrint("Details ::::::: $isLoading");
     }
-
   }
 
-
-
-
-  void showLessonPlanDetailsBottomSheet({required int index}) {
+  void showLessonPlanDetailsBottomSheet(
+      {required StudentLessonPlanDetailsData studentLessonPlanDetailsData}) {
     Get.bottomSheet(
       SizedBox(
           height: Get.height * 0.6,
@@ -127,43 +145,40 @@ class StudentLessonPlanController extends GetxController {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 10.verticalSpacing,
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
+                 Padding(
+                  padding: const EdgeInsets.all(20.0),
                   child: Text(
-                    "Saturday",
+                    studentLessonPlanDetailsData.classSection ?? "",
                     style: AppTextStyle.fontSize14BlackW500,
                   ),
                 ),
-                 BottomSheetTile(
-                  title: "Class",
-                  value: studentLessonPlanDetailsData?.classSection,
-                  color: AppColors.homeworkWidgetColor,
-                ),
-                 BottomSheetTile(
+
+                BottomSheetTile(
                   title: "Subject Name",
-                  value: studentLessonPlanDetailsData?.subject,
+                  value: studentLessonPlanDetailsData.subject,
                 ),
-                 BottomSheetTile(
+                BottomSheetTile(
                   title: "Date",
-                  value: studentLessonPlanDetailsData?.date,
+                  value: studentLessonPlanDetailsData.date,
                   color: AppColors.homeworkWidgetColor,
                 ),
-                 BottomSheetTile(
+                BottomSheetTile(
                   title: "Lesson",
-                  value: studentLessonPlanDetailsData?.lesson,
+                  value: studentLessonPlanDetailsData.lesson,
                 ),
-                 BottomSheetTile(
+                BottomSheetTile(
                   title: "Topic",
                   hasMultipleData: true,
                   listview: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: studentLessonPlanDetailsData?.topic?.length ,
+                      itemCount: studentLessonPlanDetailsData.topic?.length,
                       itemBuilder: (context, index) {
-                        debugPrint("Topic ::::::: ${studentLessonPlanDetailsData?.topic?.length}");
+                        debugPrint(
+                            "Topic ::::::: ${studentLessonPlanDetailsData.topic?.length}");
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Text(
-                            "0${index + 1}. ${studentLessonPlanDetailsData?.topic![index].topicTitle}",
+                            "0${index + 1}. ${studentLessonPlanDetailsData.topic![index].topicTitle}",
                             style: AppTextStyle.blackFontSize12W400,
                             textAlign: TextAlign.justify,
                           ),
@@ -171,28 +186,28 @@ class StudentLessonPlanController extends GetxController {
                       }),
                   color: AppColors.homeworkWidgetColor,
                 ),
-
                 BottomSheetTile(
                   title: "Sub Topic",
                   hasMultipleData: true,
                   listview: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: studentLessonPlanDetailsData?.subtopic?.length ,
+                      itemCount: studentLessonPlanDetailsData.subtopic?.length,
                       itemBuilder: (context, index) {
-                        debugPrint("Topic ::::::: ${studentLessonPlanDetailsData?.subtopic?.length}");
+                        debugPrint(
+                            "Topic ::::::: ${studentLessonPlanDetailsData.subtopic?.length}");
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Text(
-                            "0${index + 1}. ${studentLessonPlanDetailsData?.subtopic![index].subTopicTitle}",
+                            "0${index + 1}. ${studentLessonPlanDetailsData.subtopic![index].subTopicTitle}",
                             style: AppTextStyle.blackFontSize12W400,
                             textAlign: TextAlign.justify,
                           ),
                         );
                       }),
                 ),
-                 BottomSheetTile(
+                BottomSheetTile(
                   title: "Note",
-                  value: studentLessonPlanDetailsData?.note,
+                  value: studentLessonPlanDetailsData.note,
                   color: AppColors.homeworkWidgetColor,
                 ),
                 Container(
@@ -272,7 +287,8 @@ class StudentLessonPlanController extends GetxController {
                       Switch(
                           value: studentLessonPlanDetailsData?.status ?? false,
                           onChanged: (bool value) {
-                            value = studentLessonPlanDetailsData?.status ?? false;
+                            value =
+                                studentLessonPlanDetailsData?.status ?? false;
                           }),
                     ],
                   ),
@@ -285,28 +301,17 @@ class StudentLessonPlanController extends GetxController {
     );
   }
 
-
-
-
   void selectTab() {
     selectTabIndex.value = daysOfWeek.indexOf(today);
-    print('object:::::::::::::::::: $selectTabIndex:::::::::::');
   }
 
   @override
   void onInit() {
     selectTab();
     if (homeController.studentRecordList.isNotEmpty) {
-        getLessonPlanList(GlobalVariableController.userId!, homeController.studentRecordList[0].id);
+      getLessonPlanList(GlobalVariableController.userId!,
+          homeController.studentRecordList[0].id);
     }
-
-
-    debugPrint("Week::::: ${weeksList.length}");
-    int weekIndex = weeksList.indexWhere((week) => week.date == formatDate);
-
-    debugPrint("Today::::: $today :::::: $weekIndex date:::: $formatDate");
-
-
     super.onInit();
   }
 }
