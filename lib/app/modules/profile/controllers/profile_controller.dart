@@ -30,7 +30,7 @@ class ProfileController extends GetxController {
   ProfileDataController profileDataController =
       Get.put(ProfileDataController());
   LoadingController loadingController = Get.find();
-  List<ProfileDocuments> documentsDataList = [];
+  RxList<ProfileDocuments> documentsDataList = <ProfileDocuments>[].obs;
 
   Rx<File> file = File('').obs;
 
@@ -351,16 +351,18 @@ class ProfileController extends GetxController {
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
       final decodedResponse = json.decode(responseBody);
-      print(decodedResponse);
+      debugPrint(decodedResponse.toString());
 
       if (response.statusCode == 200) {
         isLoading.value = false;
+        Get.back();
         showBasicSuccessSnackBar(message: decodedResponse['message']);
 
-        //documentsDataList.add(ProfileDocuments(title: titleTextController.text, file: file.value.toString()));
-        getAllDocumentList();
+        documentsDataList.add(ProfileDocuments(title: decodedResponse['data']['title'], file: decodedResponse['data']['file'], id: decodedResponse['data']['id']));
+        // getAllDocumentList();
         titleTextController.clear();
         file.value = File('');
+
 
       } else {
         isLoading.value = false;
@@ -376,34 +378,39 @@ class ProfileController extends GetxController {
   }
 
   /// Documents Delete
-  Future<StudentDocumentsResponseModel?> deleteDocumentList(int documentId) async {
-    try {
-      loadingController.isLoading = true;
-      final response = await BaseClient().getData(
-        url: InfixApi.profileDocumentDelete(documentId: documentId),
-        header: GlobalVariableController.header,
-      );
+  Future<void> deleteDocument({required int documentId, required int index}) async {
 
-      StudentDocumentsResponseModel studentDocumentsResponseModel = StudentDocumentsResponseModel.fromJson(response);
-      if (studentDocumentsResponseModel.success == true) {
-        loadingController.isLoading = false;
-        if (studentDocumentsResponseModel.data!.profileDocuments!.isNotEmpty) {
-          for (int i = 0;
-          i < studentDocumentsResponseModel.data!.profileDocuments!.length;
-          i++) {
-            documentsDataList.add(studentDocumentsResponseModel.data!.profileDocuments![i]);
-          }
-        }
+    try{
+
+      var headers = GlobalVariableController.header;
+      var request = http.MultipartRequest('GET', Uri.parse(InfixApi.profileDocumentDelete(documentId: documentId)));
+
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      final responseBody = await response.stream.bytesToString();
+      final decodedResponse = json.decode(responseBody);
+      debugPrint(decodedResponse.toString());
+
+      if (response.statusCode == 200) {
+        Get.back();
+        documentsDataList.removeAt(index);
+        showBasicSuccessSnackBar(message: decodedResponse['message']);
+
       }
-    } catch (e, t) {
-      loadingController.isLoading = false;
+      else {
+        showBasicFailedSnackBar(message: decodedResponse['message']);
+      }
+
+    } catch(e, t){
       debugPrint('$e');
       debugPrint('$t');
-    } finally {
-      loadingController.isLoading = false;
+    } finally{
     }
-    return StudentDocumentsResponseModel();
+
   }
+
 
   @override
   void onInit() {

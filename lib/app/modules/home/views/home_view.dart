@@ -36,7 +36,7 @@ class HomeView extends GetView<HomeController> {
             icon: Icons.exit_to_app,
             onPressed: () {
               Get.dialog(
-                AccountDeleteDialogue(
+                CustomPopupDialogue(
                   onYesTap: () {
                     controller.logout();
                   },

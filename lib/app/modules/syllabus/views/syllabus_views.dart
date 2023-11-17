@@ -33,7 +33,7 @@ class SyllabusView extends GetView<SyllabusController> {
                     onTap: () {
                       PermissionCheck().checkPermissions(context);
                       Get.dialog(
-                        AccountDeleteDialogue(
+                        CustomPopupDialogue(
                           onYesTap: () {
                             Navigator.pop(context);
                             controller

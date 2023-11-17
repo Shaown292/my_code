@@ -54,7 +54,7 @@ class SettingsView extends GetView<SettingsController> {
                 isLanguage: false,
                 onTileTap: (){
                   Get.dialog(
-                    AccountDeleteDialogue(
+                    CustomPopupDialogue(
                       onYesTap: () {
                         // controller.logout();
                       },

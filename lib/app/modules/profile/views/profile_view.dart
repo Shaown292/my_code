@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
@@ -329,107 +330,97 @@ class ProfileView extends GetView<ProfileController> {
                                   ),
 
                             /// Documents Section
-                            controller.isLoading.value
-                                ? const LoadingWidget()
-                                : Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      InkWell(
-                                        onTap: () => controller
-                                            .showUploadDocumentsBottomSheet(
-                                                onTap: () {
-                                          controller.pickFile();
-                                        }, onTapForSave: () {
-                                          controller.uploadDocuments();
-                                        }),
-                                        child: Container(
-                                          width: 200,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
-                                          decoration: BoxDecoration(
-                                              color: AppColors.appButtonColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Transform.flip(
-                                                flipY: true,
-                                                child: Image.asset(
-                                                  ImagePath.download,
-                                                  scale: 4,
-                                                ),
-                                              ),
-                                              5.horizontalSpacing,
-                                              const Text(
-                                                "Upload Document",
-                                                style: AppTextStyle
-                                                    .cardTextStyle14WhiteW500,
-                                              ),
-                                            ],
+                            Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () => controller
+                                      .showUploadDocumentsBottomSheet(
+                                      onTap: () {
+                                        controller.pickFile();
+                                      }, onTapForSave: () {
+                                    controller.uploadDocuments();
+                                  }),
+                                  child: Container(
+                                    width: 200,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.appButtonColor,
+                                        borderRadius:
+                                        BorderRadius.circular(20)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        Transform.flip(
+                                          flipY: true,
+                                          child: Image.asset(
+                                            ImagePath.download,
+                                            scale: 4,
                                           ),
                                         ),
-                                      ),
-                                      10.verticalSpacing,
+                                        5.horizontalSpacing,
+                                        const Text(
+                                          "Upload Document",
+                                          style: AppTextStyle
+                                              .cardTextStyle14WhiteW500,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                10.verticalSpacing,
 
-                                      /// Documents Tiles
-                                      controller.loadingController.isLoading
-                                          ? const LoadingWidget()
-                                          : controller
-                                                  .documentsDataList.isNotEmpty
-                                              ? Expanded(
-                                                  child: ListView.builder(
-                                                    physics:
-                                                        const BouncingScrollPhysics(),
-                                                    shrinkWrap: true,
-                                                    itemCount: controller
-                                                        .documentsDataList
-                                                        .length,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return DocumentsCard(
-                                                        title:
-                                                            "${index + 1}. ${controller.documentsDataList[index].title}",
-                                                        fileName: controller
-                                                            .documentsDataList[
-                                                                index]
-                                                            .file,
-                                                        tapDelete: () =>
-                                                            Get.dialog(
-                                                          AccountDeleteDialogue(
-                                                            onYesTap: () async {
-                                                              Get.back();
-                                                              await controller
-                                                                  .deleteDocumentList(
-                                                                      controller
-                                                                          .documentsDataList[
-                                                                              index]
-                                                                          .id!);
-                                                              await controller
-                                                                  .getAllDocumentList();
+                                /// Documents Tiles
+                                controller.loadingController.isLoading
+                                    ? const CircularProgressIndicator(color: AppColors.primaryColor,)
+                                    : controller
+                                    .documentsDataList.isNotEmpty
+                                    ? Expanded(
+                                  child: ListView.builder(
+                                    physics:
+                                    const BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: controller
+                                        .documentsDataList
+                                        .length,
+                                    itemBuilder:
+                                        (context, index) {
+                                      return DocumentsCard(
+                                        title:
+                                        "${index + 1}. ${controller.documentsDataList[index].title}",
+                                        fileName: controller
+                                            .documentsDataList[
+                                        index]
+                                            .file,
+                                        tapDelete: () =>
+                                        Get.dialog(
+                                              CustomPopupDialogue(
+                                                onYesTap: () {
+                                                  controller.deleteDocument(documentId: controller.documentsDataList[index].id!, index: index);
 
-                                                            },
-                                                            title:
-                                                                'Confirmation',
-                                                            subTitle: AppText
-                                                                .deleteDocumentsWarningMsg,
-                                                            noText: 'cancel',
-                                                            yesText: 'delete',
-                                                          ),
-                                                        ),
-                                                        tapDownload: () {},
-                                                      );
-                                                    },
-                                                  ),
-                                                )
-                                              : const NoDataAvailableWidget(
-                                                  message:
-                                                      "No Document Available",
-                                                ),
-                                    ],
-                                  )
+                                                },
+                                                title:
+                                                'Confirmation',
+                                                subTitle: AppText
+                                                    .deleteDocumentsWarningMsg,
+                                                noText: 'cancel',
+                                                yesText: 'delete',
+                                              ),
+                                            ),
+                                        tapDownload: () {},
+                                      );
+                                    },
+                                  ),
+                                )
+                                    : const NoDataAvailableWidget(
+                                  message:
+                                  "No Document Available",
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),

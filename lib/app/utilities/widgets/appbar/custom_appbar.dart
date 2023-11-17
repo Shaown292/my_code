@@ -60,7 +60,7 @@ class CustomAppBar extends GetView<HomeController> {
                     InkWell(
                       onTap: () {
                         Get.dialog(
-                          AccountDeleteDialogue(
+                          CustomPopupDialogue(
                             onYesTap: () {
                               controller.logout();
                             },
