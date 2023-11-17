@@ -5,6 +5,7 @@ import '../../data/module_data/home_data/home_dummy_data.dart';
 import '../../routes/app_pages.dart';
 
 class AppFunctions {
+
   void getFunctions(int rule) {
 
     switch (rule) {
