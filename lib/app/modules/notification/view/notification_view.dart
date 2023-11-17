@@ -37,7 +37,7 @@ class NotificationView extends GetView<NotificationController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "You have ${GlobalVariableController.notificationCount} New notification",
+                      "You have ${notificationCountController.notificationCount} New notification",
                       style: AppTextStyle.notificationText,
                     ),
                     controller.unReadNotificationList.isNotEmpty ? controller.loadingController.isLoading ? const CircularProgressIndicator() : PrimaryButton(

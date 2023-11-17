@@ -86,14 +86,14 @@ class NotificationBell extends StatelessWidget {
               color: AppColors.primaryColor,
             ),
             child:  Center(
-              child: Text(
-                GlobalVariableController.notificationCount.toString(),
+              child: Obx(() => Text(
+                '${notificationCountController.notificationCount}',
                 style: const TextStyle(
                     decoration: TextDecoration.none,
                     fontSize: 12,
                     color: Colors.white
                 ),
-              ),
+              )),
             ),
           ),
         ),

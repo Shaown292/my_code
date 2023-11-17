@@ -30,7 +30,7 @@ class LoginController extends GetxController {
       profileInfoModel = ProfileInfoModel.fromJson(res);
       if (profileInfoModel.success == true) {
         isLoading.value = false;
-        GlobalVariableController.notificationCount = profileInfoModel.data.unreadNotifications;
+        notificationCountController.notificationCount.value = profileInfoModel.data.unreadNotifications;
         GlobalVariableController.token = profileInfoModel.data.accessToken;
         GlobalVariableController.roleId = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
@@ -69,7 +69,7 @@ class LoginController extends GetxController {
       profileInfoModel = ProfileInfoModel.fromJson(response);
       if (profileInfoModel.success == true) {
         isLoading.value = false;
-        GlobalVariableController.notificationCount = profileInfoModel.data.unreadNotifications;
+        notificationCountController.notificationCount.value = profileInfoModel.data.unreadNotifications;
         GlobalVariableController.token = profileInfoModel.data.accessToken;
         GlobalVariableController.roleId = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);

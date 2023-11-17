@@ -1,4 +1,6 @@
 
+import 'package:get/get.dart';
+
 import '../../app/data/module_data/home_data/home_dummy_data.dart';
 
 
@@ -19,3 +21,9 @@ class GlobalVariableController {
  };
 
 }
+
+class NotificationCountController extends GetxController{
+ RxInt notificationCount = 0.obs;
+}
+
+NotificationCountController notificationCountController = Get.put(NotificationCountController());

@@ -35,7 +35,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
 
     if (authDatabase.auth()) {
       GlobalVariableController.roleId = authDatabase.getUserInfo()!.data.user.roleId;
-      GlobalVariableController.notificationCount = authDatabase.getUnReadNotification() ?? 0;
+      notificationCountController.notificationCount.value = authDatabase.getUnReadNotification() ?? 0;
       GlobalVariableController.token = authDatabase.getToken();
       GlobalVariableController.userId = authDatabase.getUserInfo()!.data.user.id;
       AppFunctions().getFunctions(GlobalVariableController.roleId!);

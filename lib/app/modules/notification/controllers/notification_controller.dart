@@ -43,7 +43,7 @@ class NotificationController extends GetxController {
       if (notificationModel.success == true) {
         AuthDatabase authDatabase = AuthDatabase.instance;
         authDatabase.saveUnReadNotification(unReadNotification: notificationModel.data?.unreadNotificationsCount ?? 0);
-        GlobalVariableController.notificationCount = notificationModel.data?.unreadNotificationsCount ?? 0;
+        notificationCountController.notificationCount.value = notificationModel.data?.unreadNotificationsCount ?? 0;
         if (notificationModel.data?.unreadNotifications != null && notificationModel.data!.unreadNotifications!.isNotEmpty) {
           for (int i = 0; i < notificationModel.data!.unreadNotifications!.length; i++) {
             unReadNotificationList.add(notificationModel.data!.unreadNotifications![i]);
@@ -75,7 +75,7 @@ class NotificationController extends GetxController {
 
       if(defaultResponseModel.success == true){
         unReadNotificationList.clear();
-        GlobalVariableController.notificationCount = 0;
+        notificationCountController.notificationCount.value = 0;
         authDatabase.saveUnReadNotification(unReadNotification: 0);
       }
 
