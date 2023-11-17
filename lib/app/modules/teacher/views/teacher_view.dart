@@ -17,13 +17,13 @@ class TeacherView extends GetView<TeacherController> {
 
   @override
   Widget build(BuildContext context) {
-    return InfixEduScaffold(
-      title: "Teacher",
-      body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: CustomBackground(
-          customWidget: Obx(
-            () => RefreshIndicator(
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Teacher",
+        body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: CustomBackground(
+            customWidget: RefreshIndicator(
               color: AppColors.primaryColor,
               onRefresh: () async {
                 controller.teacherList.clear();
@@ -35,32 +35,28 @@ class TeacherView extends GetView<TeacherController> {
                 children: [
                   10.verticalSpacing,
                   Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 15.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: SizedBox(
                       height: 50,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount:
-                        controller.homeController.studentRecordList.length,
+                            controller.homeController.studentRecordList.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Obx(
-                                    () => StudyButton(
-                                  title:
+                            padding: const EdgeInsets.all(8.0),
+                            child: StudyButton(
+                              title:
                                   "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                                  onItemTap: () {
-                                    controller.teacherList.clear();
-                                    int recordId = controller.homeController
-                                        .studentRecordList[index].id;
-                                    controller.getAllTeacherList(
-                                        recordId:recordId);
-                                  },
-                                  isSelected:
-                                  controller.selectIndex.value == index,
-                                ),
-                              ),
+                              onItemTap: () {
+                                controller.teacherList.clear();
+                                int recordId = controller
+                                    .homeController.studentRecordList[index].id;
+                                controller.getAllTeacherList(
+                                    recordId: recordId);
+                              },
+                              isSelected: controller.selectIndex.value == index,
+                            ),
                           );
                         },
                       ),
@@ -68,14 +64,15 @@ class TeacherView extends GetView<TeacherController> {
                   ),
                   10.verticalSpacing,
                   controller.loadingController.isLoading
-                      ? const LoadingWidget()
+                      ? const CircularProgressIndicator()
                       : controller.teacherList.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
                               itemCount: controller.teacherList.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 5),
                                   child: TeacherTile(
                                     color: index % 2 == 0
                                         ? Colors.white

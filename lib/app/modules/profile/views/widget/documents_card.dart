@@ -14,7 +14,9 @@ class DocumentsCard extends StatelessWidget {
   const DocumentsCard({
     super.key,
     this.title,
-    this.fileName, this.tapDownload, this.tapDelete,
+    this.fileName,
+    this.tapDownload,
+    this.tapDelete,
   });
 
   @override
@@ -39,19 +41,18 @@ class DocumentsCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Text(
-                    title ??
-                    "",
+                  Text(
+                    title ?? "",
                     style: AppTextStyle.syllabusFontSize16W500,
                   ),
                   5.verticalSpacing,
-                   SizedBox(
-                     width: Get.width * 0.5,
-                     child: Text(
+                  SizedBox(
+                    width: Get.width * 0.5,
+                    child: Text(
                       fileName ?? "",
                       style: AppTextStyle.blackFontSize12W400,
+                    ),
                   ),
-                   ),
                 ],
               ),
               Row(
@@ -66,9 +67,10 @@ class DocumentsCard extends StatelessWidget {
                           shape: BoxShape.circle,
                           color: AppColors.appButtonColor),
                       child: Center(
-                          child: Image.asset(
-                        ImagePath.download,
-                      )),
+                        child: Image.asset(
+                          ImagePath.download,
+                        ),
+                      ),
                     ),
                   ),
                   7.horizontalSpacing,
@@ -83,9 +85,10 @@ class DocumentsCard extends StatelessWidget {
                         color: Color(0xFFED3B3B),
                       ),
                       child: Center(
-                          child: Image.asset(
-                        ImagePath.delete,
-                      )),
+                        child: Image.asset(
+                          ImagePath.delete,
+                        ),
+                      ),
                     ),
                   ),
                 ],
