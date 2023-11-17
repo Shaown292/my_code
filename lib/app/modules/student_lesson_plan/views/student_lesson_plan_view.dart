@@ -129,14 +129,25 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                               buildingName: "Building No",
                               instructorName:
                               classRoutine.teacher,
-                              onDetailsButtonTap: controller.onDetailsButtonTapped,
+                              onDetailsButtonTap: controller.isLoading.value,
                               hasDetails: true,
                               onTap: () {
-                                controller.onDetailsButtonTapped = true;
-                                controller
-                                    .showLessonPlanDetailsBottomSheet(
-                                    index: index);
-                              }
+                                controller.isLoading.value = true;
+                                controller.getLessonPlanListDetails(lessonPlanId: controller.weeksList[index].id!, context: context);
+
+                              },
+                              buttonWidget: controller.isLoading.value ? const CircularProgressIndicator() : Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2),
+                                  color: AppColors.primaryColor,
+                                ),
+                                child: const Text(
+                                  "Details",
+                                  style: AppTextStyle.textStyle12WhiteW400,
+                                ),
+                              ),
+
                             );
                           },
                         )

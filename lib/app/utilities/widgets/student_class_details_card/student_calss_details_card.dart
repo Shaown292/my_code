@@ -17,6 +17,7 @@ class StudentClassDetailsCard extends StatelessWidget {
   final bool hasDetails;
   final Function()? onTap;
   final bool onDetailsButtonTap;
+  final Widget? buttonWidget;
 
   const StudentClassDetailsCard({
     super.key,
@@ -28,7 +29,9 @@ class StudentClassDetailsCard extends StatelessWidget {
     this.instructorName,
     this.isLunchBreak = false,
     this.onTap,
-    this.hasDetails = false,  this.onDetailsButtonTap = false,
+    this.hasDetails = false,
+    this.onDetailsButtonTap = false,
+    this.buttonWidget,
   });
 
   @override
@@ -72,7 +75,7 @@ class StudentClassDetailsCard extends StatelessWidget {
                     ),
                     isLunchBreak
                         ? const SizedBox()
-                        :onDetailsButtonTap == true ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) :  Container(
+                        : Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
@@ -113,21 +116,22 @@ class StudentClassDetailsCard extends StatelessWidget {
                         style: AppTextStyle.fontSize14lightViolateW400,
                       ),
                       const Spacer(),
-                      hasDetails ?
-                      InkWell(
-                        onTap: onTap,
-                        child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: AppColors.primaryColor,
-                          ),
-                          child: const Text(
-                            "Details",
-                            style: AppTextStyle.textStyle12WhiteW400,
-                          ),
-                        ),
-                      ) : const SizedBox()
+                      hasDetails
+                          ?  InkWell(
+                                  onTap: onTap,
+                                  child: buttonWidget ?? Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      color: AppColors.primaryColor,
+                                    ),
+                                    child: const Text(
+                                      "Details",
+                                      style: AppTextStyle.textStyle12WhiteW400,
+                                    ),
+                                  ),
+                                )
+                          : const SizedBox()
                     ],
                   ),
           ],
