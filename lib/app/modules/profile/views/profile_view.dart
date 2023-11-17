@@ -34,6 +34,7 @@ class ProfileView extends GetView<ProfileController> {
       leadingIcon: const SizedBox(),
       title: "Profile",
       body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
         child: Column(
           children: [
             CustomBackground(
@@ -206,56 +207,58 @@ class ProfileView extends GetView<ProfileController> {
                             /// Parents
                             controller.isLoading.value
                                 ? const LoadingWidget()
-                                : Column(
-                                    children: [
-                                      ParentsInfo(
-                                          designation: AppText.profileFather,
+                                : SingleChildScrollView(
+                                  child: Column(
+                                      children: [
+                                        ParentsInfo(
+                                            designation: AppText.profileFather,
+                                            icon: ImagePath.parentsProfile,
+                                            name: controller.profileParents
+                                                    ?.fathersName ??
+                                                AppText.noDataAvailable,
+                                            phone: controller.profileParents
+                                                    ?.fathersMobile ??
+                                                AppText.noDataAvailable,
+                                            occupation: controller.profileParents
+                                                    ?.fathersOccupation ??
+                                                AppText.noDataAvailable),
+                                        20.verticalSpacing,
+                                        ParentsInfo(
+                                            designation: AppText.profileMother,
+                                            icon: ImagePath.parentsProfile,
+                                            name: controller.profileParents
+                                                    ?.mothersName ??
+                                                AppText.noDataAvailable,
+                                            phone: controller.profileParents
+                                                    ?.mothersMobile ??
+                                                AppText.noDataAvailable,
+                                            occupation: controller.profileParents
+                                                    ?.mothersOccupation ??
+                                                AppText.noDataAvailable),
+                                        20.verticalSpacing,
+                                        GuardianInfo(
+                                          designation: AppText.profileGuardian,
                                           icon: ImagePath.parentsProfile,
                                           name: controller.profileParents
-                                                  ?.fathersName ??
+                                                  ?.guardiansName ??
+                                              AppText.noDataAvailable,
+                                          email: controller.profileParents
+                                                  ?.guardiansEmail ??
                                               AppText.noDataAvailable,
                                           phone: controller.profileParents
-                                                  ?.fathersMobile ??
+                                                  ?.guardiansMobile ??
                                               AppText.noDataAvailable,
                                           occupation: controller.profileParents
-                                                  ?.fathersOccupation ??
-                                              AppText.noDataAvailable),
-                                      20.verticalSpacing,
-                                      ParentsInfo(
-                                          designation: AppText.profileMother,
-                                          icon: ImagePath.parentsProfile,
-                                          name: controller.profileParents
-                                                  ?.mothersName ??
+                                                  ?.guardiansOccupation ??
                                               AppText.noDataAvailable,
-                                          phone: controller.profileParents
-                                                  ?.mothersMobile ??
+                                          relation: controller.profileParents
+                                                  ?.guardiansRelation ??
                                               AppText.noDataAvailable,
-                                          occupation: controller.profileParents
-                                                  ?.mothersOccupation ??
-                                              AppText.noDataAvailable),
-                                      20.verticalSpacing,
-                                      GuardianInfo(
-                                        designation: AppText.profileGuardian,
-                                        icon: ImagePath.parentsProfile,
-                                        name: controller.profileParents
-                                                ?.guardiansName ??
-                                            AppText.noDataAvailable,
-                                        email: controller.profileParents
-                                                ?.guardiansEmail ??
-                                            AppText.noDataAvailable,
-                                        phone: controller.profileParents
-                                                ?.guardiansMobile ??
-                                            AppText.noDataAvailable,
-                                        occupation: controller.profileParents
-                                                ?.guardiansOccupation ??
-                                            AppText.noDataAvailable,
-                                        relation: controller.profileParents
-                                                ?.guardiansRelation ??
-                                            AppText.noDataAvailable,
-                                        other: "Other",
-                                      ),
-                                    ],
-                                  ),
+                                          other: "Other",
+                                        ),
+                                      ],
+                                    ),
+                                ),
 
                             /// Transport
                             controller.isLoading.value
@@ -378,46 +381,44 @@ class ProfileView extends GetView<ProfileController> {
                                     : controller
                                     .documentsDataList.isNotEmpty
                                     ? Expanded(
-                                  child: ListView.builder(
-                                    physics:
-                                    const BouncingScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: controller
-                                        .documentsDataList
-                                        .length,
-                                    itemBuilder:
-                                        (context, index) {
-                                      return DocumentsCard(
-                                        title:
-                                        "${index + 1}. ${controller.documentsDataList[index].title}",
-                                        fileName: controller
-                                            .documentsDataList[
-                                        index]
-                                            .file,
-                                        tapDelete: () =>
-                                        Get.dialog(
-                                              CustomPopupDialogue(
-                                                onYesTap: () {
-                                                  controller.deleteDocument(documentId: controller.documentsDataList[index].id!, index: index);
+                                      child: ListView.builder(
+                                        itemCount: controller
+                                            .documentsDataList
+                                            .length,
+                                        itemBuilder:
+                                            (context, index) {
+                                          return DocumentsCard(
+                                            title:
+                                            "${index + 1}. ${controller.documentsDataList[index].title}",
+                                            fileName: controller
+                                                .documentsDataList[
+                                            index]
+                                                .file,
+                                            tapDelete: () =>
+                                            Get.dialog(
+                                                  CustomPopupDialogue(
+                                                    onYesTap: () {
+                                                      controller.deleteDocument(documentId: controller.documentsDataList[index].id!, index: index);
 
-                                                },
-                                                title:
-                                                'Confirmation',
-                                                subTitle: AppText
-                                                    .deleteDocumentsWarningMsg,
-                                                noText: 'cancel',
-                                                yesText: 'delete',
-                                              ),
-                                            ),
-                                        tapDownload: () {},
-                                      );
-                                    },
-                                  ),
-                                )
+                                                    },
+                                                    title:
+                                                    'Confirmation',
+                                                    subTitle: AppText
+                                                        .deleteDocumentsWarningMsg,
+                                                    noText: 'cancel',
+                                                    yesText: 'delete',
+                                                  ),
+                                                ),
+                                            tapDownload: () {},
+                                          );
+                                        },
+                                      ),
+                                    )
                                     : const NoDataAvailableWidget(
                                   message:
                                   "No Document Available",
                                 ),
+                                200.verticalSpacing,
                               ],
                             ),
                           ],

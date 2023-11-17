@@ -122,7 +122,9 @@ class StudentLessonPlanController extends GetxController {
                   studentLessonPlanDetailsResponseModel.data!);
         }
       } else {
-        showBasicFailedSnackBar(message: studentLessonPlanDetailsResponseModel.message ?? 'Something went wrong.');
+        showBasicFailedSnackBar(
+            message: studentLessonPlanDetailsResponseModel.message ??
+                'Something went wrong.');
         Get.back();
       }
     } catch (e, t) {
@@ -135,7 +137,6 @@ class StudentLessonPlanController extends GetxController {
     }
   }
 
-
   void showLessonPlanDetailsBottomSheet(
       {required StudentLessonPlanDetailsData studentLessonPlanDetailsData}) {
     Get.bottomSheet(
@@ -146,14 +147,13 @@ class StudentLessonPlanController extends GetxController {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 10.verticalSpacing,
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
                     studentLessonPlanDetailsData.classSection ?? "",
                     style: AppTextStyle.fontSize14BlackW500,
                   ),
                 ),
-
                 BottomSheetTile(
                   title: "Subject Name",
                   value: studentLessonPlanDetailsData.subject,
@@ -261,7 +261,7 @@ class StudentLessonPlanController extends GetxController {
                 ),
                 BottomSheetTile(
                   title: "Youtube Link",
-                  value: studentLessonPlanDetailsData?.lectureYoutubeLink,
+                  value: studentLessonPlanDetailsData.lectureYoutubeLink,
                   color: AppColors.homeworkWidgetColor,
                 ),
                 Container(
@@ -286,10 +286,10 @@ class StudentLessonPlanController extends GetxController {
                         thickness: 1,
                       ),
                       Switch(
-                          value: studentLessonPlanDetailsData?.status ?? false,
+                          value: studentLessonPlanDetailsData.status ?? false,
                           onChanged: (bool value) {
                             value =
-                                studentLessonPlanDetailsData?.status ?? false;
+                                studentLessonPlanDetailsData.status ?? false;
                           }),
                     ],
                   ),
