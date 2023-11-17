@@ -21,132 +21,135 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return Obx(() => DefaultTabController(
+      initialIndex: controller.selectTabIndex.value,
       length: controller.daysOfWeek.length,
       child: InfixEduScaffold(
         title: "Lesson Plan",
-        body: Obx(
-          () => CustomBackground(
-            customWidget: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: controller.loadingController.isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.primaryColor,
+        body: CustomBackground(
+          customWidget: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            child: controller.loadingController.isLoading
+                ? const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
+              ),
+            )
+                : Column(
+              children: [
+                SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller
+                        .homeController.studentRecordList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            right: 8.0, top: 8, bottom: 8),
+                        child: StudyButton(
+                          title:
+                          "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                          onItemTap: () {
+                            controller.weeksList.clear();
+                            int recordId = controller.homeController
+                                .studentRecordList[index].id;
+                            controller.getLessonPlanList(
+                                GlobalVariableController.userId!,
+                                recordId);
+                            controller.selectIndex.value = index;
+                          },
+                          isSelected:
+                          controller.selectIndex.value == index,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                20.verticalSpacing,
+                Text(
+                  controller.formattedDate,
+                  style: AppTextStyle.fontSize14VioletW600,
+                ),
+                20.verticalSpacing,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                        color: AppColors.profileCardTextColor),
+                  ),
+                  child: TabBar(
+                    isScrollable: true,
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Colors.black,
+                    controller: controller.tabController,
+                    indicator: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: AppColors.appButtonColor),
+                    tabs: List.generate(
+                      controller.daysOfWeek.length,
+                          (index) => ShowWeekTile(
+                        title: controller.daysOfWeek[index],
                       ),
-                    )
-                  : Column(
-                      children: [
-                        SizedBox(
-                          height: 50,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: controller
-                                .homeController.studentRecordList.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8.0, top: 8, bottom: 8),
-                                child: StudyButton(
-                                  title:
-                                      "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                                  onItemTap: () {
-                                    controller.weeksList.clear();
-                                    int recordId = controller.homeController
-                                        .studentRecordList[index].id;
-                                    controller.getLessonPlanList(
-                                        GlobalVariableController.userId!,
-                                        recordId);
-                                    controller.selectIndex.value = index;
-                                  },
-                                  isSelected:
-                                      controller.selectIndex.value == index,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        20.verticalSpacing,
-                        Text(
-                          controller.formattedDate,
-                          style: AppTextStyle.fontSize14VioletW600,
-                        ),
-                        20.verticalSpacing,
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                                color: AppColors.profileCardTextColor),
-                          ),
-                          child: TabBar(
-                            isScrollable: true,
-                            labelColor: Colors.white,
-                            unselectedLabelColor: Colors.black,
-                            controller: controller.tabController,
-                            indicator: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: AppColors.appButtonColor),
-                            tabs: List.generate(
-                              controller.daysOfWeek.length,
-                              (index) => ShowWeekTile(
-                                title: controller.daysOfWeek[index],
-                              ),
-                            ),
-                          ),
-                        ),
-                        10.verticalSpacing,
-                        Expanded(
-                          child: TabBarView(
-                            controller: controller.tabController,
-                            children: List.generate(
-                              controller.daysOfWeek.length,
-                              (index) {
-                                return Obx(() => controller
-                                        .loadingController.isLoading
-                                    ? const LoadingWidget()
-                                    : controller.weeksList[index].classRoutine!
-                                            .isNotEmpty
-                                        ? ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: controller
-                                                .weeksList[index]
-                                                .classRoutine!
-                                                .length,
-                                            itemBuilder:
-                                                (context, routineIndex) {
-                                              ClassRoutine classRoutine =
-                                                  controller.weeksList[index]
-                                                          .classRoutine![
-                                                      routineIndex];
-                                              return StudentClassDetailsCard(
-                                                subject:
-                                                    classRoutine.subjectName,
-                                                startingTime:
-                                                    classRoutine.startTime,
-                                                endingTime:
-                                                    classRoutine.endTime,
-                                                roomNumber: classRoutine.room,
-                                                buildingName: "Building No",
-                                                instructorName:
-                                                    classRoutine.teacher,
-                                                hasDetails: true,
-                                                onTap: () => controller
-                                                    .showLessonPlanDetailsBottomSheet(
-                                                        index: index),
-                                              );
-                                            },
-                                          )
-                                        : const NoDataAvailableWidget());
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
+                  ),
+                ),
+                10.verticalSpacing,
+                Expanded(
+                  child: TabBarView(
+                    controller: controller.tabController,
+                    children: List.generate(
+                      controller.daysOfWeek.length,
+                          (index) {
+                        return Obx(() => controller
+                            .loadingController.isLoading
+                            ? const LoadingWidget()
+                            : controller.weeksList[index].classRoutine!
+                            .isNotEmpty
+                            ? ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: controller
+                              .weeksList[index]
+                              .classRoutine!
+                              .length,
+                          itemBuilder:
+                              (context, routineIndex) {
+                            ClassRoutine classRoutine =
+                            controller.weeksList[index]
+                                .classRoutine![
+                            routineIndex];
+                            return StudentClassDetailsCard(
+                              subject:
+                              classRoutine.subjectName,
+                              startingTime:
+                              classRoutine.startTime,
+                              endingTime:
+                              classRoutine.endTime,
+                              roomNumber: classRoutine.room,
+                              buildingName: "Building No",
+                              instructorName:
+                              classRoutine.teacher,
+                              onDetailsButtonTap: controller.onDetailsButtonTapped,
+                              hasDetails: true,
+                              onTap: () {
+                                controller.onDetailsButtonTapped = true;
+                                controller
+                                    .showLessonPlanDetailsBottomSheet(
+                                    index: index);
+                              }
+                            );
+                          },
+                        )
+                            : const NoDataAvailableWidget());
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
       ),
-    );
+    ));
   }
 }

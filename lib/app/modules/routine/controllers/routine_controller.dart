@@ -13,12 +13,7 @@ class RoutineController extends GetxController {
   LoadingController loadingController = Get.find();
   RxInt selectIndex = 1.obs;
 
-  @override
-  void onInit() async {
-    getSyllabusList();
-    selectTab();
-    super.onInit();
-  }
+
 
   List<String> daysOfWeek = <String>[
     'Sat',
@@ -70,5 +65,12 @@ class RoutineController extends GetxController {
 
   void selectTab() {
     selectIndex.value = daysOfWeek.indexOf(today);
+  }
+
+  @override
+  void onInit() async {
+    getSyllabusList();
+    selectTab();
+    super.onInit();
   }
 }
