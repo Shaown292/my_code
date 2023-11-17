@@ -72,6 +72,8 @@ import '../modules/student_search_attendance/bindings/student_search_attendance_
 import '../modules/student_search_attendance/views/student_search_attendance_view.dart';
 import '../modules/student_search_subject_attendance/bindings/student_search_subject_attendance_binding.dart';
 import '../modules/student_search_subject_attendance/views/student_search_subject_attendance_view.dart';
+import '../modules/student_wallet/bindings/student_wallet_binding.dart';
+import '../modules/student_wallet/views/student_wallet_view.dart';
 import '../modules/study_materials/bindings/study_materials_binding.dart';
 import '../modules/study_materials/views/study_materials_view.dart';
 import '../modules/subjects/bindings/subjects_binding.dart';
@@ -313,6 +315,11 @@ class AppPages {
       name: _Paths.FORGET_PASSWORD,
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.STUDENT_WALLET,
+      page: () => const StudentWalletView(),
+      binding: StudentWalletBinding(),
     ),
   ];
 }

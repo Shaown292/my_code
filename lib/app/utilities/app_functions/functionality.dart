@@ -55,6 +55,7 @@ class AppFunctions {
       case 'Profile':
         break;
       case 'Wallet':
+        Get.toNamed(Routes.STUDENT_WALLET);
         break;
       case 'Routine':
         break;
@@ -94,7 +95,6 @@ class AppFunctions {
         Get.toNamed(Routes.ONLINE_EXAM);
         break;
       case 'Attendance':
-        print('search attendance');
         Get.toNamed(Routes.ATTENDANCE);
         break;
       case 'Settings':
