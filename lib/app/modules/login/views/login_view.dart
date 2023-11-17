@@ -58,7 +58,7 @@ class LoginView extends GetView<LoginController> {
                             )),
                         Container(
                           height: 500,
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(8),

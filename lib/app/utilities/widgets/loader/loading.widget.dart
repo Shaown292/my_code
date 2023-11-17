@@ -13,8 +13,8 @@ class LoadingWidget extends GetWidget<LoadingController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return controller.isLoading
-          ? WillPopScope(
-              onWillPop: () => Future.value(false),
+          ? PopScope(
+        onPopInvoked: (bool value) => Future.value(false),
               child: Stack(
                 children: <Widget>[
                   ModalBarrier(
