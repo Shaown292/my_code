@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 
 StudentRoutineResponseModel studentRoutineResponseModelFromJson(String str) => StudentRoutineResponseModel.fromJson(json.decode(str));

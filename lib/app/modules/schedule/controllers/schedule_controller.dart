@@ -11,19 +11,17 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/message/snack_bars.dart';
 
 class ScheduleController extends GetxController {
-
   ExaminationController examinationController = Get.find();
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
-
 
   // List<String> dropdownList = [];
   List<ScheduleData> scheduleList = [];
   RxString dropdownValue = "".obs;
   RxString recordDropdownValue = "".obs;
 
-
-  void getStudentExamScheduleList({required int examId, required recordId}) async {
+  void getStudentExamScheduleList(
+      {required int examId, required recordId}) async {
     try {
       loadingController.isLoading = true;
       final response = await BaseClient().getData(
@@ -31,18 +29,22 @@ class ScheduleController extends GetxController {
         header: GlobalVariableController.header,
       );
 
-      StudentExamScheduleResponseModel studentExamScheduleResponseModel = StudentExamScheduleResponseModel.fromJson(response);
+      StudentExamScheduleResponseModel studentExamScheduleResponseModel =
+          StudentExamScheduleResponseModel.fromJson(response);
       if (studentExamScheduleResponseModel.success == true) {
         loadingController.isLoading = false;
         if (studentExamScheduleResponseModel.data!.isNotEmpty) {
-          for (int i = 0; i < studentExamScheduleResponseModel.data!.length; i++) {
+          for (int i = 0;
+              i < studentExamScheduleResponseModel.data!.length;
+              i++) {
             scheduleList.add(studentExamScheduleResponseModel.data![i]);
           }
         }
-
       } else {
         loadingController.isLoading = false;
-        showBasicFailedSnackBar(message: studentExamScheduleResponseModel.message ?? 'Failed to load data');
+        showBasicFailedSnackBar(
+            message: studentExamScheduleResponseModel.message ??
+                'Failed to load data');
       }
     } catch (e, t) {
       loadingController.isLoading = false;
@@ -55,20 +57,16 @@ class ScheduleController extends GetxController {
 
   @override
   void onInit() {
-
-    if(examinationController.examList.isNotEmpty){
+    if (examinationController.examList.isNotEmpty) {
       // dropdownList = examinationController.examDropdownList;
       dropdownValue.value = examinationController.examDropdownList[0];
       recordDropdownValue.value = homeController.studentRecordDropdownList[0];
 
-      getStudentExamScheduleList(examId: examinationController.examList[0].id!, recordId: homeController.studentRecordList[0].id);
-
-      for(int i = 0; i< homeController.studentRecordDropdownList.length; i++){
-        print('::::::: ${homeController.studentRecordDropdownList[i]}');
-      }
+      getStudentExamScheduleList(
+          examId: examinationController.examList[0].id!,
+          recordId: homeController.studentRecordList[0].id);
     }
 
     super.onInit();
   }
-
 }

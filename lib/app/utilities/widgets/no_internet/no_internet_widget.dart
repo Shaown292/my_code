@@ -11,12 +11,12 @@ class NoInternetConnection extends StatelessWidget {
   final Color? backgroundColor;
 
   const NoInternetConnection({
-    Key? key,
+    super.key,
     this.lottieFilePath,
     this.message,
     this.height,
     this.backgroundColor
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

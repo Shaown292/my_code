@@ -15,8 +15,8 @@ class ListLoaderFooter extends StatelessWidget {
     required this.loading,
     required this.noMoreItem,
     this.noItemMessage = 'No item left!',
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

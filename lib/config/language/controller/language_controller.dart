@@ -6,11 +6,11 @@ import 'language_selection.dart';
 //......
 //**:: ADD/REMOVE LANGUAGE
 //.....
-var language;
+String? language;
 bool langValue = false;
 class LanguageController extends GetxController implements Translations {
 
-  var appLocale;
+  String? appLocale;
   var langName = "".obs;
 
   @override
@@ -48,7 +48,7 @@ class LanguageController extends GetxController implements Translations {
   void onInit() async {
     super.onInit();
     await changeLanguage();
-    Get.updateLocale(Locale(appLocale));
+    Get.updateLocale(Locale(appLocale!));
     update();
   }
 }

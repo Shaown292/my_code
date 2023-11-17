@@ -13,7 +13,7 @@ class PrimaryButton extends StatelessWidget {
   final Function()? onTap;
 
   const PrimaryButton({
-    Key? key,
+    super.key,
      this.height,
      this.width,
     this.color,
@@ -21,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
     this.onTap,
     this.borderRadius,
     this.textStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

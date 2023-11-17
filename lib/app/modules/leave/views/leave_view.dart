@@ -9,7 +9,7 @@ import '../../home/views/widgets/custom_card_tile.dart';
 import '../controllers/leave_controller.dart';
 
 class LeaveView extends GetView<LeaveController> {
-  const LeaveView({Key? key}) : super(key: key);
+  const LeaveView({super.key});
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(

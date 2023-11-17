@@ -9,7 +9,7 @@ import '../../home/views/widgets/custom_card_tile.dart';
 import '../controllers/library_controller.dart';
 
 class LibraryView extends GetView<LibraryController> {
-  const LibraryView({Key? key}) : super(key: key);
+  const LibraryView({super.key});
 
   @override
   Widget build(BuildContext context) {

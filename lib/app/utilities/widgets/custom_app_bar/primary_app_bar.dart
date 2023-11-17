@@ -6,7 +6,7 @@ import '../../../data/constants/image_path.dart';
 class PrimaryAppBar extends StatelessWidget {
   final String title;
   final List<Widget>? actions;
-  const PrimaryAppBar({Key? key, required this.title, this.actions}) : super(key: key);
+  const PrimaryAppBar({super.key, required this.title, this.actions});
 
   @override
   Widget build(BuildContext context) {

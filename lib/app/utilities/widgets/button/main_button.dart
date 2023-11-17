@@ -18,8 +18,8 @@ class MainButton extends StatelessWidget {
     this.loading = false,
     this.backgroundColor = AppColors.primaryColor,
     this.borderRadius,
-    Key? key, this.buttonHeight,
-  }) : super(key: key);
+    super.key, this.buttonHeight,
+  });
 
   @override
   Widget build(BuildContext context) {

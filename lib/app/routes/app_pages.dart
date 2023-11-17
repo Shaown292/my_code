@@ -88,6 +88,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
+  // ignore: constant_identifier_names
   static const INITIAL = Routes.SPLASH;
   static final routes = [
     GetPage(
@@ -310,7 +311,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FORGET_PASSWORD,
-      page: () =>  ForgetPasswordView(),
+      page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
     ),
   ];

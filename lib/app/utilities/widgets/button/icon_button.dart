@@ -6,11 +6,11 @@ class CustomIconButton extends StatelessWidget {
   final Function()? onPressed;
 
   const CustomIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     this.size,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

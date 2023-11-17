@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../controllers/secondary_splash_controller.dart';
 
 class SecondarySplashView extends GetView<SecondarySplashController> {
-  const SecondarySplashView({Key? key}) : super(key: key);
+  const SecondarySplashView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

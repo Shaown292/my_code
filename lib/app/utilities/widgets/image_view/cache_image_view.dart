@@ -18,8 +18,8 @@ class CacheImageView extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.color = Colors.transparent,
     this.errorImageLocal,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/student_routine_model/StudentRoutineResponseModel.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/student_routine_model/student_routine_response_model.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../../config/global_variable/global_variable_controller.dart';

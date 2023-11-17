@@ -9,8 +9,7 @@ class CustomTabBarItem extends StatelessWidget {
   final Function() onTap;
 
   const CustomTabBarItem(
-      {Key? key, required this.title, required this.isActive, required this.onTap, this.textStyle,})
-      : super(key: key);
+      {super.key, required this.title, required this.isActive, required this.onTap, this.textStyle,});
 
   @override
   Widget build(BuildContext context) {

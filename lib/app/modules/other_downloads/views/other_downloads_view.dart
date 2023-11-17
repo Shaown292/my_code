@@ -8,7 +8,7 @@ import '../../../utilities/widgets/no_data_available/no_data_available_widget.da
 import '../controllers/other_downloads_controller.dart';
 
 class OtherDownloadsView extends GetView<OtherDownloadsController> {
-  const OtherDownloadsView({Key? key}) : super(key: key);
+  const OtherDownloadsView({super.key});
 
   @override
   Widget build(BuildContext context) {

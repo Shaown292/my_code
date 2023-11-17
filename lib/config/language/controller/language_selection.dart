@@ -1,5 +1,5 @@
 class LanguageSelection {
-  var drop;
+  String? drop;
   String val = 'en_US';
 
   String langName = 'English';

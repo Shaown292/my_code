@@ -3,7 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_internet/InternetController.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_internet/internet_controller.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_colors.dart';
 import '../../../routes/app_pages.dart';

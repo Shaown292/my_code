@@ -1,4 +1,6 @@
 
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 
 /// app development state

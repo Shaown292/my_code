@@ -10,12 +10,12 @@ class CustomAppBar extends StatelessWidget {
   final Function() logoutOnTap;
 
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.schoolName,
     this.centerTitle,
     required this.messengerOnTap,
     required this.logoutOnTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

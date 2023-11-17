@@ -9,7 +9,7 @@ import '../../home/views/widgets/custom_card_tile.dart';
 import '../controllers/online_exam_controller.dart';
 
 class OnlineExamView extends GetView<OnlineExamController> {
-  const OnlineExamView({Key? key}) : super(key: key);
+  const OnlineExamView({super.key});
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(

@@ -4,7 +4,7 @@ import 'package:flutter_single_getx_api_v2/config/global_variable/global_variabl
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
 import 'package:get/get.dart';
 import '../../../../domain/base_client/base_client.dart';
-import '../../../utilities/widgets/no_internet/InternetController.dart';
+import '../../../utilities/widgets/no_internet/internet_controller.dart';
 import '../../../database/auth_database.dart';
 import '../../../utilities/api_urls.dart';
 import '../../../utilities/message/snack_bars.dart';

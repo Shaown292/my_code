@@ -12,7 +12,7 @@ class IconBadge extends StatelessWidget {
   final int maxCount;
 
   const IconBadge({
-    Key? key,
+    super.key,
     this.onTap,
     required this.icon,
     this.itemCount = 0,
@@ -22,7 +22,7 @@ class IconBadge extends StatelessWidget {
     this.maxCount = 99,
     this.top = 3.0,
     this.right = 6.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
