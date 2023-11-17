@@ -16,6 +16,7 @@ class StudentClassDetailsCard extends StatelessWidget {
   final bool isLunchBreak;
   final bool hasDetails;
   final Function()? onTap;
+  final bool onDetailsButtonTap;
 
   const StudentClassDetailsCard({
     super.key,
@@ -27,7 +28,7 @@ class StudentClassDetailsCard extends StatelessWidget {
     this.instructorName,
     this.isLunchBreak = false,
     this.onTap,
-    this.hasDetails = false,
+    this.hasDetails = false,  this.onDetailsButtonTap = false,
   });
 
   @override
@@ -71,7 +72,7 @@ class StudentClassDetailsCard extends StatelessWidget {
                     ),
                     isLunchBreak
                         ? const SizedBox()
-                        : Container(
+                        :onDetailsButtonTap == true ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) :  Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),

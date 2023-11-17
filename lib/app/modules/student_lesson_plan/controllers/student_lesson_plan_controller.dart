@@ -27,7 +27,8 @@ class StudentLessonPlanController extends GetxController {
 
 
   final selectIndex = RxInt(0);
-  RxInt selectTabIndex = 1.obs;
+  RxInt selectTabIndex = 0.obs;
+  bool onDetailsButtonTapped = false;
 
 
 
@@ -289,22 +290,23 @@ class StudentLessonPlanController extends GetxController {
 
   void selectTab() {
     selectTabIndex.value = daysOfWeek.indexOf(today);
+    print('object:::::::::::::::::: $selectTabIndex:::::::::::');
   }
 
   @override
-  void onInit() async {
-    await getLessonPlanList(GlobalVariableController.userId!, homeController.studentRecordList[0].id);
+  void onInit() {
+    selectTab();
+    if (homeController.studentRecordList.isNotEmpty) {
+        getLessonPlanList(GlobalVariableController.userId!, homeController.studentRecordList[0].id);
+    }
+
 
     debugPrint("Week::::: ${weeksList.length}");
     int weekIndex = weeksList.indexWhere((week) => week.date == formatDate);
 
-    debugPrint("Today::::: $weekIndex date:::: $formatDate");
+    debugPrint("Today::::: $today :::::: $weekIndex date:::: $formatDate");
 
-    if(weekIndex != -1 ){
-      await getLessonPlanListDetails(weeksList[weekIndex].id!);
 
-    }
-    selectTab();
     super.onInit();
   }
 }

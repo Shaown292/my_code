@@ -145,7 +145,7 @@ class LoginView extends GetView<LoginController> {
                                   color: AppColors.loginIconColor,
                                 ),
                               ),
-                              10.verticalSpacing,
+                              15.verticalSpacing,
                               InkWell(
                                 onTap: ()=> Get.toNamed(Routes.FORGET_PASSWORD),
                                   child: const Text(
