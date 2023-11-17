@@ -1,7 +1,6 @@
 
 import '../../config/app_config.dart';
 
-
 class InfixApi {
   static String root = '${AppConfig.domainName}/';
 
