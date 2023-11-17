@@ -4,8 +4,6 @@ import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profi
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
-import '../../../../../domain/core/model/profile/profile_personal_model.dart';
-
 class EditProfileRoute extends StatelessWidget {
   const EditProfileRoute({super.key, this.controller});
 

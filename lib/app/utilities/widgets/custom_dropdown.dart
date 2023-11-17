@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:get/get.dart';
 
 class CustomDropdown extends StatelessWidget {
   final String? dropdownValue;

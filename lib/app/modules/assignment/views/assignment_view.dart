@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import '../controllers/assignment_controller.dart';
 
 class AssignmentView extends GetView<AssignmentController> {
-  const AssignmentView({Key? key}) : super(key: key);
+  const AssignmentView({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(() => InfixEduScaffold(

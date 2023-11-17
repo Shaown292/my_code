@@ -5,7 +5,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:get/get.dart';
 import '../../../../data/constants/app_colors.dart';
-import '../../../../data/dummy_data/student/student_info_dummy_data.dart';
 
 
 class ProfilePersonalWidget extends StatelessWidget {

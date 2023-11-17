@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
@@ -16,7 +15,6 @@ import '../../../data/constants/app_text_style.dart';
 import '../../../style/bottom_sheet/bottom_sheet_shpe.dart';
 import '../../../utilities/api_urls.dart';
 import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
-import '../views/widget/student_lesson_plan_bottom_sheet.dart';
 
 class StudentLessonPlanController extends GetxController {
   HomeController homeController = Get.find();

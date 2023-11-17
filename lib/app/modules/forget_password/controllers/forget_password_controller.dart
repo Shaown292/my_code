@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 
-import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utilities/api_urls.dart';
 import '../../../utilities/message/snack_bars.dart';

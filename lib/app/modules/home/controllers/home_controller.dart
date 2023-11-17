@@ -3,7 +3,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_record/student_record_response_model.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../../domain/base_client/base_client.dart';
 import '../../../database/auth_database.dart';

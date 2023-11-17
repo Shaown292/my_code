@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/database/auth_database.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_single_getx_api_v2/config/global_variable/global_variabl
 import 'package:flutter_single_getx_api_v2/domain/core/model/default_response_model/default_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/notification/notification_model.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/message/snack_bars.dart';

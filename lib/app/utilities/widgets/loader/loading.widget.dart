@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:get/get.dart';
 
 import 'loading.controller.dart';

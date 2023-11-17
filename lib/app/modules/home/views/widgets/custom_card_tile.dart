@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../data/constants/app_colors.dart';
 import '../../../../data/constants/app_dimens.dart';

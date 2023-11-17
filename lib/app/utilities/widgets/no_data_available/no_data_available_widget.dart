@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../../data/constants/app_text_style.dart';
 import '../../../data/constants/image_path.dart';
-import '../button/primary_button.dart';
 
 class NoDataAvailableWidget extends StatelessWidget {
   final String? message;

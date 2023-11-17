@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/notification/controllers/notification_controller.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:get/get.dart';
-
-import '../../../../data/constants/image_path.dart';
 
 class NotificationAppBarWidget extends StatelessWidget {
   final int? notificationCount;

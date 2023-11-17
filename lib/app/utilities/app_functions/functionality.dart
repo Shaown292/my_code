@@ -103,7 +103,6 @@ class AppFunctions {
       case 'Lesson':
         Get.toNamed(Routes.STUDENT_LESSON_PLAN);
         break;
-        break;
       case 'Class':
         break;
       case 'Assignment':

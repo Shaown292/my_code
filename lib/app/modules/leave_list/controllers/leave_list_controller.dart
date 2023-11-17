@@ -127,7 +127,7 @@ class LeaveListController extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               10.verticalSpacing,
-              Text("Reason: ${pendingList[index].reason}" ?? "", style:  AppTextStyle.fontSize14BlackW500,),
+              Text("Reason: ${pendingList[index].reason}", style:  AppTextStyle.fontSize14BlackW500,),
               20.verticalSpacing,
               BottomSheetTile(
                 title: "Leave Type",
@@ -164,7 +164,7 @@ class LeaveListController extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               10.verticalSpacing,
-              Text("Reason: ${approvedList[index].reason}" ?? "", style:  AppTextStyle.fontSize14BlackW500,),
+              Text("Reason: ${approvedList[index].reason}", style:  AppTextStyle.fontSize14BlackW500,),
               20.verticalSpacing,
               BottomSheetTile(
                 title: "Leave Type",
@@ -201,7 +201,7 @@ class LeaveListController extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               10.verticalSpacing,
-              Text("Reason: ${rejectedList[index].reason}" ?? "", style:  AppTextStyle.fontSize14BlackW500,),
+              Text("Reason: ${rejectedList[index].reason}", style:  AppTextStyle.fontSize14BlackW500,),
               20.verticalSpacing,
               BottomSheetTile(
                 title: "Leave Type",

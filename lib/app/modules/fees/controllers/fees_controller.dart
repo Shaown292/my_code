@@ -59,7 +59,7 @@ class FeesController extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               10.verticalSpacing,
-              const Text("Reason:" ?? "", style:  AppTextStyle.fontSize14BlackW500,),
+              const Text("Reason:", style:  AppTextStyle.fontSize14BlackW500,),
               20.verticalSpacing,
               const BottomSheetTile(
                 title: "Leave Type",
