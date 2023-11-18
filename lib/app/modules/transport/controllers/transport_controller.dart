@@ -51,9 +51,10 @@ class TransportController extends GetxController {
     return TransportResponseModel();
   }
 
-  void showTransportDetailsBottomSheet({required int index}) {
+  void showTransportDetailsBottomSheet({required int index, Color? bottomSheetBackgroundColor}) {
     Get.bottomSheet(
-      SizedBox(
+      Container(
+        color: bottomSheetBackgroundColor,
           height: Get.height * 0.45,
           child: transportDataList.isNotEmpty
               ? Column(

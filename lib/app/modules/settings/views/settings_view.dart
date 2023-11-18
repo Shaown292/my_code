@@ -38,15 +38,7 @@ class SettingsView extends GetView<SettingsController> {
                   Get.toNamed(Routes.CHANGE_PASSWORD);
                 },
               ),
-              10.verticalSpacing,
-              SettingsTile(
-                icon: ImagePath.changePassword,
-                title: "Forget Password",
-                isLanguage: false,
-                onTileTap: (){
 
-                },
-              ),
               10.verticalSpacing,
               SettingsTile(
                 icon: ImagePath.delete,
@@ -56,7 +48,7 @@ class SettingsView extends GetView<SettingsController> {
                   Get.dialog(
                     CustomPopupDialogue(
                       onYesTap: () {
-                        // controller.logout();
+
                       },
                       title: 'Confirmation',
                       subTitle: AppText.deleteAccountWarningMsg,

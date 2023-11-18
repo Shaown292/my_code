@@ -82,7 +82,7 @@ class TransportView extends GetView<TransportController> {
                       ? const LoadingWidget()
                       : controller.transportDataList.isNotEmpty
                           ? Expanded(
-                            child: ListView.builder(
+                              child: ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: controller.transportDataList.length,
                                 itemBuilder: (context, index) {
@@ -93,13 +93,16 @@ class TransportView extends GetView<TransportController> {
                                         .transportDataList[index].status,
                                     route: controller
                                         .transportDataList[index].route,
+                                    tileBackgroundColor: Colors.white,
                                     onTap: () => controller
                                         .showTransportDetailsBottomSheet(
-                                            index: index),
+                                            index: index,
+                                            bottomSheetBackgroundColor:
+                                                Colors.white),
                                   );
                                 },
                               ),
-                          )
+                            )
                           : const Center(
                               child: NoDataAvailableWidget(),
                             ),

@@ -6,11 +6,11 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 
 class TeacherTile extends StatelessWidget {
-
   final Color? color;
   final String? teachersName;
   final String? teachersEmail;
   final String? teachersPhoneNo;
+  final Color? tileBackgroundColor;
 
   const TeacherTile({
     super.key,
@@ -18,6 +18,7 @@ class TeacherTile extends StatelessWidget {
     this.teachersName,
     this.teachersEmail,
     this.teachersPhoneNo,
+    this.tileBackgroundColor,
   });
 
   @override
@@ -26,10 +27,10 @@ class TeacherTile extends StatelessWidget {
       elevation: 5,
       margin: EdgeInsets.zero,
       child: Container(
-       decoration: BoxDecoration(
-         borderRadius: BorderRadius.circular(8.0),
-         
-       ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          color: tileBackgroundColor
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: Column(
           children: [
@@ -47,7 +48,6 @@ class TeacherTile extends StatelessWidget {
                 )
               ],
             ),
-
             15.verticalSpacing,
             Row(
               children: [
@@ -80,7 +80,6 @@ class TeacherTile extends StatelessWidget {
                 )
               ],
             ),
-
           ],
         ),
       ),

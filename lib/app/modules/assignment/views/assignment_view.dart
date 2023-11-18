@@ -38,6 +38,7 @@ class AssignmentView extends GetView<AssignmentController> {
                         assignmentTile: controller.studentAssignmentList[index].contentTitle,
                         assignmentDetails: "Assigned to ${controller.studentAssignmentList[index].availableFor}",
                         dueDate: controller.studentAssignmentList[index].uploadDate,
+                        cardBackgroundColor: Colors.white,
                       );
                     },),
                 ) : const NoDataAvailableWidget()

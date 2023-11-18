@@ -64,15 +64,18 @@ class HomeView extends GetView<HomeController> {
                     crossAxisCount: 2,
                   ),
                   itemBuilder: (context, index) {
-                    return Obx(() => CustomCardTile(
-                      icon: list[index].icon,
-                      title: list[index].title,
-                      onTap: () {
-                        controller.selectIndex.value = index;
-                        AppFunctions.getStudentDashboardNavigation(title: list[index].value);
-                      },
-                      isSelected: controller.selectIndex.value == index,
-                    ));
+                    return Obx(
+                      () => CustomCardTile(
+                        icon: list[index].icon,
+                        title: list[index].title,
+                        onTap: () {
+                          controller.selectIndex.value = index;
+                          AppFunctions.getStudentDashboardNavigation(
+                              title: list[index].value);
+                        },
+                        isSelected: controller.selectIndex.value == index,
+                      ),
+                    );
                   },
                 )
               ],

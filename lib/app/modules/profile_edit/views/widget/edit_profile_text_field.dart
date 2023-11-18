@@ -47,7 +47,7 @@ class EditProfileTextField extends StatelessWidget {
         filled: true,
         labelText: labelText ?? "label",
         labelStyle: labelTextStyle ?? AppTextStyle.labelText,
-        fillColor: fillColor ?? const Color(0xFFFDFBFF),
+        fillColor: fillColor ?? Colors.white,
         hintText: hintText ?? 'Enter text',
         suffixIcon: InkWell(
           onTap: iconOnTap,

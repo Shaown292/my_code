@@ -24,6 +24,7 @@ class SyllabusTopicWise extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: CustomContainerWidget(
           borderColor: const Color(0xFFEAE7F0),
+          color: Colors.white,
           borderWidth: 1,
           requiredWidget: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -35,8 +36,7 @@ class SyllabusTopicWise extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomContainerWidget(
-                      height: 30,
-                      width: 100,
+                      padding: const EdgeInsets.all(10),
                       color: const Color(0xFFF2F0F6),
                       requiredWidget: Center(
                         child: Text(

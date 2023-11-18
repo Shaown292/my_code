@@ -14,37 +14,31 @@ class TimeAndDateTile extends StatelessWidget {
     super.key,
     this.title,
     this.date,
-    this.width, this.time,
+    this.width,
+    this.time,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width ?? Get.width * 0.22,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            title ?? "",
-            style: AppTextStyle.homeworkElements,
-          ),
-          8.verticalSpacing,
-          Column(
-            children: [
-              Text(
-                date ?? "",
-                style: AppTextStyle.homeworkElements,
-              ),
-              2.verticalSpacing,
-              Text(
-                time ?? "",
-                style: AppTextStyle.homeworkElements,
-              ),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          title ?? "",
+          style: AppTextStyle.homeworkElements,
+        ),
+        8.verticalSpacing,
+        Text(
+          date ?? "",
+          style: AppTextStyle.homeworkElements,
+        ),
+        2.verticalSpacing,
+        Text(
+          time ?? "",
+          style: AppTextStyle.homeworkElements,
+        ),
+      ],
     );
   }
 }

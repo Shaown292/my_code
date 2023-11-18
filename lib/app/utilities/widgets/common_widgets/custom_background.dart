@@ -11,7 +11,8 @@ class CustomBackground extends StatelessWidget {
     super.key,
     required this.customWidget,
     this.height,
-    this.width, this.color,
+    this.width,
+    this.color,
   });
 
   @override
@@ -21,9 +22,11 @@ class CustomBackground extends StatelessWidget {
       child: Container(
         height: height ?? Get.height,
         width: width ?? Get.width,
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
+            ),
             color: color ?? Colors.white),
         child: customWidget,
       ),

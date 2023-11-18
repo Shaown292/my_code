@@ -87,6 +87,7 @@ class StudentClassDetailsCard extends StatelessWidget {
                                   color: AppColors.parentsCardBorderColor),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "Room - ${roomNumber ?? ''}",

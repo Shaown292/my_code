@@ -9,6 +9,7 @@ class TransportTile extends StatelessWidget {
   final String? status;
   final String? route;
   final Function()? onTap;
+  final Color? tileBackgroundColor;
 
   const TransportTile({
     super.key,
@@ -16,6 +17,7 @@ class TransportTile extends StatelessWidget {
     this.status,
     this.route,
     this.onTap,
+    this.tileBackgroundColor,
   });
 
   @override
@@ -29,6 +31,7 @@ class TransportTile extends StatelessWidget {
               Container(
                 width: Get.width * 0.1,
                 padding: const EdgeInsets.all(10),
+                color: tileBackgroundColor,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
                     color: AppColors.profileCardBackgroundColor),

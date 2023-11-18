@@ -26,137 +26,138 @@ class BookListView extends GetView<BookListController> {
               controller.bookListData.clear();
               controller.getAllBookList();
             },
-            child: Obx(() => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 15),
-                      child: SearchField(
-                        controller: controller.searchController,
-                        onChange: (searchKey) {
-                          controller.bookSearchList.clear();
-                          controller.getSearchBook(searchKey);
-                        },
-                        icon: controller.searchController.text.isNotEmpty
-                            ? InkWell(
-                                onTap: () {
-                                  controller.searchController.clear();
-                                  controller.bookListData.clear();
-                                  controller.getAllBookList();
-                                },
-                                child: Icon(
-                                  Icons.close,
-                                  color: AppColors.profileDividerColor,
-                                  size: 20,
-                                ),
-                              )
-                            : Icon(
-                                Icons.search,
+            child: Obx(
+              () => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 15),
+                    child: SearchField(
+                      controller: controller.searchController,
+                      onChange: (searchKey) {
+                        controller.bookSearchList.clear();
+                        controller.getSearchBook(searchKey);
+                      },
+                      icon: controller.searchController.text.isNotEmpty
+                          ? InkWell(
+                              onTap: () {
+                                controller.searchController.clear();
+                                controller.bookListData.clear();
+                                controller.getAllBookList();
+                              },
+                              child: Icon(
+                                Icons.close,
                                 color: AppColors.profileDividerColor,
                                 size: 20,
                               ),
-                      ),
+                            )
+                          : Icon(
+                              Icons.search,
+                              color: AppColors.profileDividerColor,
+                              size: 20,
+                            ),
                     ),
-                    Container(
-                      height: Get.height * 0.07,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 15),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(8),
-                            topLeft: Radius.circular(8)),
-                        color: AppColors.profileCardBackgroundColor,
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width * 0.12,
-                            child: const Text(
-                              "Book No",
-                              style: AppTextStyle.textStyle12WhiteW500,
-                            ),
-                          ),
-                          const VerticalDivider(
-                            color: AppColors.profileTitleColor,
-                            thickness: 1,
-                          ),
-                          Container(
-                            width: Get.width * 0.2,
-                            padding: const EdgeInsets.all(10),
-                            child: const Text(
-                              "Subject",
-                              style: AppTextStyle.textStyle12WhiteW500,
-                            ),
-                          ),
-                          const VerticalDivider(
-                            color: AppColors.profileTitleColor,
-                            thickness: 1,
-                          ),
-                          const Text(
-                            "Book Name",
+                  ),
+                  Container(
+                    height: Get.height * 0.07,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(8),
+                          topLeft: Radius.circular(8)),
+                      color: AppColors.profileCardBackgroundColor,
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: Get.width * 0.12,
+                          child: const Text(
+                            "Book No",
                             style: AppTextStyle.textStyle12WhiteW500,
-                          )
-                        ],
-                      ),
+                          ),
+                        ),
+                        const VerticalDivider(
+                          color: AppColors.profileTitleColor,
+                          thickness: 1,
+                        ),
+                        Container(
+                          width: Get.width * 0.2,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: const Text(
+                            "Subject",
+                            style: AppTextStyle.textStyle12WhiteW500,
+                          ),
+                        ),
+                        const VerticalDivider(
+                          color: AppColors.profileTitleColor,
+                          thickness: 1,
+                        ),
+                        const Text(
+                          "Book Name",
+                          style: AppTextStyle.textStyle12WhiteW500,
+                        )
+                      ],
                     ),
-                    controller.searchController.text.isEmpty
-                        ? controller.loadingController.isLoading
-                            ? const LoadingWidget()
-                            : controller.bookListData.isNotEmpty
-                                ? Expanded(
-                                    child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount:
-                                            controller.bookListData.length,
-                                        itemBuilder: (context, index) {
-                                          return BookListTile(
-                                            bookName: controller
-                                                .bookListData[index].bookTitle,
-                                            subject: controller
-                                                .bookListData[index].subject,
-                                            bookNumber: controller
-                                                .bookListData[index].bookNumber,
-                                            onTap: () => controller
-                                                .showBookListDetailsBottomSheet(
-                                                    index: index),
-                                            view: "Details",
-                                          );
-                                        }),
-                                  )
-                                : const Center(child: NoDataAvailableWidget())
-                        : controller.loadingController.isLoading
-                            ? const LoadingWidget()
-                            : controller.bookSearchList.isNotEmpty
-                                ? Expanded(
-                                    child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount:
-                                            controller.bookSearchList.length,
-                                        itemBuilder: (context, index) {
-                                          return BookListTile(
-                                            bookName: controller
-                                                .bookSearchList[index]
-                                                .bookTitle,
-                                            subject: controller
-                                                .bookSearchList[index].subject,
-                                            bookNumber: controller
-                                                .bookSearchList[index]
-                                                .bookNumber,
-                                            onTap: () => controller
-                                                .showBookListDetailsBottomSheet(
-                                                    index: index),
-                                          );
-                                        }),
-                                  )
-                                : Center(
-                                    child: NoDataAvailableWidget(
-                                      message:
-                                          "No results for ${controller.searchController.text}",
-                                    ),
+                  ),
+                  controller.searchController.text.isEmpty
+                      ? controller.loadingController.isLoading
+                          ? const LoadingWidget()
+                          : controller.bookListData.isNotEmpty
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: controller.bookListData.length,
+                                      itemBuilder: (context, index) {
+                                        return BookListTile(
+                                          bookName: controller
+                                              .bookListData[index].bookTitle,
+                                          subject: controller
+                                              .bookListData[index].subject,
+                                          bookNumber: controller
+                                              .bookListData[index].bookNumber,
+                                          onTap: () => controller
+                                              .showBookListDetailsBottomSheet(
+                                                  index: index,
+                                                  bottomSheetBackgroundColor:
+                                                      Colors.white),
+                                          view: "Details",
+                                        );
+                                      }),
+                                )
+                              : const Center(child: NoDataAvailableWidget())
+                      : controller.loadingController.isLoading
+                          ? const LoadingWidget()
+                          : controller.bookSearchList.isNotEmpty
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount:
+                                          controller.bookSearchList.length,
+                                      itemBuilder: (context, index) {
+                                        return BookListTile(
+                                          bookName: controller
+                                              .bookSearchList[index].bookTitle,
+                                          subject: controller
+                                              .bookSearchList[index].subject,
+                                          bookNumber: controller
+                                              .bookSearchList[index].bookNumber,
+                                          onTap: () => controller
+                                              .showBookListDetailsBottomSheet(
+                                                  index: index),
+                                        );
+                                      }),
+                                )
+                              : Center(
+                                  child: NoDataAvailableWidget(
+                                    message:
+                                        "No results for ${controller.searchController.text}",
                                   ),
-                  ],
-                ),),
+                                ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

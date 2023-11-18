@@ -145,6 +145,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                   labelText: AppText.editProfileFirstName,
                   controller: controller.firstName,
                   iconOnTap: () => controller.userProfileInfoUpdate(),
+
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(

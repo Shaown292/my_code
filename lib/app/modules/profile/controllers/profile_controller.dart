@@ -18,7 +18,6 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/students_document_r
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-
 import '../../../../domain/base_client/base_client.dart';
 import '../../../../domain/core/model/profile_edit_model/profile_data_controller.dart';
 import '../../../style/bottom_sheet/bottom_sheet_shpe.dart';
@@ -36,14 +35,12 @@ class ProfileController extends GetxController {
 
   TextEditingController titleTextController = TextEditingController();
 
-
   RxInt pageIndex = 0.obs;
   RxBool isLoading = false.obs;
   ProfilePersonal? profilePersonal;
   ProfileParents? profileParents;
   ProfileTransport? profileTransport;
   ProfileOthers? profileOthers;
-
 
   /// Personal
   void fetchProfilePersonalData() async {
@@ -85,7 +82,6 @@ class ProfileController extends GetxController {
     }
   }
 
-
   /// Parents
   void fetchProfileParentsData() async {
     isLoading.value = true;
@@ -113,7 +109,6 @@ class ProfileController extends GetxController {
       isLoading.value = false;
     }
   }
-
 
   /// Transport
   void fetchProfileTransportData() async {
@@ -143,7 +138,6 @@ class ProfileController extends GetxController {
     }
   }
 
-
   /// Others
   void fetchProfileOthersData() async {
     isLoading.value = true;
@@ -171,7 +165,6 @@ class ProfileController extends GetxController {
     }
   }
 
-
   ///Documents Get
   Future<StudentDocumentsResponseModel?> getAllDocumentList() async {
     try {
@@ -183,14 +176,16 @@ class ProfileController extends GetxController {
         header: GlobalVariableController.header,
       );
 
-      StudentDocumentsResponseModel studentDocumentsResponseModel = StudentDocumentsResponseModel.fromJson(response);
+      StudentDocumentsResponseModel studentDocumentsResponseModel =
+          StudentDocumentsResponseModel.fromJson(response);
       if (studentDocumentsResponseModel.success == true) {
         loadingController.isLoading = false;
         if (studentDocumentsResponseModel.data!.profileDocuments!.isNotEmpty) {
           for (int i = 0;
-          i < studentDocumentsResponseModel.data!.profileDocuments!.length;
-          i++) {
-            documentsDataList.add(studentDocumentsResponseModel.data!.profileDocuments![i]);
+              i < studentDocumentsResponseModel.data!.profileDocuments!.length;
+              i++) {
+            documentsDataList
+                .add(studentDocumentsResponseModel.data!.profileDocuments![i]);
           }
         }
       }
@@ -205,10 +200,22 @@ class ProfileController extends GetxController {
   }
 
   /// Documents bottom sheet
-  void showUploadDocumentsBottomSheet({required Function() onTap, Function()? onTapForSave}) {
+  void showUploadDocumentsBottomSheet(
+      {required Function() onTap,
+      Function()? onTapForSave,
+      Color? bottomSheetBackgroundColor}) {
     Get.bottomSheet(
-      Obx(() => SizedBox(
+      Obx(() => Container(
+
           height: Get.height * 0.45,
+          decoration:  BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(8),
+              topLeft: Radius.circular(8),
+            ),
+            color: bottomSheetBackgroundColor
+
+          ),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,8 +226,9 @@ class ProfileController extends GetxController {
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(8),
-                          topLeft: Radius.circular(8)),
+                        topRight: Radius.circular(8),
+                        topLeft: Radius.circular(8),
+                      ),
                       color: AppColors.primaryColor),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -254,12 +262,16 @@ class ProfileController extends GetxController {
                         enableBorderActive: true,
                         focusBorderActive: true,
                         hintText: "Title",
+                        fillColor: Colors.white,
+
                       ),
                       10.verticalSpacing,
                       CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "${file.value.path.isNotEmpty ? file : 'Select File'}",
+                        fillColor: Colors.white,
+                        hintText:
+                            "${file.value.path.isNotEmpty ? file : 'Select File'}",
                         readOnly: true,
                         suffixIcon: InkWell(
                           onTap: onTap,
@@ -298,12 +310,16 @@ class ProfileController extends GetxController {
                         borderColor: AppColors.primaryColor,
                         onTap: () => Get.back(),
                       ),
-                      isLoading.value == true ? const CircularProgressIndicator(color: AppColors.primaryColor,) : PrimaryButton(
-                        width: Get.width * 0.2,
-                        title: "Save",
-                        textStyle: AppTextStyle.textStyle12WhiteW500,
-                        onTap: onTapForSave,
-                      ),
+                      isLoading.value == true
+                          ? const CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            )
+                          : PrimaryButton(
+                              width: Get.width * 0.2,
+                              title: "Save",
+                              textStyle: AppTextStyle.textStyle12WhiteW500,
+                              onTap: onTapForSave,
+                            ),
                     ],
                   ),
                 )
@@ -334,19 +350,17 @@ class ProfileController extends GetxController {
   void uploadDocuments() async {
     try {
       isLoading.value = true;
-      final request =
-      http.MultipartRequest('POST', Uri.parse(InfixApi.studentUploadDocuments));
+      final request = http.MultipartRequest(
+          'POST', Uri.parse(InfixApi.studentUploadDocuments));
       request.headers['Authorization'] = GlobalVariableController.token!;
 
       if (file.value.path.isNotEmpty) {
-        request.files.add(
-            await http.MultipartFile.fromPath('photo', file.value.path));
+        request.files
+            .add(await http.MultipartFile.fromPath('photo', file.value.path));
       }
-
 
       request.fields['student_id'] = '${GlobalVariableController.studentId!}';
       request.fields['title'] = titleTextController.text;
-
 
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
@@ -358,12 +372,13 @@ class ProfileController extends GetxController {
         Get.back();
         showBasicSuccessSnackBar(message: decodedResponse['message']);
 
-        documentsDataList.add(ProfileDocuments(title: decodedResponse['data']['title'], file: decodedResponse['data']['file'], id: decodedResponse['data']['id']));
+        documentsDataList.add(ProfileDocuments(
+            title: decodedResponse['data']['title'],
+            file: decodedResponse['data']['file'],
+            id: decodedResponse['data']['id']));
         // getAllDocumentList();
         titleTextController.clear();
         file.value = File('');
-
-
       } else {
         isLoading.value = false;
         showBasicSuccessSnackBar(message: decodedResponse['message']);
@@ -378,12 +393,12 @@ class ProfileController extends GetxController {
   }
 
   /// Documents Delete
-  Future<void> deleteDocument({required int documentId, required int index}) async {
-
-    try{
-
+  Future<void> deleteDocument(
+      {required int documentId, required int index}) async {
+    try {
       var headers = GlobalVariableController.header;
-      var request = http.MultipartRequest('GET', Uri.parse(InfixApi.profileDocumentDelete(documentId: documentId)));
+      var request = http.MultipartRequest('GET',
+          Uri.parse(InfixApi.profileDocumentDelete(documentId: documentId)));
 
       request.headers.addAll(headers);
 
@@ -397,20 +412,14 @@ class ProfileController extends GetxController {
         Get.back();
         documentsDataList.removeAt(index);
         showBasicSuccessSnackBar(message: decodedResponse['message']);
-
-      }
-      else {
+      } else {
         showBasicFailedSnackBar(message: decodedResponse['message']);
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
-    }
-
+    } finally {}
   }
-
 
   @override
   void onInit() {
@@ -421,5 +430,4 @@ class ProfileController extends GetxController {
     getAllDocumentList();
     super.onInit();
   }
-
 }

@@ -72,7 +72,7 @@ class TeacherView extends GetView<TeacherController> {
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 5),
+                                      horizontal: 10.0, vertical: 10),
                                   child: TeacherTile(
                                     color: index % 2 == 0
                                         ? Colors.white
@@ -83,6 +83,7 @@ class TeacherView extends GetView<TeacherController> {
                                         controller.teacherList[index].email,
                                     teachersPhoneNo:
                                         controller.teacherList[index].mobile,
+                                    tileBackgroundColor: Colors.white,
                                   ),
                                 );
                               },

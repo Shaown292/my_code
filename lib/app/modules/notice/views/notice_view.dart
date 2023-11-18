@@ -43,9 +43,12 @@ class NoticeView extends GetView<NoticeController> {
                                         .allNoticeList[index].noticeMessage,
                                     noticeDate: controller
                                         .allNoticeList[index].publishOn,
+                                      cardBackgroundColor: Colors.white,
                                     onTap: () {
                                       controller.showNoticeDetailsBottomSheet(
-                                          index: index);
+                                          index: index,
+                                        bottomSheetBackgroundColor: Colors.white
+                                      );
                                     },
                                   );
                                 })

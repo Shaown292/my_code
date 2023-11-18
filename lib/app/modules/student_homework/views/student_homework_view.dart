@@ -45,7 +45,7 @@ class StudentHomeworkView extends GetView<StudentHomeworkController> {
                         backgroundColor:
                         index % 2 == 0 ? Colors.white : AppColors.homeworkWidgetColor,
                         onTap: (){
-                          controller.showHomeworkDetailsBottomSheet(index: index);
+                          controller.showHomeworkDetailsBottomSheet(index: index, color: Colors.white);
                         },
                       ),
                     ),
