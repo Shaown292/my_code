@@ -47,9 +47,12 @@ class RoutineView extends GetView<RoutineController> {
                           ),
                           child: TabBar(
                             isScrollable: true,
+                            tabAlignment: TabAlignment.start,
+                            dividerHeight: 0,
                             labelColor: Colors.white,
                             unselectedLabelColor: Colors.black,
                             controller: controller.tabController,
+                            indicatorSize: TabBarIndicatorSize.tab,
                             indicator: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: AppColors.appButtonColor),

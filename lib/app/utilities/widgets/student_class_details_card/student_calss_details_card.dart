@@ -44,97 +44,103 @@ class StudentClassDetailsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                5.verticalSpacing,
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            subject ?? "",
-                            style: AppTextStyle.fontSize14VioletW600,
-                          ),
-                          10.verticalSpacing,
-                          Text(
-                            "$startingTime - $endingTime",
-                            style: AppTextStyle.fontSize12GreyW400,
-                          ),
-                        ],
-                      ),
-                    ),
-                    isLunchBreak
-                        ? const SizedBox()
-                        : Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: AppColors.parentsCardBorderColor),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Room - ${roomNumber ?? ''}",
-                                  style: AppTextStyle.fontSize12GreyW400,
-                                ),
-                                5.verticalSpacing,
-                                Text(
-                                  buildingName ?? "",
-                                  style:
-                                      AppTextStyle.fontSize12lightViolateW400,
-                                ),
-                              ],
-                            ),
-                          ),
-                  ],
-                ),
-              ],
-            ),
-            10.verticalSpacing,
-            isLunchBreak
-                ? const SizedBox()
-                : CustomDivider(
-                    width: Get.width,
-                  ),
-            10.verticalSpacing,
-            isLunchBreak
-                ? const SizedBox()
-                : Row(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  5.verticalSpacing,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        instructorName ?? "",
-                        style: AppTextStyle.fontSize14lightViolateW400,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              subject ?? "",
+                              style: AppTextStyle.fontSize14VioletW600,
+                            ),
+                            10.verticalSpacing,
+                            Text(
+                              "$startingTime - $endingTime",
+                              style: AppTextStyle.fontSize12GreyW400,
+                            ),
+                          ],
+                        ),
                       ),
-                      const Spacer(),
-                      hasDetails
-                          ?  InkWell(
-                                  onTap: onTap,
-                                  child: buttonWidget ?? Container(
-                                    padding: const EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      color: AppColors.primaryColor,
-                                    ),
-                                    child: const Text(
-                                      "Details",
-                                      style: AppTextStyle.textStyle12WhiteW400,
-                                    ),
+                      isLunchBreak
+                          ? const SizedBox()
+                          : Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: AppColors.parentsCardBorderColor),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Room - ${roomNumber ?? ''}",
+                                    style: AppTextStyle.fontSize12GreyW400,
                                   ),
-                                )
-                          : const SizedBox()
+                                  5.verticalSpacing,
+                                  Text(
+                                    buildingName ?? "",
+                                    style:
+                                        AppTextStyle.fontSize12lightViolateW400,
+                                  ),
+                                ],
+                              ),
+                            ),
                     ],
                   ),
-          ],
+                ],
+              ),
+              10.verticalSpacing,
+              isLunchBreak
+                  ? const SizedBox()
+                  : CustomDivider(
+                      width: Get.width,
+                    ),
+              10.verticalSpacing,
+              isLunchBreak
+                  ? const SizedBox()
+                  : Row(
+                      children: [
+                        Text(
+                          instructorName ?? "",
+                          style: AppTextStyle.fontSize14lightViolateW400,
+                        ),
+                        const Spacer(),
+                        hasDetails
+                            ?  InkWell(
+                                    onTap: onTap,
+                                    child: buttonWidget ?? Container(
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(2),
+                                        color: AppColors.primaryColor,
+                                      ),
+                                      child: const Text(
+                                        "Details",
+                                        style: AppTextStyle.textStyle12WhiteW400,
+                                      ),
+                                    ),
+                                  )
+                            : const SizedBox()
+                      ],
+                    ),
+            ],
+          ),
         ),
       ),
     );
