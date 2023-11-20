@@ -13,6 +13,7 @@ class HomeTileModelClass {
 }
 
 List<HomeTileModelClass> studentList = [
+
   HomeTileModelClass(icon: ImagePath.studentHomeWork, title: 'HomeWork', value: 'Homework'),
   HomeTileModelClass(icon: ImagePath.studentStudyMaterials, title: 'Study Materials', value: 'Study Materials'),
   HomeTileModelClass(icon: ImagePath.studentAttendance, title: 'Attendance', value: 'Attendance'),
@@ -29,6 +30,7 @@ List<HomeTileModelClass> studentList = [
   HomeTileModelClass(icon: ImagePath.studentDormitory, title: 'Dormitory', value: 'Dormitory'),
   HomeTileModelClass(icon: ImagePath.studentClass, title: 'Class', value: 'Class'),
   HomeTileModelClass(icon: ImagePath.studentSettings, title: 'Settings', value: 'Settings'),
+
 ];
 
 

@@ -158,6 +158,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileEmail,
+                  suffixIconDisable: true,
                   hintText: AppText.editProfileEmail,
                   controller: controller.email,
                 ),
@@ -165,6 +166,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfilePhoneNumber,
+                  suffixIconDisable: true,
                   hintText: AppText.editProfilePhoneNumber,
                   controller: controller.phoneNumber,
                 ),

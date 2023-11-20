@@ -11,6 +11,7 @@ class EditProfileTextField extends StatelessWidget {
   final bool enableBorderActive;
   final bool obsCureText;
   final Widget? suffixIcon;
+  final bool suffixIconDisable;
   final Function()? iconOnTap;
   final TextInputType? textInputType;
   final String? labelText;
@@ -32,7 +33,9 @@ class EditProfileTextField extends StatelessWidget {
     this.labelText,
     this.labelTextStyle,
     this.enableBorderActiveColor,
-    super.key, this.maxLine,
+    this.maxLine,
+    this.suffixIconDisable = false,
+    super.key,
   });
 
   @override
@@ -49,7 +52,7 @@ class EditProfileTextField extends StatelessWidget {
         labelStyle: labelTextStyle ?? AppTextStyle.labelText,
         fillColor: fillColor ?? Colors.white,
         hintText: hintText ?? 'Enter text',
-        suffixIcon: InkWell(
+        suffixIcon: suffixIconDisable ? null : InkWell(
           onTap: iconOnTap,
           child: Image.asset(
             ImagePath.editBlack,
