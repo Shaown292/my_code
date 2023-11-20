@@ -47,8 +47,8 @@ class ProfileView extends GetView<ProfileController> {
                       child: Container(
                         width: Get.width,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white),
                         child: Column(
                           children: [
                             Padding(
@@ -208,7 +208,7 @@ class ProfileView extends GetView<ProfileController> {
                             controller.isLoading.value
                                 ? const LoadingWidget()
                                 : SingleChildScrollView(
-                                  child: Column(
+                                    child: Column(
                                       children: [
                                         ParentsInfo(
                                             designation: AppText.profileFather,
@@ -219,7 +219,8 @@ class ProfileView extends GetView<ProfileController> {
                                             phone: controller.profileParents
                                                     ?.fathersMobile ??
                                                 AppText.noDataAvailable,
-                                            occupation: controller.profileParents
+                                            occupation: controller
+                                                    .profileParents
                                                     ?.fathersOccupation ??
                                                 AppText.noDataAvailable),
                                         20.verticalSpacing,
@@ -232,7 +233,8 @@ class ProfileView extends GetView<ProfileController> {
                                             phone: controller.profileParents
                                                     ?.mothersMobile ??
                                                 AppText.noDataAvailable,
-                                            occupation: controller.profileParents
+                                            occupation: controller
+                                                    .profileParents
                                                     ?.mothersOccupation ??
                                                 AppText.noDataAvailable),
                                         20.verticalSpacing,
@@ -258,7 +260,7 @@ class ProfileView extends GetView<ProfileController> {
                                         ),
                                       ],
                                     ),
-                                ),
+                                  ),
 
                             /// Transport
                             controller.isLoading.value
@@ -333,34 +335,37 @@ class ProfileView extends GetView<ProfileController> {
 
                             /// Documents Section
                             Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 InkWell(
-                                  onTap: () => controller
-                                      .showUploadDocumentsBottomSheet(
-                                      onTap: () {
-                                        controller.pickFile();
-                                      }, onTapForSave: () {
-                                    controller.uploadDocuments();
-                                  }),
+                                  onTap: () =>
+                                      controller.showUploadDocumentsBottomSheet(
+                                          bottomSheetBackgroundColor:
+                                              Colors.white,
+                                          onTap: () {
+                                            controller.pickFile();
+                                          },
+                                          onTapForSave: () {
+                                            controller.uploadDocuments();
+                                          }),
                                   child: Container(
                                     width: 200,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 10),
                                     decoration: BoxDecoration(
-                                        color: AppColors.appButtonColor,
-                                        borderRadius:
-                                        BorderRadius.circular(20)),
+                                      color: AppColors.appButtonColor,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Transform.flip(
                                           flipY: true,
                                           child: Image.asset(
                                             ImagePath.download,
                                             scale: 4,
+                                            color: Colors.white,
                                           ),
                                         ),
                                         5.horizontalSpacing,
@@ -377,47 +382,46 @@ class ProfileView extends GetView<ProfileController> {
 
                                 /// Documents Tiles
                                 controller.loadingController.isLoading
-                                    ? const CircularProgressIndicator(color: AppColors.primaryColor,)
-                                    : controller
-                                    .documentsDataList.isNotEmpty
-                                    ? Expanded(
-                                      child: ListView.builder(
-                                        itemCount: controller
-                                            .documentsDataList
-                                            .length,
-                                        itemBuilder:
-                                            (context, index) {
-                                          return DocumentsCard(
-                                            title:
-                                            "${index + 1}. ${controller.documentsDataList[index].title}",
-                                            fileName: controller
-                                                .documentsDataList[
-                                            index]
-                                                .file,
-                                            tapDelete: () =>
-                                            Get.dialog(
-                                                  CustomPopupDialogue(
-                                                    onYesTap: () {
-                                                      controller.deleteDocument(documentId: controller.documentsDataList[index].id!, index: index);
-
-                                                    },
-                                                    title:
-                                                    'Confirmation',
-                                                    subTitle: AppText
-                                                        .deleteDocumentsWarningMsg,
-                                                    noText: 'cancel',
-                                                    yesText: 'delete',
+                                    ? const CircularProgressIndicator(
+                                        color: AppColors.primaryColor,
+                                      )
+                                    : controller.documentsDataList.isNotEmpty
+                                        ? Expanded(
+                                            child: ListView.builder(
+                                              itemCount: controller
+                                                  .documentsDataList.length,
+                                              itemBuilder: (context, index) {
+                                                return DocumentsCard(
+                                                  title:
+                                                      "${index + 1}. ${controller.documentsDataList[index].title}",
+                                                  fileName: controller
+                                                      .documentsDataList[index]
+                                                      .file,
+                                                  tapDelete: () => Get.dialog(
+                                                    CustomPopupDialogue(
+                                                      onYesTap: () {
+                                                        controller.deleteDocument(
+                                                            documentId: controller
+                                                                .documentsDataList[
+                                                                    index]
+                                                                .id!,
+                                                            index: index);
+                                                      },
+                                                      title: 'Confirmation',
+                                                      subTitle: AppText
+                                                          .deleteDocumentsWarningMsg,
+                                                      noText: 'cancel',
+                                                      yesText: 'delete',
+                                                    ),
                                                   ),
-                                                ),
-                                            tapDownload: () {},
-                                          );
-                                        },
-                                      ),
-                                    )
-                                    : const NoDataAvailableWidget(
-                                  message:
-                                  "No Document Available",
-                                ),
+                                                  tapDownload: () {},
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        : const NoDataAvailableWidget(
+                                            message: "No Document Available",
+                                          ),
                                 200.verticalSpacing,
                               ],
                             ),

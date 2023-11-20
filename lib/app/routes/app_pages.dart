@@ -8,6 +8,8 @@ import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
 import '../modules/attendance/bindings/attendance_binding.dart';
 import '../modules/attendance/views/attendance_view.dart';
+import '../modules/blocked_users/bindings/blocked_users_binding.dart';
+import '../modules/blocked_users/views/blocked_users_view.dart';
 import '../modules/book_issued/bindings/book_issued_binding.dart';
 import '../modules/book_issued/views/book_issued_view.dart';
 import '../modules/book_list/bindings/book_list_binding.dart';
@@ -64,6 +66,12 @@ import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/staff/bindings/staff_binding.dart';
+import '../modules/staff/views/staff_view.dart';
+import '../modules/staff_individual_details/bindings/staff_individual_details_binding.dart';
+import '../modules/staff_individual_details/views/staff_individual_details_view.dart';
+import '../modules/staff_list/bindings/staff_list_binding.dart';
+import '../modules/staff_list/views/staff_list_view.dart';
 import '../modules/student_homework/bindings/student_homework_binding.dart';
 import '../modules/student_homework/views/student_homework_view.dart';
 import '../modules/student_lesson_plan/bindings/student_lesson_plan_binding.dart';
@@ -142,16 +150,18 @@ class AppPages {
       binding: NotificationBinding(),
     ),
     GetPage(
-        name: _Paths.PROFILE_EDIT,
-        page: () => const ProfileEditView(),
-        binding: ProfileEditBinding(),
-        transition: Transition.rightToLeft),
+      name: _Paths.PROFILE_EDIT,
+      page: () => const ProfileEditView(),
+      binding: ProfileEditBinding(),
+      transition: Transition.rightToLeft,
+    ),
     GetPage(
-        name: _Paths.STUDENT_HOMEWORK,
-        page: () => const StudentHomeworkView(),
-        binding: StudentHomeworkBinding(),
-        transition: Transition.fade,
-        transitionDuration: const Duration(microseconds: 500)),
+      name: _Paths.STUDENT_HOMEWORK,
+      page: () => const StudentHomeworkView(),
+      binding: StudentHomeworkBinding(),
+      transition: Transition.fade,
+      transitionDuration: const Duration(microseconds: 500),
+    ),
     GetPage(
       name: _Paths.ROUTINE,
       page: () => const RoutineView(),
@@ -170,19 +180,22 @@ class AppPages {
       transition: Transition.fade,
     ),
     GetPage(
-        name: _Paths.SETTINGS,
-        page: () => const SettingsView(),
-        binding: SettingsBinding(),
-        transition: Transition.fade),
+      name: _Paths.SETTINGS,
+      page: () => const SettingsView(),
+      binding: SettingsBinding(),
+      transition: Transition.fade,
+    ),
     GetPage(
-        name: _Paths.SCHEDULE,
-        page: () => const ScheduleView(),
-        binding: ScheduleBinding(),
-        transition: Transition.fadeIn),
+      name: _Paths.SCHEDULE,
+      page: () => const ScheduleView(),
+      binding: ScheduleBinding(),
+      transition: Transition.fadeIn,
+    ),
     GetPage(
       name: _Paths.CHANGE_PASSWORD,
       page: () => const ChangePasswordView(),
       binding: ChangePasswordBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
         name: _Paths.RESULT,
@@ -207,34 +220,40 @@ class AppPages {
       transition: Transition.fade,
     ),
     GetPage(
-        name: _Paths.EXAM_RESULT,
-        page: () => const ExamResultView(),
-        binding: ExamResultBinding(),
-        transition: Transition.fadeIn),
+      name: _Paths.EXAM_RESULT,
+      page: () => const ExamResultView(),
+      binding: ExamResultBinding(),
+      transition: Transition.fadeIn,
+    ),
     GetPage(
       name: _Paths.OTHER_DOWNLOADS,
       page: () => const OtherDownloadsView(),
       binding: OtherDownloadsBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.DORMITORY,
       page: () => const DormitoryView(),
       binding: DormitoryBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.APPLY_LEAVE,
       page: () => const ApplyLeaveView(),
       binding: ApplyLeaveBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.LEAVE_LIST,
       page: () => const LeaveListView(),
       binding: LeaveListBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.LEAVE,
       page: () => const LeaveView(),
       binding: LeaveBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.ATTENDANCE,
@@ -246,26 +265,31 @@ class AppPages {
       name: _Paths.NOTICE,
       page: () => const NoticeView(),
       binding: NoticeBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.SUBJECTS,
       page: () => const SubjectsView(),
       binding: SubjectsBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TEACHER,
       page: () => const TeacherView(),
       binding: TeacherBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.LIBRARY,
       page: () => const LibraryView(),
       binding: LibraryBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.BOOK_LIST,
       page: () => const BookListView(),
       binding: BookListBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.BOOK_ISSUED,
@@ -281,6 +305,7 @@ class AppPages {
       name: _Paths.FEES,
       page: () => const FeesView(),
       binding: FeesBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.CHAT,
@@ -292,6 +317,7 @@ class AppPages {
       name: _Paths.CHAT_SEARCH,
       page: () => const ChatSearchView(),
       binding: ChatSearchBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.STUDENT_SEARCH_ATTENDANCE,
@@ -315,11 +341,36 @@ class AppPages {
       name: _Paths.FORGET_PASSWORD,
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.STUDENT_WALLET,
       page: () => const StudentWalletView(),
       binding: StudentWalletBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.BLOCKED_USERS,
+      page: () => const BlockedUsersView(),
+      binding: BlockedUsersBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+        name: _Paths.STAFF,
+        page: () => const StaffView(),
+        binding: StaffBinding(),
+        transition: Transition.fadeIn),
+    GetPage(
+      name: _Paths.STAFF_LIST,
+      page: () => const StaffListView(),
+      binding: StaffListBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.STAFF_INDIVIDUAL_DETAILS,
+      page: () => const StaffIndividualDetailsView(),
+      binding: StaffIndividualDetailsBinding(),
+      transition: Transition.fade,
     ),
   ];
 }

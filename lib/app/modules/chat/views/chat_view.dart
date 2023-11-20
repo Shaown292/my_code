@@ -56,16 +56,17 @@ class ChatView extends GetView<ChatController> {
           5.horizontalSpacing,
           PopupMenuButton(
             padding: EdgeInsets.zero,
-            color: Colors.white,
+            iconColor: Colors.white,
             onSelected: (value) {
               if (value == 1) {
 
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem(
+               PopupMenuItem(
                 value: 1,
-                child: Text("Blocked Users"),
+                child: const Text("Blocked Users"),
+                onTap: () => Get.toNamed(Routes.BLOCKED_USERS),
               ),
             ],
           ),

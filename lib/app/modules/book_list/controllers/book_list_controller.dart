@@ -55,10 +55,11 @@ class BookListController extends GetxController {
     return BookListResponseModel();
   }
 
-  void showBookListDetailsBottomSheet({required int index}) {
+  void showBookListDetailsBottomSheet({required int index, Color? bottomSheetBackgroundColor}) {
     Get.bottomSheet(
-      SizedBox(
+      Container(
         height: Get.height * 0.55,
+        color: bottomSheetBackgroundColor,
         child: bookListData.isNotEmpty
             ? Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +118,6 @@ class BookListController extends GetxController {
           ),
         ),
       ),
-      backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );
   }

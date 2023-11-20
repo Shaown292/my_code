@@ -150,4 +150,16 @@ class AppFunctions {
 
     }
   }
+  static void getAdminHomeNavigation({required String title}) {
+    debugPrint(title);
+    switch (title) {
+      case 'Staff':
+        Get.toNamed(Routes.STAFF);
+        break;
+
+
+
+
+    }
+  }
 }

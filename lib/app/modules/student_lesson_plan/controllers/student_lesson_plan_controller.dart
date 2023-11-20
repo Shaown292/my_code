@@ -119,7 +119,8 @@ class StudentLessonPlanController extends GetxController {
         } else {
           showLessonPlanDetailsBottomSheet(
               studentLessonPlanDetailsData:
-                  studentLessonPlanDetailsResponseModel.data!);
+                  studentLessonPlanDetailsResponseModel.data!,
+              backgroundColor: Colors.white);
         }
       } else {
         showBasicFailedSnackBar(
@@ -138,9 +139,11 @@ class StudentLessonPlanController extends GetxController {
   }
 
   void showLessonPlanDetailsBottomSheet(
-      {required StudentLessonPlanDetailsData studentLessonPlanDetailsData}) {
+      {required StudentLessonPlanDetailsData studentLessonPlanDetailsData,
+      Color? backgroundColor}) {
     Get.bottomSheet(
-      SizedBox(
+      Container(
+          color: backgroundColor,
           height: Get.height * 0.6,
           child: SingleChildScrollView(
             child: Column(

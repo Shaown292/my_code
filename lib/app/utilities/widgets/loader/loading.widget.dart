@@ -13,29 +13,31 @@ class LoadingWidget extends GetWidget<LoadingController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return controller.isLoading
-          ? PopScope(
-        onPopInvoked: (bool value) => Future.value(false),
-              child: Stack(
-                children: <Widget>[
-                  ModalBarrier(
-                    dismissible: false,
-                    color: Colors.grey.withOpacity(.25),
-                  ),
-                  Center(
-                    child: Platform.isIOS
-                        ? const CupertinoActivityIndicator(
-                            color: AppColors.primaryColor,
-                            radius: 24,
-                          )
-                        : const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(
-                              AppColors.primaryColor,
+          ? Expanded(
+            child: PopScope(
+                    onPopInvoked: (bool value) => Future.value(false),
+                child: Stack(
+                  children: <Widget>[
+                    ModalBarrier(
+                      dismissible: false,
+                      color: Colors.grey.withOpacity(.25),
+                    ),
+                    Center(
+                      child: Platform.isIOS
+                          ? const CupertinoActivityIndicator(
+                              color: AppColors.primaryColor,
+                              radius: 24,
+                            )
+                          : const CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(
+                                AppColors.primaryColor,
+                              ),
                             ),
-                          ),
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            )
+          )
           : const SizedBox();
     });
   }

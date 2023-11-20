@@ -52,10 +52,11 @@ class StudentHomeworkController extends GetxController {
 
   }
 
-  void showHomeworkDetailsBottomSheet({required int index}) {
+  void showHomeworkDetailsBottomSheet({required int index,  Color? color}) {
     Get.bottomSheet(
-      SizedBox(
-        height: Get.height * 0.55,
+      Container(
+        color: color,
+        height: Get.height * 0.5,
         child: studentHomeworkList.isNotEmpty
             ? Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +95,7 @@ class StudentHomeworkController extends GetxController {
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+
       shape: defaultBottomSheetShape(),
     );
   }

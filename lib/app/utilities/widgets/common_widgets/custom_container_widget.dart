@@ -8,6 +8,7 @@ class CustomContainerWidget extends StatelessWidget {
   final Widget requiredWidget;
   final double? borderWidth;
   final Color? borderColor;
+  final EdgeInsets? padding;
 
   const CustomContainerWidget({
     super.key,
@@ -18,15 +19,17 @@ class CustomContainerWidget extends StatelessWidget {
     required this.requiredWidget,
     this.borderWidth,
     this.borderColor,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
+      padding: padding,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius ?? 8),
-          color: color ?? Colors.white,
+          color: color,
           border: Border.all(
               color: borderColor ?? Colors.white, width: borderWidth ?? 0)),
       child: requiredWidget,

@@ -16,6 +16,7 @@ import '../controllers/leave_list_controller.dart';
 
 class LeaveListView extends GetView<LeaveListController> {
   const LeaveListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -31,25 +32,25 @@ class LeaveListView extends GetView<LeaveListController> {
                   controller.remainingLeaveList.clear();
                   controller.approvedList.clear();
                   controller.rejectedList.clear();
-                  controller.getRemainingLeave(studentId: GlobalVariableController.studentId!);
+                  controller.getRemainingLeave(
+                      studentId: GlobalVariableController.studentId!);
                   controller.getAllNoticeList(
                       studentId: GlobalVariableController.studentId!);
                 },
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Card(
                       margin: EdgeInsets.zero,
                       elevation: 5,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(8),
-                              topLeft: Radius.circular(8))),
                       child: Container(
                         width: Get.width,
                         padding: const EdgeInsets.all(10),
-                        child:   Column(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(8), topLeft: Radius.circular(8),),
+                          color: Colors.white,
+                        ),
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
@@ -60,15 +61,19 @@ class LeaveListView extends GetView<LeaveListController> {
                             ListView.builder(
                               shrinkWrap: true,
                               itemCount: controller.remainingLeaveList.length,
-                                itemBuilder: (context, index){
-                                return  BottomSheetTile(
-                                  title: controller.remainingLeaveList[index].leaveType,
-                                  value: controller.remainingLeaveList[index].remainingDays.toString(),
-                                  color: index % 2 == 0 ? AppColors.homeworkWidgetColor : Colors.white ,
+                              itemBuilder: (context, index) {
+                                return BottomSheetTile(
+                                  title: controller
+                                      .remainingLeaveList[index].leaveType,
+                                  value: controller
+                                      .remainingLeaveList[index].remainingDays
+                                      .toString(),
+                                  color: index % 2 == 0
+                                      ? AppColors.homeworkWidgetColor
+                                      : Colors.white,
                                 );
-                                },
+                              },
                             )
-
                           ],
                         ),
                       ),
@@ -85,6 +90,8 @@ class LeaveListView extends GetView<LeaveListController> {
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: TabBar(
                         labelColor: AppColors.profileValueColor,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        dividerHeight: 0,
                         unselectedLabelColor: Colors.black,
                         unselectedLabelStyle:
                             AppTextStyle.fontSize12LightGreyW500,
@@ -107,13 +114,13 @@ class LeaveListView extends GetView<LeaveListController> {
                         controller: controller.tabController,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
-
                           ///Pending
-                          
+
                           controller.loadingController.isLoading
-                              ? const Center(child: CircularProgressIndicator(
-                            color: AppColors.primaryColor,
-                          ))
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                  color: AppColors.primaryColor,
+                                ))
                               : controller.pendingList.isNotEmpty
                                   ? ListView.builder(
                                       shrinkWrap: true,
@@ -132,7 +139,8 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .pendingList[index].to,
                                               statusText: controller
                                                   .pendingList[index].status,
-                                              statusColor: AppColors.activeExamStatusBlueColor,
+                                              statusColor: AppColors
+                                                  .activeExamStatusBlueColor,
                                               onTap: () {
                                                 controller
                                                     .showPendingListDetailsBottomSheet(
@@ -151,36 +159,39 @@ class LeaveListView extends GetView<LeaveListController> {
                           controller.loadingController.isLoading
                               ? const LoadingWidget()
                               : controller.approvedList.isNotEmpty
-                              ? ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: controller.approvedList.length,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    LeaveDetails(
-                                      leaveType: controller
-                                          .approvedList[index].leaveType,
-                                      applyDate: controller
-                                          .approvedList[index].applyDate,
-                                      leaveFrom: controller
-                                          .approvedList[index].from,
-                                      leaveUntil: controller
-                                          .approvedList[index].to,
-                                      statusText: controller
-                                          .approvedList[index].status,
-                                      statusColor: AppColors.primaryColor,
-                                      onTap: () {
-                                        controller
-                                            .showApprovedListDetailsBottomSheet(
-                                            index: index);
-                                      },
-                                    )
-                                  ],
-                                );
-                              })
-                              : const Center(
-                            child: NoDataAvailableWidget(),
-                          ),
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: controller.approvedList.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            LeaveDetails(
+                                              leaveType: controller
+                                                  .approvedList[index]
+                                                  .leaveType,
+                                              applyDate: controller
+                                                  .approvedList[index]
+                                                  .applyDate,
+                                              leaveFrom: controller
+                                                  .approvedList[index].from,
+                                              leaveUntil: controller
+                                                  .approvedList[index].to,
+                                              statusText: controller
+                                                  .approvedList[index].status,
+                                              statusColor:
+                                                  AppColors.primaryColor,
+                                              onTap: () {
+                                                controller
+                                                    .showApprovedListDetailsBottomSheet(
+                                                        index: index);
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      })
+                                  : const Center(
+                                      child: NoDataAvailableWidget(),
+                                    ),
 
                           /// Rejected
 
@@ -206,7 +217,6 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .rejectedList[index].to,
                                               statusText: controller
                                                   .rejectedList[index].status,
-
                                               onTap: () {
                                                 controller
                                                     .showRejectedListDetailsBottomSheet(

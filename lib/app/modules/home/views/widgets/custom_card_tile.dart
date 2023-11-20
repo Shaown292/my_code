@@ -23,7 +23,6 @@ class CustomCardTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-
       padding: const EdgeInsets.all(AppDimens.padding12),
       child: InkWell(
         onTap: onTap,

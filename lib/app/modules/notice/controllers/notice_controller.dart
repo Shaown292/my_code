@@ -13,8 +13,6 @@ class NoticeController extends GetxController {
   LoadingController loadingController = Get.find();
   List<AllNotices> allNoticeList = [];
 
-
-
   Future<NoticeListResponseModel?> getAllNoticeList() async {
     try {
       loadingController.isLoading = true;
@@ -46,26 +44,27 @@ class NoticeController extends GetxController {
     return NoticeListResponseModel();
   }
 
-  void showNoticeDetailsBottomSheet({required int index}) {
+  void showNoticeDetailsBottomSheet({required int index, Color? bottomSheetBackgroundColor}) {
     Get.bottomSheet(
       Container(
-          padding: const EdgeInsets.all(20),
-          height: Get.height * 0.45,
-          child: allNoticeList[index].noticeMessage != null
-              ? Center(
-                  child: Text(
-                    allNoticeList[index].noticeMessage ?? "",
-                    style: AppTextStyle.fontSize13BlackW400,
-                    textAlign: TextAlign.justify,
-                  ),
-                )
-              : const Center(
-                  child: Text(
-                    "No Details Available",
-                    style: AppTextStyle.fontSize16lightViolateW500,
-                  ),
-                )),
-      backgroundColor: Colors.white,
+        padding: const EdgeInsets.all(20),
+        height: Get.height * 0.45,
+        color: bottomSheetBackgroundColor,
+        child: allNoticeList[index].noticeMessage != null
+            ? Center(
+                child: Text(
+                  allNoticeList[index].noticeMessage ?? "",
+                  style: AppTextStyle.fontSize13BlackW400,
+                  textAlign: TextAlign.justify,
+                ),
+              )
+            : const Center(
+                child: Text(
+                  "No Details Available",
+                  style: AppTextStyle.fontSize16lightViolateW500,
+                ),
+              ),
+      ),
       shape: defaultBottomSheetShape(),
     );
   }
