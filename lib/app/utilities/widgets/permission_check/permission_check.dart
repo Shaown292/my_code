@@ -1,48 +1,60 @@
 // Flutter imports:
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:flutter/material.dart';
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 
 // Package imports:
 import 'package:permission_handler/permission_handler.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 // Package imports:
 
 class PermissionCheck {
   Future<void> checkPermissions(BuildContext context) async {
-    // PermissionStatus permissionStatus = await Permission.storage.request();
-    if (await Permission.storage.request().isGranted) {
-      // Either the permission was already granted before or the user just granted it.
+    PermissionStatus? storageStatus;
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      final android = await deviceInfo.androidInfo;
+      storageStatus = android.version.sdkInt < 33
+          ? await Permission.storage.request()
+          : PermissionStatus.granted;
     }
-    if (await Permission.storage.isRestricted) {
-      // The OS restricts access, for example because of parental controls.
-      permissionsDenied(context);
+
+    if (storageStatus == PermissionStatus.granted) {
+      debugPrint("granted");
     }
-    if (await Permission.storage.isDenied) {
-      permissionsDenied(context);
+    if (storageStatus == PermissionStatus.denied) {
+      debugPrint("denied");
     }
-    if (await Permission.storage.isPermanentlyDenied) {
+    if (storageStatus == PermissionStatus.permanentlyDenied) {
       openAppSettings();
     }
   }
 
-  void permissionsDenied(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-            title: const Text("Permission denied"),
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.only(
-                    left: 30, right: 30, top: 15, bottom: 15),
-                child: const Text(
-                  "You must grant all permission to use this application",
-                  style: TextStyle(fontSize: 18, color: Colors.black54),
-                ),
-              )
-            ],
-          );
-        });
+  void permissionsDenied() {
+    const CupertinoAlertDialog(
+      title: Text('Permission denied'),
+      content: Text('You must grant all permission to use this application'),
+    );
+
+    // showDialog(
+    //     context: context,
+    //     builder: (BuildContext context) {
+    //       return SimpleDialog(
+    //         title: const Text("Permission denied"),
+    //         children: <Widget>[
+    //           Container(
+    //             padding: const EdgeInsets.only(
+    //                 left: 30, right: 30, top: 15, bottom: 15),
+    //             child: const Text(
+    //               "You must grant all permission to use this application",
+    //               style: TextStyle(fontSize: 18, color: Colors.black54),
+    //             ),
+    //           )
+    //         ],
+    //       );
+    //     });
   }
 }

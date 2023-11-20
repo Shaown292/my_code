@@ -27,7 +27,8 @@ class SyllabusView extends GetView<SyllabusController> {
                   itemCount: controller.syllabusList.length,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, int index) => SyllabusTopicWise(
-                    contentTitle: controller.syllabusList[index].contentTitle ?? '',
+                    contentTitle:
+                        controller.syllabusList[index].contentTitle ?? '',
                     topic: controller.syllabusList[index].description ?? '',
                     date: controller.syllabusList[index].uploadDate ?? '',
                     onTap: () {
@@ -38,7 +39,7 @@ class SyllabusView extends GetView<SyllabusController> {
                             Navigator.pop(context);
                             controller
                                     .syllabusList[index].uploadFile!.isNotEmpty
-                                ? FileDownloadUtils().downloadFile(
+                                ? FileDownloadUtils().downloadFiles(
                                     url: controller
                                         .syllabusList[index].uploadFile!,
                                     title: controller
