@@ -16,7 +16,6 @@ class StaffController extends GetxController {
   List<Roles> roles = [];
 
 
-
   Future<void> getAllRolesList() async {
     try {
       isLoading.value = true;
