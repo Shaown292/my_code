@@ -48,6 +48,10 @@ abstract class Routes {
       _Paths.STUDENT_SEARCH_SUBJECT_ATTENDANCE;
   static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
   static const STUDENT_WALLET = _Paths.STUDENT_WALLET;
+  static const BLOCKED_USERS = _Paths.BLOCKED_USERS;
+  static const STAFF = _Paths.STAFF;
+  static const STAFF_LIST = _Paths.STAFF_LIST;
+  static const STAFF_INDIVIDUAL_DETAILS = _Paths.STAFF_INDIVIDUAL_DETAILS;
 }
 
 abstract class _Paths {
@@ -95,4 +99,8 @@ abstract class _Paths {
       '/student-search-subject-attendance';
   static const FORGET_PASSWORD = '/forget-password';
   static const STUDENT_WALLET = '/student-wallet';
+  static const BLOCKED_USERS = '/blocked-users';
+  static const STAFF = '/staff';
+  static const STAFF_LIST = '/staff-list';
+  static const STAFF_INDIVIDUAL_DETAILS = '/staff-individual-details';
 }

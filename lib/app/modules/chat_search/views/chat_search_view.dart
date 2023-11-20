@@ -10,6 +10,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:get/get.dart';
 
 import '../../../data/constants/image_path.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/chat_search_controller.dart';
 
 class ChatSearchView extends GetView<ChatSearchController> {
@@ -76,16 +77,16 @@ class ChatSearchView extends GetView<ChatSearchController> {
                 ),
                 PopupMenuButton(
                   padding: EdgeInsets.zero,
-                  color: Colors.white,
+                  iconColor: Colors.white,
                   onSelected: (value) {
                     if (value == 1) {
-
                     }
                   },
                   itemBuilder: (context) => [
-                    const PopupMenuItem(
+                     PopupMenuItem(
                       value: 1,
-                      child: Text("Blocked Users"),
+                      child: const Text("Blocked Users"),
+                      onTap: () => Get.toNamed(Routes.BLOCKED_USERS),
                     ),
                   ],
                 ),

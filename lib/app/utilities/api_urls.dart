@@ -1,4 +1,3 @@
-
 import '../../config/app_config.dart';
 
 class InfixApi {
@@ -192,6 +191,17 @@ class InfixApi {
   }) =>
       '${baseApi}view-lesson-plan-lesson/$lessonPlanId';
   static String forgetPassword = "${baseApi}forget-password";
+
+
+  //// Admin
+  static String getAdminStaffRoleList = '${baseApi}role-list';
+
+
+  static String getAdminRoleWiseStaff({required int staffRoleId}) =>
+      '${baseApi}role-wise-staff-list?role_id=$staffRoleId';
+
+  static String getAdminStaffIndividualData({required int staffIndividualId}) =>
+      '${baseApi}individual-staff-details/$staffIndividualId';
 
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {
