@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_d
 import 'package:flutter_single_getx_api_v2/app/modules/home/views/widgets/custom_card_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/icon_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -74,7 +75,8 @@ class HomeView extends GetView<HomeController> {
                       isSelected: controller.selectIndex.value == index,
                     ));
                   },
-                )
+                ),
+                40.verticalSpacing,
               ],
             ),
           ),
