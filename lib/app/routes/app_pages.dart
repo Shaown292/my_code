@@ -64,6 +64,8 @@ import '../modules/secondary_splash/bindings/secondary_splash_binding.dart';
 import '../modules/secondary_splash/views/secondary_splash_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
+import '../modules/single_chat/bindings/single_chat_binding.dart';
+import '../modules/single_chat/views/single_chat_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/staff/bindings/staff_binding.dart';
@@ -371,6 +373,11 @@ class AppPages {
       page: () => const StaffIndividualDetailsView(),
       binding: StaffIndividualDetailsBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.SINGLE_CHAT,
+      page: () =>  SingleChatView(),
+      binding: SingleChatBinding(),
     ),
   ];
 }

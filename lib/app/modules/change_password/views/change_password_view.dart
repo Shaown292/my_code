@@ -22,25 +22,28 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
             child: Column(
               children: [
                 20.verticalSpacing,
-                const CustomTextFormField(
+                 CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
                   hintText: "Current Password",
                   fillColor: Colors.white,
+                  controller: controller.currentPasswordController,
                 ),
                 10.verticalSpacing,
-                const CustomTextFormField(
+                 CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
                   hintText: "New Password",
                   fillColor: Colors.white,
+                   controller: controller.newPasswordController,
                 ),
                 10.verticalSpacing,
-                const CustomTextFormField(
+                 CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
                   hintText: "Confirm Password",
                   fillColor: Colors.white,
+                   controller: controller.confirmPasswordController,
                 ),
                 10.verticalSpacing,
                  PrimaryButton(

@@ -102,38 +102,39 @@ class ProfileEditView extends GetView<ProfileEditController> {
                                     }
                                   },
                                   fromCamera: () async {
-                                  controller.profileDataController
-                                      .profilePickedImage.value =
-                                  await FlutterImagePickerUtils
-                                      .getImageCamera(
-                                    context,
-                                  );
-                                  if (controller
-                                      .profileDataController
-                                      .profilePickedImage
-                                      .value
-                                      .path
-                                      .isNotEmpty) {
-                                    controller.profilePhotoUpdate(
-                                        file: controller.profileDataController
-                                            .profilePickedImage.value.path);
-                                  }
-                                },
+                                    controller.profileDataController
+                                            .profilePickedImage.value =
+                                        await FlutterImagePickerUtils
+                                            .getImageCamera(
+                                      context,
+                                    );
+                                    if (controller
+                                        .profileDataController
+                                        .profilePickedImage
+                                        .value
+                                        .path
+                                        .isNotEmpty) {
+                                      controller.profilePhotoUpdate(
+                                          file: controller.profileDataController
+                                              .profilePickedImage.value.path);
+                                    }
+                                  },
                                 );
                               },
                               child: Container(
-                                  height: 25,
-                                  width: 25,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.primaryColor),
-                                  child: Center(
-                                    child: Image.asset(
-                                      ImagePath.edit,
-                                      height: 12,
-                                      width: 12,
-                                    ),
-                                  )),
+                                height: 25,
+                                width: 25,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.primaryColor),
+                                child: Center(
+                                  child: Image.asset(
+                                    ImagePath.edit,
+                                    height: 12,
+                                    width: 12,
+                                  ),
+                                ),
+                              ),
                             ) //Icon
                             ),
                       ], //<Widget>[]
@@ -145,7 +146,6 @@ class ProfileEditView extends GetView<ProfileEditController> {
                   labelText: AppText.editProfileFirstName,
                   controller: controller.firstName,
                   iconOnTap: () => controller.userProfileInfoUpdate(),
-
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(

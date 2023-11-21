@@ -20,23 +20,24 @@ class StudentSearchSubjectAttendanceView
 
   @override
   Widget build(BuildContext context) {
-    return InfixEduScaffold(
-      title: "Select Subject",
-      body: CustomBackground(
-        customWidget: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 7.0),
-              child: SizedBox(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller.homeController.studentRecordList.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Obx(
-                        () => StudyButton(
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Select Subject",
+        body: CustomBackground(
+          customWidget: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                child: SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount:
+                        controller.homeController.studentRecordList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: StudyButton(
                           title:
                               "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                           onItemTap: () {
@@ -49,48 +50,48 @@ class StudentSearchSubjectAttendanceView
                           },
                           isSelected: controller.selectIndex.value == index,
                         ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Card(
+                elevation: 5,
+                margin: EdgeInsets.zero,
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  height: Get.height * 0.06,
+                  color: AppColors.profileCardTextColor,
+                  child: Row(
+                    children: [
+                      const SubjectCardTitle(
+                        title: 'Subject',
                       ),
-                    );
-                  },
+                      5.horizontalSpacing,
+                      const SubjectCardTitle(
+                        title: 'Teacher',
+                      ),
+                      5.horizontalSpacing,
+                      const SubjectCardTitle(
+                        title: 'Type',
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Card(
-              elevation: 5,
-              margin: EdgeInsets.zero,
-              child: Container(
-                padding: const EdgeInsets.all(15),
-                height: Get.height * 0.06,
-                color: AppColors.profileCardTextColor,
-                child: Row(
-                  children: [
-                    const SubjectCardTitle(
-                      title: 'Subject',
-                    ),
-                    5.horizontalSpacing,
-                    const SubjectCardTitle(
-                      title: 'Teacher',
-                    ),
-                    5.horizontalSpacing,
-                    const SubjectCardTitle(
-                      title: 'Type',
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            10.verticalSpacing,
-            Obx(() => controller.subjectsController.loadingController.isLoading
-                ? const LoadingWidget()
-                : Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: () async {
-                        controller.subjectsController.getAllSubjectList(
-                            recordId: controller.recordId.toInt());
-                      },
-                      child:
-                          controller.subjectsController.subjectList.isNotEmpty
-                              ? ListView.builder(
+              10.verticalSpacing,
+              controller.subjectsController.loadingController.isLoading
+                  ? const LoadingWidget()
+                  : Expanded(
+                child: RefreshIndicator(
+                        onRefresh: () async {
+                          controller.subjectsController.getAllSubjectList(
+                            recordId: controller.recordId.toInt(),
+                          );
+                        },
+                        child:
+                            controller.subjectsController.subjectList.isNotEmpty
+                                ? ListView.builder(
                                   itemCount: controller
                                       .subjectsController.subjectList.length,
                                   itemBuilder: (context, index) {
@@ -99,8 +100,10 @@ class StudentSearchSubjectAttendanceView
                                           .subjectList[index].subject,
                                       teacher: controller.subjectsController
                                           .subjectList[index].teacher,
-                                      lectureType: controller.subjectsController
-                                          .subjectList[index].type,
+                                      lectureType: controller
+                                          .subjectsController
+                                          .subjectList[index]
+                                          .type,
                                       onTap: () {
                                         Get.toNamed(
                                             Routes.STUDENT_SEARCH_ATTENDANCE,
@@ -115,10 +118,11 @@ class StudentSearchSubjectAttendanceView
                                     );
                                   },
                                 )
-                              : const NoDataAvailableWidget(),
-                    ),
-                  ))
-          ],
+                                : const NoDataAvailableWidget(),
+                      ),
+                  ),
+            ],
+          ),
         ),
       ),
     );

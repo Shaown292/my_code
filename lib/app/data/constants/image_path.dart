@@ -100,7 +100,7 @@ class ImagePath {
 
 
   /// Notification
-  static String noNotification     = "assets/images/no_data_available.png";
+  static String noNotification       = "assets/images/no_data_available.png";
 
 
   /// others
@@ -109,13 +109,14 @@ class ImagePath {
   static String changePassword       = "assets/images/change_password.png";
   static String delete               = "assets/images/delete.png";
   static String download             = "assets/images/download.png";
-  static String profileIcon             = "assets/images/profile_icon.png";
-  static String routineNavIcon             = "assets/images/routine_nav_icon.png";
+  static String profileIcon          = "assets/images/profile_icon.png";
+  static String routineNavIcon       = "assets/images/routine_nav_icon.png";
+  static String send                 = "assets/images/send.png";
 
 
   /// Leave
   static String applyLeave  = "assets/images/apply_leave.png";
-  static String leaveList  = "assets/images/leave_list.png";
+  static String leaveList   = "assets/images/leave_list.png";
 
   /// Examination
   static String examinationResult    = "assets/images/result.png";
@@ -126,6 +127,6 @@ class ImagePath {
   static String onlineExamResult  = "assets/images/exam_result.png";
 
   /// Teacher
-  static String teacher  = "assets/images/teacher.png";
+  static String teacher           = "assets/images/teacher.png";
 }
 

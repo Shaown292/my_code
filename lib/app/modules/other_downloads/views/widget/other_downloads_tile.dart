@@ -10,6 +10,7 @@ class OtherDownloadsTile extends StatelessWidget {
   final String topic;
   final String? date;
   final Function()? onTap;
+
   const OtherDownloadsTile({
     super.key,
     required this.contentTitle,
@@ -24,6 +25,7 @@ class OtherDownloadsTile extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: CustomContainerWidget(
           borderColor: const Color(0xFFEAE7F0),
+          color: Colors.white,
           borderWidth: 1,
           requiredWidget: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -34,13 +36,10 @@ class OtherDownloadsTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: const Color(0xFFF2F0F6),
-                      ),
-                      child: Center(
+                    CustomContainerWidget(
+                      padding: const EdgeInsets.all(10),
+                      color: const Color(0xFFF2F0F6),
+                      requiredWidget: Center(
                         child: Text(
                           contentTitle,
                           style: AppTextStyle.fontSize14BlackW500,
