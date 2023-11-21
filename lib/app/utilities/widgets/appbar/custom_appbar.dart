@@ -12,6 +12,7 @@ class CustomAppBar extends GetView<HomeController> {
   final Widget? leadingIcon;
   final String? title;
   final List<Widget>? actions;
+  final Widget? titleWidget;
   final bool centerTitle;
 
   const CustomAppBar({
@@ -20,6 +21,7 @@ class CustomAppBar extends GetView<HomeController> {
     this.leadingIcon,
     this.title,
     this.actions,
+    this.titleWidget,
   });
 
   @override
@@ -48,7 +50,7 @@ class CustomAppBar extends GetView<HomeController> {
                       ),
                     ),
                 10.horizontalSpacing,
-                Text(
+                titleWidget ?? Text(
                   title ?? "",
                   style: AppTextStyle.textStyle16WhiteW500,
                 ),

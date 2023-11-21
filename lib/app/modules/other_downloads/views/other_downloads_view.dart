@@ -12,39 +12,53 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
 
   @override
   Widget build(BuildContext context) {
-
-    return Obx(() => InfixEduScaffold(
-      title: "Other Downloads",
-      body: RefreshIndicator(
-
-        onRefresh: () async {
-          controller.studentOthersDownloadList.clear();
-          controller.getStudentOthersDownloadList();
-        },
-        child: CustomBackground(
-          customWidget: Padding(
-            padding: const EdgeInsets.all(10.0),
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Other Downloads",
+        body: RefreshIndicator(
+          onRefresh: () async {
+            controller.studentOthersDownloadList.clear();
+            controller.getStudentOthersDownloadList();
+          },
+          child: SingleChildScrollView(
             child: Column(
               children: [
-                controller.loadingController.isLoading ? const LoadingWidget() : controller.studentOthersDownloadList.isNotEmpty ? Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.studentOthersDownloadList.length,
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      return  OtherDownloadsTile(
-                        contentTitle: controller.studentOthersDownloadList[index].contentTitle ?? '',
-                        topic: controller.studentOthersDownloadList[index].availableFor ?? '',
-                        date: controller.studentOthersDownloadList[index].uploadDate ?? '',
-                      );
-                    },),
-                ) : const NoDataAvailableWidget()
-
+                CustomBackground(
+                  customWidget: controller.loadingController.isLoading
+                      ? const LoadingWidget()
+                      : controller.studentOthersDownloadList.isNotEmpty
+                          ? ListView.builder(
+                              itemCount:
+                                  controller.studentOthersDownloadList.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: OtherDownloadsTile(
+                                    contentTitle: controller
+                                            .studentOthersDownloadList[index]
+                                            .contentTitle ??
+                                        '',
+                                    topic: controller
+                                            .studentOthersDownloadList[index]
+                                            .availableFor ??
+                                        '',
+                                    date: controller
+                                            .studentOthersDownloadList[index]
+                                            .uploadDate ??
+                                        '',
+                                  ),
+                                );
+                              },
+                            )
+                          : const NoDataAvailableWidget(),
+                ),
               ],
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

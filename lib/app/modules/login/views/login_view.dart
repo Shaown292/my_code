@@ -158,6 +158,7 @@ class LoginView extends GetView<LoginController> {
                                   ? const CircularProgressIndicator()
                                   : PrimaryButton(
                                       onTap: () {
+
                                         if (validate()) {
                                           controller.isLoading.value = true;
                                           controller.userLogin(

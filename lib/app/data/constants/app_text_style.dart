@@ -186,5 +186,17 @@ class AppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
+  static const fontSize10GreenW700 = TextStyle(
+    color: Color(0xFF03B53E),
+    fontSize: 10,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w700,
+  );
+
+  static const fontSize12W400ReceivedText = TextStyle(
+      color: AppColors.teacherTextColor,
+      fontSize: 12,
+      fontWeight: FontWeight.w400);
+
 
 }

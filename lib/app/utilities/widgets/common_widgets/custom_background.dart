@@ -20,8 +20,8 @@ class CustomBackground extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10.0, right: 10, top: 20),
       child: Container(
-        height: height ?? Get.height,
-        width: width ?? Get.width,
+        height:  Get.height,
+        width:  Get.width,
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),

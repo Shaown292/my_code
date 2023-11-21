@@ -81,6 +81,7 @@ class ChatView extends GetView<ChatController> {
                 unselectedLabelColor: Colors.black,
                 unselectedLabelStyle: AppTextStyle.fontSize12LightGreyW500,
                 indicatorColor: AppColors.profileIndicatorColor,
+                indicatorSize: TabBarIndicatorSize.tab,
                 controller: controller.tabController,
                 tabs: List.generate(
                   controller.chatType.length,
@@ -113,10 +114,10 @@ class ChatView extends GetView<ChatController> {
                                       colorCode = '0xFF12AE01';
                                     } else if (status == 'INACTIVE') {
                                       colorCode = '0xFFE1E2EC';
-                                    } else if (status == 'AWAY') {
-                                      colorCode = '0xFFF99F15';
-                                    } else {
+                                    } else if (status == 'BUSY') {
                                       colorCode = '0xFFF60003';
+                                    } else {
+                                      colorCode = '0xFFF99F15';
                                     }
                                     return ChatTile(
                                       profileImage: ImagePath.editProfileImage,
@@ -132,7 +133,9 @@ class ChatView extends GetView<ChatController> {
                                           : AppColors.homeTextColor,
                                       activeStatusColor:
                                           Color(int.tryParse(colorCode)!),
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.toNamed(Routes.SINGLE_CHAT);
+                                      },
                                     );
                                   }),
                             ),
@@ -169,7 +172,8 @@ class ChatView extends GetView<ChatController> {
                                             : AppColors.homeTextColor,
                                     activeStatusColor:
                                         Color(int.tryParse(colorCode)!),
-                                    onTap: () {},
+                                    onTap: () {
+                                    },
                                   );
                                 },
                               ),
