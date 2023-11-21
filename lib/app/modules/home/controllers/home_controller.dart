@@ -12,9 +12,6 @@ import '../../../routes/app_pages.dart';
 import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class HomeController extends GetxController {
-
-
-
   late ProfileInfoModel profileInfoModel;
   final AuthDatabase _authDatabase = AuthDatabase.instance;
   final selectIndex = RxInt(-1);
@@ -30,12 +27,9 @@ class HomeController extends GetxController {
     profileInfoModel = _authDatabase.getUserInfo()!;
   }
 
-
-
   void logout() async {
     LoadingController loadingController = Get.find();
     try {
-
       // var headers = {
       //   'Authorization': GlobalVariableController.token!,
       // };
@@ -55,8 +49,6 @@ class HomeController extends GetxController {
       //   print(response.reasonPhrase);
       // }
 
-
-
       // // loadingController.isLoading = true;
       // // bool result = await _authRepository.signOut();
       //
@@ -69,7 +61,6 @@ class HomeController extends GetxController {
       // );
       //
       // print(res);
-
     } catch (e, t) {
       debugPrint(e.toString());
       debugPrint(t.toString());
@@ -80,51 +71,62 @@ class HomeController extends GetxController {
       loadingController.isLoading = false;
     }
   }
-  
+
   void getStudentRecord() async {
+    try {
+      final response = await BaseClient().getData(
+          url: InfixApi.getStudentRecord(studentId: GlobalVariable.studentId!),
+          header: GlobalVariable.header);
 
-    try{
-
-      final response = await BaseClient().getData(url: InfixApi.getStudentRecord(studentId: GlobalVariable.studentId!), header: GlobalVariable.header);
-
-      StudentRecordResponseModel studentRecordResponseModel = StudentRecordResponseModel.fromJson(response);
-      if(studentRecordResponseModel.success){
-        GlobalVariable.studentRecordId = studentRecordResponseModel.data.studentRecords.first.id;
-        if(studentRecordResponseModel.data.studentRecords.isNotEmpty){
-          for(int i = 0; i < studentRecordResponseModel.data.studentRecords.length; i++) {
-            studentRecordList.add(studentRecordResponseModel.data.studentRecords[i]);
-            studentRecordDropdownList.add('Class ${studentRecordResponseModel.data.studentRecords[i].studentRecordClass} (${studentRecordResponseModel.data.studentRecords[i].section})');
-            studentRecordIdList.add(studentRecordResponseModel.data.studentRecords[i].id);
+      StudentRecordResponseModel studentRecordResponseModel =
+          StudentRecordResponseModel.fromJson(response);
+      if (studentRecordResponseModel.success) {
+        GlobalVariable.studentRecordId =
+            studentRecordResponseModel.data.studentRecords.first.id;
+        if (studentRecordResponseModel.data.studentRecords.isNotEmpty) {
+          for (int i = 0;
+              i < studentRecordResponseModel.data.studentRecords.length;
+              i++) {
+            studentRecordList
+                .add(studentRecordResponseModel.data.studentRecords[i]);
+            studentRecordDropdownList.add(
+                'Class ${studentRecordResponseModel.data.studentRecords[i].studentRecordClass} (${studentRecordResponseModel.data.studentRecords[i].section})');
+            studentRecordIdList
+                .add(studentRecordResponseModel.data.studentRecords[i].id);
           }
-          getAllFeesList(studentId: GlobalVariable.studentId!, recordId: GlobalVariable.studentRecordId!);
+          getAllFeesList(
+              studentId: GlobalVariable.studentId!,
+              recordId: GlobalVariable.studentRecordId!);
         }
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       debugPrint('$e');
       debugPrint('$t');
-    } finally{}
-    
+    } finally {}
   }
 
-  Future<StudentFeesInvoiceResponseModel?> getAllFeesList({required int studentId, required int recordId}) async {
+  Future<StudentFeesInvoiceResponseModel?> getAllFeesList(
+      {required int studentId, required int recordId}) async {
     feesInvoiceList.clear();
     try {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentFeesList(studentId: studentId, recordId: recordId),
+        url: InfixApi.getStudentFeesList(
+            studentId: studentId, recordId: recordId),
         header: GlobalVariable.header,
       );
 
-      StudentFeesInvoiceResponseModel studentFeesInvoiceResponseModel = StudentFeesInvoiceResponseModel.fromJson(response);
+      StudentFeesInvoiceResponseModel studentFeesInvoiceResponseModel =
+          StudentFeesInvoiceResponseModel.fromJson(response);
       if (studentFeesInvoiceResponseModel.success == true) {
         loadingController.isLoading = false;
         if (studentFeesInvoiceResponseModel.data!.feesInvoice!.isNotEmpty) {
           for (int i = 0;
-          i < studentFeesInvoiceResponseModel.data!.feesInvoice!.length;
-          i++) {
-            feesInvoiceList.add(studentFeesInvoiceResponseModel.data!.feesInvoice![i]);
+              i < studentFeesInvoiceResponseModel.data!.feesInvoice!.length;
+              i++) {
+            feesInvoiceList
+                .add(studentFeesInvoiceResponseModel.data!.feesInvoice![i]);
           }
         }
       }
@@ -140,11 +142,11 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    debugPrint('Role ID: ${GlobalVariable.roleId} :::: Record ID: ${GlobalVariable.studentId}');
-    if(GlobalVariable.roleId == 2){
+    debugPrint(
+        'Role ID: ${GlobalVariable.roleId} :::: Record ID: ${GlobalVariable.studentId}');
+    if (GlobalVariable.roleId == 2) {
       getStudentRecord();
     }
     super.onInit();
   }
-  
 }

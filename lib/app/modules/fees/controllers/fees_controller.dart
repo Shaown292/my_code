@@ -8,9 +8,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_ti
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:get/get.dart';
 
-
 class FeesController extends GetxController {
-
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
 
@@ -22,24 +20,27 @@ class FeesController extends GetxController {
       Container(
           padding: const EdgeInsets.all(20),
           height: Get.height * 0.45,
-          child:  Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               10.verticalSpacing,
-              const Text("Reason:", style:  AppTextStyle.fontSize14BlackW500,),
+              const Text(
+                "Reason:",
+                style: AppTextStyle.fontSize14BlackW500,
+              ),
               20.verticalSpacing,
               const BottomSheetTile(
                 title: "Leave Type",
                 value: "",
-                color: AppColors.homeworkWidgetColor ,
+                color: AppColors.homeworkWidgetColor,
               ),
               const BottomSheetTile(
                 title: "Apply Date",
               ),
               const BottomSheetTile(
                 title: "Leave From",
-                color: AppColors.homeworkWidgetColor ,
+                color: AppColors.homeworkWidgetColor,
               ),
               const BottomSheetTile(
                 title: "Leave To",
@@ -53,7 +54,6 @@ class FeesController extends GetxController {
 
   @override
   void onInit() {
-
     // homeController.getStudentRecord();
     // if(homeController.studentRecordList.isNotEmpty){
     //   getAllFeesList(studentId: GlobalVariable.studentId!, recordId: GlobalVariable.studentRecordId!);
@@ -61,5 +61,4 @@ class FeesController extends GetxController {
 
     super.onInit();
   }
-
 }

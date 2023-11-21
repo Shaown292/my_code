@@ -321,8 +321,7 @@ class StudentSearchAttendanceController extends GetxController {
           .then((value) => setEventData());
     } else {
       getAttendanceList(
-              recordId: recordId.toInt(),
-              studentId: GlobalVariable.studentId!)
+              recordId: recordId.toInt(), studentId: GlobalVariable.studentId!)
           .then((value) => setEventData());
     }
 

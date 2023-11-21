@@ -55,8 +55,7 @@ class StudentSearchAttendanceView
                                               recordId:
                                                   controller.recordId.toInt(),
                                               studentId:
-                                                  GlobalVariable
-                                                      .studentId!);
+                                                  GlobalVariable.studentId!);
                                         },
                                         isSelected:
                                             controller.selectIndex.value ==
@@ -76,8 +75,7 @@ class StudentSearchAttendanceView
                             if (controller.fromStatus.value) {
                               controller.getSearchSubjectAttendanceListWithDate(
                                   recordId: controller.recordId.toInt(),
-                                  studentId:
-                                      GlobalVariable.studentId!,
+                                  studentId: GlobalVariable.studentId!,
                                   year: date.year,
                                   month: date.month,
                                   subjectId: controller.subjectId!);
