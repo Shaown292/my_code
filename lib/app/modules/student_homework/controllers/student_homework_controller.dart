@@ -28,7 +28,7 @@ class StudentHomeworkController extends GetxController {
 
     try{
       loadingController.isLoading = true;
-      final response = await BaseClient().getData(url: InfixApi.getStudentHomeWork(GlobalVariableController.studentRecordId!), header: GlobalVariableController.header);
+      final response = await BaseClient().getData(url: InfixApi.getStudentHomeWork(GlobalVariable.studentRecordId!), header: GlobalVariable.header);
 
       StudentHomeWorkModel studentHomeWorkModel = StudentHomeWorkModel.fromJson(response);
 

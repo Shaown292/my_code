@@ -19,7 +19,7 @@ class StaffListController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getAdminRoleWiseStaff(staffRoleId: staffRoleId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       AdminStaffRoleWiseListResponseModel adminStaffRoleWiseListResponseModel =

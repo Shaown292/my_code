@@ -41,8 +41,8 @@ class ProfileEditController extends GetxController {
   void userProfileInfoUpdate() async {
     try {
       final response = await BaseClient().postData(
-        url: InfixApi.updateProfile(GlobalVariableController.roleId!),
-        header: GlobalVariableController.header,
+        url: InfixApi.updateProfile(GlobalVariable.roleId!),
+        header: GlobalVariable.header,
         payload: {
           "first_name": firstName.text,
           "last_name": lastName.text,
@@ -76,11 +76,11 @@ class ProfileEditController extends GetxController {
 
   void profilePhotoUpdate({required String file}) async {
     try {
-      var headers = GlobalVariableController.header;
+      var headers = GlobalVariable.header;
       var request = http.MultipartRequest(
           'POST',
           Uri.parse(InfixApi.studentProfilePhotoUpdate(
-              studentId: GlobalVariableController.studentId!)));
+              studentId: GlobalVariable.studentId!)));
       request.files.add(await http.MultipartFile.fromPath('photo', file));
       request.headers.addAll(headers);
 

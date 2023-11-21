@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../app/data/module_data/home_data/home_dummy_data.dart';
 
 
-class GlobalVariableController {
+class GlobalVariable {
 
  static List<HomeTileModelClass> homeTileList = [];
  static int? roleId;
@@ -17,13 +17,14 @@ class GlobalVariableController {
  static Map<String, String> header = {
  'Content-Type': 'application/json',
  'Accept': 'application/json',
- 'Authorization': GlobalVariableController.token!,
+ 'Authorization': GlobalVariable.token!,
  };
 
 }
 
-class NotificationCountController extends GetxController{
+class GlobalRxVariableController extends GetxController{
  RxInt notificationCount = 0.obs;
+ RxInt recordId = 0.obs;
 }
 
-NotificationCountController notificationCountController = Get.put(NotificationCountController());
+GlobalRxVariableController globalRxVariableController = Get.put(GlobalRxVariableController());

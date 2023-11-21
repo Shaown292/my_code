@@ -17,7 +17,7 @@ class StaffIndividualDetailsController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getAdminStaffIndividualData(staffIndividualId: staffIndividualId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       AdminIndividualStaffDetailsResponseModel

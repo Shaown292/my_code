@@ -18,22 +18,22 @@ class DashboardView extends GetView<DashboardController> {
       context,
       controller: controller.tabIndexController,
       screens: [
-        GlobalVariableController.roleId == 3
+        GlobalVariable.roleId == 3
             ? const ProfileView()
             : const HomeView(),
 
         const NotificationView(),
 
-        GlobalVariableController.roleId == 4
+        GlobalVariable.roleId == 4
             ? const ProfileView()
             : const FeesView(),
 
 
-        GlobalVariableController.roleId == 4
+        GlobalVariable.roleId == 4
             ? const ProfileView()
             : const RoutineView(),
 
-        GlobalVariableController.roleId == 4
+        GlobalVariable.roleId == 4
             ? const ProfileView()
             : const ProfileView(),
       ],

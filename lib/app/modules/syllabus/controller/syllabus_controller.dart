@@ -29,9 +29,9 @@ class SyllabusController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getSyllabusList(
-          GlobalVariableController.studentRecordId!,
+          GlobalVariable.studentRecordId!,
         ),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       SyllabusResponseModel syllabusResponseModel =

@@ -34,10 +34,10 @@ class RoutineController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentRoutineList(
-          GlobalVariableController.roleId!,
-          GlobalVariableController.studentRecordId!,
+          GlobalVariable.roleId!,
+          GlobalVariable.studentRecordId!,
         ),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentRoutineResponseModel studentRoutineResponseModel =

@@ -30,15 +30,15 @@ class LoginController extends GetxController {
       profileInfoModel = ProfileInfoModel.fromJson(res);
       if (profileInfoModel.success == true) {
         isLoading.value = false;
-        notificationCountController.notificationCount.value = profileInfoModel.data.unreadNotifications;
-        GlobalVariableController.token = profileInfoModel.data.accessToken;
-        GlobalVariableController.roleId = profileInfoModel.data.user.roleId;
+        globalRxVariableController.notificationCount.value = profileInfoModel.data.unreadNotifications;
+        GlobalVariable.token = profileInfoModel.data.accessToken;
+        GlobalVariable.roleId = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
         if(profileInfoModel.data.user.roleId == 2){
-          GlobalVariableController.studentId = profileInfoModel.data.user.studentId;
+          GlobalVariable.studentId = profileInfoModel.data.user.studentId;
         }
 
         if (status) {
@@ -69,15 +69,15 @@ class LoginController extends GetxController {
       profileInfoModel = ProfileInfoModel.fromJson(response);
       if (profileInfoModel.success == true) {
         isLoading.value = false;
-        notificationCountController.notificationCount.value = profileInfoModel.data.unreadNotifications;
-        GlobalVariableController.token = profileInfoModel.data.accessToken;
-        GlobalVariableController.roleId = profileInfoModel.data.user.roleId;
+        globalRxVariableController.notificationCount.value = profileInfoModel.data.unreadNotifications;
+        GlobalVariable.token = profileInfoModel.data.accessToken;
+        GlobalVariable.roleId = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
         if(profileInfoModel.data.user.roleId == 2){
-          GlobalVariableController.studentId = profileInfoModel.data.user.studentId;
+          GlobalVariable.studentId = profileInfoModel.data.user.studentId;
         }
 
         if (status) {

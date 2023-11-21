@@ -19,7 +19,7 @@ class NoticeController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.studentAllNotice,
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       NoticeListResponseModel noticeListResponseModel =

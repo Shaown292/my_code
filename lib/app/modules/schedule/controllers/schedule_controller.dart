@@ -26,7 +26,7 @@ class ScheduleController extends GetxController {
       loadingController.isLoading = true;
       final response = await BaseClient().getData(
         url: InfixApi.getStudentExamSchedule(examId, recordId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentExamScheduleResponseModel studentExamScheduleResponseModel =

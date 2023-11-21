@@ -27,7 +27,7 @@ class HomeView extends GetView<HomeController> {
     return InfixEduScaffold(
       leadingIcon: const SizedBox(),
       appBar: PrimaryAppBar(
-        title: GlobalVariableController.roleId == 1 ? 'Welcome to Admin': 'Welcome to our school',
+        title: GlobalVariable.roleId == 1 ? 'Welcome to Admin': 'Welcome to our school',
         actions: [
           CustomIconButton(
             icon: FontAwesomeIcons.facebookMessenger,

@@ -174,6 +174,8 @@ class InfixApi {
     return "${baseApi}fees-invoice-view/1";
   }
 
+  static String getStudentFeesList({required int studentId, required int recordId}) => "${baseApi}student-fees?student_id=$studentId&record_id=$recordId";
+
   static String profileDocumentGet() {
     return '${baseApi}profile-documents';
   }

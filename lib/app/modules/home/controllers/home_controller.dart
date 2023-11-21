@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/fees/controllers/fees_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/student_fees_response_model/student_fees_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_record/student_record_response_model.dart';
 import 'package:get/get.dart';
 import '../../../../config/global_variable/global_variable_controller.dart';
@@ -11,14 +13,7 @@ import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class HomeController extends GetxController {
 
-  @override
-  void onInit() {
-    debugPrint('Role ID: ${GlobalVariableController.roleId} :::: Record ID: ${GlobalVariableController.studentId}');
-    if(GlobalVariableController.roleId == 2){
-      getStudentRecord();
-    }
-    super.onInit();
-  }
+
 
   late ProfileInfoModel profileInfoModel;
   final AuthDatabase _authDatabase = AuthDatabase.instance;
@@ -26,6 +21,10 @@ class HomeController extends GetxController {
   List<StudentRecord> studentRecordList = [];
   List<String> studentRecordDropdownList = [];
   List<int> studentRecordIdList = [];
+  List<FeesInvoice> feesInvoiceList = [];
+
+  // FeesController feesController = Get.find();
+  LoadingController loadingController = Get.find();
 
   void _getUserInfo() {
     profileInfoModel = _authDatabase.getUserInfo()!;
@@ -86,17 +85,18 @@ class HomeController extends GetxController {
 
     try{
 
-      final response = await BaseClient().getData(url: InfixApi.getStudentRecord(studentId: GlobalVariableController.studentId!), header: GlobalVariableController.header);
+      final response = await BaseClient().getData(url: InfixApi.getStudentRecord(studentId: GlobalVariable.studentId!), header: GlobalVariable.header);
 
       StudentRecordResponseModel studentRecordResponseModel = StudentRecordResponseModel.fromJson(response);
       if(studentRecordResponseModel.success){
-        GlobalVariableController.studentRecordId = studentRecordResponseModel.data.studentRecords.first.id;
+        GlobalVariable.studentRecordId = studentRecordResponseModel.data.studentRecords.first.id;
         if(studentRecordResponseModel.data.studentRecords.isNotEmpty){
           for(int i = 0; i < studentRecordResponseModel.data.studentRecords.length; i++) {
             studentRecordList.add(studentRecordResponseModel.data.studentRecords[i]);
             studentRecordDropdownList.add('Class ${studentRecordResponseModel.data.studentRecords[i].studentRecordClass} (${studentRecordResponseModel.data.studentRecords[i].section})');
             studentRecordIdList.add(studentRecordResponseModel.data.studentRecords[i].id);
           }
+          getAllFeesList(studentId: GlobalVariable.studentId!, recordId: GlobalVariable.studentRecordId!);
         }
       }
 
@@ -105,6 +105,46 @@ class HomeController extends GetxController {
       debugPrint('$t');
     } finally{}
     
+  }
+
+  Future<StudentFeesInvoiceResponseModel?> getAllFeesList({required int studentId, required int recordId}) async {
+    feesInvoiceList.clear();
+    try {
+      loadingController.isLoading = true;
+
+      final response = await BaseClient().getData(
+        url: InfixApi.getStudentFeesList(studentId: studentId, recordId: recordId),
+        header: GlobalVariable.header,
+      );
+
+      StudentFeesInvoiceResponseModel studentFeesInvoiceResponseModel = StudentFeesInvoiceResponseModel.fromJson(response);
+      if (studentFeesInvoiceResponseModel.success == true) {
+        loadingController.isLoading = false;
+        if (studentFeesInvoiceResponseModel.data!.feesInvoice!.isNotEmpty) {
+          for (int i = 0;
+          i < studentFeesInvoiceResponseModel.data!.feesInvoice!.length;
+          i++) {
+            feesInvoiceList.add(studentFeesInvoiceResponseModel.data!.feesInvoice![i]);
+          }
+        }
+      }
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
+    return StudentFeesInvoiceResponseModel();
+  }
+
+  @override
+  void onInit() {
+    debugPrint('Role ID: ${GlobalVariable.roleId} :::: Record ID: ${GlobalVariable.studentId}');
+    if(GlobalVariable.roleId == 2){
+      getStudentRecord();
+    }
+    super.onInit();
   }
   
 }

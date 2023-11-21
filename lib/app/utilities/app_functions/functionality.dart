@@ -10,39 +10,39 @@ class AppFunctions {
 
     switch (rule) {
       case 1:
-        GlobalVariableController.homeTileList = adminList;
+        GlobalVariable.homeTileList = adminList;
         Get.offAndToNamed(Routes.HOME, arguments: {
-          'homeListTile': GlobalVariableController.homeTileList,
+          'homeListTile': GlobalVariable.homeTileList,
         });
         break;
       case 2:
-        GlobalVariableController.homeTileList = studentList;
+        GlobalVariable.homeTileList = studentList;
         Get.offAndToNamed(Routes.DASHBOARD, arguments: {
-          'homeListTile': GlobalVariableController.homeTileList,
+          'homeListTile': GlobalVariable.homeTileList,
         });
         break;
       case 3:
-        GlobalVariableController.homeTileList = parentList;
+        GlobalVariable.homeTileList = parentList;
         Get.offAndToNamed(Routes.HOME, arguments: {
-          'homeListTile': GlobalVariableController.homeTileList,
+          'homeListTile': GlobalVariable.homeTileList,
         });
         break;
       case 4:
-        GlobalVariableController.homeTileList = teacherList;
+        GlobalVariable.homeTileList = teacherList;
         Get.offAndToNamed(Routes.DASHBOARD, arguments: {
-          'homeListTile': GlobalVariableController.homeTileList,
+          'homeListTile': GlobalVariable.homeTileList,
         });
         break;
       case 5:
-        GlobalVariableController.homeTileList = adminList;
+        GlobalVariable.homeTileList = adminList;
         Get.offAndToNamed(Routes.HOME, arguments: {
-          'homeListTile': GlobalVariableController.homeTileList,
+          'homeListTile': GlobalVariable.homeTileList,
         });
         break;
       case 9:
-        GlobalVariableController.homeTileList = adminList;
+        GlobalVariable.homeTileList = adminList;
         Get.offAndToNamed(Routes.HOME, arguments: {
-          'homeListTile': GlobalVariableController.homeTileList,
+          'homeListTile': GlobalVariable.homeTileList,
         });
         break;
     }

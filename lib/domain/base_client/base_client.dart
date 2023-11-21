@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 import '../../app/data/constants/app_text.dart';
@@ -13,6 +14,7 @@ class BaseClient {
     required String url,
     required Map<String, String> header,
   }) async {
+    debugPrint('Get Request: $url');
     try {
       final response = await http
           .get(
@@ -38,6 +40,7 @@ class BaseClient {
     required String url,
     required Map<String, String> header,
   }) async {
+    debugPrint('Post Request: $url');
     try {
       final response = await http
           .post(
@@ -64,6 +67,7 @@ class BaseClient {
     required String url,
     required Map<String, String> header,
   }) async {
+    debugPrint('Delete Request: $url');
     try {
       final response = await http
           .delete(
@@ -89,6 +93,7 @@ class BaseClient {
     required String url,
     required Map<String, String> header,
   }) async {
+    debugPrint('Put Request: $url');
     try {
       final response = await http
           .put(

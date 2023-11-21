@@ -17,8 +17,8 @@ class DormitoryController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentDormitory(studentId: GlobalVariableController.studentId!),
-        header: GlobalVariableController.header,
+        url: InfixApi.getStudentDormitory(studentId: GlobalVariable.studentId!),
+        header: GlobalVariable.header,
       );
 
       DormitoryResponseModel dormitoryResponseModel = DormitoryResponseModel.fromJson(response);
@@ -42,7 +42,7 @@ class DormitoryController extends GetxController {
 
   @override
   void onInit() {
-    if(GlobalVariableController.roleId == 2){
+    if(GlobalVariable.roleId == 2){
       getDormitoryList();
     }
 

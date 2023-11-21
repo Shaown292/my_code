@@ -41,7 +41,7 @@ class ResultController extends GetxController {
         final response = await BaseClient().getData(
           url: InfixApi.getStudentExamResultList(
               examId: examId, recordId: recordId),
-          header: GlobalVariableController.header,
+          header: GlobalVariable.header,
         );
 
         StudentExamResultResponseModel studentExamResultResponseModel =

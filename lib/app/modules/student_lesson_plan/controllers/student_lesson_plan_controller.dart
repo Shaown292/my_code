@@ -52,7 +52,7 @@ class StudentLessonPlanController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentLessonPlan(userId: userId, recordId: recordId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentLessonPlanResponseModel studentLessonPlanResponseModel =
@@ -103,7 +103,7 @@ class StudentLessonPlanController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentLessonPlanDetails(lessonPlanId: lessonPlanId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentLessonPlanDetailsResponseModel
@@ -313,7 +313,7 @@ class StudentLessonPlanController extends GetxController {
   void onInit() {
     selectTab();
     if (homeController.studentRecordList.isNotEmpty) {
-      getLessonPlanList(GlobalVariableController.userId!,
+      getLessonPlanList(GlobalVariable.userId!,
           homeController.studentRecordList[0].id);
     }
     super.onInit();

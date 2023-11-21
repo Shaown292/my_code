@@ -23,7 +23,7 @@ class ExamResultController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentOnlineExamResult(studentId: studentId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentOnlineExamResultResponseModel
@@ -52,8 +52,8 @@ class ExamResultController extends GetxController {
   
   @override
   void onInit() {
-    if(GlobalVariableController.studentId != null){
-      getStudentExamResultList(studentId: GlobalVariableController.studentId!);
+    if(GlobalVariable.studentId != null){
+      getStudentExamResultList(studentId: GlobalVariable.studentId!);
     }
 
     super.onInit();

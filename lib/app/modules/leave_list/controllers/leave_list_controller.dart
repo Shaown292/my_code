@@ -38,7 +38,7 @@ class LeaveListController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentLeaveList(studentId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       LeaveListResponseModel leaveListResponseModel =
@@ -87,7 +87,7 @@ class LeaveListController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentRemainingLeave(studentId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
     RemainingLeaveResponseModel remainingLeaveResponseModel = RemainingLeaveResponseModel.fromJson(response);
@@ -231,8 +231,8 @@ class LeaveListController extends GetxController {
   @override
   void onInit() {
     if (homeController.studentRecordList.isNotEmpty) {
-      getAllNoticeList(studentId: GlobalVariableController.studentId!);
-      getRemainingLeave(studentId: GlobalVariableController.studentId!);
+      getAllNoticeList(studentId: GlobalVariable.studentId!);
+      getRemainingLeave(studentId: GlobalVariable.studentId!);
     }
     super.onInit();
   }

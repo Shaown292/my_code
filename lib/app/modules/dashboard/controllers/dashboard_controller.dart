@@ -17,11 +17,11 @@ class DashboardController extends GetxController {
     navItem(icon :FontAwesomeIcons.house, title:'Home'),
     navItem(icon :FontAwesomeIcons.bell, title:'Notification', isNotification: true),
 
-    GlobalVariableController.roleId == 4 ? navItemWithImageIcon(imagePath: ImagePath.studentAttendance, title: 'Attendance')
+    GlobalVariable.roleId == 4 ? navItemWithImageIcon(imagePath: ImagePath.studentAttendance, title: 'Attendance')
         : navItemWithImageIcon(imagePath: ImagePath.studentWallet, title: 'Fees'),
 
-    GlobalVariableController.roleId == 4 ? navItem(icon : FontAwesomeIcons.userGraduate, title:  'Academic') : navItem(icon : FontAwesomeIcons.clipboardList, title:  'Routine'),
-    GlobalVariableController.roleId == 4 ? navItem(icon : FontAwesomeIcons.book, title: 'Homework') : navItem(icon : FontAwesomeIcons.user, title: 'Profile'),
+    GlobalVariable.roleId == 4 ? navItem(icon : FontAwesomeIcons.userGraduate, title:  'Academic') : navItem(icon : FontAwesomeIcons.clipboardList, title:  'Routine'),
+    GlobalVariable.roleId == 4 ? navItem(icon : FontAwesomeIcons.book, title: 'Homework') : navItem(icon : FontAwesomeIcons.user, title: 'Profile'),
   ];
 }
 
@@ -87,7 +87,7 @@ class NotificationBell extends StatelessWidget {
             ),
             child:  Center(
               child: Obx(() => Text(
-                '${notificationCountController.notificationCount}',
+                '${globalRxVariableController.notificationCount}',
                 style: const TextStyle(
                     decoration: TextDecoration.none,
                     fontSize: 12,

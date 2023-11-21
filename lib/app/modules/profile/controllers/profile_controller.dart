@@ -49,7 +49,7 @@ class ProfileController extends GetxController {
     try {
       final res = await BaseClient().getData(
         url: InfixApi.profilePersonal(),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       ProfilePersonalModel profilePersonalModel =
@@ -89,7 +89,7 @@ class ProfileController extends GetxController {
     try {
       final response = await BaseClient().getData(
         url: InfixApi.profileParents(),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       ProfileParentsModel profileParentsModel =
@@ -117,7 +117,7 @@ class ProfileController extends GetxController {
     try {
       final response = await BaseClient().getData(
         url: InfixApi.profileTransport(),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       ProfileTransportModel profileTransportModel =
@@ -145,7 +145,7 @@ class ProfileController extends GetxController {
     try {
       final response = await BaseClient().getData(
           url: InfixApi.profileOthers(),
-          header: GlobalVariableController.header);
+          header: GlobalVariable.header);
 
       ProfileOthersModel profileOthersModel =
           ProfileOthersModel.fromJson(response);
@@ -173,7 +173,7 @@ class ProfileController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.profileDocumentGet(),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentDocumentsResponseModel studentDocumentsResponseModel =
@@ -352,14 +352,14 @@ class ProfileController extends GetxController {
       isLoading.value = true;
       final request = http.MultipartRequest(
           'POST', Uri.parse(InfixApi.studentUploadDocuments));
-      request.headers['Authorization'] = GlobalVariableController.token!;
+      request.headers['Authorization'] = GlobalVariable.token!;
 
       if (file.value.path.isNotEmpty) {
         request.files
             .add(await http.MultipartFile.fromPath('photo', file.value.path));
       }
 
-      request.fields['student_id'] = '${GlobalVariableController.studentId!}';
+      request.fields['student_id'] = '${GlobalVariable.studentId!}';
       request.fields['title'] = titleTextController.text;
 
       final response = await request.send();
@@ -396,7 +396,7 @@ class ProfileController extends GetxController {
   Future<void> deleteDocument(
       {required int documentId, required int index}) async {
     try {
-      var headers = GlobalVariableController.header;
+      var headers = GlobalVariable.header;
       var request = http.MultipartRequest('GET',
           Uri.parse(InfixApi.profileDocumentDelete(documentId: documentId)));
 

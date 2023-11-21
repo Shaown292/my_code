@@ -20,9 +20,9 @@ class AssignmentController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getAssignmentList(
-          GlobalVariableController.studentRecordId!,
+          GlobalVariable.studentRecordId!,
         ),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentAssignmentResponseModel studentAssignmentResponseModel = StudentAssignmentResponseModel.fromJson(response);

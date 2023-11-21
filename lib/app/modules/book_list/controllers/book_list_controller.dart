@@ -32,7 +32,7 @@ class BookListController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.bookList,
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       BookListResponseModel bookListResponsiveModel = BookListResponseModel.fromJson(response);
@@ -130,7 +130,7 @@ class BookListController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getBookSearch(bookName: bookName),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       BookSearchModel bookSearchModel = BookSearchModel.fromJson(response);

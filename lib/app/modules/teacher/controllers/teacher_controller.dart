@@ -25,7 +25,7 @@ class TeacherController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentTeacherList(recordId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       TeacherResponseModel teacherResponseModel = TeacherResponseModel.fromJson(response);

@@ -45,7 +45,7 @@ class ExaminationController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentExamList(recordId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       ExamDropdownResponseModel examDropdownResponseModel =

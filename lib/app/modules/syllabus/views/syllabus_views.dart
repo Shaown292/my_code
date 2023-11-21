@@ -5,6 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_do
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../utilities/message/snack_bars.dart';
@@ -23,7 +24,7 @@ class SyllabusView extends GetView<SyllabusController> {
         body: CustomBackground(
           customWidget: controller.loadingController.isLoading
               ? const LoadingWidget()
-              : ListView.builder(
+              : controller.syllabusList.isNotEmpty ? ListView.builder(
                   itemCount: controller.syllabusList.length,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, int index) => SyllabusTopicWise(
@@ -55,7 +56,7 @@ class SyllabusView extends GetView<SyllabusController> {
                       );
                     },
                   ),
-                ),
+                ) : const NoDataAvailableWidget(),
         ),
       ),
     );

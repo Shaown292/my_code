@@ -21,7 +21,7 @@ class ActiveExamController extends GetxController {
       if (homeController.studentRecordList.isNotEmpty) {
         final response = await BaseClient().getData(
           url: InfixApi.getStudentOnlineActiveExam(recordId: recordId),
-          header: GlobalVariableController.header,
+          header: GlobalVariable.header,
         );
 
         StudentOnlineActiveExamResponseModel

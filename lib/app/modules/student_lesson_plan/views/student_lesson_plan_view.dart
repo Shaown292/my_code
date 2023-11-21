@@ -55,7 +55,7 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                             int recordId = controller.homeController
                                 .studentRecordList[index].id;
                             controller.getLessonPlanList(
-                                GlobalVariableController.userId!,
+                                GlobalVariable.userId!,
                                 recordId);
                             controller.selectIndex.value = index;
                           },

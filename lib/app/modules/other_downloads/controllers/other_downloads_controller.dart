@@ -19,9 +19,9 @@ class OtherDownloadsController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentOthersDownloadList(
-          GlobalVariableController.studentRecordId!,
+          GlobalVariable.studentRecordId!,
         ),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentOthersDownloadResponseModel studentOthersDownloadResponseModel = StudentOthersDownloadResponseModel.fromJson(response);

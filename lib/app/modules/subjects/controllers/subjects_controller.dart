@@ -23,7 +23,7 @@ class SubjectsController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentSubjects(recordId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
      SubjectResponseModel subjectResponseModel = SubjectResponseModel.fromJson(response);

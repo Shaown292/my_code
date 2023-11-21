@@ -55,7 +55,7 @@ class StudentSearchAttendanceView
                                               recordId:
                                                   controller.recordId.toInt(),
                                               studentId:
-                                                  GlobalVariableController
+                                                  GlobalVariable
                                                       .studentId!);
                                         },
                                         isSelected:
@@ -77,14 +77,14 @@ class StudentSearchAttendanceView
                               controller.getSearchSubjectAttendanceListWithDate(
                                   recordId: controller.recordId.toInt(),
                                   studentId:
-                                      GlobalVariableController.studentId!,
+                                      GlobalVariable.studentId!,
                                   year: date.year,
                                   month: date.month,
                                   subjectId: controller.subjectId!);
                             } else {
                               controller.getAttendanceListWithDate(
                                 recordId: controller.recordId.toInt(),
-                                studentId: GlobalVariableController.studentId!,
+                                studentId: GlobalVariable.studentId!,
                                 year: date.year,
                                 month: date.month,
                               );

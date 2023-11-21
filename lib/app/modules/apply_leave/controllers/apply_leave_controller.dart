@@ -38,8 +38,8 @@ class ApplyLeaveController extends GetxController {
       isLoading.value = true;
       final response = await BaseClient().getData(
         url: InfixApi.getStudentApplyLeaveType(
-            roleId: GlobalVariableController.roleId!),
-        header: GlobalVariableController.header,
+            roleId: GlobalVariable.roleId!),
+        header: GlobalVariable.header,
       );
 
       StudentApplyLeaveTypeResponseModel studentApplyLeaveTypeResponseModel =
@@ -137,7 +137,7 @@ class ApplyLeaveController extends GetxController {
       loadingController.isLoading = true;
       final request =
           http.MultipartRequest('POST', Uri.parse(InfixApi.studentApplyLeave));
-      request.headers['Authorization'] = GlobalVariableController.token!;
+      request.headers['Authorization'] = GlobalVariable.token!;
 
       if (file.value.path.isNotEmpty) {
         request.files.add(
@@ -148,7 +148,7 @@ class ApplyLeaveController extends GetxController {
       request.fields['leave_from'] = fromDateTextController.text;
       request.fields['leave_to'] = toDateTextController.text;
       request.fields['reason'] = reasonTextController.text;
-      request.fields['student_id'] = '${GlobalVariableController.studentId!}';
+      request.fields['student_id'] = '${GlobalVariable.studentId!}';
       request.fields['leave_type'] = '$leaveTypeId';
 
       final response = await request.send();
@@ -178,7 +178,7 @@ class ApplyLeaveController extends GetxController {
 
   @override
   void onInit() {
-    getStudentApplyLeaveTypeList(recordId: GlobalVariableController.roleId!);
+    getStudentApplyLeaveTypeList(recordId: GlobalVariable.roleId!);
     super.onInit();
   }
 }

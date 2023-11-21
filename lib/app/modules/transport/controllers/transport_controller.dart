@@ -26,7 +26,7 @@ class TransportController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentTransport(studentId: studentId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
 
@@ -110,7 +110,7 @@ class TransportController extends GetxController {
   }
   @override
   void onInit() {
-    getAllTransportList(studentId: GlobalVariableController.studentId!);
+    getAllTransportList(studentId: GlobalVariable.studentId!);
     super.onInit();
   }
 

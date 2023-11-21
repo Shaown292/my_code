@@ -33,9 +33,9 @@ class LeaveListView extends GetView<LeaveListController> {
                   controller.approvedList.clear();
                   controller.rejectedList.clear();
                   controller.getRemainingLeave(
-                      studentId: GlobalVariableController.studentId!);
+                      studentId: GlobalVariable.studentId!);
                   controller.getAllNoticeList(
-                      studentId: GlobalVariableController.studentId!);
+                      studentId: GlobalVariable.studentId!);
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

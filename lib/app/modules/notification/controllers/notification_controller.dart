@@ -33,7 +33,7 @@ class NotificationController extends GetxController {
     try {
       final res = await BaseClient().getData(
         url: "https://spondan.com/infixedu/api/v2/all-notification-list",
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
 
       );
 
@@ -43,7 +43,7 @@ class NotificationController extends GetxController {
       if (notificationModel.success == true) {
         AuthDatabase authDatabase = AuthDatabase.instance;
         authDatabase.saveUnReadNotification(unReadNotification: notificationModel.data?.unreadNotificationsCount ?? 0);
-        notificationCountController.notificationCount.value = notificationModel.data?.unreadNotificationsCount ?? 0;
+        globalRxVariableController.notificationCount.value = notificationModel.data?.unreadNotificationsCount ?? 0;
         if (notificationModel.data?.unreadNotifications != null && notificationModel.data!.unreadNotifications!.isNotEmpty) {
           for (int i = 0; i < notificationModel.data!.unreadNotifications!.length; i++) {
             unReadNotificationList.add(notificationModel.data!.unreadNotifications![i]);
@@ -69,13 +69,13 @@ class NotificationController extends GetxController {
 
     try{
       loadingController.isLoading = true;
-      final response = await BaseClient().getData(url: InfixApi.readAllNotification(GlobalVariableController.roleId.toString()), header: GlobalVariableController.header,);
+      final response = await BaseClient().getData(url: InfixApi.readAllNotification(GlobalVariable.roleId.toString()), header: GlobalVariable.header,);
 
     DefaultResponseModel defaultResponseModel = DefaultResponseModel.fromJson(response);
 
       if(defaultResponseModel.success == true){
         unReadNotificationList.clear();
-        notificationCountController.notificationCount.value = 0;
+        globalRxVariableController.notificationCount.value = 0;
         authDatabase.saveUnReadNotification(unReadNotification: 0);
       }
 

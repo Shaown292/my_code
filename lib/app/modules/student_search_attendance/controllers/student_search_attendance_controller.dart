@@ -68,7 +68,7 @@ class StudentSearchAttendanceController extends GetxController {
       final response = await BaseClient().getData(
         url: InfixApi.getStudentAttendance(
             recordId: recordId, studentId: studentId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentAttendanceResponseModel attendanceResponseModel =
@@ -130,7 +130,7 @@ class StudentSearchAttendanceController extends GetxController {
           year: year,
           month: month,
         ),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentAttendanceResponseModel attendanceResponseModel =
@@ -189,7 +189,7 @@ class StudentSearchAttendanceController extends GetxController {
       final response = await BaseClient().getData(
         url: InfixApi.getStudentSubjectSearchAttendance(
             recordId: recordId, studentId: studentId, subjectId: subjectId),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentAttendanceResponseModel attendanceResponseModel =
@@ -258,7 +258,7 @@ class StudentSearchAttendanceController extends GetxController {
           month: month,
           subjectId: subjectId,
         ),
-        header: GlobalVariableController.header,
+        header: GlobalVariable.header,
       );
 
       StudentAttendanceResponseModel attendanceResponseModel =
@@ -316,13 +316,13 @@ class StudentSearchAttendanceController extends GetxController {
 
       getSearchSubjectAttendanceList(
               recordId: recordId.toInt(),
-              studentId: GlobalVariableController.studentId!,
+              studentId: GlobalVariable.studentId!,
               subjectId: subjectId!)
           .then((value) => setEventData());
     } else {
       getAttendanceList(
               recordId: recordId.toInt(),
-              studentId: GlobalVariableController.studentId!)
+              studentId: GlobalVariable.studentId!)
           .then((value) => setEventData());
     }
 
