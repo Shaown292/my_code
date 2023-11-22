@@ -44,7 +44,7 @@ class SuggestedSearchTile extends StatelessWidget {
                     width: 8,
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColors.activeStatusColor),
+                        color: AppColors.activeStatusGreenColor),
                   ), //Icon
                 ),
               ], //<Widget>[]
