@@ -9,6 +9,7 @@ import '../../../../utilities/widgets/common_widgets/custom_divider.dart';
 class CustomCardTile extends StatelessWidget {
   final String icon;
   final String title;
+  final Color? iconColor;
   final bool isSelected;
   final Function() onTap;
 
@@ -18,6 +19,7 @@ class CustomCardTile extends StatelessWidget {
     required this.title,
     required this.isSelected,
     required this.onTap,
+    this.iconColor,
   });
 
   @override
@@ -50,7 +52,7 @@ class CustomCardTile extends StatelessWidget {
                     height: 74,
                     decoration: ShapeDecoration(
                       color:
-                      isSelected ? Colors.white : AppColors.smallCardColor,
+                          isSelected ? Colors.white : AppColors.smallCardColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppDimens.radius3),
                       ),
@@ -60,6 +62,7 @@ class CustomCardTile extends StatelessWidget {
                         icon,
                         height: 40,
                         width: 40,
+                        color: iconColor,
                       ),
                     ),
                   ),
@@ -84,4 +87,3 @@ class CustomCardTile extends StatelessWidget {
     );
   }
 }
-

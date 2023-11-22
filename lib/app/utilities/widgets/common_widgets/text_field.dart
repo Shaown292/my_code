@@ -38,7 +38,8 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     this.contentPadding,
     this.hintTextStyle,
-    this.inputBorder, this.prefixIcon,
+    this.inputBorder,
+    this.prefixIcon,
   });
 
   @override
@@ -64,15 +65,17 @@ class CustomTextFormField extends StatelessWidget {
             focusedBorder: focusBorderActive
                 ? OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: const Color(0xFF635976).withOpacity(0.2)),
+                      color: const Color(0xFF635976).withOpacity(0.2),
+                    ),
                     borderRadius: BorderRadius.circular(8.0),
                   )
                 : null,
             enabledBorder: enableBorderActive
                 ? OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: enableBorderActiveColor ??
-                            const Color(0xFF635976).withOpacity(0.2)),
+                      color: enableBorderActiveColor ??
+                          const Color(0xFF635976).withOpacity(0.2),
+                    ),
                     borderRadius: BorderRadius.circular(8.0),
                   )
                 : null,

@@ -55,6 +55,9 @@ abstract class Routes {
   static const SINGLE_CHAT = _Paths.SINGLE_CHAT;
   static const STUDENT_CLASS = _Paths.STUDENT_CLASS;
   static const ADMIN_LEAVE = _Paths.ADMIN_LEAVE;
+  static const ADMIN_DORMITORY = _Paths.ADMIN_DORMITORY;
+  static const ADMIN_ADD_DORMITORY = _Paths.ADMIN_ADD_DORMITORY;
+  static const ADMIN_ADD_ROOM = _Paths.ADMIN_ADD_ROOM;
 }
 
 abstract class _Paths {
@@ -109,4 +112,7 @@ abstract class _Paths {
   static const SINGLE_CHAT = '/single-chat';
   static const STUDENT_CLASS = '/student-class';
   static const ADMIN_LEAVE = '/admin-leave';
+  static const ADMIN_DORMITORY = '/admin-dormitory';
+  static const ADMIN_ADD_DORMITORY = '/admin-add-dormitory';
+  static const ADMIN_ADD_ROOM = '/admin-add-room';
 }

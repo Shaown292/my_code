@@ -155,6 +155,15 @@ class AppFunctions {
       case 'Leave':
         Get.toNamed(Routes.ADMIN_LEAVE);
         break;
+      case 'Dormitory':
+        Get.toNamed(Routes.ADMIN_DORMITORY);
+        break;
+      case 'Add Dormitory':
+        Get.toNamed(Routes.ADMIN_ADD_DORMITORY);
+        break;
+      case 'Add Room':
+        Get.toNamed(Routes.ADMIN_ADD_ROOM);
+        break;
     }
   }
 

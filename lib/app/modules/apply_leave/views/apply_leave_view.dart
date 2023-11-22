@@ -29,24 +29,20 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                         ? const CircularProgressIndicator(
                             color: AppColors.primaryColor,
                           )
-                        : Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20, right: 20, top: 0),
-                            child: CustomDropdown(
-                              dropdownValue: controller.dropdownValue.value,
-                              scheduleList: controller.leaveTypeDropdownList
-                                  .map((item) => item.toString())
-                                  .toList(),
-                              changeDropdownValue: (v) {
-                                controller.dropdownValue.value = v!;
-                                controller.leaveTypeId.value = controller
-                                    .applyLeaveTypeList[controller
-                                        .leaveTypeDropdownList
-                                        .indexOf(v)]
-                                    .id!;
-                              },
-                            ),
-                          ),
+                        : CustomDropdown(
+                          dropdownValue: controller.dropdownValue.value,
+                          scheduleList: controller.leaveTypeDropdownList
+                              .map((item) => item.toString())
+                              .toList(),
+                          changeDropdownValue: (v) {
+                            controller.dropdownValue.value = v!;
+                            controller.leaveTypeId.value = controller
+                                .applyLeaveTypeList[controller
+                                    .leaveTypeDropdownList
+                                    .indexOf(v)]
+                                .id!;
+                          },
+                        ),
                     10.verticalSpacing,
 
                     /// Text Field

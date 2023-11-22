@@ -2,6 +2,12 @@ import 'package:get/get.dart';
 
 import '../modules/active_exam/bindings/active_exam_binding.dart';
 import '../modules/active_exam/views/active_exam_view.dart';
+import '../modules/admin_add_dormitory/bindings/admin_add_dormitory_binding.dart';
+import '../modules/admin_add_dormitory/views/admin_add_dormitory_view.dart';
+import '../modules/admin_add_room/bindings/admin_add_room_binding.dart';
+import '../modules/admin_add_room/views/admin_add_room_view.dart';
+import '../modules/admin_dormitory/bindings/admin_dormitory_binding.dart';
+import '../modules/admin_dormitory/views/admin_dormitory_view.dart';
 import '../modules/admin_leave/bindings/admin_leave_binding.dart';
 import '../modules/admin_leave/views/admin_leave_view.dart';
 import '../modules/apply_leave/bindings/apply_leave_binding.dart';
@@ -392,6 +398,21 @@ class AppPages {
       name: _Paths.ADMIN_LEAVE,
       page: () => const AdminLeaveView(),
       binding: AdminLeaveBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_DORMITORY,
+      page: () => const AdminDormitoryView(),
+      binding: AdminDormitoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ADD_DORMITORY,
+      page: () => const AdminAddDormitoryView(),
+      binding: AdminAddDormitoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ADD_ROOM,
+      page: () => const AdminAddRoomView(),
+      binding: AdminAddRoomBinding(),
     ),
   ];
 }

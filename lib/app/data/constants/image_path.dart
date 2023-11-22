@@ -128,5 +128,9 @@ class ImagePath {
 
   /// Teacher
   static String teacher           = "assets/images/teacher.png";
+
+
+  //// Admin
+  static String add              = "assets/images/add.png";
 }
 

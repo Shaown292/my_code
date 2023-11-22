@@ -18,47 +18,61 @@ class CustomDropdown extends StatelessWidget {
     this.changeDropdownValue,
     this.color,
     this.dropdownColor,
-    this.dropdownText = true, this.activeStatusColor,
+    this.dropdownText = true,
+    this.activeStatusColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonHideUnderline(
-      child: DropdownButton<String>(
-          isExpanded: true,
-          items: scheduleList!
-              .map(
-                (String item) => DropdownMenuItem<String>(
-                  value: item,
-                  child: dropdownText  ? Text(
-                    item,
-                    style: AppTextStyle.fontSize14lightViolateW400,
-                    overflow: TextOverflow.ellipsis,
-                  ) : Row(
-                    children: [
-                      Container(
-                        height: 8,
-                        width: 8,
-                        decoration:   BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: activeStatusColor ),
-                      ),
-                      10.horizontalSpacing,
-                      Text(
-                        item,
-                        style:  AppTextStyle.cardTextStyle14WhiteW500,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-              )
-              .toList(),
-          value: dropdownValue,
-          iconSize: 26,
-          dropdownColor: dropdownColor,
-          iconEnabledColor: color ?? const Color(0xFFA6ABCE),
-          onChanged: changeDropdownValue),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: const Color(0xFF635976).withOpacity(0.2),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+              isExpanded: true,
+              items: scheduleList!
+                  .map(
+                    (String item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: dropdownText
+                          ? Text(
+                              item,
+                              style: AppTextStyle.fontSize14lightViolateW400,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          : Row(
+                              children: [
+                                Container(
+                                  height: 8,
+                                  width: 8,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: activeStatusColor),
+                                ),
+                                10.horizontalSpacing,
+                                Text(
+                                  item,
+                                  style: AppTextStyle.cardTextStyle14WhiteW500,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                    ),
+                  )
+                  .toList(),
+              value: dropdownValue,
+              iconSize: 26,
+              dropdownColor: dropdownColor,
+              iconEnabledColor: color ?? const Color(0xFFA6ABCE),
+              onChanged: changeDropdownValue),
+        ),
+      ),
     );
   }
 }
