@@ -68,7 +68,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                     leaveUntil: "12-03-2023",
                                     statusText: "Pending",
                                     statusColor: AppColors
-                                        .activeExamStatusBlueColor,
+                                        .activeStatusYellowColor,
                                     onTap: () {
                                       controller
                                           .showPendingListDetailsBottomSheet(
@@ -95,7 +95,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                     leaveUntil: "12-03-2023",
                                     statusText: "Approved",
                                     statusColor: AppColors
-                                        .activeExamStatusBlueColor,
+                                        .activeStatusGreenColor,
                                     onTap: () {
                                       controller
                                           .showApprovedListDetailsBottomSheet(
@@ -116,13 +116,13 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                               return Column(
                                 children: [
                                   AppliedLeaveDetailsTile(
-                                    leaveType: "",
-                                    applyDate: "",
-                                    leaveFrom: "",
-                                    leaveUntil: "",
-                                    statusText: "",
+                                    leaveType: "Sick",
+                                    applyDate: "12-03-2023",
+                                    leaveFrom: "12-03-2023",
+                                    leaveUntil: "12-03-2023",
+                                    statusText: "Rejected",
                                     statusColor: AppColors
-                                        .activeExamStatusBlueColor,
+                                        .activeStatusRedColor,
                                     onTap: () {
                                       controller
                                           .showRejectedListDetailsBottomSheet(
