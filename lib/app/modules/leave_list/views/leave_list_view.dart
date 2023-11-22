@@ -135,9 +135,9 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .pendingList[index].applyDate,
                                               leaveFrom: controller
                                                   .pendingList[index].from,
-                                              leaveUntil: controller
+                                              leaveTo: controller
                                                   .pendingList[index].to,
-                                              statusText: controller
+                                              approveStatus: controller
                                                   .pendingList[index].status,
                                               statusColor: AppColors
                                                   .activeExamStatusBlueColor,
@@ -174,9 +174,9 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .applyDate,
                                               leaveFrom: controller
                                                   .approvedList[index].from,
-                                              leaveUntil: controller
+                                              leaveTo: controller
                                                   .approvedList[index].to,
-                                              statusText: controller
+                                              approveStatus: controller
                                                   .approvedList[index].status,
                                               statusColor:
                                                   AppColors.primaryColor,
@@ -213,9 +213,9 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .applyDate,
                                               leaveFrom: controller
                                                   .rejectedList[index].from,
-                                              leaveUntil: controller
+                                              leaveTo: controller
                                                   .rejectedList[index].to,
-                                              statusText: controller
+                                              approveStatus: controller
                                                   .rejectedList[index].status,
                                               onTap: () {
                                                 controller

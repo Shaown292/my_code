@@ -195,8 +195,20 @@ class InfixApi {
   static String forgetPassword = "${baseApi}forget-password";
 
 
-  //// Admin
+
+
+
+
+
+
+
+
+  //// .....................................................For Admin Module.....................................................
+
   static String getAdminStaffRoleList = '${baseApi}role-list';
+  static String getAdminPendingLeaveList = '${baseApi}pending-leave-list';
+  static String getAdminApproveLeaveList = '${baseApi}approve-leave-list';
+  static String getAdminRejectedLeaveList = '${baseApi}rejected-leave-list';
 
 
   static String getAdminRoleWiseStaff({required int staffRoleId}) =>
@@ -204,6 +216,23 @@ class InfixApi {
 
   static String getAdminStaffIndividualData({required int staffIndividualId}) =>
       '${baseApi}individual-staff-details/$staffIndividualId';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {

@@ -7,6 +7,8 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/applied_leave_d
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:get/get.dart';
 
 class AdminLeaveView extends GetView<AdminLeaveController> {
@@ -20,125 +22,198 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
         title: "Leave List",
         body: SingleChildScrollView(
           child: CustomBackground(
-            customWidget: RefreshIndicator(
-              onRefresh: () async {},
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: TabBar(
-                      labelColor: AppColors.profileValueColor,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      dividerHeight: 0,
-                      unselectedLabelColor: Colors.black,
-                      unselectedLabelStyle:
-                      AppTextStyle.fontSize12LightGreyW500,
-                      indicatorColor: AppColors.profileIndicatorColor,
-                      controller: controller.tabController,
-                      tabs: List.generate(
-                        controller.status.length,
-                            (index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Text(
-                            controller.status[index],
-                          ),
+            customWidget: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: TabBar(
+                    labelColor: AppColors.profileValueColor,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    dividerHeight: 0,
+                    unselectedLabelColor: Colors.black,
+                    unselectedLabelStyle: AppTextStyle.fontSize12LightGreyW500,
+                    indicatorColor: AppColors.profileIndicatorColor,
+                    controller: controller.tabController,
+                    tabs: List.generate(
+                      controller.status.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          controller.status[index],
                         ),
                       ),
                     ),
                   ),
-                  10.verticalSpacing,
-                  Expanded(
-                    child: TabBarView(
-                      controller: controller.tabController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        ///Pending
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return Column(
+                ),
+                10.verticalSpacing,
+                Expanded(
+                  child: TabBarView(
+                    controller: controller.tabController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      ///Pending
+                      Obx(
+                        () => controller.loadingController.isLoading
+                            ? const Column(
                                 children: [
-                                  AppliedLeaveDetailsTile(
-                                    leaveType: "Casual",
-                                    applyDate: "12-03-2023",
-                                    leaveFrom: "12-03-2023",
-                                    leaveUntil: "12-03-2023",
-                                    statusText: "Pending",
-                                    statusColor: AppColors
-                                        .activeStatusYellowColor,
-                                    onTap: () {
-                                      controller
-                                          .showPendingListDetailsBottomSheet(
-                                          index: index);
-                                    },
-                                  )
+                                  LoadingWidget(),
                                 ],
-                              );
-                            })
-                        ,
+                              )
+                            : controller.pendingLeaveList.isNotEmpty
+                                ? RefreshIndicator(
+                                    onRefresh: () async {
+                                      controller.getAdminPendingLeave();
+                                    },
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount:
+                                          controller.pendingLeaveList.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            AppliedLeaveDetailsTile(
+                                              leaveType: controller
+                                                  .pendingLeaveList[index].type,
+                                              applyDate: controller
+                                                  .pendingLeaveList[index]
+                                                  .applyDate,
+                                              leaveFrom: controller
+                                                  .pendingLeaveList[index]
+                                                  .leaveFrom,
+                                              leaveTo: controller
+                                                  .pendingLeaveList[index]
+                                                  .leaveTo,
+                                              approveStatus: controller
+                                                  .pendingLeaveList[index]
+                                                  .approveStatus,
+                                              statusColor: AppColors
+                                                  .activeStatusYellowColor,
+                                              onTap: () {
+                                                controller
+                                                    .showPendingListDetailsBottomSheet(
+                                                        index: index);
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : const NoDataAvailableWidget(),
+                      ),
 
-                        /// Approved
+                      /// Approved
 
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return Column(
+                      Obx(
+                        () => controller.loadingController.isLoading
+                            ? const Column(
                                 children: [
-                                  AppliedLeaveDetailsTile(
-                                    leaveType: "Sick",
-                                    applyDate: "12-03-2023",
-                                    leaveFrom: "12-03-2023",
-                                    leaveUntil: "12-03-2023",
-                                    statusText: "Approved",
-                                    statusColor: AppColors
-                                        .activeStatusGreenColor,
-                                    onTap: () {
-                                      controller
-                                          .showApprovedListDetailsBottomSheet(
-                                          index: index);
-                                    },
-                                  )
+                                  LoadingWidget(),
                                 ],
-                              );
-                            }),
+                              )
+                            : controller.approveLeaveList.isNotEmpty
+                                ? RefreshIndicator(
+                                    onRefresh: () async {
+                                      controller.getAdminApproveLeave(
+                                          isLoader: true);
+                                    },
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            controller.approveLeaveList.length,
+                                        itemBuilder: (context, index) {
+                                          return Column(
+                                            children: [
+                                              AppliedLeaveDetailsTile(
+                                                leaveType: controller
+                                                    .approveLeaveList[index]
+                                                    .type,
+                                                applyDate: controller
+                                                    .approveLeaveList[index]
+                                                    .applyDate,
+                                                leaveFrom: controller
+                                                    .approveLeaveList[index]
+                                                    .leaveFrom,
+                                                leaveTo: controller
+                                                    .approveLeaveList[index]
+                                                    .leaveTo,
+                                                approveStatus: controller
+                                                    .approveLeaveList[index]
+                                                    .approveStatus,
+                                                statusColor: AppColors
+                                                    .activeStatusGreenColor,
+                                                onTap: () {
+                                                  controller
+                                                      .showApprovedListDetailsBottomSheet(
+                                                          index: index);
+                                                },
+                                              )
+                                            ],
+                                          );
+                                        }),
+                                  )
+                                : const NoDataAvailableWidget(),
+                      ),
 
+                      /// Rejected
 
-                        /// Rejected
-
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return Column(
+                      Obx(
+                        () => controller.loadingController.isLoading
+                            ? const Column(
                                 children: [
-                                  AppliedLeaveDetailsTile(
-                                    leaveType: "Sick",
-                                    applyDate: "12-03-2023",
-                                    leaveFrom: "12-03-2023",
-                                    leaveUntil: "12-03-2023",
-                                    statusText: "Rejected",
-                                    statusColor: AppColors
-                                        .activeStatusRedColor,
-                                    onTap: () {
-                                      controller
-                                          .showRejectedListDetailsBottomSheet(
-                                          index: index);
-                                    },
-                                  )
+                                  LoadingWidget(),
                                 ],
-                              );
-                            })
-
-                      ],
-                    ),
+                              )
+                            : controller.rejectedLeaveList.isNotEmpty
+                                ? RefreshIndicator(
+                                    onRefresh: () async {
+                                      controller.getAdminRejectedLeave(
+                                          isLoader: true);
+                                    },
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount:
+                                          controller.rejectedLeaveList.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            AppliedLeaveDetailsTile(
+                                              leaveType: controller
+                                                  .rejectedLeaveList[index]
+                                                  .type,
+                                              applyDate: controller
+                                                  .rejectedLeaveList[index]
+                                                  .applyDate,
+                                              leaveFrom: controller
+                                                  .rejectedLeaveList[index]
+                                                  .leaveFrom,
+                                              leaveTo: controller
+                                                  .rejectedLeaveList[index]
+                                                  .leaveTo,
+                                              approveStatus: controller
+                                                  .rejectedLeaveList[index]
+                                                  .approveStatus,
+                                              statusColor: AppColors
+                                                  .activeStatusRedColor,
+                                              onTap: () {
+                                                controller
+                                                    .showRejectedListDetailsBottomSheet(
+                                                        index: index);
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : const NoDataAvailableWidget(),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )
+                ),
+              ],
+            ),
           ),
         ),
       ),

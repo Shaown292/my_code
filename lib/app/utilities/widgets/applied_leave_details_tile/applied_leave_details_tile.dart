@@ -10,10 +10,10 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
   final Color? color;
   final Color? statusColor;
   final String? leaveType;
-  final String? statusText;
+  final String? approveStatus;
   final String? applyDate;
   final String? leaveFrom;
-  final String? leaveUntil;
+  final String? leaveTo;
   final String? status;
   final Function()? onTap;
 
@@ -23,10 +23,10 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
     this.leaveType,
     this.applyDate,
     this.leaveFrom,
-    this.leaveUntil,
+    this.leaveTo,
     this.status,
     this.statusColor,
-    this.statusText,
+    this.approveStatus,
     this.onTap,
   });
 
@@ -79,7 +79,7 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
               ),
               ColumnTile(
                 title: "To",
-                value: leaveUntil,
+                value: leaveTo,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,14 +90,14 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
                   ),
                   5.verticalSpacing,
                   Container(
-                    width: 70,
+                    width: 60,
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
                         color: statusColor ?? AppColors.homeworkStatusRedColor),
                     child: Center(
                       child: Text(
-                        statusText ?? "",
+                        approveStatus ?? "",
                         style: AppTextStyle.textStyle12WhiteW400,
                       ),
                     ),
