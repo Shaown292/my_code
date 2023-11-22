@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 
-import '../../../../data/constants/app_colors.dart';
-import '../../../../data/constants/app_text_style.dart';
-import '../../../../utilities/widgets/colum_tile/column_tile.dart';
-import '../../../../utilities/widgets/common_widgets/custom_divider.dart';
+import '../../../data/constants/app_colors.dart';
+import '../../../data/constants/app_text_style.dart';
+import '../colum_tile/column_tile.dart';
+import '../common_widgets/custom_divider.dart';
 
-class LeaveDetails extends StatelessWidget {
+class AppliedLeaveDetailsTile extends StatelessWidget {
   final Color? color;
   final Color? statusColor;
   final String? leaveType;
@@ -17,7 +17,7 @@ class LeaveDetails extends StatelessWidget {
   final String? status;
   final Function()? onTap;
 
-  const LeaveDetails({
+  const AppliedLeaveDetailsTile({
     super.key,
     this.color,
     this.leaveType,
@@ -90,6 +90,7 @@ class LeaveDetails extends StatelessWidget {
                   ),
                   5.verticalSpacing,
                   Container(
+                    width: 70,
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
@@ -97,7 +98,7 @@ class LeaveDetails extends StatelessWidget {
                     child: Center(
                       child: Text(
                         statusText ?? "",
-                        style: AppTextStyle.textStyle10WhiteW400,
+                        style: AppTextStyle.textStyle12WhiteW400,
                       ),
                     ),
                   )

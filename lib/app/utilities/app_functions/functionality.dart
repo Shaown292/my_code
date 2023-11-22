@@ -195,6 +195,9 @@ class AppFunctions {
       case 4:
         getTeacherHomeNavigation(title: title);
         break;
+      case 5:
+        getAdminHomeNavigation(title: title);
+        break;
     }
   }
 

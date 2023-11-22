@@ -18,7 +18,7 @@ class AppTextStyle {
 
   static const textStyle10WhiteW400 = TextStyle(
     color: Colors.white,
-    fontSize: 10,
+    fontSize: 11,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
   );

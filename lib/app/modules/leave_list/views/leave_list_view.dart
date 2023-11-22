@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/leave_list/views/widget/leave_details.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/applied_leave_details_tile/applied_leave_details_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -128,7 +128,7 @@ class LeaveListView extends GetView<LeaveListController> {
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
-                                            LeaveDetails(
+                                            AppliedLeaveDetailsTile(
                                               leaveType: controller
                                                   .pendingList[index].leaveType,
                                               applyDate: controller
@@ -165,7 +165,7 @@ class LeaveListView extends GetView<LeaveListController> {
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
-                                            LeaveDetails(
+                                            AppliedLeaveDetailsTile(
                                               leaveType: controller
                                                   .approvedList[index]
                                                   .leaveType,
@@ -204,7 +204,7 @@ class LeaveListView extends GetView<LeaveListController> {
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
-                                            LeaveDetails(
+                                            AppliedLeaveDetailsTile(
                                               leaveType: controller
                                                   .rejectedList[index]
                                                   .leaveType,
