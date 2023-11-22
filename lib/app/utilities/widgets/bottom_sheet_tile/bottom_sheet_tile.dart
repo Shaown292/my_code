@@ -64,7 +64,7 @@ class BottomSheetTile extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  width: Get.width * 0.3,
+                  width: Get.width * 0.35,
                   child: Text(
                     title ?? "",
                     style: AppTextStyle.fontSize12lightViolateW400,

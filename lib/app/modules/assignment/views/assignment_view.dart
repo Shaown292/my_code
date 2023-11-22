@@ -28,7 +28,11 @@ class AssignmentView extends GetView<AssignmentController> {
               children: [
                 CustomBackground(
                   customWidget: controller.loadingController.isLoading
-                      ? const LoadingWidget()
+                      ? const Column(
+                        children: [
+                          LoadingWidget(),
+                        ],
+                      )
                       : controller.studentAssignmentList.isNotEmpty
                           ? Column(
                               children: [

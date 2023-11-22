@@ -36,16 +36,19 @@ class OtherDownloadsTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomContainerWidget(
-                      padding: const EdgeInsets.all(10),
-                      color: const Color(0xFFF2F0F6),
-                      requiredWidget: Center(
-                        child: Text(
-                          contentTitle,
-                          style: AppTextStyle.fontSize14BlackW500,
+                    Flexible(
+                      child: CustomContainerWidget(
+                        padding: const EdgeInsets.all(10),
+                        color: const Color(0xFFF2F0F6),
+                        requiredWidget: Center(
+                          child: Text(
+                            contentTitle,
+                            style: AppTextStyle.fontSize14BlackW500,
+                          ),
                         ),
                       ),
                     ),
+                    10.horizontalSpacing,
                     Row(
                       children: [
                         const Text(

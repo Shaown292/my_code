@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/notice/views/widget/notice_card.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
@@ -15,51 +16,54 @@ class NoticeView extends GetView<NoticeController> {
 
   @override
   Widget build(BuildContext context) {
-    return InfixEduScaffold(
-      title: "Notice",
-      body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: CustomBackground(
-            customWidget: Obx(
-              () => RefreshIndicator(
-                color: AppColors.primaryColor,
-                onRefresh: () async {
-                  controller.allNoticeList.clear();
-                  controller.getAllNoticeList();
-                },
-                child: Column(
-                  children: [
-                    controller.loadingController.isLoading
-                        ? const LoadingWidget()
-                        : controller.allNoticeList.isNotEmpty
-                            ? ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: controller.allNoticeList.length,
-                                itemBuilder: (context, index) {
-                                  return NoticeCard(
-                                    noticeTitle: controller
-                                        .allNoticeList[index].noticeTitle,
-                                    noticeDetails: controller
-                                        .allNoticeList[index].noticeMessage,
-                                    noticeDate: controller
-                                        .allNoticeList[index].publishOn,
-                                      cardBackgroundColor: Colors.white,
-                                    onTap: () {
-                                      controller.showNoticeDetailsBottomSheet(
-                                          index: index,
-                                        bottomSheetBackgroundColor: Colors.white
-                                      );
-                                    },
-                                  );
-                                })
-                            : const Center(
-                                child: NoDataAvailableWidget(),
-                              ),
-                  ],
-                ),
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Notice",
+        body: CustomBackground(
+          customWidget: RefreshIndicator(
+            color: AppColors.primaryColor,
+            onRefresh: () async {
+              controller.allNoticeList.clear();
+              controller.getAllNoticeList();
+            },
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  controller.loadingController.isLoading
+                      ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,))
+                      : controller.allNoticeList.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: controller.allNoticeList.length,
+                              itemBuilder: (context, index) {
+                                return NoticeCard(
+                                  noticeTitle:
+                                      controller.allNoticeList[index].noticeTitle,
+                                  noticeDetails: controller
+                                      .allNoticeList[index].noticeMessage,
+                                  noticeDate:
+                                      controller.allNoticeList[index].publishOn,
+                                  cardBackgroundColor: Colors.white,
+                                  onTap: () {
+                                    controller.showNoticeDetailsBottomSheet(
+                                        index: index,
+                                        bottomSheetBackgroundColor: Colors.white);
+                                  },
+                                );
+                              })
+                          : const Center(
+                              child: NoDataAvailableWidget(),
+                            ),
+
+                  50.verticalSpacing,
+                ],
               ),
             ),
           ),
+        ),
       ),
     );
   }

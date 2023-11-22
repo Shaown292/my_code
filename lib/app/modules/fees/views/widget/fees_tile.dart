@@ -104,6 +104,7 @@ class FeesTile extends StatelessWidget {
                       ),
                       5.verticalSpacing,
                       Container(
+                        width: 65,
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(3),

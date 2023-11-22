@@ -81,46 +81,43 @@ class StudentSearchSubjectAttendanceView
               ),
               10.verticalSpacing,
               controller.subjectsController.loadingController.isLoading
-                  ? const LoadingWidget()
-                  : Expanded(
-                child: RefreshIndicator(
-                        onRefresh: () async {
-                          controller.subjectsController.getAllSubjectList(
-                            recordId: controller.recordId.toInt(),
-                          );
-                        },
-                        child:
-                            controller.subjectsController.subjectList.isNotEmpty
-                                ? ListView.builder(
-                                  itemCount: controller
-                                      .subjectsController.subjectList.length,
-                                  itemBuilder: (context, index) {
-                                    return SearchDetailsTile(
-                                      subject: controller.subjectsController
-                                          .subjectList[index].subject,
-                                      teacher: controller.subjectsController
-                                          .subjectList[index].teacher,
-                                      lectureType: controller
-                                          .subjectsController
-                                          .subjectList[index]
-                                          .type,
-                                      onTap: () {
-                                        Get.toNamed(
-                                            Routes.STUDENT_SEARCH_ATTENDANCE,
-                                            arguments: {
-                                              "subjectID": controller
-                                                  .subjectsController
-                                                  .subjectList[index]
-                                                  .id,
-                                              "from": true
-                                            });
-                                      },
-                                    );
+                  ? const CircularProgressIndicator()
+                  : controller.subjectsController.subjectList.isNotEmpty
+                      ? Expanded(
+                        child: RefreshIndicator(
+                            onRefresh: () async {
+                              controller.subjectsController.getAllSubjectList(
+                                recordId: controller.recordId.toInt(),
+                              );
+                            },
+                            child: ListView.builder(
+                              itemCount: controller
+                                  .subjectsController.subjectList.length,
+                              itemBuilder: (context, index) {
+                                return SearchDetailsTile(
+                                  subject: controller.subjectsController
+                                      .subjectList[index].subject,
+                                  teacher: controller.subjectsController
+                                      .subjectList[index].teacher,
+                                  lectureType: controller.subjectsController
+                                      .subjectList[index].type,
+                                  onTap: () {
+                                    Get.toNamed(
+                                        Routes.STUDENT_SEARCH_ATTENDANCE,
+                                        arguments: {
+                                          "subjectID": controller
+                                              .subjectsController
+                                              .subjectList[index]
+                                              .id,
+                                          "from": true
+                                        });
                                   },
-                                )
-                                : const NoDataAvailableWidget(),
-                      ),
-                  ),
+                                );
+                              },
+                            ),
+                          ),
+                      )
+                      : const NoDataAvailableWidget(),
             ],
           ),
         ),

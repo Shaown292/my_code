@@ -153,7 +153,7 @@ class AppFunctions {
         Get.toNamed(Routes.STAFF);
         break;
       case 'Leave':
-        Get.toNamed(Routes.LEAVE_LIST);
+        Get.toNamed(Routes.ADMIN_LEAVE);
         break;
     }
   }

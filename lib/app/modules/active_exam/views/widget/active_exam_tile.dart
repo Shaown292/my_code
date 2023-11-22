@@ -73,6 +73,7 @@ class ActiveExamTile extends StatelessWidget {
                   5.verticalSpacing,
                   activeStatus != null
                       ? Container(
+                    width: 60,
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(3),
