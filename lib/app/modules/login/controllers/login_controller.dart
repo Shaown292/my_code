@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
 import 'package:get/get.dart';
@@ -14,10 +15,13 @@ class LoginController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isObscureText = true.obs;
 
+  LoadingController loadingController = Get.find();
+
   void userLogin({required String email, required String password}) async {
     ProfileInfoModel profileInfoModel;
 
     try {
+      isLoading.value = true;
       final res = await BaseClient().postData(
         url: InfixApi.login(),
         header: {'Content-Type': 'application/json'},
@@ -60,7 +64,7 @@ class LoginController extends GetxController {
   void demoUserLogin({required int role}) async {
     ProfileInfoModel profileInfoModel;
     try {
-
+      isLoading.value = true;
       final response = await BaseClient().getData(
         url: InfixApi.demoLogin(role.toString()),
         header: {'Content-Type': 'application/json'},

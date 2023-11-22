@@ -155,12 +155,12 @@ class LoginView extends GetView<LoginController> {
                               60.verticalSpacing,
 
                               controller.isLoading.value
-                                  ? const CircularProgressIndicator()
+                                  ? const Center(child: CircularProgressIndicator())
                                   : PrimaryButton(
                                       onTap: () {
 
                                         if (validate()) {
-                                          controller.isLoading.value = true;
+                                          // controller.isLoading.value = true;
                                           controller.userLogin(
                                             email: emailTextController.text,
                                             password:
