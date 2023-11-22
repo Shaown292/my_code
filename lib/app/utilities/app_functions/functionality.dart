@@ -52,12 +52,8 @@ class AppFunctions {
   static void getStudentDashboardNavigation({required String title}) {
     debugPrint(title);
     switch (title) {
-      case 'Profile':
-        break;
       case 'Wallet':
         Get.toNamed(Routes.STUDENT_WALLET);
-        break;
-      case 'Routine':
         break;
       case 'Homework':
         Get.toNamed(Routes.STUDENT_HOMEWORK);
@@ -86,8 +82,6 @@ class AppFunctions {
       case 'Notice':
         Get.toNamed(Routes.NOTICE);
         break;
-      case 'Timeline':
-        break;
       case 'Examination':
         Get.toNamed(Routes.EXAMINATION);
         break;
@@ -104,6 +98,7 @@ class AppFunctions {
         Get.toNamed(Routes.STUDENT_LESSON_PLAN);
         break;
       case 'Class':
+        Get.toNamed(Routes.STUDENT_CLASS);
         break;
       case 'Assignment':
         Get.toNamed(Routes.ASSIGNMENT);
@@ -150,7 +145,30 @@ class AppFunctions {
 
     }
   }
+
   static void getAdminHomeNavigation({required String title}) {
+    debugPrint(title);
+    switch (title) {
+      case 'Staff':
+        Get.toNamed(Routes.STAFF);
+        break;
+      case 'Leave':
+        Get.toNamed(Routes.LEAVE_LIST);
+        break;
+    }
+  }
+
+  static void getParentHomeNavigation({required String title}) {
+    debugPrint(title);
+    switch (title) {
+      case 'Staff':
+        Get.toNamed(Routes.STAFF);
+        break;
+
+    }
+  }
+
+  static void getTeacherHomeNavigation({required String title}) {
     debugPrint(title);
     switch (title) {
       case 'Staff':
@@ -158,8 +176,27 @@ class AppFunctions {
         break;
 
 
-
-
     }
   }
+
+
+  static void routingDecisionForRoleId ({required int roleId, required String title}) {
+
+    switch (roleId) {
+      case 1:
+        getAdminHomeNavigation(title: title);
+        break;
+      case 2:
+        getStudentDashboardNavigation(title: title);
+        break;
+      case 3:
+        getParentHomeNavigation(title: title);
+        break;
+      case 4:
+        getTeacherHomeNavigation(title: title);
+        break;
+    }
+  }
+
+
 }

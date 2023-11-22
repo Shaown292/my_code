@@ -29,7 +29,7 @@ class StaffView extends GetView<StaffController> {
                 return  GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: controller.roles.length,
+                  itemCount: controller.staffRoleList.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                   ),
@@ -37,10 +37,10 @@ class StaffView extends GetView<StaffController> {
 
                    return CustomCardTile(
                       icon: ImagePath.mail,
-                      title: controller.roles[index].name ?? "",
+                      title: controller.staffRoleList[index].name ?? "",
                       onTap: () {
                         controller.selectIndex.value = index;
-                        Get.toNamed(Routes.STAFF_LIST, arguments: {"staff_role_id" : controller.roles[index].id});
+                        Get.toNamed(Routes.STAFF_LIST, arguments: {"staff_role_id" : controller.staffRoleList[index].id});
                       },
                       isSelected: controller.selectIndex.value == index,
                     );

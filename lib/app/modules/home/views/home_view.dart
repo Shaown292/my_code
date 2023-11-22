@@ -72,11 +72,16 @@ class HomeView extends GetView<HomeController> {
                         icon: list[index].icon,
                         title: list[index].title,
                         onTap: () {
+
                           controller.selectIndex.value = index;
-                          AppFunctions.getStudentDashboardNavigation(
-                              title: list[index].value);
-                          AppFunctions.getAdminHomeNavigation(
-                              title: list[index].value);
+                          AppFunctions.routingDecisionForRoleId(roleId: GlobalVariable.roleId!, title: list[index].value);
+
+                          // controller.selectIndex.value = index;
+                          // AppFunctions.getStudentDashboardNavigation(
+                          //     title: list[index].value);
+                          // AppFunctions.getAdminHomeNavigation(
+                          //     title: list[index].value);
+
                         },
                         isSelected: controller.selectIndex.value == index,
                       ),

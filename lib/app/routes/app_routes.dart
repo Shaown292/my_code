@@ -53,6 +53,8 @@ abstract class Routes {
   static const STAFF_LIST = _Paths.STAFF_LIST;
   static const STAFF_INDIVIDUAL_DETAILS = _Paths.STAFF_INDIVIDUAL_DETAILS;
   static const SINGLE_CHAT = _Paths.SINGLE_CHAT;
+  static const STUDENT_CLASS = _Paths.STUDENT_CLASS;
+  static const ADMIN_LEAVE = _Paths.ADMIN_LEAVE;
 }
 
 abstract class _Paths {
@@ -105,4 +107,6 @@ abstract class _Paths {
   static const STAFF_LIST = '/staff-list';
   static const STAFF_INDIVIDUAL_DETAILS = '/staff-individual-details';
   static const SINGLE_CHAT = '/single-chat';
+  static const STUDENT_CLASS = '/student-class';
+  static const ADMIN_LEAVE = '/admin-leave';
 }

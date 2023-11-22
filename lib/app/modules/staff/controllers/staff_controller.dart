@@ -13,7 +13,7 @@ class StaffController extends GetxController {
   RxBool isLoading = false.obs;
 
   final selectIndex = RxInt(-1);
-  List<Roles> roles = [];
+  List<StaffRolesData> staffRoleList = [];
 
 
   Future<void> getAllRolesList() async {
@@ -33,7 +33,7 @@ class StaffController extends GetxController {
           for (int i = 0;
           i < adminStaffRoleListResponseModel.data!.roles!.length;
           i++) {
-            roles.add(adminStaffRoleListResponseModel.data!.roles![i]);
+            staffRoleList.add(adminStaffRoleListResponseModel.data!.roles![i]);
           }
         }
       }

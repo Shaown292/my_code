@@ -23,15 +23,15 @@ class AdminStaffRoleListResponseModel {
 }
 
 class StaffRoleListData {
-  List<Roles>? roles;
+  List<StaffRolesData>? roles;
 
   StaffRoleListData({this.roles});
 
   StaffRoleListData.fromJson(Map<String, dynamic> json) {
     if (json['roles'] != null) {
-      roles = <Roles>[];
+      roles = <StaffRolesData>[];
       json['roles'].forEach((v) {
-        roles!.add(Roles.fromJson(v));
+        roles!.add(StaffRolesData.fromJson(v));
       });
     }
   }
@@ -45,7 +45,7 @@ class StaffRoleListData {
   }
 }
 
-class Roles {
+class StaffRolesData {
   int? id;
   String? name;
   String? type;
@@ -57,7 +57,7 @@ class Roles {
   int? schoolId;
   int? isSaas;
 
-  Roles(
+  StaffRolesData(
       {this.id,
         this.name,
         this.type,
@@ -69,7 +69,7 @@ class Roles {
         this.schoolId,
         this.isSaas});
 
-  Roles.fromJson(Map<String, dynamic> json) {
+  StaffRolesData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     type = json['type'];
