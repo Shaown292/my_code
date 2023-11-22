@@ -203,6 +203,9 @@ class InfixApi {
   static String getAdminApproveLeaveList = '${baseApi}approve-leave-list';
   static String getAdminRejectedLeaveList = '${baseApi}rejected-leave-list';
 
+  /// Dormitory
+  static String addDormitoryFromAdmin = '${baseApi}dormitory-store';
+
   static String adminLeaveStatusUpdate({
     required int leaveId,
     required String statusType,
