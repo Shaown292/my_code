@@ -46,32 +46,28 @@ class ScheduleView extends GetView<ScheduleController> {
                         ),
                   controller.examinationController.loadingController.isLoading
                       ? const LoadingWidget()
-                      : Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, top: 0),
-                          child: CustomDropdown(
-                            dropdownValue: controller.dropdownValue.value,
-                            scheduleList: controller
-                                .examinationController.examDropdownList
-                                .map((item) => item.toString())
-                                .toList(),
-                            changeDropdownValue: (v) {
-                              controller.dropdownValue.value = v!;
-                              controller.scheduleList.clear();
-                              int examId = controller
-                                      .examinationController.examDropdownIdList[
-                                  controller
-                                      .examinationController.examDropdownList
-                                      .indexOf(v)];
-                              int recordId = controller
-                                  .homeController.studentRecordList[0].id;
-                              controller.getStudentExamScheduleList(
-                                examId: examId,
-                                recordId: recordId,
-                              );
-                            },
-                          ),
-                        ),
+                      : CustomDropdown(
+                        dropdownValue: controller.dropdownValue.value,
+                        scheduleList: controller
+                            .examinationController.examDropdownList
+                            .map((item) => item.toString())
+                            .toList(),
+                        changeDropdownValue: (v) {
+                          controller.dropdownValue.value = v!;
+                          controller.scheduleList.clear();
+                          int examId = controller
+                                  .examinationController.examDropdownIdList[
+                              controller
+                                  .examinationController.examDropdownList
+                                  .indexOf(v)];
+                          int recordId = controller
+                              .homeController.studentRecordList[0].id;
+                          controller.getStudentExamScheduleList(
+                            examId: examId,
+                            recordId: recordId,
+                          );
+                        },
+                      ),
                   controller.loadingController.isLoading
                       ? const LoadingWidget()
                       : controller.scheduleList.isNotEmpty

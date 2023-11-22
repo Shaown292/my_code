@@ -61,7 +61,7 @@ class AppColors {
   static Color bottomSheetDividerColor = const Color(0xFF635976).withOpacity(0.1);
   static const activeStatusGreenColor = Color(0xFF3AC172);
   static const activeStatusRedColor = Color(0xFFE3342F);
-  static const activeStatusYellowColor = Color(0xFFFDED4B);
+  static const activeStatusYellowColor = Color(0xFFFFBE00);
   static const unreadChat = Color(0xFF8124D3);
 
 
