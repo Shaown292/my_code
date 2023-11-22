@@ -19,6 +19,8 @@ class ChatController extends GetxController {
     'BUSY'
   ];
 
+
+
   List<String> chatType = <String>[
     'Chat',
     'Group Chat',
@@ -26,11 +28,14 @@ class ChatController extends GetxController {
   ];
 
   List<String> activeStatusColor = <String> [
-
+    '0xFF12AE01',
+    '0xFFE1E2EC',
+    '0xFFF99F15',
+    '0xFFF60003'
   ];
 
 
-  String? changeActiveStatusColor (){
+   changeActiveStatusColor (){
     String colorCode = '';
     String status = dropdownValue.value;
     if (status == 'ACTIVE') {
@@ -44,6 +49,7 @@ class ChatController extends GetxController {
     }
     return colorCode;
   }
+
 
 
 }

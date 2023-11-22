@@ -45,7 +45,6 @@ class ProfileView extends GetView<ProfileController> {
                       elevation: 5,
                       margin: EdgeInsets.zero,
                       child: Container(
-                        width: Get.width,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: Colors.white),
@@ -64,81 +63,73 @@ class ProfileView extends GetView<ProfileController> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
                                     children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          controller
-                                                      .profileDataController
-                                                      .profilePhoto
-                                                      .value
-                                                      .isEmpty ||
-                                                  controller
-                                                          .profileDataController
-                                                          .profilePhoto
-                                                          .value ==
-                                                      ''
-                                              ? Container(
-                                                  height: Get.height * 0.1,
-                                                  width: Get.height * 0.1,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            ImagePath.dp)),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                  ),
-                                                )
-                                              : SizedBox(
-                                                  height: 50,
-                                                  width: 50,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        6.circularRadius,
-                                                    child: CacheImageView(
-                                                      url:
-                                                          '${AppConfig.imageBaseUrl}${controller.profileDataController.profilePhoto.toString()}',
-                                                      errorImageLocal:
-                                                          'assets/image/production/avatar.png',
-                                                    ),
-                                                  ),
+                                      controller.profileDataController
+                                                  .profilePhoto.value.isEmpty ||
+                                              controller.profileDataController
+                                                      .profilePhoto.value ==
+                                                  ''
+                                          ? Container(
+                                              height: Get.height * 0.1,
+                                              width: Get.height * 0.1,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image:
+                                                      AssetImage(ImagePath.dp),
                                                 ),
-                                          10.horizontalSpacing,
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '${controller.profileDataController.firstName}',
-                                                style: AppTextStyle
-                                                    .fontSize18WhiteW500,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
                                               ),
-                                              Text(
-                                                '${AppText.profileClass} ${controller.profilePersonal?.studentClass ?? ""}  |  ${AppText.profileSection} ${controller.profilePersonal?.section ?? ""}',
-                                                style: AppTextStyle
-                                                    .fontSize14LightPinkW400,
+                                            )
+                                          : SizedBox(
+                                              height: 50,
+                                              width: 50,
+                                              child: ClipRRect(
+                                                borderRadius: 6.circularRadius,
+                                                child: CacheImageView(
+                                                  url:
+                                                      '${AppConfig.imageBaseUrl}${controller.profileDataController.profilePhoto.toString()}',
+                                                  errorImageLocal:
+                                                      'assets/image/production/avatar.png',
+                                                ),
                                               ),
-                                              Text(
-                                                '${AppText.profileAdmission} ${controller.profilePersonal?.admissionNo ?? ""}  |  ${AppText.profileRoll} ${controller.profilePersonal?.roll ?? ""}',
-                                                style: AppTextStyle
-                                                    .fontSize14LightPinkW400,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                      10.horizontalSpacing,
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              '${controller.profileDataController.firstName}',
+                                              style: AppTextStyle
+                                                  .fontSize18WhiteW500,
+                                            ),
+                                            Text(
+                                              '${AppText.profileClass} ${controller.profilePersonal?.studentClass ?? ""}  |  ${AppText.profileSection} ${controller.profilePersonal?.section ?? ""}',
+                                              style: AppTextStyle
+                                                  .fontSize14LightPinkW400,
+                                            ),
+                                            Text(
+                                              '${AppText.profileAdmission} ${controller.profilePersonal?.admissionNo ?? ""}  |  ${AppText.profileRoll} ${controller.profilePersonal?.roll ?? ""}',
+                                              style: AppTextStyle
+                                                  .fontSize14LightPinkW400,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(7.0),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            image: AssetImage(ImagePath.camera),
-                                          )),
+                                            image: DecorationImage(
+                                              image:
+                                                  AssetImage(ImagePath.camera),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],

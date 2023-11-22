@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/chat_text_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/popup_action_menu.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-
 import 'package:get/get.dart';
-
 import '../../../data/constants/app_text_style.dart';
 import '../../../service/image/image_picker_utils.dart';
 import '../controllers/single_chat_controller.dart';
@@ -108,110 +106,123 @@ class SingleChatView extends GetView<SingleChatController> {
                 child: ListView.builder(
                   reverse: true,
                   shrinkWrap: true,
-                  itemCount: 4,
+                  itemCount: controller.dummyList.length,
                   itemBuilder: (context, index) {
-                    return Row(
-                      mainAxisAlignment: index % 2 == 0
-                          ? MainAxisAlignment.end
-                          : MainAxisAlignment.start,
+                    return Column(
+                      crossAxisAlignment: index % 2 == 0
+                          ? CrossAxisAlignment.end
+                          : CrossAxisAlignment.start,
                       children: [
-                        index % 2 == 0
-                            ?   InkWell(
-                          onTap: (){
-                            Get.dialog(
-                               Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () => Get.back(),
-                                  child: Stack(
-                                    children: [
-                                      Positioned.fill(
-                                        child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                            sigmaX: 10,
-                                            sigmaY: 10,
+                        Padding(
+                          padding:  EdgeInsets.only(left: index % 2 == 0 ? 60 : 0, right: index % 2 == 0 ? 0 : 60),
+                          child: Row(
+                            mainAxisAlignment: index % 2 == 0
+                                ? MainAxisAlignment.end
+                                : MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              index % 2 == 0
+                                  ? InkWell(
+                                      onTap: () {
+                                        Get.dialog(
+                                          Material(
+                                            color: Colors.transparent,
+                                            child: PopupActionMenu(
+                                              positionRight: 20,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              text: controller.dummyList[index],
+                                              color: index % 2 == 0
+                                                  ? AppColors.primaryColor
+                                                  : AppColors.homeworkWidgetColor,
+                                              textStyle: index % 2 == 0
+                                                  ? AppTextStyle
+                                                      .textStyle12WhiteW400
+                                                  : AppTextStyle
+                                                      .fontSize12W400ReceivedText,
+                                              radiusBottomLeft:
+                                                  index % 2 == 0 ? 20 : 0,
+                                              radiusBottomRight:
+                                                  index % 2 == 0 ? 0 : 20,
+                                              onDeleteTap: () {
+                                                debugPrint("Tapped on delete");
+                                              },
+                                              onForwardTap: () {
+                                                debugPrint("Tapped on forward");
+                                              },
+                                              onQuoteTap: () {
+                                                debugPrint("Tapped on quote");
+                                              },
+                                            ),
                                           ),
-                                          child: Container(
-                                            color: Colors.black12,
-                                          ),
-                                        ),
+                                        );
+                                      },
+                                      child: const Icon(
+                                        Icons.more_vert,
+                                        size: 16,
                                       ),
-                                      Positioned(
-                                        right: 20,
-                                        top: Get.height * 0.5,
-                                        child: Container(
-                                          height: 160,
-                                          width: 150,
-                                          decoration:  BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            color: Colors.white,
-                                          ),
-                                          child:  Column(
-                                            children: [
-                                              InkWell(
-                                                onTap: (){},
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(10.0),
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(Icons.question_answer_outlined, color: AppColors.primaryColor, size: 20,),
-                                                      10.horizontalSpacing,
-                                                      const Text("Quote", style: AppTextStyle.fontSize13BlackW400,),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                               CustomDivider(width: Get.width,),
-                                              InkWell(
-                                                onTap: (){},
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(10.0),
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(Icons.forward_to_inbox, color: AppColors.primaryColor, size: 20,),
-                                                      10.horizontalSpacing,
-                                                      const Text("Forward", style: AppTextStyle.fontSize13BlackW400,),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-
-                                              CustomDivider(width: Get.width,),
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                    )
+                                  : const SizedBox(),
+                              Flexible(
+                                child: ChatTextTile(
+                                  text: controller.dummyList[index],
+                                  color: index % 2 == 0
+                                      ? AppColors.primaryColor
+                                      : AppColors.homeworkWidgetColor,
+                                  textStyle: index % 2 == 0
+                                      ? AppTextStyle.textStyle12WhiteW400
+                                      : AppTextStyle.fontSize12W400ReceivedText,
+                                  radiusBottomLeft: index % 2 == 0 ? 20 : 0,
+                                  radiusBottomRight: index % 2 == 0 ? 0 : 20,
+                                  textLeftPadding: index % 2 == 0 ? 0 : 10,
+                                  textRightPadding: index % 2 == 0 ? 10 : 0,
                                 ),
-
-                              )
-                            );
-                          },
-                                child: const Icon(
-                                  Icons.more_vert,
-                                  size: 15,
-                                ),
-                              )
-                            : const SizedBox(),
-                        ChatTextTile(
-                          text: "Hello",
-                          sendText: index % 2,
-                          color: index % 2 == 0
-                              ? AppColors.primaryColor
-                              : AppColors.homeworkWidgetColor,
-                          textStyle: index % 2 == 0
-                              ? AppTextStyle.textStyle12WhiteW400
-                              : AppTextStyle.fontSize12W400ReceivedText,
-                          radiusBottomLeft: index % 2 == 0 ? 30 : 0,
-                          radiusBottomRight: index % 2 == 0 ? 0 : 30,
+                              ),
+                              index % 2 != 0
+                                  ? InkWell(
+                                      onTap: () {
+                                        Get.dialog(
+                                            Material(
+                                          color: Colors.transparent,
+                                          child: PopupActionMenu(
+                                            positionLeft: 20,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            text: controller.dummyList[index],
+                                            color: index % 2 == 0
+                                                ? AppColors.primaryColor
+                                                : AppColors.homeworkWidgetColor,
+                                            textStyle: index % 2 == 0
+                                                ? AppTextStyle
+                                                    .textStyle12WhiteW400
+                                                : AppTextStyle
+                                                    .fontSize12W400ReceivedText,
+                                            radiusBottomLeft:
+                                                index % 2 == 0 ? 30 : 0,
+                                            radiusBottomRight:
+                                                index % 2 == 0 ? 0 : 30,
+                                            onDeleteTap: () {
+                                              Get.back();
+                                              debugPrint("Tapped on delete");
+                                            },
+                                            onForwardTap: () {
+                                              debugPrint("Tapped on forward");
+                                            },
+                                            onQuoteTap: () {
+                                              debugPrint("Tapped on quote");
+                                            },
+                                          ),
+                                        ));
+                                      },
+                                      child: const Icon(
+                                        Icons.more_vert,
+                                        size: 16,
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            ],
+                          ),
                         ),
-                        index % 2 == 1
-                            ? const Icon(
-                                Icons.more_vert,
-                                size: 15,
-                              )
-                            : const SizedBox(),
                       ],
                     );
                   },

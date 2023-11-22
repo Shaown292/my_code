@@ -25,7 +25,11 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
               children: [
                 CustomBackground(
                   customWidget: controller.loadingController.isLoading
-                      ? const LoadingWidget()
+                      ? const Column(
+                        children: [
+                          LoadingWidget(),
+                        ],
+                      )
                       : controller.studentOthersDownloadList.isNotEmpty
                           ? ListView.builder(
                               itemCount:

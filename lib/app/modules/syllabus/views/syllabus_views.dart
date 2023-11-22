@@ -23,7 +23,11 @@ class SyllabusView extends GetView<SyllabusController> {
         title: "Syllabus",
         body: CustomBackground(
           customWidget: controller.loadingController.isLoading
-              ? const LoadingWidget()
+              ? const Column(
+                children: [
+                  LoadingWidget(),
+                ],
+              )
               : controller.syllabusList.isNotEmpty ? ListView.builder(
                   itemCount: controller.syllabusList.length,
                   physics: const BouncingScrollPhysics(),

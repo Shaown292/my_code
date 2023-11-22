@@ -20,17 +20,16 @@ class TeacherView extends GetView<TeacherController> {
     return Obx(
       () => InfixEduScaffold(
         title: "Teacher",
-        body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: CustomBackground(
-            customWidget: RefreshIndicator(
-              color: AppColors.primaryColor,
-              onRefresh: () async {
-                controller.teacherList.clear();
-                controller.getAllTeacherList(
-                    recordId:
-                        controller.homeController.studentRecordList[0].id);
-              },
+        body: CustomBackground(
+          customWidget: RefreshIndicator(
+            color: AppColors.primaryColor,
+            onRefresh: () async {
+              controller.teacherList.clear();
+              controller.getAllTeacherList(
+                  recordId:
+                      controller.homeController.studentRecordList[0].id);
+            },
+            child: SingleChildScrollView(
               child: Column(
                 children: [
                   10.verticalSpacing,
@@ -68,6 +67,7 @@ class TeacherView extends GetView<TeacherController> {
                       : controller.teacherList.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: controller.teacherList.length,
                               itemBuilder: (context, index) {
                                 return Padding(
