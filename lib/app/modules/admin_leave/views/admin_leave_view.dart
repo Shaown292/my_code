@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import '../controllers/admin_leave_controller.dart';
 
 class AdminLeaveView extends GetView<AdminLeaveController> {
-  const AdminLeaveView({Key? key}) : super(key: key);
+  const AdminLeaveView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
