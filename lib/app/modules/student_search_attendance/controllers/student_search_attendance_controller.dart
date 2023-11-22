@@ -40,18 +40,20 @@ class StudentSearchAttendanceController extends GetxController {
   int? subjectId;
 
   void setEventData() {
-    // customEventList[DateTime(2023, 11, 9)] = [Event(date: DateTime(2023, 11, 9), dot: presentEvent)];
-    customEventList[DateTime(
-        attendanceList[0].attendanceDate!.year,
-        attendanceList[0].attendanceDate!.month,
-        attendanceList[0].attendanceDate!.day)] = [
-      Event(
+    if (attendanceList.isNotEmpty) {
+      customEventList[DateTime(
+          attendanceList[0].attendanceDate!.year,
+          attendanceList[0].attendanceDate!.month,
+          attendanceList[0].attendanceDate!.day)] = [
+        Event(
           date: DateTime(
               attendanceList[0].attendanceDate!.year,
               attendanceList[0].attendanceDate!.month,
               attendanceList[0].attendanceDate!.day),
-          dot: presentEvent)
-    ];
+          dot: presentEvent,
+        )
+      ];
+    }
 
     eventList = EventList<Event>(events: customEventList);
 
@@ -158,9 +160,10 @@ class StudentSearchAttendanceController extends GetxController {
                 attendanceList[i].attendanceDate!.day)] = [
               Event(
                   date: DateTime(
-                      attendanceList[i].attendanceDate!.year,
-                      attendanceList[i].attendanceDate!.month,
-                      attendanceList[i].attendanceDate!.day),
+                    attendanceList[i].attendanceDate!.year,
+                    attendanceList[i].attendanceDate!.month,
+                    attendanceList[i].attendanceDate!.day,
+                  ),
                   dot: presentEvent)
             ];
           }
@@ -182,13 +185,12 @@ class StudentSearchAttendanceController extends GetxController {
     required int subjectId,
   }) async {
     try {
-      // LoadingController loadingController = Get.put(LoadingController());
-
-      // loadingController.isLoading = true;
-
       final response = await BaseClient().getData(
         url: InfixApi.getStudentSubjectSearchAttendance(
-            recordId: recordId, studentId: studentId, subjectId: subjectId),
+          recordId: recordId,
+          studentId: studentId,
+          subjectId: subjectId,
+        ),
         header: GlobalVariable.header,
       );
 
@@ -216,11 +218,12 @@ class StudentSearchAttendanceController extends GetxController {
                 attendanceList[i].attendanceDate!.month,
                 attendanceList[i].attendanceDate!.day)] = [
               Event(
-                  date: DateTime(
-                      attendanceList[i].attendanceDate!.year,
-                      attendanceList[i].attendanceDate!.month,
-                      attendanceList[i].attendanceDate!.day),
-                  dot: presentEvent)
+                date: DateTime(
+                    attendanceList[i].attendanceDate!.year,
+                    attendanceList[i].attendanceDate!.month,
+                    attendanceList[i].attendanceDate!.day),
+                dot: presentEvent,
+              )
             ];
           }
         }
@@ -229,7 +232,6 @@ class StudentSearchAttendanceController extends GetxController {
             message: attendanceResponseModel.message ?? 'Something went wrong');
       }
     } catch (e, t) {
-      //loadingController.isLoading = false;
       debugPrint('$e');
       debugPrint('$t');
       t.printInfo();
