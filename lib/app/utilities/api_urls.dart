@@ -174,7 +174,9 @@ class InfixApi {
     return "${baseApi}fees-invoice-view/1";
   }
 
-  static String getStudentFeesList({required int studentId, required int recordId}) => "${baseApi}student-fees?student_id=$studentId&record_id=$recordId";
+  static String getStudentFeesList(
+          {required int studentId, required int recordId}) =>
+      "${baseApi}student-fees?student_id=$studentId&record_id=$recordId";
 
   static String profileDocumentGet() {
     return '${baseApi}profile-documents';
@@ -194,15 +196,6 @@ class InfixApi {
       '${baseApi}view-lesson-plan-lesson/$lessonPlanId';
   static String forgetPassword = "${baseApi}forget-password";
 
-
-
-
-
-
-
-
-
-
   //// .....................................................For Admin Module.....................................................
 
   static String getAdminStaffRoleList = '${baseApi}role-list';
@@ -210,6 +203,11 @@ class InfixApi {
   static String getAdminApproveLeaveList = '${baseApi}approve-leave-list';
   static String getAdminRejectedLeaveList = '${baseApi}rejected-leave-list';
 
+  static String adminLeaveStatusUpdate({
+    required int leaveId,
+    required String statusType,
+  }) =>
+      '${baseApi}update-approve-leave?leave_id=$leaveId&approve_status=$statusType';
 
   static String getAdminRoleWiseStaff({required int staffRoleId}) =>
       '${baseApi}role-wise-staff-list?role_id=$staffRoleId';
@@ -217,23 +215,11 @@ class InfixApi {
   static String getAdminStaffIndividualData({required int staffIndividualId}) =>
       '${baseApi}individual-staff-details/$staffIndividualId';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  //////////////////////////.......................................///////////////////////////////////
+  //////////////////////////.......................................///////////////////////////////////
+  //////////////////////////.......................................///////////////////////////////////
+  //////////////////////////.......................................///////////////////////////////////
+  //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
   static String getFeesUrl(dynamic id) {
     return '${baseApi}fees-collect-student-wise/$id';

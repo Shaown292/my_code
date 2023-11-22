@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_con
 import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_approve_leave_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_pending_leave_responseModel.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_rejected_leave_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 
 import '../../../data/constants/app_text_style.dart';
@@ -32,6 +34,7 @@ class AdminLeaveController extends GetxController {
   ];
 
   Future<AdminPendingLeaveResponseModel?> getAdminPendingLeave() async {
+    pendingLeaveList.clear();
     try {
       loadingController.isLoading = true;
 
@@ -64,6 +67,7 @@ class AdminLeaveController extends GetxController {
   }
 
   Future<AdminApproveLeaveResponseModel?> getAdminApproveLeave({required bool isLoader}) async {
+    approveLeaveList.clear();
     try {
       if(isLoader){
         loadingController.isLoading = true;
@@ -104,6 +108,7 @@ class AdminLeaveController extends GetxController {
   }
 
   Future<AdminRejectedLeaveResponseModel?> getAdminRejectedLeave({required bool isLoader}) async {
+    rejectedLeaveList.clear();
     try {
 
       if(isLoader){
@@ -141,6 +146,37 @@ class AdminLeaveController extends GetxController {
     }
 
     return AdminRejectedLeaveResponseModel();
+  }
+
+  void updateLeaveStatus({required int leaveId, required String statusType}) async {
+
+    try {
+      loadingController.isLoading = true;
+      final res = await BaseClient().postData(
+        url: InfixApi.adminLeaveStatusUpdate(leaveId: leaveId, statusType: statusType),
+        header: GlobalVariable.header,
+        // payload: {
+        //   "email": email,
+        //   "password": password
+        // },
+      );
+
+      PostRequestResponseModel postRequestResponseModel = PostRequestResponseModel.fromJson(res);
+      if (postRequestResponseModel.success == true) {
+        loadingController.isLoading = false;
+        showBasicSuccessSnackBar(message: postRequestResponseModel.message ?? 'Something went wrong.');
+
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(message: postRequestResponseModel.message ?? 'Something went wrong.');
+      }
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
   }
 
   void showPendingListDetailsBottomSheet({required int index}) {
