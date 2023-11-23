@@ -205,6 +205,7 @@ class InfixApi {
   static String getAdminDormitoryList = '${baseApi}dormitory-list';
   static String getAdminRoomType = '${baseApi}room-type';
   static String addDormitoryRoomFromAdin = '${baseApi}room-store';
+  static String dormitoryRoomList = '${baseApi}room-list';
 
   /// Dormitory
   static String addDormitoryFromAdmin = '${baseApi}dormitory-store';
@@ -459,7 +460,7 @@ class InfixApi {
   static String getStuffCategory = "${baseApi}staff-roles";
 
   // static String DRIVER_LIST = baseApi+"driver-list";
-  static String dormitoryRoomList = "${baseApi}room-list";
+  // static String dormitoryRoomList = "${baseApi}room-list";
   static String dormitoryList = "${baseApi}dormitory-list";
   static String roomTypeList = "${baseApi}room-type-list";
   static String pendingLeave = "${baseApi}pending-leave";

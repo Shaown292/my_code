@@ -10,7 +10,7 @@ import '../colum_tile/column_tile.dart';
 
 class DormitoryCardTile extends StatelessWidget {
   final String? dormitoryName;
-  final String? roomNo;
+  final String? roomNoName;
   final String? roomType;
   final int? numberOfBed;
   final int? cost;
@@ -27,7 +27,7 @@ class DormitoryCardTile extends StatelessWidget {
     this.activeStatus,
     this.color,
     this.activeStatusColor,
-    this.roomNo,
+    this.roomNoName,
     this.isAdminRoomList = false,
     this.roomType,
   });
@@ -51,7 +51,7 @@ class DormitoryCardTile extends StatelessWidget {
             children: [
               ColumnTile(
                 title: isAdminRoomList ? "Room Name" : "Room no",
-                value: roomNo ?? "",
+                value: roomNoName ?? "",
                 width: Get.width * 0.2,
               ),
               ColumnTile(

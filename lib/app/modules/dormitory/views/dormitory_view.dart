@@ -30,7 +30,7 @@ class DormitoryView extends GetView<DormitoryController> {
                               return DormitoryCardTile(
                                 dormitoryName: controller
                                     .dormitoryList[index].dormitoryName,
-                                roomNo:
+                                roomNoName:
                                     controller.dormitoryList[index].roomNumber,
                                 numberOfBed:
                                     controller.dormitoryList[index].numberOfBed,
