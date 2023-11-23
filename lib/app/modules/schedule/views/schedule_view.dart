@@ -28,7 +28,7 @@ class ScheduleView extends GetView<ScheduleController> {
                               left: 20, right: 20, top: 20),
                           child: CustomDropdown(
                             dropdownValue: controller.recordDropdownValue.value,
-                            scheduleList: controller
+                            dropdownList: controller
                                 .homeController.studentRecordDropdownList,
                             changeDropdownValue: (v) {
                               controller.recordDropdownValue.value = v!;
@@ -48,7 +48,7 @@ class ScheduleView extends GetView<ScheduleController> {
                       ? const LoadingWidget()
                       : CustomDropdown(
                         dropdownValue: controller.dropdownValue.value,
-                        scheduleList: controller
+                        dropdownList: controller
                             .examinationController.examDropdownList
                             .map((item) => item.toString())
                             .toList(),

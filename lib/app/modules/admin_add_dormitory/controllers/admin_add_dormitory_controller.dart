@@ -49,7 +49,7 @@ class AdminAddDormitoryController extends GetxController {
 
     try {
       loadingController.isLoading = true;
-      final res = await BaseClient().postData(
+      final response = await BaseClient().postData(
         url: InfixApi.addDormitoryFromAdmin,
         header: GlobalVariable.header,
         payload: {
@@ -61,7 +61,7 @@ class AdminAddDormitoryController extends GetxController {
         },
       );
 
-      PostRequestResponseModel postRequestResponseModel = PostRequestResponseModel.fromJson(res);
+      PostRequestResponseModel postRequestResponseModel = PostRequestResponseModel.fromJson(response);
       if (postRequestResponseModel.success == true) {
         loadingController.isLoading = false;
         dormitoryNameController.clear();

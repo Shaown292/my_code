@@ -5,6 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -30,43 +31,48 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                       CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Room No",
+                        hintText: "Room Name",
                         fillColor: Colors.white,
-                        controller: controller.roomNoController,
+                        controller: controller.roomNameTextController,
                         hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
                       ),
                       10.verticalSpacing,
                       CustomTextFormField(
+                        textInputType: TextInputType.number,
                         enableBorderActive: true,
                         focusBorderActive: true,
                         hintText: "Number of Bed",
                         fillColor: Colors.white,
-                        controller: controller.numberOfBedController,
+                        controller: controller.numberOfBedTextController,
                         hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
                       ),
                       10.verticalSpacing,
                       CustomTextFormField(
+                        textInputType: TextInputType.number,
                         enableBorderActive: true,
                         focusBorderActive: true,
                         hintText: "Cost Per Bed",
                         fillColor: Colors.white,
-                        controller: controller.costPerBedController,
+                        controller: controller.costPerBedTextController,
                         hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
                       ),
                       10.verticalSpacing,
-                      CustomDropdown(
+
+                      controller.loadingController.isLoading ? const CircularProgressIndicator() : CustomDropdown(
                         dropdownValue: controller.dormitoryValue.value,
-                        scheduleList: controller.dormitoryList,
+                        dropdownList: controller.dormitoryDropdownList,
                         changeDropdownValue: (v) {
                           controller.dormitoryValue.value = v!;
+                          controller.dormitoryId.value = controller.dormitoryList[controller.dormitoryDropdownList.indexOf(v)].id!;
                         },
                       ),
                       10.verticalSpacing,
-                      CustomDropdown(
+                      controller.isLoading.value ? const CircularProgressIndicator() : CustomDropdown(
                         dropdownValue: controller.roomTypeValue.value,
-                        scheduleList: controller.roomTypeValueList,
+                        dropdownList: controller.roomTypeDropdownList,
                         changeDropdownValue: (v) {
                           controller.roomTypeValue.value = v!;
+                          controller.roomTypeId.value = controller.roomTypeList[controller.roomTypeDropdownList.indexOf(v)].id!;
                         },
                       ),
                       10.verticalSpacing,
@@ -75,17 +81,17 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         focusBorderActive: true,
                         hintText: "Description",
                         fillColor: Colors.white,
-                        controller: controller.descriptionController,
+                        controller: controller.descriptionTextController,
                         hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
                       ),
                       30.verticalSpacing,
-                      PrimaryButton(
+                      controller.saveLoader.value ? const LoadingWidget() : PrimaryButton(
                         text: "Save",
                         onTap: () {
-                          debugPrint(
-                              "Dropdown value is :::::::: ${controller.dormitoryValue}"
-                          );
-                          controller.validation();
+                          if(controller.validation()){
+                            controller.addDormitoryRoom();
+                          }
+
                         },
                       ),
                     ],

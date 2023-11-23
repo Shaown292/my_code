@@ -30,7 +30,7 @@ class ChatView extends GetView<ChatController> {
                 width: 110,
                 child: CustomDropdown(
                   dropdownValue: controller.dropdownValue.value,
-                  scheduleList: controller.activeStatus,
+                  dropdownList: controller.activeStatus,
                   color: Colors.white,
                   dropdownText: false,
                   changeDropdownValue: (v){

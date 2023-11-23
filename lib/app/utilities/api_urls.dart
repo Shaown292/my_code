@@ -202,6 +202,9 @@ class InfixApi {
   static String getAdminPendingLeaveList = '${baseApi}pending-leave-list';
   static String getAdminApproveLeaveList = '${baseApi}approve-leave-list';
   static String getAdminRejectedLeaveList = '${baseApi}rejected-leave-list';
+  static String getAdminDormitoryList = '${baseApi}dormitory-list';
+  static String getAdminRoomType = '${baseApi}room-type';
+  static String addDormitoryRoomFromAdin = '${baseApi}room-store';
 
   /// Dormitory
   static String addDormitoryFromAdmin = '${baseApi}dormitory-store';

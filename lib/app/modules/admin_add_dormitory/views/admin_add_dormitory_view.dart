@@ -59,7 +59,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                       10.verticalSpacing,
                       CustomDropdown(
                         dropdownValue: controller.dropdownValue.value,
-                        scheduleList: controller.dropdownList,
+                        dropdownList: controller.dropdownList,
                         changeDropdownValue: (v) {
                           controller.dropdownValue.value = v!;
                           controller.dormitoryType.value = v[0];
@@ -75,22 +75,24 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                         hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
                       ),
                       30.verticalSpacing,
-                      Obx(() => controller.loadingController.isLoading
-                          ? const Column(
-                              children: [
-                                LoadingWidget(),
-                              ],
-                            )
-                          : PrimaryButton(
-                              text: "Save",
-                              onTap: () {
-                                controller.dormitoryType.value =
-                                    controller.dropdownValue.value[0];
-                                if (controller.validation()) {
-                                  controller.addDormitory();
-                                }
-                              },
-                            )),
+                      Obx(
+                        () => controller.loadingController.isLoading
+                            ? const Column(
+                                children: [
+                                  LoadingWidget(),
+                                ],
+                              )
+                            : PrimaryButton(
+                                text: "Save",
+                                onTap: () {
+                                  controller.dormitoryType.value =
+                                      controller.dropdownValue.value[0];
+                                  if (controller.validation()) {
+                                    controller.addDormitory();
+                                  }
+                                },
+                              ),
+                      ),
                     ],
                   ),
                 ),

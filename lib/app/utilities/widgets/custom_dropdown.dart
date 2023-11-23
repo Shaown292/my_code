@@ -4,7 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 
 class CustomDropdown extends StatelessWidget {
   final String? dropdownValue;
-  final List<String>? scheduleList;
+  final List<String>? dropdownList;
   final Function(String? v)? changeDropdownValue;
   final Color? color;
   final Color? dropdownColor;
@@ -14,7 +14,7 @@ class CustomDropdown extends StatelessWidget {
   const CustomDropdown({
     super.key,
     this.dropdownValue,
-    this.scheduleList,
+    this.dropdownList,
     this.changeDropdownValue,
     this.color,
     this.dropdownColor,
@@ -35,42 +35,43 @@ class CustomDropdown extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
-              isExpanded: true,
-              items: scheduleList!
-                  .map(
-                    (String item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: dropdownText
-                          ? Text(
-                              item,
-                              style: AppTextStyle.fontSize14lightViolateW400,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          : Row(
-                              children: [
-                                Container(
-                                  height: 8,
-                                  width: 8,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: activeStatusColor),
-                                ),
-                                10.horizontalSpacing,
-                                Text(
-                                  item,
-                                  style: AppTextStyle.cardTextStyle14WhiteW500,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                    ),
-                  )
-                  .toList(),
-              value: dropdownValue,
-              iconSize: 26,
-              dropdownColor: dropdownColor,
-              iconEnabledColor: color ?? const Color(0xFFA6ABCE),
-              onChanged: changeDropdownValue),
+            isExpanded: true,
+            items: dropdownList!
+                .map(
+                  (String item) => DropdownMenuItem<String>(
+                    value: item,
+                    child: dropdownText
+                        ? Text(
+                            item,
+                            style: AppTextStyle.fontSize14lightViolateW400,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        : Row(
+                            children: [
+                              Container(
+                                height: 8,
+                                width: 8,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: activeStatusColor),
+                              ),
+                              10.horizontalSpacing,
+                              Text(
+                                item,
+                                style: AppTextStyle.cardTextStyle14WhiteW500,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                  ),
+                )
+                .toList(),
+            value: dropdownValue,
+            iconSize: 26,
+            dropdownColor: dropdownColor,
+            iconEnabledColor: color ?? const Color(0xFFA6ABCE),
+            onChanged: changeDropdownValue,
+          ),
         ),
       ),
     );

@@ -31,7 +31,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                           )
                         : CustomDropdown(
                           dropdownValue: controller.dropdownValue.value,
-                          scheduleList: controller.leaveTypeDropdownList
+                          dropdownList: controller.leaveTypeDropdownList
                               .map((item) => item.toString())
                               .toList(),
                           changeDropdownValue: (v) {

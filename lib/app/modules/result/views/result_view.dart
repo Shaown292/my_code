@@ -71,7 +71,7 @@ class ResultView extends GetView<ResultController> {
                     ? const LoadingWidget()
                     : CustomDropdown(
                       dropdownValue: controller.dropdownValue.value,
-                      scheduleList: controller
+                      dropdownList: controller
                           .examinationController.examDropdownList
                           .map((item) => item.toString())
                           .toList(),
