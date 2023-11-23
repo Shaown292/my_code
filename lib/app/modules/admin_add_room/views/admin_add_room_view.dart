@@ -14,17 +14,19 @@ import '../controllers/admin_add_room_controller.dart';
 
 class AdminAddRoomView extends GetView<AdminAddRoomController> {
   const AdminAddRoomView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => InfixEduScaffold(
+      () => InfixEduScaffold(
         title: "Add Room",
         body: CustomBackground(
           customWidget: SingleChildScrollView(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 15),
                   child: Column(
                     children: [
                       20.verticalSpacing,
@@ -57,24 +59,35 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
                       ),
                       10.verticalSpacing,
-
-                      controller.loadingController.isLoading ? const CircularProgressIndicator() : CustomDropdown(
-                        dropdownValue: controller.dormitoryValue.value,
-                        dropdownList: controller.dormitoryDropdownList,
-                        changeDropdownValue: (v) {
-                          controller.dormitoryValue.value = v!;
-                          controller.dormitoryId.value = controller.dormitoryList[controller.dormitoryDropdownList.indexOf(v)].id!;
-                        },
-                      ),
+                      controller.loadingController.isLoading
+                          ? const CircularProgressIndicator()
+                          : CustomDropdown(
+                              dropdownValue: controller.dormitoryValue.value,
+                              dropdownList: controller.dormitoryDropdownList,
+                              changeDropdownValue: (v) {
+                                controller.dormitoryValue.value = v!;
+                                controller.dormitoryId.value = controller
+                                    .dormitoryList[controller
+                                        .dormitoryDropdownList
+                                        .indexOf(v)]
+                                    .id!;
+                              },
+                            ),
                       10.verticalSpacing,
-                      controller.isLoading.value ? const CircularProgressIndicator() : CustomDropdown(
-                        dropdownValue: controller.roomTypeValue.value,
-                        dropdownList: controller.roomTypeDropdownList,
-                        changeDropdownValue: (v) {
-                          controller.roomTypeValue.value = v!;
-                          controller.roomTypeId.value = controller.roomTypeList[controller.roomTypeDropdownList.indexOf(v)].id!;
-                        },
-                      ),
+                      controller.isLoading.value
+                          ? const CircularProgressIndicator()
+                          : CustomDropdown(
+                              dropdownValue: controller.roomTypeValue.value,
+                              dropdownList: controller.roomTypeDropdownList,
+                              changeDropdownValue: (v) {
+                                controller.roomTypeValue.value = v!;
+                                controller.roomTypeId.value = controller
+                                    .roomTypeList[controller
+                                        .roomTypeDropdownList
+                                        .indexOf(v)]
+                                    .id!;
+                              },
+                            ),
                       10.verticalSpacing,
                       CustomTextFormField(
                         enableBorderActive: true,
@@ -85,15 +98,16 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
                       ),
                       30.verticalSpacing,
-                      controller.saveLoader.value ? const LoadingWidget() : PrimaryButton(
-                        text: "Save",
-                        onTap: () {
-                          if(controller.validation()){
-                            controller.addDormitoryRoom();
-                          }
-
-                        },
-                      ),
+                      controller.saveLoader.value
+                          ? const LoadingWidget()
+                          : PrimaryButton(
+                              text: "Save",
+                              onTap: () {
+                                if (controller.validation()) {
+                                  controller.addDormitoryRoom();
+                                }
+                              },
+                            ),
                     ],
                   ),
                 ),
