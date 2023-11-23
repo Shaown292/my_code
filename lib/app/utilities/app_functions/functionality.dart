@@ -164,6 +164,9 @@ class AppFunctions {
       case 'Add Room':
         Get.toNamed(Routes.ADMIN_ADD_ROOM);
         break;
+      case 'Room List':
+        Get.toNamed(Routes.ADMIN_ROOM_LIST);
+        break;
     }
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/dormitory/views/widget/dormitory_card_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/dormitory_card_tile/dormitory_card_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
@@ -14,36 +14,38 @@ class DormitoryView extends GetView<DormitoryController> {
 
   @override
   Widget build(BuildContext context) {
-    return InfixEduScaffold(
-      title: "Dormitory",
-      body: CustomBackground(
-        customWidget: Obx(() => Column(
-              children: [
-                controller.loadingController.isLoading
-                    ? const LoadingWidget()
-                    : controller.dormitoryList.isNotEmpty
-                        ? Expanded(
-                            child: ListView.builder(
-                              itemCount: controller.dormitoryList.length,
-                              itemBuilder: (context, index) {
-                                return DormitoryCardTile(
-                                  hostelType: controller
-                                      .dormitoryList[index].dormitoryName,
-                                  roomNo: controller
-                                      .dormitoryList[index].roomNumber,
-                                  numberOfBed: controller
-                                      .dormitoryList[index].numberOfBed,
-                                  cost: controller
-                                      .dormitoryList[index].costPerBed,
-                                  activeStatus:
-                                      controller.dormitoryList[index].status,
-                                );
-                              },
-                            ),
-                          )
-                        : const NoDataAvailableWidget(),
-              ],
-            )),
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Dormitory",
+        body: CustomBackground(
+          customWidget: Column(
+            children: [
+              controller.loadingController.isLoading
+                  ? const LoadingWidget()
+                  : controller.dormitoryList.isNotEmpty
+                      ? Expanded(
+                          child: ListView.builder(
+                            itemCount: controller.dormitoryList.length,
+                            itemBuilder: (context, index) {
+                              return DormitoryCardTile(
+                                dormitoryName: controller
+                                    .dormitoryList[index].dormitoryName,
+                                roomNo:
+                                    controller.dormitoryList[index].roomNumber,
+                                numberOfBed:
+                                    controller.dormitoryList[index].numberOfBed,
+                                cost:
+                                    controller.dormitoryList[index].costPerBed,
+                                activeStatus:
+                                    controller.dormitoryList[index].status,
+                              );
+                            },
+                          ),
+                        )
+                      : const NoDataAvailableWidget(),
+            ],
+          ),
+        ),
       ),
     );
   }

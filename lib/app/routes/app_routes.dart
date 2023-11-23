@@ -58,6 +58,7 @@ abstract class Routes {
   static const ADMIN_DORMITORY = _Paths.ADMIN_DORMITORY;
   static const ADMIN_ADD_DORMITORY = _Paths.ADMIN_ADD_DORMITORY;
   static const ADMIN_ADD_ROOM = _Paths.ADMIN_ADD_ROOM;
+  static const ADMIN_ROOM_LIST = _Paths.ADMIN_ROOM_LIST;
 }
 
 abstract class _Paths {
@@ -115,4 +116,5 @@ abstract class _Paths {
   static const ADMIN_DORMITORY = '/admin-dormitory';
   static const ADMIN_ADD_DORMITORY = '/admin-add-dormitory';
   static const ADMIN_ADD_ROOM = '/admin-add-room';
+  static const ADMIN_ROOM_LIST = '/admin-room-list';
 }
