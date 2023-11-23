@@ -59,6 +59,10 @@ abstract class Routes {
   static const ADMIN_ADD_DORMITORY = _Paths.ADMIN_ADD_DORMITORY;
   static const ADMIN_ADD_ROOM = _Paths.ADMIN_ADD_ROOM;
   static const ADMIN_ROOM_LIST = _Paths.ADMIN_ROOM_LIST;
+  static const ADMIN_FEES = _Paths.ADMIN_FEES;
+  static const ADMIN_FEES_GROUP = _Paths.ADMIN_FEES_GROUP;
+  static const ADMIN_FEES_TYPE = _Paths.ADMIN_FEES_TYPE;
+  static const ADMIN_FEES_INVOICE = _Paths.ADMIN_FEES_INVOICE;
 }
 
 abstract class _Paths {
@@ -117,4 +121,8 @@ abstract class _Paths {
   static const ADMIN_ADD_DORMITORY = '/admin-add-dormitory';
   static const ADMIN_ADD_ROOM = '/admin-add-room';
   static const ADMIN_ROOM_LIST = '/admin-room-list';
+  static const ADMIN_FEES = '/admin-fees';
+  static const ADMIN_FEES_GROUP = '/admin-fees-group';
+  static const ADMIN_FEES_TYPE = '/admin-fees-type';
+  static const ADMIN_FEES_INVOICE = '/admin-fees-invoice';
 }

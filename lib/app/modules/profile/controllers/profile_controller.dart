@@ -144,8 +144,7 @@ class ProfileController extends GetxController {
 
     try {
       final response = await BaseClient().getData(
-          url: InfixApi.profileOthers(),
-          header: GlobalVariable.header);
+          url: InfixApi.profileOthers(), header: GlobalVariable.header);
 
       ProfileOthersModel profileOthersModel =
           ProfileOthersModel.fromJson(response);
@@ -200,22 +199,20 @@ class ProfileController extends GetxController {
   }
 
   /// Documents bottom sheet
-  void showUploadDocumentsBottomSheet(
-      {required Function() onTap,
-      Function()? onTapForSave,
-      Color? bottomSheetBackgroundColor}) {
+  void showUploadDocumentsBottomSheet({
+    required Function() onTap,
+    Function()? onTapForSave,
+    Color? bottomSheetBackgroundColor,
+  }) {
     Get.bottomSheet(
       Obx(() => Container(
-
           height: Get.height * 0.45,
-          decoration:  BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(8),
-              topLeft: Radius.circular(8),
-            ),
-            color: bottomSheetBackgroundColor
-
-          ),
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(8),
+                topLeft: Radius.circular(8),
+              ),
+              color: bottomSheetBackgroundColor),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -263,7 +260,6 @@ class ProfileController extends GetxController {
                         focusBorderActive: true,
                         hintText: "Title",
                         fillColor: Colors.white,
-
                       ),
                       10.verticalSpacing,
                       CustomTextFormField(

@@ -24,7 +24,7 @@ class StaffListView extends GetView<StaffListController> {
           children: [
             10.verticalSpacing,
             Obx(
-              () => controller.loadingController.isLoading
+              () => controller.isLoading.value
                   ? const CircularProgressIndicator(
                       color: AppColors.primaryColor,
                     )
@@ -43,13 +43,18 @@ class StaffListView extends GetView<StaffListController> {
                                   staffName: controller
                                       .roleWiseStaffList[index].firstName,
                                   staffAddress: controller
-                                      .roleWiseStaffList[index].currentAddress,
+                                      .roleWiseStaffList[index]
+                                      .currentAddress,
                                   staffPhoneNo: controller
                                       .roleWiseStaffList[index].mobile,
                                   staffImage: ImagePath.dp,
                                   onTap: () {
-                                    Get.toNamed(Routes.STAFF_INDIVIDUAL_DETAILS,
-                                        arguments: {"staff_individual_id" : controller.roleWiseStaffList[index].id});
+                                    Get.toNamed(
+                                        Routes.STAFF_INDIVIDUAL_DETAILS,
+                                        arguments: {
+                                          "staff_individual_id": controller
+                                              .roleWiseStaffList[index].id
+                                        });
                                   },
                                 );
                               },

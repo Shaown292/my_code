@@ -5,20 +5,28 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 
-class DocumentsCard extends StatelessWidget {
+class DeleteTile extends StatelessWidget {
   final String? title;
   final String? fileName;
-  final Function()? tapDownload;
-  final Function()? tapDelete;
+  final Function()? tapLeftButton;
+  final Function()? tapRightButton;
   final Color? color;
+  final String? leftIcon;
+  final Color? leftIconBackgroundColor;
+  final String? rightIcon;
+  final Color? rightIconBackgroundColor;
 
-  const DocumentsCard({
+  const DeleteTile({
     super.key,
     this.title,
     this.fileName,
-    this.tapDownload,
-    this.tapDelete,
+    this.tapLeftButton,
+    this.tapRightButton,
     this.color,
+    this.leftIcon,
+    this.rightIcon,
+    this.leftIconBackgroundColor,
+    this.rightIconBackgroundColor,
   });
 
   @override
@@ -64,40 +72,44 @@ class DocumentsCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    InkWell(
-                      onTap: tapDownload,
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        padding: const EdgeInsets.all(5),
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.appButtonColor),
-                        child: Center(
-                          child: Image.asset(
-                            ImagePath.download,
+                    leftIcon == null
+                        ? const SizedBox()
+                        : InkWell(
+                            onTap: tapLeftButton,
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: leftIconBackgroundColor),
+                              child: Center(
+                                child: Image.asset(
+                                  leftIcon ?? "",
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                     7.horizontalSpacing,
-                    InkWell(
-                      onTap: tapDelete,
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        padding: const EdgeInsets.all(5),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFFED3B3B),
-                        ),
-                        child: Center(
-                          child: Image.asset(
-                            ImagePath.delete,
+                    rightIcon == null
+                        ? const SizedBox()
+                        : InkWell(
+                            onTap: tapRightButton,
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: rightIconBackgroundColor,
+                              ),
+                              child: Center(
+                                child: Image.asset(
+                                  rightIcon ?? "",
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                   ],
                 )
               ],

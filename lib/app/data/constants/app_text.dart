@@ -9,7 +9,8 @@ class AppText {
       'Connect with Internet and Restart your App.';
   static const String deleteAccountWarningMsg = 'Are you sure,\n you want to delete your account?';
   static const String deleteDocumentsWarningMsg = 'Are you sure,\n you want to delete your document?';
-
+  static const String deleteFeesGroupWarningMsg = 'Are you sure,\n you want to delete fees group?';
+  static const String deleteFeesTypeWarningMsg = 'Are you sure,\n you want to delete fees type?';
   /// Profile
 
   static const String dateOfBirth = 'Date of birth';
