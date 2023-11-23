@@ -167,6 +167,18 @@ class AppFunctions {
       case 'Room List':
         Get.toNamed(Routes.ADMIN_ROOM_LIST);
         break;
+      case 'Fees':
+        Get.toNamed(Routes.ADMIN_FEES);
+        break;
+      case 'Fees Group':
+        Get.toNamed(Routes.ADMIN_FEES_GROUP);
+        break;
+      case 'Fees Type':
+        Get.toNamed(Routes.ADMIN_FEES_TYPE);
+        break;
+      case 'Fees Invoice':
+        Get.toNamed(Routes.ADMIN_FEES_INVOICE);
+        break;
     }
   }
 

@@ -9,13 +9,13 @@ import '../../../utilities/api_urls.dart';
 
 class StaffListController extends GetxController {
   LoadingController loadingController = Get.find();
-
+  RxBool isLoading = false.obs;
   List<RoleWiseStaffListData> roleWiseStaffList = [];
   int staffId = -1;
 
   Future<void> getRoleWiseStaffList({required int staffRoleId}) async {
     try {
-      loadingController.isLoading = true;
+      isLoading.value = true;
 
       final response = await BaseClient().getData(
         url: InfixApi.getAdminRoleWiseStaff(staffRoleId: staffRoleId),
@@ -26,7 +26,7 @@ class StaffListController extends GetxController {
           AdminStaffRoleWiseListResponseModel.fromJson(response);
 
       if (adminStaffRoleWiseListResponseModel.success == true) {
-        loadingController.isLoading = false;
+        isLoading.value = false;
         if (adminStaffRoleWiseListResponseModel.data!.isNotEmpty) {
           for (int i = 0;
               i < adminStaffRoleWiseListResponseModel.data!.length;
@@ -36,11 +36,11 @@ class StaffListController extends GetxController {
         }
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+      isLoading.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      isLoading.value = false;
     }
   }
 

@@ -3,7 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profile_controller.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/documents_card.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/guardian_info.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/others_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/parents_info.dart';
@@ -331,14 +331,14 @@ class ProfileView extends GetView<ProfileController> {
                                 InkWell(
                                   onTap: () =>
                                       controller.showUploadDocumentsBottomSheet(
-                                          bottomSheetBackgroundColor:
-                                              Colors.white,
-                                          onTap: () {
-                                            controller.pickFile();
-                                          },
-                                          onTapForSave: () {
-                                            controller.uploadDocuments();
-                                          }),
+                                    bottomSheetBackgroundColor: Colors.white,
+                                    onTap: () {
+                                      controller.pickFile();
+                                    },
+                                    onTapForSave: () {
+                                      controller.uploadDocuments();
+                                    },
+                                  ),
                                   child: Container(
                                     width: 200,
                                     padding: const EdgeInsets.symmetric(
@@ -382,13 +382,21 @@ class ProfileView extends GetView<ProfileController> {
                                               itemCount: controller
                                                   .documentsDataList.length,
                                               itemBuilder: (context, index) {
-                                                return DocumentsCard(
+                                                return DeleteTile(
                                                   title:
                                                       "${index + 1}. ${controller.documentsDataList[index].title}",
                                                   fileName: controller
                                                       .documentsDataList[index]
                                                       .file,
-                                                  tapDelete: () => Get.dialog(
+                                                  leftIconBackgroundColor:
+                                                      AppColors.appButtonColor,
+                                                  leftIcon: ImagePath.download,
+                                                  rightIconBackgroundColor:
+                                                      const Color(0xFFED3B3B),
+                                                  rightIcon: ImagePath.delete,
+                                                  /// Delete button
+                                                  tapRightButton: () =>
+                                                      Get.dialog(
                                                     CustomPopupDialogue(
                                                       onYesTap: () {
                                                         controller.deleteDocument(
@@ -405,7 +413,9 @@ class ProfileView extends GetView<ProfileController> {
                                                       yesText: 'delete',
                                                     ),
                                                   ),
-                                                  tapDownload: () {},
+
+                                                  /// Download button
+                                                  tapLeftButton: () {},
                                                 );
                                               },
                                             ),

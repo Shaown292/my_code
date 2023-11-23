@@ -8,6 +8,14 @@ import '../modules/admin_add_room/bindings/admin_add_room_binding.dart';
 import '../modules/admin_add_room/views/admin_add_room_view.dart';
 import '../modules/admin_dormitory/bindings/admin_dormitory_binding.dart';
 import '../modules/admin_dormitory/views/admin_dormitory_view.dart';
+import '../modules/admin_fees/bindings/admin_fees_binding.dart';
+import '../modules/admin_fees/views/admin_fees_view.dart';
+import '../modules/admin_fees_group/bindings/admin_fees_group_binding.dart';
+import '../modules/admin_fees_group/views/admin_fees_group_view.dart';
+import '../modules/admin_fees_invoice/bindings/admin_fees_invoice_binding.dart';
+import '../modules/admin_fees_invoice/views/admin_fees_invoice_view.dart';
+import '../modules/admin_fees_type/bindings/admin_fees_type_binding.dart';
+import '../modules/admin_fees_type/views/admin_fees_type_view.dart';
 import '../modules/admin_leave/bindings/admin_leave_binding.dart';
 import '../modules/admin_leave/views/admin_leave_view.dart';
 import '../modules/admin_room_list/bindings/admin_room_list_binding.dart';
@@ -388,7 +396,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SINGLE_CHAT,
-      page: () => SingleChatView(),
+      page: () => const SingleChatView(),
       binding: SingleChatBinding(),
     ),
     GetPage(
@@ -400,26 +408,55 @@ class AppPages {
       name: _Paths.ADMIN_LEAVE,
       page: () => const AdminLeaveView(),
       binding: AdminLeaveBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.ADMIN_DORMITORY,
       page: () => const AdminDormitoryView(),
       binding: AdminDormitoryBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.ADMIN_ADD_DORMITORY,
       page: () => const AdminAddDormitoryView(),
       binding: AdminAddDormitoryBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_ADD_ROOM,
       page: () => const AdminAddRoomView(),
       binding: AdminAddRoomBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_ROOM_LIST,
       page: () => const AdminRoomListView(),
       binding: AdminRoomListBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_FEES,
+      page: () => const AdminFeesView(),
+      binding: AdminFeesBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_FEES_GROUP,
+      page: () => const AdminFeesGroupView(),
+      binding: AdminFeesGroupBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_FEES_TYPE,
+      page: () => const AdminFeesTypeView(),
+      binding: AdminFeesTypeBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_FEES_INVOICE,
+      page: () => const AdminFeesInvoiceView(),
+      binding: AdminFeesInvoiceBinding(),
+      transition: Transition.fade,
     ),
   ];
 }

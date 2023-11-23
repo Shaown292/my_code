@@ -189,7 +189,6 @@ class ChatView extends GetView<ChatController> {
           elevation: 15,
           backgroundColor: AppColors.primaryColor,
           onPressed: () {},
-          mini: true,
           child: const Icon(
             Icons.add,
             size: 30,
