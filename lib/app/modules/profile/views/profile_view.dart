@@ -385,7 +385,7 @@ class ProfileView extends GetView<ProfileController> {
                                                 return DeleteTile(
                                                   title:
                                                       "${index + 1}. ${controller.documentsDataList[index].title}",
-                                                  fileName: controller
+                                                  subTitle: controller
                                                       .documentsDataList[index]
                                                       .file,
                                                   leftIconBackgroundColor:

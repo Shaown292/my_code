@@ -2,16 +2,57 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_fees_model/admin_fees_type_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminFeesTypeController extends GetxController {
 
+  LoadingController loadingController = Get.find();
+
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
+  RxList<FeesTypes> feesTypeList = <FeesTypes>[].obs;
+
+  Future<AdminFeesTypeResponseModel> getFeesListList() async {
+    try {
+      feesTypeList.clear();
+      loadingController.isLoading = true;
+      final response = await BaseClient().getData(
+          url: InfixApi.getFeesTypeList, header: GlobalVariable.header);
+      AdminFeesTypeResponseModel feesTypeResponseModel =
+      AdminFeesTypeResponseModel.fromJson(response);
+
+      if (feesTypeResponseModel.success == true) {
+        if (feesTypeResponseModel.data!.feesTypes!.isNotEmpty) {
+          for (int i = 0; i < feesTypeResponseModel.data!.feesTypes!.length; i++) {
+            feesTypeList.add(feesTypeResponseModel.data!.feesTypes![i]);
+          }
+        }
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(
+            message:
+            feesTypeResponseModel.message ?? 'Something Went Wrong.');
+      }
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
+
+    return AdminFeesTypeResponseModel();
+  }
 
 
   void showUploadDocumentsBottomSheet({
@@ -126,4 +167,12 @@ class AdminFeesTypeController extends GetxController {
       shape: defaultBottomSheetShape(),
     );
   }
+
+
+  @override
+  void onInit() {
+    getFeesListList();
+    super.onInit();
+  }
+
 }

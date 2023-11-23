@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class DeleteTile extends StatelessWidget {
   final String? title;
-  final String? fileName;
+  final String? subTitle;
   final Function()? tapLeftButton;
   final Function()? tapRightButton;
   final Color? color;
@@ -19,7 +19,7 @@ class DeleteTile extends StatelessWidget {
   const DeleteTile({
     super.key,
     this.title,
-    this.fileName,
+    this.subTitle,
     this.tapLeftButton,
     this.tapRightButton,
     this.color,
@@ -64,7 +64,7 @@ class DeleteTile extends StatelessWidget {
                     SizedBox(
                       width: Get.width * 0.5,
                       child: Text(
-                        fileName ?? "",
+                        subTitle ?? "",
                         style: AppTextStyle.blackFontSize12W400,
                       ),
                     ),

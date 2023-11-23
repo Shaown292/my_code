@@ -6,6 +6,8 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -20,16 +22,22 @@ class AdminFeesTypeView extends GetView<AdminFeesTypeController> {
       body: CustomBackground(
         customWidget: Column(
           children: [
-            Expanded(
+            Obx(() => Expanded(
               child: RefreshIndicator(
                 color: AppColors.primaryColor,
                 onRefresh: () async{
+                  controller.getFeesListList();
                 },
-                child: ListView.builder(
-                  itemCount: 100,
+                child: controller.loadingController.isLoading ? const Column(
+                  children: [
+                    LoadingWidget(),
+                  ],
+                ) : controller.feesTypeList.isNotEmpty ? ListView.builder(
+                  itemCount: controller.feesTypeList.length,
                   itemBuilder: (context, index) {
                     return DeleteTile(
-                      title: "${index + 1} Hello",
+                      title: "${index + 1}. ${controller.feesTypeList[index].name}",
+                      subTitle: controller.feesTypeList[index].description,
 
                       /// Delete button
                       rightIconBackgroundColor: const Color(0xFFED3B3B),
@@ -63,9 +71,9 @@ class AdminFeesTypeView extends GetView<AdminFeesTypeController> {
                       },
                     );
                   },
-                ),
+                ) : const NoDataAvailableWidget(),
               ),
-            ),
+            ),),
           ],
         ),
       ),

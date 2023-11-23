@@ -2,17 +2,128 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_fees_model/fees_group_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminFeesGroupController extends GetxController {
+  LoadingController loadingController = Get.find();
+  RxBool createLoader = false.obs;
+  RxBool deleteLoader = false.obs;
+
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
-  // TextEditingController titleEditTextController = TextEditingController();
-  // TextEditingController descriptionEditTextController = TextEditingController();
+  RxList<FeesGroupData> fessGroupList = <FeesGroupData>[].obs;
+
+  Future<FeesGroupListResponseModel> getFeesGroupList() async {
+    try {
+      fessGroupList.clear();
+      loadingController.isLoading = true;
+      final response = await BaseClient().getData(
+          url: InfixApi.getFeesGroupList, header: GlobalVariable.header);
+      FeesGroupListResponseModel feesGroupListResponseModel =
+          FeesGroupListResponseModel.fromJson(response);
+
+      if (feesGroupListResponseModel.success == true) {
+        if (feesGroupListResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < feesGroupListResponseModel.data!.length; i++) {
+            fessGroupList.add(feesGroupListResponseModel.data![i]);
+          }
+        }
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(
+            message:
+                feesGroupListResponseModel.message ?? 'Something Went Wrong.');
+      }
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
+
+    return FeesGroupListResponseModel();
+  }
+
+  Future<void> createFeesGroup() async {
+    try {
+      createLoader.value = true;
+      final response = await BaseClient().postData(
+        url: InfixApi.createFeesGroup,
+        header: GlobalVariable.header,
+        payload: {
+          "name": titleTextController.text,
+          "description": descriptionTextController.text,
+        },
+      );
+      FeesGroupListResponseModel feesGroupListResponseModel =
+          FeesGroupListResponseModel.fromJson(response);
+
+      if (feesGroupListResponseModel.success == true) {
+        createLoader.value = false;
+        Get.back();
+        showBasicSuccessSnackBar(message: feesGroupListResponseModel.message ?? 'Created Successfully');
+        if (feesGroupListResponseModel.data!.isNotEmpty) {
+          fessGroupList.add(FeesGroupData(
+            id: feesGroupListResponseModel.data!.first.id,
+            name: feesGroupListResponseModel.data!.first.name,
+            description: feesGroupListResponseModel.data!.first.description,
+          ),);
+        }
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(
+            message:
+                feesGroupListResponseModel.message ?? 'Something went wrong.');
+      }
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      createLoader.value = false;
+    }
+  }
+
+  Future<void> deleteSingleFees(
+      {required int feesId, required int index}) async {
+    try {
+      deleteLoader.value = true;
+      final response = await BaseClient().postData(
+          url: InfixApi.deleteSingleFeesGroup(feesId: feesId),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        deleteLoader.value = false;
+        Get.back();
+        fessGroupList.removeAt(index);
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'Data deleted');
+      } else {
+        deleteLoader.value = false;
+        showBasicFailedSnackBar(
+            message:
+                postRequestResponseModel.message ?? 'Something went wrong');
+      }
+    } catch (e, t) {
+      deleteLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {deleteLoader.value = false;}
+  }
 
   void showUploadDocumentsBottomSheet({
     Function()? onTapForSave,
@@ -95,9 +206,9 @@ class AdminFeesGroupController extends GetxController {
                   ],
                 ),
               ),
-              Padding(
+              Obx(() => Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -109,7 +220,7 @@ class AdminFeesGroupController extends GetxController {
                       borderColor: AppColors.primaryColor,
                       onTap: onTapCancel,
                     ),
-                    PrimaryButton(
+                    createLoader.value ? const CircularProgressIndicator() : PrimaryButton(
                       width: Get.width * 0.2,
                       title: "Save",
                       textStyle: AppTextStyle.textStyle12WhiteW500,
@@ -117,7 +228,7 @@ class AdminFeesGroupController extends GetxController {
                     ),
                   ],
                 ),
-              )
+              ),),
             ],
           ),
         ),
@@ -125,5 +236,11 @@ class AdminFeesGroupController extends GetxController {
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );
+  }
+
+  @override
+  void onInit() {
+    getFeesGroupList();
+    super.onInit();
   }
 }

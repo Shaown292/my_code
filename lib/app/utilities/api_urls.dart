@@ -206,6 +206,12 @@ class InfixApi {
   static String getAdminRoomType = '${baseApi}room-type';
   static String addDormitoryRoomFromAdin = '${baseApi}room-store';
   static String dormitoryRoomList = '${baseApi}room-list';
+  static String getFeesGroupList = '${baseApi}fees-group';
+  static String createFeesGroup = '${baseApi}fees-group-store';
+
+  static String deleteSingleFeesGroup({required int feesId}) => '${baseApi}fees-group-delete?fees_group_id=$feesId';
+
+  static String getFeesTypeList = '${baseApi}fees-type';
 
   /// Dormitory
   static String addDormitoryFromAdmin = '${baseApi}dormitory-store';

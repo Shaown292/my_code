@@ -34,8 +34,10 @@ class CustomPopupDialogue extends StatelessWidget {
           ),
         ),
         isLoading
-            ? const CircularProgressIndicator(
-                color: AppColors.primaryColor,
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryColor,
+                ),
               )
             : TextButton(
                 onPressed: onYesTap,

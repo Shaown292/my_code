@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/alert_dialog.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -16,7 +19,7 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
 
   @override
   Widget build(BuildContext context) {
-    return InfixEduScaffold(
+    return Obx(() => InfixEduScaffold(
       title: "Fees Group",
       body: CustomBackground(
         customWidget: Column(
@@ -25,30 +28,40 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
               child: RefreshIndicator(
                 color: AppColors.primaryColor,
                 onRefresh: () async{
+                  controller.getFeesGroupList();
                 },
-                child: ListView.builder(
-                  itemCount: 100,
+                child: controller.loadingController.isLoading ? const Column(
+                  children: [
+                    LoadingWidget(),
+                  ],
+                ) : controller.fessGroupList.isNotEmpty ? ListView.builder(
+                  itemCount: controller.fessGroupList.length,
                   itemBuilder: (context, index) {
                     return DeleteTile(
-                      title: "${index + 1} Hello",
+                      title: "${index + 1}. ${controller.fessGroupList[index].name}",
 
                       /// Delete button
                       rightIconBackgroundColor: const Color(0xFFED3B3B),
                       rightIcon: ImagePath.delete,
                       tapRightButton: () => Get.dialog(
-                        CustomPopupDialogue(
-                          onYesTap: () {},
+                        Obx(() => CustomPopupDialogue(
+                          isLoading: controller.deleteLoader.value,
+                          onYesTap: () {
+                            controller.deleteSingleFees(feesId: controller.fessGroupList[index].id!, index: index);
+                          },
                           title: 'Confirmation',
                           subTitle: AppText.deleteFeesGroupWarningMsg,
                           noText: 'cancel',
                           yesText: 'delete',
-                        ),
+                        ),),
                       ),
 
                       /// Edit button
                       leftIcon: ImagePath.edit,
                       leftIconBackgroundColor: AppColors.appButtonColor,
                       tapLeftButton: () {
+                        controller.titleTextController.text = controller.fessGroupList[index].name ?? '';
+                        controller.descriptionTextController.text = controller.fessGroupList[index].description ?? '';
                         controller.showUploadDocumentsBottomSheet(
                           header: "Edit",
                           bottomSheetBackgroundColor: Colors.white,
@@ -59,12 +72,14 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                             controller.titleTextController.clear();
                             controller.descriptionTextController.clear();
                           },
-                          onTapForSave: () {},
+                          onTapForSave: () {
+
+                          },
                         );
                       },
                     );
                   },
-                ),
+                ) : const NoDataAvailableWidget(),
               ),
             ),
           ],
@@ -85,8 +100,12 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
               controller.descriptionTextController.clear();
             },
             onTapForSave: () {
-              debugPrint("Title :::: ${controller.titleTextController}");
-              debugPrint("Description :::: ${controller.descriptionTextController}");
+              if(controller.titleTextController.text.isEmpty){
+                showBasicFailedSnackBar(message: 'Title is required.');
+              } else{
+                controller.createFeesGroup();
+              }
+
             },
           );
         },
@@ -97,6 +116,6 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
           color: Colors.white,
         ),
       ),
-    );
+    ),);
   }
 }
