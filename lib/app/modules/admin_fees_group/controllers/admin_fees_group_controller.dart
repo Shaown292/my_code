@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 
 class AdminFeesGroupController extends GetxController {
   LoadingController loadingController = Get.find();
-  RxBool createLoader = false.obs;
+  RxBool createUpdateLoader = false.obs;
   RxBool deleteLoader = false.obs;
 
   TextEditingController titleTextController = TextEditingController();
@@ -58,7 +58,7 @@ class AdminFeesGroupController extends GetxController {
 
   Future<void> createFeesGroup() async {
     try {
-      createLoader.value = true;
+      createUpdateLoader.value = true;
       final response = await BaseClient().postData(
         url: InfixApi.createFeesGroup,
         header: GlobalVariable.header,
@@ -71,7 +71,7 @@ class AdminFeesGroupController extends GetxController {
           FeesGroupListResponseModel.fromJson(response);
 
       if (feesGroupListResponseModel.success == true) {
-        createLoader.value = false;
+        createUpdateLoader.value = false;
         Get.back();
         showBasicSuccessSnackBar(message: feesGroupListResponseModel.message ?? 'Created Successfully');
         if (feesGroupListResponseModel.data!.isNotEmpty) {
@@ -92,7 +92,7 @@ class AdminFeesGroupController extends GetxController {
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      createLoader.value = false;
+      createUpdateLoader.value = false;
     }
   }
 
@@ -124,6 +124,43 @@ class AdminFeesGroupController extends GetxController {
       debugPrint('$t');
     } finally {deleteLoader.value = false;}
   }
+
+  Future<void> updateSingleFeesGroup({required int feesId, required int index}) async {
+    try{
+
+      createUpdateLoader.value = true;
+
+      final response = await BaseClient().postData(url: InfixApi.updateSingleFeesGroup, header: GlobalVariable.header,
+      payload: {
+        "id": feesId,
+        "name": titleTextController.text,
+        "description": descriptionTextController.text,
+      },);
+
+      FeesGroupListResponseModel feesGroupListResponseModel = FeesGroupListResponseModel.fromJson(response);
+      if(feesGroupListResponseModel.success == true){
+        fessGroupList[index].id = feesGroupListResponseModel.data!.first.id;
+        fessGroupList[index].name = feesGroupListResponseModel.data!.first.name;
+        fessGroupList[index].description = feesGroupListResponseModel.data!.first.description;
+        titleTextController.clear();
+        descriptionTextController.clear();
+        createUpdateLoader.value = false;
+        fessGroupList.refresh();
+        Get.back();
+      } else{
+        createUpdateLoader.value = false;
+        showBasicFailedSnackBar(message: feesGroupListResponseModel.message ?? 'Something went wrong');
+      }
+
+    } catch(e, t){
+      createUpdateLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally{
+      createUpdateLoader.value = false;
+    }
+  }
+
 
   void showUploadDocumentsBottomSheet({
     Function()? onTapForSave,
@@ -220,7 +257,7 @@ class AdminFeesGroupController extends GetxController {
                       borderColor: AppColors.primaryColor,
                       onTap: onTapCancel,
                     ),
-                    createLoader.value ? const CircularProgressIndicator() : PrimaryButton(
+                    createUpdateLoader.value ? const CircularProgressIndicator() : PrimaryButton(
                       width: Get.width * 0.2,
                       title: "Save",
                       textStyle: AppTextStyle.textStyle12WhiteW500,

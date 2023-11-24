@@ -73,7 +73,11 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                             controller.descriptionTextController.clear();
                           },
                           onTapForSave: () {
-
+                            if(controller.titleTextController.text.isNotEmpty){
+                              controller.updateSingleFeesGroup(feesId: controller.fessGroupList[index].id!, index: index);
+                            } else{
+                              showBasicFailedSnackBar(message: 'Title is required');
+                            }
                           },
                         );
                       },
