@@ -73,13 +73,17 @@ class AdminFeesGroupController extends GetxController {
       if (feesGroupListResponseModel.success == true) {
         createUpdateLoader.value = false;
         Get.back();
-        showBasicSuccessSnackBar(message: feesGroupListResponseModel.message ?? 'Created Successfully');
+        showBasicSuccessSnackBar(
+            message:
+                feesGroupListResponseModel.message ?? 'Created Successfully');
         if (feesGroupListResponseModel.data!.isNotEmpty) {
-          fessGroupList.add(FeesGroupData(
-            id: feesGroupListResponseModel.data!.first.id,
-            name: feesGroupListResponseModel.data!.first.name,
-            description: feesGroupListResponseModel.data!.first.description,
-          ),);
+          fessGroupList.add(
+            FeesGroupData(
+              id: feesGroupListResponseModel.data!.first.id,
+              name: feesGroupListResponseModel.data!.first.name,
+              description: feesGroupListResponseModel.data!.first.description,
+            ),
+          );
         }
       } else {
         loadingController.isLoading = false;
@@ -122,45 +126,52 @@ class AdminFeesGroupController extends GetxController {
       deleteLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally {deleteLoader.value = false;}
+    } finally {
+      deleteLoader.value = false;
+    }
   }
 
-  Future<void> updateSingleFeesGroup({required int feesId, required int index}) async {
-    try{
-
+  Future<void> updateSingleFeesGroup(
+      {required int feesId, required int index}) async {
+    try {
       createUpdateLoader.value = true;
 
-      final response = await BaseClient().postData(url: InfixApi.updateSingleFeesGroup, header: GlobalVariable.header,
-      payload: {
-        "id": feesId,
-        "name": titleTextController.text,
-        "description": descriptionTextController.text,
-      },);
+      final response = await BaseClient().postData(
+        url: InfixApi.updateSingleFeesGroup,
+        header: GlobalVariable.header,
+        payload: {
+          "id": feesId,
+          "name": titleTextController.text,
+          "description": descriptionTextController.text,
+        },
+      );
 
-      FeesGroupListResponseModel feesGroupListResponseModel = FeesGroupListResponseModel.fromJson(response);
-      if(feesGroupListResponseModel.success == true){
+      FeesGroupListResponseModel feesGroupListResponseModel =
+          FeesGroupListResponseModel.fromJson(response);
+      if (feesGroupListResponseModel.success == true) {
         fessGroupList[index].id = feesGroupListResponseModel.data!.first.id;
         fessGroupList[index].name = feesGroupListResponseModel.data!.first.name;
-        fessGroupList[index].description = feesGroupListResponseModel.data!.first.description;
+        fessGroupList[index].description =
+            feesGroupListResponseModel.data!.first.description;
         titleTextController.clear();
         descriptionTextController.clear();
         createUpdateLoader.value = false;
         fessGroupList.refresh();
         Get.back();
-      } else{
+      } else {
         createUpdateLoader.value = false;
-        showBasicFailedSnackBar(message: feesGroupListResponseModel.message ?? 'Something went wrong');
+        showBasicFailedSnackBar(
+            message:
+                feesGroupListResponseModel.message ?? 'Something went wrong');
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       createUpdateLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       createUpdateLoader.value = false;
     }
   }
-
 
   void showUploadDocumentsBottomSheet({
     Function()? onTapForSave,
@@ -243,29 +254,33 @@ class AdminFeesGroupController extends GetxController {
                   ],
                 ),
               ),
-              Obx(() => Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    PrimaryButton(
-                      width: Get.width * 0.15,
-                      title: "Cancel",
-                      color: Colors.white,
-                      textStyle: AppTextStyle.fontSize13BlackW400,
-                      borderColor: AppColors.primaryColor,
-                      onTap: onTapCancel,
-                    ),
-                    createUpdateLoader.value ? const CircularProgressIndicator() : PrimaryButton(
-                      width: Get.width * 0.2,
-                      title: "Save",
-                      textStyle: AppTextStyle.textStyle12WhiteW500,
-                      onTap: onTapForSave,
-                    ),
-                  ],
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PrimaryButton(
+                        width: Get.width * 0.15,
+                        title: "Cancel",
+                        color: Colors.white,
+                        textStyle: AppTextStyle.fontSize13BlackW400,
+                        borderColor: AppColors.primaryColor,
+                        onTap: onTapCancel,
+                      ),
+                      createUpdateLoader.value
+                          ? const CircularProgressIndicator()
+                          : PrimaryButton(
+                              width: Get.width * 0.2,
+                              title: "Save",
+                              textStyle: AppTextStyle.textStyle12WhiteW500,
+                              onTap: onTapForSave,
+                            ),
+                    ],
+                  ),
                 ),
-              ),),
+              ),
             ],
           ),
         ),

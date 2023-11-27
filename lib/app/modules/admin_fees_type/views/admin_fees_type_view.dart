@@ -43,13 +43,16 @@ class AdminFeesTypeView extends GetView<AdminFeesTypeController> {
                       rightIconBackgroundColor: const Color(0xFFED3B3B),
                       rightIcon: ImagePath.delete,
                       tapRightButton: () => Get.dialog(
-                        CustomPopupDialogue(
-                          onYesTap: () {},
+                        Obx(() => CustomPopupDialogue(
+                          isLoading: controller.deleteLoader.value,
+                          onYesTap: () {
+                            controller.deleteSingleFeesType(feesTypeId: controller.feesTypeList[index].id!, index: index);
+                          },
                           title: 'Confirmation',
                           subTitle: AppText.deleteFeesTypeWarningMsg,
                           noText: 'cancel',
                           yesText: 'delete',
-                        ),
+                        ),),
                       ),
 
                       /// Edit button

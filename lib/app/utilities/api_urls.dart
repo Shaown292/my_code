@@ -213,6 +213,7 @@ class InfixApi {
   static String deleteSingleFeesGroup({required int feesId}) => '${baseApi}fees-group-delete?fees_group_id=$feesId';
 
   static String getFeesTypeList = '${baseApi}fees-type';
+  static String deleteFeesType({required feesTypeId}) => '${baseApi}fees-type-delete?fees_type_id=$feesTypeId';
 
   /// Dormitory
   static String addDormitoryFromAdmin = '${baseApi}dormitory-store';

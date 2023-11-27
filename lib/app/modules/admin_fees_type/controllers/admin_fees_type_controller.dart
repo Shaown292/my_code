@@ -11,16 +11,19 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_fees_model/admin_fees_type_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminFeesTypeController extends GetxController {
-
   LoadingController loadingController = Get.find();
 
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
   RxList<FeesTypes> feesTypeList = <FeesTypes>[].obs;
+
+  RxBool createUpdateLoader = false.obs;
+  RxBool deleteLoader = false.obs;
 
   Future<AdminFeesTypeResponseModel> getFeesListList() async {
     try {
@@ -29,19 +32,20 @@ class AdminFeesTypeController extends GetxController {
       final response = await BaseClient().getData(
           url: InfixApi.getFeesTypeList, header: GlobalVariable.header);
       AdminFeesTypeResponseModel feesTypeResponseModel =
-      AdminFeesTypeResponseModel.fromJson(response);
+          AdminFeesTypeResponseModel.fromJson(response);
 
       if (feesTypeResponseModel.success == true) {
         if (feesTypeResponseModel.data!.feesTypes!.isNotEmpty) {
-          for (int i = 0; i < feesTypeResponseModel.data!.feesTypes!.length; i++) {
+          for (int i = 0;
+              i < feesTypeResponseModel.data!.feesTypes!.length;
+              i++) {
             feesTypeList.add(feesTypeResponseModel.data!.feesTypes![i]);
           }
         }
       } else {
         loadingController.isLoading = false;
         showBasicFailedSnackBar(
-            message:
-            feesTypeResponseModel.message ?? 'Something Went Wrong.');
+            message: feesTypeResponseModel.message ?? 'Something Went Wrong.');
       }
     } catch (e, t) {
       loadingController.isLoading = false;
@@ -54,6 +58,112 @@ class AdminFeesTypeController extends GetxController {
     return AdminFeesTypeResponseModel();
   }
 
+  // Future<void> createFeesGroup() async {
+  //   try {
+  //     createUpdateLoader.value = true;
+  //     final response = await BaseClient().postData(
+  //       url: InfixApi.createFeesGroup,
+  //       header: GlobalVariable.header,
+  //       payload: {
+  //         "name": titleTextController.text,
+  //         "description": descriptionTextController.text,
+  //       },
+  //     );
+  //     FeesGroupListResponseModel feesGroupListResponseModel =
+  //     FeesGroupListResponseModel.fromJson(response);
+  //
+  //     if (feesGroupListResponseModel.success == true) {
+  //       createUpdateLoader.value = false;
+  //       Get.back();
+  //       showBasicSuccessSnackBar(message: feesGroupListResponseModel.message ?? 'Created Successfully');
+  //       if (feesGroupListResponseModel.data!.isNotEmpty) {
+  //         fessGroupList.add(FeesGroupData(
+  //           id: feesGroupListResponseModel.data!.first.id,
+  //           name: feesGroupListResponseModel.data!.first.name,
+  //           description: feesGroupListResponseModel.data!.first.description,
+  //         ),);
+  //       }
+  //     } else {
+  //       loadingController.isLoading = false;
+  //       showBasicFailedSnackBar(
+  //           message:
+  //           feesGroupListResponseModel.message ?? 'Something went wrong.');
+  //     }
+  //   } catch (e, t) {
+  //     loadingController.isLoading = false;
+  //     debugPrint('$e');
+  //     debugPrint('$t');
+  //   } finally {
+  //     createUpdateLoader.value = false;
+  //   }
+  // }
+
+  Future<void> deleteSingleFeesType(
+      {required int feesTypeId, required int index}) async {
+    try {
+      deleteLoader.value = true;
+      final response = await BaseClient().postData(
+          url: InfixApi.deleteFeesType(feesTypeId: feesTypeId),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        deleteLoader.value = false;
+        Get.back();
+        feesTypeList.removeAt(index);
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'Data deleted');
+      } else {
+        deleteLoader.value = false;
+        showBasicFailedSnackBar(
+            message:
+                postRequestResponseModel.message ?? 'Something went wrong');
+      }
+    } catch (e, t) {
+      deleteLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      deleteLoader.value = false;
+    }
+  }
+
+  // Future<void> updateSingleFeesGroup({required int feesId, required int index}) async {
+  //   try{
+  //
+  //     createUpdateLoader.value = true;
+  //
+  //     final response = await BaseClient().postData(url: InfixApi.updateSingleFeesGroup, header: GlobalVariable.header,
+  //       payload: {
+  //         "id": feesId,
+  //         "name": titleTextController.text,
+  //         "description": descriptionTextController.text,
+  //       },);
+  //
+  //     FeesGroupListResponseModel feesGroupListResponseModel = FeesGroupListResponseModel.fromJson(response);
+  //     if(feesGroupListResponseModel.success == true){
+  //       fessGroupList[index].id = feesGroupListResponseModel.data!.first.id;
+  //       fessGroupList[index].name = feesGroupListResponseModel.data!.first.name;
+  //       fessGroupList[index].description = feesGroupListResponseModel.data!.first.description;
+  //       titleTextController.clear();
+  //       descriptionTextController.clear();
+  //       createUpdateLoader.value = false;
+  //       fessGroupList.refresh();
+  //       Get.back();
+  //     } else{
+  //       createUpdateLoader.value = false;
+  //       showBasicFailedSnackBar(message: feesGroupListResponseModel.message ?? 'Something went wrong');
+  //     }
+  //
+  //   } catch(e, t){
+  //     createUpdateLoader.value = false;
+  //     debugPrint('$e');
+  //     debugPrint('$t');
+  //   } finally{
+  //     createUpdateLoader.value = false;
+  //   }
+  // }
 
   void showUploadDocumentsBottomSheet({
     Function()? onTapForSave,
@@ -136,29 +246,35 @@ class AdminFeesTypeController extends GetxController {
                   ],
                 ),
               ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    PrimaryButton(
-                      width: Get.width * 0.15,
-                      title: "Cancel",
-                      color: Colors.white,
-                      textStyle: AppTextStyle.fontSize13BlackW400,
-                      borderColor: AppColors.primaryColor,
-                      onTap: onTapCancel,
-                    ),
-                    PrimaryButton(
-                      width: Get.width * 0.2,
-                      title: "Save",
-                      textStyle: AppTextStyle.textStyle12WhiteW500,
-                      onTap: onTapForSave,
-                    ),
-                  ],
+
+              Obx(
+                    () => Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PrimaryButton(
+                        width: Get.width * 0.15,
+                        title: "Cancel",
+                        color: Colors.white,
+                        textStyle: AppTextStyle.fontSize13BlackW400,
+                        borderColor: AppColors.primaryColor,
+                        onTap: onTapCancel,
+                      ),
+                      createUpdateLoader.value || deleteLoader.value
+                          ? const CircularProgressIndicator()
+                          : PrimaryButton(
+                        width: Get.width * 0.2,
+                        title: "Save",
+                        textStyle: AppTextStyle.textStyle12WhiteW500,
+                        onTap: onTapForSave,
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
+
             ],
           ),
         ),
@@ -168,11 +284,9 @@ class AdminFeesTypeController extends GetxController {
     );
   }
 
-
   @override
   void onInit() {
     getFeesListList();
     super.onInit();
   }
-
 }
