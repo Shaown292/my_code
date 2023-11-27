@@ -11,6 +11,8 @@ class StaffIndividualDetailsController extends GetxController {
   int staffIndividualId = 5;
   LoadingController loadingController = Get.find();
 
+  AdminIndividualStaffDetailsResponseModel? adminIndividualStaffDetailsResponseModel;
+
   Future<void> getIndividualStaffData({required int staffIndividualId}) async {
     try {
       loadingController.isLoading = true;
@@ -20,11 +22,11 @@ class StaffIndividualDetailsController extends GetxController {
         header: GlobalVariable.header,
       );
 
-      AdminIndividualStaffDetailsResponseModel
-          adminIndividualStaffDetailsResponseModel =
+
+      adminIndividualStaffDetailsResponseModel =
           AdminIndividualStaffDetailsResponseModel.fromJson(response);
-      if (adminIndividualStaffDetailsResponseModel.success == true) {
-        // loadingController.isLoading = false;
+      if (adminIndividualStaffDetailsResponseModel!.success == true) {
+        loadingController.isLoading = false;
 
       }
     } catch (e, t) {

@@ -37,8 +37,9 @@ class StaffView extends GetView<StaffController> {
                         itemBuilder: (context, index) {
                           return Obx(
                             () => CustomCardTile(
-                              icon: ImagePath.mail,
+                              icon: ImagePath.add,
                               title: controller.staffRoleList[index].name ?? "",
+                              iconColor: AppColors.primaryColor.withOpacity(0.7),
                               onTap: () {
                                 controller.selectIndex.value = index;
                                 Get.toNamed(

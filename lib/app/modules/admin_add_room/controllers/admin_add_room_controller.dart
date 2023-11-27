@@ -22,13 +22,14 @@ class AdminAddRoomController extends GetxController {
   RxInt dormitoryId = 0.obs;
   RxInt roomTypeId = 0.obs;
 
-  RxString dormitoryValue = ''.obs;
+  Rx<DormitoryListData> dormitoryValue =
+      DormitoryListData(id: -1, name: "Dormitory").obs;
   List<String> dormitoryDropdownList = [];
-  List<DormitoryListData> dormitoryList = [];
+  RxList<DormitoryListData> dormitoryList = <DormitoryListData>[].obs;
 
-  RxString roomTypeValue = ''.obs;
-  List<String> roomTypeDropdownList = [];
-  List<DormitoryRoomTypeData> roomTypeList = [];
+  Rx<DormitoryRoomTypeData> roomTypeValue =
+      DormitoryRoomTypeData(id: -1, name: "Select dormitory room").obs;
+  RxList<DormitoryRoomTypeData> roomTypeList = <DormitoryRoomTypeData>[].obs;
 
   bool validation() {
     if (roomNameTextController.text.isEmpty) {
@@ -57,7 +58,7 @@ class AdminAddRoomController extends GetxController {
           url: InfixApi.getAdminDormitoryList, header: GlobalVariable.header);
 
       DormitoryListResponseModel dormitoryListResponseModel =
-          DormitoryListResponseModel.fromJson(response);
+      DormitoryListResponseModel.fromJson(response);
       if (dormitoryListResponseModel.success == true) {
         loadingController.isLoading = false;
 
@@ -65,15 +66,15 @@ class AdminAddRoomController extends GetxController {
           for (int i = 0; i < dormitoryListResponseModel.data!.length; i++) {
             dormitoryList.add(dormitoryListResponseModel.data![i]);
             dormitoryDropdownList
-                .add(dormitoryListResponseModel.data![i].dormitoryName!);
+                .add(dormitoryListResponseModel.data![i].name!);
           }
-          dormitoryValue.value = dormitoryDropdownList[0];
+          dormitoryValue.value = dormitoryList[0];
         }
       } else {
         loadingController.isLoading = false;
         showBasicFailedSnackBar(
             message:
-                dormitoryListResponseModel.message ?? 'Something went wrong');
+            dormitoryListResponseModel.message ?? 'Something went wrong');
       }
     } catch (e, t) {
       loadingController.isLoading = false;
@@ -91,18 +92,17 @@ class AdminAddRoomController extends GetxController {
       final response = await BaseClient().getData(
           url: InfixApi.getAdminRoomType, header: GlobalVariable.header);
       DormitoryRoomTypeResponseModel dormitoryRoomTypeResponseModel =
-          DormitoryRoomTypeResponseModel.fromJson(response);
+      DormitoryRoomTypeResponseModel.fromJson(response);
 
       if (dormitoryRoomTypeResponseModel.success == true) {
         if (dormitoryRoomTypeResponseModel.data!.isNotEmpty) {
           for (int i = 0;
-              i < dormitoryRoomTypeResponseModel.data!.length;
-              i++) {
+          i < dormitoryRoomTypeResponseModel.data!.length;
+          i++) {
             roomTypeList.add(dormitoryRoomTypeResponseModel.data![i]);
-            roomTypeDropdownList
-                .add(dormitoryRoomTypeResponseModel.data![i].type!);
           }
-          roomTypeValue.value = roomTypeDropdownList[0];
+
+          roomTypeValue.value = roomTypeList[0];
         }
       } else {
         isLoading.value = false;
@@ -138,7 +138,7 @@ class AdminAddRoomController extends GetxController {
       );
 
       PostRequestResponseModel postRequestResponseModel =
-          PostRequestResponseModel.fromJson(response);
+      PostRequestResponseModel.fromJson(response);
       if (postRequestResponseModel.success == true) {
         saveLoader.value = false;
         roomNameTextController.clear();
@@ -147,7 +147,7 @@ class AdminAddRoomController extends GetxController {
         descriptionTextController.clear();
         showBasicSuccessSnackBar(
             message:
-                postRequestResponseModel.message ?? 'Operation Successful');
+            postRequestResponseModel.message ?? 'Operation Successful');
       } else {
         saveLoader.value = false;
         showBasicFailedSnackBar(

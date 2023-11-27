@@ -21,6 +21,7 @@ class AdminFeesView extends GetView<AdminFeesController> {
           children: [
             GridView.builder(
               shrinkWrap: true,
+
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.adminFeesTileList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

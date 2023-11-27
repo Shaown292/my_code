@@ -63,6 +63,16 @@ abstract class Routes {
   static const ADMIN_FEES_GROUP = _Paths.ADMIN_FEES_GROUP;
   static const ADMIN_FEES_TYPE = _Paths.ADMIN_FEES_TYPE;
   static const ADMIN_FEES_INVOICE = _Paths.ADMIN_FEES_INVOICE;
+  static const ADMIN_ATTENDANCE = _Paths.ADMIN_ATTENDANCE;
+  static const ADMIN_CLASS_ATTENDANCE_SEARCH =
+      _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH;
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH =
+      _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH;
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL =
+      _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL;
+  static const ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL =
+      _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL;
+  static const ADMIN_CLASS_SET_ATTENDANCE = _Paths.ADMIN_CLASS_SET_ATTENDANCE;
 }
 
 abstract class _Paths {
@@ -125,4 +135,13 @@ abstract class _Paths {
   static const ADMIN_FEES_GROUP = '/admin-fees-group';
   static const ADMIN_FEES_TYPE = '/admin-fees-type';
   static const ADMIN_FEES_INVOICE = '/admin-fees-invoice';
+  static const ADMIN_ATTENDANCE = '/admin-attendance';
+  static const ADMIN_CLASS_ATTENDANCE_SEARCH = '/admin-class-attendance-search';
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH =
+      '/admin-subject-attendance-search';
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL =
+      '/admin-subject-attendance-search-individual';
+  static const ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL =
+      '/admin-class-attendance-search-individual';
+  static const ADMIN_CLASS_SET_ATTENDANCE = '/admin-class-set-attendance';
 }

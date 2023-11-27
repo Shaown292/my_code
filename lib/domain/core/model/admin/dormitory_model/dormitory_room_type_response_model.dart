@@ -29,19 +29,19 @@ class DormitoryRoomTypeResponseModel {
 
 class DormitoryRoomTypeData {
   int? id;
-  String? type;
+  String? name; ///type => name
 
-  DormitoryRoomTypeData({this.id, this.type});
+  DormitoryRoomTypeData({this.id, this.name});
 
   DormitoryRoomTypeData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    type = json['type'];
+    name = json['type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['type'] = type;
+    data['type'] = name;
     return data;
   }
 }

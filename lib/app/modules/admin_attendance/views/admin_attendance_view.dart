@@ -7,33 +7,32 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 
 import 'package:get/get.dart';
 
-import '../controllers/admin_dormitory_controller.dart';
+import '../controllers/admin_attendance_controller.dart';
 
-class AdminDormitoryView extends GetView<AdminDormitoryController> {
-  const AdminDormitoryView({super.key});
-
+class AdminAttendanceView extends GetView<AdminAttendanceController> {
+  const AdminAttendanceView({super.key});
   @override
   Widget build(BuildContext context) {
-    return  InfixEduScaffold(
-      title: "Dormitory",
+    return InfixEduScaffold(
+      title: "Attendance",
       body: CustomBackground(
         customWidget: Column(
           children: [
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: controller.dormitoryTileList.length,
+              itemCount: controller.adminAttendanceTileList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
               ),
               itemBuilder: (context, index) {
                 return Obx(() => CustomCardTile(
-                  icon: controller.dormitoryTileList[index].icon,
-                  title: controller.dormitoryTileList[index].title,
+                  icon: controller.adminAttendanceTileList[index].icon,
+                  title: controller.adminAttendanceTileList[index].title,
                   iconColor: AppColors.primaryColor.withOpacity(0.7),
                   onTap: () {
                     controller.selectIndex.value = index;
-                    AppFunctions.getAdminHomeNavigation(title: controller.dormitoryTileList[index].value);
+                    AppFunctions.getAdminHomeNavigation(title: controller.adminAttendanceTileList[index].value);
                   },
                   isSelected: controller.selectIndex.value == index,
                 ));
