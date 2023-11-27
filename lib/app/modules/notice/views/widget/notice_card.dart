@@ -39,7 +39,7 @@ class NoticeCard extends StatelessWidget {
               children: [
                 Text(
                   noticeTitle ?? "",
-                  style: AppTextStyle.fontSize16lightViolateW500,
+                  style: AppTextStyle.fontSize16lightBlackW500,
                 ),
                 5.verticalSpacing,
                 Text(

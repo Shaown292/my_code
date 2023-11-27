@@ -119,7 +119,7 @@ class StudentClassDetailsCard extends StatelessWidget {
                       children: [
                         Text(
                           instructorName ?? "",
-                          style: AppTextStyle.fontSize14lightViolateW400,
+                          style: AppTextStyle.fontSize14lightBlackW400,
                         ),
                         const Spacer(),
                         hasDetails

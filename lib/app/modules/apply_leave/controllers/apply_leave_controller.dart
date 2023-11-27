@@ -28,10 +28,15 @@ class ApplyLeaveController extends GetxController {
 
   bool isValidate = false;
   Rx<File> file = File('').obs;
-  List<LeaveType> applyLeaveTypeList = [];
+  // List<LeaveType> applyLeaveTypeList = [];
   List<String> leaveTypeDropdownList = [];
-  RxString dropdownValue = "".obs;
+  // RxList<LeaveType> leaveTypeDropdownList = <LeaveType>[].obs;
+  // RxString dropdownValue = "".obs;
   RxInt leaveTypeId = 0.obs;
+  Rx<LeaveType> dropdownValue =
+      LeaveType(id: -1, name: "leave_type").obs;
+
+  RxList<LeaveType> applyLeaveTypeList = <LeaveType>[].obs;
 
   void getStudentApplyLeaveTypeList({required int recordId}) async {
     try {
@@ -53,10 +58,9 @@ class ApplyLeaveController extends GetxController {
             applyLeaveTypeList
                 .add(studentApplyLeaveTypeResponseModel.data!.leaveType![i]);
             leaveTypeDropdownList.add(studentApplyLeaveTypeResponseModel
-                    .data!.leaveType![i].leaveType ??
-                '');
+                    .data!.leaveType![i].name ?? '');
           }
-          dropdownValue.value = leaveTypeDropdownList[0];
+          dropdownValue.value = applyLeaveTypeList[0];
           leaveTypeId.value = applyLeaveTypeList[0].id!;
         }
       } else {
@@ -83,7 +87,8 @@ class ApplyLeaveController extends GetxController {
   }
 
   void changeFromDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate();
+    DateTime? dateTime = await DatePickerUtils().pickDate( canSelectPastDate: true , canSelectFutureDate: true);
+
 
     if (dateTime != null) {
       fromDateTextController.text = dateTime.dd_mm_yyyy;
@@ -91,7 +96,7 @@ class ApplyLeaveController extends GetxController {
   }
 
   void changeToDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate();
+    DateTime? dateTime = await DatePickerUtils().pickDate(canSelectPastDate: true , canSelectFutureDate: true);
 
     if (dateTime != null) {
       toDateTextController.text = dateTime.dd_mm_yyyy;
@@ -99,7 +104,7 @@ class ApplyLeaveController extends GetxController {
   }
 
   bool validation() {
-    if (dropdownValue.isEmpty) {
+    if (dropdownValue.value == '') {
       showBasicFailedSnackBar(message: 'Select Leave Type.');
     }
     if (applyDateTextController.text.isEmpty) {

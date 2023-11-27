@@ -67,7 +67,7 @@ class AdminSubjectAttendanceSearchView
                   focusBorderActive: true,
                   hintText: "Select Date *",
                   fillColor: Colors.white,
-                  hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
+                  hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   suffixIcon: Image.asset(
                     ImagePath.calender,
                     color: AppColors.profileValueColor,

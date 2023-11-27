@@ -47,19 +47,19 @@ class ApplyLeaveTypeData {
 
 class LeaveType {
   int? id;
-  String? leaveType;
+  String? name;  /// name => leave_type
 
-  LeaveType({this.id, this.leaveType});
+  LeaveType({this.id, this.name});
 
   LeaveType.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    leaveType = json['leave_type'];
+    name = json['leave_type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['leave_type'] = leaveType;
+    data['leave_type'] = name;
     return data;
   }
 }

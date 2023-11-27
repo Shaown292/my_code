@@ -100,7 +100,7 @@ class TransportController extends GetxController {
               : const Center(
             child: Text(
               "No Details Available",
-              style: AppTextStyle.fontSize16lightViolateW500,
+              style: AppTextStyle.fontSize16lightBlackW500,
             ),
           ),
       ),

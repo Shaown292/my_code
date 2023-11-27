@@ -92,7 +92,17 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                             onTap: () {
                                               controller
                                                   .showPendingListDetailsBottomSheet(
-                                                      index: index);
+                                                index: index,
+                                                reason: controller
+                                                    .pendingLeaveList[index].reason ?? "",
+                                                onTap: (){
+                                                  controller.updateLeaveStatus(
+                                                    leaveId: controller.pendingLeaveList[index].id!,
+                                                    statusType: controller.selectedOption.value,
+                                                  );
+                                                }
+
+                                              );
                                             },
                                           )
                                         ],
@@ -127,8 +137,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                           children: [
                                             AppliedLeaveDetailsTile(
                                               leaveType: controller
-                                                  .approveLeaveList[index]
-                                                  .type,
+                                                  .approveLeaveList[index].type,
                                               applyDate: controller
                                                   .approveLeaveList[index]
                                                   .applyDate,
@@ -145,8 +154,17 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                                   .activeStatusGreenColor,
                                               onTap: () {
                                                 controller
-                                                    .showApprovedListDetailsBottomSheet(
-                                                        index: index);
+                                                    .showPendingListDetailsBottomSheet(
+                                                        index: index,
+                                                    reason: controller
+                                                        .approveLeaveList[index].reason ?? "",
+                                                    onTap: (){
+                                                      controller.updateLeaveStatus(
+                                                        leaveId: controller.pendingLeaveList[index].id!,
+                                                        statusType: controller.selectedOption.value,
+                                                      );
+                                                    }
+                                                );
                                               },
                                             )
                                           ],
@@ -180,8 +198,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                         children: [
                                           AppliedLeaveDetailsTile(
                                             leaveType: controller
-                                                .rejectedLeaveList[index]
-                                                .type,
+                                                .rejectedLeaveList[index].type,
                                             applyDate: controller
                                                 .rejectedLeaveList[index]
                                                 .applyDate,
@@ -194,12 +211,21 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                             approveStatus: controller
                                                 .rejectedLeaveList[index]
                                                 .approveStatus,
-                                            statusColor: AppColors
-                                                .activeStatusRedColor,
+                                            statusColor:
+                                                AppColors.activeStatusRedColor,
                                             onTap: () {
                                               controller
-                                                  .showRejectedListDetailsBottomSheet(
-                                                      index: index);
+                                                  .showPendingListDetailsBottomSheet(
+                                                      index: index,
+                                                  reason: controller
+                                                      .rejectedLeaveList[index].reason ?? "",
+                                                  onTap: (){
+                                                    controller.updateLeaveStatus(
+                                                      leaveId: controller.pendingLeaveList[index].id!,
+                                                      statusType: controller.selectedOption.value,
+                                                    );
+                                                  }
+                                              );
                                             },
                                           )
                                         ],

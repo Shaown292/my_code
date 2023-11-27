@@ -33,7 +33,7 @@ class AdminAddRoomController extends GetxController {
 
   bool validation() {
     if (roomNameTextController.text.isEmpty) {
-      showBasicFailedSnackBar(message: 'Select Room No');
+      showBasicFailedSnackBar(message: 'Select Room Name');
       return false;
     }
 

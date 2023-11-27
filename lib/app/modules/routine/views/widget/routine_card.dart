@@ -96,7 +96,7 @@ class RoutineCard extends StatelessWidget {
             10.verticalSpacing,
             isLunchBreak ?  const SizedBox() : Text(
               instructorName ?? "",
-              style: AppTextStyle.fontSize14lightViolateW400,
+              style: AppTextStyle.fontSize14lightBlackW400,
             ) ,
           ],
         ),
