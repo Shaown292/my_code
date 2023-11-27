@@ -24,9 +24,9 @@ class AdminLeaveController extends GetxController {
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
 
-  List<PendingLeaveData> pendingLeaveList = [];
-  List<ApproveLeaveData> approveLeaveList = [];
-  List<RejectedLeaveData> rejectedLeaveList = [];
+  RxList<PendingLeaveData> pendingLeaveList = <PendingLeaveData>[].obs;
+  RxList<ApproveLeaveData> approveLeaveList = <ApproveLeaveData>[].obs;
+  RxList<RejectedLeaveData> rejectedLeaveList = <RejectedLeaveData>[].obs;
 
   List<String> status = <String>[
     'Pending',
@@ -35,6 +35,7 @@ class AdminLeaveController extends GetxController {
   ];
 
   RxString selectedOption = "P".obs;
+  RxBool saveLoader = false.obs;
 
   Future<AdminPendingLeaveResponseModel?> getAdminPendingLeave() async {
     pendingLeaveList.clear();
@@ -153,42 +154,137 @@ class AdminLeaveController extends GetxController {
   }
 
   void updateLeaveStatus(
-      {required int leaveId, required String statusType}) async {
+      {required int leaveId,
+      required String currentStatus,
+      required String previousStatus,
+      required int index}) async {
+    print('previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
     try {
-      loadingController.isLoading = true;
+      saveLoader.value = true;
       final res = await BaseClient().postData(
         url: InfixApi.adminLeaveStatusUpdate(
-            leaveId: leaveId, statusType: statusType),
+            leaveId: leaveId, statusType: currentStatus),
         header: GlobalVariable.header,
-        // payload: {
-        //   "email": email,
-        //   "password": password
-        // },
       );
 
       PostRequestResponseModel postRequestResponseModel =
           PostRequestResponseModel.fromJson(res);
       if (postRequestResponseModel.success == true) {
-        loadingController.isLoading = false;
+        saveLoader.value = false;
+
+        if (previousStatus == 'P' && currentStatus == 'A') {
+          print('1. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
+          approveLeaveList.add(
+            ApproveLeaveData(
+              id: pendingLeaveList[index].id,
+              fullName: pendingLeaveList[index].fullName,
+              applyDate: pendingLeaveList[index].applyDate,
+              leaveTo: pendingLeaveList[index].leaveTo,
+              leaveFrom: pendingLeaveList[index].leaveFrom,
+              file: pendingLeaveList[index].file,
+              type: pendingLeaveList[index].type,
+              approveStatus: currentStatus,
+            ),
+          );
+          pendingLeaveList.removeAt(index);
+        } else if (previousStatus == 'P' && currentStatus == 'C') {
+          print('2. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
+          rejectedLeaveList.add(
+            RejectedLeaveData(
+              id: pendingLeaveList[index].id,
+              fullName: pendingLeaveList[index].fullName,
+              applyDate: pendingLeaveList[index].applyDate,
+              leaveTo: pendingLeaveList[index].leaveTo,
+              leaveFrom: pendingLeaveList[index].leaveFrom,
+              file: pendingLeaveList[index].file,
+              type: pendingLeaveList[index].type,
+              approveStatus: currentStatus,
+            ),
+          );
+          pendingLeaveList.removeAt(index);
+        } else if (previousStatus == 'A' && currentStatus == 'P') {
+          print('3. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
+          pendingLeaveList.add(
+            PendingLeaveData(
+              id: pendingLeaveList[index].id,
+              fullName: pendingLeaveList[index].fullName,
+              applyDate: pendingLeaveList[index].applyDate,
+              leaveTo: pendingLeaveList[index].leaveTo,
+              leaveFrom: pendingLeaveList[index].leaveFrom,
+              file: pendingLeaveList[index].file,
+              type: pendingLeaveList[index].type,
+              approveStatus: currentStatus,
+            ),
+          );
+          approveLeaveList.removeAt(index);
+        } else if (previousStatus == 'A' && currentStatus == 'C') {
+          print('4. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
+          rejectedLeaveList.add(
+            RejectedLeaveData(
+              id: pendingLeaveList[index].id,
+              fullName: pendingLeaveList[index].fullName,
+              applyDate: pendingLeaveList[index].applyDate,
+              leaveTo: pendingLeaveList[index].leaveTo,
+              leaveFrom: pendingLeaveList[index].leaveFrom,
+              file: pendingLeaveList[index].file,
+              type: pendingLeaveList[index].type,
+              approveStatus: currentStatus,
+            ),
+          );
+          approveLeaveList.removeAt(index);
+        } else if (previousStatus == 'C' && currentStatus == 'P') {
+          print('5. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
+          pendingLeaveList.add(
+            PendingLeaveData(
+              id: pendingLeaveList[index].id,
+              fullName: pendingLeaveList[index].fullName,
+              applyDate: pendingLeaveList[index].applyDate,
+              leaveTo: pendingLeaveList[index].leaveTo,
+              leaveFrom: pendingLeaveList[index].leaveFrom,
+              file: pendingLeaveList[index].file,
+              type: pendingLeaveList[index].type,
+              approveStatus: currentStatus,
+            ),
+          );
+          rejectedLeaveList.removeAt(index);
+        } else if (previousStatus == 'C' && currentStatus == 'A') {
+          print('6. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
+          approveLeaveList.add(
+            ApproveLeaveData(
+              id: pendingLeaveList[index].id,
+              fullName: pendingLeaveList[index].fullName,
+              applyDate: pendingLeaveList[index].applyDate,
+              leaveTo: pendingLeaveList[index].leaveTo,
+              leaveFrom: pendingLeaveList[index].leaveFrom,
+              file: pendingLeaveList[index].file,
+              type: pendingLeaveList[index].type,
+              approveStatus: currentStatus,
+            ),
+          );
+          rejectedLeaveList.removeAt(index);
+        }
+
+        Get.back();
         showBasicSuccessSnackBar(
             message:
                 postRequestResponseModel.message ?? 'Something went wrong.');
       } else {
-        loadingController.isLoading = false;
+        saveLoader.value = false;
         showBasicFailedSnackBar(
             message:
                 postRequestResponseModel.message ?? 'Something went wrong.');
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+      saveLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      saveLoader.value = false;
     }
   }
 
-  void showPendingListDetailsBottomSheet({required int index, required String reason, required Function() onTap}) {
+  void showPendingListDetailsBottomSheet(
+      {required int index, required String reason, required Function() onTap, required String leaveType, required String applyDate, required String leaveFrom, required String leaveTo, required String file,}) {
     Get.bottomSheet(
       Obx(
         () => Container(
@@ -200,34 +296,34 @@ class AdminLeaveController extends GetxController {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 10.verticalSpacing,
-                 Text(
+                Text(
                   "Reason: $reason",
                   style: AppTextStyle.fontSize14BlackW500,
                 ),
                 20.verticalSpacing,
-                const BottomSheetTile(
+                BottomSheetTile(
                   title: "Leave Type",
-                  value: "",
+                  value: leaveType,
                   color: AppColors.homeworkWidgetColor,
                 ),
-                const BottomSheetTile(
+                BottomSheetTile(
                   title: "Apply Date",
-                  value: "",
+                  value: applyDate,
                 ),
-                const BottomSheetTile(
+                BottomSheetTile(
                   title: "Leave From",
-                  value: "",
+                  value: leaveFrom,
                   color: AppColors.homeworkWidgetColor,
                 ),
-                const BottomSheetTile(
+                BottomSheetTile(
                   title: "Leave To",
-                  value: "",
+                  value: leaveTo,
                 ),
                 10.verticalSpacing,
                 InkWell(
                   onTap: () {},
-                  child: const Text(
-                    "Attached File: Download",
+                  child: Text(
+                    "Attached File: $file",
                     style: AppTextStyle.fontSize16lightBlackW500,
                   ),
                 ),
@@ -273,9 +369,16 @@ class AdminLeaveController extends GetxController {
                   ),
                 ),
                 20.verticalSpacing,
-                PrimaryButton(
-                  text: "Save",
-                  onTap: onTap,
+                Obx(
+                  () => saveLoader.value
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ))
+                      : PrimaryButton(
+                          text: "Save",
+                          onTap: onTap,
+                        ),
                 ),
                 30.verticalSpacing,
               ],

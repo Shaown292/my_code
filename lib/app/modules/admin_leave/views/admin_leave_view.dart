@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/admin_leave/controllers/admin_leave_controller.dart';
@@ -94,14 +93,42 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                                   .showPendingListDetailsBottomSheet(
                                                 index: index,
                                                 reason: controller
-                                                    .pendingLeaveList[index].reason ?? "",
-                                                onTap: (){
+                                                        .pendingLeaveList[index]
+                                                        .reason ??
+                                                    "",
+                                                onTap: () {
                                                   controller.updateLeaveStatus(
-                                                    leaveId: controller.pendingLeaveList[index].id!,
-                                                    statusType: controller.selectedOption.value,
+                                                    leaveId: controller
+                                                        .pendingLeaveList[index]
+                                                        .id!,
+                                                    currentStatus: controller
+                                                        .selectedOption.value,
+                                                    previousStatus: controller
+                                                        .pendingLeaveList[index]
+                                                        .approveStatus!,
+                                                    index: index,
                                                   );
-                                                }
-
+                                                },
+                                                leaveType: controller
+                                                        .pendingLeaveList[index]
+                                                        .type ??
+                                                    '',
+                                                applyDate: controller
+                                                        .pendingLeaveList[index]
+                                                        .applyDate ??
+                                                    '',
+                                                leaveFrom: controller
+                                                        .pendingLeaveList[index]
+                                                        .leaveFrom ??
+                                                    '',
+                                                leaveTo: controller
+                                                        .pendingLeaveList[index]
+                                                        .leaveTo ??
+                                                    '',
+                                                file: controller
+                                                        .pendingLeaveList[index]
+                                                        .file ??
+                                                    '',
                                               );
                                             },
                                           )
@@ -155,15 +182,53 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                               onTap: () {
                                                 controller
                                                     .showPendingListDetailsBottomSheet(
-                                                        index: index,
-                                                    reason: controller
-                                                        .approveLeaveList[index].reason ?? "",
-                                                    onTap: (){
-                                                      controller.updateLeaveStatus(
-                                                        leaveId: controller.pendingLeaveList[index].id!,
-                                                        statusType: controller.selectedOption.value,
-                                                      );
-                                                    }
+                                                  index: index,
+                                                  reason: controller
+                                                          .approveLeaveList[
+                                                              index]
+                                                          .reason ??
+                                                      "",
+                                                  onTap: () {
+                                                    controller
+                                                        .updateLeaveStatus(
+                                                      leaveId: controller
+                                                          .approveLeaveList[
+                                                              index]
+                                                          .id!,
+                                                      currentStatus: controller
+                                                          .selectedOption.value,
+                                                      previousStatus: controller
+                                                          .approveLeaveList[
+                                                              index]
+                                                          .approveStatus!,
+                                                      index: index,
+                                                    );
+                                                  },
+                                                  leaveType: controller
+                                                          .approveLeaveList[
+                                                              index]
+                                                          .type ??
+                                                      '',
+                                                  applyDate: controller
+                                                          .approveLeaveList[
+                                                              index]
+                                                          .applyDate ??
+                                                      '',
+                                                  leaveFrom: controller
+                                                          .approveLeaveList[
+                                                              index]
+                                                          .leaveFrom ??
+                                                      '',
+                                                  leaveTo: controller
+                                                          .approveLeaveList[
+                                                              index]
+                                                          .leaveTo ??
+                                                      '',
+                                                  file: controller
+                                                          .approveLeaveList[
+                                                              index]
+                                                          .file ??
+                                                      '',
                                                 );
                                               },
                                             )
@@ -216,15 +281,52 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                             onTap: () {
                                               controller
                                                   .showPendingListDetailsBottomSheet(
-                                                      index: index,
-                                                  reason: controller
-                                                      .rejectedLeaveList[index].reason ?? "",
-                                                  onTap: (){
-                                                    controller.updateLeaveStatus(
-                                                      leaveId: controller.pendingLeaveList[index].id!,
-                                                      statusType: controller.selectedOption.value,
-                                                    );
-                                                  }
+                                                index: index,
+                                                reason: controller
+                                                        .rejectedLeaveList[
+                                                            index]
+                                                        .reason ??
+                                                    "",
+                                                onTap: () {
+                                                  controller.updateLeaveStatus(
+                                                    leaveId: controller
+                                                        .rejectedLeaveList[
+                                                            index]
+                                                        .id!,
+                                                    currentStatus: controller
+                                                        .selectedOption.value,
+                                                    previousStatus: controller
+                                                        .rejectedLeaveList[
+                                                            index]
+                                                        .approveStatus!,
+                                                    index: index,
+                                                  );
+                                                },
+                                                leaveType: controller
+                                                        .rejectedLeaveList[
+                                                            index]
+                                                        .type ??
+                                                    '',
+                                                applyDate: controller
+                                                        .rejectedLeaveList[
+                                                            index]
+                                                        .applyDate ??
+                                                    '',
+                                                leaveFrom: controller
+                                                        .rejectedLeaveList[
+                                                            index]
+                                                        .leaveFrom ??
+                                                    '',
+                                                leaveTo: controller
+                                                        .rejectedLeaveList[
+                                                            index]
+                                                        .leaveTo ??
+                                                    '',
+                                                file: controller
+                                                        .rejectedLeaveList[
+                                                            index]
+                                                        .file ??
+                                                    '',
                                               );
                                             },
                                           )
