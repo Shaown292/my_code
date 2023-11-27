@@ -6,6 +6,14 @@ import '../modules/admin_add_dormitory/bindings/admin_add_dormitory_binding.dart
 import '../modules/admin_add_dormitory/views/admin_add_dormitory_view.dart';
 import '../modules/admin_add_room/bindings/admin_add_room_binding.dart';
 import '../modules/admin_add_room/views/admin_add_room_view.dart';
+import '../modules/admin_attendance/bindings/admin_attendance_binding.dart';
+import '../modules/admin_attendance/views/admin_attendance_view.dart';
+import '../modules/admin_class_attendance_search/bindings/admin_class_attendance_search_binding.dart';
+import '../modules/admin_class_attendance_search/views/admin_class_attendance_search_view.dart';
+import '../modules/admin_class_attendance_search_individual/bindings/admin_class_attendance_search_individual_binding.dart';
+import '../modules/admin_class_attendance_search_individual/views/admin_class_attendance_search_individual_view.dart';
+import '../modules/admin_class_set_attendance/bindings/admin_class_set_attendance_binding.dart';
+import '../modules/admin_class_set_attendance/views/admin_class_set_attendance_view.dart';
 import '../modules/admin_dormitory/bindings/admin_dormitory_binding.dart';
 import '../modules/admin_dormitory/views/admin_dormitory_view.dart';
 import '../modules/admin_fees/bindings/admin_fees_binding.dart';
@@ -20,6 +28,10 @@ import '../modules/admin_leave/bindings/admin_leave_binding.dart';
 import '../modules/admin_leave/views/admin_leave_view.dart';
 import '../modules/admin_room_list/bindings/admin_room_list_binding.dart';
 import '../modules/admin_room_list/views/admin_room_list_view.dart';
+import '../modules/admin_subject_attendance_search/bindings/admin_subject_attendance_search_binding.dart';
+import '../modules/admin_subject_attendance_search/views/admin_subject_attendance_search_view.dart';
+import '../modules/admin_subject_attendance_search_individual/bindings/admin_subject_attendance_search_individual_binding.dart';
+import '../modules/admin_subject_attendance_search_individual/views/admin_subject_attendance_search_individual_view.dart';
 import '../modules/apply_leave/bindings/apply_leave_binding.dart';
 import '../modules/apply_leave/views/apply_leave_view.dart';
 import '../modules/assignment/bindings/assignment_binding.dart';
@@ -457,6 +469,36 @@ class AppPages {
       page: () => const AdminFeesInvoiceView(),
       binding: AdminFeesInvoiceBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ATTENDANCE,
+      page: () => const AdminAttendanceView(),
+      binding: AdminAttendanceBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH,
+      page: () => const AdminClassAttendanceSearchView(),
+      binding: AdminClassAttendanceSearchBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH,
+      page: () => const AdminSubjectAttendanceSearchView(),
+      binding: AdminSubjectAttendanceSearchBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL,
+      page: () => const AdminSubjectAttendanceSearchIndividualView(),
+      binding: AdminSubjectAttendanceSearchIndividualBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL,
+      page: () => const AdminClassAttendanceSearchIndividualView(),
+      binding: AdminClassAttendanceSearchIndividualBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_CLASS_SET_ATTENDANCE,
+      page: () => const AdminClassSetAttendanceView(),
+      binding: AdminClassSetAttendanceBinding(),
     ),
   ];
 }

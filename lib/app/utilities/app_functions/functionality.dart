@@ -179,6 +179,21 @@ class AppFunctions {
       case 'Fees Invoice':
         Get.toNamed(Routes.ADMIN_FEES_INVOICE);
         break;
+      case 'Attendance':
+        Get.toNamed(Routes.ADMIN_ATTENDANCE);
+        break;
+      case 'Class Attendance Search':
+        Get.toNamed(Routes.ADMIN_CLASS_ATTENDANCE_SEARCH);
+        break;
+      case 'Subject Attendance Search':
+        Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH);
+        break;
+      case 'Class Attendance Search Individual':
+        Get.toNamed(Routes.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL);
+        break;
+      case 'Subject Attendance Search Individual':
+        Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL);
+        break;
     }
   }
 

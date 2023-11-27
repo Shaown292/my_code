@@ -30,7 +30,7 @@ class AdminDormitoryView extends GetView<AdminDormitoryController> {
                 return Obx(() => CustomCardTile(
                   icon: controller.dormitoryTileList[index].icon,
                   title: controller.dormitoryTileList[index].title,
-                  iconColor: AppColors.primaryColor,
+                  iconColor: AppColors.primaryColor.withOpacity(0.7),
                   onTap: () {
                     controller.selectIndex.value = index;
                     AppFunctions.getAdminHomeNavigation(title: controller.dormitoryTileList[index].value);

@@ -5,6 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_s
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 import 'package:get/get.dart';
 
 class AdminFeesTypeController extends GetxController {
@@ -12,7 +13,14 @@ class AdminFeesTypeController extends GetxController {
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
-
+  RxString feesGroupInitialValue = '1'.obs;
+  RxString feesGroupNullValue = ''.obs;
+  List<String> feesGroupList = [
+    '1',
+    '2',
+    '3',
+    '4'
+  ];
 
   void showUploadDocumentsBottomSheet({
     Function()? onTapForSave,
@@ -73,6 +81,7 @@ class AdminFeesTypeController extends GetxController {
                   ],
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -83,6 +92,14 @@ class AdminFeesTypeController extends GetxController {
                       focusBorderActive: true,
                       hintText: "Title",
                       fillColor: Colors.white,
+                    ),
+                    10.verticalSpacing,
+                    CustomDropdown(
+                      dropdownValue: feesGroupList.isEmpty ? feesGroupNullValue.value : feesGroupInitialValue.value,
+                      dropdownList: feesGroupList,
+                      changeDropdownValue: (v) {
+                        feesGroupInitialValue.value = v!;
+                      },
                     ),
                     10.verticalSpacing,
                     CustomTextFormField(

@@ -3,6 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
@@ -18,7 +19,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => InfixEduScaffold(
+          () => InfixEduScaffold(
         title: "Add Room",
         body: CustomBackground(
           customWidget: SingleChildScrollView(
@@ -61,33 +62,25 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                       10.verticalSpacing,
                       controller.loadingController.isLoading
                           ? const CircularProgressIndicator()
-                          : CustomDropdown(
-                              dropdownValue: controller.dormitoryValue.value,
-                              dropdownList: controller.dormitoryDropdownList,
-                              changeDropdownValue: (v) {
-                                controller.dormitoryValue.value = v!;
-                                controller.dormitoryId.value = controller
-                                    .dormitoryList[controller
-                                        .dormitoryDropdownList
-                                        .indexOf(v)]
-                                    .id!;
-                              },
-                            ),
+                          : DuplicateDropdown(
+                        dropdownValue: controller.dormitoryValue.value,
+                        dropdownList: controller.dormitoryList,
+                        changeDropdownValue: (v) {
+                          controller.dormitoryValue.value = v;
+                          controller.dormitoryId.value = v.id;
+                        },
+                      ),
                       10.verticalSpacing,
                       controller.isLoading.value
                           ? const CircularProgressIndicator()
-                          : CustomDropdown(
-                              dropdownValue: controller.roomTypeValue.value,
-                              dropdownList: controller.roomTypeDropdownList,
-                              changeDropdownValue: (v) {
-                                controller.roomTypeValue.value = v!;
-                                controller.roomTypeId.value = controller
-                                    .roomTypeList[controller
-                                        .roomTypeDropdownList
-                                        .indexOf(v)]
-                                    .id!;
-                              },
-                            ),
+                          : DuplicateDropdown(
+                        dropdownValue: controller.roomTypeValue.value,
+                        dropdownList: controller.roomTypeList,
+                        changeDropdownValue: (v) {
+                          controller.roomTypeValue.value = v;
+                          controller.roomTypeId.value = v.id;
+                        },
+                      ),
                       10.verticalSpacing,
                       CustomTextFormField(
                         enableBorderActive: true,
@@ -101,13 +94,13 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                       controller.saveLoader.value
                           ? const LoadingWidget()
                           : PrimaryButton(
-                              text: "Save",
-                              onTap: () {
-                                if (controller.validation()) {
-                                  controller.addDormitoryRoom();
-                                }
-                              },
-                            ),
+                        text: "Save",
+                        onTap: () {
+                          if (controller.validation()) {
+                            controller.addDormitoryRoom();
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),
