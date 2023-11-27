@@ -11,7 +11,7 @@ class AdminFeesController extends GetxController {
     HomeTileModelClass(icon: ImagePath.studentWallet, title: 'Fees Group', value: 'Fees Group'),
     HomeTileModelClass(icon: ImagePath.studentWallet, title: 'Fees Type', value: 'Fees Type'),
     HomeTileModelClass(icon: ImagePath.studentWallet, title: 'Fees Invoice', value: 'Fees Invoice'),
-    HomeTileModelClass(icon: ImagePath.studentWallet, title: 'Fees Invoice', value: 'Bank Payment'),
-    HomeTileModelClass(icon: ImagePath.studentWallet, title: 'Fees Invoice', value: 'Reports'),
+    HomeTileModelClass(icon: ImagePath.studentWallet, title: 'Bank Payment', value: 'Bank Payment'),
+    HomeTileModelClass(icon: ImagePath.studentWallet, title: 'Reports', value: 'Reports'),
   ];
 }

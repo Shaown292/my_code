@@ -34,7 +34,7 @@ class IssuedBookTile extends StatelessWidget {
         children: [
           Text(
             bookName ?? "",
-            style: AppTextStyle.fontSize14lightViolateW400,
+            style: AppTextStyle.fontSize14lightBlackW400,
           ),
           10.verticalSpacing,
           Row(
