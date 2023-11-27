@@ -14,39 +14,40 @@ class ScheduleView extends GetView<ScheduleController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => InfixEduScaffold(
-          title: "Schedule",
-          body: RefreshIndicator(
-            onRefresh: () async {},
-            child: CustomBackground(
-              customWidget: Column(
-                children: [
-                  controller.examinationController.loadingController.isLoading
-                      ? const LoadingWidget()
-                      : Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, top: 20),
-                          child: CustomDropdown(
-                            dropdownValue: controller.recordDropdownValue.value,
-                            dropdownList: controller
-                                .homeController.studentRecordDropdownList,
-                            changeDropdownValue: (v) {
-                              controller.recordDropdownValue.value = v!;
-                              controller.examinationController.examDropdownList
-                                  .clear();
-                              int recordId =
-                                  controller.homeController.studentRecordIdList[
-                                      controller.homeController
-                                          .studentRecordDropdownList
-                                          .indexOf(v)];
-                              controller.examinationController
-                                  .getStudentExamList(recordId: recordId);
-                            },
-                          ),
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Schedule",
+        body: RefreshIndicator(
+          onRefresh: () async {},
+          child: CustomBackground(
+            customWidget: Column(
+              children: [
+                controller.examinationController.loadingController.isLoading
+                    ? const LoadingWidget()
+                    : Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 20),
+                        child: CustomDropdown(
+                          dropdownValue: controller.recordDropdownValue.value,
+                          dropdownList: controller
+                              .homeController.studentRecordDropdownList,
+                          changeDropdownValue: (v) {
+                            controller.recordDropdownValue.value = v!;
+                            controller.examinationController.examDropdownList
+                                .clear();
+                            int recordId =
+                                controller.homeController.studentRecordIdList[
+                                    controller.homeController
+                                        .studentRecordDropdownList
+                                        .indexOf(v)];
+                            controller.examinationController
+                                .getStudentExamList(recordId: recordId);
+                          },
                         ),
-                  controller.examinationController.loadingController.isLoading
-                      ? const LoadingWidget()
-                      : CustomDropdown(
+                      ),
+                controller.examinationController.loadingController.isLoading
+                    ? const LoadingWidget()
+                    : CustomDropdown(
                         dropdownValue: controller.dropdownValue.value,
                         dropdownList: controller
                             .examinationController.examDropdownList
@@ -57,47 +58,47 @@ class ScheduleView extends GetView<ScheduleController> {
                           controller.scheduleList.clear();
                           int examId = controller
                                   .examinationController.examDropdownIdList[
-                              controller
-                                  .examinationController.examDropdownList
+                              controller.examinationController.examDropdownList
                                   .indexOf(v)];
-                          int recordId = controller
-                              .homeController.studentRecordList[0].id;
+                          int recordId =
+                              controller.homeController.studentRecordList[0].id;
                           controller.getStudentExamScheduleList(
                             examId: examId,
                             recordId: recordId,
                           );
                         },
                       ),
-                  controller.loadingController.isLoading
-                      ? const LoadingWidget()
-                      : controller.scheduleList.isNotEmpty
-                          ? Expanded(
-                              child: ListView.builder(
-                                itemCount: controller.scheduleList.length,
-                                itemBuilder: (context, index) {
-                                  return ScheduleDetailsTile(
-                                    date: controller
-                                        .scheduleList[index].dateAndDay,
-                                    subject:
-                                        controller.scheduleList[index].subject,
-                                    time: controller.scheduleList[index].time,
-                                    roomNo: controller.scheduleList[index].room,
-                                    section: controller
-                                        .scheduleList[index].classSection,
-                                    teacher:
-                                        controller.scheduleList[index].teacher,
-                                    color: index % 2 == 0
-                                        ? AppColors.profileCardTextColor
-                                        : Colors.white,
-                                  );
-                                },
-                              ),
-                            )
-                          : const NoDataAvailableWidget(),
-                ],
-              ),
+                controller.loadingController.isLoading
+                    ? const LoadingWidget()
+                    : controller.scheduleList.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                              itemCount: controller.scheduleList.length,
+                              itemBuilder: (context, index) {
+                                return ScheduleDetailsTile(
+                                  date:
+                                      controller.scheduleList[index].dateAndDay,
+                                  subject:
+                                      controller.scheduleList[index].subject,
+                                  time: controller.scheduleList[index].time,
+                                  roomNo: controller.scheduleList[index].room,
+                                  section: controller
+                                      .scheduleList[index].classSection,
+                                  teacher:
+                                      controller.scheduleList[index].teacher,
+                                  color: index % 2 == 0
+                                      ? AppColors.profileCardTextColor
+                                      : Colors.white,
+                                );
+                              },
+                            ),
+                          )
+                        : const NoDataAvailableWidget(),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
