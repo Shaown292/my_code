@@ -37,7 +37,7 @@ class AssignmentCard extends StatelessWidget {
             children: [
               Text(
                 assignmentTile ?? "",
-                style: AppTextStyle.fontSize16lightViolateW500,
+                style: AppTextStyle.fontSize16lightBlackW500,
               ),
               5.verticalSpacing,
               Text(

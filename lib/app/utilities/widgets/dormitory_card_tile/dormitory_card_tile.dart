@@ -42,7 +42,7 @@ class DormitoryCardTile extends StatelessWidget {
         children: [
           Text(
             dormitoryName ?? AppText.noDataAvailable,
-            style: AppTextStyle.fontSize14lightViolateW400,
+            style: AppTextStyle.fontSize14lightBlackW400,
           ),
           10.verticalSpacing,
           Row(

@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
@@ -30,8 +31,10 @@ class AdminLeaveController extends GetxController {
   List<String> status = <String>[
     'Pending',
     'Approved',
-    'Rejected',
+    'Cancelled',
   ];
+
+  RxString selectedOption = "P".obs;
 
   Future<AdminPendingLeaveResponseModel?> getAdminPendingLeave() async {
     pendingLeaveList.clear();
@@ -66,10 +69,11 @@ class AdminLeaveController extends GetxController {
     return AdminPendingLeaveResponseModel();
   }
 
-  Future<AdminApproveLeaveResponseModel?> getAdminApproveLeave({required bool isLoader}) async {
+  Future<AdminApproveLeaveResponseModel?> getAdminApproveLeave(
+      {required bool isLoader}) async {
     approveLeaveList.clear();
     try {
-      if(isLoader){
+      if (isLoader) {
         loadingController.isLoading = true;
       }
 
@@ -79,39 +83,39 @@ class AdminLeaveController extends GetxController {
       );
 
       AdminApproveLeaveResponseModel adminApproveLeaveResponseModel =
-      AdminApproveLeaveResponseModel.fromJson(response);
+          AdminApproveLeaveResponseModel.fromJson(response);
       if (adminApproveLeaveResponseModel.success == true) {
-        if(isLoader){
+        if (isLoader) {
           loadingController.isLoading = false;
         }
         if (adminApproveLeaveResponseModel.data!.isNotEmpty) {
           for (int i = 0;
-          i < adminApproveLeaveResponseModel.data!.length;
-          i++) {
+              i < adminApproveLeaveResponseModel.data!.length;
+              i++) {
             approveLeaveList.add(adminApproveLeaveResponseModel.data![i]);
           }
         }
       }
     } catch (e, t) {
-      if(isLoader){
-          loadingController.isLoading = false;
-        }
+      if (isLoader) {
+        loadingController.isLoading = false;
+      }
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      if(isLoader){
-          loadingController.isLoading = false;
-        }
+      if (isLoader) {
+        loadingController.isLoading = false;
+      }
     }
 
     return AdminApproveLeaveResponseModel();
   }
 
-  Future<AdminRejectedLeaveResponseModel?> getAdminRejectedLeave({required bool isLoader}) async {
+  Future<AdminRejectedLeaveResponseModel?> getAdminRejectedLeave(
+      {required bool isLoader}) async {
     rejectedLeaveList.clear();
     try {
-
-      if(isLoader){
+      if (isLoader) {
         loadingController.isLoading = true;
       }
       final response = await BaseClient().getData(
@@ -120,40 +124,41 @@ class AdminLeaveController extends GetxController {
       );
 
       AdminRejectedLeaveResponseModel adminRejectedLeaveResponseModel =
-      AdminRejectedLeaveResponseModel.fromJson(response);
+          AdminRejectedLeaveResponseModel.fromJson(response);
       if (adminRejectedLeaveResponseModel.success == true) {
-        if(isLoader){
+        if (isLoader) {
           loadingController.isLoading = false;
         }
         if (adminRejectedLeaveResponseModel.data!.isNotEmpty) {
           for (int i = 0;
-          i < adminRejectedLeaveResponseModel.data!.length;
-          i++) {
+              i < adminRejectedLeaveResponseModel.data!.length;
+              i++) {
             rejectedLeaveList.add(adminRejectedLeaveResponseModel.data![i]);
           }
         }
       }
     } catch (e, t) {
-      if(isLoader){
-          loadingController.isLoading = false;
-        }
+      if (isLoader) {
+        loadingController.isLoading = false;
+      }
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      if(isLoader){
-          loadingController.isLoading = false;
-        }
+      if (isLoader) {
+        loadingController.isLoading = false;
+      }
     }
 
     return AdminRejectedLeaveResponseModel();
   }
 
-  void updateLeaveStatus({required int leaveId, required String statusType}) async {
-
+  void updateLeaveStatus(
+      {required int leaveId, required String statusType}) async {
     try {
       loadingController.isLoading = true;
       final res = await BaseClient().postData(
-        url: InfixApi.adminLeaveStatusUpdate(leaveId: leaveId, statusType: statusType),
+        url: InfixApi.adminLeaveStatusUpdate(
+            leaveId: leaveId, statusType: statusType),
         header: GlobalVariable.header,
         // payload: {
         //   "email": email,
@@ -161,14 +166,18 @@ class AdminLeaveController extends GetxController {
         // },
       );
 
-      PostRequestResponseModel postRequestResponseModel = PostRequestResponseModel.fromJson(res);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(res);
       if (postRequestResponseModel.success == true) {
         loadingController.isLoading = false;
-        showBasicSuccessSnackBar(message: postRequestResponseModel.message ?? 'Something went wrong.');
-
+        showBasicSuccessSnackBar(
+            message:
+                postRequestResponseModel.message ?? 'Something went wrong.');
       } else {
         loadingController.isLoading = false;
-        showBasicFailedSnackBar(message: postRequestResponseModel.message ?? 'Something went wrong.');
+        showBasicFailedSnackBar(
+            message:
+                postRequestResponseModel.message ?? 'Something went wrong.');
       }
     } catch (e, t) {
       loadingController.isLoading = false;
@@ -179,125 +188,186 @@ class AdminLeaveController extends GetxController {
     }
   }
 
-  void showPendingListDetailsBottomSheet({required int index}) {
+  void showPendingListDetailsBottomSheet({required int index, required String reason, required Function() onTap}) {
     Get.bottomSheet(
-      Container(
+      Obx(
+        () => Container(
           padding: const EdgeInsets.all(20),
-          height: Get.height * 0.45,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              10.verticalSpacing,
-              const Text(
-                "Reason: something}",
-                style: AppTextStyle.fontSize14BlackW500,
-              ),
-              20.verticalSpacing,
-              const BottomSheetTile(
-                title: "Leave Type",
-                value: "",
-                color: AppColors.homeworkWidgetColor,
-              ),
-              const BottomSheetTile(
-                title: "Apply Date",
-                value: "",
-              ),
-              const BottomSheetTile(
-                title: "Leave From",
-                value: "",
-                color: AppColors.homeworkWidgetColor,
-              ),
-              const BottomSheetTile(
-                title: "Leave To",
-                value: "",
-              ),
-            ],
-          )),
+          height: Get.height * 0.7,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                10.verticalSpacing,
+                 Text(
+                  "Reason: $reason",
+                  style: AppTextStyle.fontSize14BlackW500,
+                ),
+                20.verticalSpacing,
+                const BottomSheetTile(
+                  title: "Leave Type",
+                  value: "",
+                  color: AppColors.homeworkWidgetColor,
+                ),
+                const BottomSheetTile(
+                  title: "Apply Date",
+                  value: "",
+                ),
+                const BottomSheetTile(
+                  title: "Leave From",
+                  value: "",
+                  color: AppColors.homeworkWidgetColor,
+                ),
+                const BottomSheetTile(
+                  title: "Leave To",
+                  value: "",
+                ),
+                10.verticalSpacing,
+                InkWell(
+                  onTap: () {},
+                  child: const Text(
+                    "Attached File: Download",
+                    style: AppTextStyle.fontSize16lightBlackW500,
+                  ),
+                ),
+                30.verticalSpacing,
+                const Text(
+                  "Leave Status",
+                  style: AppTextStyle.fontSize14BlackW500,
+                ),
+                ListTile(
+                  title: const Text('Pending'),
+                  leading: Radio(
+                    value: "P",
+                    groupValue: selectedOption.value,
+                    onChanged: (value) {
+                      selectedOption.value = value!;
+                      debugPrint("Value is $selectedOption");
+                    },
+                    activeColor: AppColors.primaryColor,
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Approve'),
+                  leading: Radio(
+                    value: "A",
+                    groupValue: selectedOption.value,
+                    onChanged: (value) {
+                      selectedOption.value = value!;
+                      debugPrint("Value is $selectedOption");
+                    },
+                    activeColor: AppColors.primaryColor,
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Cancel'),
+                  leading: Radio(
+                    value: "C",
+                    groupValue: selectedOption.value,
+                    onChanged: (value) {
+                      selectedOption.value = value!;
+                      debugPrint("Value is $selectedOption");
+                    },
+                    activeColor: AppColors.primaryColor,
+                  ),
+                ),
+                20.verticalSpacing,
+                PrimaryButton(
+                  text: "Save",
+                  onTap: onTap,
+                ),
+                30.verticalSpacing,
+              ],
+            ),
+          ),
+        ),
+      ),
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );
   }
 
-  void showApprovedListDetailsBottomSheet({required int index}) {
-    Get.bottomSheet(
-      Container(
-          padding: const EdgeInsets.all(20),
-          height: Get.height * 0.45,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              10.verticalSpacing,
-              const Text(
-                "Reason: something",
-                style: AppTextStyle.fontSize14BlackW500,
-              ),
-              20.verticalSpacing,
-              const BottomSheetTile(
-                title: "Leave Type",
-                value: "",
-                color: AppColors.homeworkWidgetColor,
-              ),
-              const BottomSheetTile(
-                title: "Apply Date",
-                value: "",
-              ),
-              const BottomSheetTile(
-                title: "Leave From",
-                value: "",
-                color: AppColors.homeworkWidgetColor,
-              ),
-              const BottomSheetTile(
-                title: "Leave To",
-                value: "",
-              ),
-            ],
-          )),
-      backgroundColor: Colors.white,
-      shape: defaultBottomSheetShape(),
-    );
-  }
-
-  void showRejectedListDetailsBottomSheet({required int index}) {
-    Get.bottomSheet(
-      Container(
-          padding: const EdgeInsets.all(20),
-          height: Get.height * 0.45,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              10.verticalSpacing,
-              const Text(
-                "Reason: asdjas",
-                style: AppTextStyle.fontSize14BlackW500,
-              ),
-              20.verticalSpacing,
-              const BottomSheetTile(
-                title: "Leave Type",
-                value: "",
-                color: AppColors.homeworkWidgetColor,
-              ),
-              const BottomSheetTile(
-                title: "Apply Date",
-                value: "",
-              ),
-              const BottomSheetTile(
-                title: "Leave From",
-                value: "",
-                color: AppColors.homeworkWidgetColor,
-              ),
-              const BottomSheetTile(
-                title: "Leave To",
-                value: "",
-              ),
-            ],
-          )),
-      backgroundColor: Colors.white,
-      shape: defaultBottomSheetShape(),
-    );
-  }
+  // void showApprovedListDetailsBottomSheet({required int index}) {
+  //   Get.bottomSheet(
+  //     Container(
+  //       padding: const EdgeInsets.all(20),
+  //       height: Get.height * 0.7,
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           10.verticalSpacing,
+  //           const Text(
+  //             "Reason: something",
+  //             style: AppTextStyle.fontSize14BlackW500,
+  //           ),
+  //           20.verticalSpacing,
+  //           const BottomSheetTile(
+  //             title: "Leave Type",
+  //             value: "",
+  //             color: AppColors.homeworkWidgetColor,
+  //           ),
+  //           const BottomSheetTile(
+  //             title: "Apply Date",
+  //             value: "",
+  //           ),
+  //           const BottomSheetTile(
+  //             title: "Leave From",
+  //             value: "",
+  //             color: AppColors.homeworkWidgetColor,
+  //           ),
+  //           const BottomSheetTile(
+  //             title: "Leave To",
+  //             value: "",
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //     backgroundColor: Colors.white,
+  //     shape: defaultBottomSheetShape(),
+  //   );
+  // }
+  //
+  // void showRejectedListDetailsBottomSheet({required int index}) {
+  //   Get.bottomSheet(
+  //     Container(
+  //         padding: const EdgeInsets.all(20),
+  //         height: Get.height * 0.45,
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.start,
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             10.verticalSpacing,
+  //             const Text(
+  //               "Reason: asdjas",
+  //               style: AppTextStyle.fontSize14BlackW500,
+  //             ),
+  //             20.verticalSpacing,
+  //             const BottomSheetTile(
+  //               title: "Leave Type",
+  //               value: "",
+  //               color: AppColors.homeworkWidgetColor,
+  //             ),
+  //             const BottomSheetTile(
+  //               title: "Apply Date",
+  //               value: "",
+  //             ),
+  //             const BottomSheetTile(
+  //               title: "Leave From",
+  //               value: "",
+  //               color: AppColors.homeworkWidgetColor,
+  //             ),
+  //             const BottomSheetTile(
+  //               title: "Leave To",
+  //               value: "",
+  //             ),
+  //           ],
+  //         )),
+  //     backgroundColor: Colors.white,
+  //     shape: defaultBottomSheetShape(),
+  //   );
+  // }
 
   @override
   void onInit() {

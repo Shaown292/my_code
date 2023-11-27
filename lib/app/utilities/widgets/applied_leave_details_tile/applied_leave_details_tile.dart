@@ -44,7 +44,7 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
             children: [
               Text(
                 leaveType ?? "title",
-                style: AppTextStyle.fontSize14lightViolateW400,
+                style: AppTextStyle.fontSize14lightBlackW400,
               ),
                InkWell(
                 onTap: onTap,

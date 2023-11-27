@@ -5,6 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_text_style.dart';
 import '../../../utilities/widgets/common_widgets/custom_divider.dart';
@@ -29,18 +30,12 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                         ? const CircularProgressIndicator(
                             color: AppColors.primaryColor,
                           )
-                        : CustomDropdown(
+                        : DuplicateDropdown(
                           dropdownValue: controller.dropdownValue.value,
-                          dropdownList: controller.leaveTypeDropdownList
-                              .map((item) => item.toString())
-                              .toList(),
+                          dropdownList: controller.applyLeaveTypeList,
                           changeDropdownValue: (v) {
                             controller.dropdownValue.value = v!;
-                            controller.leaveTypeId.value = controller
-                                .applyLeaveTypeList[controller
-                                    .leaveTypeDropdownList
-                                    .indexOf(v)]
-                                .id!;
+                            controller.leaveTypeId.value = v.id;
                           },
                         ),
                     10.verticalSpacing,
@@ -60,6 +55,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                         ImagePath.calender,
                         color: AppColors.profileValueColor,
                       ),
+                      hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     ),
                     10.verticalSpacing,
                     CustomTextFormField(
@@ -76,6 +72,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                         ImagePath.calender,
                         color: AppColors.profileValueColor,
                       ),
+                      hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     ),
                     10.verticalSpacing,
                     CustomTextFormField(
@@ -87,11 +84,13 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                       enableBorderActive: true,
                       focusBorderActive: true,
                       hintText: "To Date *",
+                      hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       fillColor: Colors.white,
                       suffixIcon: Image.asset(
                         ImagePath.calender,
                         color: AppColors.profileValueColor,
                       ),
+
                     ),
                     10.verticalSpacing,
                     CustomTextFormField(
@@ -121,6 +120,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                         controller.pickFile();
                         debugPrint("Browser ::: ${controller.file}");
                       },
+                      hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     ),
                     10.verticalSpacing,
                     CustomTextFormField(
@@ -128,6 +128,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                       enableBorderActive: true,
                       focusBorderActive: true,
                       hintText: "Reason",
+                      hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       fillColor: Colors.white,
                       maxLine: 3,
                       iconOnTap: () {

@@ -36,7 +36,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                         hintText: "Dormitory Name",
                         fillColor: Colors.white,
                         controller: controller.dormitoryNameController,
-                        hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
+                        hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       ),
                       10.verticalSpacing,
                       CustomTextFormField(
@@ -45,7 +45,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                         hintText: "Intake",
                         fillColor: Colors.white,
                         controller: controller.dormitoryIntakeController,
-                        hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
+                        hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       ),
                       10.verticalSpacing,
                       CustomTextFormField(
@@ -54,7 +54,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                         hintText: "Address",
                         fillColor: Colors.white,
                         controller: controller.dormitoryAddressController,
-                        hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
+                        hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       ),
                       10.verticalSpacing,
                       CustomDropdown(
@@ -72,7 +72,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                         hintText: "Description",
                         fillColor: Colors.white,
                         controller: controller.dormitoryDescriptionController,
-                        hintTextStyle: AppTextStyle.fontSize14lightViolateW400,
+                        hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       ),
                       30.verticalSpacing,
                       Obx(

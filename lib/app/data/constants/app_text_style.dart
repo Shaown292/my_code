@@ -131,12 +131,12 @@ class AppTextStyle {
       fontSize: 12,
       fontWeight: FontWeight.w400);
 
-  static const fontSize14lightViolateW400 = TextStyle(
+  static const fontSize14lightBlackW400 = TextStyle(
       color: AppColors.profileValueColor,
       fontSize: 14,
       fontWeight: FontWeight.w400);
 
-  static const fontSize16lightViolateW500 = TextStyle(
+  static const fontSize16lightBlackW500 = TextStyle(
       color: AppColors.profileValueColor,
       fontSize: 16,
       fontWeight: FontWeight.w500);

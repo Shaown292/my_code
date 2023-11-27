@@ -5,12 +5,13 @@ class DatePickerUtils {
   Future<DateTime?> pickDate({
     int additionalYear = 1,
     bool canSelectPastDate = false,
+    bool canSelectFutureDate = false,
   }) async {
     DateTime? dateTime = await showDatePicker(
       context: Get.context!,
       initialDate: DateTime.now(),
       firstDate: canSelectPastDate ? DateTime(DateTime.now().year - additionalYear) :DateTime.now(),
-      lastDate: canSelectPastDate ? DateTime.now() : DateTime(DateTime.now().year + additionalYear),
+      lastDate:   canSelectFutureDate ? DateTime(DateTime.now().year + additionalYear) : DateTime.now(),
     );
     return dateTime;
   }

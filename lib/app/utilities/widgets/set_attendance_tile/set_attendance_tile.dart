@@ -20,9 +20,10 @@ class SetAttendanceTile extends StatelessWidget {
   final String status;
   final bool isSelected;
   final String? title;
-  final String? value;
   final String? groupValue;
+  final String? value;
   final Function(String? value)? onChanged;
+  final int? index;
 
   const SetAttendanceTile({
     super.key,
@@ -32,11 +33,15 @@ class SetAttendanceTile extends StatelessWidget {
     this.studentClass,
     this.section,
     this.onPresentButtonTap,
-    this.status = "P",
+    this.status = "L",
     this.onAbsentButtonTap,
     this.onLateButtonTap,
     this.onHalfDayButtonTap,
-    this.isSelected = false, this.title, this.value, this.groupValue, this.onChanged,
+    this.isSelected = false,
+    this.title,
+    this.groupValue,
+    this.onChanged,
+    this.index, this.value,
   });
 
   @override
@@ -48,34 +53,34 @@ class SetAttendanceTile extends StatelessWidget {
             10.horizontalSpacing,
             isImageEmpty
                 ? Container(
-              height: 70,
-              width: 70,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child: ClipRRect(
-                child: CacheImageView(
-                  url: imageUrl,
-                  errorImageLocal: ImagePath.dp,
-                ),
-              ),
-            )
+                    height: 70,
+                    width: 70,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: ClipRRect(
+                      child: CacheImageView(
+                        url: imageUrl,
+                        errorImageLocal: ImagePath.dp,
+                      ),
+                    ),
+                  )
                 : Container(
-              height: 70,
-              width: 70,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage(ImagePath.dp),
-                ),
-              ),
-            ),
+                    height: 70,
+                    width: 70,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(ImagePath.dp),
+                      ),
+                    ),
+                  ),
             10.horizontalSpacing,
             Flexible(
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -83,6 +88,21 @@ class SetAttendanceTile extends StatelessWidget {
                     10.verticalSpacing,
                     Text("Class: $studentClass  |  Section: $section"),
                     10.verticalSpacing,
+
+                    // SizedBox(
+                    //   height: 100,
+                    //   child: ListView.builder(
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount: 4,
+                    //     itemBuilder: (context, index) {
+                    //       return RadioListTile(
+                    //           title: const Text("Present"),
+                    //           groupValue: title,
+                    //           onChanged: onChanged,
+                    //           value: value[id],
+                    //     },
+                    //   ),
+                    // )
                     // SizedBox(
                     //   height: 100,
                     //   child: Row(
