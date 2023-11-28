@@ -22,6 +22,8 @@ import '../modules/admin_fees_group/bindings/admin_fees_group_binding.dart';
 import '../modules/admin_fees_group/views/admin_fees_group_view.dart';
 import '../modules/admin_fees_invoice/bindings/admin_fees_invoice_binding.dart';
 import '../modules/admin_fees_invoice/views/admin_fees_invoice_view.dart';
+import '../modules/admin_fees_invoice_list/bindings/admin_fees_invoice_list_binding.dart';
+import '../modules/admin_fees_invoice_list/views/admin_fees_invoice_list_view.dart';
 import '../modules/admin_fees_type/bindings/admin_fees_type_binding.dart';
 import '../modules/admin_fees_type/views/admin_fees_type_view.dart';
 import '../modules/admin_leave/bindings/admin_leave_binding.dart';
@@ -474,31 +476,43 @@ class AppPages {
       name: _Paths.ADMIN_ATTENDANCE,
       page: () => const AdminAttendanceView(),
       binding: AdminAttendanceBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH,
       page: () => const AdminClassAttendanceSearchView(),
       binding: AdminClassAttendanceSearchBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH,
       page: () => const AdminSubjectAttendanceSearchView(),
       binding: AdminSubjectAttendanceSearchBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL,
       page: () => const AdminSubjectAttendanceSearchIndividualView(),
       binding: AdminSubjectAttendanceSearchIndividualBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL,
       page: () => const AdminClassAttendanceSearchIndividualView(),
       binding: AdminClassAttendanceSearchIndividualBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_CLASS_SET_ATTENDANCE,
       page: () => const AdminClassSetAttendanceView(),
       binding: AdminClassSetAttendanceBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_FEES_INVOICE_LIST,
+      page: () => const AdminFeesInvoiceListView(),
+      binding: AdminFeesInvoiceListBinding(),
+      transition: Transition.fade,
     ),
   ];
 }

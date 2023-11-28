@@ -176,8 +176,8 @@ class AppFunctions {
       case 'Fees Type':
         Get.toNamed(Routes.ADMIN_FEES_TYPE);
         break;
-      case 'Fees Invoice':
-        Get.toNamed(Routes.ADMIN_FEES_INVOICE);
+      case 'Fees Invoice List':
+        Get.toNamed(Routes.ADMIN_FEES_INVOICE_LIST);
         break;
       case 'Attendance':
         Get.toNamed(Routes.ADMIN_ATTENDANCE);
