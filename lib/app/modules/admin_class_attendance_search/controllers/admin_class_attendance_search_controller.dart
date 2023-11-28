@@ -28,6 +28,7 @@ class AdminClassAttendanceSearchController extends GetxController {
     'D'
   ];
 
+
   void selectDate() async {
     DateTime? dateTime = await DatePickerUtils().pickDate(
       canSelectPastDate: true,

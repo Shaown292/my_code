@@ -1,23 +1,35 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AdminSubjectAttendanceSearchIndividualController extends GetxController {
-  //TODO: Implement AdminSubjectAttendanceSearchIndividualController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  TextEditingController nameTextController = TextEditingController();
+  TextEditingController rollTextController = TextEditingController();
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  RxString classInitialValue = '1'.obs;
+  RxString classNullValue = ''.obs;
+  List<String> classList = [
+    '1',
+    '2',
+    '3',
+    '4'
+  ];
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  RxString sectionInitialValue = 'A'.obs;
+  RxString sectionNullValue = ''.obs;
+  List<String> sectionList = [
+    'A',
+    'B',
+    'C',
+    'D'
+  ];
 
-  void increment() => count.value++;
+  RxString subjectInitialValue = 'Mat'.obs;
+  RxString subjectNullValue = ''.obs;
+  List<String> subjectList = [
+    'Mat',
+    'Eng',
+    'Ban',
+    'Phy'
+  ];
 }
