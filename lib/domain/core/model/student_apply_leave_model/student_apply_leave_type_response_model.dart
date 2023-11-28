@@ -47,7 +47,7 @@ class ApplyLeaveTypeData {
 
 class LeaveType {
   int? id;
-  String? name;  /// name => leave_type
+  String? name;  ///  leave_type => name
 
   LeaveType({this.id, this.name});
 
