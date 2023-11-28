@@ -219,6 +219,10 @@ class InfixApi {
   /// Dormitory
   static String addDormitoryFromAdmin = '${baseApi}dormitory-store';
 
+  /// Student Class List
+  static String getStudentClassList = '${baseApi}class-list';
+  static String getStudentSectionList({required int classId}) => '${baseApi}section-list?id=$classId';
+
   static String adminLeaveStatusUpdate({
     required int leaveId,
     required String statusType,
