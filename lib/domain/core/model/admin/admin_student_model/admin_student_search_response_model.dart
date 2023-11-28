@@ -1,6 +1,6 @@
 class AdminStudentSearchResponseModel {
   bool? success;
-  List<StudentData>? data;
+  List<StudentSearchData>? data;
   String? message;
 
   AdminStudentSearchResponseModel({this.success, this.data, this.message});
@@ -8,9 +8,9 @@ class AdminStudentSearchResponseModel {
   AdminStudentSearchResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
-      data = <StudentData>[];
+      data = <StudentSearchData>[];
       json['data'].forEach((v) {
-        data!.add(StudentData.fromJson(v));
+        data!.add(StudentSearchData.fromJson(v));
       });
     }
     message = json['message'];
@@ -27,15 +27,15 @@ class AdminStudentSearchResponseModel {
   }
 }
 
-class StudentData {
+class StudentSearchData {
   int? id;
   String? fullName;
   String? studentPhoto;
   List<ClassSection>? classSection;
 
-  StudentData({this.id, this.fullName, this.studentPhoto, this.classSection});
+  StudentSearchData({this.id, this.fullName, this.studentPhoto, this.classSection});
 
-  StudentData.fromJson(Map<String, dynamic> json) {
+  StudentSearchData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullName = json['full_name'];
     studentPhoto = json['student_photo'];

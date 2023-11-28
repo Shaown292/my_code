@@ -5,8 +5,8 @@ import '../controllers/admin_students_search_list_controller.dart';
 class AdminStudentsSearchListBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AdminStudentsSearchListController>(
-      () => AdminStudentsSearchListController(),
+    Get.put<AdminStudentsSearchListController>(
+      AdminStudentsSearchListController(),
     );
   }
 }

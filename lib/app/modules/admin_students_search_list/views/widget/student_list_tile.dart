@@ -15,6 +15,7 @@ class StudentListTile extends StatelessWidget {
   final String? studentName;
   final String? studentClass;
   final String? studentSection;
+  final List<dynamic>? classSectionList;
 
   const StudentListTile({
     super.key,
@@ -23,6 +24,7 @@ class StudentListTile extends StatelessWidget {
     this.studentName,
     this.studentClass,
     this.studentSection,
+    this.classSectionList,
   });
 
   @override
@@ -66,14 +68,18 @@ class StudentListTile extends StatelessWidget {
                     style: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   3.verticalSpacing,
-                  Text(
-                    "${studentClass ?? ""} (${studentSection ?? ""})",
-                    style: AppTextStyle.homeworkElements,
-                  ),
+                  Row(
+                    children: [
+                      Text(
+                        classSectionList!
+                            .map((e) => e.classSection.toString())
+                            .join(', '),
+                      ),
+                    ],
+                  )
                 ],
               ),
               10.horizontalSpacing,
-          
             ],
           ),
         ),
@@ -81,7 +87,6 @@ class StudentListTile extends StatelessWidget {
           width: Get.width,
           color: AppColors.dormitoryDividerColor,
         ),
-
       ],
     );
   }
