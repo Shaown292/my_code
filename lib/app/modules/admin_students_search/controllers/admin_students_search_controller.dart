@@ -50,7 +50,6 @@ class AdminStudentsSearchController extends GetxController {
             classList.add(studentClassListResponseModel.data![i]);
           }
           studentClassId.value = classList[0].id!;
-          print(studentClassId.value);
         }
       } else {
         loadingController.isLoading = false;
@@ -108,8 +107,12 @@ class AdminStudentsSearchController extends GetxController {
     return StudentSectionListResponseModel();
   }
 
-  Future<AdminStudentSearchResponseModel> getSearchStudentDataList(
-      {required int classId, int? sectionId, int? rollId, String? name,}) async {
+  Future<AdminStudentSearchResponseModel> getSearchStudentDataList({
+    required int classId,
+    int? sectionId,
+    int? rollId,
+    String? name,
+  }) async {
     try {
       searchLoader.value = true;
 
@@ -118,14 +121,14 @@ class AdminStudentsSearchController extends GetxController {
           header: GlobalVariable.header);
 
       AdminStudentSearchResponseModel adminStudentSearchResponseModel =
-      AdminStudentSearchResponseModel.fromJson(response);
+          AdminStudentSearchResponseModel.fromJson(response);
 
       if (adminStudentSearchResponseModel.success == true) {
         searchLoader.value = false;
         if (adminStudentSearchResponseModel.data!.isNotEmpty) {
           for (int i = 0;
-          i < adminStudentSearchResponseModel.data!.length;
-          i++) {
+              i < adminStudentSearchResponseModel.data!.length;
+              i++) {
             studentSearchDataList.add(adminStudentSearchResponseModel.data![i]);
           }
           Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST);
@@ -149,12 +152,11 @@ class AdminStudentsSearchController extends GetxController {
 
   @override
   void onInit() {
-    getStudentClassList().then(
-        (value) {
-          if(classList.isNotEmpty){
-            getStudentSectionList(classId: studentClassId.value);
-          }
-        });
+    getStudentClassList().then((value) {
+      if (classList.isNotEmpty) {
+        getStudentSectionList(classId: studentClassId.value);
+      }
+    });
     super.onInit();
   }
 }

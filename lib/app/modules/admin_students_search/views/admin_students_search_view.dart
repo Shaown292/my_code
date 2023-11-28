@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/student_class_list_response_model.dart';
 
 import 'package:get/get.dart';
 
@@ -19,7 +17,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => InfixEduScaffold(
+      () => InfixEduScaffold(
         title: "Students",
         body: CustomBackground(
           customWidget: Padding(
@@ -63,7 +61,6 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                         fillColor: Colors.white,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       ),
-
                     ],
                   ),
                 ),
@@ -74,14 +71,14 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                       onTap: () {
                         print('............... ${controller.studentClassId}');
                         // Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST);
-                        controller.getSearchStudentDataList(classId: controller.studentClassId.value,);
+                        controller.getSearchStudentDataList(
+                          classId: controller.studentClassId.value,
+                        );
                       },
                     ),
                     // 50.verticalSpacing,
                   ],
                 ),
-
-
               ],
             ),
           ),
