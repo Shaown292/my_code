@@ -27,7 +27,7 @@ class AdminStudentsSearchController extends GetxController {
   RxList<SectionListData> sectionList = <SectionListData>[].obs;
   Rx<SectionListData> sectionValue =
       SectionListData(id: -1, name: "Select Class Name").obs;
-  RxList<StudentData> studentSearchDataList = <StudentData>[].obs;
+  RxList<StudentSearchData> studentSearchDataList = <StudentSearchData>[].obs;
 
   RxInt studentClassId = 0.obs;
   RxInt studentSectionId = 0.obs;
