@@ -19,13 +19,20 @@ class AdminStudentsSearchController extends GetxController {
   TextEditingController nameTextController = TextEditingController();
   TextEditingController rollTextController = TextEditingController();
 
+  Rx<ClassListData> classValue =
+      ClassListData(id: -1, name: "Select Class Name").obs;
+
   RxList<ClassListData> classList = <ClassListData>[].obs;
+
   RxList<SectionListData> sectionList = <SectionListData>[].obs;
+  Rx<SectionListData> sectionValue =
+      SectionListData(id: -1, name: "Select Class Name").obs;
   RxList<StudentData> studentSearchDataList = <StudentData>[].obs;
+
   RxInt studentClassId = 0.obs;
   RxInt studentSectionId = 0.obs;
 
-  RxString classValue = "1".obs;
+  // RxString classValue = "1".obs;
 
   RxList<String> classListDropdown = [
     "1",
@@ -49,6 +56,8 @@ class AdminStudentsSearchController extends GetxController {
           for (int i = 0; i < studentClassListResponseModel.data!.length; i++) {
             classList.add(studentClassListResponseModel.data![i]);
           }
+          classValue.value = classList[0];
+
           studentClassId.value = classList[0].id!;
         }
       } else {
@@ -80,6 +89,7 @@ class AdminStudentsSearchController extends GetxController {
       StudentSectionListResponseModel studentSectionListResponseModel =
           StudentSectionListResponseModel.fromJson(response);
 
+      sectionList.add(SectionListData(id: -1, name: "Select Section"));
       if (studentSectionListResponseModel.success == true) {
         sectionLoader.value = false;
         if (studentSectionListResponseModel.data!.isNotEmpty) {
@@ -88,6 +98,7 @@ class AdminStudentsSearchController extends GetxController {
               i++) {
             sectionList.add(studentSectionListResponseModel.data![i]);
           }
+          sectionValue.value = sectionList[0];
           studentSectionId.value = sectionList[0].id!;
         }
       } else {
@@ -131,7 +142,8 @@ class AdminStudentsSearchController extends GetxController {
               i++) {
             studentSearchDataList.add(adminStudentSearchResponseModel.data![i]);
           }
-          Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST);
+          Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST,
+              arguments: {'search_data': studentSearchDataList});
         }
       } else {
         searchLoader.value = false;
