@@ -31,6 +31,7 @@ class CacheImageView extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           color: color,
+          shape: BoxShape.circle,
           image: DecorationImage(
             image: imageProvider,
             fit: fit,
@@ -58,11 +59,16 @@ class CacheImageView extends StatelessWidget {
           ),
         );
       },
-      errorWidget: (context, url, error) => Image.asset(
-        errorImageLocal ?? 'assets/image/production/galary.png',
-        width: width,
-        height: height,
-        fit: fit,
+      errorWidget: (context, url, error) => Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle
+        ),
+        child: Image.asset(
+          errorImageLocal ?? 'assets/image/production/galary.png',
+          width: width,
+          height: height,
+          fit: fit,
+        ),
       ),
     );
   }

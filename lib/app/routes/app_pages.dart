@@ -30,6 +30,10 @@ import '../modules/admin_leave/bindings/admin_leave_binding.dart';
 import '../modules/admin_leave/views/admin_leave_view.dart';
 import '../modules/admin_room_list/bindings/admin_room_list_binding.dart';
 import '../modules/admin_room_list/views/admin_room_list_view.dart';
+import '../modules/admin_students_search/bindings/admin_students_search_binding.dart';
+import '../modules/admin_students_search/views/admin_students_search_view.dart';
+import '../modules/admin_students_search_list/bindings/admin_students_search_list_binding.dart';
+import '../modules/admin_students_search_list/views/admin_students_search_list_view.dart';
 import '../modules/admin_subject_attendance_search/bindings/admin_subject_attendance_search_binding.dart';
 import '../modules/admin_subject_attendance_search/views/admin_subject_attendance_search_view.dart';
 import '../modules/admin_subject_attendance_search_individual/bindings/admin_subject_attendance_search_individual_binding.dart';
@@ -513,6 +517,17 @@ class AppPages {
       page: () => const AdminFeesInvoiceListView(),
       binding: AdminFeesInvoiceListBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_STUDENTS_SEARCH,
+      page: () => const AdminStudentsSearchView(),
+      binding: AdminStudentsSearchBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_STUDENTS_SEARCH_LIST,
+      page: () => const AdminStudentsSearchListView(),
+      binding: AdminStudentsSearchListBinding(),
     ),
   ];
 }

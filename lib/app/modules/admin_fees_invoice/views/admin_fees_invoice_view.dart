@@ -29,7 +29,7 @@ class AdminFeesInvoiceView extends GetView<AdminFeesInvoiceController> {
               color: Colors.white,
             ),
           ),
-        )
+        ),
       ],
       body: CustomBackground(
         customWidget: Padding(
