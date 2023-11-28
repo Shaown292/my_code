@@ -13,6 +13,7 @@ class InfixEduScaffold extends StatelessWidget {
   final Widget? floatingActionButton;
   final Widget? titleWidget;
   final double? appBarHeight;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   const InfixEduScaffold({
     super.key,
@@ -25,6 +26,7 @@ class InfixEduScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.titleWidget,
     this.appBarHeight,
+    this.floatingActionButtonLocation,
   });
 
   @override
@@ -44,7 +46,7 @@ class InfixEduScaffold extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white.withOpacity(0),
         appBar: PreferredSize(
-          preferredSize:  Size.fromHeight(appBarHeight ?? 80),
+          preferredSize: Size.fromHeight(appBarHeight ?? 80),
           child: appBar ??
               CustomAppBar(
                 leadingIcon: leadingIcon,
@@ -56,6 +58,7 @@ class InfixEduScaffold extends StatelessWidget {
         body: body,
         bottomNavigationBar: bottomNavBar,
         floatingActionButton: floatingActionButton,
+        floatingActionButtonLocation: floatingActionButtonLocation,
       ),
     );
   }
