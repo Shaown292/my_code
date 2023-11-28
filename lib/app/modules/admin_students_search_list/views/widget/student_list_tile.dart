@@ -16,6 +16,7 @@ class StudentListTile extends StatelessWidget {
   final String? studentClass;
   final String? studentSection;
   final List<dynamic>? classSectionList;
+  final Function()? onTap;
 
   const StudentListTile({
     super.key,
@@ -25,62 +26,66 @@ class StudentListTile extends StatelessWidget {
     this.studentClass,
     this.studentSection,
     this.classSectionList,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              isPhotoAvailable
-                  ? Container(
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage(ImagePath.dp),
+        InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                isPhotoAvailable
+                    ? Container(
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage(ImagePath.dp),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 70,
+                        width: 70,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CacheImageView(
+                          url: '${AppConfig.imageBaseUrl}$imageURL',
+                          errorImageLocal: ImagePath.dp,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                    )
-                  : Container(
-                      height: 70,
-                      width: 70,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: CacheImageView(
-                        url: '${AppConfig.imageBaseUrl}$imageURL',
-                        errorImageLocal: ImagePath.dp,
-                        fit: BoxFit.cover,
-                      ),
+                10.horizontalSpacing,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      studentName ?? AppText.noDataAvailable,
+                      style: AppTextStyle.fontSize14lightBlackW400,
                     ),
-              10.horizontalSpacing,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    studentName ?? AppText.noDataAvailable,
-                    style: AppTextStyle.fontSize14lightBlackW400,
-                  ),
-                  3.verticalSpacing,
-                  Row(
-                    children: [
-                      Text(
-                        classSectionList!
-                            .map((e) => e.classSection.toString())
-                            .join(', '),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              10.horizontalSpacing,
-            ],
+                    3.verticalSpacing,
+                    Row(
+                      children: [
+                        Text(
+                          classSectionList!
+                              .map((e) => e.classSection.toString())
+                              .join(', '),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                10.horizontalSpacing,
+              ],
+            ),
           ),
         ),
         CustomDivider(
