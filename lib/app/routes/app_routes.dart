@@ -73,6 +73,7 @@ abstract class Routes {
   static const ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL =
       _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL;
   static const ADMIN_CLASS_SET_ATTENDANCE = _Paths.ADMIN_CLASS_SET_ATTENDANCE;
+  static const ADMIN_FEES_INVOICE_LIST = _Paths.ADMIN_FEES_INVOICE_LIST;
 }
 
 abstract class _Paths {
@@ -144,4 +145,5 @@ abstract class _Paths {
   static const ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL =
       '/admin-class-attendance-search-individual';
   static const ADMIN_CLASS_SET_ATTENDANCE = '/admin-class-set-attendance';
+  static const ADMIN_FEES_INVOICE_LIST = '/admin-fees-invoice-list';
 }
