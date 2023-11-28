@@ -210,18 +210,31 @@ class InfixApi {
   static String createFeesGroup = '${baseApi}fees-group-store';
   static String updateSingleFeesGroup = '${baseApi}fees-group-update';
 
-  static String deleteSingleFeesGroup({required int feesId}) => '${baseApi}fees-group-delete?fees_group_id=$feesId';
+  static String deleteSingleFeesGroup({required int feesId}) =>
+      '${baseApi}fees-group-delete?fees_group_id=$feesId';
 
   static String getFeesTypeList = '${baseApi}fees-type';
   static String getAdminFeesInvoiceList = '${baseApi}fees-invoice';
-  static String deleteFeesType({required feesTypeId}) => '${baseApi}fees-type-delete?fees_type_id=$feesTypeId';
+
+  static String deleteFeesType({required feesTypeId}) =>
+      '${baseApi}fees-type-delete?fees_type_id=$feesTypeId';
 
   /// Dormitory
   static String addDormitoryFromAdmin = '${baseApi}dormitory-store';
 
   /// Student Class List
   static String getStudentClassList = '${baseApi}class-list';
-  static String getStudentSectionList({required int classId}) => '${baseApi}section-list?id=$classId';
+
+  static String getStudentSectionList({required int classId}) =>
+      '${baseApi}section-list?id=$classId';
+
+  static String getAdminStudentSearchList({
+    required int classId,
+    int? sectionId,
+    int? rollId,
+    String? name,
+  }) =>
+      '${baseApi}student-list-search?class=$classId&section=${sectionId ?? ''}&name=${name ?? ''}&roll_no=${rollId ?? ''}';
 
   static String adminLeaveStatusUpdate({
     required int leaveId,
@@ -407,13 +420,14 @@ class InfixApi {
   static String adminAddBook = "${baseApi}save-book-data";
 
   static String addLibraryMember(
-      String memberType,
-      String memberUdId,
-      String clsId,
-      String secId,
-      String studentId,
-      String stuffId,
-      String createdBy) {
+    String memberType,
+    String memberUdId,
+    String clsId,
+    String secId,
+    String studentId,
+    String stuffId,
+    String createdBy,
+  ) {
     return "${baseApi}add-library-member?member_type=$memberType&member_ud_id=$memberUdId&class=$clsId&section=$secId&student=$studentId&staff=$stuffId&created_by=$createdBy";
   }
 

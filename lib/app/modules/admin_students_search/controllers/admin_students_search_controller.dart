@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
+import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/admin_student_search_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/student_class_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/student_section_list_response_model.dart';
 import 'package:get/get.dart';
@@ -12,12 +14,14 @@ import 'package:get/get.dart';
 class AdminStudentsSearchController extends GetxController {
   LoadingController loadingController = Get.find();
   RxBool sectionLoader = false.obs;
+  RxBool searchLoader = false.obs;
 
   TextEditingController nameTextController = TextEditingController();
   TextEditingController rollTextController = TextEditingController();
 
   RxList<ClassListData> classList = <ClassListData>[].obs;
   RxList<SectionListData> sectionList = <SectionListData>[].obs;
+  RxList<StudentData> studentSearchDataList = <StudentData>[].obs;
   RxInt studentClassId = 0.obs;
   RxInt studentSectionId = 0.obs;
 
@@ -45,6 +49,8 @@ class AdminStudentsSearchController extends GetxController {
           for (int i = 0; i < studentClassListResponseModel.data!.length; i++) {
             classList.add(studentClassListResponseModel.data![i]);
           }
+          studentClassId.value = classList[0].id!;
+          print(studentClassId.value);
         }
       } else {
         loadingController.isLoading = false;
@@ -102,10 +108,53 @@ class AdminStudentsSearchController extends GetxController {
     return StudentSectionListResponseModel();
   }
 
+  Future<AdminStudentSearchResponseModel> getSearchStudentDataList(
+      {required int classId, int? sectionId, int? rollId, String? name,}) async {
+    try {
+      searchLoader.value = true;
+
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminStudentSearchList(classId: classId),
+          header: GlobalVariable.header);
+
+      AdminStudentSearchResponseModel adminStudentSearchResponseModel =
+      AdminStudentSearchResponseModel.fromJson(response);
+
+      if (adminStudentSearchResponseModel.success == true) {
+        searchLoader.value = false;
+        if (adminStudentSearchResponseModel.data!.isNotEmpty) {
+          for (int i = 0;
+          i < adminStudentSearchResponseModel.data!.length;
+          i++) {
+            studentSearchDataList.add(adminStudentSearchResponseModel.data![i]);
+          }
+          Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST);
+        }
+      } else {
+        searchLoader.value = false;
+        showBasicFailedSnackBar(
+            message: adminStudentSearchResponseModel.message ??
+                AppText.somethingWentWrong);
+      }
+    } catch (e, t) {
+      searchLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      searchLoader.value = false;
+    }
+
+    return AdminStudentSearchResponseModel();
+  }
+
   @override
   void onInit() {
     getStudentClassList().then(
-        (value) => getStudentSectionList(classId: studentSectionId.value));
+        (value) {
+          if(classList.isNotEmpty){
+            getStudentSectionList(classId: studentClassId.value);
+          }
+        });
     super.onInit();
   }
 }
