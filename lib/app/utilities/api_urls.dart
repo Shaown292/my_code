@@ -226,15 +226,15 @@ class InfixApi {
   static String getStudentClassList = '${baseApi}class-list';
 
   static String getStudentSectionList({required int classId}) =>
-      '${baseApi}section-list?id=$classId';
+      '${baseApi}section-list?class_id=$classId';
 
   static String getAdminStudentSearchList({
     required int classId,
-    int? sectionId,
-    int? rollId,
-    String? name,
+    required int sectionId,
+    required String rollINo,
+    required String name,
   }) =>
-      '${baseApi}student-list-search?class=$classId&section=${sectionId ?? ''}&name=${name ?? ''}&roll_no=${rollId ?? ''}';
+      '${baseApi}student-list-search?class=$classId&section=$sectionId&name=$name&roll_no=$rollINo';
 
   static String adminLeaveStatusUpdate({
     required int leaveId,

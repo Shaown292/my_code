@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
@@ -27,6 +25,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  /// Student Class List Dropdown
                   controller.loadingController.isLoading
                       ? const CircularProgressIndicator(
                           color: AppColors.primaryColor,
@@ -37,10 +36,16 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                           changeDropdownValue: (v) {
                             controller.classValue.value = v!;
                             controller.studentClassId.value = v.id;
+
+                            controller.getStudentSectionList(
+                              classId: controller.studentClassId.value,
+                            );
                           },
                         ),
                   10.verticalSpacing,
-                  controller.loadingController.isLoading
+
+                  /// Student Section List Dropdown
+                  controller.sectionLoader.value
                       ? const CircularProgressIndicator(
                           color: AppColors.primaryColor,
                         )
@@ -66,14 +71,22 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                     controller: controller.rollTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
+                    textInputType: TextInputType.number,
                     hintText: "Roll",
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   50.verticalSpacing,
-                  PrimaryButton(
+                  controller.searchLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : PrimaryButton(
                     text: "Search",
-                    onTap: () {},
+                    onTap: () {
+                      controller.getSearchStudentDataList(
+                        classId: controller.studentClassId.value,
+                        sectionId: controller.studentSectionId.value,
+                        rollNo: controller.rollTextController.text,
+                        name: controller.nameTextController.text,
+                      );
+                    },
                   )
                 ],
               ),

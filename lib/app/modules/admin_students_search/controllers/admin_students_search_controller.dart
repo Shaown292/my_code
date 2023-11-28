@@ -26,23 +26,16 @@ class AdminStudentsSearchController extends GetxController {
 
   RxList<SectionListData> sectionList = <SectionListData>[].obs;
   Rx<SectionListData> sectionValue =
-      SectionListData(id: -1, name: "Select Class Name").obs;
+      SectionListData(id: -1, name: "").obs;
   RxList<StudentSearchData> studentSearchDataList = <StudentSearchData>[].obs;
 
   RxInt studentClassId = 0.obs;
   RxInt studentSectionId = 0.obs;
 
-  // RxString classValue = "1".obs;
-
-  RxList<String> classListDropdown = [
-    "1",
-    '2',
-    "3",
-    '4',
-  ].obs;
 
   Future<StudentClassListResponseModel> getStudentClassList() async {
     try {
+      classList.clear();
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
@@ -80,6 +73,7 @@ class AdminStudentsSearchController extends GetxController {
   Future<StudentSectionListResponseModel> getStudentSectionList(
       {required int classId}) async {
     try {
+      sectionList.clear();
       sectionLoader.value = true;
 
       final response = await BaseClient().getData(
@@ -89,7 +83,7 @@ class AdminStudentsSearchController extends GetxController {
       StudentSectionListResponseModel studentSectionListResponseModel =
           StudentSectionListResponseModel.fromJson(response);
 
-      sectionList.add(SectionListData(id: -1, name: "Select Section"));
+
       if (studentSectionListResponseModel.success == true) {
         sectionLoader.value = false;
         if (studentSectionListResponseModel.data!.isNotEmpty) {
@@ -120,15 +114,16 @@ class AdminStudentsSearchController extends GetxController {
 
   Future<AdminStudentSearchResponseModel> getSearchStudentDataList({
     required int classId,
-    int? sectionId,
-    int? rollId,
-    String? name,
+    required int sectionId,
+    required String rollNo,
+    required String name,
   }) async {
     try {
+      studentSearchDataList.clear();
       searchLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminStudentSearchList(classId: classId),
+          url: InfixApi.getAdminStudentSearchList(classId: classId, sectionId: sectionId, rollINo: rollNo, name: name,),
           header: GlobalVariable.header);
 
       AdminStudentSearchResponseModel adminStudentSearchResponseModel =
@@ -142,6 +137,9 @@ class AdminStudentsSearchController extends GetxController {
               i++) {
             studentSearchDataList.add(adminStudentSearchResponseModel.data![i]);
           }
+          Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST,
+              arguments: {'search_data': studentSearchDataList});
+        } else{
           Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST,
               arguments: {'search_data': studentSearchDataList});
         }
