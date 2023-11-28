@@ -48,6 +48,7 @@ class AppText {
 
   /// Others
   static const String downloadMessage = 'Would you like to download the file?';
+  static const String somethingWentWrong = 'Something went Wrong.';
 
 
   /// Forget Password
