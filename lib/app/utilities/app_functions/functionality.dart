@@ -149,6 +149,10 @@ class AppFunctions {
   static void getAdminHomeNavigation({required String title}) {
     debugPrint(title);
     switch (title) {
+
+      case 'Students':
+        Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH);
+        break;
       case 'Staff':
         Get.toNamed(Routes.STAFF);
         break;
