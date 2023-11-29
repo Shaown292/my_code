@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/admin_students_search/controllers/admin_students_search_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/datepicker_dialogue/date_picker.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/student_class_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/student_section_list_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminClassAttendanceSearchController extends GetxController {
@@ -9,24 +13,16 @@ class AdminClassAttendanceSearchController extends GetxController {
 
   TextEditingController selectedDateTextController = TextEditingController();
 
+  LoadingController loadingController = Get.find();
+  AdminStudentsSearchController adminStudentsSearchController = Get.put(AdminStudentsSearchController());
 
-  RxString classInitialValue = '1'.obs;
+
+
   RxString classNullValue = ''.obs;
-  List<String> classList = [
-    '1',
-    '2',
-    '3',
-    '4'
-  ];
 
-  RxString sectionInitialValue = 'A'.obs;
+
   RxString sectionNullValue = ''.obs;
-  List<String> sectionList = [
-    'A',
-    'B',
-    'C',
-    'D'
-  ];
+
 
 
   void selectDate() async {
@@ -40,12 +36,12 @@ class AdminClassAttendanceSearchController extends GetxController {
   }
 
   bool validation() {
-    if (classList.isEmpty) {
+    if (adminStudentsSearchController.classList.isEmpty) {
       showBasicFailedSnackBar(message: 'Select Class');
       return false;
     }
 
-    if (sectionList.isEmpty) {
+    if (adminStudentsSearchController.sectionList.isEmpty) {
       showBasicFailedSnackBar(message: 'Select Section');
       return false;
     }
@@ -57,4 +53,5 @@ class AdminClassAttendanceSearchController extends GetxController {
 
     return true;
   }
+
 }

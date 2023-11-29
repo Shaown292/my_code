@@ -76,6 +76,7 @@ abstract class Routes {
   static const ADMIN_FEES_INVOICE_LIST = _Paths.ADMIN_FEES_INVOICE_LIST;
   static const ADMIN_STUDENTS_SEARCH = _Paths.ADMIN_STUDENTS_SEARCH;
   static const ADMIN_STUDENTS_SEARCH_LIST = _Paths.ADMIN_STUDENTS_SEARCH_LIST;
+  static const ADMIN_CONTENT = _Paths.ADMIN_CONTENT;
 }
 
 abstract class _Paths {
@@ -150,4 +151,5 @@ abstract class _Paths {
   static const ADMIN_FEES_INVOICE_LIST = '/admin-fees-invoice-list';
   static const ADMIN_STUDENTS_SEARCH = '/admin-students-search';
   static const ADMIN_STUDENTS_SEARCH_LIST = '/admin-students-search-list';
+  static const ADMIN_CONTENT = '/admin-content';
 }

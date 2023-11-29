@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
@@ -28,19 +29,23 @@ class AdminClassAttendanceSearchView
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
             child: Column(
               children: [
-                CustomDropdown(
-                  dropdownValue: controller.classList.isEmpty ? controller.classNullValue.value : controller.classInitialValue.value,
-                  dropdownList: controller.classList,
-                  changeDropdownValue: (v) {
-                    controller.classInitialValue.value = v!;
-                  },
-                ),
+                controller.loadingController.isLoading
+                    ? const CircularProgressIndicator()
+                    : DuplicateDropdown(
+                        dropdownValue: controller.adminStudentsSearchController.classList.isEmpty
+                            ? controller.classNullValue.value
+                            : controller.adminStudentsSearchController.classValue.value,
+                        dropdownList: controller.adminStudentsSearchController.classList,
+                        changeDropdownValue: (v) {
+                          controller.adminStudentsSearchController.classValue.value = v!;
+                        },
+                      ),
                 10.verticalSpacing,
-                CustomDropdown(
-                  dropdownValue: controller.sectionList.isEmpty ? controller.sectionNullValue.value : controller.sectionInitialValue.value,
-                  dropdownList: controller.sectionList,
+                DuplicateDropdown(
+                  dropdownValue: controller.adminStudentsSearchController.sectionList.isEmpty ? controller.sectionNullValue.value : controller.adminStudentsSearchController.sectionValue.value,
+                  dropdownList: controller.adminStudentsSearchController.sectionList,
                   changeDropdownValue: (v) {
-                    controller.sectionInitialValue.value = v!;
+                    controller.adminStudentsSearchController.sectionValue.value = v!;
                   },
                 ),
                 10.verticalSpacing,
@@ -64,7 +69,7 @@ class AdminClassAttendanceSearchView
                 PrimaryButton(
                   text: "Search",
                   onTap: () {
-                    if(controller.validation()){
+                    if (controller.validation()) {
                       Get.toNamed(Routes.ADMIN_CLASS_SET_ATTENDANCE);
                     }
                   },
