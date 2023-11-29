@@ -14,6 +14,8 @@ import '../modules/admin_class_attendance_search_individual/bindings/admin_class
 import '../modules/admin_class_attendance_search_individual/views/admin_class_attendance_search_individual_view.dart';
 import '../modules/admin_class_set_attendance/bindings/admin_class_set_attendance_binding.dart';
 import '../modules/admin_class_set_attendance/views/admin_class_set_attendance_view.dart';
+import '../modules/admin_content/bindings/admin_content_binding.dart';
+import '../modules/admin_content/views/admin_content_view.dart';
 import '../modules/admin_dormitory/bindings/admin_dormitory_binding.dart';
 import '../modules/admin_dormitory/views/admin_dormitory_view.dart';
 import '../modules/admin_fees/bindings/admin_fees_binding.dart';
@@ -528,6 +530,11 @@ class AppPages {
       name: _Paths.ADMIN_STUDENTS_SEARCH_LIST,
       page: () => const AdminStudentsSearchListView(),
       binding: AdminStudentsSearchListBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_CONTENT,
+      page: () => const AdminContentView(),
+      binding: AdminContentBinding(),
     ),
   ];
 }
