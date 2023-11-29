@@ -9,7 +9,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 
 import 'package:get/get.dart';
 
@@ -29,7 +28,9 @@ class AdminClassAttendanceSearchView
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
             child: Column(
               children: [
-                controller.loadingController.isLoading
+
+                /// Class Dropdown
+                controller.adminStudentsSearchController.loadingController.isLoading
                     ? const CircularProgressIndicator()
                     : DuplicateDropdown(
                         dropdownValue: controller.adminStudentsSearchController.classList.isEmpty
@@ -38,10 +39,13 @@ class AdminClassAttendanceSearchView
                         dropdownList: controller.adminStudentsSearchController.classList,
                         changeDropdownValue: (v) {
                           controller.adminStudentsSearchController.classValue.value = v!;
+                          controller.adminStudentsSearchController.getStudentSectionList(classId: controller.adminStudentsSearchController.studentClassId.value);
                         },
                       ),
                 10.verticalSpacing,
-                DuplicateDropdown(
+
+                /// Section Dropdown
+                controller.adminStudentsSearchController.sectionLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : DuplicateDropdown(
                   dropdownValue: controller.adminStudentsSearchController.sectionList.isEmpty ? controller.sectionNullValue.value : controller.adminStudentsSearchController.sectionValue.value,
                   dropdownList: controller.adminStudentsSearchController.sectionList,
                   changeDropdownValue: (v) {
@@ -66,11 +70,11 @@ class AdminClassAttendanceSearchView
                   ),
                 ),
                 const Spacer(),
-                PrimaryButton(
+                controller.isLoading.value ? const CircularProgressIndicator(color:  AppColors.primaryColor,) : PrimaryButton(
                   text: "Search",
                   onTap: () {
                     if (controller.validation()) {
-                      Get.toNamed(Routes.ADMIN_CLASS_SET_ATTENDANCE);
+                      controller.getStudentAttendanceList(studentClassId: controller.adminStudentsSearchController.studentClassId.value, studentSectionId: controller.adminStudentsSearchController.studentSectionId.value, selectedDate: controller.selectedDateTextController.text,);
                     }
                   },
                 ),

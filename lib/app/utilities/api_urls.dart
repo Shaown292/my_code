@@ -228,6 +228,9 @@ class InfixApi {
   static String getStudentSectionList({required int classId}) =>
       '${baseApi}section-list?class_id=$classId';
 
+  static String getAdminStudentSearchAttendanceList({required int classId, required int sectionId, required String selectedDate}) =>
+      '${baseApi}student-search?class=$classId&section=$sectionId&attendance_date=$selectedDate';
+
   static String getAdminStudentSearchList({
     required int classId,
     required int sectionId,
