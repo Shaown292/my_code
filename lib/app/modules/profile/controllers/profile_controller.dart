@@ -42,18 +42,36 @@ class ProfileController extends GetxController {
   ProfileTransport? profileTransport;
   ProfileOthers? profileOthers;
 
-  /// Personal
-  void fetchProfilePersonalData() async {
+  ProfilePersonalModel profilePersonalModel = ProfilePersonalModel();
+
+
+  /// For Admin Module
+  int? studentId;
+
+  /// Get Personal Data
+  void fetchProfilePersonalData(int studentId) async {
     isLoading.value = true;
 
     try {
-      final res = await BaseClient().getData(
-        url: InfixApi.profilePersonal(),
-        header: GlobalVariable.header,
-      );
 
-      ProfilePersonalModel profilePersonalModel =
-          ProfilePersonalModel.fromJson(res);
+
+      if(GlobalVariable.roleId == 1){
+
+        final response = await BaseClient().getData(
+          url: InfixApi.getSingleStudentProfile(studentId: studentId),
+          header: GlobalVariable.header,
+        );
+        profilePersonalModel = ProfilePersonalModel.fromJson(response);
+
+      } else {
+        final response = await BaseClient().getData(
+          url: InfixApi.profilePersonal(),
+          header: GlobalVariable.header,
+        );
+        profilePersonalModel = ProfilePersonalModel.fromJson(response);
+      }
+
+
 
       if (profilePersonalModel.success == true) {
         profilePersonal = profilePersonalModel.data?.profilePersonal;
@@ -82,7 +100,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  /// Parents
+  /// Get Parents Data
   void fetchProfileParentsData() async {
     isLoading.value = true;
 
@@ -110,7 +128,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  /// Transport
+  /// Get Transport Data
   void fetchProfileTransportData() async {
     isLoading.value = true;
 
@@ -138,7 +156,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  /// Others
+  /// Get Others Data
   void fetchProfileOthersData() async {
     isLoading.value = true;
 
@@ -164,7 +182,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  ///Documents Get
+  /// Get Documents Data
   Future<StudentDocumentsResponseModel?> getAllDocumentList() async {
     try {
       loadingController.isLoading = true;
@@ -419,7 +437,10 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
-    fetchProfilePersonalData();
+
+    studentId = Get.arguments['student_id'];
+
+    fetchProfilePersonalData(studentId!);
     fetchProfileParentsData();
     fetchProfileTransportData();
     fetchProfileOthersData();

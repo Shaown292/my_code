@@ -248,9 +248,15 @@ class InfixApi {
   static String getAdminStaffIndividualData({required int staffIndividualId}) =>
       '${baseApi}individual-staff-details/$staffIndividualId';
 
+  static String getSingleStudentProfile({required int studentId}) => '${baseApi}student-profile-personal?student_id=$studentId';
+  static String getSingleParentProfile({required int studentId}) => '${baseApi}student-profile-parents?student_id=$studentId';
+  static String getSingleStudentTransportData({required int studentId}) => '${baseApi}student-profile-transport?student_id=$studentId';
+  static String getSingleStudentOthersData({required int studentId}) => '${baseApi}student-profile-others?student_id=$studentId';
+  static String getSingleStudentDocumentsData({required int studentId}) => '${baseApi}student-profile-documents?student_id=$studentId';
+
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
-  //////////////////////////.......................................///////////////////////////////////
+  //////////////////////////..........PREVIOUS APP URLS................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
