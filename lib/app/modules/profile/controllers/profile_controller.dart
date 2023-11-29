@@ -38,12 +38,13 @@ class ProfileController extends GetxController {
 
   RxInt pageIndex = 0.obs;
   RxBool isLoading = false.obs;
+  RxBool deleteLoader = false.obs;
+  RxBool saveLoader = false.obs;
   RxBool personalLoader = false.obs;
   RxBool parentLoader = false.obs;
   RxBool transportLoader = false.obs;
   RxBool othersLoader = false.obs;
   RxBool documentLoader = false.obs;
-
 
   ProfilePersonal? profilePersonal;
   ProfileParents? profileParents;
@@ -54,27 +55,23 @@ class ProfileController extends GetxController {
   ProfileParentsModel profileParentsModel = ProfileParentsModel();
   ProfileTransportModel profileTransportModel = ProfileTransportModel();
   ProfileOthersModel profileOthersModel = ProfileOthersModel();
-  StudentDocumentsResponseModel studentDocumentsResponseModel = StudentDocumentsResponseModel();
-
+  StudentDocumentsResponseModel studentDocumentsResponseModel =
+      StudentDocumentsResponseModel();
 
   /// For Admin Module
   int? studentId;
 
   /// Get Personal Data
   void fetchProfilePersonalData({int? studentId}) async {
-
     try {
-
       personalLoader.value = true;
 
-      if(GlobalVariable.roleId == 1){
-
+      if (GlobalVariable.roleId == 1) {
         final response = await BaseClient().getData(
           url: InfixApi.getSingleStudentProfile(studentId: studentId!),
           header: GlobalVariable.header,
         );
         profilePersonalModel = ProfilePersonalModel.fromJson(response);
-
       } else {
         final response = await BaseClient().getData(
           url: InfixApi.profilePersonal(),
@@ -82,8 +79,6 @@ class ProfileController extends GetxController {
         );
         profilePersonalModel = ProfilePersonalModel.fromJson(response);
       }
-
-
 
       if (profilePersonalModel.success == true) {
         personalLoader.value = false;
@@ -115,19 +110,17 @@ class ProfileController extends GetxController {
 
   /// Get Parents Data
   void fetchProfileParentsData({int? studentId}) async {
-
-
     try {
       parentLoader.value = true;
 
-      if(GlobalVariable.roleId == 1){
+      if (GlobalVariable.roleId == 1) {
         final response = await BaseClient().getData(
           url: InfixApi.getSingleParentProfile(studentId: studentId!),
           header: GlobalVariable.header,
         );
 
         profileParentsModel = ProfileParentsModel.fromJson(response);
-      } else{
+      } else {
         final response = await BaseClient().getData(
           url: InfixApi.profileParents(),
           header: GlobalVariable.header,
@@ -135,8 +128,6 @@ class ProfileController extends GetxController {
 
         profileParentsModel = ProfileParentsModel.fromJson(response);
       }
-
-
 
       if (profileParentsModel.success == true) {
         profileParents = profileParentsModel.data?.profileParents;
@@ -156,30 +147,24 @@ class ProfileController extends GetxController {
 
   /// Get Transport Data
   void fetchProfileTransportData({int? studentId}) async {
-
-
     try {
       transportLoader.value = true;
 
-      if(GlobalVariable.roleId == 1){
+      if (GlobalVariable.roleId == 1) {
         final response = await BaseClient().getData(
           url: InfixApi.getSingleStudentTransportData(studentId: studentId!),
           header: GlobalVariable.header,
         );
 
-        profileTransportModel =
-            ProfileTransportModel.fromJson(response);
-      } else{
+        profileTransportModel = ProfileTransportModel.fromJson(response);
+      } else {
         final response = await BaseClient().getData(
           url: InfixApi.profileTransport(),
           header: GlobalVariable.header,
         );
 
-        profileTransportModel =
-        ProfileTransportModel.fromJson(response);
+        profileTransportModel = ProfileTransportModel.fromJson(response);
       }
-
-
 
       if (profileTransportModel.success == true) {
         profileTransport = profileTransportModel.data?.profileTransport;
@@ -199,26 +184,21 @@ class ProfileController extends GetxController {
 
   /// Get Others Data
   void fetchProfileOthersData({int? studentId}) async {
-
-
     try {
       othersLoader.value = true;
 
-      if(GlobalVariable.roleId == 1){
+      if (GlobalVariable.roleId == 1) {
         final response = await BaseClient().getData(
-            url: InfixApi.getSingleStudentOthersData(studentId: studentId!), header: GlobalVariable.header);
+            url: InfixApi.getSingleStudentOthersData(studentId: studentId!),
+            header: GlobalVariable.header);
 
-        profileOthersModel =
-            ProfileOthersModel.fromJson(response);
-      } else{
+        profileOthersModel = ProfileOthersModel.fromJson(response);
+      } else {
         final response = await BaseClient().getData(
             url: InfixApi.profileOthers(), header: GlobalVariable.header);
 
-        profileOthersModel =
-            ProfileOthersModel.fromJson(response);
+        profileOthersModel = ProfileOthersModel.fromJson(response);
       }
-
-
 
       if (profileOthersModel.success == true) {
         profileOthers = profileOthersModel.data?.profileOthers;
@@ -237,12 +217,13 @@ class ProfileController extends GetxController {
   }
 
   /// Get Documents Data
-  Future<StudentDocumentsResponseModel?> getAllDocumentList({int? studentId}) async {
+  Future<StudentDocumentsResponseModel?> getAllDocumentList(
+      {int? studentId}) async {
     try {
       documentLoader.value = true;
       documentsDataList.clear();
 
-      if(GlobalVariable.roleId == 1){
+      if (GlobalVariable.roleId == 1) {
         final response = await BaseClient().getData(
           url: InfixApi.getSingleStudentDocumentsData(studentId: studentId!),
           header: GlobalVariable.header,
@@ -250,7 +231,7 @@ class ProfileController extends GetxController {
 
         studentDocumentsResponseModel =
             StudentDocumentsResponseModel.fromJson(response);
-      } else{
+      } else {
         final response = await BaseClient().getData(
           url: InfixApi.profileDocumentGet(),
           header: GlobalVariable.header,
@@ -259,7 +240,6 @@ class ProfileController extends GetxController {
         studentDocumentsResponseModel =
             StudentDocumentsResponseModel.fromJson(response);
       }
-
 
       if (studentDocumentsResponseModel.success == true) {
         documentLoader.value = false;
@@ -271,9 +251,11 @@ class ProfileController extends GetxController {
                 .add(studentDocumentsResponseModel.data!.profileDocuments![i]);
           }
         }
-      } else{
+      } else {
         documentLoader.value = false;
-        showBasicFailedSnackBar(message: studentDocumentsResponseModel.message ?? AppText.somethingWentWrong);
+        showBasicFailedSnackBar(
+            message: studentDocumentsResponseModel.message ??
+                AppText.somethingWentWrong);
       }
     } catch (e, t) {
       documentLoader.value = false;
@@ -393,16 +375,18 @@ class ProfileController extends GetxController {
                         borderColor: AppColors.primaryColor,
                         onTap: () => Get.back(),
                       ),
-                      isLoading.value == true
-                          ? const CircularProgressIndicator(
-                              color: AppColors.primaryColor,
-                            )
-                          : PrimaryButton(
-                              width: Get.width * 0.2,
-                              title: "Save",
-                              textStyle: AppTextStyle.textStyle12WhiteW500,
-                              onTap: onTapForSave,
-                            ),
+                      Obx(
+                        () => saveLoader.value == true
+                            ? const CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              )
+                            : PrimaryButton(
+                                width: Get.width * 0.2,
+                                title: "Save",
+                                textStyle: AppTextStyle.textStyle12WhiteW500,
+                                onTap: onTapForSave,
+                              ),
+                      ),
                     ],
                   ),
                 )
@@ -432,7 +416,7 @@ class ProfileController extends GetxController {
   /// Documents Post
   void uploadDocuments() async {
     try {
-      isLoading.value = true;
+      saveLoader.value = true;
       final request = http.MultipartRequest(
           'POST', Uri.parse(InfixApi.studentUploadDocuments));
       request.headers['Authorization'] = GlobalVariable.token!;
@@ -442,9 +426,11 @@ class ProfileController extends GetxController {
             .add(await http.MultipartFile.fromPath('photo', file.value.path));
       }
 
-      if(GlobalVariable.roleId == 1){
+      if (GlobalVariable.roleId == 1) {
         request.fields['student_id'] = studentId.toString();
-      } else{request.fields['student_id'] = '${GlobalVariable.studentId!}';}
+      } else {
+        request.fields['student_id'] = '${GlobalVariable.studentId!}';
+      }
 
       request.fields['title'] = titleTextController.text;
 
@@ -454,7 +440,7 @@ class ProfileController extends GetxController {
       debugPrint(decodedResponse.toString());
 
       if (response.statusCode == 200) {
-        isLoading.value = false;
+        saveLoader.value = false;
         Get.back();
         showBasicSuccessSnackBar(message: decodedResponse['message']);
 
@@ -462,19 +448,18 @@ class ProfileController extends GetxController {
             title: decodedResponse['data']['title'],
             file: decodedResponse['data']['file'],
             id: decodedResponse['data']['id']));
-        // getAllDocumentList();
         titleTextController.clear();
         file.value = File('');
       } else {
-        isLoading.value = false;
+        saveLoader.value = false;
         showBasicSuccessSnackBar(message: decodedResponse['message']);
       }
     } catch (e, t) {
-      isLoading.value = false;
+      saveLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      isLoading.value = false;
+      saveLoader.value = false;
     }
   }
 
@@ -482,6 +467,7 @@ class ProfileController extends GetxController {
   Future<void> deleteDocument(
       {required int documentId, required int index}) async {
     try {
+      deleteLoader.value = true;
       var headers = GlobalVariable.header;
       var request = http.MultipartRequest('GET',
           Uri.parse(InfixApi.profileDocumentDelete(documentId: documentId)));
@@ -492,24 +478,28 @@ class ProfileController extends GetxController {
 
       final responseBody = await response.stream.bytesToString();
       final decodedResponse = json.decode(responseBody);
-      debugPrint('Decoument Delete Response: ${decodedResponse.toString()}');
+      debugPrint('Document Delete Response: ${decodedResponse.toString()}');
 
       if (response.statusCode == 200) {
+        deleteLoader.value = false;
         Get.back();
         documentsDataList.removeAt(index);
         showBasicSuccessSnackBar(message: decodedResponse['message']);
       } else {
+        deleteLoader.value = false;
         showBasicFailedSnackBar(message: decodedResponse['message']);
       }
     } catch (e, t) {
+      deleteLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally {}
+    } finally {
+      deleteLoader.value = false;
+    }
   }
 
   @override
   void onInit() {
-
     studentId = Get.arguments['student_id'];
 
     fetchProfilePersonalData(studentId: studentId);
