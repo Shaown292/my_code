@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attendance_model/admin_student_subject_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/admin_student_search_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/student_class_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student_model/student_section_list_response_model.dart';
@@ -15,6 +16,7 @@ class AdminStudentsSearchController extends GetxController {
   LoadingController loadingController = Get.find();
   RxBool sectionLoader = false.obs;
   RxBool searchLoader = false.obs;
+  RxBool subjectLoader = false.obs;
 
   TextEditingController nameTextController = TextEditingController();
   TextEditingController rollTextController = TextEditingController();
@@ -25,14 +27,14 @@ class AdminStudentsSearchController extends GetxController {
   RxList<ClassListData> classList = <ClassListData>[].obs;
 
   RxList<SectionListData> sectionList = <SectionListData>[].obs;
-  Rx<SectionListData> sectionValue =
-      SectionListData(id: -1, name: "").obs;
+  RxList<SubjectData> studentSubjectList = <SubjectData>[].obs;
+  Rx<SectionListData> sectionValue = SectionListData(id: -1, name: "").obs;
   RxList<StudentSearchData> studentSearchDataList = <StudentSearchData>[].obs;
 
   RxInt studentClassId = 0.obs;
   RxInt studentSectionId = 0.obs;
 
-
+  /// Get Admin Student Class List
   Future<StudentClassListResponseModel> getStudentClassList() async {
     try {
       classList.clear();
@@ -70,6 +72,7 @@ class AdminStudentsSearchController extends GetxController {
     return StudentClassListResponseModel();
   }
 
+  /// Get Admin Student Section List
   Future<StudentSectionListResponseModel> getStudentSectionList(
       {required int classId}) async {
     try {
@@ -82,7 +85,6 @@ class AdminStudentsSearchController extends GetxController {
 
       StudentSectionListResponseModel studentSectionListResponseModel =
           StudentSectionListResponseModel.fromJson(response);
-
 
       if (studentSectionListResponseModel.success == true) {
         sectionLoader.value = false;
@@ -112,6 +114,49 @@ class AdminStudentsSearchController extends GetxController {
     return StudentSectionListResponseModel();
   }
 
+  /// Get Admin Student Subject List
+  Future<AdminStudentSubjectListResponseModel> getAdminStudentSubjectList(
+      {required int classId, required int sectionId}) async {
+    try {
+      subjectLoader.value = true;
+
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminStudentSubjectList(
+              classId: classId, sectionId: sectionId),
+          header: GlobalVariable.header);
+
+      AdminStudentSubjectListResponseModel
+          adminStudentSubjectListResponseModel =
+          AdminStudentSubjectListResponseModel.fromJson(response);
+
+      if (adminStudentSubjectListResponseModel.success == true) {
+        if (adminStudentSubjectListResponseModel.data!.isNotEmpty) {
+          for (int i = 0;
+              i < adminStudentSubjectListResponseModel.data!.length;
+              i++) {
+            studentSubjectList
+                .add(adminStudentSubjectListResponseModel.data![i]);
+          }
+        }
+      } else {
+        subjectLoader.value = false;
+        showBasicFailedSnackBar(
+          message: adminStudentSubjectListResponseModel.message ??
+              AppText.somethingWentWrong,
+        );
+      }
+    } catch (e, t) {
+      subjectLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      subjectLoader.value = false;
+    }
+
+    return AdminStudentSubjectListResponseModel();
+  }
+
+  /// Get Student List against class, section, roll no & name
   Future<AdminStudentSearchResponseModel> getSearchStudentDataList({
     required int classId,
     required int sectionId,
@@ -123,7 +168,12 @@ class AdminStudentsSearchController extends GetxController {
       searchLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminStudentSearchList(classId: classId, sectionId: sectionId, rollINo: rollNo, name: name,),
+          url: InfixApi.getAdminStudentSearchList(
+            classId: classId,
+            sectionId: sectionId,
+            rollINo: rollNo,
+            name: name,
+          ),
           header: GlobalVariable.header);
 
       AdminStudentSearchResponseModel adminStudentSearchResponseModel =
@@ -139,7 +189,7 @@ class AdminStudentsSearchController extends GetxController {
           }
           Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST,
               arguments: {'search_data': studentSearchDataList});
-        } else{
+        } else {
           Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH_LIST,
               arguments: {'search_data': studentSearchDataList});
         }
@@ -164,7 +214,13 @@ class AdminStudentsSearchController extends GetxController {
   void onInit() {
     getStudentClassList().then((value) {
       if (classList.isNotEmpty) {
-        getStudentSectionList(classId: studentClassId.value);
+        getStudentSectionList(classId: studentClassId.value).then((value) {
+          if (sectionList.isNotEmpty) {
+            getAdminStudentSubjectList(
+                classId: studentClassId.value,
+                sectionId: studentSectionId.value);
+          }
+        });
       }
     });
     super.onInit();

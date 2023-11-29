@@ -1,40 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/admin_students_search/controllers/admin_students_search_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/datepicker_dialogue/date_picker.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AdminSubjectAttendanceSearchController extends GetxController {
+  AdminStudentsSearchController adminStudentsSearchController =
+      Get.put(AdminStudentsSearchController());
 
-  TextEditingController selectedDateTextController = TextEditingController();
-
+  TextEditingController selectedDateTextController = TextEditingController(
+      text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
 
   RxString classInitialValue = '1'.obs;
   RxString classNullValue = ''.obs;
-  List<String> classList = [
-    '1',
-    '2',
-    '3',
-    '4'
-  ];
+  List<String> classList = ['1', '2', '3', '4'];
 
   RxString sectionInitialValue = 'A'.obs;
   RxString sectionNullValue = ''.obs;
-  List<String> sectionList = [
-    'A',
-    'B',
-    'C',
-    'D'
-  ];
+  List<String> sectionList = ['A', 'B', 'C', 'D'];
 
   RxString subjectInitialValue = 'Eng'.obs;
   RxString subjectNullValue = ''.obs;
-  List<String> subjectList = [
-    'Eng',
-    'Mat',
-    'Ban',
-    'His'
-  ];
+  List<String> subjectList = ['Eng', 'Mat', 'Ban', 'His'];
 
   void selectDate() async {
     DateTime? dateTime = await DatePickerUtils().pickDate(
@@ -42,9 +30,7 @@ class AdminSubjectAttendanceSearchController extends GetxController {
     );
 
     if (dateTime != null) {
-      selectedDateTextController.text = dateTime.dd_mm_yyyy;
+      selectedDateTextController.text = dateTime.yyyy_mm_dd;
     }
   }
-
-
 }

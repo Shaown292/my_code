@@ -5,6 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
@@ -27,35 +28,74 @@ class AdminSubjectAttendanceSearchView
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
             child: Column(
               children: [
-                CustomDropdown(
-                  dropdownValue: controller.classList.isEmpty
-                      ? controller.classNullValue.value
-                      : controller.classInitialValue.value,
-                  dropdownList: controller.classList,
-                  changeDropdownValue: (v) {
-                    controller.classInitialValue.value = v!;
-                  },
-                ),
+                /// Student Class List
+                controller.adminStudentsSearchController.loadingController
+                        .isLoading
+                    ? const CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      )
+                    : DuplicateDropdown(
+                        dropdownValue: controller
+                                .adminStudentsSearchController.classList.isEmpty
+                            ? controller.classNullValue.value
+                            : controller
+                                .adminStudentsSearchController.classValue.value,
+                        dropdownList:
+                            controller.adminStudentsSearchController.classList,
+                        changeDropdownValue: (v) {
+                          controller.adminStudentsSearchController.classValue
+                              .value = v!;
+                          controller.adminStudentsSearchController
+                              .getStudentSectionList(
+                                  classId: controller
+                                      .adminStudentsSearchController
+                                      .studentClassId
+                                      .value);
+                        },
+                      ),
+
+                /// Student Section List
                 10.verticalSpacing,
-                CustomDropdown(
-                  dropdownValue: controller.sectionList.isEmpty
-                      ? controller.sectionNullValue.value
-                      : controller.sectionInitialValue.value,
-                  dropdownList: controller.sectionList,
-                  changeDropdownValue: (v) {
-                    controller.sectionInitialValue.value = v!;
-                  },
-                ),
+                controller.adminStudentsSearchController.sectionLoader.value
+                    ? const CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      )
+                    : DuplicateDropdown(
+                        dropdownValue: controller.adminStudentsSearchController
+                                .sectionList.isEmpty
+                            ? controller.sectionNullValue.value
+                            : controller.adminStudentsSearchController
+                                .sectionValue.value,
+                        dropdownList: controller
+                            .adminStudentsSearchController.sectionList,
+                        changeDropdownValue: (v) {
+                          controller.adminStudentsSearchController.sectionValue
+                              .value = v!;
+                          controller.adminStudentsSearchController
+                              .getAdminStudentSubjectList(
+                            classId: controller.adminStudentsSearchController
+                                .studentClassId.value,
+                            sectionId: controller.adminStudentsSearchController
+                                .studentSectionId.value,
+                          );
+                        },
+                      ),
+
+                /// Student Subject List
                 10.verticalSpacing,
-                CustomDropdown(
-                  dropdownValue: controller.subjectList.isEmpty
-                      ? controller.subjectNullValue.value
-                      : controller.subjectInitialValue.value,
-                  dropdownList: controller.subjectList,
-                  changeDropdownValue: (v) {
-                    controller.sectionInitialValue.value = v!;
-                  },
-                ),
+                controller.adminStudentsSearchController.subjectLoader.value
+                    ? const CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      )
+                    : CustomDropdown(
+                        dropdownValue: controller.subjectList.isEmpty
+                            ? controller.subjectNullValue.value
+                            : controller.subjectInitialValue.value,
+                        dropdownList: controller.subjectList,
+                        changeDropdownValue: (v) {
+                          controller.sectionInitialValue.value = v!;
+                        },
+                      ),
                 10.verticalSpacing,
                 CustomTextFormField(
                   iconOnTap: () {

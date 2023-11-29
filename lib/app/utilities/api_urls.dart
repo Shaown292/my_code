@@ -228,7 +228,14 @@ class InfixApi {
   static String getStudentSectionList({required int classId}) =>
       '${baseApi}section-list?class_id=$classId';
 
-  static String getAdminStudentSearchAttendanceList({required int classId, required int sectionId, required String selectedDate}) =>
+  static String getAdminStudentSubjectList(
+          {required int classId, required int sectionId}) =>
+      '${baseApi}subject-list?class=$classId&section=$sectionId';
+
+  static String getAdminStudentSearchAttendanceList(
+          {required int classId,
+          required int sectionId,
+          required String selectedDate}) =>
       '${baseApi}student-search?class=$classId&section=$sectionId&attendance_date=$selectedDate';
 
   static String getAdminStudentSearchList({
@@ -251,11 +258,20 @@ class InfixApi {
   static String getAdminStaffIndividualData({required int staffIndividualId}) =>
       '${baseApi}individual-staff-details/$staffIndividualId';
 
-  static String getSingleStudentProfile({required int studentId}) => '${baseApi}student-profile-personal?student_id=$studentId';
-  static String getSingleParentProfile({required int studentId}) => '${baseApi}student-profile-parents?student_id=$studentId';
-  static String getSingleStudentTransportData({required int studentId}) => '${baseApi}student-profile-transport?student_id=$studentId';
-  static String getSingleStudentOthersData({required int studentId}) => '${baseApi}student-profile-others?student_id=$studentId';
-  static String getSingleStudentDocumentsData({required int studentId}) => '${baseApi}student-profile-documents?student_id=$studentId';
+  static String getSingleStudentProfile({required int studentId}) =>
+      '${baseApi}student-profile-personal?student_id=$studentId';
+
+  static String getSingleParentProfile({required int studentId}) =>
+      '${baseApi}student-profile-parents?student_id=$studentId';
+
+  static String getSingleStudentTransportData({required int studentId}) =>
+      '${baseApi}student-profile-transport?student_id=$studentId';
+
+  static String getSingleStudentOthersData({required int studentId}) =>
+      '${baseApi}student-profile-others?student_id=$studentId';
+
+  static String getSingleStudentDocumentsData({required int studentId}) =>
+      '${baseApi}student-profile-documents?student_id=$studentId';
 
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
