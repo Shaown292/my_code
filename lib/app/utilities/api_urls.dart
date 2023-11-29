@@ -26,11 +26,11 @@ class InfixApi {
   static String login() => '${baseApi}login';
 
   static String editProfile(int studentId) {
-    return '${baseApi}student-profile-edit/$studentId';
+    return '${baseApi}student-profile-edit?student_id=$studentId';
   }
 
   static String updateProfile(int roleId) {
-    return '${baseApi}student-profile-update/$roleId';
+    return '${baseApi}student-profile-update?student_id=$roleId';
   }
 
   static String profilePersonal() {
@@ -58,7 +58,7 @@ class InfixApi {
   }
 
   static String getSyllabusList(int studentRecordId) {
-    return '${baseApi}student-syllabus/$studentRecordId';
+    return '${baseApi}student-syllabus?record_id=$studentRecordId';
   }
 
   static String syllabusDownloadUrl(int syllabusId) {
@@ -66,24 +66,24 @@ class InfixApi {
   }
 
   static String getAssignmentList(int studentRecordId) {
-    return '${baseApi}student-assignment/$studentRecordId';
+    return '${baseApi}student-assignment?record_id=$studentRecordId';
   }
 
   static String getStudentOthersDownloadList(int studentRecordId) {
-    return '${baseApi}student-others-download/$studentRecordId';
+    return '${baseApi}student-others-download?record_id=$studentRecordId';
   }
 
-  static String getStudentRoutineList(int roleId, int studentRecordId) {
-    return '${baseApi}student-class-routine/$roleId/$studentRecordId';
+  static String getStudentRoutineList(int studentRecordId) {
+    return '${baseApi}student-class-routine?record_id=$studentRecordId';
   }
 
   static String getStudentExamResultList(
-      {required int examId, required int recordId}) {
-    return '${baseApi}exam-result/$examId/$recordId';
+      {required int typeId, required int recordId}) {
+    return '${baseApi}exam-result?exam_type_id=$typeId&record_id=$recordId';
   }
 
   static String getStudentExamList(int recordId) {
-    return '${baseApi}student-exam-type/$recordId';
+    return '${baseApi}student-exam-type?record_id=$recordId';
   }
 
   static String getStudentExamSchedule(int examTypeId, int recordId) {
@@ -99,7 +99,7 @@ class InfixApi {
   }
 
   static String getStudentTeacherList(int roleId) {
-    return '${baseApi}student-teacher/$roleId';
+    return '${baseApi}student-teacher?record_id=$roleId';
   }
 
   static String getStudentLeaveList(int studentId) {
@@ -139,7 +139,7 @@ class InfixApi {
   }
 
   static String getStudentOnlineActiveExam({required int recordId}) {
-    return "${baseApi}student-online-exam/$recordId";
+    return "${baseApi}student-online-exam?record_id=$recordId";
   }
 
   static String getStudentDormitory({required int studentId}) {
@@ -147,7 +147,7 @@ class InfixApi {
   }
 
   static String studentProfilePhotoUpdate({required int studentId}) {
-    return "${baseApi}student-profile-img-update/$studentId";
+    return "${baseApi}student-profile-update?student_id=$studentId";
   }
 
   static String getStudentTransport({required int studentId}) {
@@ -167,11 +167,11 @@ class InfixApi {
   }
 
   static String getStudentSubjects(int recordId) {
-    return "${baseApi}student-subject/$recordId";
+    return "${baseApi}student-subject?record_id=$recordId";
   }
 
   static String getStudentFeesDetails() {
-    return "${baseApi}fees-invoice-view/1";
+    return "${baseApi}fees-invoice-view?fees_invoice_id=1";
   }
 
   static String getStudentFeesList(
@@ -183,7 +183,7 @@ class InfixApi {
   }
 
   static String profileDocumentDelete({required documentId}) {
-    return '${baseApi}profile-documents-delete/$documentId';
+    return '${baseApi}profile-documents-delete?document_id=$documentId';
   }
 
   static String getStudentLessonPlan(
@@ -193,7 +193,7 @@ class InfixApi {
   static String getStudentLessonPlanDetails({
     required int lessonPlanId,
   }) =>
-      '${baseApi}view-lesson-plan-lesson/$lessonPlanId';
+      '${baseApi}view-lesson-plan-lesson?lesson_plan_id=$lessonPlanId';
   static String forgetPassword = "${baseApi}forget-password";
 
   //// .....................................................For Admin Module.....................................................
@@ -299,8 +299,8 @@ class InfixApi {
     return "${baseApi}my-attendance/$id?month=$month&year=$year";
   }
 
-  static String getStudentOnlineResult(dynamic id, dynamic examId) {
-    return "${baseApi}online-exam-result/$id/$examId";
+  static String getStudentOnlineResult(dynamic typeId, dynamic recordId) {
+    return "${baseApi}exam-result?exam_type_id=$typeId&record_id=$recordId";
   }
 
   static String getStudentByClass(dynamic mClass) {
@@ -662,8 +662,8 @@ class InfixApi {
 
   static String chatGetBlockedUsers = "${baseApi}chat/users/blocked";
 
-  static String getStudentHomeWork(int roleId) {
-    return "${baseApi}student-homework/$roleId";
+  static String getStudentHomeWork(int recordId) {
+    return "${baseApi}student-homework?record_id=$recordId";
   }
 
   static String studentUploadHomework = '${baseApi}student-upload-homework';

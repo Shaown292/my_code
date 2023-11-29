@@ -25,7 +25,7 @@ class ResultView extends GetView<ResultController> {
             onRefresh: () async {
               controller.examResultList.clear();
               controller.getStudentExamResultList(
-                  examId: controller.currentExamId!,
+                  typeId: controller.currentExamId!,
                   recordId: controller.currentRecordId!);
             },
             child: Column(
@@ -86,7 +86,7 @@ class ResultView extends GetView<ResultController> {
                         int recordId = controller
                             .homeController.studentRecordList[0].id;
                         controller.getStudentExamResultList(
-                          examId: examId,
+                          typeId: examId,
                           recordId: recordId,
                         );
                       },

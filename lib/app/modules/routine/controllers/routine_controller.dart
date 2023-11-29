@@ -34,7 +34,6 @@ class RoutineController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentRoutineList(
-          GlobalVariable.roleId!,
           GlobalVariable.studentRecordId!,
         ),
         header: GlobalVariable.header,
