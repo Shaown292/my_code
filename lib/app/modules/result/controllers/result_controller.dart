@@ -32,7 +32,7 @@ class ResultController extends GetxController {
   }
 
   void getStudentExamResultList(
-      {required int examId, required int recordId}) async {
+      {required int typeId, required int recordId}) async {
     try {
       loadingController.isLoading = true;
 
@@ -40,7 +40,7 @@ class ResultController extends GetxController {
           homeController.studentRecordList.isNotEmpty) {
         final response = await BaseClient().getData(
           url: InfixApi.getStudentExamResultList(
-              examId: examId, recordId: recordId),
+              typeId: typeId, recordId: recordId),
           header: GlobalVariable.header,
         );
 
@@ -73,7 +73,7 @@ class ResultController extends GetxController {
     if(examinationController.examList.isNotEmpty && homeController.studentRecordList.isNotEmpty){
       dropdownValue.value = examinationController.examDropdownList[0];
       getStudentExamResultList(
-          examId: examinationController.examList[0].id!,
+          typeId: examinationController.examList[0].id!,
           recordId: homeController.studentRecordList[0].id);
     }
 

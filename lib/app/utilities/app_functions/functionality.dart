@@ -198,6 +198,9 @@ class AppFunctions {
       case 'Subject Attendance Search Individual':
         Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL);
         break;
+      case 'Content':
+        Get.toNamed(Routes.ADMIN_CONTENT);
+        break;
     }
   }
 
