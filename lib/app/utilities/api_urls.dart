@@ -273,6 +273,10 @@ class InfixApi {
   static String getSingleStudentDocumentsData({required int studentId}) =>
       '${baseApi}student-profile-documents?student_id=$studentId';
 
+
+  /// Admin Content
+  static String getAdminContentList = '${baseApi}admin-upload-content-list';
+
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////..........PREVIOUS APP URLS................///////////////////////////////////
