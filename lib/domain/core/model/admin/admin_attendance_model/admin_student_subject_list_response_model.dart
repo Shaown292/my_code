@@ -29,19 +29,19 @@ class AdminStudentSubjectListResponseModel {
 
 class SubjectData {
   int? id;
-  String? subjectName;
+  String? name;  /// subjectName => name (dropdown value)
 
-  SubjectData({this.id, this.subjectName});
+  SubjectData({this.id, this.name});
 
   SubjectData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    subjectName = json['subject_name'];
+    name = json['subject_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['subject_name'] = subjectName;
+    data['subject_name'] = name;
     return data;
   }
 }

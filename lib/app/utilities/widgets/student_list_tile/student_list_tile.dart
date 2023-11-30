@@ -15,8 +15,10 @@ class StudentListTile extends StatelessWidget {
   final String? studentName;
   final String? studentClass;
   final String? studentSection;
+  final String? classSection;
   final List<dynamic>? classSectionList;
   final Function()? onTap;
+  final bool isMultipleSectionAvailable;
 
   const StudentListTile({
     super.key,
@@ -27,6 +29,8 @@ class StudentListTile extends StatelessWidget {
     this.studentSection,
     this.classSectionList,
     this.onTap,
+    this.isMultipleSectionAvailable = false,
+    this.classSection,
   });
 
   @override
@@ -54,7 +58,6 @@ class StudentListTile extends StatelessWidget {
                     : SizedBox(
                         height: 70,
                         width: 70,
-
                         child: CacheImageView(
                           url: '${AppConfig.imageBaseUrl}$imageURL',
                           errorImageLocal: ImagePath.dp,
@@ -69,15 +72,20 @@ class StudentListTile extends StatelessWidget {
                       style: AppTextStyle.fontSize14lightBlackW400,
                     ),
                     3.verticalSpacing,
-                    Row(
-                      children: [
-                        Text(
-                          classSectionList!
-                              .map((e) => e.classSection.toString())
-                              .join(', '),
-                        ),
-                      ],
-                    )
+                    isMultipleSectionAvailable
+                        ? Row(
+                            children: [
+                              Text(
+                                classSectionList!
+                                    .map((e) => e.classSection.toString())
+                                    .join(', '),
+                              ),
+                            ],
+                          )
+                        : Text(
+                            classSection!,
+                            style: AppTextStyle.fontSize14lightBlackW400,
+                          ),
                   ],
                 ),
                 10.horizontalSpacing,

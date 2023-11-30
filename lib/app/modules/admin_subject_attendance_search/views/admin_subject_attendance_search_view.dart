@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -87,13 +88,13 @@ class AdminSubjectAttendanceSearchView
                     ? const CircularProgressIndicator(
                         color: AppColors.primaryColor,
                       )
-                    : CustomDropdown(
-                        dropdownValue: controller.subjectList.isEmpty
+                    : DuplicateDropdown(
+                        dropdownValue: controller.adminStudentsSearchController.subjectList.isEmpty
                             ? controller.subjectNullValue.value
-                            : controller.subjectInitialValue.value,
-                        dropdownList: controller.subjectList,
+                            : controller.adminStudentsSearchController.subjectValue.value,
+                        dropdownList: controller.adminStudentsSearchController.subjectList,
                         changeDropdownValue: (v) {
-                          controller.sectionInitialValue.value = v!;
+                          controller.adminStudentsSearchController.subjectValue.value = v!;
                         },
                       ),
                 10.verticalSpacing,
@@ -116,7 +117,9 @@ class AdminSubjectAttendanceSearchView
                 const Spacer(),
                 PrimaryButton(
                   text: "Search",
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST);
+                  },
                 ),
                 50.verticalSpacing,
               ],

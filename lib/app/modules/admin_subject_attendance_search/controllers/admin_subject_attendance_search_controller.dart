@@ -12,13 +12,10 @@ class AdminSubjectAttendanceSearchController extends GetxController {
   TextEditingController selectedDateTextController = TextEditingController(
       text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
 
-  RxString classInitialValue = '1'.obs;
   RxString classNullValue = ''.obs;
-  List<String> classList = ['1', '2', '3', '4'];
 
-  RxString sectionInitialValue = 'A'.obs;
+
   RxString sectionNullValue = ''.obs;
-  List<String> sectionList = ['A', 'B', 'C', 'D'];
 
   RxString subjectInitialValue = 'Eng'.obs;
   RxString subjectNullValue = ''.obs;

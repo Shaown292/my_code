@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/admin_students_search_list/views/widget/student_list_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/student_list_tile/student_list_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -33,6 +33,7 @@ class AdminStudentsSearchListView
                           },
                           studentName: controller.studentData![index].fullName,
                           imageURL: controller.studentData![index].studentPhoto,
+                          isMultipleSectionAvailable: true,
                           classSectionList:
                               controller.studentData![index].classSection,
                         );

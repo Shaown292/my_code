@@ -22,17 +22,24 @@ class AdminStudentsSearchController extends GetxController {
   TextEditingController rollTextController = TextEditingController();
 
   Rx<ClassListData> classValue =
-      ClassListData(id: -1, name: "Select Class Name").obs;
-
+      ClassListData(id: -1, name: "").obs;
   RxList<ClassListData> classList = <ClassListData>[].obs;
+  RxInt studentClassId = 0.obs;
+
 
   RxList<SectionListData> sectionList = <SectionListData>[].obs;
-  RxList<SubjectData> studentSubjectList = <SubjectData>[].obs;
   Rx<SectionListData> sectionValue = SectionListData(id: -1, name: "").obs;
+  RxInt studentSectionId = 0.obs;
+
+
   RxList<StudentSearchData> studentSearchDataList = <StudentSearchData>[].obs;
 
-  RxInt studentClassId = 0.obs;
-  RxInt studentSectionId = 0.obs;
+
+  Rx<SubjectData> subjectValue =
+      SubjectData(id: -1, name: "").obs;
+  RxList<SubjectData> subjectList = <SubjectData>[].obs;
+  RxInt studentSubjectId = 0.obs ;
+
 
   /// Get Admin Student Class List
   Future<StudentClassListResponseModel> getStudentClassList() async {
@@ -134,9 +141,12 @@ class AdminStudentsSearchController extends GetxController {
           for (int i = 0;
               i < adminStudentSubjectListResponseModel.data!.length;
               i++) {
-            studentSubjectList
+            subjectList
                 .add(adminStudentSubjectListResponseModel.data![i]);
           }
+          subjectValue.value = subjectList[0];
+          studentSubjectId.value = subjectList[0].id!;
+
         }
       } else {
         subjectLoader.value = false;

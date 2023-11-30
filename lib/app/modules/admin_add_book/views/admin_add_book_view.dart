@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 
 import 'package:get/get.dart';
 
 import '../controllers/admin_add_book_controller.dart';
 
 class AdminAddBookView extends GetView<AdminAddBookController> {
-  const AdminAddBookView({Key? key}) : super(key: key);
+  const AdminAddBookView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AdminAddBookView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'AdminAddBookView is working',
-          style: TextStyle(fontSize: 20),
+    return const InfixEduScaffold(
+      title: "Add Book",
+      body: CustomBackground(
+        customWidget: Column(
+          children: [
+
+          ],
         ),
       ),
     );

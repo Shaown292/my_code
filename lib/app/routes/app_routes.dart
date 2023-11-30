@@ -83,6 +83,14 @@ abstract class Routes {
   static const ADMIN_ADD_BOOK = _Paths.ADMIN_ADD_BOOK;
   static const ADMIN_BOOK_LIST = _Paths.ADMIN_BOOK_LIST;
   static const ADMIN_ADD_MEMBER = _Paths.ADMIN_ADD_MEMBER;
+  static const ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST =
+      _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST;
+  static const ADMIN_CLASS_ATTENDANCE_INDIVIDUAL_DETAILS =
+      _Paths.ADMIN_CLASS_ATTENDANCE_INDIVIDUAL_DETAILS;
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_LIST =
+      _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_LIST;
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST =
+      _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST;
 }
 
 abstract class _Paths {
@@ -164,4 +172,12 @@ abstract class _Paths {
   static const ADMIN_ADD_BOOK = '/admin-add-book';
   static const ADMIN_BOOK_LIST = '/admin-book-list';
   static const ADMIN_ADD_MEMBER = '/admin-add-member';
+  static const ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST =
+      '/admin-class-attendance-search-individual-list';
+  static const ADMIN_CLASS_ATTENDANCE_INDIVIDUAL_DETAILS =
+      '/admin-class-attendance-individual-details';
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_LIST =
+      '/admin-subject-attendance-search-individual-list';
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST =
+      '/admin-subject-attendance-search-list';
 }
