@@ -1,23 +1,30 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AdminAddBookController extends GetxController {
-  //TODO: Implement AdminAddBookController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  TextEditingController titleTextController = TextEditingController();
+  TextEditingController bookNumberTextController = TextEditingController();
+  TextEditingController isbnTextController = TextEditingController();
+  TextEditingController publisherNameTextController = TextEditingController();
+  TextEditingController authorNameTextController = TextEditingController();
+  TextEditingController rackNumberTextController = TextEditingController();
+  TextEditingController quantityTextController = TextEditingController();
+  TextEditingController priceTextController = TextEditingController();
+  TextEditingController dateTextController = TextEditingController();
+  TextEditingController descriptionTextController = TextEditingController();
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  RxString categoryInitValue = "Horror".obs;
+  RxList<String> categoryList = [
+    "Horror",
+    "Comedy",
+    "Novel"
+  ].obs;
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  RxString audienceInitValue = "Child".obs;
+  RxList<String> audienceList = [
+    "Child",
+    "Adult",
+    "Teen"
+  ].obs;
 }

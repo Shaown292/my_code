@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-
 import 'package:get/get.dart';
-
 import '../../../utilities/widgets/common_widgets/primary_button.dart';
 import '../controllers/admin_class_attendance_search_individual_controller.dart';
 
@@ -98,21 +97,9 @@ class AdminClassAttendanceSearchIndividualView
                       : PrimaryButton(
                           text: "Search",
                           onTap: () {
-                            controller.adminStudentsSearchController
-                                .getSearchStudentDataList(
-                              classId: controller.adminStudentsSearchController
-                                  .studentClassId.value,
-                              sectionId: controller
-                                  .adminStudentsSearchController
-                                  .studentSectionId
-                                  .value,
-                              rollNo: controller.adminStudentsSearchController
-                                  .rollTextController.text,
-                              name: controller.adminStudentsSearchController
-                                  .nameTextController.text,
-                            );
+                            Get.toNamed(Routes.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST);
                           },
-                        )
+                        ),
                 ],
               ),
             ),

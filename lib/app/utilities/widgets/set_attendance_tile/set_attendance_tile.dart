@@ -33,7 +33,7 @@ class SetAttendanceTile extends StatelessWidget {
     this.studentClass,
     this.section,
     this.onPresentButtonTap,
-    this.status = "L",
+    this.status = "P",
     this.onAbsentButtonTap,
     this.onLateButtonTap,
     this.onHalfDayButtonTap,
