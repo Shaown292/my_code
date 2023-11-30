@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -14,28 +15,49 @@ class AdminContentListView extends GetView<AdminContentListController> {
 
   @override
   Widget build(BuildContext context) {
-    return  InfixEduScaffold(
+    return InfixEduScaffold(
       title: "Content List",
       body: CustomBackground(
-        customWidget: SingleChildScrollView(
-          child: Column(
-            children: [
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 20,
-                  itemBuilder: (context, index){
-                return  ContentTile(
-                  title: "New Assignment",
-                  contentType: "Assignment",
-                  date: "30-03-2023",
-                  availableFor: "Student",
-                  onDeleteTap: ()=> debugPrint("Item deleted"),
-                  onDownloadTap: ()=> debugPrint("Item downloaded"),
-                );
-              }),
-              50.verticalSpacing,
-            ],
+        customWidget: RefreshIndicator(
+          color: AppColors.primaryColor,
+          onRefresh: () async {
+            controller.getAdminContentList();
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Obx(
+                  () => controller.loadingController.isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ))
+                      : controller.contentList.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: controller.contentList.length,
+                              itemBuilder: (context, index) {
+                                return ContentTile(
+                                  title:
+                                      controller.contentList[index].contentTitle,
+                                  contentType:
+                                      controller.contentList[index].contentType,
+                                  date: controller.contentList[index].uploadDate,
+                                  availableFor:
+                                      controller.contentList[index].availableFor,
+                                  onDeleteTap: () => controller.showDialog(
+                                      id: controller.contentList[index].id!,
+                                      index: index),
+                                  onDownloadTap: () => controller.fileDownload(),
+                                );
+                              },
+                            )
+                          : const NoDataAvailableWidget(),
+                ),
+                50.verticalSpacing,
+              ],
+            ),
           ),
         ),
       ),
