@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:get/get.dart';
-import '../../../../data/constants/app_colors.dart';
-import '../../../../utilities/widgets/common_widgets/custom_divider.dart';
+import '../../../data/constants/app_colors.dart';
+import '../common_widgets/custom_divider.dart';
 
 class BookListTile extends StatelessWidget {
   final String? bookName;

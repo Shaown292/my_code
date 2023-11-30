@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/student_list_tile/student_list_tile.dart';
 
 import 'package:get/get.dart';
 
@@ -6,19 +9,32 @@ import '../controllers/admin_class_attendance_search_individual_list_controller.
 
 class AdminClassAttendanceSearchIndividualListView
     extends GetView<AdminClassAttendanceSearchIndividualListController> {
-  const AdminClassAttendanceSearchIndividualListView({Key? key})
-      : super(key: key);
+  const AdminClassAttendanceSearchIndividualListView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AdminClassAttendanceSearchIndividualListView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'AdminClassAttendanceSearchIndividualListView is working',
-          style: TextStyle(fontSize: 20),
+    return InfixEduScaffold(
+      title: "Students List",
+      body: CustomBackground(
+        customWidget: Column(
+          children: [
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: () async {},
+                child: ListView.builder(
+                  itemCount: 50,
+                  itemBuilder: (context, index) {
+                    return StudentListTile(
+                      onTap: () {},
+                      studentName: "Jahid",
+                      imageURL: "URL",
+                      classSection: "Tulip",
+                      studentClass: "Five",
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

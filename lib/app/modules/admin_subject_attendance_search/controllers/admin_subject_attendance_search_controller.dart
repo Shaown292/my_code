@@ -13,13 +13,9 @@ class AdminSubjectAttendanceSearchController extends GetxController {
       text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
 
   RxString classNullValue = ''.obs;
-
-
   RxString sectionNullValue = ''.obs;
-
-  RxString subjectInitialValue = 'Eng'.obs;
   RxString subjectNullValue = ''.obs;
-  List<String> subjectList = ['Eng', 'Mat', 'Ban', 'His'];
+
 
   void selectDate() async {
     DateTime? dateTime = await DatePickerUtils().pickDate(

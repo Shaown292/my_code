@@ -10,11 +10,12 @@ import 'package:flutter_single_getx_api_v2/config/global_variable/global_variabl
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attendance_model/admin_student_search_attendance_response_model.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AdminClassAttendanceSearchController extends GetxController {
 
 
-  TextEditingController selectedDateTextController = TextEditingController();
+  TextEditingController selectedDateTextController = TextEditingController(text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
 
 
   AdminStudentsSearchController adminStudentsSearchController = Get.put(AdminStudentsSearchController());
