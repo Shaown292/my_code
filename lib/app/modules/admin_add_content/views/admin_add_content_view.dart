@@ -37,6 +37,9 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                   CustomDropdown(
                     dropdownValue: controller.contentInitialValue.value,
                     dropdownList: controller.contentList,
+                    changeDropdownValue: (value){
+                      controller.contentInitialValue.value = value!;
+                    },
                   ),
                   10.verticalSpacing,
 
