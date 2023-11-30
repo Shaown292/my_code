@@ -12,7 +12,7 @@ class AdminContentController extends GetxController {
       value: 'Add Content',
     ),
     HomeTileModelClass(
-      icon: ImagePath.leaveList,
+      icon: ImagePath.list,
       title: 'Content List',
       value: 'Content List',
     ),

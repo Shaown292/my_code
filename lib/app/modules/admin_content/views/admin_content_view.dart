@@ -31,7 +31,7 @@ class AdminContentView extends GetView<AdminContentController> {
                 return Obx(() => CustomCardTile(
                   icon: controller.contentTileList[index].icon,
                   title: controller.contentTileList[index].title,
-                  iconColor: AppColors.primaryColor.withOpacity(0.7),
+                  iconColor: AppColors.primaryColor,
                   onTap: () {
                     controller.selectIndex.value = index;
                     AppFunctions.getAdminHomeNavigation(title: controller.contentTileList[index].value);

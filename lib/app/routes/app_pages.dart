@@ -2,12 +2,20 @@ import 'package:get/get.dart';
 
 import '../modules/active_exam/bindings/active_exam_binding.dart';
 import '../modules/active_exam/views/active_exam_view.dart';
+import '../modules/admin_add_book/bindings/admin_add_book_binding.dart';
+import '../modules/admin_add_book/views/admin_add_book_view.dart';
+import '../modules/admin_add_content/bindings/admin_add_content_binding.dart';
+import '../modules/admin_add_content/views/admin_add_content_view.dart';
 import '../modules/admin_add_dormitory/bindings/admin_add_dormitory_binding.dart';
 import '../modules/admin_add_dormitory/views/admin_add_dormitory_view.dart';
+import '../modules/admin_add_member/bindings/admin_add_member_binding.dart';
+import '../modules/admin_add_member/views/admin_add_member_view.dart';
 import '../modules/admin_add_room/bindings/admin_add_room_binding.dart';
 import '../modules/admin_add_room/views/admin_add_room_view.dart';
 import '../modules/admin_attendance/bindings/admin_attendance_binding.dart';
 import '../modules/admin_attendance/views/admin_attendance_view.dart';
+import '../modules/admin_book_list/bindings/admin_book_list_binding.dart';
+import '../modules/admin_book_list/views/admin_book_list_view.dart';
 import '../modules/admin_class_attendance_search/bindings/admin_class_attendance_search_binding.dart';
 import '../modules/admin_class_attendance_search/views/admin_class_attendance_search_view.dart';
 import '../modules/admin_class_attendance_search_individual/bindings/admin_class_attendance_search_individual_binding.dart';
@@ -16,6 +24,8 @@ import '../modules/admin_class_set_attendance/bindings/admin_class_set_attendanc
 import '../modules/admin_class_set_attendance/views/admin_class_set_attendance_view.dart';
 import '../modules/admin_content/bindings/admin_content_binding.dart';
 import '../modules/admin_content/views/admin_content_view.dart';
+import '../modules/admin_content_list/bindings/admin_content_list_binding.dart';
+import '../modules/admin_content_list/views/admin_content_list_view.dart';
 import '../modules/admin_dormitory/bindings/admin_dormitory_binding.dart';
 import '../modules/admin_dormitory/views/admin_dormitory_view.dart';
 import '../modules/admin_fees/bindings/admin_fees_binding.dart';
@@ -30,6 +40,8 @@ import '../modules/admin_fees_type/bindings/admin_fees_type_binding.dart';
 import '../modules/admin_fees_type/views/admin_fees_type_view.dart';
 import '../modules/admin_leave/bindings/admin_leave_binding.dart';
 import '../modules/admin_leave/views/admin_leave_view.dart';
+import '../modules/admin_library/bindings/admin_library_binding.dart';
+import '../modules/admin_library/views/admin_library_view.dart';
 import '../modules/admin_room_list/bindings/admin_room_list_binding.dart';
 import '../modules/admin_room_list/views/admin_room_list_view.dart';
 import '../modules/admin_students_search/bindings/admin_students_search_binding.dart';
@@ -530,11 +542,45 @@ class AppPages {
       name: _Paths.ADMIN_STUDENTS_SEARCH_LIST,
       page: () => const AdminStudentsSearchListView(),
       binding: AdminStudentsSearchListBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_CONTENT,
       page: () => const AdminContentView(),
       binding: AdminContentBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_CONTENT_LIST,
+      page: () => const AdminContentListView(),
+      binding: AdminContentListBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ADD_CONTENT,
+      page: () => const AdminAddContentView(),
+      binding: AdminAddContentBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_LIBRARY,
+      page: () => const AdminLibraryView(),
+      binding: AdminLibraryBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ADD_BOOK,
+      page: () => const AdminAddBookView(),
+      binding: AdminAddBookBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_BOOK_LIST,
+      page: () => const AdminBookListView(),
+      binding: AdminBookListBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ADD_MEMBER,
+      page: () => const AdminAddMemberView(),
+      binding: AdminAddMemberBinding(),
     ),
   ];
 }

@@ -8,7 +8,7 @@ class LibraryController extends GetxController {
   final selectIndex = RxInt(-1);
   List<HomeTileModelClass> libraryTileList = [
     HomeTileModelClass(icon: ImagePath.applyLeave, title: 'Book List', value: 'Book List'),
-    HomeTileModelClass(icon: ImagePath.leaveList, title: 'Book Issued', value: 'Book Issued'),
+    HomeTileModelClass(icon: ImagePath.list, title: 'Book Issued', value: 'Book Issued'),
   ];
 
 }

@@ -7,6 +7,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_radio_button/custom_radio_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
@@ -290,6 +291,7 @@ class AdminLeaveController extends GetxController {
         () => Container(
           padding: const EdgeInsets.all(20),
           height: Get.height * 0.7,
+          color: Colors.white,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -332,42 +334,39 @@ class AdminLeaveController extends GetxController {
                   "Leave Status",
                   style: AppTextStyle.fontSize14BlackW500,
                 ),
-                ListTile(
-                  title: const Text('Pending'),
-                  leading: Radio(
-                    value: "P",
-                    groupValue: selectedOption.value,
-                    onChanged: (value) {
-                      selectedOption.value = value!;
-                      debugPrint("Value is $selectedOption");
-                    },
-                    activeColor: AppColors.primaryColor,
-                  ),
+
+                CustomRadioButton(
+                  title: "Pending",
+                  value: "P",
+                  groupValue: selectedOption.value,
+                  onChanged: (value) {
+                    selectedOption.value = value!;
+                    debugPrint("Value is $selectedOption");
+                  },
+                  activeColor: AppColors.primaryColor,
                 ),
-                ListTile(
-                  title: const Text('Approve'),
-                  leading: Radio(
-                    value: "A",
-                    groupValue: selectedOption.value,
-                    onChanged: (value) {
-                      selectedOption.value = value!;
-                      debugPrint("Value is $selectedOption");
-                    },
-                    activeColor: AppColors.primaryColor,
-                  ),
+                CustomRadioButton(
+                   title: "Approved",
+                  value: "A",
+                  groupValue: selectedOption.value,
+                  onChanged: (value) {
+                    selectedOption.value = value!;
+                    debugPrint("Value is $selectedOption");
+                  },
+                  activeColor: AppColors.primaryColor,
                 ),
-                ListTile(
-                  title: const Text('Cancel'),
-                  leading: Radio(
-                    value: "C",
-                    groupValue: selectedOption.value,
-                    onChanged: (value) {
-                      selectedOption.value = value!;
-                      debugPrint("Value is $selectedOption");
-                    },
-                    activeColor: AppColors.primaryColor,
-                  ),
+                CustomRadioButton(
+                  title: "Cancel",
+                  value: "C",
+                  groupValue: selectedOption.value,
+                  onChanged: (value) {
+                    selectedOption.value = value!;
+                    debugPrint("Value is $selectedOption");
+                  },
+                  activeColor: AppColors.primaryColor,
                 ),
+
+
                 20.verticalSpacing,
                 Obx(
                   () => saveLoader.value

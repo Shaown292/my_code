@@ -77,6 +77,12 @@ abstract class Routes {
   static const ADMIN_STUDENTS_SEARCH = _Paths.ADMIN_STUDENTS_SEARCH;
   static const ADMIN_STUDENTS_SEARCH_LIST = _Paths.ADMIN_STUDENTS_SEARCH_LIST;
   static const ADMIN_CONTENT = _Paths.ADMIN_CONTENT;
+  static const ADMIN_CONTENT_LIST = _Paths.ADMIN_CONTENT_LIST;
+  static const ADMIN_ADD_CONTENT = _Paths.ADMIN_ADD_CONTENT;
+  static const ADMIN_LIBRARY = _Paths.ADMIN_LIBRARY;
+  static const ADMIN_ADD_BOOK = _Paths.ADMIN_ADD_BOOK;
+  static const ADMIN_BOOK_LIST = _Paths.ADMIN_BOOK_LIST;
+  static const ADMIN_ADD_MEMBER = _Paths.ADMIN_ADD_MEMBER;
 }
 
 abstract class _Paths {
@@ -152,4 +158,10 @@ abstract class _Paths {
   static const ADMIN_STUDENTS_SEARCH = '/admin-students-search';
   static const ADMIN_STUDENTS_SEARCH_LIST = '/admin-students-search-list';
   static const ADMIN_CONTENT = '/admin-content';
+  static const ADMIN_CONTENT_LIST = '/admin-content-list';
+  static const ADMIN_ADD_CONTENT = '/admin-add-content';
+  static const ADMIN_LIBRARY = '/admin-library';
+  static const ADMIN_ADD_BOOK = '/admin-add-book';
+  static const ADMIN_BOOK_LIST = '/admin-book-list';
+  static const ADMIN_ADD_MEMBER = '/admin-add-member';
 }

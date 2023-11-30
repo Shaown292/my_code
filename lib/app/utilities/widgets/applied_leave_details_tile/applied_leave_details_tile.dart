@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
 
 import '../../../data/constants/app_colors.dart';
 import '../../../data/constants/app_text_style.dart';
@@ -67,19 +68,22 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
           10.verticalSpacing,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ColumnTile(
                 title: "Apply Date",
-                value: applyDate,
+                value: "applyDate",
+                width: Get.width * 0.2,
               ),
               ColumnTile(
                 title: "From",
                 value: leaveFrom,
+                width: Get.width * 0.2,
               ),
               ColumnTile(
                 title: "To",
                 value: leaveTo,
+                width: Get.width * 0.2,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

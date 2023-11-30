@@ -51,16 +51,13 @@ class StudentListTile extends StatelessWidget {
                           ),
                         ),
                       )
-                    : Container(
+                    : SizedBox(
                         height: 70,
                         width: 70,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
+
                         child: CacheImageView(
                           url: '${AppConfig.imageBaseUrl}$imageURL',
                           errorImageLocal: ImagePath.dp,
-                          fit: BoxFit.cover,
                         ),
                       ),
                 10.horizontalSpacing,
