@@ -274,8 +274,12 @@ class InfixApi {
       '${baseApi}student-profile-documents?student_id=$studentId';
 
 
-  /// Admin Content
+  /// Admin Content Module
   static String getAdminContentList = '${baseApi}admin-upload-content-list';
+
+
+  /// Admin Book Module
+  static String getAdminBookList = '${baseApi}admin-book-list';
 
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
