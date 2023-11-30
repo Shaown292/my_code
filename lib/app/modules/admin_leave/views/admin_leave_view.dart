@@ -8,6 +8,9 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_approve_leave_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_pending_leave_responseModel.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_rejected_leave_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminLeaveView extends GetView<AdminLeaveController> {
@@ -69,69 +72,48 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                     itemCount:
                                         controller.pendingLeaveList.length,
                                     itemBuilder: (context, index) {
+                                      PendingLeaveData pendingData =
+                                          controller.pendingLeaveList[index];
                                       return Column(
                                         children: [
                                           AppliedLeaveDetailsTile(
-                                            leaveType: controller
-                                                .pendingLeaveList[index].type,
-                                            applyDate: controller
-                                                .pendingLeaveList[index]
-                                                .applyDate,
-                                            leaveFrom: controller
-                                                .pendingLeaveList[index]
-                                                .leaveFrom,
-                                            leaveTo: controller
-                                                .pendingLeaveList[index]
-                                                .leaveTo,
-                                            approveStatus: controller
-                                                .pendingLeaveList[index]
-                                                .approveStatus,
+                                            leaveType: pendingData.type,
+                                            applyDate: pendingData.applyDate,
+                                            leaveFrom: pendingData.leaveFrom,
+                                            leaveTo: pendingData.leaveTo,
+                                            approveStatus:
+                                                pendingData.approveStatus,
                                             statusColor: AppColors
                                                 .activeStatusYellowColor,
                                             onTap: () {
                                               controller
                                                   .showPendingListDetailsBottomSheet(
                                                 index: index,
-                                                reason: controller
-                                                        .pendingLeaveList[index]
-                                                        .reason ??
-                                                    "",
+                                                reason:
+                                                    pendingData.reason ?? "",
                                                 onTap: () {
                                                   controller.updateLeaveStatus(
-                                                    leaveId: controller
-                                                        .pendingLeaveList[index]
-                                                        .id!,
+                                                    leaveId: pendingData.id!,
                                                     currentStatus: controller
                                                         .selectedOption.value,
-                                                    previousStatus: controller
-                                                        .pendingLeaveList[index]
+                                                    previousStatus: pendingData
                                                         .approveStatus!,
                                                     index: index,
                                                   );
                                                 },
-                                                leaveType: controller
-                                                        .pendingLeaveList[index]
-                                                        .type ??
-                                                    '',
-                                                applyDate: controller
-                                                        .pendingLeaveList[index]
-                                                        .applyDate ??
-                                                    '',
-                                                leaveFrom: controller
-                                                        .pendingLeaveList[index]
-                                                        .leaveFrom ??
-                                                    '',
-                                                leaveTo: controller
-                                                        .pendingLeaveList[index]
-                                                        .leaveTo ??
-                                                    '',
-                                                file: controller
-                                                        .pendingLeaveList[index]
-                                                        .file ??
-                                                    '',
+                                                leaveType:
+                                                    pendingData.type ?? '',
+                                                applyDate:
+                                                    pendingData.applyDate ?? '',
+                                                leaveFrom:
+                                                    pendingData.leaveFrom ?? '',
+                                                leaveTo:
+                                                    pendingData.leaveTo ?? '',
+                                                file: pendingData.file ?? '',
                                               );
                                             },
-                                          )
+                                          ),
+                                          20.verticalSpacing,
                                         ],
                                       );
                                     },
@@ -160,22 +142,18 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                       itemCount:
                                           controller.approveLeaveList.length,
                                       itemBuilder: (context, index) {
+                                        ApproveLeaveData approveLeaveData =
+                                            controller.approveLeaveList[index];
                                         return Column(
                                           children: [
                                             AppliedLeaveDetailsTile(
-                                              leaveType: controller
-                                                  .approveLeaveList[index].type,
-                                              applyDate: controller
-                                                  .approveLeaveList[index]
-                                                  .applyDate,
-                                              leaveFrom: controller
-                                                  .approveLeaveList[index]
-                                                  .leaveFrom,
-                                              leaveTo: controller
-                                                  .approveLeaveList[index]
-                                                  .leaveTo,
-                                              approveStatus: controller
-                                                  .approveLeaveList[index]
+                                              leaveType: approveLeaveData.type,
+                                              applyDate:
+                                                  approveLeaveData.applyDate,
+                                              leaveFrom:
+                                                  approveLeaveData.leaveFrom,
+                                              leaveTo: approveLeaveData.leaveTo,
+                                              approveStatus: approveLeaveData
                                                   .approveStatus,
                                               statusColor: AppColors
                                                   .activeStatusGreenColor,
@@ -183,55 +161,40 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                                 controller
                                                     .showPendingListDetailsBottomSheet(
                                                   index: index,
-                                                  reason: controller
-                                                          .approveLeaveList[
-                                                              index]
-                                                          .reason ??
-                                                      "",
+                                                  reason:
+                                                      approveLeaveData.reason ??
+                                                          "",
                                                   onTap: () {
                                                     controller
                                                         .updateLeaveStatus(
-                                                      leaveId: controller
-                                                          .approveLeaveList[
-                                                              index]
-                                                          .id!,
+                                                      leaveId:
+                                                          approveLeaveData.id!,
                                                       currentStatus: controller
                                                           .selectedOption.value,
-                                                      previousStatus: controller
-                                                          .approveLeaveList[
-                                                              index]
-                                                          .approveStatus!,
+                                                      previousStatus:
+                                                          approveLeaveData
+                                                              .approveStatus!,
                                                       index: index,
                                                     );
                                                   },
-                                                  leaveType: controller
-                                                          .approveLeaveList[
-                                                              index]
-                                                          .type ??
-                                                      '',
-                                                  applyDate: controller
-                                                          .approveLeaveList[
-                                                              index]
+                                                  leaveType:
+                                                      approveLeaveData.type ??
+                                                          '',
+                                                  applyDate: approveLeaveData
                                                           .applyDate ??
                                                       '',
-                                                  leaveFrom: controller
-                                                          .approveLeaveList[
-                                                              index]
+                                                  leaveFrom: approveLeaveData
                                                           .leaveFrom ??
                                                       '',
-                                                  leaveTo: controller
-                                                          .approveLeaveList[
-                                                              index]
+                                                  leaveTo: approveLeaveData
                                                           .leaveTo ??
                                                       '',
-                                                  file: controller
-                                                          .approveLeaveList[
-                                                              index]
-                                                          .file ??
+                                                  file: approveLeaveData.file ??
                                                       '',
                                                 );
                                               },
-                                            )
+                                            ),
+                                            20.verticalSpacing,
                                           ],
                                         );
                                       }),
@@ -259,77 +222,58 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                     itemCount:
                                         controller.rejectedLeaveList.length,
                                     itemBuilder: (context, index) {
+                                      RejectedLeaveData rejectedLeaveData =
+                                          controller.rejectedLeaveList[index];
                                       return Column(
                                         children: [
                                           AppliedLeaveDetailsTile(
-                                            leaveType: controller
-                                                .rejectedLeaveList[index].type,
-                                            applyDate: controller
-                                                .rejectedLeaveList[index]
-                                                .applyDate,
-                                            leaveFrom: controller
-                                                .rejectedLeaveList[index]
-                                                .leaveFrom,
-                                            leaveTo: controller
-                                                .rejectedLeaveList[index]
-                                                .leaveTo,
-                                            approveStatus: controller
-                                                .rejectedLeaveList[index]
-                                                .approveStatus,
+                                            leaveType: rejectedLeaveData.type,
+                                            applyDate:
+                                                rejectedLeaveData.applyDate,
+                                            leaveFrom:
+                                                rejectedLeaveData.leaveFrom,
+                                            leaveTo: rejectedLeaveData.leaveTo,
+                                            approveStatus:
+                                                rejectedLeaveData.approveStatus,
                                             statusColor:
                                                 AppColors.activeStatusRedColor,
                                             onTap: () {
                                               controller
                                                   .showPendingListDetailsBottomSheet(
                                                 index: index,
-                                                reason: controller
-                                                        .rejectedLeaveList[
-                                                            index]
-                                                        .reason ??
-                                                    "",
+                                                reason:
+                                                    rejectedLeaveData.reason ??
+                                                        "",
                                                 onTap: () {
                                                   controller.updateLeaveStatus(
-                                                    leaveId: controller
-                                                        .rejectedLeaveList[
-                                                            index]
-                                                        .id!,
+                                                    leaveId:
+                                                        rejectedLeaveData.id!,
                                                     currentStatus: controller
                                                         .selectedOption.value,
-                                                    previousStatus: controller
-                                                        .rejectedLeaveList[
-                                                            index]
-                                                        .approveStatus!,
+                                                    previousStatus:
+                                                        rejectedLeaveData
+                                                            .approveStatus!,
                                                     index: index,
                                                   );
                                                 },
-                                                leaveType: controller
-                                                        .rejectedLeaveList[
-                                                            index]
-                                                        .type ??
-                                                    '',
-                                                applyDate: controller
-                                                        .rejectedLeaveList[
-                                                            index]
+                                                leaveType:
+                                                    rejectedLeaveData.type ??
+                                                        '',
+                                                applyDate: rejectedLeaveData
                                                         .applyDate ??
                                                     '',
-                                                leaveFrom: controller
-                                                        .rejectedLeaveList[
-                                                            index]
+                                                leaveFrom: rejectedLeaveData
                                                         .leaveFrom ??
                                                     '',
-                                                leaveTo: controller
-                                                        .rejectedLeaveList[
-                                                            index]
-                                                        .leaveTo ??
-                                                    '',
-                                                file: controller
-                                                        .rejectedLeaveList[
-                                                            index]
-                                                        .file ??
+                                                leaveTo:
+                                                    rejectedLeaveData.leaveTo ??
+                                                        '',
+                                                file: rejectedLeaveData.file ??
                                                     '',
                                               );
                                             },
-                                          )
+                                          ),
+                                          20.verticalSpacing,
                                         ],
                                       );
                                     },

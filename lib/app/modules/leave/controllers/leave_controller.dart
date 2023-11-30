@@ -10,7 +10,7 @@ class LeaveController extends GetxController {
 
   List<HomeTileModelClass> leaveTileList = [
     HomeTileModelClass(icon: ImagePath.applyLeave, title: 'Apply Leave', value: 'Apply Leave'),
-    HomeTileModelClass(icon: ImagePath.leaveList, title: 'Leave List', value: 'Leave List'),
+    HomeTileModelClass(icon: ImagePath.list, title: 'Leave List', value: 'Leave List'),
   ];
 
 }

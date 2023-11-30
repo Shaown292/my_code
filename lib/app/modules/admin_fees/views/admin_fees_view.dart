@@ -17,33 +17,35 @@ class AdminFeesView extends GetView<AdminFeesController> {
     return InfixEduScaffold(
       title: "Fees",
       body: CustomBackground(
-        customWidget: Column(
-          children: [
-            GridView.builder(
-              shrinkWrap: true,
-
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: controller.adminFeesTileList.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+        customWidget: SingleChildScrollView(
+          child: Column(
+            children: [
+              GridView.builder(
+                shrinkWrap: true,
+          
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.adminFeesTileList.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) {
+                  return Obx(
+                    () => CustomCardTile(
+                      icon: controller.adminFeesTileList[index].icon,
+                      title: controller.adminFeesTileList[index].title,
+                      iconColor: AppColors.primaryColor,
+                      onTap: () {
+                        controller.selectIndex.value = index;
+                        AppFunctions.getAdminHomeNavigation(
+                            title: controller.adminFeesTileList[index].value);
+                      },
+                      isSelected: controller.selectIndex.value == index,
+                    ),
+                  );
+                },
               ),
-              itemBuilder: (context, index) {
-                return Obx(
-                  () => CustomCardTile(
-                    icon: controller.adminFeesTileList[index].icon,
-                    title: controller.adminFeesTileList[index].title,
-                    iconColor: AppColors.primaryColor,
-                    onTap: () {
-                      controller.selectIndex.value = index;
-                      AppFunctions.getAdminHomeNavigation(
-                          title: controller.adminFeesTileList[index].value);
-                    },
-                    isSelected: controller.selectIndex.value == index,
-                  ),
-                );
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

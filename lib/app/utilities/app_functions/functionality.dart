@@ -201,6 +201,24 @@ class AppFunctions {
       case 'Content':
         Get.toNamed(Routes.ADMIN_CONTENT);
         break;
+      case 'Add Content':
+        Get.toNamed(Routes.ADMIN_ADD_CONTENT);
+        break;
+      case 'Content List':
+        Get.toNamed(Routes.ADMIN_CONTENT_LIST);
+        break;
+      case 'Library':
+        Get.toNamed(Routes.ADMIN_LIBRARY);
+        break;
+      case 'Add Book':
+        Get.toNamed(Routes.ADMIN_ADD_BOOK);
+        break;
+      case 'Book List':
+        Get.toNamed(Routes.ADMIN_BOOK_LIST);
+        break;
+      case 'Add Member':
+        Get.toNamed(Routes.ADMIN_ADD_MEMBER);
+        break;
     }
   }
 

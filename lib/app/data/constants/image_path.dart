@@ -116,7 +116,7 @@ class ImagePath {
 
   /// Leave
   static String applyLeave  = "assets/images/apply_leave.png";
-  static String leaveList   = "assets/images/leave_list.png";
+  static String list   = "assets/images/leave_list.png";
 
   /// Examination
   static String examinationResult    = "assets/images/result.png";

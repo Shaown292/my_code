@@ -60,15 +60,15 @@ class CacheImageView extends StatelessWidget {
         );
       },
       errorWidget: (context, url, error) => Container(
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle
+        height: 20,
+        width: 20,
+        decoration:  BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: AssetImage(errorImageLocal ?? 'assets/image/production/galary.png',)
+          )
         ),
-        child: Image.asset(
-          errorImageLocal ?? 'assets/image/production/galary.png',
-          width: width,
-          height: height,
-          fit: fit,
-        ),
+
       ),
     );
   }
