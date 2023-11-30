@@ -39,17 +39,19 @@ class AdminContentListView extends GetView<AdminContentListController> {
                               itemCount: controller.contentList.length,
                               itemBuilder: (context, index) {
                                 return ContentTile(
-                                  title:
-                                      controller.contentList[index].contentTitle,
+                                  title: controller
+                                      .contentList[index].contentTitle,
                                   contentType:
                                       controller.contentList[index].contentType,
-                                  date: controller.contentList[index].uploadDate,
-                                  availableFor:
-                                      controller.contentList[index].availableFor,
+                                  date:
+                                      controller.contentList[index].uploadDate,
+                                  availableFor: controller
+                                      .contentList[index].availableFor,
                                   onDeleteTap: () => controller.showDialog(
                                       id: controller.contentList[index].id!,
                                       index: index),
-                                  onDownloadTap: () => controller.fileDownload(),
+                                  onDownloadTap: () =>
+                                      controller.fileDownload(),
                                 );
                               },
                             )

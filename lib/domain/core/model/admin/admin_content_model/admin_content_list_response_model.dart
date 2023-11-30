@@ -37,11 +37,11 @@ class AdminContentData {
 
   AdminContentData(
       {this.id,
-        this.contentTitle,
-        this.contentType,
-        this.uploadDate,
-        this.availableFor,
-        this.contentFile});
+      this.contentTitle,
+      this.contentType,
+      this.uploadDate,
+      this.availableFor,
+      this.contentFile});
 
   AdminContentData.fromJson(Map<String, dynamic> json) {
     id = json['id'];

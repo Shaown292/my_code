@@ -51,11 +51,11 @@ class AdminContentListController extends GetxController {
     return AdminContentListResponseModel();
   }
 
-  void deleteContent(){
+  void deleteContent() {
     Get.back();
   }
 
-  void fileDownload(){
+  void fileDownload() {
     debugPrint('file downloaded');
     //FileDownloadUtils().downloadFiles(url: 'url', title: 'title');
   }
@@ -63,7 +63,7 @@ class AdminContentListController extends GetxController {
   void showDialog({required int id, required int index}) {
     Get.dialog(
       CustomPopupDialogue(
-        onYesTap: deleteContent,
+          onYesTap: deleteContent,
           subTitle: AppText.deleteDocumentsWarningMsg,
           noText: 'Cancel',
           yesText: 'Delete'),
