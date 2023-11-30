@@ -113,7 +113,6 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     fillColor: Colors.white,
                   ),
                   10.verticalSpacing,
-
                   /// Quantity Text Field
                   CustomTextFormField(
                     controller: controller.quantityTextController,

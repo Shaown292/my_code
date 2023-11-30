@@ -56,16 +56,15 @@ class AppTextStyle {
       fontSize: 14,
       fontWeight: FontWeight.w400);
 
-  static const fontSize18WhiteW500 = TextStyle(
-      color: Colors.white,
-      fontSize: 18,
-      fontWeight: FontWeight.w500);
+  static const fontSize18WhiteW500 =
+      TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500);
 
   /// Syllabus
   static const fontSize14BlackW500 = TextStyle(
-      color: AppColors.syllabusTextColorBlack,
-      fontSize: 14,
-      fontWeight: FontWeight.w500);
+    color: AppColors.syllabusTextColorBlack,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
 
   static const fontSize13BlackW400 = TextStyle(
       color: AppColors.syllabusTextColorBlack,
@@ -87,12 +86,10 @@ class AppTextStyle {
       fontSize: 10,
       fontWeight: FontWeight.w400);
 
-
   static const labelText = TextStyle(
       color: AppColors.editProfileTextFieldLabelColor,
       fontSize: 8,
       fontWeight: FontWeight.w400);
-
 
   ///Homework
   static const homeworkSubject = TextStyle(
@@ -117,9 +114,9 @@ class AppTextStyle {
       fontWeight: FontWeight.w600);
 
   static const fontSize12GreyW400 = TextStyle(
-  color: AppColors.profileTitleColor,
-  fontSize: 12,
-  fontWeight: FontWeight.w400);
+      color: AppColors.profileTitleColor,
+      fontSize: 12,
+      fontWeight: FontWeight.w400);
 
   static const fontSize10GreyW300 = TextStyle(
       color: AppColors.profileTitleColor,
@@ -197,6 +194,4 @@ class AppTextStyle {
       color: AppColors.teacherTextColor,
       fontSize: 12,
       fontWeight: FontWeight.w400);
-
-
 }

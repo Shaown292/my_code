@@ -3,6 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
@@ -28,10 +29,7 @@ class AdminContentListView extends GetView<AdminContentListController> {
               children: [
                 Obx(
                   () => controller.loadingController.isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                          color: AppColors.primaryColor,
-                        ))
+                      ? const LoadingWidget()
                       : controller.contentList.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
