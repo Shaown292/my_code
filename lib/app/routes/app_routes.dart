@@ -91,6 +91,9 @@ abstract class Routes {
       _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_LIST;
   static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST =
       _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST;
+  static const ADMIN_TRANSPORT = _Paths.ADMIN_TRANSPORT;
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS =
+      _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS;
 }
 
 abstract class _Paths {
@@ -180,4 +183,7 @@ abstract class _Paths {
       '/admin-subject-attendance-search-individual-list';
   static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST =
       '/admin-subject-attendance-search-list';
+  static const ADMIN_TRANSPORT = '/admin-transport';
+  static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS =
+      '/admin-subject-attendance-search-individual-details';
 }

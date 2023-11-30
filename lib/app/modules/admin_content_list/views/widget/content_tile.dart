@@ -30,32 +30,45 @@ class ContentTile extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title ?? "",
-                style: AppTextStyle.fontSize14BlackW500,
-              ),
-              const Spacer(),
-              InkWell(
-                onTap:onDownloadTap,
-                child: Image.asset(
-                  ImagePath.download,
-                  scale: 4,
-                  color: AppColors.activeExamStatusBlueColor,
+              Container(
+                padding: const EdgeInsets.only(right: 15),
+                width: Get.width * 0.7,
+                child: Text(
+                  title ?? "",
+                  style: AppTextStyle.fontSize14BlackW500,
+                  textAlign: TextAlign.left,
                 ),
               ),
-              15.horizontalSpacing,
-              InkWell(
-                onTap: onDeleteTap,
-                child: Image.asset(
-                  ImagePath.delete,
-                  scale: 4,
-                  color: AppColors.activeStatusRedColor,
-                ),
+              Row(
+                children: [
+                  InkWell(
+                    onTap:onDownloadTap,
+                    child: Image.asset(
+                      ImagePath.download,
+                      scale: 4,
+                      color: AppColors.activeExamStatusBlueColor,
+                    ),
+                  ),
+                  10.horizontalSpacing,
+                  InkWell(
+                    onTap: onDeleteTap,
+                    child: Image.asset(
+                      ImagePath.delete,
+                      scale: 4,
+                      color: AppColors.activeStatusRedColor,
+                    ),
+                  ),
+                  10.horizontalSpacing,
+                ],
               ),
-              10.horizontalSpacing,
+
+
             ],
           ),
+
           10.verticalSpacing,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,

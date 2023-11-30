@@ -24,67 +24,73 @@ class AdminClassSetAttendanceView
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                      "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
-                  InkWell(
-                    onTap: () {
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.primaryColor,
-                      ),
-                      child: const Text(
-                        "Mark Holiday",
-                        style: AppTextStyle.textStyle12WhiteW400,
+          child: controller.attendanceStudentList.students == null ||
+                  controller.attendanceStudentList.students!.isEmpty
+              ? const NoDataAvailableWidget()
+              : Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                            "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
+                        InkWell(
+                          onTap: () {},
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: AppColors.primaryColor,
+                            ),
+                            child: const Text(
+                              "Mark Holiday",
+                              style: AppTextStyle.textStyle12WhiteW400,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    10.verticalSpacing,
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount:
+                            controller.attendanceStudentList.students!.length,
+                        itemBuilder: (context, index) {
+                          return SetAttendanceTile(
+                            studentName: controller.attendanceStudentList
+                                .students![index].fullName,
+                            section:
+                                controller.attendanceStudentList.sectionName,
+                            studentClass:
+                                controller.attendanceStudentList.className,
+                            onPresentButtonTap: () {
+                              controller.status.value = "P";
+                              controller.selectIndex.value = index;
+                            },
+                            onAbsentButtonTap: () {
+                              controller.status.value = "A";
+                              controller.selectIndex.value = index;
+                            },
+                            onLateButtonTap: () {
+                              controller.status.value = "L";
+                            },
+                            onHalfDayButtonTap: () {
+                              controller.status.value = "H";
+                            },
+                            status: controller.status.value,
+                            isSelected: controller.selectIndex.value == index,
+                          );
+                        },
                       ),
                     ),
-                  )
-                ],
-              ),
-              10.verticalSpacing,
-              Obx(() => Expanded(
-                child: controller.attendanceStudentList.students!.isNotEmpty ? controller.isLoading.value ? const LoadingWidget() : ListView.builder(
-                  itemCount: controller.attendanceStudentList.students!.length,
-                  itemBuilder: (context, index) {
-                    return SetAttendanceTile(
-                      studentName: controller.attendanceStudentList.students![index].fullName,
-                      section: controller.attendanceStudentList.sectionName,
-                      studentClass: controller.attendanceStudentList.className,
-                      onPresentButtonTap: () {
-                        controller.status.value = "P";
-                        controller.selectIndex.value = index;
-                      },
-                      onAbsentButtonTap: () {
-                        controller.status.value = "A";
-                        controller.selectIndex.value = index;
-                      },
-                      onLateButtonTap: () {
-                        controller.status.value = "L";
-                      },
-                      onHalfDayButtonTap: () {
-                        controller.status.value = "H";
-                      },
-                      status: controller.status.value,
-                      isSelected: controller.selectIndex.value == index,
-                    );
-                  },
-                ) : const NoDataAvailableWidget(),
-              ),),
-              30.verticalSpacing,
-              PrimaryButton(
-                text: "Save",
-                onTap: () {},
-              ),
-              30.verticalSpacing
-            ],
-          ),
+                    30.verticalSpacing,
+                    PrimaryButton(
+                      text: "Save",
+                      onTap: () {},
+                    ),
+                    30.verticalSpacing
+                  ],
+                ),
         ),
       ),
     );

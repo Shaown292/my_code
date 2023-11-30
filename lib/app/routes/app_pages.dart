@@ -56,10 +56,14 @@ import '../modules/admin_subject_attendance_search/bindings/admin_subject_attend
 import '../modules/admin_subject_attendance_search/views/admin_subject_attendance_search_view.dart';
 import '../modules/admin_subject_attendance_search_individual/bindings/admin_subject_attendance_search_individual_binding.dart';
 import '../modules/admin_subject_attendance_search_individual/views/admin_subject_attendance_search_individual_view.dart';
+import '../modules/admin_subject_attendance_search_individual_details/bindings/admin_subject_attendance_search_individual_details_binding.dart';
+import '../modules/admin_subject_attendance_search_individual_details/views/admin_subject_attendance_search_individual_details_view.dart';
 import '../modules/admin_subject_attendance_search_individual_list/bindings/admin_subject_attendance_search_individual_list_binding.dart';
 import '../modules/admin_subject_attendance_search_individual_list/views/admin_subject_attendance_search_individual_list_view.dart';
 import '../modules/admin_subject_attendance_search_list/bindings/admin_subject_attendance_search_list_binding.dart';
 import '../modules/admin_subject_attendance_search_list/views/admin_subject_attendance_search_list_view.dart';
+import '../modules/admin_transport/bindings/admin_transport_binding.dart';
+import '../modules/admin_transport/views/admin_transport_view.dart';
 import '../modules/apply_leave/bindings/apply_leave_binding.dart';
 import '../modules/apply_leave/views/apply_leave_view.dart';
 import '../modules/assignment/bindings/assignment_binding.dart';
@@ -609,6 +613,16 @@ class AppPages {
       name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST,
       page: () => const AdminSubjectAttendanceSearchListView(),
       binding: AdminSubjectAttendanceSearchListBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_TRANSPORT,
+      page: () => const AdminTransportView(),
+      binding: AdminTransportBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS,
+      page: () => const AdminSubjectAttendanceSearchIndividualDetailsView(),
+      binding: AdminSubjectAttendanceSearchIndividualDetailsBinding(),
     ),
   ];
 }

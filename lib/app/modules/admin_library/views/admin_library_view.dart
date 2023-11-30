@@ -14,7 +14,7 @@ class AdminLibraryView extends GetView<AdminLibraryController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Fees",
+      title: "Library",
       body: CustomBackground(
         customWidget: SingleChildScrollView(
           child: Column(
