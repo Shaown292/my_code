@@ -1,23 +1,15 @@
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_dummy_data.dart';
 import 'package:get/get.dart';
 
 class AdminTransportController extends GetxController {
-  //TODO: Implement AdminTransportController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  final selectIndex = RxInt(-1);
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  List<HomeTileModelClass> adminFeesTileList = [
+    HomeTileModelClass(icon: ImagePath.studentTransport, title: 'Route', value: 'Route'),
+    HomeTileModelClass(icon: ImagePath.studentTransport, title: 'Vehicle', value: 'Vehicle'),
+    HomeTileModelClass(icon: ImagePath.add, title: 'Assign Vehicle', value: 'Assign Vehicle'),
+    HomeTileModelClass(icon: ImagePath.studentTransport, title: 'Transport', value: 'Transport Details'),
+  ];
 }

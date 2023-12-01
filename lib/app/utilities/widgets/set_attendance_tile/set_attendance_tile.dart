@@ -272,7 +272,7 @@ class SetAttendanceTile extends StatelessWidget {
         10.verticalSpacing,
         CustomDivider(
           width: Get.width,
-          color: AppColors.dormitoryDividerColor,
+          color: AppColors.customDividerColor,
         )
       ],
     );

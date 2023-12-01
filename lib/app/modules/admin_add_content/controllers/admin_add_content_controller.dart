@@ -22,8 +22,11 @@ class AdminAddContentController extends GetxController {
   RxBool sectionLoader = false.obs;
   RxBool isStudent = false.obs;
   RxBool isAllStudent = false.obs;
+  RxBool isStudentSelected = false.obs;
+  RxBool isAdminSelected = false.obs;
   RxString contentInitialValue = "Assignment".obs;
-  RxString selectedOption = "All Admin".obs;
+  RxString selectedAdminOption = "All Admin".obs;
+  RxString selectedStudentOption = "".obs;
   RxString classNullValue = ''.obs;
   RxString sectionNullValue = ''.obs;
   Rx<File> file = File('').obs;

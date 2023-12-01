@@ -106,7 +106,7 @@ class AdminFeesInvoiceView extends GetView<AdminFeesInvoiceController> {
               5.verticalSpacing,
               CustomDivider(
                 width: Get.width,
-                color: AppColors.dormitoryDividerColor,
+                color: AppColors.customDividerColor,
               ),
               10.verticalSpacing,
                Row(

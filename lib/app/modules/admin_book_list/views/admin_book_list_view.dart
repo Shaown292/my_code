@@ -18,7 +18,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
     return InfixEduScaffold(
       title: "Book List",
       body: RefreshIndicator(
-        onRefresh: () async { 
+        onRefresh: () async {
           controller.getAdminBookList();
         },
         child: SingleChildScrollView(
@@ -69,30 +69,41 @@ class AdminBookListView extends GetView<AdminBookListController> {
                     ],
                   ),
                 ),
-                Obx(() => Expanded(
-                  child: controller.loadingController.isLoading
-                      ? const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primaryColor,
-                    ),
-                  )
-                      : controller.bookList.isNotEmpty ? ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: controller.bookList.length,
-                    itemBuilder: (context, index) {
-                      return BookListTile(
-                        bookName: controller.bookList[index].bookTitle,
-                        subject: controller.bookList[index].subjectName,
-                        bookNumber: controller.bookList[index].bookNumber,
-                        onTap: () {
-                          controller.showBookListDetailsBottomSheet(
-                            index: index,
-                            bottomSheetBackgroundColor: Colors.white,
-                          );
-                        },
-                      );
-                    },) : const NoDataAvailableWidget(),
-                ),),
+                Obx(
+                  () => Expanded(
+                    child: controller.loadingController.isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            ),
+                          )
+                        : controller.bookList.isNotEmpty
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: controller.bookList.length,
+                                itemBuilder: (context, index) {
+                                  return BookListTile(
+                                    bookName:
+                                        controller.bookList[index].bookTitle,
+                                    subject:
+                                        controller.bookList[index].subjectName,
+                                    bookNumber:
+                                        controller.bookList[index].bookNumber,
+                                    onTap: () {
+                                      controller.showBookListDetailsBottomSheet(
+                                        index: index,
+                                        bottomSheetBackgroundColor:
+                                            Colors.white,
+                                      );
+                                    },
+                                  );
+                                },
+                              )
+                            : const Center(
+                                child: NoDataAvailableWidget(),
+                              ),
+                  ),
+                ),
               ],
             ),
           ),

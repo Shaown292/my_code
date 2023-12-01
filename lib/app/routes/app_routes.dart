@@ -94,6 +94,12 @@ abstract class Routes {
   static const ADMIN_TRANSPORT = _Paths.ADMIN_TRANSPORT;
   static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS =
       _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS;
+  static const ADMIN_NOTICE = _Paths.ADMIN_NOTICE;
+  static const ADMIN_ROUTE = _Paths.ADMIN_ROUTE;
+  static const ADMIN_VEHICLE = _Paths.ADMIN_VEHICLE;
+  static const ADMIN_ASSIGN_VEHICLE = _Paths.ADMIN_ASSIGN_VEHICLE;
+  static const ADMIN_TRANSPORT_DETAILS = _Paths.ADMIN_TRANSPORT_DETAILS;
+  static const ADMIN_SETTINGS = _Paths.ADMIN_SETTINGS;
 }
 
 abstract class _Paths {
@@ -186,4 +192,10 @@ abstract class _Paths {
   static const ADMIN_TRANSPORT = '/admin-transport';
   static const ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS =
       '/admin-subject-attendance-search-individual-details';
+  static const ADMIN_NOTICE = '/admin-notice';
+  static const ADMIN_ROUTE = '/admin-route';
+  static const ADMIN_VEHICLE = '/admin-vehicle';
+  static const ADMIN_ASSIGN_VEHICLE = '/admin-assign-vehicle';
+  static const ADMIN_TRANSPORT_DETAILS = '/admin-transport-details';
+  static const ADMIN_SETTINGS = '/admin-settings';
 }

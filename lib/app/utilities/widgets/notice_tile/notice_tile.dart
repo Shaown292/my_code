@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 
-import '../../../../data/constants/app_colors.dart';
-import '../../../../data/constants/app_text_style.dart';
+import '../../../data/constants/app_colors.dart';
+import '../../../data/constants/app_text_style.dart';
 
-class NoticeCard extends StatelessWidget {
+class NoticeTile extends StatelessWidget {
   final String? noticeTitle;
   final String? noticeDetails;
   final String? noticeDate;
   final Function()? onTap;
   final Color? cardBackgroundColor;
 
-  const NoticeCard({
+  const NoticeTile({
     super.key,
     this.noticeTitle,
     this.noticeDetails,

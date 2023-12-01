@@ -69,11 +69,14 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                                   statusColor: AppColors.activeStatusRedColor,
                                   onTapView: () =>
                                       Get.toNamed(Routes.ADMIN_FEES_INVOICE),
-                                  onTapDelete: (() => controller.showAlertDialog()),
+                                  onTapDelete: (() =>
+                                      controller.showAlertDialog()),
                                 );
                               },
                             )
-                          : const NoDataAvailableWidget(),
+                          : const Center(
+                              child: NoDataAvailableWidget(),
+                            ),
                 ),
               ),
             ),
