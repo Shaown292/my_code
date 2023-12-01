@@ -12,6 +12,8 @@ import '../modules/admin_add_member/bindings/admin_add_member_binding.dart';
 import '../modules/admin_add_member/views/admin_add_member_view.dart';
 import '../modules/admin_add_room/bindings/admin_add_room_binding.dart';
 import '../modules/admin_add_room/views/admin_add_room_view.dart';
+import '../modules/admin_assign_vehicle/bindings/admin_assign_vehicle_binding.dart';
+import '../modules/admin_assign_vehicle/views/admin_assign_vehicle_view.dart';
 import '../modules/admin_attendance/bindings/admin_attendance_binding.dart';
 import '../modules/admin_attendance/views/admin_attendance_view.dart';
 import '../modules/admin_book_list/bindings/admin_book_list_binding.dart';
@@ -46,8 +48,14 @@ import '../modules/admin_leave/bindings/admin_leave_binding.dart';
 import '../modules/admin_leave/views/admin_leave_view.dart';
 import '../modules/admin_library/bindings/admin_library_binding.dart';
 import '../modules/admin_library/views/admin_library_view.dart';
+import '../modules/admin_notice/bindings/admin_notice_binding.dart';
+import '../modules/admin_notice/views/admin_notice_view.dart';
 import '../modules/admin_room_list/bindings/admin_room_list_binding.dart';
 import '../modules/admin_room_list/views/admin_room_list_view.dart';
+import '../modules/admin_route/bindings/admin_route_binding.dart';
+import '../modules/admin_route/views/admin_route_view.dart';
+import '../modules/admin_settings/bindings/admin_settings_binding.dart';
+import '../modules/admin_settings/views/admin_settings_view.dart';
 import '../modules/admin_students_search/bindings/admin_students_search_binding.dart';
 import '../modules/admin_students_search/views/admin_students_search_view.dart';
 import '../modules/admin_students_search_list/bindings/admin_students_search_list_binding.dart';
@@ -64,6 +72,10 @@ import '../modules/admin_subject_attendance_search_list/bindings/admin_subject_a
 import '../modules/admin_subject_attendance_search_list/views/admin_subject_attendance_search_list_view.dart';
 import '../modules/admin_transport/bindings/admin_transport_binding.dart';
 import '../modules/admin_transport/views/admin_transport_view.dart';
+import '../modules/admin_transport_details/bindings/admin_transport_details_binding.dart';
+import '../modules/admin_transport_details/views/admin_transport_details_view.dart';
+import '../modules/admin_vehicle/bindings/admin_vehicle_binding.dart';
+import '../modules/admin_vehicle/views/admin_vehicle_view.dart';
 import '../modules/apply_leave/bindings/apply_leave_binding.dart';
 import '../modules/apply_leave/views/apply_leave_view.dart';
 import '../modules/assignment/bindings/assignment_binding.dart';
@@ -232,6 +244,7 @@ class AppPages {
       name: _Paths.ROUTINE,
       page: () => const RoutineView(),
       binding: RoutineBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.STUDY_MATERIALS,
@@ -361,11 +374,13 @@ class AppPages {
       name: _Paths.BOOK_ISSUED,
       page: () => const BookIssuedView(),
       binding: BookIssuedBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TRANSPORT,
       page: () => const TransportView(),
       binding: TransportBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.FEES,
@@ -422,10 +437,11 @@ class AppPages {
       transition: Transition.fade,
     ),
     GetPage(
-        name: _Paths.STAFF,
-        page: () => const StaffView(),
-        binding: StaffBinding(),
-        transition: Transition.fadeIn),
+      name: _Paths.STAFF,
+      page: () => const StaffView(),
+      binding: StaffBinding(),
+      transition: Transition.fadeIn,
+    ),
     GetPage(
       name: _Paths.STAFF_LIST,
       page: () => const StaffListView(),
@@ -442,11 +458,13 @@ class AppPages {
       name: _Paths.SINGLE_CHAT,
       page: () => const SingleChatView(),
       binding: SingleChatBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.STUDENT_CLASS,
       page: () => const StudentClassView(),
       binding: StudentClassBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.ADMIN_LEAVE,
@@ -578,51 +596,97 @@ class AppPages {
       name: _Paths.ADMIN_LIBRARY,
       page: () => const AdminLibraryView(),
       binding: AdminLibraryBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.ADMIN_ADD_BOOK,
       page: () => const AdminAddBookView(),
       binding: AdminAddBookBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_BOOK_LIST,
       page: () => const AdminBookListView(),
       binding: AdminBookListBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_ADD_MEMBER,
       page: () => const AdminAddMemberView(),
       binding: AdminAddMemberBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST,
       page: () => const AdminClassAttendanceSearchIndividualListView(),
       binding: AdminClassAttendanceSearchIndividualListBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_CLASS_ATTENDANCE_INDIVIDUAL_DETAILS,
       page: () => const AdminClassAttendanceIndividualDetailsView(),
       binding: AdminClassAttendanceIndividualDetailsBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_LIST,
       page: () => const AdminSubjectAttendanceSearchIndividualListView(),
       binding: AdminSubjectAttendanceSearchIndividualListBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST,
       page: () => const AdminSubjectAttendanceSearchListView(),
       binding: AdminSubjectAttendanceSearchListBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ADMIN_TRANSPORT,
       page: () => const AdminTransportView(),
       binding: AdminTransportBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS,
       page: () => const AdminSubjectAttendanceSearchIndividualDetailsView(),
       binding: AdminSubjectAttendanceSearchIndividualDetailsBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_NOTICE,
+      page: () => const AdminNoticeView(),
+      binding: AdminNoticeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ROUTE,
+      page: () => const AdminRouteView(),
+      binding: AdminRouteBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_VEHICLE,
+      page: () => const AdminVehicleView(),
+      binding: AdminVehicleBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ASSIGN_VEHICLE,
+      page: () => const AdminAssignVehicleView(),
+      binding: AdminAssignVehicleBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_TRANSPORT_DETAILS,
+      page: () => const AdminTransportDetailsView(),
+      binding: AdminTransportDetailsBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ADMIN_SETTINGS,
+      page: () => const AdminSettingsView(),
+      binding: AdminSettingsBinding(),
+      transition: Transition.fadeIn,
     ),
   ];
 }

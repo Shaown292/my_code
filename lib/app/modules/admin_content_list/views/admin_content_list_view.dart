@@ -29,7 +29,14 @@ class AdminContentListView extends GetView<AdminContentListController> {
               children: [
                 Obx(
                   () => controller.loadingController.isLoading
-                      ? const LoadingWidget()
+                      ? SizedBox(
+                          height: Get.height,
+                          child: const Column(
+                            children: [
+                              LoadingWidget(),
+                            ],
+                          ),
+                        )
                       : controller.contentList.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
@@ -46,14 +53,17 @@ class AdminContentListView extends GetView<AdminContentListController> {
                                   availableFor: controller
                                       .contentList[index].availableFor,
                                   onDeleteTap: () => controller.showDialog(
-                                      id: controller.contentList[index].id!,
-                                      index: index),
+                                    id: controller.contentList[index].id!,
+                                    index: index,
+                                  ),
                                   onDownloadTap: () =>
                                       controller.fileDownload(),
                                 );
                               },
                             )
-                          : const NoDataAvailableWidget(),
+                          : const Center(
+                              child: NoDataAvailableWidget(),
+                            ),
                 ),
                 50.verticalSpacing,
               ],

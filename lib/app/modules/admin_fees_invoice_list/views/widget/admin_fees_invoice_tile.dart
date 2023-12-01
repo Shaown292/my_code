@@ -125,7 +125,7 @@ class AdminFeesInvoiceTile extends StatelessWidget {
         ),
         CustomDivider(
           width: Get.width,
-          color: AppColors.dormitoryDividerColor,
+          color: AppColors.customDividerColor,
         ),
       ],
     );

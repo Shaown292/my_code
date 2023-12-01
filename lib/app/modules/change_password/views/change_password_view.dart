@@ -45,7 +45,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   fillColor: Colors.white,
                    controller: controller.confirmPasswordController,
                 ),
-                10.verticalSpacing,
+                30.verticalSpacing,
                  PrimaryButton(
                   title: "Save",
                   height: Get.height * 0.05,

@@ -9,6 +9,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_checkbox/custom_checkbox.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_radio_button/custom_radio_button.dart';
 
@@ -37,7 +38,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                   CustomDropdown(
                     dropdownValue: controller.contentInitialValue.value,
                     dropdownList: controller.contentList,
-                    changeDropdownValue: (value){
+                    changeDropdownValue: (value) {
                       controller.contentInitialValue.value = value!;
                     },
                   ),
@@ -59,54 +60,44 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                   ),
 
                   //All Admin radio button
-                  CustomRadioButton(
-                    title: "All Admin",
-                    value: "All Admin",
-                    groupValue: controller.selectedOption.value,
-                    onChanged: (value) {
-                      controller.selectedOption.value = value!;
-                      controller.isStudent.value = false;
-                    },
-                    activeColor: AppColors.primaryColor,
-                  ),
-
-                  //student radio button
-                  CustomRadioButton(
-                    title: "Student",
-                    value: "Student",
-                    groupValue: controller.selectedOption.value,
-                    onChanged: (value) {
-                      controller.selectedOption.value = value!;
+                  CustomCheckbox(
+                    checkboxValue: controller.isAdminSelected.value,
+                    checkboxTitle: "All Admin",
+                    onChange: (bool? value) {
+                      controller.isAdminSelected.value = value!;
                       controller.isStudent.value = true;
                     },
-                    activeColor: AppColors.primaryColor,
+                    shape: const CircleBorder(),
                   ),
 
-                  10.verticalSpacing,
-                  controller.isStudent.value
-                      ? Row(
-                          children: [
-                            16.horizontalSpacing,
-                            Checkbox(
-                              value: controller.isAllStudent.value,
-                              onChanged: (bool? value) {
-                                controller.isAllStudent.value = value!;
 
-                              },
-                            ),
-                            15.horizontalSpacing,
-                            const Text(
-                              "All Student",
-                              style: AppTextStyle.fontSize13BlackW400,
-                            ),
-                          ],
+                  //student radio button
+                  CustomCheckbox(
+                    checkboxValue: controller.isStudentSelected.value,
+                    checkboxTitle: "Student",
+                    onChange: (bool? value) {
+                      controller.isStudentSelected.value = value!;
+                      controller.isStudent.value = true;
+                    },
+                    shape: const CircleBorder(),
+                  ),
+
+
+                  10.verticalSpacing,
+                  controller.isStudentSelected.value
+                      ? CustomCheckbox(
+                          checkboxValue: controller.isAllStudent.value,
+                          checkboxTitle: "All Students",
+                          onChange: (bool? value) {
+                            controller.isAllStudent.value = value!;
+                          },
                         )
                       : const SizedBox(),
 
                   10.verticalSpacing,
-
                   /// Student Class List Dropdown
-                  controller.isStudent.value && controller.isAllStudent.value == false
+                  controller.isStudentSelected.value &&
+                          controller.isAllStudent.value == false
                       ? controller.loadingController.isLoading
                           ? const CircularProgressIndicator(
                               color: AppColors.primaryColor,
@@ -130,7 +121,8 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                   10.verticalSpacing,
 
                   /// Student Section List Dropdown
-                  controller.isStudent.value && controller.isAllStudent.value == false
+                  controller.isStudentSelected.value &&
+                          controller.isAllStudent.value == false
                       ? controller.sectionLoader.value
                           ? const CircularProgressIndicator(
                               color: AppColors.primaryColor,

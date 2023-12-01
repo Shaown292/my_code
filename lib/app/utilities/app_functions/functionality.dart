@@ -207,6 +207,9 @@ class AppFunctions {
       case 'Content List':
         Get.toNamed(Routes.ADMIN_CONTENT_LIST);
         break;
+      case 'Notice':
+        Get.toNamed(Routes.ADMIN_NOTICE);
+        break;
       case 'Library':
         Get.toNamed(Routes.ADMIN_LIBRARY);
         break;
@@ -218,6 +221,24 @@ class AppFunctions {
         break;
       case 'Add Member':
         Get.toNamed(Routes.ADMIN_ADD_MEMBER);
+        break;
+      case 'Transport':
+        Get.toNamed(Routes.ADMIN_TRANSPORT);
+        break;
+      case 'Route':
+        Get.toNamed(Routes.ADMIN_ROUTE);
+        break;
+      case 'Vehicle':
+        Get.toNamed(Routes.ADMIN_VEHICLE);
+        break;
+      case 'Assign Vehicle':
+        Get.toNamed(Routes.ADMIN_ASSIGN_VEHICLE);
+        break;
+      case 'Transport Details':
+        Get.toNamed(Routes.ADMIN_TRANSPORT_DETAILS);
+        break;
+      case 'Settings':
+        Get.toNamed(Routes.ADMIN_SETTINGS);
         break;
     }
   }
