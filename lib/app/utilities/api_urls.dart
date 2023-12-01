@@ -238,6 +238,7 @@ class InfixApi {
           required String selectedDate}) =>
       '${baseApi}student-search?class=$classId&section=$sectionId&attendance_date=$selectedDate';
 
+  /// Attendance
   static String getAdminStudentSearchList({
     required int classId,
     required int sectionId,
@@ -245,6 +246,29 @@ class InfixApi {
     required String name,
   }) =>
       '${baseApi}student-list-search?class=$classId&section=$sectionId&name=$name&roll_no=$rollINo';
+
+  static String getAdminSubAttenSearchList({
+    required int classId,
+    required int sectionId,
+    required int subjectId,
+    required String rollINo,
+    required String name,
+  }) =>
+      '${baseApi}subject-wise-students?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&name=$name&roll_no=$rollINo';
+
+  static String getAdminSubAttenSearchDetailsList({
+    required int recordId,
+    required int subjectNameId,
+  }) =>
+      '${baseApi}student-subject-attendance?record_id=$recordId&subject_id=$subjectNameId';
+
+  static String getAdminSubAttenSearchDetailsWithDateList({
+    required int recordId,
+    required int subjectNameId,
+    required int month,
+    required int year,
+  }) =>
+      '${baseApi}student-subject-attendance?record_id=$recordId&subject_id=$subjectNameId&month=$month&year=$year';
 
   static String adminLeaveStatusUpdate({
     required int leaveId,
@@ -256,7 +280,7 @@ class InfixApi {
       '${baseApi}role-wise-staff-list?role_id=$staffRoleId';
 
   static String getAdminStaffIndividualData({required int staffIndividualId}) =>
-      '${baseApi}individual-staff-details/$staffIndividualId';
+      '${baseApi}individual-staff-details?staff_id=$staffIndividualId';
 
   static String getSingleStudentProfile({required int studentId}) =>
       '${baseApi}student-profile-personal?student_id=$studentId';

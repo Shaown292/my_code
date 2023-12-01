@@ -23,16 +23,20 @@ class AdminSubjectAttendanceSearchIndividualListView
               child: RefreshIndicator(
                 onRefresh: () async {},
                 child: ListView.builder(
-                  itemCount: 50,
+                  itemCount: controller.adminSubAttendanceList.length,
                   itemBuilder: (context, index) {
                     return StudentListTile(
                       onTap: () {
-                        Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS);
+                        // print(controller.subjectNameId.value);
+                        Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_INDIVIDUAL_DETAILS, arguments: {
+                          'record_id' : controller.adminSubAttendanceList[index].recordId,
+                          'subject_name_id' : controller.subjectNameId.value,
+                        });
                       },
-                      studentName: "Jahid",
-                      imageURL: "URL",
-                      classSection: "Tulip",
-                      studentClass: "Five",
+                      studentName: controller.adminSubAttendanceList[index].fullName,
+                      imageURL: controller.adminSubAttendanceList[index].studentPhoto,
+                      classSection: controller.adminSubAttendanceList[index].section,
+                      studentClass: controller.adminSubAttendanceList[index].className,
                     );
                   },
                 ),

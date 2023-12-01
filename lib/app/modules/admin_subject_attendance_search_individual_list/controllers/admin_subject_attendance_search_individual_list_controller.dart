@@ -1,24 +1,20 @@
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attendance_model/admin_sub_atten_search_individual_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminSubjectAttendanceSearchIndividualListController
     extends GetxController {
-  //TODO: Implement AdminSubjectAttendanceSearchIndividualListController
 
-  final count = 0.obs;
+  RxList<AdminSubAttenStudents> adminSubAttendanceList =
+      <AdminSubAttenStudents>[].obs;
+  RxInt subjectNameId = 0.obs;
+
+
   @override
   void onInit() {
+    adminSubAttendanceList = Get.arguments['search_data'];
+    subjectNameId.value = Get.arguments['subject_name_id'];
+
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
