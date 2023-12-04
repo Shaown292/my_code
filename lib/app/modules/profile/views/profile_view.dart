@@ -412,25 +412,25 @@ class ProfileView extends GetView<ProfileController> {
                                                   /// Delete button
                                                   tapRightButton: () =>
                                                       Get.dialog(
-                                                    Obx(() =>
-                                                        CustomPopupDialogue(
-                                                          onYesTap: () {
-                                                            controller.deleteDocument(
-                                                                documentId: controller
-                                                                    .documentsDataList[
-                                                                        index]
-                                                                    .id!,
-                                                                index: index);
-                                                          },
-                                                          isLoading: controller
-                                                              .deleteLoader
-                                                              .value,
-                                                          title: 'Confirmation',
-                                                          subTitle: AppText
-                                                              .deleteDocumentsWarningMsg,
-                                                          noText: 'cancel',
-                                                          yesText: 'delete',
-                                                        )),
+                                                    Obx(
+                                                      () => CustomPopupDialogue(
+                                                        onYesTap: () {
+                                                          controller.deleteDocument(
+                                                              documentId: controller
+                                                                  .documentsDataList[
+                                                                      index]
+                                                                  .id!,
+                                                              index: index);
+                                                        },
+                                                        isLoading: controller
+                                                            .deleteLoader.value,
+                                                        title: 'Confirmation',
+                                                        subTitle: AppText
+                                                            .deleteDocumentsWarningMsg,
+                                                        noText: 'cancel',
+                                                        yesText: 'delete',
+                                                      ),
+                                                    ),
                                                   ),
 
                                                   /// Download button

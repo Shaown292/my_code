@@ -33,8 +33,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   10.verticalSpacing,
-                  // const Text("Content type", style: AppTextStyle.fontSize13BlackW400,),
-                  5.verticalSpacing,
+
                   CustomDropdown(
                     dropdownValue: controller.contentInitialValue.value,
                     dropdownList: controller.contentList,

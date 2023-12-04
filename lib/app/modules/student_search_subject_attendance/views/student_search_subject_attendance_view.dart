@@ -84,7 +84,7 @@ class StudentSearchSubjectAttendanceView
                   ? const CircularProgressIndicator()
                   : controller.subjectsController.subjectList.isNotEmpty
                       ? Expanded(
-                        child: RefreshIndicator(
+                          child: RefreshIndicator(
                             onRefresh: () async {
                               controller.subjectsController.getAllSubjectList(
                                 recordId: controller.recordId.toInt(),
@@ -103,20 +103,22 @@ class StudentSearchSubjectAttendanceView
                                       .subjectList[index].type,
                                   onTap: () {
                                     Get.toNamed(
-                                        Routes.STUDENT_SEARCH_ATTENDANCE,
-                                        arguments: {
-                                          "subjectID": controller
-                                              .subjectsController
-                                              .subjectList[index]
-                                              .id,
-                                          "from": true
-                                        });
+                                      Routes.STUDENT_SEARCH_ATTENDANCE,
+                                      arguments: {
+                                        "subjectID": controller
+                                            .subjectsController
+                                            .subjectList[index]
+                                            .id,
+                                        "from": true
+                                      },
+
+                                    );
                                   },
                                 );
                               },
                             ),
                           ),
-                      )
+                        )
                       : const NoDataAvailableWidget(),
             ],
           ),

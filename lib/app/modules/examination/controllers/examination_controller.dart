@@ -35,9 +35,10 @@ class ExaminationController extends GetxController {
   // List<int> examDropdownIdList = [];
 
 
-  RxList examList = <ExamDataList>[].obs;
+
   RxList examDropdownList = <String>[].obs;
   RxList examDropdownIdList = <int>[].obs;
+  RxList<ExamDataList> examList = <ExamDataList>[].obs;
 
   void getStudentExamList({required int recordId}) async {
     try {
@@ -55,7 +56,7 @@ class ExaminationController extends GetxController {
         if (examDropdownResponseModel.data!.isNotEmpty) {
           for (int i = 0; i < examDropdownResponseModel.data!.length; i++) {
             examList.add(examDropdownResponseModel.data![i]);
-            examDropdownList.add(examDropdownResponseModel.data![i].title!);
+            examDropdownList.add(examDropdownResponseModel.data![i].name!);
             examDropdownIdList.add(examDropdownResponseModel.data![i].id!);
           }
         }

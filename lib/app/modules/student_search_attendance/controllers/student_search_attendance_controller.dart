@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/display_dot.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:get/get.dart';
@@ -50,7 +51,8 @@ class StudentSearchAttendanceController extends GetxController {
               attendanceList[0].attendanceDate!.year,
               attendanceList[0].attendanceDate!.month,
               attendanceList[0].attendanceDate!.day),
-          dot: presentEvent,
+          dot: GlobalVariable.getAttendanceStatus(
+              attendanceList[0].attendanceType ?? ""),
         )
       ];
     }
@@ -97,11 +99,14 @@ class StudentSearchAttendanceController extends GetxController {
                 attendanceList[i].attendanceDate!.month,
                 attendanceList[i].attendanceDate!.day)] = [
               Event(
-                  date: DateTime(
-                      attendanceList[i].attendanceDate!.year,
-                      attendanceList[i].attendanceDate!.month,
-                      attendanceList[i].attendanceDate!.day),
-                  dot: presentEvent)
+                date: DateTime(
+                    attendanceList[i].attendanceDate!.year,
+                    attendanceList[i].attendanceDate!.month,
+                    attendanceList[i].attendanceDate!.day),
+                dot: GlobalVariable.getAttendanceStatus(
+                    attendanceList[i].attendanceType ?? ""),
+              ),
+              //////Eikhane change hoy colorrrrrr
             ];
           }
         }
@@ -159,12 +164,14 @@ class StudentSearchAttendanceController extends GetxController {
                 attendanceList[i].attendanceDate!.month,
                 attendanceList[i].attendanceDate!.day)] = [
               Event(
-                  date: DateTime(
-                    attendanceList[i].attendanceDate!.year,
-                    attendanceList[i].attendanceDate!.month,
-                    attendanceList[i].attendanceDate!.day,
-                  ),
-                  dot: presentEvent)
+                date: DateTime(
+                  attendanceList[i].attendanceDate!.year,
+                  attendanceList[i].attendanceDate!.month,
+                  attendanceList[i].attendanceDate!.day,
+                ),
+                dot: GlobalVariable.getAttendanceStatus(
+                    attendanceList[i].attendanceType ?? ""),
+              )
             ];
           }
         }
@@ -222,7 +229,8 @@ class StudentSearchAttendanceController extends GetxController {
                     attendanceList[i].attendanceDate!.year,
                     attendanceList[i].attendanceDate!.month,
                     attendanceList[i].attendanceDate!.day),
-                dot: presentEvent,
+                dot: GlobalVariable.getAttendanceStatus(
+                    attendanceList[i].attendanceType ?? ""),
               )
             ];
           }
@@ -287,11 +295,13 @@ class StudentSearchAttendanceController extends GetxController {
                 attendanceList[i].attendanceDate!.month,
                 attendanceList[i].attendanceDate!.day)] = [
               Event(
-                  date: DateTime(
-                      attendanceList[i].attendanceDate!.year,
-                      attendanceList[i].attendanceDate!.month,
-                      attendanceList[i].attendanceDate!.day),
-                  dot: presentEvent)
+                date: DateTime(
+                    attendanceList[i].attendanceDate!.year,
+                    attendanceList[i].attendanceDate!.month,
+                    attendanceList[i].attendanceDate!.day),
+                dot: GlobalVariable.getAttendanceStatus(
+                    attendanceList[i].attendanceType ?? ""),
+              )
             ];
           }
         }

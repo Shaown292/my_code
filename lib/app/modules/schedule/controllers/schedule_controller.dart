@@ -15,10 +15,12 @@ class ScheduleController extends GetxController {
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
 
+
   // List<String> dropdownList = [];
   List<ScheduleData> scheduleList = [];
   RxString dropdownValue = "".obs;
   RxString recordDropdownValue = "".obs;
+  final selectIndex = RxInt(0);
 
   void getStudentExamScheduleList(
       {required int examId, required recordId}) async {
