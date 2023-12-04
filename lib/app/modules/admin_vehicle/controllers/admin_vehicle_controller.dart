@@ -5,12 +5,13 @@ import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_transport_model/admin_vehicle_driver_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_transport_model/admin_vehicle_list_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminVehicleController extends GetxController {
-
   LoadingController loadingController = Get.find();
+  RxBool dropdownLoader = false.obs;
 
   TabController? tabController;
 
@@ -19,24 +20,17 @@ class AdminVehicleController extends GetxController {
   TextEditingController madeYearTextController = TextEditingController();
   TextEditingController noteTextController = TextEditingController();
 
-  RxList<AdminVehicleData> adminVehicleList =
-      <AdminVehicleData>[].obs;
+  RxList<AdminVehicleData> adminVehicleList = <AdminVehicleData>[].obs;
+  RxList<AdminVehicleDriverData> adminVehicleDriverList =
+      <AdminVehicleDriverData>[].obs;
 
   RxString initialValue = "Rohit Sharma".obs;
-  RxList <String> list = [
-    "Rohit Sharma",
-    "Virat Kohli",
-    "Subhman Gill"
-  ].obs;
+  RxList<String> list = ["Rohit Sharma", "Virat Kohli", "Subhman Gill"].obs;
 
   List<String> tabs = <String>[
     'Add Vehicle',
     'Vehicle List',
   ];
-
-
-
-
 
   Future<AdminVehicleListResponseModel> getAdminVehicleList() async {
     try {
@@ -47,7 +41,7 @@ class AdminVehicleController extends GetxController {
           url: InfixApi.getAdminVehicleList, header: GlobalVariable.header);
 
       AdminVehicleListResponseModel adminVehicleListResponseModel =
-      AdminVehicleListResponseModel.fromJson(response);
+          AdminVehicleListResponseModel.fromJson(response);
 
       if (adminVehicleListResponseModel.success == true) {
         loadingController.isLoading = false;
@@ -74,12 +68,49 @@ class AdminVehicleController extends GetxController {
     return AdminVehicleListResponseModel();
   }
 
+  Future<AdminVehicleDriverResponseModel> getAdminVehicleDriverList() async {
+    try {
+      adminVehicleList.clear();
+      dropdownLoader.value = true;
+
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminVehicleList, header: GlobalVariable.header);
+
+      AdminVehicleDriverResponseModel adminVehicleDriverResponseModel =
+          AdminVehicleDriverResponseModel.fromJson(response);
+
+      if (adminVehicleDriverResponseModel.success == true) {
+        dropdownLoader.value = false;
+        if (adminVehicleDriverResponseModel.data!.isNotEmpty) {
+          for (int i = 0;
+              i < adminVehicleDriverResponseModel.data!.length;
+              i++) {
+            adminVehicleDriverList
+                .add(adminVehicleDriverResponseModel.data![i]);
+          }
+        }
+      } else {
+        dropdownLoader.value = false;
+        showBasicFailedSnackBar(
+          message: adminVehicleDriverResponseModel.message ??
+              AppText.somethingWentWrong,
+        );
+      }
+    } catch (e, t) {
+      dropdownLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      dropdownLoader.value = false;
+    }
+
+    return AdminVehicleDriverResponseModel();
+  }
 
   @override
   void onInit() {
     getAdminVehicleList();
+    getAdminVehicleDriverList();
     super.onInit();
   }
-
-
 }

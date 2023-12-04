@@ -96,13 +96,19 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 10.verticalSpacing,
 
                                 /// Driver list dropdown
-                                CustomDropdown(
-                                  dropdownValue: controller.initialValue.value,
-                                  dropdownList: controller.list,
-                                  changeDropdownValue: (value) {
-                                    controller.initialValue.value = value!;
-                                  },
-                                ),
+                                controller.dropdownLoader.value
+                                    ? const CircularProgressIndicator(
+                                        color: AppColors.primaryColor,
+                                      )
+                                    : CustomDropdown(
+                                        dropdownValue:
+                                            controller.initialValue.value,
+                                        dropdownList: controller.list,
+                                        changeDropdownValue: (value) {
+                                          controller.initialValue.value =
+                                              value!;
+                                        },
+                                      ),
                                 10.verticalSpacing,
                                 CustomTextFormField(
                                   controller: controller.noteTextController,
