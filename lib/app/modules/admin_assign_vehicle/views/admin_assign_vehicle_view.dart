@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -28,30 +29,32 @@ class AdminAssignVehicleView extends GetView<AdminAssignVehicleController> {
                 style: AppTextStyle.fontSize16lightBlackW500,
               ),
               10.verticalSpacing,
-              CustomDropdown(
+              Obx(() => controller.dropdownLoader.value ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) : CustomDropdown(
                 dropdownValue: controller.initialValue.value,
                 dropdownList: controller.list,
                 changeDropdownValue: (value) {
                   controller.initialValue.value = value!;
                 },
-              ),
+              ),),
               20.verticalSpacing,
               const Text(
                 "Select Vehicle",
                 style: AppTextStyle.fontSize16lightBlackW500,
               ),10.verticalSpacing,
-              CustomDropdown(
+              Obx(() => controller.dropdownLoader.value ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) : CustomDropdown(
                 dropdownValue: controller.initialValue.value,
                 dropdownList: controller.list,
                 changeDropdownValue: (value) {
                   controller.initialValue.value = value!;
                 },
-              ),
+              ),),
               50.verticalSpacing,
-              PrimaryButton(
+              Obx(() => controller.loadingController.isLoading ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) : PrimaryButton(
                 text: "Save",
-                onTap: () {},
-              ),
+                onTap: () {
+                  controller.addAssignVehicleToRoute(routeId: controller.routeId.value, vehicleId: controller.vehicleId.value,);
+                },
+              ),),
             ],
           ),
         ),
