@@ -36,6 +36,8 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                     fillColor: Colors.white,
                   ),
                   10.verticalSpacing,
+
+                  /// Member type
                   CustomDropdown(
                     dropdownValue: controller.memberCategory.value,
                     dropdownList: controller.memberCategoryList,
@@ -43,7 +45,42 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                       controller.memberCategory.value = value!;
                     },
                   ),
-                  10.verticalSpacing,
+
+
+                  /// Student or Parents class
+                  controller.memberCategory.value == "Student" ||
+                          controller.memberCategory.value == "Parents"
+                      ? Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0, top: 10),
+                        child: CustomDropdown(
+                            dropdownValue: controller.memberName.value,
+                            dropdownList: controller.memberNameList,
+                            changeDropdownValue: (value) {
+                              controller.memberName.value = value!;
+                            },
+                          ),
+                      )
+                      : const SizedBox(),
+
+                  /// Student or Parents section
+                  controller.memberCategory.value == "Student" ||
+                          controller.memberCategory.value == "Parents"
+                      ? Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: CustomDropdown(
+                            dropdownValue: controller.memberName.value,
+                            dropdownList: controller.memberNameList,
+                            changeDropdownValue: (value) {
+                              controller.memberName.value = value!;
+                            },
+                          ),
+                      )
+                      : const SizedBox(),
+                  controller.memberCategory.value == "Student" ||
+                      controller.memberCategory.value == "Parents"
+                      ? 0.verticalSpacing : 10.verticalSpacing,
+
+                  /// Member id
                   CustomDropdown(
                     dropdownValue: controller.memberName.value,
                     dropdownList: controller.memberNameList,

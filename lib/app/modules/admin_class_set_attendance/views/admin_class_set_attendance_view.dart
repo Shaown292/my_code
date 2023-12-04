@@ -52,35 +52,47 @@ class AdminClassSetAttendanceView
                     ),
                     10.verticalSpacing,
                     Expanded(
-                      child: ListView.builder(
-                        itemCount:
-                            controller.attendanceStudentList.students!.length,
-                        itemBuilder: (context, index) {
-                          return SetAttendanceTile(
-                            studentName: controller.attendanceStudentList
-                                .students![index].fullName,
-                            section:
-                                controller.attendanceStudentList.sectionName,
-                            studentClass:
-                                controller.attendanceStudentList.className,
-                            onPresentButtonTap: () {
-                              controller.status.value = "P";
-                              controller.selectIndex.value = index;
-                            },
-                            onAbsentButtonTap: () {
-                              controller.status.value = "A";
-                              controller.selectIndex.value = index;
-                            },
-                            onLateButtonTap: () {
-                              controller.status.value = "L";
-                            },
-                            onHalfDayButtonTap: () {
-                              controller.status.value = "H";
-                            },
-                            status: controller.status.value,
-                            isSelected: controller.selectIndex.value == index,
-                          );
-                        },
+                      child: Obx(
+                        () => ListView.builder(
+                          itemCount: controller.adminClassSetAttendanceUIModel.length,
+                          itemBuilder: (context, index) {
+
+                            var data = controller
+                                .adminClassSetAttendanceUIModel[index];
+
+                            return SetAttendanceTile(
+                              studentName: controller.attendanceStudentList
+                                  .students![index].fullName,
+                              section:
+                                  controller.attendanceStudentList.sectionName,
+                              studentClass:
+                                  controller.attendanceStudentList.className,
+                              imageUrl: "Bhai model update korle boshay niyen",
+                              onPresentButtonTap: () {
+
+                                print("Student id P : ${data.studentId}");
+
+
+                              controller.updateAttendance(student: data, attendanceType: "P");
+
+                              },
+                              onAbsentButtonTap: () {
+                                print("Student id A : ${data.studentId}");
+                                controller.updateAttendance(student: data, attendanceType: "A");
+
+                              },
+                              onLateButtonTap: () {
+                                print("Student id L : ${data.studentId}");
+                                controller.updateAttendance(student: data, attendanceType: "L");
+                              },
+                              onHalfDayButtonTap: () {
+                                print("Student id H : ${data.studentId}");
+                                controller.updateAttendance(student: data, attendanceType: "H");
+                              },
+                              adminClassSetAttendanceUIModel: data,
+                            );
+                          },
+                        ),
                       ),
                     ),
                     30.verticalSpacing,

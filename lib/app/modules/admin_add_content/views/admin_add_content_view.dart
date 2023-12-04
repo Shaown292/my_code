@@ -11,7 +11,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_checkbox/custom_checkbox.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_radio_button/custom_radio_button.dart';
 
 import 'package:get/get.dart';
 
@@ -89,6 +88,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                           checkboxTitle: "All Students",
                           onChange: (bool? value) {
                             controller.isAllStudent.value = value!;
+                            controller.isStudent.value = false;
                           },
                         )
                       : const SizedBox(),

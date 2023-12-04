@@ -14,7 +14,7 @@ class AdminTransportView extends GetView<AdminTransportController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Library",
+      title: "Transport",
       body: CustomBackground(
         customWidget: SingleChildScrollView(
           child: Column(

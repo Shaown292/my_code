@@ -10,7 +10,9 @@ class AdminAddMemberController extends GetxController {
     "Driver",
     "Teacher",
     "Security Guard",
-    "Librarian"
+    "Librarian",
+    "Student",
+    "Parents",
   ].obs;
 
   RxString memberName = "Sumon".obs;
