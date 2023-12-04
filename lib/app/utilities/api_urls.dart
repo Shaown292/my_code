@@ -256,6 +256,14 @@ class InfixApi {
   }) =>
       '${baseApi}subject-wise-students?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&name=$name&roll_no=$rollINo';
 
+  static String getAdminSubAttenSearchIndividualList({
+    required int classId,
+    required int sectionId,
+    required String rollINo,
+    required String name,
+  }) =>
+      '${baseApi}student-search-attend?class=$classId&section=$sectionId &name=$name&roll_no=$rollINo';
+
   static String getAdminSubAttenSearchDetailsList({
     required int recordId,
     required int subjectNameId,

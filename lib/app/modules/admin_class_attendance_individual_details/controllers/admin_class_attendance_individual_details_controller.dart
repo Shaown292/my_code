@@ -9,10 +9,21 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
   Map<DateTime, List<Event>> customEventList = {};
   EventList<Event>? eventList;
 
-
   RxInt present = 0.obs;
   RxInt halfDay = 0.obs;
   RxInt late = 0.obs;
   RxInt absent = 0.obs;
   RxInt holiday = 0.obs;
+
+  /// Receive Arguments
+  RxInt studentAttendanceId = 0.obs;
+
+
+  @override
+  void onInit() {
+    studentAttendanceId.value = Get.arguments['student_attendance_id'];
+    print(studentAttendanceId);
+    super.onInit();
+  }
+
 }

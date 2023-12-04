@@ -83,7 +83,7 @@ class StudentListTile extends StatelessWidget {
                             ],
                           )
                         : Text(
-                            classSection!,
+                            classSection ?? '',
                             style: AppTextStyle.fontSize14lightBlackW400,
                           ),
                   ],
