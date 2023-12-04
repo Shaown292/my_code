@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attendance_model/admin_set_attendance_ui_model.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/image_view/cache_image_view.dart';
 import 'package:get/get.dart';
 
 class SetAttendanceTile extends StatelessWidget {
+  final AdminSetAttendanceUIModel adminClassSetAttendanceUIModel;
   final bool isImageEmpty;
   final String? imageUrl;
   final String? studentName;
@@ -17,8 +19,6 @@ class SetAttendanceTile extends StatelessWidget {
   final Function()? onAbsentButtonTap;
   final Function()? onLateButtonTap;
   final Function()? onHalfDayButtonTap;
-  final String status;
-  final bool isSelected;
   final String? title;
   final String? groupValue;
   final String? value;
@@ -33,15 +33,15 @@ class SetAttendanceTile extends StatelessWidget {
     this.studentClass,
     this.section,
     this.onPresentButtonTap,
-    this.status = "P",
     this.onAbsentButtonTap,
     this.onLateButtonTap,
     this.onHalfDayButtonTap,
-    this.isSelected = false,
     this.title,
     this.groupValue,
     this.onChanged,
-    this.index, this.value,
+    this.index,
+    this.value,
+    required this.adminClassSetAttendanceUIModel,
   });
 
   @override
@@ -154,10 +154,10 @@ class SetAttendanceTile extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
                                   width: 1,
-                                  color: status == "P" && isSelected
+                                  color: adminClassSetAttendanceUIModel.attendanceType == "P"
                                       ? Colors.transparent
                                       : AppColors.primaryColor),
-                              color: status == "P" && isSelected
+                              color: adminClassSetAttendanceUIModel.attendanceType == "P"
                                   ? AppColors.appButtonColor
                                   : Colors.white,
                             ),
@@ -166,7 +166,9 @@ class SetAttendanceTile extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "Present",
-                                  style: status == "P" && isSelected
+                                  style: adminClassSetAttendanceUIModel
+                                                  .attendanceType ==
+                                              "P"
                                       ? AppTextStyle.textStyle12WhiteW500
                                       : AppTextStyle.cardTextStyle12PurpleW400,
                                 ),
@@ -183,10 +185,14 @@ class SetAttendanceTile extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
                                   width: 1,
-                                  color: status == "A" && isSelected
+                                  color: adminClassSetAttendanceUIModel
+                                                  .attendanceType ==
+                                              "A"
                                       ? Colors.transparent
                                       : AppColors.primaryColor),
-                              color: status == "A" && isSelected
+                              color: adminClassSetAttendanceUIModel
+                                              .attendanceType ==
+                                          "A"
                                   ? AppColors.appButtonColor
                                   : Colors.white,
                             ),
@@ -195,7 +201,9 @@ class SetAttendanceTile extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "Absent",
-                                  style: status == "A" && isSelected
+                                  style: adminClassSetAttendanceUIModel
+                                                  .attendanceType ==
+                                              "A"
                                       ? AppTextStyle.textStyle12WhiteW500
                                       : AppTextStyle.cardTextStyle12PurpleW400,
                                 ),
@@ -211,11 +219,16 @@ class SetAttendanceTile extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
-                                  width: 1,
-                                  color: status == "L" && isSelected
-                                      ? Colors.transparent
-                                      : AppColors.primaryColor),
-                              color: status == "L" && isSelected
+                                width: 1,
+                                color: adminClassSetAttendanceUIModel
+                                                .attendanceType ==
+                                            "L"
+                                    ? Colors.transparent
+                                    : AppColors.primaryColor,
+                              ),
+                              color: adminClassSetAttendanceUIModel
+                                              .attendanceType ==
+                                          "L"
                                   ? AppColors.appButtonColor
                                   : Colors.white,
                             ),
@@ -224,7 +237,9 @@ class SetAttendanceTile extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "Late",
-                                  style: status == "L" && isSelected
+                                  style: adminClassSetAttendanceUIModel
+                                                  .attendanceType ==
+                                              "L"
                                       ? AppTextStyle.textStyle12WhiteW500
                                       : AppTextStyle.cardTextStyle12PurpleW400,
                                 ),
@@ -241,10 +256,14 @@ class SetAttendanceTile extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(
                                   width: 1,
-                                  color: status == "H" && isSelected
+                                  color: adminClassSetAttendanceUIModel
+                                                  .attendanceType ==
+                                              "H"
                                       ? Colors.transparent
                                       : AppColors.primaryColor),
-                              color: status == "H" && isSelected
+                              color: adminClassSetAttendanceUIModel
+                                              .attendanceType ==
+                                          "H"
                                   ? AppColors.appButtonColor
                                   : Colors.white,
                             ),
@@ -253,7 +272,9 @@ class SetAttendanceTile extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "Half day",
-                                  style: status == "H" && isSelected
+                                  style: adminClassSetAttendanceUIModel
+                                                  .attendanceType ==
+                                              "H"
                                       ? AppTextStyle.textStyle12WhiteW500
                                       : AppTextStyle.cardTextStyle12PurpleW400,
                                 ),

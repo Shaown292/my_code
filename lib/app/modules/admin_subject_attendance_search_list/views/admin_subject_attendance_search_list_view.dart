@@ -49,27 +49,30 @@ class AdminSubjectAttendanceSearchListView
               10.verticalSpacing,
               Expanded(
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: controller.adminClassSetAttendanceUIModel.length,
                   itemBuilder: (context, index) {
-                    return Obx(
-                      () => SetAttendanceTile(
-                        studentName: "Syed Nahid",
-                        section: "Rose",
-                        studentClass: "Five",
-                        onPresentButtonTap: () {
-                          controller.selectIndex.value = index;
-                        },
-                        onAbsentButtonTap: () {
-                          controller.selectIndex.value = index;
-                        },
-                        onLateButtonTap: () {
-                          controller.selectIndex.value = index;
-                        },
-                        onHalfDayButtonTap: () {
-                          controller.selectIndex.value = index;
-                        },
-                        isSelected: controller.selectIndex.value == index,
-                      ),
+
+                    var data = controller
+                        .adminClassSetAttendanceUIModel[index];
+
+                    return SetAttendanceTile(
+                      studentName: "Jalil",
+                      section:"B",
+                      studentClass:"One",
+                      imageUrl: "Bhai model update korle boshay niyen",
+                      onPresentButtonTap: () {
+
+                      },
+                      onAbsentButtonTap: () {
+
+                      },
+                      onLateButtonTap: () {
+
+                      },
+                      onHalfDayButtonTap: () {
+
+                      },
+                      adminClassSetAttendanceUIModel: data,
                     );
                   },
                 ),

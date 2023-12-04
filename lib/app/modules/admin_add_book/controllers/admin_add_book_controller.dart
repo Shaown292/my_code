@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:get/get.dart';
 
 class AdminAddBookController extends GetxController {
@@ -21,10 +22,24 @@ class AdminAddBookController extends GetxController {
     "Novel"
   ].obs;
 
-  RxString audienceInitValue = "Child".obs;
-  RxList<String> audienceList = [
+  RxString subjectInitValue = "Child".obs;
+  RxList<String> subjectList = [
     "Child",
     "Adult",
     "Teen"
   ].obs;
+
+  bool validation() {
+    if (titleTextController.text == '') {
+      showBasicFailedSnackBar(message: 'Add Book Title');
+    }
+    if(categoryList.isEmpty){
+      showBasicFailedSnackBar(message: 'Select Book Category .');
+    }
+    if(subjectList.isEmpty) {
+      showBasicFailedSnackBar(message: 'Select Book Category .');
+    }
+
+    return true;
+  }
 }

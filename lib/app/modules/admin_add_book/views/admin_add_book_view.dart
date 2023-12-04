@@ -39,10 +39,10 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
 
                   /// Book Gerne dropdown List
                   CustomDropdown(
-                    dropdownValue: controller.audienceInitValue.value,
-                    dropdownList: controller.audienceList,
+                    dropdownValue: controller.subjectInitValue.value,
+                    dropdownList: controller.subjectList,
                     changeDropdownValue: (value) {
-                      controller.audienceInitValue.value = value!;
+                      controller.subjectInitValue.value = value!;
                     },
                   ),
                   10.verticalSpacing,
@@ -159,7 +159,11 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                   30.verticalSpacing,
                   PrimaryButton(
                     text: "Save",
-                    onTap: () {},
+                    onTap: () {
+                      if(controller.validation()){
+                        debugPrint("Validation is working");
+                      }
+                    },
                   ),
                   40.verticalSpacing,
                 ],

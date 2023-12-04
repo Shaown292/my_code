@@ -88,10 +88,21 @@ class AdminClassAttendanceSearchController extends GetxController {
       if (adminStudentSearchAttendanceResponseModel.success == true) {
         isLoading.value = false;
 
+
         attendanceStudentListData = adminStudentSearchAttendanceResponseModel.data!;
+
+
+
           Get.toNamed(Routes.ADMIN_CLASS_SET_ATTENDANCE, arguments: {
             'student_attendance_list' : attendanceStudentListData,
+            'class_id' : studentClassId ,
+            'section_id' : studentSectionId,
+
           });
+
+        // attendanceStudentListData.students?.forEach((studentInfo) {
+        //
+        // });
 
       } else {
         isLoading.value = false;
