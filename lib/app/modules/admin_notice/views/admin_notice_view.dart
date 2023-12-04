@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -18,35 +19,51 @@ class AdminNoticeView extends GetView<AdminNoticeController> {
     return InfixEduScaffold(
       title: "Notice",
       body: CustomBackground(
-        customWidget: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Obx(() => controller.loadingController.isLoading ? SizedBox(
-                height: Get.height,
-                child: LoadingWidget(),
-              ) : controller.adminStaffNoticeList.isNotEmpty ? ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: controller.adminStaffNoticeList.length,
-                itemBuilder: (context, index) {
-                  return NoticeTile(
-                    noticeTitle: controller.adminStaffNoticeList[index].noticeTitle,
-                    noticeDetails: controller.adminStaffNoticeList[index].noticeMessage,
-                    noticeDate: controller.adminStaffNoticeList[index].noticeDate,
-                    cardBackgroundColor: Colors.white,
-                    onTap: () {
-                      controller.showNoticeDetailsBottomSheet(
-                        index: index,
-                        bottomSheetBackgroundColor: Colors.white,
-                      );
-                    },
-                  );
-                },
-              ) : const NoDataAvailableWidget(),),
-              50.verticalSpacing,
-            ],
+        customWidget: RefreshIndicator(
+          color: AppColors.primaryColor,
+          onRefresh: () async {
+            controller.getAdminStaffNotice();
+          },
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Obx(
+                  () => controller.loadingController.isLoading
+                      ? SizedBox(
+                          height: Get.height,
+                          child: const LoadingWidget(),
+                        )
+                      : controller.adminStaffNoticeList.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: controller.adminStaffNoticeList.length,
+                              itemBuilder: (context, index) {
+                                return NoticeTile(
+                                  noticeTitle: controller
+                                      .adminStaffNoticeList[index].noticeTitle,
+                                  noticeDetails: controller
+                                      .adminStaffNoticeList[index]
+                                      .noticeMessage,
+                                  noticeDate: controller
+                                      .adminStaffNoticeList[index].noticeDate,
+                                  cardBackgroundColor: Colors.white,
+                                  onTap: () {
+                                    controller.showNoticeDetailsBottomSheet(
+                                      index: index,
+                                      bottomSheetBackgroundColor: Colors.white,
+                                    );
+                                  },
+                                );
+                              },
+                            )
+                          : const NoDataAvailableWidget(),
+                ),
+                50.verticalSpacing,
+              ],
+            ),
           ),
         ),
       ),

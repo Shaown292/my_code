@@ -11,39 +11,41 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_notice_
 import 'package:get/get.dart';
 
 class AdminNoticeController extends GetxController {
-
   LoadingController loadingController = Get.find();
 
-  RxList<AdminStaffNoticeData> adminStaffNoticeList = <AdminStaffNoticeData>[].obs;
+  RxList<AdminStaffNoticeData> adminStaffNoticeList =
+      <AdminStaffNoticeData>[].obs;
 
   Future<AdminStaffNoticeResponseModel> getAdminStaffNotice() async {
-
-    try{
-
+    try {
+      adminStaffNoticeList.clear();
       loadingController.isLoading = true;
 
-      final response = await BaseClient().getData(url: InfixApi.getAdminStaffNoticeList, header: GlobalVariable.header);
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminStaffNoticeList, header: GlobalVariable.header);
 
-      AdminStaffNoticeResponseModel adminStaffNoticeResponseModel = AdminStaffNoticeResponseModel.fromJson(response);
+      AdminStaffNoticeResponseModel adminStaffNoticeResponseModel =
+          AdminStaffNoticeResponseModel.fromJson(response);
 
-      if(adminStaffNoticeResponseModel.success == true){
+      if (adminStaffNoticeResponseModel.success == true) {
         loadingController.isLoading = false;
-        if(adminStaffNoticeResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < adminStaffNoticeResponseModel.data!.length; i++){
+        if (adminStaffNoticeResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < adminStaffNoticeResponseModel.data!.length; i++) {
             adminStaffNoticeList.add(adminStaffNoticeResponseModel.data![i]);
           }
         }
-
-      } else{
+      } else {
         loadingController.isLoading = false;
-        showBasicFailedSnackBar(message: adminStaffNoticeResponseModel.message ?? AppText.somethingWentWrong,);
+        showBasicFailedSnackBar(
+          message: adminStaffNoticeResponseModel.message ??
+              AppText.somethingWentWrong,
+        );
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       loadingController.isLoading = false;
     }
 
@@ -69,12 +71,9 @@ class AdminNoticeController extends GetxController {
     );
   }
 
-
   @override
   void onInit() {
     getAdminStaffNotice();
     super.onInit();
   }
-
-
 }
