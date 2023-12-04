@@ -29,19 +29,19 @@ class ExamDropdownResponseModel {
 
 class ExamDataList {
   int? id;
-  String? title;
+  String? name;  /// title => name
 
-  ExamDataList({this.id, this.title});
+  ExamDataList({this.id, this.name});
 
   ExamDataList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    title = json['title'];
+    name = json['title'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['title'] = title;
+    data['title'] = name;
     return data;
   }
 }

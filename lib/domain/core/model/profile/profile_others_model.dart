@@ -70,8 +70,8 @@ class ProfileOthers {
         this.bankAccountNo});
 
   ProfileOthers.fromJson(Map<String, dynamic> json) {
-    height = json['height'];
-    weight = json['weight'];
+    height = json['height'].runtimeType == int ? json['height'].toString() : json['height'];
+    weight = json['weight'].runtimeType == int ? json['weight'].toString() : json['weight'];
     nationalIdNo = json['national_id_no'];
     localIdNo = json['local_id_no'];
     bankName = json['bank_name'];

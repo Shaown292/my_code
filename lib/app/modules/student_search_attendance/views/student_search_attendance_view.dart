@@ -24,8 +24,9 @@ class StudentSearchAttendanceView
               child: controller.loadingController.isLoading
                   ? const Center(
                       child: CircularProgressIndicator(
-                      color: AppColors.primaryColor,
-                    ))
+                        color: AppColors.primaryColor,
+                      ),
+                    )
                   : Column(
                       children: [
                         Padding(
@@ -70,8 +71,7 @@ class StudentSearchAttendanceView
                           currentDate: controller.currentDate,
                           eventList: controller.eventList,
                           onCalendarChanged: (DateTime date) {
-                            controller.eventList!.clear();
-
+                            // controller.eventList!.clear();
                             if (controller.fromStatus.value) {
                               controller.getSearchSubjectAttendanceListWithDate(
                                   recordId: controller.recordId.toInt(),
@@ -85,9 +85,12 @@ class StudentSearchAttendanceView
                                 studentId: GlobalVariable.studentId!,
                                 year: date.year,
                                 month: date.month,
-                              );
+                              ).then((value) => controller.setEventData());
+                              
+                              
                             }
                           },
+
                         ),
                         EventStatus(
                           color: const Color(0xFF00C106),

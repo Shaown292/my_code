@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/study_button/study_button.dart';
 import 'package:get/get.dart';
 import '../controllers/schedule_controller.dart';
 
@@ -24,50 +25,66 @@ class ScheduleView extends GetView<ScheduleController> {
               children: [
                 controller.examinationController.loadingController.isLoading
                     ? const LoadingWidget()
-                    : Padding(
-                        padding:
-                            const EdgeInsets.only(left: 20, right: 20, top: 20),
-                        child: CustomDropdown(
-                          dropdownValue: controller.recordDropdownValue.value,
-                          dropdownList: controller
-                              .homeController.studentRecordDropdownList,
-                          changeDropdownValue: (v) {
-                            controller.recordDropdownValue.value = v!;
-                            controller.examinationController.examDropdownList
-                                .clear();
-                            int recordId =
-                                controller.homeController.studentRecordIdList[
-                                    controller.homeController
-                                        .studentRecordDropdownList
-                                        .indexOf(v)];
-                            controller.examinationController
-                                .getStudentExamList(recordId: recordId);
-                          },
-                        ),
-                      ),
+                    :  Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 7.0, vertical: 0),
+                  child: SizedBox(
+                    height: 55,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                      controller.homeController.studentRecordList.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Obx(
+                                  () => StudyButton(
+                                title:
+                                "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                onItemTap: () {
+                                  controller.selectIndex.value = index;
+                                  controller
+                                      .examinationController.examDropdownList
+                                      .clear();
+                                  int recordId = controller.homeController
+                                      .studentRecordList[index].id;
+                                  controller.examinationController
+                                      .getStudentExamList(recordId: recordId);
+                                },
+                                isSelected:
+                                controller.selectIndex.value == index,
+                              ),
+                            ));
+                      },
+                    ),
+                  ),
+                ),
                 controller.examinationController.loadingController.isLoading
                     ? const LoadingWidget()
-                    : CustomDropdown(
-                        dropdownValue: controller.dropdownValue.value,
-                        dropdownList: controller
-                            .examinationController.examDropdownList
-                            .map((item) => item.toString())
-                            .toList(),
-                        changeDropdownValue: (v) {
-                          controller.dropdownValue.value = v!;
-                          controller.scheduleList.clear();
-                          int examId = controller
-                                  .examinationController.examDropdownIdList[
-                              controller.examinationController.examDropdownList
-                                  .indexOf(v)];
-                          int recordId =
-                              controller.homeController.studentRecordList[0].id;
-                          controller.getStudentExamScheduleList(
-                            examId: examId,
-                            recordId: recordId,
-                          );
-                        },
-                      ),
+                    : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                      child: CustomDropdown(
+                          dropdownValue: controller.dropdownValue.value,
+                          dropdownList: controller
+                              .examinationController.examDropdownList
+                              .map((item) => item.toString())
+                              .toList(),
+                          changeDropdownValue: (v) {
+                            controller.dropdownValue.value = v!;
+                            controller.scheduleList.clear();
+                            int examId = controller
+                                    .examinationController.examDropdownIdList[
+                                controller.examinationController.examDropdownList
+                                    .indexOf(v)];
+                            int recordId =
+                                controller.homeController.studentRecordList[0].id;
+                            controller.getStudentExamScheduleList(
+                              examId: examId,
+                              recordId: recordId,
+                            );
+                          },
+                        ),
+                    ),
                 controller.loadingController.isLoading
                     ? const LoadingWidget()
                     : controller.scheduleList.isNotEmpty

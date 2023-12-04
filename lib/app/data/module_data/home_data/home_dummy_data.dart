@@ -118,3 +118,5 @@ List<HomeTileModelClass> adminList = [
   HomeTileModelClass(
       icon: ImagePath.adminSettings, title: 'Settings', value: 'Settings'),
 ];
+
+
