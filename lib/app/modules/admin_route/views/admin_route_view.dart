@@ -64,6 +64,7 @@ class AdminRouteView extends GetView<AdminRouteController> {
                           10.verticalSpacing,
                           CustomTextFormField(
                             controller: controller.routeFareTextController,
+                            textInputType: TextInputType.number,
                             enableBorderActive: true,
                             focusBorderActive: true,
                             hintText: "Route fare",
@@ -72,13 +73,18 @@ class AdminRouteView extends GetView<AdminRouteController> {
                             fillColor: Colors.white,
                           ),
                           30.verticalSpacing,
-                          PrimaryButton(
+                          Obx(() => controller.saveLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : PrimaryButton(
                             text: "Save",
-                            onTap: () {},
-                          ),
+                            onTap: () {
+                              if(controller.validation()){
+                                controller.addTransportRoute();
+                              }
+                            },
+                          ),),
                         ],
                       ),
-                    )
+                    ),
+                    const Placeholder(),
                   ],
                 ),
               ),
