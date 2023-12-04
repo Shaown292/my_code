@@ -45,7 +45,7 @@ class NoticeTile extends StatelessWidget {
                 Text(
                   noticeDetails ?? "",
                   style: AppTextStyle.blackFontSize12W400,
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 10.verticalSpacing,

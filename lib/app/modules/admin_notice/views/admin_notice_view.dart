@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/notice_tile/notice_tile.dart';
 
 import 'package:get/get.dart';
@@ -21,16 +23,18 @@ class AdminNoticeView extends GetView<AdminNoticeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ListView.builder(
+              Obx(() => controller.loadingController.isLoading ? SizedBox(
+                height: Get.height,
+                child: LoadingWidget(),
+              ) : controller.adminStaffNoticeList.isNotEmpty ? ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 5,
+                itemCount: controller.adminStaffNoticeList.length,
                 itemBuilder: (context, index) {
                   return NoticeTile(
-                    noticeTitle: "Notice 101",
-                    noticeDetails:
-                        "saklajsdjaksjdklasjdklajsdjasdjklasjdklajssaklajsdjaksjdklasjdklajsdjasdjklasjdklajssaklajsdjaksjdklasjdklajsdjasdjklasjdklajssaklajsdjaksjdklasjdklajsdjasdjklasjdklajs",
-                    noticeDate: "16-02-2023",
+                    noticeTitle: controller.adminStaffNoticeList[index].noticeTitle,
+                    noticeDetails: controller.adminStaffNoticeList[index].noticeMessage,
+                    noticeDate: controller.adminStaffNoticeList[index].noticeDate,
                     cardBackgroundColor: Colors.white,
                     onTap: () {
                       controller.showNoticeDetailsBottomSheet(
@@ -40,7 +44,7 @@ class AdminNoticeView extends GetView<AdminNoticeController> {
                     },
                   );
                 },
-              ),
+              ) : const NoDataAvailableWidget(),),
               50.verticalSpacing,
             ],
           ),
