@@ -70,8 +70,7 @@ class AdminClassAttendanceSearchIndividualView
                         ),
                   10.verticalSpacing,
                   CustomTextFormField(
-                    controller: controller
-                        .adminStudentsSearchController.nameTextController,
+                    controller: controller.nameTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "Name",
@@ -80,8 +79,7 @@ class AdminClassAttendanceSearchIndividualView
                   ),
                   10.verticalSpacing,
                   CustomTextFormField(
-                    controller: controller
-                        .adminStudentsSearchController.rollTextController,
+                    controller: controller.rollTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
                     textInputType: TextInputType.number,
@@ -97,7 +95,21 @@ class AdminClassAttendanceSearchIndividualView
                       : PrimaryButton(
                           text: "Search",
                           onTap: () {
-                            Get.toNamed(Routes.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST);
+                            Get.toNamed(
+                                Routes
+                                    .ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST,
+                                arguments: {
+                                  'class_id': controller
+                                      .adminStudentsSearchController
+                                      .studentClassId
+                                      .value,
+                                  'section_id': controller
+                                      .adminStudentsSearchController
+                                      .studentSectionId
+                                      .value,
+                                  'name': controller.nameTextController.text,
+                                  'roll_no': controller.rollTextController.text,
+                                });
                           },
                         ),
                 ],

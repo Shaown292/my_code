@@ -256,11 +256,31 @@ class InfixApi {
   }) =>
       '${baseApi}subject-wise-students?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&name=$name&roll_no=$rollINo';
 
+  static String getAdminSubAttenSearchIndividualList({
+    required int classId,
+    required int sectionId,
+    required String rollINo,
+    required String name,
+  }) =>
+      '${baseApi}student-search-attend?class=$classId&section=$sectionId &name=$name&roll_no=$rollINo';
+
   static String getAdminSubAttenSearchDetailsList({
     required int recordId,
     required int subjectNameId,
   }) =>
       '${baseApi}student-subject-attendance?record_id=$recordId&subject_id=$subjectNameId';
+
+  static String getAdminStudentSearchDetailsList({
+    required int studentAttendanceId,
+  }) =>
+      '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId';
+
+  static String getAdminStudentSearchDetailsListWithDate({
+    required int studentAttendanceId,
+    required int month,
+    required int year,
+  }) =>
+      '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId&month=$month&year=$year';
 
   static String getAdminSubAttenSearchDetailsWithDateList({
     required int recordId,

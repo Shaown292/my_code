@@ -10,8 +10,6 @@ import 'package:get/get.dart';
 
 class AdminSubjectAttendanceSearchIndividualDetailsController
     extends GetxController {
-
-
   final selectIndex = RxInt(0);
   DateTime currentDate = DateTime.now();
   Map<DateTime, List<Event>> customEventList = {};
@@ -35,10 +33,8 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
 
   RxList<AdminAttendances> attendanceList = <AdminAttendances>[].obs;
 
-
-
-
-  Future<AdminAttenSubSearchIndividualDetailsResponseModel> getAdminAttendanceSubDetailsList({
+  Future<AdminAttenSubSearchIndividualDetailsResponseModel>
+      getAdminAttendanceSubDetailsList({
     required int recordId,
     required int subjectNameId,
   }) async {
@@ -53,35 +49,52 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
         header: GlobalVariable.header,
       );
 
-      AdminAttenSubSearchIndividualDetailsResponseModel adminAttenSubSearchIndividualDetailsResponseModel =
-      AdminAttenSubSearchIndividualDetailsResponseModel.fromJson(response);
+      AdminAttenSubSearchIndividualDetailsResponseModel
+          adminAttenSubSearchIndividualDetailsResponseModel =
+          AdminAttenSubSearchIndividualDetailsResponseModel.fromJson(response);
       if (adminAttenSubSearchIndividualDetailsResponseModel.success == true) {
         isLoading.value = false;
 
-        present.value = adminAttenSubSearchIndividualDetailsResponseModel.data?.totalPresent ?? 0;
-        halfDay.value = adminAttenSubSearchIndividualDetailsResponseModel.data?.totalHalfDay ?? 0;
-        late.value = adminAttenSubSearchIndividualDetailsResponseModel.data?.totalLate ?? 0;
-        absent.value = adminAttenSubSearchIndividualDetailsResponseModel.data?.totalAbsent ?? 0;
-        holiday.value = adminAttenSubSearchIndividualDetailsResponseModel.data?.totalHolyDay ?? 0;
+        present.value = adminAttenSubSearchIndividualDetailsResponseModel
+                .data?.totalPresent ??
+            0;
+        halfDay.value = adminAttenSubSearchIndividualDetailsResponseModel
+                .data?.totalHalfDay ??
+            0;
+        late.value =
+            adminAttenSubSearchIndividualDetailsResponseModel.data?.totalLate ??
+                0;
+        absent.value = adminAttenSubSearchIndividualDetailsResponseModel
+                .data?.totalAbsent ??
+            0;
+        holiday.value = adminAttenSubSearchIndividualDetailsResponseModel
+                .data?.totalHolyDay ??
+            0;
 
-        currentDate =
-            DateTime.tryParse(adminAttenSubSearchIndividualDetailsResponseModel.data!.currentDay!) ??
-                DateTime.now();
-        if (adminAttenSubSearchIndividualDetailsResponseModel.data!.attendances!.isNotEmpty) {
+        currentDate = DateTime.tryParse(
+                adminAttenSubSearchIndividualDetailsResponseModel
+                    .data!.currentDay!) ??
+            DateTime.now();
+        if (adminAttenSubSearchIndividualDetailsResponseModel
+            .data!.attendances!.isNotEmpty) {
           for (int i = 0;
-          i < adminAttenSubSearchIndividualDetailsResponseModel.data!.attendances!.length;
-          i++) {
-            attendanceList.add(adminAttenSubSearchIndividualDetailsResponseModel.data!.attendances![i]);
+              i <
+                  adminAttenSubSearchIndividualDetailsResponseModel
+                      .data!.attendances!.length;
+              i++) {
+            attendanceList.add(adminAttenSubSearchIndividualDetailsResponseModel
+                .data!.attendances![i]);
             customEventList[DateTime(
                 attendanceList[i].attendanceDate!.year,
                 attendanceList[i].attendanceDate!.month,
                 attendanceList[i].attendanceDate!.day)] = [
               Event(
-                  date: DateTime(
-                      attendanceList[i].attendanceDate!.year,
-                      attendanceList[i].attendanceDate!.month,
-                      attendanceList[i].attendanceDate!.day),
-                  dot: presentEvent,)
+                date: DateTime(
+                    attendanceList[i].attendanceDate!.year,
+                    attendanceList[i].attendanceDate!.month,
+                    attendanceList[i].attendanceDate!.day),
+                dot: presentEvent,
+              )
             ];
           }
         }
@@ -96,13 +109,12 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
     return AdminAttenSubSearchIndividualDetailsResponseModel();
   }
 
-
-  Future<AdminAttenSubSearchIndividualDetailsResponseModel?> getAttendanceListWithDate({
+  Future<AdminAttenSubSearchIndividualDetailsResponseModel?>
+      getAdminAttendanceSubDetailsListWithDate({
     required int recordId,
     required int subjectNameId,
     required int month,
     required int year,
-
   }) async {
     try {
       attendanceList.clear();
@@ -111,29 +123,46 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
 
       final response = await BaseClient().getData(
         url: InfixApi.getAdminSubAttenSearchDetailsWithDateList(
-            recordId: recordId, subjectNameId: subjectNameId, month: month, year: year),
+            recordId: recordId,
+            subjectNameId: subjectNameId,
+            month: month,
+            year: year),
         header: GlobalVariable.header,
       );
 
-      AdminAttenSubSearchIndividualDetailsResponseModel attenSubSearchIndividualDetailsResponseModel =
-      AdminAttenSubSearchIndividualDetailsResponseModel.fromJson(response);
+      AdminAttenSubSearchIndividualDetailsResponseModel
+          attenSubSearchIndividualDetailsResponseModel =
+          AdminAttenSubSearchIndividualDetailsResponseModel.fromJson(response);
       if (attenSubSearchIndividualDetailsResponseModel.success == true) {
         isLoading.value = false;
 
-        present.value = attenSubSearchIndividualDetailsResponseModel.data?.totalPresent ?? 0;
-        halfDay.value = attenSubSearchIndividualDetailsResponseModel.data?.totalHalfDay ?? 0;
-        late.value = attenSubSearchIndividualDetailsResponseModel.data?.totalLate ?? 0;
-        absent.value = attenSubSearchIndividualDetailsResponseModel.data?.totalAbsent ?? 0;
-        holiday.value = attenSubSearchIndividualDetailsResponseModel.data?.totalHolyDay ?? 0;
+        present.value =
+            attenSubSearchIndividualDetailsResponseModel.data?.totalPresent ??
+                0;
+        halfDay.value =
+            attenSubSearchIndividualDetailsResponseModel.data?.totalHalfDay ??
+                0;
+        late.value =
+            attenSubSearchIndividualDetailsResponseModel.data?.totalLate ?? 0;
+        absent.value =
+            attenSubSearchIndividualDetailsResponseModel.data?.totalAbsent ?? 0;
+        holiday.value =
+            attenSubSearchIndividualDetailsResponseModel.data?.totalHolyDay ??
+                0;
 
-        currentDate =
-            DateTime.tryParse(attenSubSearchIndividualDetailsResponseModel.data!.currentDay!) ??
-                DateTime.now();
-        if (attenSubSearchIndividualDetailsResponseModel.data!.attendances!.isNotEmpty) {
+        currentDate = DateTime.tryParse(
+                attenSubSearchIndividualDetailsResponseModel
+                    .data!.currentDay!) ??
+            DateTime.now();
+        if (attenSubSearchIndividualDetailsResponseModel
+            .data!.attendances!.isNotEmpty) {
           for (int i = 0;
-          i < attenSubSearchIndividualDetailsResponseModel.data!.attendances!.length;
-          i++) {
-            attendanceList.add(attenSubSearchIndividualDetailsResponseModel.data!.attendances![i]);
+              i <
+                  attenSubSearchIndividualDetailsResponseModel
+                      .data!.attendances!.length;
+              i++) {
+            attendanceList.add(attenSubSearchIndividualDetailsResponseModel
+                .data!.attendances![i]);
             customEventList[DateTime(
                 attendanceList[i].attendanceDate!.year,
                 attendanceList[i].attendanceDate!.month,
@@ -159,8 +188,7 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
     return AdminAttenSubSearchIndividualDetailsResponseModel();
   }
 
-
-  void _setEventData() {
+  void setEventData() {
     if (attendanceList.isNotEmpty) {
       customEventList[DateTime(
           attendanceList[0].attendanceDate!.year,
@@ -181,9 +209,6 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
     update();
   }
 
-
-
-
   @override
   void onInit() async {
     recordId.value = Get.arguments['record_id'];
@@ -192,9 +217,8 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
     await getAdminAttendanceSubDetailsList(
       recordId: recordId.value,
       subjectNameId: subjectNameId.value,
-    ).then((value) => _setEventData());
+    ).then((value) => setEventData());
 
     super.onInit();
   }
-
 }
