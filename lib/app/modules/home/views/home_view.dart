@@ -81,7 +81,6 @@ class HomeView extends GetView<HomeController> {
                           //     title: list[index].value);
                           // AppFunctions.getAdminHomeNavigation(
                           //     title: list[index].value);
-
                         },
                         isSelected: controller.selectIndex.value == index,
                       ),
