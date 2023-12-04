@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -24,8 +25,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
         () => InfixEduScaffold(
           title: "Add Vehicle",
           body: RefreshIndicator(
-            onRefresh: () async {
-            },
+            onRefresh: () async {},
             color: AppColors.primaryColor,
             child: SingleChildScrollView(
               child: CustomBackground(
@@ -38,7 +38,8 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                         indicatorSize: TabBarIndicatorSize.tab,
                         dividerHeight: 0,
                         unselectedLabelColor: Colors.black,
-                        unselectedLabelStyle: AppTextStyle.fontSize12LightGreyW500,
+                        unselectedLabelStyle:
+                            AppTextStyle.fontSize12LightGreyW500,
                         indicatorColor: AppColors.profileIndicatorColor,
                         controller: controller.tabController,
                         tabs: List.generate(
@@ -55,17 +56,15 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                     Expanded(
                       child: TabBarView(
                         children: [
-
                           /// Add Vehicle
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 15.0, vertical: 10),
                             child: Column(
                               children: [
-
-
                                 CustomTextFormField(
-                                  controller: controller.vehicleNoTextController,
+                                  controller:
+                                      controller.vehicleNoTextController,
                                   enableBorderActive: true,
                                   focusBorderActive: true,
                                   hintText: "Vehicle No",
@@ -75,7 +74,8 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 ),
                                 10.verticalSpacing,
                                 CustomTextFormField(
-                                  controller: controller.vehicleModelTextController,
+                                  controller:
+                                      controller.vehicleModelTextController,
                                   enableBorderActive: true,
                                   focusBorderActive: true,
                                   hintText: "Vehicle Model",
@@ -94,6 +94,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                   fillColor: Colors.white,
                                 ),
                                 10.verticalSpacing,
+
                                 /// Driver list dropdown
                                 CustomDropdown(
                                   dropdownValue: controller.initialValue.value,
@@ -122,22 +123,38 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                           ),
 
                           /// Vehicle List
-                          ListView.builder(
-                            shrinkWrap: true,
-
-                            itemCount: 10,
-                            itemBuilder: (context, index) {
-                              return  VehicleTile(
-                                model: "Infix 101",
-                                number: "21212",
-                                madeYear: "2023",
-                                note: "Note",
-                                color:  index % 2 == 0
-                              ? AppColors.profileCardTextColor
-                                  : Colors.white,
-                              );
-                            },
-                          )
+                          Obx(
+                            () => controller.loadingController.isLoading
+                                ? const CircularProgressIndicator(
+                                    color: AppColors.primaryColor,
+                                  )
+                                : controller.adminVehicleList.isNotEmpty
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            controller.adminVehicleList.length,
+                                        itemBuilder: (context, index) {
+                                          return VehicleTile(
+                                            model: controller
+                                                .adminVehicleList[index]
+                                                .vehicleModel,
+                                            number: controller
+                                                .adminVehicleList[index]
+                                                .vehicleNo,
+                                            madeYear: controller
+                                                .adminVehicleList[index]
+                                                .madeYear
+                                                .toString(),
+                                            note: controller
+                                                .adminVehicleList[index].note,
+                                            color: index % 2 == 0
+                                                ? AppColors.profileCardTextColor
+                                                : Colors.white,
+                                          );
+                                        },
+                                      )
+                                    : const NoDataAvailableWidget(),
+                          ),
                         ],
                       ),
                     ),

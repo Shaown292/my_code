@@ -324,6 +324,10 @@ class InfixApi {
   /// Admin Staff Notice
   static String getAdminStaffNoticeList = '${baseApi}admin-staff-notice-list';
 
+  /// Admin Transport
+  static String getAdminVehicleList = '${baseApi}admin-vehicle-list';
+
+
 
   /// Admin Book Module
   static String getAdminBookList = '${baseApi}admin-book-list';
