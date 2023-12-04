@@ -270,6 +270,18 @@ class InfixApi {
   }) =>
       '${baseApi}student-subject-attendance?record_id=$recordId&subject_id=$subjectNameId';
 
+  static String getAdminStudentSearchDetailsList({
+    required int studentAttendanceId,
+  }) =>
+      '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId';
+
+  static String getAdminStudentSearchDetailsListWithDate({
+    required int studentAttendanceId,
+    required int month,
+    required int year,
+  }) =>
+      '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId&month=$month&year=$year';
+
   static String getAdminSubAttenSearchDetailsWithDateList({
     required int recordId,
     required int subjectNameId,
