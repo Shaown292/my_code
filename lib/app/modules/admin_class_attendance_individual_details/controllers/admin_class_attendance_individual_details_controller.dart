@@ -9,7 +9,6 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attenda
 import 'package:get/get.dart';
 
 class AdminClassAttendanceIndividualDetailsController extends GetxController {
-
   static const halfDayEvent = DisplayDot(color: Color(0xFF5057FC));
   static const presentEvent = DisplayDot(color: Color(0xFF00C106));
   static const lateEvent = DisplayDot(color: Color(0xFFFF6F00));
@@ -31,13 +30,11 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
   RxInt studentAttendanceId = 0.obs;
   RxBool isLoading = false.obs;
 
+  RxList<AdminStudentAttendanceSingleData> adminStudentAttendanceList =
+      <AdminStudentAttendanceSingleData>[].obs;
 
-  RxList<AdminStudentAttendanceSingleData> adminStudentAttendanceList = <AdminStudentAttendanceSingleData>[].obs;
-
-
-
-
-  Future<AdminStudentSearchAttenResponseModel> getAdminStudentSearchAttendanceDetailsList({
+  Future<AdminStudentSearchAttenResponseModel>
+      getAdminStudentSearchAttendanceDetailsList({
     required int studentAttendanceId,
   }) async {
     try {
@@ -51,8 +48,9 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
         header: GlobalVariable.header,
       );
 
-      AdminStudentSearchAttenResponseModel adminStudentSearchAttenResponseModel =
-      AdminStudentSearchAttenResponseModel.fromJson(response);
+      AdminStudentSearchAttenResponseModel
+          adminStudentSearchAttenResponseModel =
+          AdminStudentSearchAttenResponseModel.fromJson(response);
       if (adminStudentSearchAttenResponseModel.success == true) {
         isLoading.value = false;
 
@@ -62,14 +60,18 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
         absent.value = adminStudentSearchAttenResponseModel.data?.a ?? 0;
         holiday.value = adminStudentSearchAttenResponseModel.data?.h ?? 0;
 
-        currentDate =
-            DateTime.tryParse(adminStudentSearchAttenResponseModel.data!.currentDay!) ??
-                DateTime.now();
-        if (adminStudentSearchAttenResponseModel.data!.attendances!.isNotEmpty) {
+        currentDate = DateTime.tryParse(
+                adminStudentSearchAttenResponseModel.data!.currentDay!) ??
+            DateTime.now();
+        if (adminStudentSearchAttenResponseModel
+            .data!.attendances!.isNotEmpty) {
           for (int i = 0;
-          i < adminStudentSearchAttenResponseModel.data!.attendances!.length;
-          i++) {
-            adminStudentAttendanceList.add(adminStudentSearchAttenResponseModel.data!.attendances![i]);
+              i <
+                  adminStudentSearchAttenResponseModel
+                      .data!.attendances!.length;
+              i++) {
+            adminStudentAttendanceList.add(
+                adminStudentSearchAttenResponseModel.data!.attendances![i]);
             customEventList[DateTime(
                 adminStudentAttendanceList[i].attendanceDate!.year,
                 adminStudentAttendanceList[i].attendanceDate!.month,
@@ -79,7 +81,9 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
                     adminStudentAttendanceList[i].attendanceDate!.year,
                     adminStudentAttendanceList[i].attendanceDate!.month,
                     adminStudentAttendanceList[i].attendanceDate!.day),
-                dot: presentEvent,)
+                dot: GlobalVariable.getAttendanceStatus(
+                    adminStudentAttendanceList[i].attendanceType ?? ""),
+              ),
             ];
           }
         }
@@ -94,12 +98,11 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
     return AdminStudentSearchAttenResponseModel();
   }
 
-
-  Future<AdminStudentSearchAttenResponseModel?> getAdminStudentSearchAttendanceDetailsListWithDate({
+  Future<AdminStudentSearchAttenResponseModel?>
+      getAdminStudentSearchAttendanceDetailsListWithDate({
     required int studentAttendanceId,
     required int month,
     required int year,
-
   }) async {
     try {
       adminStudentAttendanceList.clear();
@@ -112,8 +115,9 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
         header: GlobalVariable.header,
       );
 
-      AdminStudentSearchAttenResponseModel adminStudentSearchAttenResponseModel =
-      AdminStudentSearchAttenResponseModel.fromJson(response);
+      AdminStudentSearchAttenResponseModel
+          adminStudentSearchAttenResponseModel =
+          AdminStudentSearchAttenResponseModel.fromJson(response);
       if (adminStudentSearchAttenResponseModel.success == true) {
         isLoading.value = false;
 
@@ -123,25 +127,31 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
         absent.value = adminStudentSearchAttenResponseModel.data?.a ?? 0;
         holiday.value = adminStudentSearchAttenResponseModel.data?.h ?? 0;
 
-        currentDate =
-            DateTime.tryParse(adminStudentSearchAttenResponseModel.data!.currentDay!) ??
-                DateTime.now();
-        if (adminStudentSearchAttenResponseModel.data!.attendances!.isNotEmpty) {
+        currentDate = DateTime.tryParse(
+                adminStudentSearchAttenResponseModel.data!.currentDay!) ??
+            DateTime.now();
+        if (adminStudentSearchAttenResponseModel
+            .data!.attendances!.isNotEmpty) {
           for (int i = 0;
-          i < adminStudentSearchAttenResponseModel.data!.attendances!.length;
-          i++) {
-            adminStudentAttendanceList.add(adminStudentSearchAttenResponseModel.data!.attendances![i]);
+              i <
+                  adminStudentSearchAttenResponseModel
+                      .data!.attendances!.length;
+              i++) {
+            adminStudentAttendanceList.add(
+                adminStudentSearchAttenResponseModel.data!.attendances![i]);
             customEventList[DateTime(
                 adminStudentAttendanceList[i].attendanceDate!.year,
                 adminStudentAttendanceList[i].attendanceDate!.month,
                 adminStudentAttendanceList[i].attendanceDate!.day)] = [
               Event(
-                  date: DateTime(
-                    adminStudentAttendanceList[i].attendanceDate!.year,
-                    adminStudentAttendanceList[i].attendanceDate!.month,
-                    adminStudentAttendanceList[i].attendanceDate!.day,
-                  ),
-                  dot: presentEvent)
+                date: DateTime(
+                  adminStudentAttendanceList[i].attendanceDate!.year,
+                  adminStudentAttendanceList[i].attendanceDate!.month,
+                  adminStudentAttendanceList[i].attendanceDate!.day,
+                ),
+                dot: GlobalVariable.getAttendanceStatus(
+                    adminStudentAttendanceList[i].attendanceType ?? ""),
+              ),
             ];
           }
         }
@@ -155,7 +165,6 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
     }
     return AdminStudentSearchAttenResponseModel();
   }
-
 
   void setEventData() {
     if (adminStudentAttendanceList.isNotEmpty) {
@@ -178,14 +187,14 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
     update();
   }
 
-
   @override
   void onInit() {
     studentAttendanceId.value = Get.arguments['student_attendance_id'];
 
-    getAdminStudentSearchAttendanceDetailsList(studentAttendanceId: studentAttendanceId.value).then((value) => setEventData());
+    getAdminStudentSearchAttendanceDetailsList(
+            studentAttendanceId: studentAttendanceId.value)
+        .then((value) => setEventData());
 
     super.onInit();
   }
-
 }

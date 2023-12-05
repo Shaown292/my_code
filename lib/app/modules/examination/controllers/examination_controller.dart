@@ -36,6 +36,10 @@ class ExaminationController extends GetxController {
 
 
 
+  Rx<ExamDataList> dropdownValue =
+      ExamDataList(id: -1, name: "title").obs;
+
+  RxList<ExamDataList> dropdownList = <ExamDataList>[].obs;
   RxList examDropdownList = <String>[].obs;
   RxList examDropdownIdList = <int>[].obs;
   RxList<ExamDataList> examList = <ExamDataList>[].obs;
@@ -58,7 +62,9 @@ class ExaminationController extends GetxController {
             examList.add(examDropdownResponseModel.data![i]);
             examDropdownList.add(examDropdownResponseModel.data![i].name!);
             examDropdownIdList.add(examDropdownResponseModel.data![i].id!);
+            dropdownList.add(examDropdownResponseModel.data![i]);
           }
+          dropdownValue.value = dropdownList[0];
         }
       } else {
         loadingController.isLoading = false;

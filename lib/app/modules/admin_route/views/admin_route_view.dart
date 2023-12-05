@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/alert_dialog.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -84,7 +89,46 @@ class AdminRouteView extends GetView<AdminRouteController> {
                         ],
                       ),
                     ),
-                    const Placeholder(),
+                    controller.loadingController.isLoading ?
+                        const CircularProgressIndicator(color: AppColors.primaryColor,) :
+                    ListView.builder(
+                      itemCount: controller.adminTransportRouteList.length,
+                      itemBuilder: (context, index) {
+                        return DeleteTile(
+                          title:
+                          "${index + 1}. Route Title: ${controller.adminTransportRouteList[index].title}",
+                          subTitle: "Fare: ${controller.adminTransportRouteList[index].far.toString()}",
+
+                          /// Delete button
+                          rightIconBackgroundColor:
+                          const Color(0xFFED3B3B),
+                          rightIcon: ImagePath.delete,
+                          tapRightButton: () => Get.dialog(
+                            Obx(
+                                  () => CustomPopupDialogue(
+                                isLoading: controller.loadingController.isLoading,
+                                onYesTap: () {
+
+                                },
+                                title: 'Confirmation',
+                                subTitle:
+                                AppText.deleteFeesGroupWarningMsg,
+                                noText: 'cancel',
+                                yesText: 'delete',
+                              ),
+                            ),
+                          ),
+
+                          /// Edit button
+                          leftIcon: ImagePath.edit,
+                          leftIconBackgroundColor:
+                          AppColors.appButtonColor,
+                          tapLeftButton: () {
+
+                          },
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

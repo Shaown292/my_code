@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/result/views/widget/resul
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/study_button/study_button.dart';
 import 'package:get/get.dart';
 import '../../../utilities/widgets/custom_dropdown.dart';
@@ -32,10 +33,10 @@ class ResultView extends GetView<ResultController> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                20.verticalSpacing,
+                10.verticalSpacing,
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
+                      const EdgeInsets.symmetric(horizontal: 7.0, vertical: 10 ),
                   child: SizedBox(
                     height: 50,
                     child: ListView.builder(
@@ -69,27 +70,24 @@ class ResultView extends GetView<ResultController> {
                 ),
                 controller.examinationController.loadingController.isLoading
                     ? const LoadingWidget()
-                    : CustomDropdown(
-                      dropdownValue: controller.dropdownValue.value,
-                      dropdownList: controller
-                          .examinationController.examDropdownList
-                          .map((item) => item.toString())
-                          .toList(),
-                      changeDropdownValue: (v) {
-                        controller.dropdownValue.value = v!;
-                        controller.examResultList.clear();
-                        int examId = controller
-                                .examinationController.examDropdownIdList[
-                            controller
-                                .examinationController.examDropdownList
-                                .indexOf(v)];
-                        int recordId = controller
-                            .homeController.studentRecordList[0].id;
-                        controller.getStudentExamResultList(
-                          typeId: examId,
-                          recordId: recordId,
-                        );
-                      },
+                    : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: DuplicateDropdown(
+                        dropdownValue: controller.examinationController.dropdownValue.value,
+                        dropdownList: controller
+                            .examinationController.dropdownList,
+                        changeDropdownValue: (v) {
+                          controller.examinationController.dropdownValue.value = v!;
+                          controller.examResultList.clear();
+                          int examId = v.id;
+                          int recordId = controller
+                              .homeController.studentRecordList[0].id;
+                          controller.getStudentExamResultList(
+                            typeId: examId,
+                            recordId: recordId,
+                          );
+                        },
+                      ),
                     ),
                 20.verticalSpacing,
                 controller.loadingController.isLoading

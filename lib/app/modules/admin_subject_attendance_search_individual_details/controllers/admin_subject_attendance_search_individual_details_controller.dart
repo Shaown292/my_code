@@ -37,6 +37,8 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
       getAdminAttendanceSubDetailsList({
     required int recordId,
     required int subjectNameId,
+    required int month,
+    required int year,
   }) async {
     try {
       attendanceList.clear();
@@ -45,7 +47,9 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
 
       final response = await BaseClient().getData(
         url: InfixApi.getAdminSubAttenSearchDetailsList(
-            recordId: recordId, subjectNameId: subjectNameId),
+            recordId: recordId,
+            subjectNameId: subjectNameId,
+            ),
         header: GlobalVariable.header,
       );
 
@@ -93,7 +97,8 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
                     attendanceList[i].attendanceDate!.year,
                     attendanceList[i].attendanceDate!.month,
                     attendanceList[i].attendanceDate!.day),
-                dot: presentEvent,
+                dot: GlobalVariable.getAttendanceStatus(
+                    attendanceList[i].attendanceType ?? ""),
               )
             ];
           }
@@ -117,10 +122,10 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
     required int year,
   }) async {
     try {
+
+      isLoading.value = true;
       attendanceList.clear();
       eventList?.clear();
-      isLoading.value = true;
-
       final response = await BaseClient().getData(
         url: InfixApi.getAdminSubAttenSearchDetailsWithDateList(
             recordId: recordId,
@@ -168,12 +173,14 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
                 attendanceList[i].attendanceDate!.month,
                 attendanceList[i].attendanceDate!.day)] = [
               Event(
-                  date: DateTime(
-                    attendanceList[i].attendanceDate!.year,
-                    attendanceList[i].attendanceDate!.month,
-                    attendanceList[i].attendanceDate!.day,
-                  ),
-                  dot: presentEvent)
+                date: DateTime(
+                  attendanceList[i].attendanceDate!.year,
+                  attendanceList[i].attendanceDate!.month,
+                  attendanceList[i].attendanceDate!.day,
+                ),
+                dot: GlobalVariable.getAttendanceStatus(
+                    attendanceList[i].attendanceType ?? ""),
+              ),
             ];
           }
         }
@@ -215,9 +222,11 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
     subjectNameId.value = Get.arguments['subject_name_id'];
 
     await getAdminAttendanceSubDetailsList(
-      recordId: recordId.value,
-      subjectNameId: subjectNameId.value,
-    ).then((value) => setEventData());
+            recordId: recordId.value,
+            subjectNameId: subjectNameId.value,
+            month: DateTime.now().month,
+            year: DateTime.now().year)
+        .then((value) => setEventData());
 
     super.onInit();
   }

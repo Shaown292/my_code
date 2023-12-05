@@ -23,7 +23,6 @@ class AdminBookListView extends GetView<AdminBookListController> {
           controller.getAdminBookList();
         },
         child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
           child: CustomBackground(
             customWidget: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,6 +80,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
                         : controller.bookList.isNotEmpty
                             ? ListView.builder(
                                 shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: controller.bookList.length,
                                 itemBuilder: (context, index) {
                                   return BookListTile(
@@ -105,8 +105,6 @@ class AdminBookListView extends GetView<AdminBookListController> {
                               ),
                   ),
                 ),
-
-
               ],
             ),
           ),

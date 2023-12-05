@@ -39,6 +39,7 @@ class BookListView extends GetView<BookListController> {
                         controller.bookSearchList.clear();
                         controller.getSearchBook(searchKey);
                       },
+                      hintTextStyle: AppTextStyle.fontSize12GreyW400,
                       icon: controller.searchController.text.isNotEmpty
                           ? InkWell(
                               onTap: () {

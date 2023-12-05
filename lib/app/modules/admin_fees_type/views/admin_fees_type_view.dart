@@ -86,6 +86,7 @@ class AdminFeesTypeView extends GetView<AdminFeesTypeController> {
         elevation: 15,
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
+          debugPrint("Group value :::::::: ${controller.feesTypeInitialValue.value}");
           controller.showUploadDocumentsBottomSheet(
             header: "Add Fees Group",
             bottomSheetBackgroundColor: Colors.white,
