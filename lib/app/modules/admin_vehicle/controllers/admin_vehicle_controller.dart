@@ -21,11 +21,11 @@ class AdminVehicleController extends GetxController {
   TextEditingController noteTextController = TextEditingController();
 
   RxList<AdminVehicleData> adminVehicleList = <AdminVehicleData>[].obs;
+
   RxList<AdminVehicleDriverData> adminVehicleDriverList =
       <AdminVehicleDriverData>[].obs;
-
-  RxString initialValue = "Rohit Sharma".obs;
-  RxList<String> list = ["Rohit Sharma", "Virat Kohli", "Subhman Gill"].obs;
+  Rx<AdminVehicleDriverData> initialValue =
+      AdminVehicleDriverData(id: -1, name: "full_name").obs;
 
   List<String> tabs = <String>[
     'Add Vehicle',
@@ -74,7 +74,7 @@ class AdminVehicleController extends GetxController {
       dropdownLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminVehicleList, header: GlobalVariable.header);
+          url: InfixApi.getAdminDriverList, header: GlobalVariable.header);
 
       AdminVehicleDriverResponseModel adminVehicleDriverResponseModel =
           AdminVehicleDriverResponseModel.fromJson(response);
@@ -88,6 +88,7 @@ class AdminVehicleController extends GetxController {
             adminVehicleDriverList
                 .add(adminVehicleDriverResponseModel.data![i]);
           }
+          initialValue.value = adminVehicleDriverList[0];
         }
       } else {
         dropdownLoader.value = false;

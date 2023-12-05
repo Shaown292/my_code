@@ -4,8 +4,8 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
@@ -100,10 +100,11 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                     ? const CircularProgressIndicator(
                                         color: AppColors.primaryColor,
                                       )
-                                    : CustomDropdown(
+                                    : DuplicateDropdown(
                                         dropdownValue:
                                             controller.initialValue.value,
-                                        dropdownList: controller.list,
+                                        dropdownList:
+                                            controller.adminVehicleDriverList,
                                         changeDropdownValue: (value) {
                                           controller.initialValue.value =
                                               value!;

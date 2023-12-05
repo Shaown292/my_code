@@ -27,21 +27,22 @@ class AdminVehicleDriverResponseModel {
   }
 }
 
+/// Rename fullName -> name for dropdown
 class AdminVehicleDriverData {
   int? id;
-  String? fullName;
+  String? name;
 
-  AdminVehicleDriverData({this.id, this.fullName});
+  AdminVehicleDriverData({this.id, this.name});
 
   AdminVehicleDriverData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    fullName = json['full_name'];
+    name = json['full_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['full_name'] = fullName;
+    data['full_name'] = name;
     return data;
   }
 }

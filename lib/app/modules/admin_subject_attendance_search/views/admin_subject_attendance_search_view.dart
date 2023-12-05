@@ -48,6 +48,9 @@ class AdminSubjectAttendanceSearchView
                         changeDropdownValue: (v) {
                           controller.adminStudentsSearchController.classValue
                               .value = v!;
+                          controller
+                              .adminStudentsSearchController
+                              .studentClassId.value = v.id;
                           controller.adminStudentsSearchController
                               .getStudentSectionList(
                                   classId: controller
@@ -75,6 +78,8 @@ class AdminSubjectAttendanceSearchView
                           controller.adminStudentsSearchController.sectionValue
                               .value = v!;
                           controller.adminStudentsSearchController
+                              .studentSectionId.value = v.id;
+                          controller.adminStudentsSearchController
                               .getAdminStudentSubjectList(
                             classId: controller.adminStudentsSearchController
                                 .studentClassId.value,
@@ -97,6 +102,8 @@ class AdminSubjectAttendanceSearchView
                         dropdownList: controller.adminStudentsSearchController.subjectList,
                         changeDropdownValue: (v) {
                           controller.adminStudentsSearchController.subjectValue.value = v!;
+                          controller.adminStudentsSearchController.studentSubjectId.value = v.id;
+                          print(v.id);
                         },
                       ),
                 10.verticalSpacing,
@@ -120,7 +127,12 @@ class AdminSubjectAttendanceSearchView
                 PrimaryButton(
                   text: "Search",
                   onTap: () {
-                    Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST);
+                    Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST, arguments: {
+                      'class_id': controller.adminStudentsSearchController.studentClassId.value,
+                      'section_id': controller.adminStudentsSearchController.studentSectionId.value,
+                      'subject_id': controller.adminStudentsSearchController.studentSubjectId.value,
+                      'date': controller.selectedDateTextController.text,
+                    });
                   },
                 ),
                 50.verticalSpacing,

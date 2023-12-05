@@ -1,13 +1,14 @@
+// AttendanceStudentData
+// StudentsListData
+
 class AdminStudentSearchAttendanceResponseModel {
   bool? success;
   AttendanceStudentData? data;
   String? message;
 
-  AdminStudentSearchAttendanceResponseModel(
-      {this.success, this.data, this.message});
+  AdminStudentSearchAttendanceResponseModel({this.success, this.data, this.message});
 
-  AdminStudentSearchAttendanceResponseModel.fromJson(
-      Map<String, dynamic> json) {
+  AdminStudentSearchAttendanceResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     data = json['data'] != null ? AttendanceStudentData.fromJson(json['data']) : null;
     message = json['message'];
@@ -25,40 +26,35 @@ class AdminStudentSearchAttendanceResponseModel {
 }
 
 class AttendanceStudentData {
-  String? submittedMessage;
   String? className;
   String? sectionName;
   String? date;
+  int? classId;
+  int? sectionId;
   List<StudentsListData>? students;
   String? status;
 
-  AttendanceStudentData(
-      {this.submittedMessage,
-        this.className,
-        this.sectionName,
-        this.date,
-        this.students,
-        this.status});
+  AttendanceStudentData({this.className, this.sectionName, this.date, this.students, this.status, this.classId, this.sectionId,});
 
   AttendanceStudentData.fromJson(Map<String, dynamic> json) {
-    submittedMessage = json['submitted_message'];
     className = json['class_name'];
     sectionName = json['section_name'];
+    classId = json['class_id'];
+    sectionId = json['section_id'];
     date = json['date'];
     if (json['students'] != null) {
       students = <StudentsListData>[];
-      json['students'].forEach((v) {
-        students!.add(StudentsListData.fromJson(v));
-      });
+      json['students'].forEach((v) { students!.add(StudentsListData.fromJson(v)); });
     }
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['submitted_message'] = submittedMessage;
     data['class_name'] = className;
     data['section_name'] = sectionName;
+    data['class_id'] = classId;
+    data['section_id'] = sectionId;
     data['date'] = date;
     if (students != null) {
       data['students'] = students!.map((v) => v.toJson()).toList();
@@ -69,38 +65,39 @@ class AttendanceStudentData {
 }
 
 class StudentsListData {
-  int? id;
-  int? admissionNo;
+  int? studentId;
+  int? recordId;
   String? fullName;
-  int? rollNo;
   String? note;
   String? attendanceType;
+  String? studentPhoto;
+  String? className;
+  String? section;
 
-  StudentsListData(
-      {this.id,
-        this.admissionNo,
-        this.fullName,
-        this.rollNo,
-        this.note,
-        this.attendanceType});
+  StudentsListData({this.studentId, this.recordId, this.fullName, this.note, this.attendanceType, this.studentPhoto, this.className, this.section});
 
   StudentsListData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    admissionNo = json['admission_no'];
-    fullName = json['full_name'];
-    rollNo = json['roll_no'];
-    note = json['note'];
-    attendanceType = json['attendance_type'];
+  studentId = json['student_id'];
+  recordId = json['record_id'];
+  fullName = json['full_name'];
+  note = json['note'];
+  attendanceType = json['attendance_type'];
+  studentPhoto = json['student_photo'];
+  className = json['class'];
+  section = json['section'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['admission_no'] = admissionNo;
-    data['full_name'] = fullName;
-    data['roll_no'] = rollNo;
-    data['note'] = note;
-    data['attendance_type'] = attendanceType;
-    return data;
+  final Map<String, dynamic> data = <String, dynamic>{};
+  data['student_id'] = studentId;
+  data['record_id'] = recordId;
+  data['full_name'] = fullName;
+  data['note'] = note;
+  data['attendance_type'] = attendanceType;
+  data['student_photo'] = studentPhoto;
+  data['class'] = className;
+  data['section'] = section;
+  return data;
   }
 }
+

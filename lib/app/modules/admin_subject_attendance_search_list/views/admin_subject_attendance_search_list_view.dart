@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/set_attendance_tile/set_attendance_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/student_list_tile/student_list_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -47,40 +48,61 @@ class AdminSubjectAttendanceSearchListView
                 ],
               ),
               10.verticalSpacing,
-              Expanded(
+              Obx(() => controller.isLoading.value ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) : controller.adminStudentSubSearchList.isNotEmpty ? Expanded(
                 child: ListView.builder(
-                  itemCount: controller.adminClassSetAttendanceUIModel.length,
+                  itemCount: controller.adminStudentSubSearchList.length,
                   itemBuilder: (context, index) {
 
-                    var data = controller
-                        .adminClassSetAttendanceUIModel[index];
+                    var data = controller.adminStudentSubSearchList[index];
 
                     return SetAttendanceTile(
-                      studentName: "Jalil",
-                      section:"B",
-                      studentClass:"One",
-                      imageUrl: "Bhai model update korle boshay niyen",
+                      studentName: data.fullName,
+                      section:data.section,
+                      studentClass:data.className,
+                      imageUrl: data.studentPhoto,
                       onPresentButtonTap: () {
+                        controller.updateAttendance(
+                                  index: index,
+                                  attendanceType: 'P',
+                                );
 
                       },
                       onAbsentButtonTap: () {
+                        controller.updateAttendance(
+                                  index: index,
+                                  attendanceType: 'A',
+                                );
 
                       },
                       onLateButtonTap: () {
+                        controller.updateAttendance(
+                                  index: index,
+                                  attendanceType: 'L',
+                                );
 
                       },
                       onHalfDayButtonTap: () {
+                        controller.updateAttendance(
+                                  index: index,
+                                  attendanceType: 'H',
+                                );
 
                       },
-                      adminClassSetAttendanceUIModel: data,
+                      attendanceType: data.attendanceType ?? '',
                     );
                   },
                 ),
-              ),
+              ) : const NoDataAvailableWidget(),),
               30.verticalSpacing,
-              PrimaryButton(
-                text: "Save",
-                onTap: () {},
+              Obx(
+                    () => controller.saveLoader.value
+                    ? const CircularProgressIndicator()
+                    : PrimaryButton(
+                  text: "Save",
+                  onTap: () {
+                    controller.dataFilteringForApiCall();
+                  },
+                ),
               ),
               30.verticalSpacing
             ],

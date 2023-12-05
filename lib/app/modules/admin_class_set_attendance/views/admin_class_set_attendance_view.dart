@@ -5,7 +5,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/set_attendance_tile/set_attendance_tile.dart';
 
@@ -24,8 +23,8 @@ class AdminClassSetAttendanceView
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: controller.attendanceStudentList.students == null ||
-                  controller.attendanceStudentList.students!.isEmpty
+          child: controller.attendanceStudentData.students == null ||
+                  controller.attendanceStudentData.students!.isEmpty
               ? const NoDataAvailableWidget()
               : Column(
                   children: [
@@ -34,71 +33,87 @@ class AdminClassSetAttendanceView
                       children: [
                         const Text(
                             "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
-                        InkWell(
-                          onTap: () {},
+                        Obx(() => controller.holidayLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : InkWell(
+                          onTap: () {
+
+                            controller.markHoliday.value = !controller.markHoliday.value;
+                            controller.markUnMarkHoliday(purpose: controller.markHoliday.value ? 'mark' : 'unmark',);
+
+                          },
                           child: Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               color: AppColors.primaryColor,
                             ),
-                            child: const Text(
-                              "Mark Holiday",
+                            child: Text(
+                              controller.markHoliday.value ? "Unmark Holiday" : "Mark Holiday",
                               style: AppTextStyle.textStyle12WhiteW400,
                             ),
                           ),
-                        )
+                        ),),
                       ],
                     ),
                     10.verticalSpacing,
                     Expanded(
                       child: Obx(
                         () => ListView.builder(
-                          itemCount: controller.adminClassSetAttendanceUIModel.length,
+                          itemCount:
+                              controller.adminClassSetAttendanceList.length,
                           itemBuilder: (context, index) {
-
-                            var data = controller
-                                .adminClassSetAttendanceUIModel[index];
+                            var data =
+                                controller.adminClassSetAttendanceList[index];
 
                             return SetAttendanceTile(
-                              studentName: controller.attendanceStudentList
+                              studentName: controller.attendanceStudentData
                                   .students![index].fullName,
                               section:
-                                  controller.attendanceStudentList.sectionName,
+                                  controller.attendanceStudentData.sectionName,
                               studentClass:
-                                  controller.attendanceStudentList.className,
-                              imageUrl: "Bhai model update korle boshay niyen",
+                                  controller.attendanceStudentData.className,
+                              imageUrl: controller
+                                  .adminClassSetAttendanceList[index]
+                                  .studentPhoto,
                               onPresentButtonTap: () {
-
-                                print("Student id P : ${data.studentId}");
-
-
-                              controller.updateAttendance(student: data, attendanceType: "P");
-
+                                controller.updateAttendance(
+                                  index: index,
+                                  attendanceType: 'P',
+                                );
                               },
                               onAbsentButtonTap: () {
-                                print("Student id A : ${data.studentId}");
-                                controller.updateAttendance(student: data, attendanceType: "A");
-
+                                controller.updateAttendance(
+                                  index: index,
+                                  attendanceType: 'A',
+                                );
                               },
                               onLateButtonTap: () {
-                                print("Student id L : ${data.studentId}");
-                                controller.updateAttendance(student: data, attendanceType: "L");
+                                controller.updateAttendance(
+                                  index: index,
+                                  attendanceType: 'L',
+                                );
                               },
                               onHalfDayButtonTap: () {
-                                print("Student id H : ${data.studentId}");
-                                controller.updateAttendance(student: data, attendanceType: "H");
+                                controller.updateAttendance(
+                                  index: index,
+                                  attendanceType: 'H',
+                                );
                               },
-                              adminClassSetAttendanceUIModel: data,
+                              attendanceType: data.attendanceType ?? '',
                             );
                           },
                         ),
                       ),
                     ),
                     30.verticalSpacing,
-                    PrimaryButton(
-                      text: "Save",
-                      onTap: () {},
+                    Obx(
+                      () => controller.saveLoader.value
+                          ? const CircularProgressIndicator()
+                          : PrimaryButton(
+                              text: "Save",
+                              onTap: () {
+                                controller.dataFiltering();
+                              },
+                            ),
                     ),
                     30.verticalSpacing
                   ],
