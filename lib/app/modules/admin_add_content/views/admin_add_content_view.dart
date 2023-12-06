@@ -33,27 +33,33 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                 children: [
                   10.verticalSpacing,
 
+                  const Text('Content type*'),
+                  5.verticalSpacing,
                   CustomDropdown(
                     dropdownValue: controller.contentInitialValue.value,
                     dropdownList: controller.contentList,
                     changeDropdownValue: (value) {
                       controller.contentInitialValue.value = value!;
+                      controller.contentType.value = controller
+                          .contentInitialValue.value
+                          .substring(0, 2)
+                          .toLowerCase();
                     },
                   ),
-                  10.verticalSpacing,
+                  15.verticalSpacing,
 
                   /// Title
                   CustomTextFormField(
                     controller: controller.titleTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Title",
+                    hintText: "Title*",
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   15.verticalSpacing,
                   const Text(
-                    "Available For",
+                    "Available For*",
                     style: AppTextStyle.fontSize14BlackW500,
                   ),
 
@@ -64,10 +70,12 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     onChange: (bool? value) {
                       controller.isAdminSelected.value = value!;
                       controller.isStudent.value = true;
+                      controller.isAdminSelected.value
+                          ? controller.availableForList.add('admin')
+                          : controller.availableForList.remove('admin');
                     },
                     shape: const CircleBorder(),
                   ),
-
 
                   //student radio button
                   CustomCheckbox(
@@ -76,10 +84,12 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     onChange: (bool? value) {
                       controller.isStudentSelected.value = value!;
                       controller.isStudent.value = true;
+                      controller.isStudentSelected.value
+                          ? controller.availableForList.add('student')
+                          : controller.availableForList.remove('student');
                     },
                     shape: const CircleBorder(),
                   ),
-
 
                   10.verticalSpacing,
                   controller.isStudentSelected.value
@@ -89,11 +99,15 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                           onChange: (bool? value) {
                             controller.isAllStudent.value = value!;
                             controller.isStudent.value = false;
+                            controller.isAllStudent.value
+                                ? controller.allClasses.value = 'on'
+                                : controller.allClasses.value = '';
                           },
                         )
                       : const SizedBox(),
 
                   10.verticalSpacing,
+
                   /// Student Class List Dropdown
                   controller.isStudentSelected.value &&
                           controller.isAllStudent.value == false
@@ -114,6 +128,8 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                               changeDropdownValue: (v) {
                                 controller.adminStudentsSearchController
                                     .classValue.value = v!;
+                                controller.adminStudentsSearchController
+                                    .studentClassId.value = v.id;
                               },
                             )
                       : const SizedBox(),
@@ -139,6 +155,8 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                               changeDropdownValue: (v) {
                                 controller.adminStudentsSearchController
                                     .sectionValue.value = v!;
+                                controller.adminStudentsSearchController
+                                    .studentSectionId.value = v.id;
                               },
                             )
                       : const SizedBox(),
@@ -153,7 +171,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     controller: controller.selectedDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Assign Date",
+                    hintText: "Assign Date*",
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
@@ -169,7 +187,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     focusBorderActive: true,
                     readOnly: true,
                     hintText:
-                        "${controller.file.value.path.isNotEmpty ? controller.file : 'Select File'}",
+                        "${controller.contentFile.value.path.isNotEmpty ? controller.contentFile : 'Select File'}",
                     fillColor: Colors.white,
                     suffixIcon: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -190,7 +208,6 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     ),
                     iconOnTap: () {
                       controller.pickFile();
-                      debugPrint("Browser ::: ${controller.file}");
                     },
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
@@ -206,10 +223,19 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   50.verticalSpacing,
-                  PrimaryButton(
-                    text: "Save",
-                    onTap: () {},
-                  ),
+                  controller.saveLoader.value
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ))
+                      : PrimaryButton(
+                          text: "Save",
+                          onTap: () {
+                            if (controller.validation()) {
+                              controller.uploadContent();
+                            }
+                          },
+                        ),
                   20.verticalSpacing,
                 ],
               ),
