@@ -49,11 +49,10 @@ class SetAttendanceTile extends StatelessWidget {
       children: [
         Row(
           children: [
-            10.horizontalSpacing,
+            
             isImageEmpty
                 ? Container(
-                    height: 70,
-                    width: 70,
+                    width: Get.width * 0.05,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
@@ -65,8 +64,8 @@ class SetAttendanceTile extends StatelessWidget {
                     ),
                   )
                 : Container(
-                    height: 70,
-                    width: 70,
+                    height: Get.width * 0.15,
+                    width: Get.width * 0.15,
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -75,7 +74,7 @@ class SetAttendanceTile extends StatelessWidget {
                       ),
                     ),
                   ),
-            10.horizontalSpacing,
+            5.horizontalSpacing,
             Flexible(
               child: Padding(
                 padding:
@@ -84,9 +83,9 @@ class SetAttendanceTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(studentName ?? ""),
-                    10.verticalSpacing,
+                    8.verticalSpacing,
                     Text("Class: $studentClass  |  Section: $section"),
-                    10.verticalSpacing,
+                    8.verticalSpacing,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -106,7 +105,7 @@ class SetAttendanceTile extends StatelessWidget {
                                   : Colors.white,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Center(
                                 child: Text(
                                   "Present",
@@ -118,7 +117,7 @@ class SetAttendanceTile extends StatelessWidget {
                             ),
                           ),
                         ),
-
+              
                         /// Absent
                         InkWell(
                           onTap: onAbsentButtonTap,
@@ -135,7 +134,7 @@ class SetAttendanceTile extends StatelessWidget {
                                   : Colors.white,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Center(
                                 child: Text(
                                   "Absent",
@@ -147,7 +146,7 @@ class SetAttendanceTile extends StatelessWidget {
                             ),
                           ),
                         ),
-
+              
                         /// Late
                         InkWell(
                           onTap: onLateButtonTap,
@@ -165,7 +164,7 @@ class SetAttendanceTile extends StatelessWidget {
                                   : Colors.white,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Center(
                                 child: Text(
                                   "Late",
@@ -177,7 +176,7 @@ class SetAttendanceTile extends StatelessWidget {
                             ),
                           ),
                         ),
-
+              
                         /// Half Day
                         InkWell(
                           onTap: onHalfDayButtonTap,
@@ -194,7 +193,7 @@ class SetAttendanceTile extends StatelessWidget {
                                   : Colors.white,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Center(
                                 child: Text(
                                   "Half day",

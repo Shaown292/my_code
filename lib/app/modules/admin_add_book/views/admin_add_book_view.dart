@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -28,21 +32,27 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                   10.verticalSpacing,
 
                   /// Book Category dropdown List
-                  CustomDropdown(
-                    dropdownValue: controller.categoryInitValue.value,
-                    dropdownList: controller.categoryList,
-                    changeDropdownValue: (value) {
-                      controller.categoryInitValue.value = value!;
-                    },
-                  ),
+                  controller.loadingController.isLoading
+                      ? const CircularProgressIndicator()
+                      : DuplicateDropdown(
+                          dropdownValue: controller.bookCategoryInitValue.value,
+                          dropdownList: controller.bookCategoryList,
+                          changeDropdownValue: (value) {
+                            controller.bookCategoryInitValue.value = value!;
+                            controller.bookCategoryId.value = value.id;
+                            debugPrint("category id is :::::::::: ${controller.bookCategoryId.value}");
+                          },
+                        ),
                   10.verticalSpacing,
 
                   /// Book Gerne dropdown List
-                  CustomDropdown(
-                    dropdownValue: controller.subjectInitValue.value,
-                    dropdownList: controller.subjectList,
+                  DuplicateDropdown(
+                    dropdownValue: controller.bookSubjectInitValue.value,
+                    dropdownList: controller.bookSubjectList,
                     changeDropdownValue: (value) {
-                      controller.subjectInitValue.value = value!;
+                      controller.bookSubjectInitValue.value = value!;
+                      controller.bookSubjectId.value = value.id;
+                      debugPrint("subject id is :::::::::: ${controller.bookSubjectId.value}");
                     },
                   ),
                   10.verticalSpacing,
@@ -113,6 +123,7 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     fillColor: Colors.white,
                   ),
                   10.verticalSpacing,
+
                   /// Quantity Text Field
                   CustomTextFormField(
                     controller: controller.quantityTextController,
@@ -137,12 +148,20 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
 
                   /// Date Text Field
                   CustomTextFormField(
+                    iconOnTap: () {
+                      controller.changeApplyDate();
+                    },
+                    readOnly: true,
                     controller: controller.dateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Date",
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
+                    hintText: "* Select upload date",
                     fillColor: Colors.white,
+                    suffixIcon: Image.asset(
+                      ImagePath.calender,
+                      color: AppColors.profileValueColor,
+                    ),
+                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   10.verticalSpacing,
 
@@ -157,11 +176,18 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                   ),
 
                   30.verticalSpacing,
+                  controller.addBookLoader.value ?
+                     const CircularProgressIndicator(color: AppColors.primaryColor,) :
                   PrimaryButton(
                     text: "Save",
                     onTap: () {
-                      if(controller.validation()){
-                        debugPrint("Validation is working");
+                      if (controller.validation()) {
+                        controller.addAdminBook(
+                          bookCategoryId: controller.bookCategoryId.value,
+                          bookSubjectId: controller.bookSubjectId.value,
+                        );
+                        debugPrint("subject id is :::::::::: ${controller.bookSubjectId.value}");
+                        debugPrint("category id is :::::::::: ${controller.bookCategoryId.value}");
                       }
                     },
                   ),

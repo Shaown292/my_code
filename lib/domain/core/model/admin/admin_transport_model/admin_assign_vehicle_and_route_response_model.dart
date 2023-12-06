@@ -58,38 +58,38 @@ class Data {
 
 class AdminVehicleAssignRoutes {
   int? id;
-  String? title;
+  String? name;  /// Title => name changed for dropdown value
 
-  AdminVehicleAssignRoutes({this.id, this.title});
+  AdminVehicleAssignRoutes({this.id, this.name});
 
   AdminVehicleAssignRoutes.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    title = json['title'];
+    name = json['title'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['title'] = title;
+    data['title'] = name;
     return data;
   }
 }
 
 class AdminVehicleAssignVehicles {
   int? id;
-  String? vehicleNo;
+  String? name; /// changed vehicle no to name for using dropdown
 
-  AdminVehicleAssignVehicles({this.id, this.vehicleNo});
+  AdminVehicleAssignVehicles({this.id, this.name});
 
   AdminVehicleAssignVehicles.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    vehicleNo = json['vehicle_no'];
+    name = json['vehicle_no'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['vehicle_no'] = vehicleNo;
+    data['vehicle_no'] = name;
     return data;
   }
 }

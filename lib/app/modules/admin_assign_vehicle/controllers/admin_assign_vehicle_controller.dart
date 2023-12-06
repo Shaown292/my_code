@@ -14,6 +14,10 @@ class AdminAssignVehicleController extends GetxController {
   LoadingController loadingController = Get.find();
   RxBool dropdownLoader = false.obs;
 
+
+
+
+
   RxString initialValue = "Rohit Sharma".obs;
   RxList <String> list = [
     "Rohit Sharma",
@@ -21,8 +25,12 @@ class AdminAssignVehicleController extends GetxController {
     "Subhman Gill"
   ].obs;
 
-
+  Rx<AdminVehicleAssignRoutes> assignRouteInitialValue =
+      AdminVehicleAssignRoutes(id: -1, name: "Assign Route").obs;
   RxList<AdminVehicleAssignRoutes> assignRouteList = <AdminVehicleAssignRoutes>[].obs;
+
+  Rx<AdminVehicleAssignVehicles> assignVehicleInitialValue =
+      AdminVehicleAssignVehicles(id: -1, name: "Assign Vehicle").obs;
   RxList<AdminVehicleAssignVehicles> assignVehicleList = <AdminVehicleAssignVehicles>[].obs;
 
   RxInt routeId = 0.obs;
@@ -50,7 +58,9 @@ class AdminAssignVehicleController extends GetxController {
             assignRouteList
                 .add(adminAssignVehicleAndRouteResponseModel.data!.routes![i]);
           }
+          assignRouteInitialValue.value = assignRouteList[0];
         }
+
 
         if (adminAssignVehicleAndRouteResponseModel.data!.vehicles!.isNotEmpty) {
           for (int i = 0;
@@ -59,6 +69,7 @@ class AdminAssignVehicleController extends GetxController {
             assignVehicleList
                 .add(adminAssignVehicleAndRouteResponseModel.data!.vehicles![i]);
           }
+          assignVehicleInitialValue.value = assignVehicleList[0];
         }
 
       } else {
@@ -85,7 +96,7 @@ class AdminAssignVehicleController extends GetxController {
 
       loadingController.isLoading = true;
 
-      final response = await BaseClient().postData(url: InfixApi.getAdminVehicleAssignRouteAndVehicleList, header: GlobalVariable.header, payload: {
+      final response = await BaseClient().postData(url: InfixApi.postAdminVehicleAssignRouteAndVehicle, header: GlobalVariable.header, payload: {
         'route': routeId,
         'vehicles': vehicleId,
       });

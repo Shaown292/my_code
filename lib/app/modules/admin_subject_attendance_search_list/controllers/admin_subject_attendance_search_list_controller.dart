@@ -111,6 +111,10 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
   }
 
   void dataFilteringForApiCall() {
+    recordIdList.clear();
+    studentIdList.clear();
+    attendanceTypeList.clear();
+    noteList.clear();
     for (int i = 0; i < adminStudentSubSearchList.length; i++) {
       recordIdList.add(adminStudentSubSearchList[i].recordId!);
       studentIdList.add(adminStudentSubSearchList[i].studentId!);
@@ -123,7 +127,10 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
   }
 
   Future<PostRequestResponseModel> uploadAttendance() async {
+
+
     try {
+
       saveLoader.value = true;
 
       final response = await BaseClient().postData(

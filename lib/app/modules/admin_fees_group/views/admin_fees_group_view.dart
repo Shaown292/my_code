@@ -30,7 +30,7 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                 child: RefreshIndicator(
                   color: AppColors.primaryColor,
                   onRefresh: () async {
-                    controller.fessGroupList.clear();
+                    controller.feesGroupList.clear();
                     controller.getFeesGroupList();
                   },
                   child: controller.loadingController.isLoading
@@ -39,14 +39,14 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                             LoadingWidget(),
                           ],
                         )
-                      : controller.fessGroupList.isNotEmpty
+                      : controller.feesGroupList.isNotEmpty
                           ? ListView.builder(
-                              itemCount: controller.fessGroupList.length,
+                              itemCount: controller.feesGroupList.length,
                               itemBuilder: (context, index) {
                                 return DeleteTile(
                                   title:
-                                      "${index + 1}. ${controller.fessGroupList[index].name}",
-                                  subTitle: controller.fessGroupList[index].description,
+                                      "${index + 1}. ${controller.feesGroupList[index].name}",
+                                  subTitle: controller.feesGroupList[index].description,
 
                                   /// Delete button
                                   rightIconBackgroundColor:
@@ -60,7 +60,7 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                                         onYesTap: () {
                                           controller.deleteSingleFees(
                                               feesId: controller
-                                                  .fessGroupList[index].id!,
+                                                  .feesGroupList[index].id!,
                                               index: index);
                                         },
                                         title: 'Confirmation',
@@ -78,10 +78,10 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                                       AppColors.appButtonColor,
                                   tapLeftButton: () {
                                     controller.titleTextController.text =
-                                        controller.fessGroupList[index].name ??
+                                        controller.feesGroupList[index].name ??
                                             '';
                                     controller.descriptionTextController.text =
-                                        controller.fessGroupList[index]
+                                        controller.feesGroupList[index]
                                                 .description ??
                                             '';
                                     controller.showUploadDocumentsBottomSheet(
@@ -102,7 +102,7 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                                             .isNotEmpty) {
                                           controller.updateSingleFeesGroup(
                                               feesId: controller
-                                                  .fessGroupList[index].id!,
+                                                  .feesGroupList[index].id!,
                                               index: index);
                                         } else {
                                           showBasicFailedSnackBar(
