@@ -29,10 +29,13 @@ class AdminClassSetAttendanceView
               : Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                            "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
+                        SizedBox(
+                          width: Get.width * 0.55,
+                          child: const Text(
+                              "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
+                        ),
+                        5.horizontalSpacing,
                         Obx(() => controller.holidayLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : InkWell(
                           onTap: () {
 
@@ -112,6 +115,7 @@ class AdminClassSetAttendanceView
                               text: "Save",
                               onTap: () {
                                 controller.dataFiltering();
+
                               },
                             ),
                     ),

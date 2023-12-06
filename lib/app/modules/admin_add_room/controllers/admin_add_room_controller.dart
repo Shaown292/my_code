@@ -69,6 +69,7 @@ class AdminAddRoomController extends GetxController {
                 .add(dormitoryListResponseModel.data![i].name!);
           }
           dormitoryValue.value = dormitoryList[0];
+          dormitoryId.value = dormitoryList[0].id!;
         }
       } else {
         loadingController.isLoading = false;
@@ -103,6 +104,7 @@ class AdminAddRoomController extends GetxController {
           }
 
           roomTypeValue.value = roomTypeList[0];
+          roomTypeId.value = roomTypeList[0].id!;
         }
       } else {
         isLoading.value = false;

@@ -19,13 +19,15 @@ class AdminFeesGroupController extends GetxController {
   RxBool createUpdateLoader = false.obs;
   RxBool deleteLoader = false.obs;
 
+
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
-  RxList<FeesGroupData> fessGroupList = <FeesGroupData>[].obs;
+  RxList<FeesGroupData> feesGroupList = <FeesGroupData>[].obs;
   Rx<FeesGroupData> feesGroupInitialValue = FeesGroupData(id: -1, name: "Select Fees Group").obs;
-
   RxString feesGroupNullValue = "".obs;
+  RxInt groupId = 0.obs;
+
   Future<FeesGroupListResponseModel> getFeesGroupList() async {
     try {
       //fessGroupList.clear();
@@ -38,13 +40,15 @@ class AdminFeesGroupController extends GetxController {
       if (feesGroupListResponseModel.success == true) {
         if (feesGroupListResponseModel.data!.isNotEmpty) {
           for (int i = 0; i < feesGroupListResponseModel.data!.length; i++) {
-            fessGroupList.add(feesGroupListResponseModel.data![i]);
+            feesGroupList.add(feesGroupListResponseModel.data![i]);
           }
 
 
-          debugPrint(" GROUP :::: ${fessGroupList[0]}");
+          debugPrint(" GROUP :::: ${feesGroupList[0]}");
 
-          feesGroupInitialValue.value = fessGroupList[0];
+          feesGroupInitialValue.value = feesGroupList[0];
+          groupId.value = feesGroupList[0].id!;
+
 
         }
       } else {
@@ -85,7 +89,7 @@ class AdminFeesGroupController extends GetxController {
             message:
                 feesGroupListResponseModel.message ?? 'Created Successfully');
         if (feesGroupListResponseModel.data!.isNotEmpty) {
-          fessGroupList.add(
+          feesGroupList.add(
             FeesGroupData(
               id: feesGroupListResponseModel.data!.first.id,
               name: feesGroupListResponseModel.data!.first.name,
@@ -121,7 +125,7 @@ class AdminFeesGroupController extends GetxController {
       if (postRequestResponseModel.success == true) {
         deleteLoader.value = false;
         Get.back();
-        fessGroupList.removeAt(index);
+        feesGroupList.removeAt(index);
         showBasicSuccessSnackBar(
             message: postRequestResponseModel.message ?? 'Data deleted');
       } else {
@@ -157,14 +161,14 @@ class AdminFeesGroupController extends GetxController {
       FeesGroupListResponseModel feesGroupListResponseModel =
           FeesGroupListResponseModel.fromJson(response);
       if (feesGroupListResponseModel.success == true) {
-        fessGroupList[index].id = feesGroupListResponseModel.data!.first.id;
-        fessGroupList[index].name = feesGroupListResponseModel.data!.first.name;
-        fessGroupList[index].description =
+        feesGroupList[index].id = feesGroupListResponseModel.data!.first.id;
+        feesGroupList[index].name = feesGroupListResponseModel.data!.first.name;
+        feesGroupList[index].description =
             feesGroupListResponseModel.data!.first.description;
         titleTextController.clear();
         descriptionTextController.clear();
         createUpdateLoader.value = false;
-        fessGroupList.refresh();
+        feesGroupList.refresh();
         Get.back();
       } else {
         createUpdateLoader.value = false;

@@ -343,6 +343,13 @@ class InfixApi {
   static String getAdminDriverList = '${baseApi}admin-vehicle-drivers';
   static String postAdminTransportRoute = '${baseApi}admin-route-store';
   static String getAdminVehicleAssignRouteAndVehicleList = '${baseApi}assign-vehicle-to-route';
+  static String postAdminVehicleAssignRouteAndVehicle = '${baseApi}store-assign-vehicle-to-route';
+
+  /// book
+  static String getAdminBookCategoryAndSubjectList = '${baseApi}admin-add-book-dropdown-items';
+  static String postAdminAddBook = '${baseApi}admin-book-store';
+  static String createFeesType= '${baseApi}fees-type-store';
+  static String updateSingleFeesType= '${baseApi}fees-type-update';
 
 
 

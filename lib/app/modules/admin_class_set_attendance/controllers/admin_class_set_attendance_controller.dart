@@ -59,6 +59,10 @@ class AdminClassSetAttendanceController extends GetxController {
   }
 
   void dataFiltering() {
+    recordIdList.clear();
+    studentIdList.clear();
+    attendanceTypeList.clear();
+    noteList.clear();
     for (int i = 0; i < adminClassSetAttendanceList.length; i++) {
       recordIdList.add(adminClassSetAttendanceList[i].recordId!);
       studentIdList.add(adminClassSetAttendanceList[i].studentId!);
@@ -72,6 +76,7 @@ class AdminClassSetAttendanceController extends GetxController {
 
   void uploadAttendance() async {
     try {
+
       saveLoader.value = true;
 
       final response = await BaseClient().postData(
@@ -113,6 +118,8 @@ class AdminClassSetAttendanceController extends GetxController {
   Future<PostRequestResponseModel> markUnMarkHoliday(
       {required String purpose}) async {
     try {
+
+
       holidayLoader.value = true;
 
       final response = await BaseClient().postData(
