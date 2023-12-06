@@ -12,7 +12,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_approve_leave_response_model.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_pending_leave_responseModel.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_pending_leave_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_rejected_leave_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
@@ -159,7 +159,6 @@ class AdminLeaveController extends GetxController {
       required String currentStatus,
       required String previousStatus,
       required int index}) async {
-    print('previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
     try {
       saveLoader.value = true;
       final res = await BaseClient().postData(
@@ -174,7 +173,6 @@ class AdminLeaveController extends GetxController {
         saveLoader.value = false;
 
         if (previousStatus == 'P' && currentStatus == 'A') {
-          print('1. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
           approveLeaveList.add(
             ApproveLeaveData(
               id: pendingLeaveList[index].id,
@@ -189,7 +187,6 @@ class AdminLeaveController extends GetxController {
           );
           pendingLeaveList.removeAt(index);
         } else if (previousStatus == 'P' && currentStatus == 'C') {
-          print('2. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
           rejectedLeaveList.add(
             RejectedLeaveData(
               id: pendingLeaveList[index].id,
@@ -204,7 +201,6 @@ class AdminLeaveController extends GetxController {
           );
           pendingLeaveList.removeAt(index);
         } else if (previousStatus == 'A' && currentStatus == 'P') {
-          print('3. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
           pendingLeaveList.add(
             PendingLeaveData(
               id: pendingLeaveList[index].id,
@@ -219,7 +215,6 @@ class AdminLeaveController extends GetxController {
           );
           approveLeaveList.removeAt(index);
         } else if (previousStatus == 'A' && currentStatus == 'C') {
-          print('4. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
           rejectedLeaveList.add(
             RejectedLeaveData(
               id: pendingLeaveList[index].id,
@@ -234,7 +229,6 @@ class AdminLeaveController extends GetxController {
           );
           approveLeaveList.removeAt(index);
         } else if (previousStatus == 'C' && currentStatus == 'P') {
-          print('5. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
           pendingLeaveList.add(
             PendingLeaveData(
               id: pendingLeaveList[index].id,
@@ -249,7 +243,6 @@ class AdminLeaveController extends GetxController {
           );
           rejectedLeaveList.removeAt(index);
         } else if (previousStatus == 'C' && currentStatus == 'A') {
-          print('6. previousStatus $previousStatus >>>>>>>>>>>> currentStatus $currentStatus');
           approveLeaveList.add(
             ApproveLeaveData(
               id: pendingLeaveList[index].id,
@@ -284,8 +277,16 @@ class AdminLeaveController extends GetxController {
     }
   }
 
-  void showPendingListDetailsBottomSheet(
-      {required int index, required String reason, required Function() onTap, required String leaveType, required String applyDate, required String leaveFrom, required String leaveTo, required String file,}) {
+  void showPendingListDetailsBottomSheet({
+    required int index,
+    required String reason,
+    required Function() onTap,
+    required String leaveType,
+    required String applyDate,
+    required String leaveFrom,
+    required String leaveTo,
+    required String file,
+  }) {
     Get.bottomSheet(
       Obx(
         () => Container(
@@ -334,7 +335,6 @@ class AdminLeaveController extends GetxController {
                   "Leave Status",
                   style: AppTextStyle.fontSize14BlackW500,
                 ),
-
                 CustomRadioButton(
                   title: "Pending",
                   value: "P",
@@ -346,7 +346,7 @@ class AdminLeaveController extends GetxController {
                   activeColor: AppColors.primaryColor,
                 ),
                 CustomRadioButton(
-                   title: "Approved",
+                  title: "Approved",
                   value: "A",
                   groupValue: selectedOption.value,
                   onChanged: (value) {
@@ -365,8 +365,6 @@ class AdminLeaveController extends GetxController {
                   },
                   activeColor: AppColors.primaryColor,
                 ),
-
-
                 20.verticalSpacing,
                 Obx(
                   () => saveLoader.value
@@ -389,87 +387,6 @@ class AdminLeaveController extends GetxController {
       shape: defaultBottomSheetShape(),
     );
   }
-
-  // void showApprovedListDetailsBottomSheet({required int index}) {
-  //   Get.bottomSheet(
-  //     Container(
-  //       padding: const EdgeInsets.all(20),
-  //       height: Get.height * 0.7,
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           10.verticalSpacing,
-  //           const Text(
-  //             "Reason: something",
-  //             style: AppTextStyle.fontSize14BlackW500,
-  //           ),
-  //           20.verticalSpacing,
-  //           const BottomSheetTile(
-  //             title: "Leave Type",
-  //             value: "",
-  //             color: AppColors.homeworkWidgetColor,
-  //           ),
-  //           const BottomSheetTile(
-  //             title: "Apply Date",
-  //             value: "",
-  //           ),
-  //           const BottomSheetTile(
-  //             title: "Leave From",
-  //             value: "",
-  //             color: AppColors.homeworkWidgetColor,
-  //           ),
-  //           const BottomSheetTile(
-  //             title: "Leave To",
-  //             value: "",
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //     backgroundColor: Colors.white,
-  //     shape: defaultBottomSheetShape(),
-  //   );
-  // }
-  //
-  // void showRejectedListDetailsBottomSheet({required int index}) {
-  //   Get.bottomSheet(
-  //     Container(
-  //         padding: const EdgeInsets.all(20),
-  //         height: Get.height * 0.45,
-  //         child: Column(
-  //           mainAxisAlignment: MainAxisAlignment.start,
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             10.verticalSpacing,
-  //             const Text(
-  //               "Reason: asdjas",
-  //               style: AppTextStyle.fontSize14BlackW500,
-  //             ),
-  //             20.verticalSpacing,
-  //             const BottomSheetTile(
-  //               title: "Leave Type",
-  //               value: "",
-  //               color: AppColors.homeworkWidgetColor,
-  //             ),
-  //             const BottomSheetTile(
-  //               title: "Apply Date",
-  //               value: "",
-  //             ),
-  //             const BottomSheetTile(
-  //               title: "Leave From",
-  //               value: "",
-  //               color: AppColors.homeworkWidgetColor,
-  //             ),
-  //             const BottomSheetTile(
-  //               title: "Leave To",
-  //               value: "",
-  //             ),
-  //           ],
-  //         )),
-  //     backgroundColor: Colors.white,
-  //     shape: defaultBottomSheetShape(),
-  //   );
-  // }
 
   @override
   void onInit() {

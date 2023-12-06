@@ -7,17 +7,17 @@ class AdminFeesInvoiceListResponseModel {
 
   AdminFeesInvoiceListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -31,16 +31,16 @@ class Data {
     if (json['studentInvoices'] != null) {
       studentInvoices = <StudentInvoices>[];
       json['studentInvoices'].forEach((v) {
-        studentInvoices!.add(new StudentInvoices.fromJson(v));
+        studentInvoices!.add(StudentInvoices.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.studentInvoices != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (studentInvoices != null) {
       data['studentInvoices'] =
-          this.studentInvoices!.map((v) => v.toJson()).toList();
+          studentInvoices!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -81,16 +81,16 @@ class StudentInvoices {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['full_name'] = this.fullName;
-    data['class'] = this.studentClass;
-    data['section'] = this.section;
-    data['date'] = this.date;
-    data['amount'] = this.amount;
-    data['paid'] = this.paid;
-    data['balance'] = this.balance;
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['full_name'] = fullName;
+    data['class'] = studentClass;
+    data['section'] = section;
+    data['date'] = date;
+    data['amount'] = amount;
+    data['paid'] = paid;
+    data['balance'] = balance;
+    data['status'] = status;
     return data;
   }
 }

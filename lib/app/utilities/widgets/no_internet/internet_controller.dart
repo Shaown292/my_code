@@ -1,10 +1,9 @@
-
 import 'dart:async';
 import 'dart:io';
 import 'package:get/get.dart';
 
-class InternetController extends GetxController{
-  var internet = false.obs;
+class InternetController extends GetxController {
+  RxBool internet = false.obs;
 
   @override
   void onInit() {
@@ -12,7 +11,7 @@ class InternetController extends GetxController{
     internetConnection();
   }
 
-  Future internetConnection() async{
+  Future internetConnection() async {
     try {
       final result = await InternetAddress.lookup('example.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -24,9 +23,8 @@ class InternetController extends GetxController{
   }
 }
 
-  var internetController             = Get.put(InternetController());
-
 void internetConnectionChecker() {
+  InternetController internetController = Get.find();
   const oneSec = Duration(seconds: 1);
   Timer.periodic(oneSec, (Timer t) {
     internetController.internetConnection();

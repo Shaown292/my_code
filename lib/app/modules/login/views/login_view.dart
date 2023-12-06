@@ -3,7 +3,6 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_internet/internet_controller.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_colors.dart';
 import '../../../routes/app_pages.dart';
@@ -14,16 +13,12 @@ import '../../../utilities/widgets/common_widgets/text_field.dart';
 import '../../../utilities/widgets/no_internet/no_internet_widget.dart';
 import '../controllers/login_controller.dart';
 
-// ignore: must_be_immutable
 class LoginView extends GetView<LoginController> {
-  LoginView({super.key});
-
-  TextEditingController emailTextController = TextEditingController();
-  TextEditingController passwordTextController = TextEditingController();
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => internetController.internet.isTrue
+    return Obx(() => controller.internetController.internet.isTrue
         ? Scaffold(
             backgroundColor: AppColors.secondaryColor,
             body: SafeArea(
@@ -107,7 +102,7 @@ class LoginView extends GetView<LoginController> {
 
                               /// Email Text field
                               CustomTextFormField(
-                                controller: emailTextController,
+                                controller: controller.emailTextController,
                                 fillColor: Colors.white,
                                 focusBorderActive: true,
                                 enableBorderActive: true,
@@ -129,7 +124,7 @@ class LoginView extends GetView<LoginController> {
                                   controller.isObscureText.value =
                                       !controller.isObscureText.value;
                                 },
-                                controller: passwordTextController,
+                                controller: controller.passwordTextController,
                                 obsCureText: controller.isObscureText.value,
                                 fillColor: Colors.white,
                                 hintText: "Password",
@@ -147,24 +142,27 @@ class LoginView extends GetView<LoginController> {
                               ),
                               15.verticalSpacing,
                               InkWell(
-                                onTap: ()=> Get.toNamed(Routes.FORGET_PASSWORD),
+                                  onTap: () =>
+                                      Get.toNamed(Routes.FORGET_PASSWORD),
                                   child: const Text(
-                                "Forget password?",
-                                style: AppTextStyle.cardTextStyle14PurpleW500,
-                              )),
+                                    "Forget password?",
+                                    style:
+                                        AppTextStyle.cardTextStyle14PurpleW500,
+                                  )),
                               60.verticalSpacing,
 
                               controller.isLoading.value
-                                  ? const Center(child: CircularProgressIndicator())
+                                  ? const Center(
+                                      child: CircularProgressIndicator())
                                   : PrimaryButton(
                                       onTap: () {
-
                                         if (validate()) {
                                           // controller.isLoading.value = true;
                                           controller.userLogin(
-                                            email: emailTextController.text,
-                                            password:
-                                                passwordTextController.text,
+                                            email: controller
+                                                .emailTextController.text,
+                                            password: controller
+                                                .passwordTextController.text,
                                           );
                                         }
                                       },
@@ -184,8 +182,8 @@ class LoginView extends GetView<LoginController> {
   }
 
   bool validate() {
-    String email = emailTextController.text;
-    String password = passwordTextController.text;
+    String email = controller.emailTextController.text;
+    String password = controller.passwordTextController.text;
     if (email.isEmpty) {
       showBasicFailedSnackBar(message: 'Enter email');
       return false;

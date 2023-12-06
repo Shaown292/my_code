@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/student_wallet_controller.dart';
 
 class StudentWalletView extends GetView<StudentWalletController> {
-  const StudentWalletView({Key? key}) : super(key: key);
+  const StudentWalletView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

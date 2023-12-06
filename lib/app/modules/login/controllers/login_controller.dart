@@ -11,11 +11,14 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/message/snack_bars.dart';
 
 class LoginController extends GetxController {
-
   RxBool isLoading = false.obs;
   RxBool isObscureText = true.obs;
 
   LoadingController loadingController = Get.find();
+  InternetController internetController = Get.find();
+
+  TextEditingController emailTextController = TextEditingController();
+  TextEditingController passwordTextController = TextEditingController();
 
   void userLogin({required String email, required String password}) async {
     ProfileInfoModel profileInfoModel;
@@ -25,23 +28,21 @@ class LoginController extends GetxController {
       final res = await BaseClient().postData(
         url: InfixApi.login(),
         header: {'Content-Type': 'application/json'},
-        payload: {
-          "email": email,
-          "password": password
-        },
+        payload: {"email": email, "password": password},
       );
 
       profileInfoModel = ProfileInfoModel.fromJson(res);
       if (profileInfoModel.success == true) {
         isLoading.value = false;
-        globalRxVariableController.notificationCount.value = profileInfoModel.data.unreadNotifications;
+        globalRxVariableController.notificationCount.value =
+            profileInfoModel.data.unreadNotifications;
         GlobalVariable.token = profileInfoModel.data.accessToken;
         GlobalVariable.roleId = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
-        if(profileInfoModel.data.user.roleId == 2){
+        if (profileInfoModel.data.user.roleId == 2) {
           GlobalVariable.studentId = profileInfoModel.data.user.studentId;
         }
 
@@ -73,14 +74,15 @@ class LoginController extends GetxController {
       profileInfoModel = ProfileInfoModel.fromJson(response);
       if (profileInfoModel.success == true) {
         isLoading.value = false;
-        globalRxVariableController.notificationCount.value = profileInfoModel.data.unreadNotifications;
+        globalRxVariableController.notificationCount.value =
+            profileInfoModel.data.unreadNotifications;
         GlobalVariable.token = profileInfoModel.data.accessToken;
         GlobalVariable.roleId = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
-        if(profileInfoModel.data.user.roleId == 2){
+        if (profileInfoModel.data.user.roleId == 2) {
           GlobalVariable.studentId = profileInfoModel.data.user.studentId;
         }
 
