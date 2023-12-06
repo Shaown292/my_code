@@ -32,7 +32,7 @@ class DeleteTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
       child: Card(
         elevation: 5,
         margin: EdgeInsets.zero,
@@ -65,7 +65,7 @@ class DeleteTile extends StatelessWidget {
                       width: Get.width * 0.5,
                       child: Text(
                         subTitle ?? "",
-                        style: AppTextStyle.blackFontSize12W400,
+                        style: AppTextStyle.fontSize13BlackW400,
                       ),
                     ),
                   ],

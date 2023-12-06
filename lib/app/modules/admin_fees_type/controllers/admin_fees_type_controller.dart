@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/admin_fees_group/controllers/admin_fees_group_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_fees_model/admin_fees_type_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_fees_model/fees_group_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminFeesTypeController extends GetxController {
   LoadingController loadingController = Get.find();
+  AdminFeesGroupController adminFeesGroupController = Get.put(AdminFeesGroupController());
 
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
   RxList<FeesTypes> feesTypeList = <FeesTypes>[].obs;
-
+  Rx<FeesTypes> feesTypeInitialValue = FeesTypes(id: -1, name: "name").obs;
+  RxString feesTypeNullValue = "".obs;
   RxBool createUpdateLoader = false.obs;
   RxBool deleteLoader = false.obs;
+  RxInt groupId = 0.obs;
 
   Future<AdminFeesTypeResponseModel> getFeesListList() async {
     try {
@@ -174,17 +180,16 @@ class AdminFeesTypeController extends GetxController {
     Function()? onTapCancel,
   }) {
     Get.bottomSheet(
-      Container(
-        height: Get.height * 0.45,
-        decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(8),
-              topLeft: Radius.circular(8),
-            ),
-            color: bottomSheetBackgroundColor),
-        child: SingleChildScrollView(
+      Obx(
+        () => Container(
+          height: Get.height * 0.5,
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(8),
+                topLeft: Radius.circular(8),
+              ),
+              color: bottomSheetBackgroundColor),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 height: Get.height * 0.1,
@@ -224,56 +229,79 @@ class AdminFeesTypeController extends GetxController {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  children: [
-                    CustomTextFormField(
-                      controller: titleController,
-                      enableBorderActive: true,
-                      focusBorderActive: true,
-                      hintText: "Title",
-                      fillColor: Colors.white,
-                    ),
-                    10.verticalSpacing,
-                    CustomTextFormField(
-                      controller: descriptionController,
-                      enableBorderActive: true,
-                      focusBorderActive: true,
-                      fillColor: Colors.white,
-                      hintText: "Descriptions",
-                    ),
-                  ],
-                ),
-              ),
-
-              Obx(
-                    () => Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      PrimaryButton(
-                        width: Get.width * 0.15,
-                        title: "Cancel",
-                        color: Colors.white,
-                        textStyle: AppTextStyle.fontSize13BlackW400,
-                        borderColor: AppColors.primaryColor,
-                        onTap: onTapCancel,
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              CustomTextFormField(
+                                controller: titleController,
+                                enableBorderActive: true,
+                                focusBorderActive: true,
+                                hintText: "Title",
+                                fillColor: Colors.white,
+                              ),
+                              10.verticalSpacing,
+                              DuplicateDropdown(
+                                dropdownValue: adminFeesGroupController.feesGroupInitialValue.value,
+                                dropdownList: adminFeesGroupController.fessGroupList,
+                                changeDropdownValue: (value) {
+                  
+                                  FeesGroupData feesGroupData = value;
+                  
+                                  adminFeesGroupController.feesGroupInitialValue.value = value ;
+                                  groupId.value = feesGroupData.id!;
+                                  debugPrint("Group name is ${adminFeesGroupController.feesGroupInitialValue.value}");
+                                  debugPrint("ID  is $groupId}");
+                                },
+                              ),
+                              10.verticalSpacing,
+                              CustomTextFormField(
+                                controller: descriptionController,
+                                enableBorderActive: true,
+                                focusBorderActive: true,
+                                fillColor: Colors.white,
+                                hintText: "Descriptions",
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      createUpdateLoader.value || deleteLoader.value
-                          ? const CircularProgressIndicator()
-                          : PrimaryButton(
-                        width: Get.width * 0.2,
-                        title: "Save",
-                        textStyle: AppTextStyle.textStyle12WhiteW500,
-                        onTap: onTapForSave,
+                      10.verticalSpacing,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PrimaryButton(
+                              width: Get.width * 0.15,
+                              title: "Cancel",
+                              color: Colors.white,
+                              textStyle: AppTextStyle.fontSize13BlackW400,
+                              borderColor: AppColors.primaryColor,
+                              onTap: onTapCancel,
+                            ),
+                            createUpdateLoader.value || deleteLoader.value
+                                ? const CircularProgressIndicator()
+                                : PrimaryButton(
+                              width: Get.width * 0.2,
+                              title: "Save",
+                              textStyle: AppTextStyle.textStyle12WhiteW500,
+                              onTap: onTapForSave,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
+
 
             ],
           ),

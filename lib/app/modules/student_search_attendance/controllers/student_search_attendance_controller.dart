@@ -36,11 +36,12 @@ class StudentSearchAttendanceController extends GetxController {
 
   Map<DateTime, List<Event>> customEventList = {};
   EventList<Event>? eventList;
-  List<Attendances> attendanceList = [];
+  RxList<Attendances> attendanceList = <Attendances>[].obs;
 
   int? subjectId;
 
   void setEventData() {
+
     if (attendanceList.isNotEmpty) {
       customEventList[DateTime(
           attendanceList[0].attendanceDate!.year,
@@ -86,9 +87,8 @@ class StudentSearchAttendanceController extends GetxController {
         absent.value = attendanceResponseModel.data?.absent ?? 0;
         holiday.value = attendanceResponseModel.data?.holidayDay ?? 0;
 
-        currentDate =
-            DateTime.tryParse(attendanceResponseModel.data!.currentDay!) ??
-                DateTime.now();
+        // currentDate = DateTime.tryParse(attendanceResponseModel.data!.currentDay!) ?? DateTime.now();
+
         if (attendanceResponseModel.data!.attendances!.isNotEmpty) {
           for (int i = 0;
               i < attendanceResponseModel.data!.attendances!.length;
@@ -130,6 +130,8 @@ class StudentSearchAttendanceController extends GetxController {
     try {
       loadingController.isLoading = true;
 
+      eventList?.clear();
+      attendanceList.clear();
       final response = await BaseClient().getData(
         url: InfixApi.getStudentAttendanceWithDate(
           recordId: recordId,
@@ -151,9 +153,9 @@ class StudentSearchAttendanceController extends GetxController {
         absent.value = attendanceResponseModel.data?.absent ?? 0;
         holiday.value = attendanceResponseModel.data?.holidayDay ?? 0;
 
-        currentDate =
-            DateTime.tryParse(attendanceResponseModel.data!.currentDay!) ??
-                DateTime.now();
+        /// current date changed
+        currentDate = DateTime.tryParse(attendanceResponseModel.data!.currentDay!) ?? DateTime.now();
+
         if (attendanceResponseModel.data!.attendances!.isNotEmpty) {
           for (int i = 0;
               i < attendanceResponseModel.data!.attendances!.length;
@@ -167,13 +169,14 @@ class StudentSearchAttendanceController extends GetxController {
                 date: DateTime(
                   attendanceList[i].attendanceDate!.year,
                   attendanceList[i].attendanceDate!.month,
-                  attendanceList[i].attendanceDate!.day,
+                  attendanceList[i].attendanceDate!.day
                 ),
                 dot: GlobalVariable.getAttendanceStatus(
                     attendanceList[i].attendanceType ?? ""),
               )
             ];
           }
+
         }
       }
     } catch (e, t) {
@@ -260,6 +263,9 @@ class StudentSearchAttendanceController extends GetxController {
     try {
       loadingController.isLoading = true;
 
+      eventList?.clear();
+      attendanceList.clear();
+
       final response = await BaseClient().getData(
         url: InfixApi.getStudentSubjectSearchAttendanceWithDate(
           recordId: recordId,
@@ -318,12 +324,15 @@ class StudentSearchAttendanceController extends GetxController {
 
   @override
   void onInit() {
+
     fromStatus.value = Get.arguments["from"];
+
     if (homeController.studentRecordList.isNotEmpty) {
       recordId.value = homeController.studentRecordList[0].id;
     }
 
     if (fromStatus.value) {
+
       subjectId = Get.arguments["subjectID"];
 
       getSearchSubjectAttendanceList(

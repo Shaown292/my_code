@@ -29,6 +29,7 @@ class PrimaryButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: height ?? 40,
+        width: width,
         decoration: ShapeDecoration(
           color: color ?? AppColors.primaryColor,
           shape: RoundedRectangleBorder(

@@ -27,29 +27,7 @@ class GlobalVariable {
   };
 
   static getAttendanceStatus(String attendanceStatus) {
-    // debugPrint("status is::::::: $attendanceStatus");
-    // switch (attendanceStatus) {
-    //   case "P":
-    //     presentEvent;
-    //     debugPrint("1 status is::::::: $attendanceStatus");
-    //     break;
-    //   case "A":
-    //     absentEvent;
-    //     debugPrint("2 status is::::::: $attendanceStatus");
-    //     break;
-    //   case "H":
-    //     halfDayEvent;
-    //     debugPrint("3 status is::::::: $attendanceStatus");
-    //     break;
-    //   case "L":
-    //     lateEvent;
-    //     debugPrint("4 status is::::::: $attendanceStatus");
-    //     break;
-    //   case "F":
-    //     halfDayEvent;
-    //     debugPrint("5 status is::::::: $attendanceStatus");
-    //     break;
-    // }
+
     if (attendanceStatus == "P"){
      return presentEvent;
     }

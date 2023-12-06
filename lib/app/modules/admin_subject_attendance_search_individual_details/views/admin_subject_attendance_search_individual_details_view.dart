@@ -37,18 +37,18 @@ class AdminSubjectAttendanceSearchIndividualDetailsView
                               itemCount: 1,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Obx(
-                                      () => StudyButton(
-                                        title: "Five (Rose)",
-                                        onItemTap: () {
-                                          controller.selectIndex.value = index;
-                                        },
-                                        isSelected:
-                                            controller.selectIndex.value ==
-                                                index,
-                                      ),
-                                    ));
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Obx(
+                                    () => StudyButton(
+                                      title: "Five (Rose)",
+                                      onItemTap: () {
+                                        controller.selectIndex.value = index;
+                                      },
+                                      isSelected:
+                                          controller.selectIndex.value == index,
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                           ),

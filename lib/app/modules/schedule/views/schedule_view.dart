@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/schedule/views/widget/schedule_details_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -63,19 +64,14 @@ class ScheduleView extends GetView<ScheduleController> {
                     ? const LoadingWidget()
                     : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-                      child: CustomDropdown(
-                          dropdownValue: controller.dropdownValue.value,
+                      child: DuplicateDropdown(
+                          dropdownValue: controller.examinationController.dropdownValue.value,
                           dropdownList: controller
-                              .examinationController.examDropdownList
-                              .map((item) => item.toString())
-                              .toList(),
+                              .examinationController.dropdownList,
                           changeDropdownValue: (v) {
-                            controller.dropdownValue.value = v!;
+                            controller.examinationController.dropdownValue.value = v!;
                             controller.scheduleList.clear();
-                            int examId = controller
-                                    .examinationController.examDropdownIdList[
-                                controller.examinationController.examDropdownList
-                                    .indexOf(v)];
+                            int examId = v.id;
                             int recordId =
                                 controller.homeController.studentRecordList[0].id;
                             controller.getStudentExamScheduleList(

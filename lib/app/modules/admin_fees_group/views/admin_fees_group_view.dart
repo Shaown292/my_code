@@ -30,6 +30,7 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                 child: RefreshIndicator(
                   color: AppColors.primaryColor,
                   onRefresh: () async {
+                    controller.fessGroupList.clear();
                     controller.getFeesGroupList();
                   },
                   child: controller.loadingController.isLoading
@@ -45,6 +46,7 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                                 return DeleteTile(
                                   title:
                                       "${index + 1}. ${controller.fessGroupList[index].name}",
+                                  subTitle: controller.fessGroupList[index].description,
 
                                   /// Delete button
                                   rightIconBackgroundColor:

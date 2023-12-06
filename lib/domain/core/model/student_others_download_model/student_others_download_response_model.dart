@@ -32,6 +32,7 @@ class StudentOthersDownloadData {
   String? uploadDate;
   String? contentTitle;
   String? availableFor;
+  String? uploadFile;
 
   StudentOthersDownloadData({this.id, this.uploadDate, this.contentTitle, this.availableFor});
 
@@ -40,6 +41,7 @@ class StudentOthersDownloadData {
     uploadDate = json['upload_date'];
     contentTitle = json['content_title'];
     availableFor = json['available_for'];
+    uploadFile = json['upload_file'];
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +50,7 @@ class StudentOthersDownloadData {
     data['upload_date'] = uploadDate;
     data['content_title'] = contentTitle;
     data['available_for'] = availableFor;
+    data['upload_file'] = uploadFile;
     return data;
   }
 }

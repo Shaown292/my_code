@@ -10,12 +10,12 @@ class AdminSubjectAttendanceSearchController extends GetxController {
       Get.put(AdminStudentsSearchController());
 
   TextEditingController selectedDateTextController = TextEditingController(
-      text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
+    text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString(),
+  );
 
   RxString classNullValue = ''.obs;
   RxString sectionNullValue = ''.obs;
   RxString subjectNullValue = ''.obs;
-
 
   void selectDate() async {
     DateTime? dateTime = await DatePickerUtils().pickDate(

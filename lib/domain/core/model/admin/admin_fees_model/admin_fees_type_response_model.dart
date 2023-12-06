@@ -57,7 +57,7 @@ class FeesTypes {
     id = json['id'];
     name = json['name'];
     description = json['description'];
-    feesGroup = json['fees_group'];
+    feesGroup = json['fees_group_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -65,7 +65,7 @@ class FeesTypes {
     data['id'] = id;
     data['name'] = name;
     data['description'] = description;
-    data['fees_group'] = feesGroup;
+    data['fees_group_id'] = feesGroup;
     return data;
   }
 }

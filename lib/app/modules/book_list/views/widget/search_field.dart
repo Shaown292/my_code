@@ -8,6 +8,7 @@ class SearchField extends StatelessWidget {
   final Function()? onTap;
   final bool isTextFieldEmpty;
   final Widget? icon;
+  final TextStyle? hintTextStyle;
 
   const SearchField({
     super.key,
@@ -15,7 +16,7 @@ class SearchField extends StatelessWidget {
     this.onChange,
     this.isTextFieldEmpty = false,
     this.onTap,
-    this.icon,
+    this.icon, this.hintTextStyle,
   });
 
   @override
@@ -23,10 +24,7 @@ class SearchField extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
           hintText: "Search",
-          hintStyle: TextStyle(
-              color: AppColors.profileDividerColor,
-              fontSize: 12,
-              fontWeight: FontWeight.w400),
+          hintStyle: hintTextStyle,
           suffixIcon: icon,
           focusedBorder: OutlineInputBorder(
             borderSide:
