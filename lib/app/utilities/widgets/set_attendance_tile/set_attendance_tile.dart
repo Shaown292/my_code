@@ -87,61 +87,6 @@ class SetAttendanceTile extends StatelessWidget {
                     10.verticalSpacing,
                     Text("Class: $studentClass  |  Section: $section"),
                     10.verticalSpacing,
-
-                    // SizedBox(
-                    //   height: 100,
-                    //   child: ListView.builder(
-                    //     scrollDirection: Axis.horizontal,
-                    //     itemCount: 4,
-                    //     itemBuilder: (context, index) {
-                    //       return RadioListTile(
-                    //           title: const Text("Present"),
-                    //           groupValue: title,
-                    //           onChanged: onChanged,
-                    //           value: value[id],
-                    //     },
-                    //   ),
-                    // )
-                    // SizedBox(
-                    //   height: 100,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       RadioListTile(
-                    //         title: Text(title ?? ""),
-                    //         value: value,
-                    //         groupValue: groupValue,
-                    //         onChanged:  (value) {
-                    //
-                    //         } ,
-                    //       ),
-                    //       RadioListTile(
-                    //         title: Text(title ?? ""),
-                    //         value: value,
-                    //         groupValue: groupValue,
-                    //         onChanged:  (value) {
-                    //
-                    //         } ,
-                    //       ),
-                    //       RadioListTile(
-                    //         title: Text(title ?? ""),
-                    //         value: value,
-                    //         groupValue: groupValue,
-                    //         onChanged:  (value) {
-                    //
-                    //         } ,
-                    //       ),
-                    //       RadioListTile(
-                    //         title: Text(title ?? ""),
-                    //         value: value,
-                    //         groupValue: groupValue,
-                    //         onChanged:  (value) {
-                    //
-                    //         } ,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

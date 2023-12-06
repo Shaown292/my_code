@@ -4,7 +4,6 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/set_attendance_tile/set_attendance_tile.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/student_list_tile/student_list_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 
@@ -31,78 +30,100 @@ class AdminSubjectAttendanceSearchListView
                 children: [
                   const Text(
                       "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.primaryColor,
-                      ),
-                      child: const Text(
-                        "Mark Holiday",
-                        style: AppTextStyle.textStyle12WhiteW400,
-                      ),
-                    ),
-                  )
+                  Obx(
+                    () => controller.holidayLoader.value
+                        ? const CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          )
+                        : InkWell(
+                            onTap: () {
+                              controller.markHoliday.value =
+                                  !controller.markHoliday.value;
+                              controller.markUnMarkHoliday(
+                                purpose: controller.markHoliday.value
+                                    ? 'mark'
+                                    : 'unmark',
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: AppColors.primaryColor,
+                              ),
+                              child: Text(
+                                controller.markHoliday.value
+                                    ? "Unmark Holiday"
+                                    : "Mark Holiday",
+                                style: AppTextStyle.textStyle12WhiteW400,
+                              ),
+                            ),
+                          ),
+                  ),
                 ],
               ),
               10.verticalSpacing,
-              Obx(() => controller.isLoading.value ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) : controller.adminStudentSubSearchList.isNotEmpty ? Expanded(
-                child: ListView.builder(
-                  itemCount: controller.adminStudentSubSearchList.length,
-                  itemBuilder: (context, index) {
+              Obx(
+                () => controller.isLoading.value
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ))
+                    : controller.adminStudentSubSearchList.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                              itemCount:
+                                  controller.adminStudentSubSearchList.length,
+                              itemBuilder: (context, index) {
+                                var data =
+                                    controller.adminStudentSubSearchList[index];
 
-                    var data = controller.adminStudentSubSearchList[index];
-
-                    return SetAttendanceTile(
-                      studentName: data.fullName,
-                      section:data.section,
-                      studentClass:data.className,
-                      imageUrl: data.studentPhoto,
-                      onPresentButtonTap: () {
-                        controller.updateAttendance(
-                                  index: index,
-                                  attendanceType: 'P',
+                                return SetAttendanceTile(
+                                  studentName: data.fullName,
+                                  section: data.section,
+                                  studentClass: data.className,
+                                  imageUrl: data.studentPhoto,
+                                  onPresentButtonTap: () {
+                                    controller.updateAttendanceStatus(
+                                      index: index,
+                                      attendanceType: 'P',
+                                    );
+                                  },
+                                  onAbsentButtonTap: () {
+                                    controller.updateAttendanceStatus(
+                                      index: index,
+                                      attendanceType: 'A',
+                                    );
+                                  },
+                                  onLateButtonTap: () {
+                                    controller.updateAttendanceStatus(
+                                      index: index,
+                                      attendanceType: 'L',
+                                    );
+                                  },
+                                  onHalfDayButtonTap: () {
+                                    controller.updateAttendanceStatus(
+                                      index: index,
+                                      attendanceType: 'H',
+                                    );
+                                  },
+                                  attendanceType: data.attendanceType ?? '',
                                 );
-
-                      },
-                      onAbsentButtonTap: () {
-                        controller.updateAttendance(
-                                  index: index,
-                                  attendanceType: 'A',
-                                );
-
-                      },
-                      onLateButtonTap: () {
-                        controller.updateAttendance(
-                                  index: index,
-                                  attendanceType: 'L',
-                                );
-
-                      },
-                      onHalfDayButtonTap: () {
-                        controller.updateAttendance(
-                                  index: index,
-                                  attendanceType: 'H',
-                                );
-
-                      },
-                      attendanceType: data.attendanceType ?? '',
-                    );
-                  },
-                ),
-              ) : const NoDataAvailableWidget(),),
+                              },
+                            ),
+                          )
+                        : const NoDataAvailableWidget(),
+              ),
               30.verticalSpacing,
               Obx(
-                    () => controller.saveLoader.value
+                () => controller.saveLoader.value
                     ? const CircularProgressIndicator()
                     : PrimaryButton(
-                  text: "Save",
-                  onTap: () {
-                    controller.dataFilteringForApiCall();
-                  },
-                ),
+                        text: "Save",
+                        onTap: () {
+                          controller.dataFilteringForApiCall();
+                        },
+                      ),
               ),
               30.verticalSpacing
             ],

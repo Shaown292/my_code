@@ -20,6 +20,8 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
   RxString attendanceDate = ''.obs;
   RxBool isLoading = false.obs;
   RxBool saveLoader = false.obs;
+  RxBool markHoliday = false.obs;
+  RxBool holidayLoader = false.obs;
 
   RxList<AdminStudentsSubSearchData> adminStudentSubSearchList =
       <AdminStudentsSubSearchData>[].obs;
@@ -90,7 +92,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
 
 
 
-  void updateAttendance({
+  void updateAttendanceStatus({
     required int index,
     required String attendanceType,
   }) {
@@ -164,7 +166,50 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
   }
 
 
+  Future<PostRequestResponseModel> markUnMarkHoliday(
+      {required String purpose}) async {
+    try {
+      holidayLoader.value = true;
 
+      final response = await BaseClient().postData(
+          url: InfixApi.adminAttendanceMarkUnMarkHolyDay,
+          header: GlobalVariable.header,
+          payload: {
+            'purpose': purpose,
+            'class_id': classId.value,
+            'section_id': sectionId.value,
+            'attendance_date': attendanceDate.value,
+          });
+
+      PostRequestResponseModel postRequestResponseModel =
+      PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        holidayLoader.value = false;
+        for (int i = 0; i < adminStudentSubSearchList.length; i++) {
+          adminStudentSubSearchList[i].attendanceType =
+          markHoliday.value ? '' : 'P';
+        }
+        adminStudentSubSearchList.refresh();
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'Upload Successful');
+      } else {
+        holidayLoader.value = false;
+        showBasicFailedSnackBar(
+          message:
+          postRequestResponseModel.message ?? AppText.somethingWentWrong,
+        );
+      }
+    } catch (e, t) {
+      holidayLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      holidayLoader.value = false;
+    }
+
+    return PostRequestResponseModel();
+  }
 
 
   @override
