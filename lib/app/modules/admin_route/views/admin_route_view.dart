@@ -89,8 +89,10 @@ class AdminRouteView extends GetView<AdminRouteController> {
                         ],
                       ),
                     ),
-                    controller.loadingController.isLoading ?
-                        const CircularProgressIndicator(color: AppColors.primaryColor,) :
+
+                    /// Route List
+                    Obx(() => controller.loadingController.isLoading ?
+                    const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) :
                     ListView.builder(
                       itemCount: controller.adminTransportRouteList.length,
                       itemBuilder: (context, index) {
@@ -106,7 +108,7 @@ class AdminRouteView extends GetView<AdminRouteController> {
                           tapRightButton: () => Get.dialog(
                             Obx(
                                   () => CustomPopupDialogue(
-                                isLoading: controller.loadingController.isLoading,
+                                isLoading: controller.deleteLoader.value,
                                 onYesTap: () {
 
                                 },
@@ -128,7 +130,7 @@ class AdminRouteView extends GetView<AdminRouteController> {
                           },
                         );
                       },
-                    ),
+                    )),
                   ],
                 ),
               ),

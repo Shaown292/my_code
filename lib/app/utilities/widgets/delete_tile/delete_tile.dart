@@ -53,22 +53,25 @@ class DeleteTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title ?? "",
-                      style: AppTextStyle.syllabusFontSize16W500,
-                    ),
-                    5.verticalSpacing,
-                    SizedBox(
-                      width: Get.width * 0.5,
-                      child: Text(
-                        subTitle ?? "",
-                        style: AppTextStyle.fontSize13BlackW400,
+                SizedBox(
+                  width: Get.width*0.6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title ?? "",
+                        style: AppTextStyle.syllabusFontSize16W500,
                       ),
-                    ),
-                  ],
+                      5.verticalSpacing,
+                      SizedBox(
+                        width: Get.width * 0.5,
+                        child: Text(
+                          subTitle ?? "",
+                          style: AppTextStyle.fontSize13BlackW400,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Row(
                   children: [

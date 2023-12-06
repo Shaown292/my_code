@@ -18,6 +18,7 @@ class AdminRouteController extends GetxController {
   LoadingController loadingController = Get.find();
   RxBool saveLoader = false.obs;
   RxBool createUpdateLoader = false.obs;
+  RxBool deleteLoader = false.obs;
 
   TabController? tabController;
 
@@ -80,7 +81,7 @@ class AdminRouteController extends GetxController {
         header: GlobalVariable.header,
         payload: {
           "title": routeTitleTextController.text,
-          "far": routeFareTextController.toString(),
+          "far": routeFareTextController.text,
         },
       );
 
