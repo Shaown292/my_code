@@ -41,24 +41,24 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                   10.verticalSpacing,
 
                   /// Role dropdown
-                  controller.rolesList.isNotEmpty
-                      ? DuplicateDropdown(
+                  controller.rolesLoader.value
+                      ? const CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        )
+                      : DuplicateDropdown(
                           dropdownValue: controller.rolesDropdownValue.value,
                           dropdownList: controller.rolesList,
                           changeDropdownValue: (value) {
                             controller.rolesDropdownValue.value = value!;
                             controller.rolesId.value = value.id;
                           },
-                        )
-                      : const CircularProgressIndicator(
-                          color: AppColors.primaryColor,
                         ),
 
                   /// Student or Parents class
                   controller.rolesId.value == 2 || controller.rolesId.value == 3
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: controller.classList.isEmpty
+                          child: controller.classLoader.value
                               ? const CircularProgressIndicator(
                                   color: AppColors.primaryColor,
                                 )
@@ -77,18 +77,23 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
 
                   /// Student or Parents section
                   controller.rolesId.value == 2 || controller.rolesId.value == 3
-                      ? Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: DuplicateDropdown(
-                            dropdownValue:
-                                controller.sectionDropdownValue.value,
-                            dropdownList: controller.sectionList,
-                            changeDropdownValue: (value) {
-                              controller.sectionDropdownValue.value = value!;
-                              controller.sectionId.value = value.id;
-                            },
-                          ),
-                        )
+                      ? controller.sectionLoader.value
+                          ? const CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: DuplicateDropdown(
+                                dropdownValue:
+                                    controller.sectionDropdownValue.value,
+                                dropdownList: controller.sectionList,
+                                changeDropdownValue: (value) {
+                                  controller.sectionDropdownValue.value =
+                                      value!;
+                                  controller.sectionId.value = value.id;
+                                },
+                              ),
+                            )
                       : const SizedBox(),
                   controller.rolesId.value == 2 || controller.rolesId.value == 3
                       ? 0.verticalSpacing
@@ -97,7 +102,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                   /// Member id
                   controller.rolesId.value == 2 || controller.rolesId.value == 3
                       ? const SizedBox()
-                      : controller.userNameList.isEmpty
+                      : controller.userNameLoader.value
                           ? const CircularProgressIndicator(
                               color: AppColors.primaryColor,
                             )
@@ -112,7 +117,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                             ),
 
                   controller.rolesId.value == 2
-                      ? controller.studentList.isEmpty
+                      ? controller.studentLoader.value
                           ? const CircularProgressIndicator(
                               color: AppColors.primaryColor,
                             )
@@ -127,22 +132,25 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                             )
                       : const SizedBox(),
                   controller.rolesId.value == 3
-                      ? controller.studentList.isEmpty
-                      ? const CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  )
-                      : DuplicateDropdown(
-                    dropdownValue:
-                    controller.parentsDropdownValue.value,
-                    dropdownList: controller.parentsList,
-                    changeDropdownValue: (value) {
-                      controller.parentsDropdownValue.value = value!;
-                      controller.parentsId.value = value.id;
-                    },
-                  )
+                      ? controller.parentLoader.value
+                          ? const CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            )
+                          : DuplicateDropdown(
+                              dropdownValue:
+                                  controller.parentsDropdownValue.value,
+                              dropdownList: controller.parentsList,
+                              changeDropdownValue: (value) {
+                                controller.parentsDropdownValue.value = value!;
+                                controller.parentsId.value = value.id;
+                              },
+                            )
                       : const SizedBox(),
                   50.verticalSpacing,
-                  PrimaryButton(text: "Save", onTap: (){},)
+                  PrimaryButton(
+                    text: "Save",
+                    onTap: () {},
+                  )
                 ],
               ),
             ),
