@@ -10,7 +10,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -78,59 +78,97 @@ class AdminRouteView extends GetView<AdminRouteController> {
                             fillColor: Colors.white,
                           ),
                           30.verticalSpacing,
-                          Obx(() => controller.saveLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : PrimaryButton(
-                            text: "Save",
-                            onTap: () {
-                              if(controller.validation()){
-                                controller.addTransportRoute();
-                              }
-                            },
-                          ),),
+                          Obx(
+                            () => controller.saveLoader.value
+                                ? const CircularProgressIndicator(
+                                    color: AppColors.primaryColor,
+                                  )
+                                : PrimaryButton(
+                                    text: "Save",
+                                    onTap: () {
+                                      if (controller.validation()) {
+                                        controller.addTransportRoute();
+                                      }
+                                    },
+                                  ),
+                          ),
                         ],
                       ),
                     ),
 
                     /// Route List
-                    Obx(() => controller.loadingController.isLoading ?
-                    const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) :
-                    ListView.builder(
-                      itemCount: controller.adminTransportRouteList.length,
-                      itemBuilder: (context, index) {
-                        return DeleteTile(
-                          title:
-                          "${index + 1}. Route Title: ${controller.adminTransportRouteList[index].title}",
-                          subTitle: "Fare: ${controller.adminTransportRouteList[index].far.toString()}",
+                    Obx(
+                      () => controller.loadingController.isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            ))
+                          : controller.adminTransportRouteList.isNotEmpty
+                              ? ListView.builder(
+                                  itemCount:
+                                      controller.adminTransportRouteList.length,
+                                  itemBuilder: (context, index) {
+                                    return DeleteTile(
+                                      title:
+                                          "${index + 1}. Route Title: ${controller.adminTransportRouteList[index].title}",
+                                      subTitle:
+                                          "Fare: ${controller.adminTransportRouteList[index].fare.toString()}",
 
-                          /// Delete button
-                          rightIconBackgroundColor:
-                          const Color(0xFFED3B3B),
-                          rightIcon: ImagePath.delete,
-                          tapRightButton: () => Get.dialog(
-                            Obx(
-                                  () => CustomPopupDialogue(
-                                isLoading: controller.deleteLoader.value,
-                                onYesTap: () {
+                                      /// Delete button
+                                      rightIconBackgroundColor:
+                                          const Color(0xFFED3B3B),
+                                      rightIcon: ImagePath.delete,
+                                      tapRightButton: () => Get.dialog(
+                                        Obx(
+                                          () => CustomPopupDialogue(
+                                            isLoading:
+                                                controller.deleteLoader.value,
+                                            onYesTap: () {
+                                              controller.deleteSingleRoute(
+                                                  routeId: controller
+                                                      .adminTransportRouteList[
+                                                          index]
+                                                      .id!,
+                                                  index: index);
+                                            },
+                                            title: 'Confirmation',
+                                            subTitle: AppText
+                                                .deleteFeesGroupWarningMsg,
+                                            noText: 'cancel',
+                                            yesText: 'delete',
+                                          ),
+                                        ),
+                                      ),
 
-                                },
-                                title: 'Confirmation',
-                                subTitle:
-                                AppText.deleteFeesGroupWarningMsg,
-                                noText: 'cancel',
-                                yesText: 'delete',
-                              ),
-                            ),
-                          ),
-
-                          /// Edit button
-                          leftIcon: ImagePath.edit,
-                          leftIconBackgroundColor:
-                          AppColors.appButtonColor,
-                          tapLeftButton: () {
-
-                          },
-                        );
-                      },
-                    )),
+                                      /// Edit button
+                                      leftIcon: ImagePath.edit,
+                                      leftIconBackgroundColor:
+                                          AppColors.appButtonColor,
+                                      tapLeftButton: () {
+                                        controller.routeTitleTextController
+                                            .text = controller
+                                                .adminTransportRouteList[index]
+                                                .title ??
+                                            '';
+                                        controller
+                                                .routeFareTextController.text =
+                                            controller
+                                                .adminTransportRouteList[index]
+                                                .fare
+                                                .toString();
+                                        controller
+                                            .showUploadDocumentsBottomSheet(
+                                          routeId: controller
+                                              .adminTransportRouteList[index]
+                                              .id!,
+                                          index: index,
+                                        );
+                                      },
+                                    );
+                                  },
+                                )
+                              : const NoDataAvailableWidget(),
+                    ),
                   ],
                 ),
               ),

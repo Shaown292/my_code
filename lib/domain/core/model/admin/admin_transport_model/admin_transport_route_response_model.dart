@@ -30,21 +30,21 @@ class AdminTransportRouteResponseModel {
 class AdminTransportRouteData {
   int? id;
   String? title;
-  int? far;
+  int? fare;
 
-  AdminTransportRouteData({this.id, this.title, this.far});
+  AdminTransportRouteData({this.id, this.title, this.fare});
 
   AdminTransportRouteData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    far = json['far'];
+    fare = json['far'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['title'] = title;
-    data['far'] = far;
+    data['far'] = fare;
     return data;
   }
 }

@@ -345,6 +345,8 @@ class InfixApi {
   static String postAdminTransportRoute = '${baseApi}admin-route-store';
   static String getAdminVehicleAssignRouteAndVehicleList = '${baseApi}assign-vehicle-to-route';
   static String postAdminVehicleAssignRouteAndVehicle = '${baseApi}store-assign-vehicle-to-route';
+  static String postAdminRouteUpdate = '${baseApi}admin-route-update';
+  static String deleteRoute({required int routeId}) => '${baseApi}admin-route-delete?route_id=$routeId';
 
   /// Library
   static String getAdminBookCategoryAndSubjectList = '${baseApi}admin-add-book-dropdown-items';

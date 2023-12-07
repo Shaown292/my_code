@@ -12,6 +12,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_transport_model/admin_transport_route_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminRouteController extends GetxController {
@@ -33,6 +34,7 @@ class AdminRouteController extends GetxController {
   RxList<AdminTransportRouteData> adminTransportRouteList =
       <AdminTransportRouteData>[].obs;
 
+  /// Get Transport List
   Future<AdminTransportRouteResponseModel> getAdminTransportRouteList() async {
     try {
       adminTransportRouteList.clear();
@@ -73,6 +75,7 @@ class AdminRouteController extends GetxController {
     return AdminTransportRouteResponseModel();
   }
 
+  /// Add Transport
   Future<AdminTransportRouteResponseModel> addTransportRoute() async {
     try {
       saveLoader.value = true;
@@ -95,7 +98,7 @@ class AdminRouteController extends GetxController {
             AdminTransportRouteData(
               id: adminTransportRouteResponseModel.data![0].id,
               title: adminTransportRouteResponseModel.data![0].title,
-              far: adminTransportRouteResponseModel.data![0].far,
+              fare: adminTransportRouteResponseModel.data![0].fare,
             ),
           );
         }
@@ -122,6 +125,88 @@ class AdminRouteController extends GetxController {
     return AdminTransportRouteResponseModel();
   }
 
+  /// Delete Single Fees Type
+  Future<PostRequestResponseModel> deleteSingleRoute(
+      {required int routeId, required int index}) async {
+    try {
+      deleteLoader.value = true;
+      final response = await BaseClient().postData(
+          url: InfixApi.deleteRoute(routeId: routeId),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        deleteLoader.value = false;
+        Get.back();
+        adminTransportRouteList.removeAt(index);
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'Data deleted');
+      } else {
+        deleteLoader.value = false;
+        showBasicFailedSnackBar(
+            message:
+                postRequestResponseModel.message ?? 'Something went wrong');
+      }
+    } catch (e, t) {
+      deleteLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      deleteLoader.value = false;
+    }
+
+    return PostRequestResponseModel();
+  }
+
+  /// Update or Edit Fees Type
+  Future<void> updateRoute({
+    required int routeId,
+    required int index,
+  }) async {
+    try {
+      createUpdateLoader.value = true;
+
+      final response = await BaseClient().postData(
+        url: InfixApi.postAdminRouteUpdate,
+        header: GlobalVariable.header,
+        payload: {
+          "route_id": routeId,
+          "title": routeTitleTextController.text,
+          "far": routeFareTextController.text,
+        },
+      );
+
+      AdminTransportRouteResponseModel adminTransportRouteResponseModel =
+          AdminTransportRouteResponseModel.fromJson(response);
+      if (adminTransportRouteResponseModel.success == true) {
+        adminTransportRouteList[index].id =
+            adminTransportRouteResponseModel.data!.first.id;
+        adminTransportRouteList[index].title =
+            adminTransportRouteResponseModel.data!.first.title;
+        adminTransportRouteList[index].fare =
+            adminTransportRouteResponseModel.data!.first.fare;
+
+        routeTitleTextController.clear();
+        routeFareTextController.clear();
+        createUpdateLoader.value = false;
+        adminTransportRouteList.refresh();
+        Get.back();
+      } else {
+        createUpdateLoader.value = false;
+        showBasicFailedSnackBar(
+            message: adminTransportRouteResponseModel.message ??
+                'Something went wrong');
+      }
+    } catch (e, t) {
+      createUpdateLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      createUpdateLoader.value = false;
+    }
+  }
+
   bool validation() {
     if (routeTitleTextController.text.isEmpty) {
       showBasicFailedSnackBar(message: 'Select Route Title.');
@@ -137,12 +222,10 @@ class AdminRouteController extends GetxController {
   }
 
   void showUploadDocumentsBottomSheet({
-    Function()? onTapForSave,
     Color? bottomSheetBackgroundColor,
     String? header,
-    TextEditingController? titleController,
-    TextEditingController? descriptionController,
-    Function()? onTapCancel,
+    required int routeId,
+    required int index,
   }) {
     Get.bottomSheet(
       Container(
@@ -200,25 +283,25 @@ class AdminRouteController extends GetxController {
                 child: Column(
                   children: [
                     CustomTextFormField(
-                      controller: titleController,
+                      controller: routeTitleTextController,
                       enableBorderActive: true,
                       focusBorderActive: true,
-                      hintText: "Title",
+                      hintText: "Title*",
                       fillColor: Colors.white,
                     ),
                     10.verticalSpacing,
                     CustomTextFormField(
-                      controller: descriptionController,
+                      controller: routeFareTextController,
                       enableBorderActive: true,
                       focusBorderActive: true,
                       fillColor: Colors.white,
-                      hintText: "Descriptions",
+                      hintText: "Fare*",
                     ),
                   ],
                 ),
               ),
               Obx(
-                    () => Padding(
+                () => Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 20.0, vertical: 30),
                   child: Row(
@@ -230,16 +313,19 @@ class AdminRouteController extends GetxController {
                         color: Colors.white,
                         textStyle: AppTextStyle.fontSize13BlackW400,
                         borderColor: AppColors.primaryColor,
-                        onTap: onTapCancel,
+                        onTap: (() => Get.back()),
                       ),
                       createUpdateLoader.value
                           ? const CircularProgressIndicator()
                           : PrimaryButton(
-                        width: Get.width * 0.2,
-                        title: "Save",
-                        textStyle: AppTextStyle.textStyle12WhiteW500,
-                        onTap: onTapForSave,
-                      ),
+                              width: Get.width * 0.2,
+                              title: "Save",
+                              textStyle: AppTextStyle.textStyle12WhiteW500,
+                              onTap: (() => updateRoute(
+                                    routeId: routeId,
+                                    index: index,
+                                  )),
+                            ),
                     ],
                   ),
                 ),
