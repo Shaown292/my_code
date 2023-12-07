@@ -21,7 +21,9 @@ class DormitoryView extends GetView<DormitoryController> {
           customWidget: Column(
             children: [
               controller.loadingController.isLoading
-                  ? const LoadingWidget()
+                  ? const Expanded(
+                      child: LoadingWidget(),
+                    )
                   : controller.dormitoryList.isNotEmpty
                       ? Expanded(
                           child: ListView.builder(

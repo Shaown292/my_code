@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
@@ -58,7 +59,7 @@ class StaffTile extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: AssetImage(staffImage ?? ""),
+                            image: AssetImage(ImagePath.dp),
                           ),
                         ),
                       ),
@@ -67,9 +68,9 @@ class StaffTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Name :  ${staffName ?? ""}"),
-                    Text("Phone : ${staffAddress ?? ""}"),
-                    Text("Address : ${staffPhoneNo ?? ""}"),
+                    Text("Name :  ${staffName ?? AppText.noDataAvailable}"),
+                    Text("Phone : ${staffAddress ?? AppText.noDataAvailable}"),
+                    Text("Address : ${staffPhoneNo ?? AppText.noDataAvailable}"),
                   ],
                 )
               ],

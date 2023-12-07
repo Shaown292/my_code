@@ -13,7 +13,7 @@ class StaffIndividualDetailsController extends GetxController {
 
   AdminIndividualStaffDetailsResponseModel? adminIndividualStaffDetailsResponseModel;
 
-  Future<void> getIndividualStaffData({required int staffIndividualId}) async {
+  Future getIndividualStaffData({required int staffIndividualId}) async {
     try {
       loadingController.isLoading = true;
 

@@ -11,38 +11,46 @@ import '../controllers/admin_room_list_controller.dart';
 
 class AdminRoomListView extends GetView<AdminRoomListController> {
   const AdminRoomListView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return InfixEduScaffold(
-      title: "Room",
-      body: CustomBackground(
-        customWidget: Column(
-          children: [
-            Obx(() => Expanded(
-              child: controller.loadingController.isLoading ? const Column(
-                children: [
-                  LoadingWidget(),
-                ],
-              ) : controller.dormitoryRoomList.isNotEmpty ? RefreshIndicator(
-                onRefresh: () async {
-                  controller.getDormitoryRoomList();
-                },
-                child: ListView.builder(
-                  itemCount: controller.dormitoryRoomList.length,
-                  itemBuilder: (context, index) {
-                    return DormitoryCardTile(
-                      dormitoryName: controller.dormitoryRoomList[index].dormitory,
-                      roomNoName: '${controller.dormitoryRoomList[index].name}',
-                      cost: controller.dormitoryRoomList[index].costPerBed,
-                      numberOfBed: controller.dormitoryRoomList[index].numberOfBed,
-                      roomType: controller.dormitoryRoomList[index].roomType,
-                      isAdminRoomList: true,
-                    );
-                  },
-                ),
-              ) : const NoDataAvailableWidget(),
-            ),),
-          ],
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Room",
+        body: CustomBackground(
+          customWidget: Column(
+            children: [
+              controller.loadingController.isLoading
+                  ? const Expanded(child: LoadingWidget())
+                  : Expanded(
+                      child: controller.dormitoryRoomList.isNotEmpty
+                          ? RefreshIndicator(
+                              onRefresh: () async {
+                                controller.getDormitoryRoomList();
+                              },
+                              child: ListView.builder(
+                                itemCount: controller.dormitoryRoomList.length,
+                                itemBuilder: (context, index) {
+                                  return DormitoryCardTile(
+                                    dormitoryName: controller
+                                        .dormitoryRoomList[index].dormitory,
+                                    roomNoName:
+                                        '${controller.dormitoryRoomList[index].name}',
+                                    cost: controller
+                                        .dormitoryRoomList[index].costPerBed,
+                                    numberOfBed: controller
+                                        .dormitoryRoomList[index].numberOfBed,
+                                    roomType: controller
+                                        .dormitoryRoomList[index].roomType,
+                                    isAdminRoomList: true,
+                                  );
+                                },
+                              ),
+                            )
+                          : const NoDataAvailableWidget(),
+                    ),
+            ],
+          ),
         ),
       ),
     );

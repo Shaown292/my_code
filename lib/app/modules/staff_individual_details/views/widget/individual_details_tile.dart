@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
@@ -38,12 +39,12 @@ class IndividualDetailsTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Address: ${address ?? ""}",
+                "Address: ${address ?? AppText.noDataAvailable}",
                 style: AppTextStyle.fontSize13BlackW400,
               ),
               10.verticalSpacing,
               Text(
-                "Phone: ${phone ?? ""}",
+                "Phone: ${phone ?? AppText.noDataAvailable}",
                 style: AppTextStyle.fontSize13BlackW400,
               ),
             ],
@@ -55,7 +56,7 @@ class IndividualDetailsTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Text(
-            "Title: ${title ?? ""}",
+            "Title: ${title ?? AppText.noDataAvailable}",
             style: AppTextStyle.fontSize13BlackW400,
           ),
         ),
@@ -65,7 +66,7 @@ class IndividualDetailsTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Text(
-            "Qualification: ${qualification ?? ""}",
+            "Qualification: ${qualification ?? AppText.noDataAvailable}",
             style: AppTextStyle.fontSize13BlackW400,
           ),
         ),
@@ -75,7 +76,7 @@ class IndividualDetailsTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Text(
-            "Marital Status: ${maritalStatus ?? ""}",
+            "Marital Status: ${maritalStatus ?? AppText.noDataAvailable}",
             style: AppTextStyle.fontSize13BlackW400,
           ),
         ),
@@ -85,7 +86,7 @@ class IndividualDetailsTile extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Text(
-            "Joining Date: ${joiningDate ?? ""}",
+            "Joining Date: ${joiningDate ?? AppText.noDataAvailable}",
             style: AppTextStyle.fontSize13BlackW400,
           ),
         ),

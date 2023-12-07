@@ -104,7 +104,9 @@ class BookListView extends GetView<BookListController> {
                   ),
                   controller.searchController.text.isEmpty
                       ? controller.loadingController.isLoading
-                          ? const LoadingWidget()
+                          ? const Expanded(
+                              child: LoadingWidget(),
+                            )
                           : controller.bookListData.isNotEmpty
                               ? Expanded(
                                   child: ListView.builder(

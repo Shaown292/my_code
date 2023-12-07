@@ -23,44 +23,42 @@ class SyllabusView extends GetView<SyllabusController> {
         title: "Syllabus",
         body: CustomBackground(
           customWidget: controller.loadingController.isLoading
-              ? const Column(
-                children: [
-                  LoadingWidget(),
-                ],
-              )
-              : controller.syllabusList.isNotEmpty ? ListView.builder(
-                  itemCount: controller.syllabusList.length,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, int index) => SyllabusTopicWise(
-                    contentTitle:
-                        controller.syllabusList[index].contentTitle ?? '',
-                    topic: controller.syllabusList[index].description ?? '',
-                    date: controller.syllabusList[index].uploadDate ?? '',
-                    onTap: () {
-                      PermissionCheck().checkPermissions(context);
-                      Get.dialog(
-                        CustomPopupDialogue(
-                          onYesTap: () {
-                            Navigator.pop(context);
-                            controller
-                                    .syllabusList[index].uploadFile!.isNotEmpty
-                                ? FileDownloadUtils().downloadFiles(
-                                    url: controller
-                                        .syllabusList[index].uploadFile!,
-                                    title: controller
-                                        .syllabusList[index].contentTitle!)
-                                : showBasicSuccessSnackBar(
-                                    message: 'No File Available.');
-                          },
-                          title: 'Confirmation',
-                          subTitle: AppText.downloadMessage,
-                          noText: 'No',
-                          yesText: 'Download',
-                        ),
-                      );
-                    },
-                  ),
-                ) : const NoDataAvailableWidget(),
+              ? const LoadingWidget()
+              : controller.syllabusList.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: controller.syllabusList.length,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, int index) => SyllabusTopicWise(
+                        contentTitle:
+                            controller.syllabusList[index].contentTitle ?? '',
+                        topic: controller.syllabusList[index].description ?? '',
+                        date: controller.syllabusList[index].uploadDate ?? '',
+                        onTap: () {
+                          PermissionCheck().checkPermissions(context);
+                          Get.dialog(
+                            CustomPopupDialogue(
+                              onYesTap: () {
+                                Navigator.pop(context);
+                                controller.syllabusList[index].uploadFile!
+                                        .isNotEmpty
+                                    ? FileDownloadUtils().downloadFiles(
+                                        url: controller
+                                            .syllabusList[index].uploadFile!,
+                                        title: controller
+                                            .syllabusList[index].contentTitle!)
+                                    : showBasicSuccessSnackBar(
+                                        message: 'No File Available.');
+                              },
+                              title: 'Confirmation',
+                              subTitle: AppText.downloadMessage,
+                              noText: 'No',
+                              yesText: 'Download',
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  : const NoDataAvailableWidget(),
         ),
       ),
     );

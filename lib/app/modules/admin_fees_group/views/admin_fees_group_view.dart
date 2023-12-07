@@ -26,6 +26,11 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
         body: CustomBackground(
           customWidget: Column(
             children: [
+              controller.loadingController.isLoading
+                  ? const Expanded(
+                child: LoadingWidget(),
+              )
+                  :
               Expanded(
                 child: RefreshIndicator(
                   color: AppColors.primaryColor,
@@ -33,20 +38,15 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                     controller.feesGroupList.clear();
                     controller.getFeesGroupList();
                   },
-                  child: controller.loadingController.isLoading
-                      ? const Column(
-                          children: [
-                            LoadingWidget(),
-                          ],
-                        )
-                      : controller.feesGroupList.isNotEmpty
+                  child: controller.feesGroupList.isNotEmpty
                           ? ListView.builder(
                               itemCount: controller.feesGroupList.length,
                               itemBuilder: (context, index) {
                                 return DeleteTile(
                                   title:
                                       "${index + 1}. ${controller.feesGroupList[index].name}",
-                                  subTitle: controller.feesGroupList[index].description,
+                                  subTitle: controller
+                                      .feesGroupList[index].description,
 
                                   /// Delete button
                                   rightIconBackgroundColor:

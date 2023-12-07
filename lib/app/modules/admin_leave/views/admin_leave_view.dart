@@ -56,11 +56,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                     ///Pending
                     Obx(
                       () => controller.loadingController.isLoading
-                          ? const Column(
-                              children: [
-                                LoadingWidget(),
-                              ],
-                            )
+                          ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,),)
                           : controller.pendingLeaveList.isNotEmpty
                               ? RefreshIndicator(
                                   onRefresh: () async {
@@ -126,11 +122,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
 
                     Obx(
                       () => controller.loadingController.isLoading
-                          ? const Column(
-                              children: [
-                                LoadingWidget(),
-                              ],
-                            )
+                          ? const  Center(child: CircularProgressIndicator(color: AppColors.primaryColor,),)
                           : controller.approveLeaveList.isNotEmpty
                               ? RefreshIndicator(
                                   onRefresh: () async {
@@ -206,11 +198,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
 
                     Obx(
                       () => controller.loadingController.isLoading
-                          ? const Column(
-                              children: [
-                                LoadingWidget(),
-                              ],
-                            )
+                          ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,),)
                           : controller.rejectedLeaveList.isNotEmpty
                               ? RefreshIndicator(
                                   onRefresh: () async {
