@@ -23,79 +23,64 @@ class AssignmentView extends GetView<AssignmentController> {
     return Obx(
       () => InfixEduScaffold(
         title: "Assignment",
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              RefreshIndicator(
-                onRefresh: () async {
-                  controller.studentAssignmentList.clear();
-                  controller.getStudentAssignmentList();
-                },
-                child: CustomBackground(
-                  customWidget: controller.loadingController.isLoading
-                      ? const Column(
-                        children: [
-                          LoadingWidget(),
-                        ],
-                      )
-                      : controller.studentAssignmentList.isNotEmpty
-                          ? Column(
-                              children: [
-                                20.verticalSpacing,
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: ListView.builder(
-                                      itemCount:
-                                          controller.studentAssignmentList.length,
-                                      shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      itemBuilder: (context, int index) {
-                                        return ContentTile(
+        body: RefreshIndicator(
+          onRefresh: () async {
+            controller.studentAssignmentList.clear();
+            controller.getStudentAssignmentList();
+          },
+          child: CustomBackground(
+            customWidget: controller.loadingController.isLoading
+                ? const LoadingWidget()
+                : controller.studentAssignmentList.isNotEmpty
+                    ? Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ListView.builder(
+                          itemCount:
+                              controller.studentAssignmentList.length,
+                          shrinkWrap: true,
+                          physics:
+                              const BouncingScrollPhysics(),
+                          itemBuilder: (context, int index) {
+                            return ContentTile(
+                              title: controller
+                                  .studentAssignmentList[index]
+                                  .contentTitle,
+                              details:
+                                  "Assigned to ${controller.studentAssignmentList[index].availableFor}",
+                              dueDate: controller
+                                  .studentAssignmentList[index]
+                                  .uploadDate,
+                              cardBackgroundColor: Colors.white,
+                              onTap: () {
+                                PermissionCheck().checkPermissions(context);
+                                Get.dialog(
+                                  CustomPopupDialogue(
+                                    onYesTap: () {
+                                      Navigator.pop(context);
+                                      controller
+                                          .studentAssignmentList[index].uploadFile!.isNotEmpty
+                                          ? FileDownloadUtils().downloadFiles(
+                                          url: controller
+                                              .studentAssignmentList[index].uploadFile!,
                                           title: controller
-                                              .studentAssignmentList[index]
-                                              .contentTitle,
-                                          details:
-                                              "Assigned to ${controller.studentAssignmentList[index].availableFor}",
-                                          dueDate: controller
-                                              .studentAssignmentList[index]
-                                              .uploadDate,
-                                          cardBackgroundColor: Colors.white,
-                                          onTap: () {
-                                            PermissionCheck().checkPermissions(context);
-                                            Get.dialog(
-                                              CustomPopupDialogue(
-                                                onYesTap: () {
-                                                  Navigator.pop(context);
-                                                  controller
-                                                      .studentAssignmentList[index].uploadFile!.isNotEmpty
-                                                      ? FileDownloadUtils().downloadFiles(
-                                                      url: controller
-                                                          .studentAssignmentList[index].uploadFile!,
-                                                      title: controller
-                                                          .studentAssignmentList[index].contentTitle!)
-                                                      : showBasicSuccessSnackBar(
-                                                      message: 'No File Available.');
-                                                },
-                                                title: 'Confirmation',
-                                                subTitle: AppText.downloadMessage,
-                                                noText: 'No',
-                                                yesText: 'Download',
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
+                                              .studentAssignmentList[index].contentTitle!)
+                                          : showBasicSuccessSnackBar(
+                                          message: 'No File Available.');
+                                    },
+                                    title: 'Confirmation',
+                                    subTitle: AppText.downloadMessage,
+                                    noText: 'No',
+                                    yesText: 'Download',
                                   ),
-                                ),
-                              ],
-                            )
-                          : const NoDataAvailableWidget(),
-                ),
-              ),
-            ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    )
+                    : const NoDataAvailableWidget(),
           ),
         ),
       ),
