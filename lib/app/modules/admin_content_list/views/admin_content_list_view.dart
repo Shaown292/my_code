@@ -24,32 +24,26 @@ class AdminContentListView extends GetView<AdminContentListController> {
           onRefresh: () async {
             controller.getAdminContentList();
           },
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Obx(
-                  () => controller.loadingController.isLoading
-                      ? SizedBox(
-                          height: Get.height,
-                          child: const Column(
-                            children: [
-                              LoadingWidget(),
-                            ],
-                          ),
-                        )
-                      : controller.contentList.isNotEmpty
-                          ? ListView.builder(
+          child: Column(
+            children: [
+              Obx(
+                () => controller.loadingController.isLoading
+                    ? const Expanded(
+                        child: LoadingWidget(),
+                      )
+                    : controller.contentList.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
                               shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: controller.contentList.length,
                               itemBuilder: (context, index) {
                                 return ContentTile(
                                   title: controller
                                       .contentList[index].contentTitle,
-                                  contentType:
-                                      controller.contentList[index].contentType,
-                                  date:
-                                      controller.contentList[index].uploadDate,
+                                  contentType: controller
+                                      .contentList[index].contentType,
+                                  date: controller
+                                      .contentList[index].uploadDate,
                                   availableFor: controller
                                       .contentList[index].availableFor,
                                   onDeleteTap: () => controller.showDialog(
@@ -57,23 +51,24 @@ class AdminContentListView extends GetView<AdminContentListController> {
                                         controller.contentList[index].id!,
                                     index: index,
                                   ),
-                                  onDownloadTap: () => controller.fileDownload(
-                                      url: controller
-                                              .contentList[index].uploadFile ??
-                                          '',
-                                      title: controller.contentList[index]
-                                              .contentTitle ??
-                                          ''),
+                                  onDownloadTap: () =>
+                                      controller.fileDownload(
+                                          url: controller.contentList[index]
+                                                  .uploadFile ??
+                                              '',
+                                          title: controller.contentList[index]
+                                                  .contentTitle ??
+                                              ''),
                                 );
                               },
-                            )
-                          : const Center(
-                              child: NoDataAvailableWidget(),
                             ),
-                ),
-                50.verticalSpacing,
-              ],
-            ),
+                          )
+                        : const Center(
+                            child: NoDataAvailableWidget(),
+                          ),
+              ),
+
+            ],
           ),
         ),
       ),
