@@ -7,7 +7,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/study_button/study_button.dart';
 import 'package:get/get.dart';
-import '../../../utilities/widgets/custom_dropdown.dart';
 import '../../../utilities/widgets/loader/loading.widget.dart';
 import '../../../utilities/widgets/no_data_available/no_data_available_widget.dart';
 import '../controllers/result_controller.dart';

@@ -11,7 +11,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_book_model/admin_book_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library_model/admin_book_list_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminBookListController extends GetxController {

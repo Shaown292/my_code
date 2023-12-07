@@ -346,11 +346,19 @@ class InfixApi {
   static String getAdminVehicleAssignRouteAndVehicleList = '${baseApi}assign-vehicle-to-route';
   static String postAdminVehicleAssignRouteAndVehicle = '${baseApi}store-assign-vehicle-to-route';
 
-  /// book
+  /// Library
   static String getAdminBookCategoryAndSubjectList = '${baseApi}admin-add-book-dropdown-items';
   static String postAdminAddBook = '${baseApi}admin-book-store';
   static String createFeesType= '${baseApi}fees-type-store';
   static String updateSingleFeesType= '${baseApi}fees-type-update';
+
+  /// Admin Library Module
+  static String getAdminMemberRolesList = '${baseApi}admin-add-member-roles';
+  static String getAdminMemberUserNameList({required int roleId}) => '${baseApi}admin-add-member-user-names?role_id=$roleId';
+  static String getAdminMemberClassList({required int roleId}) => '${baseApi}admin-add-member-classes?role_id=$roleId';
+  static String getAdminMemberSectionList({required int classId}) => '${baseApi}admin-add-member-sections?class_id=$classId';
+  static String getAdminMemberStudentList({required int classId, required int sectionId}) => '${baseApi}admin-add-member-students?class=$classId&section=$sectionId';
+  static String getAdminMemberParentList({required int classId, required int sectionId}) => '${baseApi}admin-add-member-parents?class=$classId&section=$sectionId';
 
 
 

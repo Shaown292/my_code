@@ -7,7 +7,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_book_model/book_category_and_subject_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library_model/book_category_and_subject_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
