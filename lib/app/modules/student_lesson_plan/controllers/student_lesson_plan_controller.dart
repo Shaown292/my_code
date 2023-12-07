@@ -312,7 +312,7 @@ class StudentLessonPlanController extends GetxController {
   @override
   void onInit() {
     selectTab();
-    if (homeController.studentRecordList.isNotEmpty) {
+    if (homeController.studentRecordList.isNotEmpty && GlobalVariable.userId != null) {
       getLessonPlanList(GlobalVariable.userId!,
           homeController.studentRecordList[0].id);
     }
