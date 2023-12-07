@@ -13,7 +13,7 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library
 import 'package:get/get.dart';
 
 class AdminAddMemberController extends GetxController {
-  TextEditingController idTextController = TextEditingController();
+  TextEditingController uniqueIdTextController = TextEditingController();
 
   /// Loader
   RxBool rolesLoader = false.obs;
@@ -57,7 +57,6 @@ class AdminAddMemberController extends GetxController {
       AdminLibraryAddMemberStudentData(id: -1, name: "Section").obs;
   RxInt studentId = 0.obs;
 
-
   /// Parents List Dropdown
   RxList<AdminLibraryAddMemberParentsData> parentsList =
       <AdminLibraryAddMemberParentsData>[].obs;
@@ -65,11 +64,10 @@ class AdminAddMemberController extends GetxController {
       AdminLibraryAddMemberParentsData(id: -1, name: "parent_name").obs;
   RxInt parentsId = 0.obs;
 
-
-
   /// Get Member Role List
   Future<AdminLibraryAddMemberRolesResponseModel> getRolesList() async {
     try {
+      rolesList.clear();
       rolesLoader.value = true;
 
       final response = await BaseClient().getData(
@@ -110,6 +108,7 @@ class AdminAddMemberController extends GetxController {
   Future<AdminLibraryAddMemberUserNameResponseModel> getUserNameList(
       {required int roleId}) async {
     try {
+      userNameList.clear();
       userNameLoader.value = true;
 
       final response = await BaseClient().getData(
@@ -153,6 +152,8 @@ class AdminAddMemberController extends GetxController {
   Future<AdminLibraryAddMemberClassResponseModel> getClassList(
       {required int roleId}) async {
     try {
+      print('calling ........');
+      classList.clear();
       classLoader.value = true;
 
       final response = await BaseClient().getData(
@@ -193,6 +194,7 @@ class AdminAddMemberController extends GetxController {
   Future<AdminLibraryAddMemberSectionResponseModel> getSectionList(
       {required int classId}) async {
     try {
+      sectionList.clear();
       sectionLoader.value = true;
 
       final response = await BaseClient().getData(
@@ -233,6 +235,7 @@ class AdminAddMemberController extends GetxController {
   Future<AdminLibraryAddMemberStudentResponseModel> getStudentList(
       {required int classId, required int sectionId}) async {
     try {
+      studentList.clear();
       studentLoader.value = true;
 
       final response = await BaseClient().getData(
@@ -251,7 +254,7 @@ class AdminAddMemberController extends GetxController {
             studentList.add(addMemberStudentResponseModel.data![i]);
           }
           studentDropdownValue.value = studentList[0];
-          studentId.value = studentList[0].id! ;
+          studentId.value = studentList[0].id!;
         }
       } else {
         studentLoader.value = false;
@@ -274,6 +277,7 @@ class AdminAddMemberController extends GetxController {
   Future<AdminLibraryAddMemberParentsResponseModel> getParentsList(
       {required int classId, required int sectionId}) async {
     try {
+      parentsList.clear();
       parentLoader.value = true;
 
       final response = await BaseClient().getData(
@@ -292,7 +296,7 @@ class AdminAddMemberController extends GetxController {
             parentsList.add(addMemberParentsResponseModel.data![i]);
           }
           parentsDropdownValue.value = parentsList[0];
-          parentsId.value = parentsList[0].id! ;
+          parentsId.value = parentsList[0].id!;
         }
       } else {
         parentLoader.value = false;
@@ -311,15 +315,26 @@ class AdminAddMemberController extends GetxController {
     return AdminLibraryAddMemberParentsResponseModel();
   }
 
+  bool validation() {
+    if (rolesList.isEmpty) {
+      showBasicFailedSnackBar(message: 'The member type field is required.');
+      return false;
+    } else if (uniqueIdTextController.text.isEmpty) {
+      showBasicFailedSnackBar(message: 'The Member id is required.');
+      return false;
+    }
+
+    return true;
+  }
 
   @override
   void onInit() {
-    getRolesList();
-    getUserNameList(roleId: 1);
-    getClassList(roleId: 2);
-    getSectionList(classId: 1);
-    getStudentList(classId: 1, sectionId: 1);
-    getParentsList(classId: 1, sectionId: 1);
+    getRolesList().then((value) => getUserNameList(roleId: rolesId.value));
+    // getUserNameList(roleId: 1);
+    // getClassList(roleId: 2);
+    // getSectionList(classId: 1);
+    // getStudentList(classId: 1, sectionId: 1);
+    // getParentsList(classId: 1, sectionId: 1);
 
     super.onInit();
   }

@@ -7,7 +7,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 
 import 'package:get/get.dart';
 
@@ -31,7 +30,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
               child: Column(
                 children: [
                   CustomTextFormField(
-                    controller: controller.idTextController,
+                    controller: controller.uniqueIdTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "Enter ID",
@@ -51,6 +50,14 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                           changeDropdownValue: (value) {
                             controller.rolesDropdownValue.value = value!;
                             controller.rolesId.value = value.id;
+
+                            controller.getUserNameList(
+                                roleId: controller.rolesId.value);
+
+                            if (value.id == 2 || value.id == 3) {
+                              controller.getClassList(
+                                  roleId: controller.rolesId.value);
+                            }
                           },
                         ),
 
@@ -70,6 +77,9 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                                     controller.classDropdownValue.value =
                                         value!;
                                     controller.classId.value = value.id;
+
+                                    controller.getSectionList(
+                                        classId: controller.classId.value);
                                   },
                                 ),
                         )
@@ -91,6 +101,16 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                                   controller.sectionDropdownValue.value =
                                       value!;
                                   controller.sectionId.value = value.id;
+
+                                  if (controller.rolesId.value == 2) {
+                                    controller.getStudentList(
+                                        classId: controller.classId.value,
+                                        sectionId: controller.sectionId.value);
+                                  } else if (controller.rolesId.value == 3) {
+                                    controller.getParentsList(
+                                        classId: controller.classId.value,
+                                        sectionId: controller.sectionId.value);
+                                  }
                                 },
                               ),
                             )
@@ -99,7 +119,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                       ? 0.verticalSpacing
                       : 10.verticalSpacing,
 
-                  /// Member id
+                  /// Member Name
                   controller.rolesId.value == 2 || controller.rolesId.value == 3
                       ? const SizedBox()
                       : controller.userNameLoader.value
@@ -149,7 +169,9 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                   50.verticalSpacing,
                   PrimaryButton(
                     text: "Save",
-                    onTap: () {},
+                    onTap: () {
+                      if (controller.validation()) {}
+                    },
                   )
                 ],
               ),
