@@ -13,7 +13,6 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library
 import 'package:get/get.dart';
 
 class AdminAddMemberController extends GetxController {
-
   TextEditingController idTextController = TextEditingController();
 
   /// Loader
@@ -24,66 +23,83 @@ class AdminAddMemberController extends GetxController {
   RxBool studentLoader = false.obs;
   RxBool parentLoader = false.obs;
 
-  /// Dropdown List
+  /// Roles dropdown
   RxList<AdminAddMemberRoleData> rolesList = <AdminAddMemberRoleData>[].obs;
-  RxList<AdminAddMemberUserNameData> userNameList = <AdminAddMemberUserNameData>[].obs;
-  RxList<AdminLibraryAddMemberClassData> classList = <AdminLibraryAddMemberClassData>[].obs;
-  RxList<AdminAddMemberSectionData> sectionList = <AdminAddMemberSectionData>[].obs;
-  RxList<AdminLibraryAddMemberStudentData> studentList = <AdminLibraryAddMemberStudentData>[].obs;
-  RxList<AdminLibraryAddMemberParentsData> parentsList = <AdminLibraryAddMemberParentsData>[].obs;
+  Rx<AdminAddMemberRoleData> rolesDropdownValue =
+      AdminAddMemberRoleData(id: -1, name: "Roles Name").obs;
+  RxInt rolesId = 0.obs;
 
-  RxString memberCategory = "Driver".obs;
-  RxList<String> memberCategoryList = [
-    "Driver",
-    "Teacher",
-    "Security Guard",
-    "Librarian",
-    "Student",
-    "Parents",
-  ].obs;
+  /// user Name dropdown
+  RxList<AdminAddMemberUserNameData> userNameList =
+      <AdminAddMemberUserNameData>[].obs;
+  Rx<AdminAddMemberUserNameData> userNameDropdownValue =
+      AdminAddMemberUserNameData(id: -1, name: "User Name").obs;
+  RxInt userId = 0.obs;
 
-  RxString memberName = "Sumon".obs;
-  RxList<String> memberNameList = [
-    "Sumon",
-    "Sujon",
-    "Sukhon",
-    "Roton"
-  ].obs;
+  /// Class List dropdown
+  RxList<AdminLibraryAddMemberClassData> classList =
+      <AdminLibraryAddMemberClassData>[].obs;
+  Rx<AdminLibraryAddMemberClassData> classDropdownValue =
+      AdminLibraryAddMemberClassData(id: -1, name: "Class").obs;
+  RxInt classId = 0.obs;
+
+  /// Section List dropdown
+  RxList<AdminAddMemberSectionData> sectionList =
+      <AdminAddMemberSectionData>[].obs;
+  Rx<AdminAddMemberSectionData> sectionDropdownValue =
+      AdminAddMemberSectionData(id: -1, name: "Section").obs;
+  RxInt sectionId = 0.obs;
+
+  /// Student List dropdown
+  RxList<AdminLibraryAddMemberStudentData> studentList =
+      <AdminLibraryAddMemberStudentData>[].obs;
+  Rx<AdminLibraryAddMemberStudentData> studentDropdownValue =
+      AdminLibraryAddMemberStudentData(id: -1, name: "Section").obs;
+  RxInt studentId = 0.obs;
+
+
+  /// Parents List Dropdown
+  RxList<AdminLibraryAddMemberParentsData> parentsList =
+      <AdminLibraryAddMemberParentsData>[].obs;
+  Rx<AdminLibraryAddMemberParentsData> parentsDropdownValue =
+      AdminLibraryAddMemberParentsData(id: -1, name: "Section").obs;
+  RxInt parentsId = 0.obs;
+
 
 
   /// Get Member Role List
   Future<AdminLibraryAddMemberRolesResponseModel> getRolesList() async {
-
-
-    try{
-
+    try {
       rolesLoader.value = true;
 
-      final response = await BaseClient().getData(url: InfixApi.getAdminMemberRolesList, header: GlobalVariable.header);
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminMemberRolesList, header: GlobalVariable.header);
 
-      AdminLibraryAddMemberRolesResponseModel addMemberRolesResponseModel = AdminLibraryAddMemberRolesResponseModel.fromJson(response);
+      AdminLibraryAddMemberRolesResponseModel addMemberRolesResponseModel =
+          AdminLibraryAddMemberRolesResponseModel.fromJson(response);
 
-      if(addMemberRolesResponseModel.success == true){
-
+      if (addMemberRolesResponseModel.success == true) {
         rolesLoader.value = false;
 
-        if(addMemberRolesResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < addMemberRolesResponseModel.data!.length; i++){
+        if (addMemberRolesResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < addMemberRolesResponseModel.data!.length; i++) {
             rolesList.add(addMemberRolesResponseModel.data![i]);
           }
+          rolesDropdownValue.value = rolesList[0];
+          rolesId.value = rolesList[0].id!;
+          debugPrint("jasdjahsjkdhjka :::: ${rolesId.value}");
         }
-
-
-      } else{
+      } else {
         rolesLoader.value = false;
-        showBasicFailedSnackBar(message: addMemberRolesResponseModel.message ?? AppText.somethingWentWrong);
+        showBasicFailedSnackBar(
+            message: addMemberRolesResponseModel.message ??
+                AppText.somethingWentWrong);
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       rolesLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       rolesLoader.value = false;
     }
 
@@ -91,38 +107,42 @@ class AdminAddMemberController extends GetxController {
   }
 
   /// Get User Name list
-  Future<AdminLibraryAddMemberUserNameResponseModel> getUserNameList({required int roleId}) async {
-
-
-    try{
-
+  Future<AdminLibraryAddMemberUserNameResponseModel> getUserNameList(
+      {required int roleId}) async {
+    try {
       userNameLoader.value = true;
 
-      final response = await BaseClient().getData(url: InfixApi.getAdminMemberUserNameList(roleId: roleId), header: GlobalVariable.header);
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminMemberUserNameList(roleId: roleId),
+          header: GlobalVariable.header);
 
-      AdminLibraryAddMemberUserNameResponseModel addMemberUserNameResponseModel = AdminLibraryAddMemberUserNameResponseModel.fromJson(response);
+      AdminLibraryAddMemberUserNameResponseModel
+          addMemberUserNameResponseModel =
+          AdminLibraryAddMemberUserNameResponseModel.fromJson(response);
 
-      if(addMemberUserNameResponseModel.success == true){
-
+      if (addMemberUserNameResponseModel.success == true) {
         userNameLoader.value = false;
 
-        if(addMemberUserNameResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < addMemberUserNameResponseModel.data!.length; i++){
+        if (addMemberUserNameResponseModel.data!.isNotEmpty) {
+          for (int i = 0;
+              i < addMemberUserNameResponseModel.data!.length;
+              i++) {
             userNameList.add(addMemberUserNameResponseModel.data![i]);
           }
+          userNameDropdownValue.value = userNameList[0];
+          userId.value = userNameList[0].id!;
         }
-
-
-      } else{
+      } else {
         userNameLoader.value = false;
-        showBasicFailedSnackBar(message: addMemberUserNameResponseModel.message ?? AppText.somethingWentWrong);
+        showBasicFailedSnackBar(
+            message: addMemberUserNameResponseModel.message ??
+                AppText.somethingWentWrong);
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       userNameLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       userNameLoader.value = false;
     }
 
@@ -130,164 +150,166 @@ class AdminAddMemberController extends GetxController {
   }
 
   /// Get Class List
-  Future<AdminLibraryAddMemberClassResponseModel> getClassList({required int roleId}) async {
-
-
-    try{
-
+  Future<AdminLibraryAddMemberClassResponseModel> getClassList(
+      {required int roleId}) async {
+    try {
       classLoader.value = true;
 
-      final response = await BaseClient().getData(url: InfixApi.getAdminMemberClassList(roleId: roleId), header: GlobalVariable.header);
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminMemberClassList(roleId: roleId),
+          header: GlobalVariable.header);
 
-      AdminLibraryAddMemberClassResponseModel addMemberClassResponseModel = AdminLibraryAddMemberClassResponseModel.fromJson(response);
+      AdminLibraryAddMemberClassResponseModel addMemberClassResponseModel =
+          AdminLibraryAddMemberClassResponseModel.fromJson(response);
 
-      if(addMemberClassResponseModel.success == true){
-
+      if (addMemberClassResponseModel.success == true) {
         classLoader.value = false;
 
-        if(addMemberClassResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < addMemberClassResponseModel.data!.length; i++){
+        if (addMemberClassResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < addMemberClassResponseModel.data!.length; i++) {
             classList.add(addMemberClassResponseModel.data![i]);
           }
+          classDropdownValue.value = classList[0];
+          classId.value = classList[0].id!;
         }
-
-
-      } else{
+      } else {
         classLoader.value = false;
-        showBasicFailedSnackBar(message: addMemberClassResponseModel.message ?? AppText.somethingWentWrong);
+        showBasicFailedSnackBar(
+            message: addMemberClassResponseModel.message ??
+                AppText.somethingWentWrong);
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       classLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       classLoader.value = false;
     }
 
     return AdminLibraryAddMemberClassResponseModel();
   }
 
-
   /// Get Sections List
-  Future<AdminLibraryAddMemberSectionResponseModel> getSectionList({required int classId}) async {
-
-
-    try{
-
+  Future<AdminLibraryAddMemberSectionResponseModel> getSectionList(
+      {required int classId}) async {
+    try {
       sectionLoader.value = true;
 
-      final response = await BaseClient().getData(url: InfixApi.getAdminMemberSectionList(classId: classId), header: GlobalVariable.header);
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminMemberSectionList(classId: classId),
+          header: GlobalVariable.header);
 
-      AdminLibraryAddMemberSectionResponseModel addMemberSectionResponseModel = AdminLibraryAddMemberSectionResponseModel.fromJson(response);
+      AdminLibraryAddMemberSectionResponseModel addMemberSectionResponseModel =
+          AdminLibraryAddMemberSectionResponseModel.fromJson(response);
 
-      if(addMemberSectionResponseModel.success == true){
-
+      if (addMemberSectionResponseModel.success == true) {
         sectionLoader.value = false;
 
-        if(addMemberSectionResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < addMemberSectionResponseModel.data!.length; i++){
+        if (addMemberSectionResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < addMemberSectionResponseModel.data!.length; i++) {
             sectionList.add(addMemberSectionResponseModel.data![i]);
           }
+          sectionDropdownValue.value = sectionList[0];
+          sectionId.value = sectionList[0].id!;
         }
-
-
-      } else{
+      } else {
         sectionLoader.value = false;
-        showBasicFailedSnackBar(message: addMemberSectionResponseModel.message ?? AppText.somethingWentWrong);
+        showBasicFailedSnackBar(
+            message: addMemberSectionResponseModel.message ??
+                AppText.somethingWentWrong);
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       sectionLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       sectionLoader.value = false;
     }
 
     return AdminLibraryAddMemberSectionResponseModel();
   }
 
-
   /// Get Students List
-  Future<AdminLibraryAddMemberStudentResponseModel> getStudentList({required int classId, required int sectionId}) async {
-
-
-    try{
-
+  Future<AdminLibraryAddMemberStudentResponseModel> getStudentList(
+      {required int classId, required int sectionId}) async {
+    try {
       studentLoader.value = true;
 
-      final response = await BaseClient().getData(url: InfixApi.getAdminMemberStudentList(classId: classId, sectionId: sectionId), header: GlobalVariable.header);
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminMemberStudentList(
+              classId: classId, sectionId: sectionId),
+          header: GlobalVariable.header);
 
-      AdminLibraryAddMemberStudentResponseModel addMemberStudentResponseModel = AdminLibraryAddMemberStudentResponseModel.fromJson(response);
+      AdminLibraryAddMemberStudentResponseModel addMemberStudentResponseModel =
+          AdminLibraryAddMemberStudentResponseModel.fromJson(response);
 
-      if(addMemberStudentResponseModel.success == true){
-
+      if (addMemberStudentResponseModel.success == true) {
         studentLoader.value = false;
 
-        if(addMemberStudentResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < addMemberStudentResponseModel.data!.length; i++){
+        if (addMemberStudentResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < addMemberStudentResponseModel.data!.length; i++) {
             studentList.add(addMemberStudentResponseModel.data![i]);
           }
+          studentDropdownValue.value = studentList[0];
+          studentId.value = studentList[0].id! ;
         }
-
-
-      } else{
+      } else {
         studentLoader.value = false;
-        showBasicFailedSnackBar(message: addMemberStudentResponseModel.message ?? AppText.somethingWentWrong);
+        showBasicFailedSnackBar(
+            message: addMemberStudentResponseModel.message ??
+                AppText.somethingWentWrong);
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       studentLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       studentLoader.value = false;
     }
 
     return AdminLibraryAddMemberStudentResponseModel();
   }
 
-
   /// Get Parents List
-  Future<AdminLibraryAddMemberParentsResponseModel> getParentsList({required int classId, required int sectionId}) async {
-
-
-    try{
-
+  Future<AdminLibraryAddMemberParentsResponseModel> getParentsList(
+      {required int classId, required int sectionId}) async {
+    try {
       parentLoader.value = true;
 
-      final response = await BaseClient().getData(url: InfixApi.getAdminMemberParentList(classId: classId, sectionId: sectionId), header: GlobalVariable.header);
+      final response = await BaseClient().getData(
+          url: InfixApi.getAdminMemberParentList(
+              classId: classId, sectionId: sectionId),
+          header: GlobalVariable.header);
 
-      AdminLibraryAddMemberParentsResponseModel addMemberParentsResponseModel = AdminLibraryAddMemberParentsResponseModel.fromJson(response);
+      AdminLibraryAddMemberParentsResponseModel addMemberParentsResponseModel =
+          AdminLibraryAddMemberParentsResponseModel.fromJson(response);
 
-      if(addMemberParentsResponseModel.success == true){
-
+      if (addMemberParentsResponseModel.success == true) {
         parentLoader.value = false;
 
-        if(addMemberParentsResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < addMemberParentsResponseModel.data!.length; i++){
+        if (addMemberParentsResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < addMemberParentsResponseModel.data!.length; i++) {
             parentsList.add(addMemberParentsResponseModel.data![i]);
           }
+          parentsDropdownValue.value = parentsList[0];
+          parentsId.value = parentsList[0].id! ;
         }
-
-
-      } else{
+      } else {
         parentLoader.value = false;
-        showBasicFailedSnackBar(message: addMemberParentsResponseModel.message ?? AppText.somethingWentWrong);
+        showBasicFailedSnackBar(
+            message: addMemberParentsResponseModel.message ??
+                AppText.somethingWentWrong);
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       parentLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       parentLoader.value = false;
     }
 
     return AdminLibraryAddMemberParentsResponseModel();
   }
-
 
 
   @override
@@ -301,5 +323,4 @@ class AdminAddMemberController extends GetxController {
 
     super.onInit();
   }
-
 }

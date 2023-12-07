@@ -31,21 +31,21 @@ class AdminLibraryAddMemberStudentResponseModel {
 
 class AdminLibraryAddMemberStudentData {
   int? id;
-  String? fullName;
+  String? name; /// changed name to full name for dropdown
   int? userId;
 
-  AdminLibraryAddMemberStudentData({this.id, this.fullName, this.userId});
+  AdminLibraryAddMemberStudentData({this.id, this.name, this.userId});
 
   AdminLibraryAddMemberStudentData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    fullName = json['full_name'];
+    name = json['full_name'];
     userId = json['user_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['full_name'] = fullName;
+    data['full_name'] = name;
     data['user_id'] = userId;
     return data;
   }
