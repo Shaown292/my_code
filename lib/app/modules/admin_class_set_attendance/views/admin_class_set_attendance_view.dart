@@ -29,9 +29,10 @@ class AdminClassSetAttendanceView
               : Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: Get.width * 0.55,
+                          width: Get.width * 0.6,
                           child: const Text(
                               "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
                         ),
@@ -100,6 +101,9 @@ class AdminClassSetAttendanceView
                                   index: index,
                                   attendanceType: 'H',
                                 );
+                              },
+                              onAddNoteTap: (){
+
                               },
                               attendanceType: data.attendanceType ?? '',
                             );

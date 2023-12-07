@@ -23,6 +23,7 @@ class SetAttendanceTile extends StatelessWidget {
   final Function(String? value)? onChanged;
   final int? index;
   final String attendanceType;
+  final Function()? onAddNoteTap;
 
   const SetAttendanceTile({
     super.key,
@@ -41,6 +42,7 @@ class SetAttendanceTile extends StatelessWidget {
     this.index,
     this.value,
     required this.attendanceType,
+    this.onAddNoteTap,
   });
 
   @override
@@ -49,10 +51,10 @@ class SetAttendanceTile extends StatelessWidget {
       children: [
         Row(
           children: [
-            
             isImageEmpty
                 ? Container(
-                    width: Get.width * 0.05,
+                    height: Get.width * 0.17,
+                    width: Get.width * 0.17,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
@@ -64,8 +66,8 @@ class SetAttendanceTile extends StatelessWidget {
                     ),
                   )
                 : Container(
-                    height: Get.width * 0.15,
-                    width: Get.width * 0.15,
+                    height: Get.width * 0.17,
+                    width: Get.width * 0.17,
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -82,8 +84,29 @@ class SetAttendanceTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(studentName ?? ""),
-                    8.verticalSpacing,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(studentName ?? ""),
+
+                        InkWell(
+                          onTap: onAddNoteTap,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: AppColors.appButtonColor),
+                            child: const Center(
+                              child: Text(
+                                "Add Note",
+                                style: AppTextStyle.textStyle12WhiteW400,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    5.verticalSpacing,
                     Text("Class: $studentClass  |  Section: $section"),
                     8.verticalSpacing,
                     Row(
@@ -105,7 +128,7 @@ class SetAttendanceTile extends StatelessWidget {
                                   : Colors.white,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(Get.width * 0.02),
                               child: Center(
                                 child: Text(
                                   "Present",
@@ -117,7 +140,7 @@ class SetAttendanceTile extends StatelessWidget {
                             ),
                           ),
                         ),
-              
+
                         /// Absent
                         InkWell(
                           onTap: onAbsentButtonTap,
@@ -134,7 +157,7 @@ class SetAttendanceTile extends StatelessWidget {
                                   : Colors.white,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(Get.width * 0.02),
                               child: Center(
                                 child: Text(
                                   "Absent",
@@ -146,7 +169,7 @@ class SetAttendanceTile extends StatelessWidget {
                             ),
                           ),
                         ),
-              
+
                         /// Late
                         InkWell(
                           onTap: onLateButtonTap,
@@ -164,7 +187,7 @@ class SetAttendanceTile extends StatelessWidget {
                                   : Colors.white,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(Get.width * 0.02),
                               child: Center(
                                 child: Text(
                                   "Late",
@@ -176,7 +199,7 @@ class SetAttendanceTile extends StatelessWidget {
                             ),
                           ),
                         ),
-              
+
                         /// Half Day
                         InkWell(
                           onTap: onHalfDayButtonTap,
@@ -193,7 +216,7 @@ class SetAttendanceTile extends StatelessWidget {
                                   : Colors.white,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: EdgeInsets.all(Get.width * 0.02),
                               child: Center(
                                 child: Text(
                                   "Half day",

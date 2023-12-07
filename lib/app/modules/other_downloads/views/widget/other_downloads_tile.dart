@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
 
 import '../../../../data/constants/app_text_style.dart';
 import '../../../../utilities/widgets/button/primary_button.dart';
 import '../../../../utilities/widgets/common_widgets/custom_container_widget.dart';
 
 class OtherDownloadsTile extends StatelessWidget {
-  final String contentTitle;
-  final String topic;
+  final String? contentTitle;
+  final String? topic;
   final String? date;
   final Function()? onTap;
 
   const OtherDownloadsTile({
     super.key,
-    required this.contentTitle,
-    required this.topic,
+     this.contentTitle,
+     this.topic,
     this.date,
     this.onTap,
   });
@@ -42,30 +43,26 @@ class OtherDownloadsTile extends StatelessWidget {
                         color: const Color(0xFFF2F0F6),
                         requiredWidget: Center(
                           child: Text(
-                            contentTitle,
+                            contentTitle ?? "",
                             style: AppTextStyle.fontSize14BlackW500,
                           ),
                         ),
                       ),
                     ),
                     10.horizontalSpacing,
-                    Row(
-                      children: [
-                        const Text(
-                          "Date: ",
-                          style: AppTextStyle.blackFontSize14W400,
-                        ),
-                        Text(
-                          date ?? "",
-                          style: AppTextStyle.blackFontSize14W400,
-                        ),
-                      ],
-                    )
+                     SizedBox(
+                       width: Get.width * 0.3,
+                       child: Text(
+                        "Date: $date",
+                        style: AppTextStyle.blackFontSize14W400,
+                                           ),
+                     ),
+
                   ],
                 ),
                 10.verticalSpacing,
                 Text(
-                  topic,
+                  topic ?? "",
                   style: AppTextStyle.syllabusFontSize16W500,
                 ),
                 20.verticalSpacing,

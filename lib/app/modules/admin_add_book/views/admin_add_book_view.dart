@@ -62,7 +62,7 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     controller: controller.titleTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Title",
+                    hintText: "*Title",
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                   ),
@@ -155,7 +155,7 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     controller: controller.dateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "* Select upload date",
+                    hintText: "Select Upload Date",
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -186,8 +186,6 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                           bookCategoryId: controller.bookCategoryId.value,
                           bookSubjectId: controller.bookSubjectId.value,
                         );
-                        debugPrint("subject id is :::::::::: ${controller.bookSubjectId.value}");
-                        debugPrint("category id is :::::::::: ${controller.bookCategoryId.value}");
                       }
                     },
                   ),
