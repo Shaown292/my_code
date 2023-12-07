@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
@@ -53,7 +54,7 @@ class StudentHomeworkController extends GetxController {
     }
   }
 
-  void showHomeworkDetailsBottomSheet({required int index, Color? color}) {
+  void showHomeworkDetailsBottomSheet({required int index, Color? color, Function()? downloadTap}) {
     Get.bottomSheet(
       Container(
         color: color,
@@ -104,7 +105,7 @@ class StudentHomeworkController extends GetxController {
                           text: "Download",
                           width: 100,
                           borderRadius: 10,
-                          onTap: () {},
+                          onTap: downloadTap,
                         ),
                         PrimaryButton(
                           text: "Upload",
@@ -127,4 +128,10 @@ class StudentHomeworkController extends GetxController {
       shape: defaultBottomSheetShape(),
     );
   }
+
+
+  void downloadFile({required String url, required String title}){
+    FileDownloadUtils().downloadFiles(url: url, title: title);
+  }
+
 }

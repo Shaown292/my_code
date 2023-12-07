@@ -54,6 +54,7 @@ class HomeworkLists {
   String? status;
   int? marks;
   String? subject;
+  String? file;
 
   HomeworkLists(
       {this.id,
@@ -62,7 +63,8 @@ class HomeworkLists {
         this.evaluationDate,
         this.status,
         this.marks,
-        this.subject});
+        this.subject,
+      this.file,});
 
   HomeworkLists.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -72,6 +74,7 @@ class HomeworkLists {
     status = json['status'];
     marks = json['marks'];
     subject = json['subject'];
+    file = json['file'];
   }
 
   Map<String, dynamic> toJson() {
@@ -83,6 +86,7 @@ class HomeworkLists {
     data['status'] = status;
     data['marks'] = marks;
     data['subject'] = subject;
+    data['file'] = file;
     return data;
   }
 }
