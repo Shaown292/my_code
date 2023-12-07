@@ -72,13 +72,17 @@ class SubjectsView extends GetView<SubjectsController> {
             10.verticalSpacing,
             Obx(
               () => controller.loadingController.isLoading
-                  ? const LoadingWidget()
+                  ? const Expanded(
+                      child: LoadingWidget(),
+                    )
                   : controller.subjectList.isNotEmpty
                       ? Expanded(
                           child: RefreshIndicator(
                             onRefresh: () async {
                               controller.subjectList.clear();
-                              controller.getAllSubjectList(recordId: controller.homeController.studentRecordIdList[0]);
+                              controller.getAllSubjectList(
+                                  recordId: controller
+                                      .homeController.studentRecordIdList[0]);
                             },
                             child: ListView.builder(
                               itemCount: controller.subjectList.length,

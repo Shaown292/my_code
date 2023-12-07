@@ -79,7 +79,9 @@ class TransportView extends GetView<TransportController> {
                 ),
                 Obx(
                   () => controller.loadingController.isLoading
-                      ? const LoadingWidget()
+                      ? const Expanded(
+                          child: LoadingWidget(),
+                        )
                       : controller.transportDataList.isNotEmpty
                           ? Expanded(
                               child: ListView.builder(

@@ -32,7 +32,7 @@ class ProfileView extends GetView<ProfileController> {
       actions: [
         EditProfileRoute(controller: controller),
       ],
-      leadingIcon: GlobalVariable.roleId == 4
+      leadingIcon: GlobalVariable.roleId == 2
           ? const SizedBox()
           : InkWell(
               onTap: Get.back,

@@ -21,22 +21,24 @@ class BookIssuedView extends GetView<BookIssuedController> {
           customWidget: Column(
             children: [
               10.verticalSpacing,
-              Obx(() => Expanded(
-                    child: controller.loadingController.isLoading
-                        ? const LoadingWidget()
-                        : ListView.builder(
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return const IssuedBookTile(
-                                issuedDate: "10-03-2023",
-                                returnDate: "11-03-2023",
-                                bookName: "Mathematics 102",
-                                bookNo: "10",
-                                activeStatus: "Returned",
-                                activeStatusColor: Colors.redAccent,
-                              );
-                            }),
-                  )),
+              controller.loadingController.isLoading
+                  ? const Expanded(
+                child: LoadingWidget(),
+              )
+                  : Expanded(
+                child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return const IssuedBookTile(
+                        issuedDate: "10-03-2023",
+                        returnDate: "11-03-2023",
+                        bookName: "Mathematics 102",
+                        bookNo: "10",
+                        activeStatus: "Returned",
+                        activeStatusColor: Colors.redAccent,
+                      );
+                    }),
+              ),
             ],
           ),
         ),

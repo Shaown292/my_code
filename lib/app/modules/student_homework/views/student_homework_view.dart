@@ -25,45 +25,46 @@ class StudentHomeworkView extends GetView<StudentHomeworkController> {
             },
             child: CustomBackground(
               customWidget: controller.loadingController.isLoading
-                  ? const Column(
-                    children: [
-                      LoadingWidget(),
-                    ],
-                  ) : controller.studentHomeworkList.isNotEmpty ?
-                   ListView.builder(
-                      itemCount: controller.studentHomeworkList.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        var data = controller.studentHomeworkList[index];
-                        String createdAt = DateTimeConverter()
-                            .convertISOToDesiredFormat(data.createdAt ?? '');
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: HomeworkCardTile(
-                                subject: data.subject,
-                                created: createdAt,
-                                submission: data.submissionDate,
-                                evaluation: data.evaluationDate,
-                                status: data.status,
-                                marks: data.marks.toString(),
-                                statusColor: data.status == 'Completed'
-                                    ? AppColors.homeworkStatusGreenColor
-                                    : AppColors.homeworkStatusRedColor,
-                                backgroundColor: index % 2 == 0
-                                    ? Colors.white
-                                    : AppColors.homeworkWidgetColor,
-                                onTap: () {
-                                  controller.showHomeworkDetailsBottomSheet(
-                                      index: index, color: Colors.white);
-                                },
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ) : const NoDataAvailableWidget(),
+                  ? const Expanded(
+                      child: LoadingWidget(),
+                    )
+                  : controller.studentHomeworkList.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: controller.studentHomeworkList.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            var data = controller.studentHomeworkList[index];
+                            String createdAt = DateTimeConverter()
+                                .convertISOToDesiredFormat(
+                                    data.createdAt ?? '');
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: HomeworkCardTile(
+                                    subject: data.subject,
+                                    created: createdAt,
+                                    submission: data.submissionDate,
+                                    evaluation: data.evaluationDate,
+                                    status: data.status,
+                                    marks: data.marks.toString(),
+                                    statusColor: data.status == 'Completed'
+                                        ? AppColors.homeworkStatusGreenColor
+                                        : AppColors.homeworkStatusRedColor,
+                                    backgroundColor: index % 2 == 0
+                                        ? Colors.white
+                                        : AppColors.homeworkWidgetColor,
+                                    onTap: () {
+                                      controller.showHomeworkDetailsBottomSheet(
+                                          index: index, color: Colors.white);
+                                    },
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        )
+                      : const NoDataAvailableWidget(),
             ),
           ),
         ));

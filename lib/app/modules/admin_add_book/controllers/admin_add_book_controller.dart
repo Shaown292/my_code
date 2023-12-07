@@ -147,12 +147,16 @@ class AdminAddBookController extends GetxController {
   bool validation() {
     if (titleTextController.text == '') {
       showBasicFailedSnackBar(message: 'Add Book Title');
+      return false;
+
     }
     if(bookCategoryList.isEmpty){
       showBasicFailedSnackBar(message: 'Select Book Category .');
+      return false;
     }
     if(bookSubjectList.isEmpty) {
       showBasicFailedSnackBar(message: 'Select Book Category .');
+      return false;
     }
 
     return true;

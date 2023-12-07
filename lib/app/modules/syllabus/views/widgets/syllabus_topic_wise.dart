@@ -3,17 +3,18 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_container_widget.dart';
+import 'package:get/get.dart';
 
 class SyllabusTopicWise extends StatelessWidget {
-  final String contentTitle;
-  final String topic;
+  final String? contentTitle;
+  final String? topic;
   final String? date;
   final Function()? onTap;
 
   const SyllabusTopicWise({
     super.key,
-    required this.contentTitle,
-    required this.topic,
+    this.contentTitle,
+    this.topic,
     this.date,
     this.onTap,
   });
@@ -35,33 +36,31 @@ class SyllabusTopicWise extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomContainerWidget(
-                      padding: const EdgeInsets.all(10),
-                      color: const Color(0xFFF2F0F6),
-                      requiredWidget: Center(
-                        child: Text(
-                          contentTitle,
-                          style: AppTextStyle.fontSize14BlackW500,
+                    Flexible(
+                      child: CustomContainerWidget(
+                        padding: const EdgeInsets.all(10),
+                        color: const Color(0xFFF2F0F6),
+                        requiredWidget: Center(
+                          child: Text(
+                            contentTitle ?? "",
+                            style: AppTextStyle.fontSize14BlackW500,
+                          ),
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Date: ",
-                          style: AppTextStyle.blackFontSize14W400,
-                        ),
-                        Text(
-                          date ?? "",
-                          style: AppTextStyle.blackFontSize14W400,
-                        ),
-                      ],
-                    )
+                    10.horizontalSpacing,
+                    SizedBox(
+                      width: Get.width * 0.3,
+                      child: Text(
+                        "Date: $date",
+                        style: AppTextStyle.blackFontSize14W400,
+                      ),
+                    ),
                   ],
                 ),
                 10.verticalSpacing,
                 Text(
-                  topic,
+                  topic ?? "",
                   style: AppTextStyle.syllabusFontSize16W500,
                 ),
                 20.verticalSpacing,

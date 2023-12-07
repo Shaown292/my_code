@@ -31,10 +31,7 @@ class AdminNoticeView extends GetView<AdminNoticeController> {
               children: [
                 Obx(
                   () => controller.loadingController.isLoading
-                      ? SizedBox(
-                          height: Get.height,
-                          child: const LoadingWidget(),
-                        )
+                      ? SizedBox(height: Get.height, child: const LoadingWidget())
                       : controller.adminStaffNoticeList.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,

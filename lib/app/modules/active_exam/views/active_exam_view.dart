@@ -55,7 +55,9 @@ class ActiveExamView extends GetView<ActiveExamController> {
                   ),
                 ),
                 controller.loadingController.isLoading
-                    ? const LoadingWidget()
+                    ? const Expanded(
+                        child: LoadingWidget(),
+                      )
                     : Expanded(
                         child: RefreshIndicator(
                           onRefresh: () async {

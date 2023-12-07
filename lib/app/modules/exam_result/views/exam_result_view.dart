@@ -15,53 +15,25 @@ class ExamResultView extends GetView<ExamResultController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => InfixEduScaffold(
-          title: "Exam Result",
-          body: CustomBackground(
-              customWidget: Column(
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Exam Result",
+        body: CustomBackground(
+          customWidget: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 20.verticalSpacing,
-              // Padding(
-              //   padding:
-              //       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              //   child: SizedBox(
-              //     height: 50,
-              //     child: ListView.builder(
-              //       scrollDirection: Axis.horizontal,
-              //       itemCount:
-              //       controller.homeController.studentRecordList.length,
-              //       itemBuilder: (context, index) {
-              //         return Padding(
-              //             padding: const EdgeInsets.all(8.0),
-              //             child: Obx(
-              //                   () => StudyButton(
-              //                 title:
-              //                 "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-              //                 onItemTap: () {
-              //                   controller.onlineExamResultList.clear();
-              //                   // int recordId = controller.homeController
-              //                   //     .studentRecordList[index].id;
-              //                   controller.getStudentExamResultList(
-              //                       studentId: GlobalVariableController.studentId!);
-              //                 },
-              //                 isSelected:
-              //                 controller.selectIndex.value == index,
-              //               ),
-              //             ));
-              //       },
-              //     ),
-              //   ),
-              // ),
               20.verticalSpacing,
               controller.loadingController.isLoading
-                  ? const LoadingWidget()
+                  ? const Expanded(
+                      child: LoadingWidget(),
+                    )
                   : Expanded(
                       child: RefreshIndicator(
                         onRefresh: () async {
                           controller.onlineExamResultList.clear();
-                          controller.getStudentExamResultList(studentId: GlobalVariable.studentId!);
+                          controller.getStudentExamResultList(
+                              studentId: GlobalVariable.studentId!);
                         },
                         child: controller.onlineExamResultList.isNotEmpty
                             ? ListView.builder(
@@ -69,13 +41,24 @@ class ExamResultView extends GetView<ExamResultController> {
                                     controller.onlineExamResultList.length,
                                 itemBuilder: (context, index) {
                                   return ExamResultTile(
-                                    title: controller.onlineExamResultList[index].title,
-                                    startingTime: controller.onlineExamResultList[index].examTime,
-                                    endingTime: controller.onlineExamResultList[index].endTime,
-                                    startDate: controller.onlineExamResultList[index].startDate,
-                                    endDate: controller.onlineExamResultList[index].endDate,
-                                    result: controller.onlineExamResultList[index].result,
-                                    activeStatusColor: controller.onlineExamResultList[index].result == 'Fail' ? AppColors.homeworkStatusRedColor : AppColors.homeworkStatusGreenColor,
+                                    title: controller
+                                        .onlineExamResultList[index].title,
+                                    startingTime: controller
+                                        .onlineExamResultList[index].examTime,
+                                    endingTime: controller
+                                        .onlineExamResultList[index].endTime,
+                                    startDate: controller
+                                        .onlineExamResultList[index].startDate,
+                                    endDate: controller
+                                        .onlineExamResultList[index].endDate,
+                                    result: controller
+                                        .onlineExamResultList[index].result,
+                                    activeStatusColor: controller
+                                                .onlineExamResultList[index]
+                                                .result ==
+                                            'Fail'
+                                        ? AppColors.homeworkStatusRedColor
+                                        : AppColors.homeworkStatusGreenColor,
                                     color: index % 2 == 0
                                         ? Colors.white
                                         : AppColors.homeworkWidgetColor,
@@ -86,7 +69,9 @@ class ExamResultView extends GetView<ExamResultController> {
                       ),
                     ),
             ],
-          )),
-        ));
+          ),
+        ),
+      ),
+    );
   }
 }

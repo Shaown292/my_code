@@ -54,7 +54,7 @@ class DeleteTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: Get.width*0.6,
+                  width: Get.width*0.58,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

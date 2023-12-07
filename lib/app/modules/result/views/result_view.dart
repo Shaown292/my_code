@@ -35,7 +35,7 @@ class ResultView extends GetView<ResultController> {
                 10.verticalSpacing,
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 7.0, vertical: 10 ),
+                      const EdgeInsets.symmetric(horizontal: 7.0, vertical: 10),
                   child: SizedBox(
                     height: 50,
                     child: ListView.builder(
@@ -68,29 +68,33 @@ class ResultView extends GetView<ResultController> {
                   ),
                 ),
                 controller.examinationController.loadingController.isLoading
-                    ? const LoadingWidget()
+                    ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,))
                     : Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: DuplicateDropdown(
-                        dropdownValue: controller.examinationController.dropdownValue.value,
-                        dropdownList: controller
-                            .examinationController.dropdownList,
-                        changeDropdownValue: (v) {
-                          controller.examinationController.dropdownValue.value = v!;
-                          controller.examResultList.clear();
-                          int examId = v.id;
-                          int recordId = controller
-                              .homeController.studentRecordList[0].id;
-                          controller.getStudentExamResultList(
-                            typeId: examId,
-                            recordId: recordId,
-                          );
-                        },
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: DuplicateDropdown(
+                          dropdownValue: controller
+                              .examinationController.dropdownValue.value,
+                          dropdownList:
+                              controller.examinationController.dropdownList,
+                          changeDropdownValue: (v) {
+                            controller
+                                .examinationController.dropdownValue.value = v!;
+                            controller.examResultList.clear();
+                            int examId = v.id;
+                            int recordId = controller
+                                .homeController.studentRecordList[0].id;
+                            controller.getStudentExamResultList(
+                              typeId: examId,
+                              recordId: recordId,
+                            );
+                          },
+                        ),
                       ),
-                    ),
                 20.verticalSpacing,
                 controller.loadingController.isLoading
-                    ? const LoadingWidget()
+                    ? const Expanded(
+                        child: LoadingWidget(),
+                      )
                     : controller.examResultList.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(

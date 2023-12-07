@@ -31,11 +31,9 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
               children: [
                 CustomBackground(
                   customWidget: controller.loadingController.isLoading
-                      ? const Column(
-                        children: [
-                          LoadingWidget(),
-                        ],
-                      )
+                      ? const Expanded(
+                          child: LoadingWidget(),
+                        )
                       : controller.studentOthersDownloadList.isNotEmpty
                           ? ListView.builder(
                               itemCount:
@@ -44,47 +42,51 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, int index) {
                                 return Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child:  OtherDownloadsTile(
-                                    contentTitle: controller
-                                        .studentOthersDownloadList[index]
-                                        .contentTitle,
-                                    topic: controller
-                                        .studentOthersDownloadList[index]
-                                        .availableFor,
-                                    date: controller
-                                        .studentOthersDownloadList[index]
-                                        .uploadDate ??
-                                        '',
-                                    onTap: () {
-                                      PermissionCheck().checkPermissions(context);
-                                      Get.dialog(
-                                        CustomPopupDialogue(
-                                          onYesTap: () {
-                                            Navigator.pop(context);
-                                            controller
-                                                .studentOthersDownloadList[index].uploadFile!.isNotEmpty
-                                                ? FileDownloadUtils().downloadFiles(
-                                                url: controller
-                                                    .studentOthersDownloadList[index].uploadFile!,
-                                                title: controller
-                                                    .studentOthersDownloadList[index].contentTitle!)
-                                                : showBasicSuccessSnackBar(
-                                                message: 'No File Available.');
-                                          },
-                                          title: 'Confirmation',
-                                          subTitle: AppText.downloadMessage,
-                                          noText: 'No',
-                                          yesText: 'Download',
-                                        ),
-                                      );
-                                    },
-
-                                  )
-
-
-
-                                );
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: OtherDownloadsTile(
+                                      contentTitle: controller
+                                          .studentOthersDownloadList[index]
+                                          .contentTitle,
+                                      topic: controller
+                                          .studentOthersDownloadList[index]
+                                          .availableFor,
+                                      date: controller
+                                              .studentOthersDownloadList[index]
+                                              .uploadDate ??
+                                          '',
+                                      onTap: () {
+                                        PermissionCheck()
+                                            .checkPermissions(context);
+                                        Get.dialog(
+                                          CustomPopupDialogue(
+                                            onYesTap: () {
+                                              Navigator.pop(context);
+                                              controller
+                                                      .studentOthersDownloadList[
+                                                          index]
+                                                      .uploadFile!
+                                                      .isNotEmpty
+                                                  ? FileDownloadUtils().downloadFiles(
+                                                      url: controller
+                                                          .studentOthersDownloadList[
+                                                              index]
+                                                          .uploadFile!,
+                                                      title: controller
+                                                          .studentOthersDownloadList[
+                                                              index]
+                                                          .contentTitle!)
+                                                  : showBasicSuccessSnackBar(
+                                                      message:
+                                                          'No File Available.');
+                                            },
+                                            title: 'Confirmation',
+                                            subTitle: AppText.downloadMessage,
+                                            noText: 'No',
+                                            yesText: 'Download',
+                                          ),
+                                        );
+                                      },
+                                    ));
                               },
                             )
                           : const NoDataAvailableWidget(),
