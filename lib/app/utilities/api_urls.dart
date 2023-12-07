@@ -239,9 +239,12 @@ class InfixApi {
       '${baseApi}student-search?class=$classId&section=$sectionId&attendance_date=$selectedDate';
 
   /// Attendance
-  static String adminSubmitStudentAttendance = '${baseApi}submit-student-class-attendance';
-  static String adminSubmitSubjectWiseStudentAttendance = '${baseApi}subject-wise-attendance-submit';
-  static String adminAttendanceMarkUnMarkHolyDay = '${baseApi}student-attendance-holiday';
+  static String adminSubmitStudentAttendance =
+      '${baseApi}submit-student-class-attendance';
+  static String adminSubmitSubjectWiseStudentAttendance =
+      '${baseApi}subject-wise-attendance-submit';
+  static String adminAttendanceMarkUnMarkHolyDay =
+      '${baseApi}student-attendance-holiday';
 
   static String getAdminStudentSearchList({
     required int classId,
@@ -329,10 +332,12 @@ class InfixApi {
   static String getSingleStudentDocumentsData({required int studentId}) =>
       '${baseApi}student-profile-documents?student_id=$studentId';
 
-
   /// Admin Content Module
   static String getAdminContentList = '${baseApi}admin-upload-content-list';
   static String postAdminContent = '${baseApi}store-admin-content';
+
+  static String adminContentDelete({required int contentId}) =>
+      '${baseApi}delete-admin-content?content_id=$contentId';
 
   /// Admin Staff Notice
   static String getAdminStaffNoticeList = '${baseApi}admin-staff-notice-list';
@@ -342,9 +347,8 @@ class InfixApi {
   static String getAdminTransportRouteList = '${baseApi}admin-route-list';
   static String getAdminDriverList = '${baseApi}admin-vehicle-drivers';
   static String postAdminTransportRoute = '${baseApi}admin-route-store';
-  static String getAdminVehicleAssignRouteAndVehicleList = '${baseApi}assign-vehicle-to-route';
-
-
+  static String getAdminVehicleAssignRouteAndVehicleList =
+      '${baseApi}assign-vehicle-to-route';
 
   /// Admin Book Module
   static String getAdminBookList = '${baseApi}admin-book-list';

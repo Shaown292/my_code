@@ -8,10 +8,12 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_content_model/admin_content_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminContentListController extends GetxController {
   LoadingController loadingController = Get.find();
+  RxBool deleteLoader = false.obs;
 
   RxList<AdminContentData> contentList = <AdminContentData>[].obs;
 
@@ -51,22 +53,62 @@ class AdminContentListController extends GetxController {
     return AdminContentListResponseModel();
   }
 
-  void deleteContent() {
-    Get.back();
+  Future<PostRequestResponseModel> deleteContent(
+      {required int contentId, required int index}) async {
+    try {
+      deleteLoader.value = true;
+
+      final response = await BaseClient().postData(
+          url: InfixApi.adminContentDelete(contentId: contentId),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        deleteLoader.value = false;
+        Get.back();
+        contentList.removeAt(index);
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? '');
+      } else {
+        deleteLoader.value = false;
+        showBasicFailedSnackBar(
+          message:
+              postRequestResponseModel.message ?? AppText.somethingWentWrong,
+        );
+      }
+    } catch (e, t) {
+      deleteLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      deleteLoader.value = false;
+    }
+
+    return PostRequestResponseModel();
   }
 
-  void fileDownload() {
-    debugPrint('file downloaded');
-    //FileDownloadUtils().downloadFiles(url: 'url', title: 'title');
+  void fileDownload({required String url, required String title}) {
+    url == ''
+        ? showBasicFailedSnackBar(
+            message: 'No File Available',
+          )
+        : FileDownloadUtils().downloadFiles(url: url, title: title);
   }
 
-  void showDialog({required int id, required int index}) {
+  void showDialog({required int contentId, required int index}) {
     Get.dialog(
-      CustomPopupDialogue(
-          onYesTap: deleteContent,
+      Obx(
+        () => CustomPopupDialogue(
+          onYesTap: () {
+            deleteContent(contentId: contentId, index: index);
+          },
+          isLoading: deleteLoader.value,
           subTitle: AppText.deleteDocumentsWarningMsg,
           noText: 'Cancel',
-          yesText: 'Delete'),
+          yesText: 'Delete',
+        ),
+      ),
     );
   }
 
