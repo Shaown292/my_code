@@ -333,6 +333,7 @@ class InfixApi {
   /// Admin Content Module
   static String getAdminContentList = '${baseApi}admin-upload-content-list';
   static String postAdminContent = '${baseApi}store-admin-content';
+  static String adminContentDelete({required int contentId}) => '${baseApi}delete-admin-content?content_id=$contentId';
 
   /// Admin Staff Notice
   static String getAdminStaffNoticeList = '${baseApi}admin-staff-notice-list';
