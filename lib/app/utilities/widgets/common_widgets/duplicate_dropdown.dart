@@ -43,7 +43,7 @@ class DuplicateDropdown extends StatelessWidget {
                 value: item,
                 child: dropdownText
                     ? Text(
-                  item.name!,
+                  item.name ?? "Unknown",
                   style: AppTextStyle.fontSize14lightBlackW400,
                   overflow: TextOverflow.ellipsis,
                 )

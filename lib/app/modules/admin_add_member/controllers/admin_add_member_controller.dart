@@ -62,7 +62,7 @@ class AdminAddMemberController extends GetxController {
   RxList<AdminLibraryAddMemberParentsData> parentsList =
       <AdminLibraryAddMemberParentsData>[].obs;
   Rx<AdminLibraryAddMemberParentsData> parentsDropdownValue =
-      AdminLibraryAddMemberParentsData(id: -1, name: "Section").obs;
+      AdminLibraryAddMemberParentsData(id: -1, name: "parent_name").obs;
   RxInt parentsId = 0.obs;
 
 
