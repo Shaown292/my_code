@@ -16,7 +16,6 @@ class StudentClassView extends GetView<StudentClassController> {
       ),
       body: const Center(
         child: Text(
-
           'StudentClassView is working',
           style: TextStyle(fontSize: 20),
         ),
