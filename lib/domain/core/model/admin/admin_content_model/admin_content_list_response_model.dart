@@ -34,14 +34,17 @@ class AdminContentData {
   String? uploadDate;
   String? availableFor;
   String? contentFile;
+  String? uploadFile;
 
-  AdminContentData(
-      {this.id,
-      this.contentTitle,
-      this.contentType,
-      this.uploadDate,
-      this.availableFor,
-      this.contentFile});
+  AdminContentData({
+    this.id,
+    this.contentTitle,
+    this.contentType,
+    this.uploadDate,
+    this.availableFor,
+    this.contentFile,
+    this.uploadFile,
+  });
 
   AdminContentData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -50,6 +53,7 @@ class AdminContentData {
     uploadDate = json['upload_date'];
     availableFor = json['available_for'];
     contentFile = json['content_file'];
+    uploadFile = json['upload_file'];
   }
 
   Map<String, dynamic> toJson() {
@@ -60,6 +64,7 @@ class AdminContentData {
     data['upload_date'] = uploadDate;
     data['available_for'] = availableFor;
     data['content_file'] = contentFile;
+    data['upload_file'] = uploadFile;
     return data;
   }
 }

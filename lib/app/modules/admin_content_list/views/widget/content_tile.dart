@@ -20,7 +20,9 @@ class ContentTile extends StatelessWidget {
     this.title,
     this.contentType,
     this.date,
-    this.availableFor, this.onDeleteTap, this.onDownloadTap,
+    this.availableFor,
+    this.onDeleteTap,
+    this.onDownloadTap,
   });
 
   @override
@@ -35,7 +37,7 @@ class ContentTile extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.only(right: 15),
-                width: Get.width * 0.7,
+                width: Get.width * 0.65,
                 child: Text(
                   title ?? "",
                   style: AppTextStyle.fontSize14BlackW500,
@@ -45,7 +47,7 @@ class ContentTile extends StatelessWidget {
               Row(
                 children: [
                   InkWell(
-                    onTap:onDownloadTap,
+                    onTap: onDownloadTap,
                     child: Image.asset(
                       ImagePath.download,
                       scale: 4,
@@ -64,11 +66,8 @@ class ContentTile extends StatelessWidget {
                   10.horizontalSpacing,
                 ],
               ),
-
-
             ],
           ),
-
           10.verticalSpacing,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -53,11 +53,17 @@ class AdminContentListView extends GetView<AdminContentListController> {
                                   availableFor: controller
                                       .contentList[index].availableFor,
                                   onDeleteTap: () => controller.showDialog(
-                                    id: controller.contentList[index].id!,
+                                    contentId:
+                                        controller.contentList[index].id!,
                                     index: index,
                                   ),
-                                  onDownloadTap: () =>
-                                      controller.fileDownload(),
+                                  onDownloadTap: () => controller.fileDownload(
+                                      url: controller
+                                              .contentList[index].uploadFile ??
+                                          '',
+                                      title: controller.contentList[index]
+                                              .contentTitle ??
+                                          ''),
                                 );
                               },
                             )
