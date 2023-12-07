@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/fees/controllers/fees_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_dummy_data.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_fees_response_model/student_fees_response_model.dart';
@@ -12,6 +12,9 @@ import '../../../routes/app_pages.dart';
 import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class HomeController extends GetxController {
+
+  List<HomeTileModelClass> homeTileList = <HomeTileModelClass>[];
+
   late ProfileInfoModel profileInfoModel;
   final AuthDatabase _authDatabase = AuthDatabase.instance;
   final selectIndex = RxInt(-1);
@@ -20,7 +23,6 @@ class HomeController extends GetxController {
   List<int> studentRecordIdList = [];
   List<FeesInvoice> feesInvoiceList = [];
 
-  // FeesController feesController = Get.find();
   LoadingController loadingController = Get.find();
 
   void _getUserInfo() {
@@ -142,6 +144,9 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+
+     homeTileList = Get.arguments["homeListTile"];
+
     debugPrint(
         'Role ID: ${GlobalVariable.roleId} :::: Record ID: ${GlobalVariable.studentId}');
     if (GlobalVariable.roleId == 2) {

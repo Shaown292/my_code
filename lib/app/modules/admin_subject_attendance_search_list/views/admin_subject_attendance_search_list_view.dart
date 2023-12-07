@@ -28,8 +28,11 @@ class AdminSubjectAttendanceSearchListView
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                      "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
+                  SizedBox(
+                    width: Get.width*0.58,
+                    child: const Text(
+                        "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
+                  ),
                   Obx(
                     () => controller.holidayLoader.value
                         ? const CircularProgressIndicator(

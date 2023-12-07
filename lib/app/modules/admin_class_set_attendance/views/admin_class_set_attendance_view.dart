@@ -32,7 +32,7 @@ class AdminClassSetAttendanceView
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: Get.width * 0.6,
+                          width: Get.width * 0.58,
                           child: const Text(
                               "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
                         ),

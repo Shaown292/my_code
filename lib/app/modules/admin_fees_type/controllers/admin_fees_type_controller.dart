@@ -33,7 +33,7 @@ class AdminFeesTypeController extends GetxController {
 
 
 
-  /// fees list
+  /// Fees List
   Future<AdminFeesTypeResponseModel> getFeesListList() async {
     try {
       feesTypeList.clear();
@@ -67,6 +67,7 @@ class AdminFeesTypeController extends GetxController {
     return AdminFeesTypeResponseModel();
   }
 
+  /// Create Fess Type
   Future<void> createFeesType({required int feesGroupId}) async {
     try {
       createUpdateLoader.value = true;
@@ -113,7 +114,7 @@ class AdminFeesTypeController extends GetxController {
   }
 
 
-  /// Delete A tile
+  /// Delete Single Fees Type
   Future<void> deleteSingleFeesType(
       {required int feesTypeId, required int index}) async {
     try {

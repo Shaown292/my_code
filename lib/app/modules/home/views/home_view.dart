@@ -21,8 +21,7 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    var data = Get.arguments;
-    List<HomeTileModelClass> list = data["homeListTile"];
+
 
     return InfixEduScaffold(
       leadingIcon: const SizedBox(),
@@ -62,19 +61,19 @@ class HomeView extends GetView<HomeController> {
                 GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: list.length,
+                  itemCount: controller.homeTileList.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                   ),
                   itemBuilder: (context, index) {
                     return Obx(
                       () => CustomCardTile(
-                        icon: list[index].icon,
-                        title: list[index].title,
+                        icon: controller.homeTileList[index].icon,
+                        title: controller.homeTileList[index].title,
                         onTap: () {
 
                           controller.selectIndex.value = index;
-                          AppFunctions.routingDecisionForRoleId(roleId: GlobalVariable.roleId!, title: list[index].value);
+                          AppFunctions.routingDecisionForRoleId(roleId: GlobalVariable.roleId!, title: controller.homeTileList[index].value);
 
                           // controller.selectIndex.value = index;
                           // AppFunctions.getStudentDashboardNavigation(

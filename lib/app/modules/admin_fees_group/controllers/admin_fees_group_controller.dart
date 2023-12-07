@@ -19,18 +19,18 @@ class AdminFeesGroupController extends GetxController {
   RxBool createUpdateLoader = false.obs;
   RxBool deleteLoader = false.obs;
 
-
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
   RxList<FeesGroupData> feesGroupList = <FeesGroupData>[].obs;
-  Rx<FeesGroupData> feesGroupInitialValue = FeesGroupData(id: -1, name: "Select Fees Group").obs;
+  Rx<FeesGroupData> feesGroupInitialValue =
+      FeesGroupData(id: -1, name: "Select Fees Group").obs;
   RxString feesGroupNullValue = "".obs;
   RxInt groupId = 0.obs;
 
   Future<FeesGroupListResponseModel> getFeesGroupList() async {
     try {
-      //fessGroupList.clear();
+      feesGroupList.clear();
       loadingController.isLoading = true;
       final response = await BaseClient().getData(
           url: InfixApi.getFeesGroupList, header: GlobalVariable.header);
@@ -43,13 +43,8 @@ class AdminFeesGroupController extends GetxController {
             feesGroupList.add(feesGroupListResponseModel.data![i]);
           }
 
-
-          debugPrint(" GROUP :::: ${feesGroupList[0]}");
-
           feesGroupInitialValue.value = feesGroupList[0];
           groupId.value = feesGroupList[0].id!;
-
-
         }
       } else {
         loadingController.isLoading = false;
