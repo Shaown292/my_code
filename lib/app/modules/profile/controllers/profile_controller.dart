@@ -59,7 +59,7 @@ class ProfileController extends GetxController {
       StudentDocumentsResponseModel();
 
   /// For Admin Module
-  int? studentId;
+  int? studentIdFromAdmin;
 
   /// Get Personal Data
   void fetchProfilePersonalData({int? studentId}) async {
@@ -427,7 +427,7 @@ class ProfileController extends GetxController {
       }
 
       if (GlobalVariable.roleId == 1) {
-        request.fields['student_id'] = studentId.toString();
+        request.fields['student_id'] = studentIdFromAdmin.toString();
       } else {
         request.fields['student_id'] = '${GlobalVariable.studentId!}';
       }
@@ -500,13 +500,13 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
-    studentId = Get.arguments['student_id'];
+    studentIdFromAdmin = Get.arguments['student_id'];
 
-    fetchProfilePersonalData(studentId: studentId);
-    fetchProfileParentsData(studentId: studentId);
-    fetchProfileTransportData(studentId: studentId);
-    fetchProfileOthersData(studentId: studentId);
-    getAllDocumentList(studentId: studentId);
+    fetchProfilePersonalData(studentId: studentIdFromAdmin);
+    fetchProfileParentsData(studentId: studentIdFromAdmin);
+    fetchProfileTransportData(studentId: studentIdFromAdmin);
+    fetchProfileOthersData(studentId: studentIdFromAdmin);
+    getAllDocumentList(studentId: studentIdFromAdmin);
     super.onInit();
   }
 }
