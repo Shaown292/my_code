@@ -8,11 +8,9 @@ import 'package:get/get.dart';
 import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../../domain/base_client/base_client.dart';
 import '../../../database/auth_database.dart';
-import '../../../routes/app_pages.dart';
 import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class HomeController extends GetxController {
-
   List<HomeTileModelClass> homeTileList = <HomeTileModelClass>[];
 
   late ProfileInfoModel profileInfoModel;
@@ -69,7 +67,10 @@ class HomeController extends GetxController {
     } finally {
       await _authDatabase.logOut();
       // loadingController.isLoading = false;
-      Get.offAndToNamed(Routes.SPLASH);
+      // Get.offAndToNamed(Routes.SPLASH);
+
+      Get.offNamedUntil('/splash', (route) => false);
+
       loadingController.isLoading = false;
     }
   }
@@ -144,8 +145,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-
-     homeTileList = Get.arguments["homeListTile"];
+    homeTileList = Get.arguments["homeListTile"];
 
     debugPrint(
         'Role ID: ${GlobalVariable.roleId} :::: Record ID: ${GlobalVariable.studentId}');
