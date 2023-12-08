@@ -104,6 +104,7 @@ abstract class Routes {
   static const TE_ADD_HOMEWORK = _Paths.TE_ADD_HOMEWORK;
   static const TE_HOMEWORK_LIST = _Paths.TE_HOMEWORK_LIST;
   static const TE_HOMEWORK_EVALUATION = _Paths.TE_HOMEWORK_EVALUATION;
+  static const TE_ACADEMIC = _Paths.TE_ACADEMIC;
 }
 
 abstract class _Paths {
@@ -206,4 +207,5 @@ abstract class _Paths {
   static const TE_ADD_HOMEWORK = '/te-add-homework';
   static const TE_HOMEWORK_LIST = '/te-homework-list';
   static const TE_HOMEWORK_EVALUATION = '/te-homework-evaluation';
+  static const TE_ACADEMIC = '/te-academic';
 }

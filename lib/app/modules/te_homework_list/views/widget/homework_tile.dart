@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/column_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
@@ -21,7 +22,8 @@ class HomeworkTile extends StatelessWidget {
     this.evaluation,
     this.marks,
     this.subject,
-    this.onTap,  this.isEvaluation = false,
+    this.onTap,
+    this.isEvaluation = false,
   });
 
   @override
@@ -39,19 +41,33 @@ class HomeworkTile extends StatelessWidget {
               ),
               InkWell(
                 onTap: onTap,
-                child: const Padding(
-                  padding: EdgeInsets.only(top: 5.0),
-                  child: Text(
-                    "Evaluation",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.transparent, // Step 2 SEE HERE
-                      shadows: [Shadow(offset: Offset(0, -5), color: AppColors.primaryColor)],
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
+                child: isEvaluation
+                    ? InkWell(
+                        onTap: () {},
+                        child: Image.asset(
+                          ImagePath.download,
+                          scale: 4,
+                          color: AppColors.primaryColor,
+                        ),
+                      )
+                    : const Padding(
+                        padding: EdgeInsets.only(top: 5.0),
+                        child: Text(
+                          "Evaluation",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.transparent,
+                            // Step 2 SEE HERE
+                            shadows: [
+                              Shadow(
+                                  offset: Offset(0, -5),
+                                  color: AppColors.primaryColor)
+                            ],
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),
@@ -83,7 +99,7 @@ class HomeworkTile extends StatelessWidget {
         ),
         10.verticalSpacing,
         const CustomDivider(
-          color: AppColors.dividerColor,
+          color: AppColors.customDividerColor,
         )
       ],
     );

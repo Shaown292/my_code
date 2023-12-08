@@ -4,6 +4,8 @@ import 'package:flutter_single_getx_api_v2/app/modules/fees/views/fees_view.dart
 import 'package:flutter_single_getx_api_v2/app/modules/home/views/home_view.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/profile_view.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/routine/views/routine_view.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/te_academic/views/te_academic_view.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/te_homework/views/te_homework_view.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -31,11 +33,11 @@ class DashboardView extends GetView<DashboardController> {
 
 
         GlobalVariable.roleId == 4
-            ? const ProfileView()
+            ? const TeAcademicView()
             : const RoutineView(),
 
         GlobalVariable.roleId == 4
-            ? const ProfileView()
+            ? const TeHomeworkView()
             : const ProfileView(),
       ],
       items: controller.tabItem,

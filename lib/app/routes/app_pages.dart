@@ -166,6 +166,8 @@ import '../modules/subjects/bindings/subjects_binding.dart';
 import '../modules/subjects/views/subjects_view.dart';
 import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
+import '../modules/te_academic/bindings/te_academic_binding.dart';
+import '../modules/te_academic/views/te_academic_view.dart';
 import '../modules/te_add_homework/bindings/te_add_homework_binding.dart';
 import '../modules/te_add_homework/views/te_add_homework_view.dart';
 import '../modules/te_homework/bindings/te_homework_binding.dart';
@@ -229,6 +231,8 @@ class AppPages {
         RoutineBinding(),
         FeesBinding(),
         AdminAttendanceBinding(),
+        TeAcademicBinding(),
+        TeHomeworkBinding(),
       ],
     ),
     GetPage(
@@ -720,6 +724,12 @@ class AppPages {
       page: () => const TeHomeworkEvaluationView(),
       binding: TeHomeworkEvaluationBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.TE_ACADEMIC,
+      page: () => const TeAcademicView(),
+      binding: TeAcademicBinding(),
+      transition: Transition.fadeIn,
     ),
   ];
 }
