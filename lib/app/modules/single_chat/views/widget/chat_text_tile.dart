@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:get/get.dart';
 
 class ChatTextTile extends StatelessWidget {
   final String? text;
@@ -26,7 +23,11 @@ class ChatTextTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(top: 10.0, bottom: 10, left:textLeftPadding ?? 0, right: textRightPadding ?? 0),
+      padding: EdgeInsets.only(
+          top: 10.0,
+          bottom: 10,
+          left: textLeftPadding ?? 0,
+          right: textRightPadding ?? 0),
       child: Container(
         padding: const EdgeInsets.all(13),
         decoration: BoxDecoration(
@@ -45,5 +46,3 @@ class ChatTextTile extends StatelessWidget {
     );
   }
 }
-
-

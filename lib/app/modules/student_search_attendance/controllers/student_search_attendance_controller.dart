@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/display_dot.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:get/get.dart';
@@ -41,7 +40,6 @@ class StudentSearchAttendanceController extends GetxController {
   int? subjectId;
 
   void setEventData() {
-
     if (attendanceList.isNotEmpty) {
       customEventList[DateTime(
           attendanceList[0].attendanceDate!.year,
@@ -154,7 +152,9 @@ class StudentSearchAttendanceController extends GetxController {
         holiday.value = attendanceResponseModel.data?.holidayDay ?? 0;
 
         /// current date changed
-        currentDate = DateTime.tryParse(attendanceResponseModel.data!.currentDay!) ?? DateTime.now();
+        currentDate =
+            DateTime.tryParse(attendanceResponseModel.data!.currentDay!) ??
+                DateTime.now();
 
         if (attendanceResponseModel.data!.attendances!.isNotEmpty) {
           for (int i = 0;
@@ -167,16 +167,14 @@ class StudentSearchAttendanceController extends GetxController {
                 attendanceList[i].attendanceDate!.day)] = [
               Event(
                 date: DateTime(
-                  attendanceList[i].attendanceDate!.year,
-                  attendanceList[i].attendanceDate!.month,
-                  attendanceList[i].attendanceDate!.day
-                ),
+                    attendanceList[i].attendanceDate!.year,
+                    attendanceList[i].attendanceDate!.month,
+                    attendanceList[i].attendanceDate!.day),
                 dot: GlobalVariable.getAttendanceStatus(
                     attendanceList[i].attendanceType ?? ""),
               )
             ];
           }
-
         }
       }
     } catch (e, t) {
@@ -324,7 +322,6 @@ class StudentSearchAttendanceController extends GetxController {
 
   @override
   void onInit() {
-
     fromStatus.value = Get.arguments["from"];
 
     if (homeController.studentRecordList.isNotEmpty) {
@@ -332,7 +329,6 @@ class StudentSearchAttendanceController extends GetxController {
     }
 
     if (fromStatus.value) {
-
       subjectId = Get.arguments["subjectID"];
 
       getSearchSubjectAttendanceList(

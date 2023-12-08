@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
-import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -115,18 +112,26 @@ class AdminSubjectAttendanceSearchIndividualView
                   fillColor: Colors.white,
                 ),
                 const Spacer(),
-                controller.searchLoader.value ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) : PrimaryButton(
-                  text: "Search",
-                  onTap: () {
-                    controller.getSearchStudentDataList(
-                      classId: controller.adminStudentsSearchController.studentClassId.value,
-                      sectionId: controller.adminStudentsSearchController.studentSectionId.value,
-                      subjectId: controller.adminStudentsSearchController.studentSubjectId.value,
-                      rollNo: controller.rollTextController.text,
-                      name: controller.nameTextController.text,
-                    );
-                  },
-                ),
+                controller.searchLoader.value
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ))
+                    : PrimaryButton(
+                        text: "Search",
+                        onTap: () {
+                          controller.getSearchStudentDataList(
+                            classId: controller.adminStudentsSearchController
+                                .studentClassId.value,
+                            sectionId: controller.adminStudentsSearchController
+                                .studentSectionId.value,
+                            subjectId: controller.adminStudentsSearchController
+                                .studentSubjectId.value,
+                            rollNo: controller.rollTextController.text,
+                            name: controller.nameTextController.text,
+                          );
+                        },
+                      ),
                 50.verticalSpacing,
               ],
             ),

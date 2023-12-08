@@ -3,7 +3,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/notice_tile/not
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
@@ -32,7 +31,10 @@ class NoticeView extends GetView<NoticeController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   controller.loadingController.isLoading
-                      ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,))
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ))
                       : controller.allNoticeList.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
@@ -40,8 +42,8 @@ class NoticeView extends GetView<NoticeController> {
                               itemCount: controller.allNoticeList.length,
                               itemBuilder: (context, index) {
                                 return NoticeTile(
-                                  noticeTitle:
-                                      controller.allNoticeList[index].noticeTitle,
+                                  noticeTitle: controller
+                                      .allNoticeList[index].noticeTitle,
                                   noticeDetails: controller
                                       .allNoticeList[index].noticeMessage,
                                   noticeDate:
@@ -50,14 +52,14 @@ class NoticeView extends GetView<NoticeController> {
                                   onTap: () {
                                     controller.showNoticeDetailsBottomSheet(
                                         index: index,
-                                        bottomSheetBackgroundColor: Colors.white);
+                                        bottomSheetBackgroundColor:
+                                            Colors.white);
                                   },
                                 );
                               })
                           : const Center(
                               child: NoDataAvailableWidget(),
                             ),
-
                   50.verticalSpacing,
                 ],
               ),

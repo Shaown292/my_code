@@ -6,7 +6,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/alert_dialog.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/content_tile/content_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/permission_check/permission_check.dart';
 import 'package:get/get.dart';
 import '../../../utilities/widgets/loader/loading.widget.dart';

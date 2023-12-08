@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import '../../../data/constants/app_text_style.dart';
 import '../../../utilities/widgets/common_widgets/custom_divider.dart';
 import '../../../utilities/widgets/common_widgets/text_field.dart';
-import '../../../utilities/widgets/custom_dropdown.dart';
 import '../controllers/apply_leave_controller.dart';
 
 class ApplyLeaveView extends GetView<ApplyLeaveController> {
@@ -31,13 +30,13 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                             color: AppColors.primaryColor,
                           )
                         : DuplicateDropdown(
-                          dropdownValue: controller.dropdownValue.value,
-                          dropdownList: controller.applyLeaveTypeList,
-                          changeDropdownValue: (v) {
-                            controller.dropdownValue.value = v!;
-                            controller.leaveTypeId.value = v.id;
-                          },
-                        ),
+                            dropdownValue: controller.dropdownValue.value,
+                            dropdownList: controller.applyLeaveTypeList,
+                            changeDropdownValue: (v) {
+                              controller.dropdownValue.value = v!;
+                              controller.leaveTypeId.value = v.id;
+                            },
+                          ),
                     10.verticalSpacing,
 
                     /// Text Field
@@ -90,7 +89,6 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                         ImagePath.calender,
                         color: AppColors.profileValueColor,
                       ),
-
                     ),
                     10.verticalSpacing,
                     CustomTextFormField(

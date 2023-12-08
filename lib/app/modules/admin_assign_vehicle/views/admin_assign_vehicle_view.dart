@@ -6,7 +6,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 
 import 'package:get/get.dart';
 
@@ -60,7 +59,8 @@ class AdminAssignVehicleView extends GetView<AdminAssignVehicleController> {
                         ),
                       )
                     : DuplicateDropdown(
-                        dropdownValue: controller.assignVehicleInitialValue.value,
+                        dropdownValue:
+                            controller.assignVehicleInitialValue.value,
                         dropdownList: controller.assignVehicleList,
                         changeDropdownValue: (value) {
                           controller.assignVehicleInitialValue.value = value!;

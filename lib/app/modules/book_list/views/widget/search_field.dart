@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../data/constants/app_colors.dart';
-
 class SearchField extends StatelessWidget {
   final TextEditingController controller;
   final Function(String searchKey)? onChange;
@@ -16,7 +14,8 @@ class SearchField extends StatelessWidget {
     this.onChange,
     this.isTextFieldEmpty = false,
     this.onTap,
-    this.icon, this.hintTextStyle,
+    this.icon,
+    this.hintTextStyle,
   });
 
   @override

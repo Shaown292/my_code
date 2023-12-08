@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
-import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_dummy_data.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/views/widgets/custom_card_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
@@ -21,12 +20,12 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return InfixEduScaffold(
       leadingIcon: const SizedBox(),
       appBar: PrimaryAppBar(
-        title: GlobalVariable.roleId == 1 ? 'Welcome to Admin': 'Welcome to our school',
+        title: GlobalVariable.roleId == 1
+            ? 'Welcome to Admin'
+            : 'Welcome to our school',
         actions: [
           CustomIconButton(
             icon: FontAwesomeIcons.facebookMessenger,
@@ -71,16 +70,16 @@ class HomeView extends GetView<HomeController> {
                         icon: controller.homeTileList[index].icon,
                         title: controller.homeTileList[index].title,
                         onTap: () {
-
                           controller.selectIndex.value = index;
-                          AppFunctions.routingDecisionForRoleId(roleId: GlobalVariable.roleId!, title: controller.homeTileList[index].value);
+                          AppFunctions.routingDecisionForRoleId(
+                              roleId: GlobalVariable.roleId!,
+                              title: controller.homeTileList[index].value);
 
                           // controller.selectIndex.value = index;
                           // AppFunctions.getStudentDashboardNavigation(
                           //     title: list[index].value);
                           // AppFunctions.getAdminHomeNavigation(
                           //     title: list[index].value);
-
                         },
                         isSelected: controller.selectIndex.value == index,
                       ),
