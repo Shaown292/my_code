@@ -40,7 +40,6 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                           changeDropdownValue: (value) {
                             controller.bookCategoryInitValue.value = value!;
                             controller.bookCategoryId.value = value.id;
-                            debugPrint("category id is :::::::::: ${controller.bookCategoryId.value}");
                           },
                         ),
                   10.verticalSpacing,
@@ -52,7 +51,6 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     changeDropdownValue: (value) {
                       controller.bookSubjectInitValue.value = value!;
                       controller.bookSubjectId.value = value.id;
-                      debugPrint("subject id is :::::::::: ${controller.bookSubjectId.value}");
                     },
                   ),
                   10.verticalSpacing,
@@ -62,7 +60,7 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     controller: controller.titleTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "*Title",
+                    hintText: "Title*",
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                   ),

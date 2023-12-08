@@ -6,7 +6,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -34,7 +33,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                       CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Room Name",
+                        hintText: "Room Name*",
                         fillColor: Colors.white,
                         controller: controller.roomNameTextController,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
@@ -44,7 +43,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         textInputType: TextInputType.number,
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Number of Bed",
+                        hintText: "Number of Bed*",
                         fillColor: Colors.white,
                         controller: controller.numberOfBedTextController,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
@@ -54,7 +53,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         textInputType: TextInputType.number,
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Cost Per Bed",
+                        hintText: "Cost Per Bed*",
                         fillColor: Colors.white,
                         controller: controller.costPerBedTextController,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,

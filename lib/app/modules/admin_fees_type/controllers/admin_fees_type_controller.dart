@@ -9,7 +9,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_fees_model/admin_fees_type_response_model.dart';
@@ -18,7 +17,7 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_respon
 import 'package:get/get.dart';
 
 class AdminFeesTypeController extends GetxController {
-  LoadingController loadingController = Get.find();
+  // LoadingController loadingController = Get.find();
   AdminFeesGroupController adminFeesGroupController =
       Get.put(AdminFeesGroupController());
 
@@ -30,6 +29,7 @@ class AdminFeesTypeController extends GetxController {
   RxString feesTypeNullValue = "".obs;
   RxBool createUpdateLoader = false.obs;
   RxBool deleteLoader = false.obs;
+  RxBool getFeesLoader = false.obs;
 
 
 
@@ -37,13 +37,14 @@ class AdminFeesTypeController extends GetxController {
   Future<AdminFeesTypeResponseModel> getFeesListList() async {
     try {
       feesTypeList.clear();
-      loadingController.isLoading = true;
+      getFeesLoader.value = true;
       final response = await BaseClient().getData(
           url: InfixApi.getFeesTypeList, header: GlobalVariable.header);
       AdminFeesTypeResponseModel feesTypeResponseModel =
           AdminFeesTypeResponseModel.fromJson(response);
 
       if (feesTypeResponseModel.success == true) {
+        getFeesLoader.value = false;
         if (feesTypeResponseModel.data!.feesTypes!.isNotEmpty) {
           for (int i = 0;
               i < feesTypeResponseModel.data!.feesTypes!.length;
@@ -51,17 +52,18 @@ class AdminFeesTypeController extends GetxController {
             feesTypeList.add(feesTypeResponseModel.data!.feesTypes![i]);
           }
         }
+
       } else {
-        loadingController.isLoading = false;
+        getFeesLoader.value = false;
         showBasicFailedSnackBar(
             message: feesTypeResponseModel.message ?? 'Something Went Wrong.');
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+      getFeesLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      getFeesLoader.value = false;
     }
 
     return AdminFeesTypeResponseModel();
@@ -100,12 +102,12 @@ class AdminFeesTypeController extends GetxController {
         }
         Get.back();
       } else {
-        loadingController.isLoading = false;
+        createUpdateLoader.value = false;
         showBasicFailedSnackBar(
             message: feesTypeResponseModel.message ?? 'Something went wrong.');
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+      createUpdateLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {

@@ -151,11 +151,11 @@ class AdminAddBookController extends GetxController {
 
     }
     if(bookCategoryList.isEmpty){
-      showBasicFailedSnackBar(message: 'Select Book Category .');
+      showBasicFailedSnackBar(message: 'No Category available');
       return false;
     }
     if(bookSubjectList.isEmpty) {
-      showBasicFailedSnackBar(message: 'Select Book Category .');
+      showBasicFailedSnackBar(message: 'Select Subject available.');
       return false;
     }
 
