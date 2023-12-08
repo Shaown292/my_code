@@ -27,7 +27,7 @@ class ColumnTile extends StatelessWidget {
         children: [
           Text(
             title ?? "",
-            style: AppTextStyle.homeworkElements,
+            style: AppTextStyle.fontSize13BlackW400,
           ),
           8.verticalSpacing,
           Padding(

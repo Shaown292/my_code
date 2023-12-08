@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/display_calender.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/event_status.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -22,20 +23,14 @@ class StudentSearchAttendanceView
       body: Obx(
         () => CustomBackground(
           customWidget: SingleChildScrollView(
-            child: controller.loadingController.isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primaryColor,
-                    ),
-                  )
-                : Column(
+            child:  Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 0),
                         child: SizedBox(
                           height: 50,
-                          child: ListView.builder(
+                          child:ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: controller
                                 .homeController.studentRecordList.length,
@@ -67,7 +62,9 @@ class StudentSearchAttendanceView
                           ),
                         ),
                       ),
-                      DisplayCalender(
+                      controller.loadingController.isLoading
+                          ? const CircularProgressIndicator(color: AppColors.primaryColor,)
+                          :DisplayCalender(
                         currentDate: controller.currentDate,
                         eventList: controller.eventList,
                         onCalendarChanged: (DateTime date) {

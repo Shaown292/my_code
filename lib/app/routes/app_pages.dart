@@ -166,6 +166,12 @@ import '../modules/subjects/bindings/subjects_binding.dart';
 import '../modules/subjects/views/subjects_view.dart';
 import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
+import '../modules/te_add_homework/bindings/te_add_homework_binding.dart';
+import '../modules/te_add_homework/views/te_add_homework_view.dart';
+import '../modules/te_homework/bindings/te_homework_binding.dart';
+import '../modules/te_homework/views/te_homework_view.dart';
+import '../modules/te_homework_list/bindings/te_homework_list_binding.dart';
+import '../modules/te_homework_list/views/te_homework_list_view.dart';
 import '../modules/teacher/bindings/teacher_binding.dart';
 import '../modules/teacher/views/teacher_view.dart';
 import '../modules/transport/bindings/transport_binding.dart';
@@ -687,6 +693,21 @@ class AppPages {
       page: () => const AdminSettingsView(),
       binding: AdminSettingsBinding(),
       transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.TE_HOMEWORK,
+      page: () => const TeHomeworkView(),
+      binding: TeHomeworkBinding(),
+    ),
+    GetPage(
+      name: _Paths.TE_ADD_HOMEWORK,
+      page: () => const TeAddHomeworkView(),
+      binding: TeAddHomeworkBinding(),
+    ),
+    GetPage(
+      name: _Paths.TE_HOMEWORK_LIST,
+      page: () => const TeHomeworkListView(),
+      binding: TeHomeworkListBinding(),
     ),
   ];
 }

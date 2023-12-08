@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/teacher/views/widget/teac
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -61,7 +62,9 @@ class TeacherView extends GetView<TeacherController> {
                   ),
                   10.verticalSpacing,
                   controller.loadingController.isLoading
-                      ? const CircularProgressIndicator()
+                      ? SizedBox(
+                          height: Get.height - 200,
+                          child: const LoadingWidget())
                       : controller.teacherList.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
