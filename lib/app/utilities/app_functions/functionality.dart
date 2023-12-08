@@ -6,9 +6,9 @@ import '../../routes/app_pages.dart';
 
 class AppFunctions {
 
-  void getFunctions(int rule) {
+  void getFunctions(int role) {
 
-    switch (rule) {
+    switch (role) {
       case 1:
         GlobalVariable.homeTileList = adminList;
         Get.offAndToNamed(Routes.HOME, arguments: {
