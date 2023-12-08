@@ -11,6 +11,7 @@ class PrimaryButton extends StatelessWidget {
   final String text;
   final TextStyle? textStyle;
   final Function()? onTap;
+  final EdgeInsets? padding;
 
   const PrimaryButton({
     super.key,
@@ -20,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
     required this.text,
     this.onTap,
     this.borderRadius,
-    this.textStyle,
+    this.textStyle, this.padding,
   });
 
   @override
@@ -30,6 +31,7 @@ class PrimaryButton extends StatelessWidget {
       child: Container(
         height: height ?? 40,
         width: width,
+        padding: padding,
         decoration: ShapeDecoration(
           color: color ?? AppColors.primaryColor,
           shape: RoundedRectangleBorder(

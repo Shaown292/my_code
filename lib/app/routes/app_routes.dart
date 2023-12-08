@@ -100,6 +100,9 @@ abstract class Routes {
   static const ADMIN_ASSIGN_VEHICLE = _Paths.ADMIN_ASSIGN_VEHICLE;
   static const ADMIN_TRANSPORT_DETAILS = _Paths.ADMIN_TRANSPORT_DETAILS;
   static const ADMIN_SETTINGS = _Paths.ADMIN_SETTINGS;
+  static const TE_HOMEWORK = _Paths.TE_HOMEWORK;
+  static const TE_ADD_HOMEWORK = _Paths.TE_ADD_HOMEWORK;
+  static const TE_HOMEWORK_LIST = _Paths.TE_HOMEWORK_LIST;
 }
 
 abstract class _Paths {
@@ -198,4 +201,7 @@ abstract class _Paths {
   static const ADMIN_ASSIGN_VEHICLE = '/admin-assign-vehicle';
   static const ADMIN_TRANSPORT_DETAILS = '/admin-transport-details';
   static const ADMIN_SETTINGS = '/admin-settings';
+  static const TE_HOMEWORK = '/te-homework';
+  static const TE_ADD_HOMEWORK = '/te-add-homework';
+  static const TE_HOMEWORK_LIST = '/te-homework-list';
 }

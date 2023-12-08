@@ -256,8 +256,14 @@ class AppFunctions {
   static void getTeacherHomeNavigation({required String title}) {
     debugPrint(title);
     switch (title) {
-      case 'Staff':
-        Get.toNamed(Routes.STAFF);
+      case 'HomeWork':
+        Get.toNamed(Routes.TE_HOMEWORK);
+        break;
+      case 'Add Homework':
+        Get.toNamed(Routes.TE_ADD_HOMEWORK);
+        break;
+      case 'Homework List':
+        Get.toNamed(Routes.TE_HOMEWORK_LIST);
         break;
 
 
