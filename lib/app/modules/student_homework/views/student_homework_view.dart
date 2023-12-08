@@ -77,7 +77,9 @@ class StudentHomeworkView extends GetView<StudentHomeworkController> {
                                     },
                                     onUploadTap: () => controller.isUpload.value = true,
                                     onTapBrowse: () => controller.pickFile(),
-                                    onTapForSave: (){},
+                                    onTapForSave: (){
+                                      controller.uploadFilesWithId(controller.pickedFileList, controller.studentHomeworkList[index].id!);
+                                    },
 
                                   );
                                 },

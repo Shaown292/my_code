@@ -779,6 +779,8 @@ class InfixApi {
     return "${baseApi}student-homework?record_id=$recordId";
   }
 
+  static String getStudentHomeWorkUploadFiles = "${baseApi}upload-homework-content";
+
   static String studentUploadHomework = '${baseApi}student-upload-homework';
 
   static String getStudentAssignment(dynamic userId, int recordId) {

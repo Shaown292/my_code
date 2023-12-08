@@ -28,7 +28,8 @@ class StudentHomeworkController extends GetxController {
   TextEditingController uploadFileTextController = TextEditingController();
   RxBool saveLoader = false.obs;
 
-  Rx<File> file = File('').obs;
+  RxList<File> pickedFileList = <File>[].obs;
+
   RxBool isUpload = false.obs;
 
   void getHomeWorkList() async {
@@ -102,7 +103,7 @@ class StudentHomeworkController extends GetxController {
                                     shape: BoxShape.circle,
                                     color: Colors.white),
                                 child: InkWell(
-                                  onTap: () => Get.back(),
+                                  onTap: () => isUpload.value = false,
                                   child: const Icon(
                                     Icons.close,
                                     size: 16,
@@ -114,13 +115,15 @@ class StudentHomeworkController extends GetxController {
                         ),
                         20.verticalSpacing,
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20),
                           child: CustomTextFormField(
                             enableBorderActive: true,
                             focusBorderActive: true,
                             fillColor: Colors.white,
-                            hintText:
-                                "${file.value.path.isNotEmpty ? file : 'Select File'}",
+                            hintText: pickedFileList.isNotEmpty
+                                ? pickedFileList.first.path
+                                : 'Select File',
                             readOnly: true,
                             suffixIcon: InkWell(
                               onTap: onTapBrowse,
@@ -142,6 +145,18 @@ class StudentHomeworkController extends GetxController {
                               ),
                             ),
                           ),
+                        ),
+                        Column(
+                          children: pickedFileList
+                              .map((element) => Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(element.path.split('/').last),
+                                      const Icon(Icons.cancel_outlined),
+                                    ],
+                                  ))
+                              .toList(),
                         ),
                         const Spacer(),
                         Padding(
@@ -307,15 +322,56 @@ class StudentHomeworkController extends GetxController {
     );
 
     if (result != null) {
-      file.value = File(result.files.single.path!);
+      pickedFileList.value = result.paths.map((path) => File(path!)).toList();
     } else {
       showBasicFailedSnackBar(message: 'canceled file selection');
       debugPrint("User canceled file selection");
     }
   }
 
+  void uploadFilesWithId(List<File> files, int id) async {
+    try {
+      saveLoader.value = true;
 
+      var uri = Uri.parse(InfixApi
+          .getStudentHomeWorkUploadFiles); // Replace with your server endpoint
+      var request = http.MultipartRequest("POST", uri);
 
+      request.fields['id'] = id.toString();
+      request.headers.addAll(GlobalVariable.header);
+
+      for (var file in files) {
+        var stream = http.ByteStream(file.openRead());
+        var length = await file.length();
+        var multipartFile = http.MultipartFile('files[]', stream, length,
+            filename: file.path.split('/').last);
+
+        request.files.add(multipartFile);
+      }
+
+      var response = await request.send();
+      final responseBody = await response.stream.bytesToString();
+      final decodedResponse = json.decode(responseBody);
+      debugPrint(decodedResponse.toString());
+
+      if (response.statusCode == 200) {
+        saveLoader.value = false;
+        isUpload.value = false;
+        Get.back();
+        pickedFileList.clear();
+        showBasicSuccessSnackBar(message: decodedResponse["message"]);
+      } else {
+        saveLoader.value = false;
+        showBasicFailedSnackBar(message: decodedResponse["message"]);
+      }
+    } catch (e, t) {
+      saveLoader.value = false;
+      debugPrint("$e");
+      debugPrint("$t");
+    } finally {
+      saveLoader.value = false;
+    }
+  }
 
   @override
   void onInit() {
