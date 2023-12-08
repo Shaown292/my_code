@@ -52,32 +52,34 @@ class StudentHomeworkView extends GetView<StudentHomeworkController> {
                                     : AppColors.homeworkWidgetColor,
                                 onTap: () {
                                   controller.showHomeworkDetailsBottomSheet(
-                                      index: index,
-                                      color: Colors.white,
-                                      downloadTap: () {
-                                        if (controller
+                                    index: index,
+                                    color: Colors.white,
+                                    onDownloadTap: () {
+                                      if (controller.studentHomeworkList[index]
+                                                  .file ==
+                                              null ||
+                                          controller.studentHomeworkList[index]
+                                                  .file ==
+                                              '') {
+                                        showBasicFailedSnackBar(
+                                            message:
+                                                'No file available on server');
+                                      } else {
+                                        controller.downloadFile(
+                                            url: controller
+                                                .studentHomeworkList[index]
+                                                .file!,
+                                            title: controller
                                                     .studentHomeworkList[index]
-                                                    .file ==
-                                                null ||
-                                            controller
-                                                    .studentHomeworkList[index]
-                                                    .file ==
-                                                '') {
-                                          showBasicFailedSnackBar(
-                                              message:
-                                                  'No file available on server');
-                                        } else {
-                                          controller.downloadFile(
-                                              url: controller
-                                                  .studentHomeworkList[index]
-                                                  .file!,
-                                              title: controller
-                                                      .studentHomeworkList[
-                                                          index]
-                                                      .subject ??
-                                                  '');
-                                        }
-                                      });
+                                                    .subject ??
+                                                '');
+                                      }
+                                    },
+                                    onUploadTap: () => controller.isUpload.value = true,
+                                    onTapBrowse: () => controller.pickFile(),
+                                    onTapForSave: (){},
+
+                                  );
                                 },
                               ),
                             );
