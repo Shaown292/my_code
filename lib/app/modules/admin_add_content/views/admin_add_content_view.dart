@@ -221,6 +221,8 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     hintText: "Description",
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
+                    minLine: 1,
+                    maxLine: 2,
                   ),
                   50.verticalSpacing,
                   controller.saveLoader.value

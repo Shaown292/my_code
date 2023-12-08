@@ -9,8 +9,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attendance_model/admin_student_search_attendance_response_model.dart';
 
 import 'package:get/get.dart';
 
@@ -30,7 +28,6 @@ class AdminSubjectAttendanceSearchView
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
             child: Column(
               children: [
-
                 /// Student Class List
                 controller.adminStudentsSearchController.loadingController
                         .isLoading
@@ -48,8 +45,7 @@ class AdminSubjectAttendanceSearchView
                         changeDropdownValue: (v) {
                           controller.adminStudentsSearchController.classValue
                               .value = v!;
-                          controller
-                              .adminStudentsSearchController
+                          controller.adminStudentsSearchController
                               .studentClassId.value = v.id;
                           controller.adminStudentsSearchController
                               .getStudentSectionList(
@@ -96,14 +92,18 @@ class AdminSubjectAttendanceSearchView
                         color: AppColors.primaryColor,
                       )
                     : DuplicateDropdown(
-                        dropdownValue: controller.adminStudentsSearchController.subjectList.isEmpty
+                        dropdownValue: controller.adminStudentsSearchController
+                                .subjectList.isEmpty
                             ? controller.subjectNullValue.value
-                            : controller.adminStudentsSearchController.subjectValue.value,
-                        dropdownList: controller.adminStudentsSearchController.subjectList,
+                            : controller.adminStudentsSearchController
+                                .subjectValue.value,
+                        dropdownList: controller
+                            .adminStudentsSearchController.subjectList,
                         changeDropdownValue: (v) {
-                          controller.adminStudentsSearchController.subjectValue.value = v!;
-                          controller.adminStudentsSearchController.studentSubjectId.value = v.id;
-                          print(v.id);
+                          controller.adminStudentsSearchController.subjectValue
+                              .value = v!;
+                          controller.adminStudentsSearchController
+                              .studentSubjectId.value = v.id;
                         },
                       ),
                 10.verticalSpacing,
@@ -127,12 +127,16 @@ class AdminSubjectAttendanceSearchView
                 PrimaryButton(
                   text: "Search",
                   onTap: () {
-                    Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST, arguments: {
-                      'class_id': controller.adminStudentsSearchController.studentClassId.value,
-                      'section_id': controller.adminStudentsSearchController.studentSectionId.value,
-                      'subject_id': controller.adminStudentsSearchController.studentSubjectId.value,
-                      'date': controller.selectedDateTextController.text,
-                    });
+                    Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST,
+                        arguments: {
+                          'class_id': controller.adminStudentsSearchController
+                              .studentClassId.value,
+                          'section_id': controller.adminStudentsSearchController
+                              .studentSectionId.value,
+                          'subject_id': controller.adminStudentsSearchController
+                              .studentSubjectId.value,
+                          'date': controller.selectedDateTextController.text,
+                        });
                   },
                 ),
                 50.verticalSpacing,

@@ -8,8 +8,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -40,19 +38,17 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                           changeDropdownValue: (value) {
                             controller.bookCategoryInitValue.value = value!;
                             controller.bookCategoryId.value = value.id;
-                            debugPrint("category id is :::::::::: ${controller.bookCategoryId.value}");
                           },
                         ),
                   10.verticalSpacing,
 
-                  /// Book Gerne dropdown List
+                  /// Book Subject dropdown List
                   DuplicateDropdown(
                     dropdownValue: controller.bookSubjectInitValue.value,
                     dropdownList: controller.bookSubjectList,
                     changeDropdownValue: (value) {
                       controller.bookSubjectInitValue.value = value!;
                       controller.bookSubjectId.value = value.id;
-                      debugPrint("subject id is :::::::::: ${controller.bookSubjectId.value}");
                     },
                   ),
                   10.verticalSpacing,
@@ -62,7 +58,7 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     controller: controller.titleTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "*Title",
+                    hintText: "Title*",
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                   ),

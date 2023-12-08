@@ -25,9 +25,9 @@ class HomeController extends GetxController {
 
   LoadingController loadingController = Get.find();
 
-  void _getUserInfo() {
-    profileInfoModel = _authDatabase.getUserInfo()!;
-  }
+  // void _getUserInfo() {
+  //   profileInfoModel = _authDatabase.getUserInfo()!;
+  // }
 
   void logout() async {
     LoadingController loadingController = Get.find();

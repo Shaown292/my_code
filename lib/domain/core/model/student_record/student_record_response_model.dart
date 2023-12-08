@@ -57,8 +57,8 @@ class StudentRecord {
 
   factory StudentRecord.fromJson(Map<String, dynamic> json) => StudentRecord(
     id: json["id"],
-    studentRecordClass: json["class"],
-    section: json["section"],
+    studentRecordClass: json["class"] ?? '',
+    section: json["section"] ?? '',
   );
 
   Map<String, dynamic> toJson() => {

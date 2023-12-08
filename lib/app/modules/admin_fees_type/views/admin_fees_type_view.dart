@@ -26,7 +26,7 @@ class AdminFeesTypeView extends GetView<AdminFeesTypeController> {
         body: CustomBackground(
           customWidget: Column(
             children: [
-              controller.loadingController.isLoading
+              controller.getFeesLoader.value
                   ? const Expanded(
                       child: LoadingWidget(),
                     )

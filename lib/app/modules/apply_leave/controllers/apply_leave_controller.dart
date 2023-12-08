@@ -104,20 +104,21 @@ class ApplyLeaveController extends GetxController {
   }
 
   bool validation() {
-    if (dropdownValue.value == '') {
-      showBasicFailedSnackBar(message: 'Select Leave Type.');
+    if (dropdownValue.value.id == -1) {
+      showBasicFailedSnackBar(message: 'No leave type available.');
+      return false;
     }
     if (applyDateTextController.text.isEmpty) {
       showBasicFailedSnackBar(message: 'Select Apply Date.');
-      return isValidate = false;
+      return false;
     }
     if (fromDateTextController.text.isEmpty) {
       showBasicFailedSnackBar(message: 'Select From Date.');
-      return isValidate = false;
+      return false;
     }
     if (toDateTextController.text.isEmpty) {
       showBasicFailedSnackBar(message: 'Select To Date.');
-      return isValidate = false;
+      return false;
     }
 
     return true;

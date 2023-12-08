@@ -7,7 +7,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -34,7 +33,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                       CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Dormitory Name",
+                        hintText: "Dormitory Name*",
                         fillColor: Colors.white,
                         controller: controller.dormitoryNameController,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
@@ -43,7 +42,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                       CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Intake",
+                        hintText: "Intake*",
                         fillColor: Colors.white,
                         controller: controller.dormitoryIntakeController,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
@@ -52,7 +51,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                       CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Address",
+                        hintText: "Address*",
                         fillColor: Colors.white,
                         controller: controller.dormitoryAddressController,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,

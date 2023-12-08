@@ -6,7 +6,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/applied_leave_d
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_approve_leave_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_leave_model/admin_pending_leave_response_model.dart';
@@ -56,7 +55,11 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                     ///Pending
                     Obx(
                       () => controller.loadingController.isLoading
-                          ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,),)
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
+                            )
                           : controller.pendingLeaveList.isNotEmpty
                               ? RefreshIndicator(
                                   onRefresh: () async {
@@ -122,7 +125,11 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
 
                     Obx(
                       () => controller.loadingController.isLoading
-                          ? const  Center(child: CircularProgressIndicator(color: AppColors.primaryColor,),)
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
+                            )
                           : controller.approveLeaveList.isNotEmpty
                               ? RefreshIndicator(
                                   onRefresh: () async {
@@ -198,7 +205,11 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
 
                     Obx(
                       () => controller.loadingController.isLoading
-                          ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,),)
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
+                            )
                           : controller.rejectedLeaveList.isNotEmpty
                               ? RefreshIndicator(
                                   onRefresh: () async {

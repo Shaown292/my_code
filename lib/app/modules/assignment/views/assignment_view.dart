@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/content_tile/content_tile.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/alert_dialog.dart';
@@ -33,53 +32,53 @@ class AssignmentView extends GetView<AssignmentController> {
                 ? const LoadingWidget()
                 : controller.studentAssignmentList.isNotEmpty
                     ? Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ListView.builder(
-                          itemCount:
-                              controller.studentAssignmentList.length,
-                          shrinkWrap: true,
-                          physics:
-                              const BouncingScrollPhysics(),
-                          itemBuilder: (context, int index) {
-                            return ContentTile(
-                              title: controller
-                                  .studentAssignmentList[index]
-                                  .contentTitle,
-                              details:
-                                  "Assigned to ${controller.studentAssignmentList[index].availableFor}",
-                              dueDate: controller
-                                  .studentAssignmentList[index]
-                                  .uploadDate,
-                              cardBackgroundColor: Colors.white,
-                              onTap: () {
-                                PermissionCheck().checkPermissions(context);
-                                Get.dialog(
-                                  CustomPopupDialogue(
-                                    onYesTap: () {
-                                      Navigator.pop(context);
-                                      controller
-                                          .studentAssignmentList[index].uploadFile!.isNotEmpty
-                                          ? FileDownloadUtils().downloadFiles(
-                                          url: controller
-                                              .studentAssignmentList[index].uploadFile!,
-                                          title: controller
-                                              .studentAssignmentList[index].contentTitle!)
-                                          : showBasicSuccessSnackBar(
-                                          message: 'No File Available.');
-                                    },
-                                    title: 'Confirmation',
-                                    subTitle: AppText.downloadMessage,
-                                    noText: 'No',
-                                    yesText: 'Download',
-                                  ),
-                                );
-                              },
-                            );
-                          },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ListView.builder(
+                            itemCount: controller.studentAssignmentList.length,
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, int index) {
+                              return ContentTile(
+                                title: controller
+                                    .studentAssignmentList[index].contentTitle,
+                                details:
+                                    "Assigned to ${controller.studentAssignmentList[index].availableFor}",
+                                dueDate: controller
+                                    .studentAssignmentList[index].uploadDate,
+                                cardBackgroundColor: Colors.white,
+                                onTap: () {
+                                  PermissionCheck().checkPermissions(context);
+                                  Get.dialog(
+                                    CustomPopupDialogue(
+                                      onYesTap: () {
+                                        Navigator.pop(context);
+                                        controller.studentAssignmentList[index]
+                                                .uploadFile!.isNotEmpty
+                                            ? FileDownloadUtils().downloadFiles(
+                                                url: controller
+                                                    .studentAssignmentList[
+                                                        index]
+                                                    .uploadFile!,
+                                                title: controller
+                                                    .studentAssignmentList[
+                                                        index]
+                                                    .contentTitle!)
+                                            : showBasicSuccessSnackBar(
+                                                message: 'No File Available.');
+                                      },
+                                      title: 'Confirmation',
+                                      subTitle: AppText.downloadMessage,
+                                      noText: 'No',
+                                      yesText: 'Download',
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    )
+                      )
                     : const NoDataAvailableWidget(),
           ),
         ),

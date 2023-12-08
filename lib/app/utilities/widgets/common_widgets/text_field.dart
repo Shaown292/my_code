@@ -14,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle? labelTextStyle;
   final Color? enableBorderActiveColor;
   final int? maxLine;
+  final int? minLine;
   final Function()? onTap;
   final bool readOnly;
   final EdgeInsets? contentPadding;
@@ -33,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     this.labelTextStyle,
     this.enableBorderActiveColor,
     this.maxLine,
+    this.minLine,
     this.onTap,
     this.readOnly = false,
     super.key,
@@ -50,7 +52,7 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         obscureText: obsCureText,
         keyboardType: textInputType,
-        minLines: 1,
+        minLines: minLine ?? 1,
         maxLines: maxLine ?? 1,
         readOnly: readOnly,
         decoration: InputDecoration(
