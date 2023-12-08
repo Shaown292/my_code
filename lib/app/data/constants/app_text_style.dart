@@ -64,6 +64,7 @@ class AppTextStyle {
     color: AppColors.syllabusTextColorBlack,
     fontSize: 14,
     fontWeight: FontWeight.w500,
+
   );
 
   static const fontSize13BlackW400 = TextStyle(
