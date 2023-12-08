@@ -132,10 +132,12 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                               dropdownList: controller.userNameList,
                               changeDropdownValue: (value) {
                                 controller.userNameDropdownValue.value = value!;
-                                controller.userId.value = value.id;
+                                controller.nameId.value = value.id;
+                                controller.userId.value = value.userId;
                               },
                             ),
 
+                  /// Student dropdown
                   controller.rolesId.value == 2
                       ? controller.studentLoader.value
                           ? const CircularProgressIndicator(
@@ -148,6 +150,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                               changeDropdownValue: (value) {
                                 controller.studentDropdownValue.value = value!;
                                 controller.studentId.value = value.id;
+                                controller.userId.value = value.userId;
                               },
                             )
                       : const SizedBox(),
@@ -163,6 +166,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                               changeDropdownValue: (value) {
                                 controller.parentsDropdownValue.value = value!;
                                 controller.parentsId.value = value.id;
+                                controller.userId.value = value.userId;
                               },
                             )
                       : const SizedBox(),
@@ -170,7 +174,9 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                   PrimaryButton(
                     text: "Save",
                     onTap: () {
-                      if (controller.validation()) {}
+                      if (controller.validation()) {
+                        controller.adminAddMember();
+                      }
                     },
                   )
                 ],

@@ -358,6 +358,7 @@ class InfixApi {
 
   /// Admin Library Module
   static String getAdminMemberRolesList = '${baseApi}admin-add-member-roles';
+  static String postAdminLibraryAddMember = '${baseApi}store-admin-library-member';
   static String getAdminMemberUserNameList({required int roleId}) => '${baseApi}admin-add-member-user-names?role_id=$roleId';
   static String getAdminMemberClassList({required int roleId}) => '${baseApi}admin-add-member-classes?role_id=$roleId';
   static String getAdminMemberSectionList({required int classId}) => '${baseApi}admin-add-member-sections?class_id=$classId';

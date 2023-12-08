@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library_model/member_model/admin_library_add_member_class_response_model.dart';
@@ -10,9 +11,13 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library_model/member_model/admin_library_add_member_section_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library_model/member_model/admin_library_add_member_student_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library_model/member_model/admin_library_add_member_user_name_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 
 class AdminAddMemberController extends GetxController {
+
+  LoadingController loadingController = Get.find();
+
   TextEditingController uniqueIdTextController = TextEditingController();
 
   /// Loader
@@ -34,6 +39,7 @@ class AdminAddMemberController extends GetxController {
       <AdminAddMemberUserNameData>[].obs;
   Rx<AdminAddMemberUserNameData> userNameDropdownValue =
       AdminAddMemberUserNameData(id: -1, name: "User Name").obs;
+  RxInt nameId = 0.obs;
   RxInt userId = 0.obs;
 
   /// Class List dropdown
@@ -129,7 +135,8 @@ class AdminAddMemberController extends GetxController {
             userNameList.add(addMemberUserNameResponseModel.data![i]);
           }
           userNameDropdownValue.value = userNameList[0];
-          userId.value = userNameList[0].id!;
+          nameId.value = userNameList[0].id!;
+          userId.value = userNameList.first.userId!;
         }
       } else {
         userNameLoader.value = false;
@@ -254,6 +261,7 @@ class AdminAddMemberController extends GetxController {
           }
           studentDropdownValue.value = studentList[0];
           studentId.value = studentList[0].id!;
+          userId.value = studentList.first.userId!;
         }
       } else {
         studentLoader.value = false;
@@ -296,6 +304,7 @@ class AdminAddMemberController extends GetxController {
           }
           parentsDropdownValue.value = parentsList[0];
           parentsId.value = parentsList[0].id!;
+          userId.value = parentsList.first.userId!;
         }
       } else {
         parentLoader.value = false;
@@ -326,14 +335,55 @@ class AdminAddMemberController extends GetxController {
     return true;
   }
 
+
+  Future<PostRequestResponseModel> adminAddMember() async {
+
+    try{
+
+      print('User Id :::::::: $userId');
+      loadingController.isLoading = true;
+      final response = await BaseClient().postData(url: InfixApi.postAdminLibraryAddMember, header: GlobalVariable.header, payload: {
+        'student': studentId.value,
+        'parent': parentsId.value,
+        'staff': nameId.value,
+        'user_id': userId.value,
+        'member_type': rolesId.value,
+        'member_ud_id': uniqueIdTextController.text,
+      });
+
+      PostRequestResponseModel postRequestResponseModel = PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        loadingController.isLoading = false;
+        showBasicSuccessSnackBar(message: postRequestResponseModel.message ??
+            AppText.somethingWentWrong,);
+
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(
+            message: postRequestResponseModel.message ??
+                AppText.somethingWentWrong,);
+      }
+
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
+
+
+
+
+
+    return PostRequestResponseModel();
+  }
+
+
   @override
   void onInit() {
     getRolesList().then((value) => getUserNameList(roleId: rolesId.value));
-    // getUserNameList(roleId: 1);
-    // getClassList(roleId: 2);
-    // getSectionList(classId: 1);
-    // getStudentList(classId: 1, sectionId: 1);
-    // getParentsList(classId: 1, sectionId: 1);
 
     super.onInit();
   }
