@@ -137,10 +137,10 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .pendingList[index].from,
                                               leaveTo: controller
                                                   .pendingList[index].to,
-                                              approveStatus: controller
+                                              status: controller
                                                   .pendingList[index].status,
                                               statusColor: AppColors
-                                                  .activeExamStatusBlueColor,
+                                                  .activeStatusYellowColor,
                                               onTap: () {
                                                 controller
                                                     .showPendingListDetailsBottomSheet(
@@ -176,7 +176,7 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .approvedList[index].from,
                                               leaveTo: controller
                                                   .approvedList[index].to,
-                                              approveStatus: controller
+                                              status: controller
                                                   .approvedList[index].status,
                                               statusColor:
                                                   AppColors.primaryColor,
@@ -215,7 +215,7 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .rejectedList[index].from,
                                               leaveTo: controller
                                                   .rejectedList[index].to,
-                                              approveStatus: controller
+                                              status: controller
                                                   .rejectedList[index].status,
                                               onTap: () {
                                                 controller

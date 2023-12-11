@@ -80,7 +80,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                             applyDate: pendingData.applyDate,
                                             leaveFrom: pendingData.leaveFrom,
                                             leaveTo: pendingData.leaveTo,
-                                            approveStatus:
+                                            status:
                                                 pendingData.approveStatus,
                                             statusColor: AppColors
                                                 .activeStatusYellowColor,
@@ -152,7 +152,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                               leaveFrom:
                                                   approveLeaveData.leaveFrom,
                                               leaveTo: approveLeaveData.leaveTo,
-                                              approveStatus: approveLeaveData
+                                              status: approveLeaveData
                                                   .approveStatus,
                                               statusColor: AppColors
                                                   .activeStatusGreenColor,
@@ -232,7 +232,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                             leaveFrom:
                                                 rejectedLeaveData.leaveFrom,
                                             leaveTo: rejectedLeaveData.leaveTo,
-                                            approveStatus:
+                                            status:
                                                 rejectedLeaveData.approveStatus,
                                             statusColor:
                                                 AppColors.activeStatusRedColor,

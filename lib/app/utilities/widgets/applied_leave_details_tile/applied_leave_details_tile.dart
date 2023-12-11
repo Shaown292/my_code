@@ -35,7 +35,7 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(15),
       color: color,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,8 +67,8 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
           ),
           10.verticalSpacing,
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ColumnTile(
                 title: "Apply Date",
@@ -90,22 +90,23 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
                 children: [
                   const Text(
                     "Status",
-                    style: AppTextStyle.homeworkElements,
+                    style: AppTextStyle.fontSize13BlackW400,
                   ),
-                  5.verticalSpacing,
-                  Container(
-                    width: 60,
+                  15.verticalSpacing,
+                  status != null
+                      ? Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
-                        color: statusColor ?? AppColors.homeworkStatusRedColor),
+                        color: statusColor),
                     child: Center(
                       child: Text(
-                        approveStatus ?? "",
-                        style: AppTextStyle.textStyle12WhiteW400,
+                        status ?? "",
+                        style: AppTextStyle.textStyle10WhiteW400,
                       ),
                     ),
                   )
+                      : const SizedBox(),
                 ],
               ),
             ],

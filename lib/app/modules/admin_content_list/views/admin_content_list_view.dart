@@ -8,7 +8,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_availab
 import 'package:get/get.dart';
 
 import '../controllers/admin_content_list_controller.dart';
-import 'widget/content_tile.dart';
+import '../../../utilities/widgets/content_tile.dart';
 
 class AdminContentListView extends GetView<AdminContentListController> {
   const AdminContentListView({super.key});

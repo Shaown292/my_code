@@ -91,7 +91,7 @@ class HomeworkCardTile extends StatelessWidget {
                       children: [
                         const Text(
                           "Status",
-                          style: AppTextStyle.homeworkElements,
+                          style: AppTextStyle.fontSize13BlackW400,
                         ),
                         5.verticalSpacing,
                         status != null
