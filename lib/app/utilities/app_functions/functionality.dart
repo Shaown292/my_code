@@ -268,6 +268,30 @@ class AppFunctions {
       case 'Library':
         Get.toNamed(Routes.TE_LIBRARY);
         break;
+      case 'Notice':
+        Get.toNamed(Routes.TE_NOTICE);
+        break;
+      case 'Content':
+        Get.toNamed(Routes.TE_CONTENT);
+        break;
+      case 'Add Content':
+        Get.toNamed(Routes.TE_ADD_CONTENT);
+        break;
+      case 'Content List':
+        Get.toNamed(Routes.TE_CONTENT_LIST);
+        break;
+      case 'Leave':
+        Get.toNamed(Routes.TE_LEAVE);
+        break;
+      case 'Apply Leave':
+        Get.toNamed(Routes.TE_APPLY_LEAVE);
+        break;
+      case 'Leave List':
+        Get.toNamed(Routes.TE_LEAVE_LIST);
+        break;
+      case 'Attendance':
+        Get.toNamed(Routes.TE_ATTENDANCE);
+        break;
 
 
     }
