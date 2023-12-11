@@ -9,49 +9,49 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_hom
 import 'package:get/get.dart';
 
 class TeHomeworkListController extends GetxController {
-
   LoadingController loadingController = Get.find();
 
   RxList<TeacherHomeworkData> teacherHomeworkList = <TeacherHomeworkData>[].obs;
 
-
   Future<TeacherHomeworkListResponseModel> getTeacherHomeWorkList() async {
-
-    try{
-
+    try {
       teacherHomeworkList.clear();
       loadingController.isLoading = true;
-      final response = await BaseClient().getData(url: InfixApi.getTeacherHomeworkList, header: GlobalVariable.header,);
+      final response = await BaseClient().getData(
+        url: InfixApi.getTeacherHomeworkList,
+        header: GlobalVariable.header,
+      );
 
-      TeacherHomeworkListResponseModel teacherHomeworkListResponseModel = TeacherHomeworkListResponseModel.fromJson(response);
+      TeacherHomeworkListResponseModel teacherHomeworkListResponseModel =
+          TeacherHomeworkListResponseModel.fromJson(response);
 
-      if(teacherHomeworkListResponseModel.success == true){
+      if (teacherHomeworkListResponseModel.success == true) {
         loadingController.isLoading = false;
-        if(teacherHomeworkListResponseModel.data!.isNotEmpty){
-          for (var element in teacherHomeworkListResponseModel.data!) {teacherHomeworkList.add(element);}
+        if (teacherHomeworkListResponseModel.data!.isNotEmpty) {
+          for (var element in teacherHomeworkListResponseModel.data!) {
+            teacherHomeworkList.add(element);
+          }
         }
-      } else{
+      } else {
         loadingController.isLoading = false;
-        showBasicFailedSnackBar(message: teacherHomeworkListResponseModel.message ?? AppText.somethingWentWrong);
+        showBasicFailedSnackBar(
+            message: teacherHomeworkListResponseModel.message ??
+                AppText.somethingWentWrong);
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
       debugPrint('$t');
-
-    } finally{
+    } finally {
       loadingController.isLoading = false;
     }
 
     return TeacherHomeworkListResponseModel();
   }
 
-
   @override
   void onInit() {
     getTeacherHomeWorkList();
     super.onInit();
   }
-
 }
