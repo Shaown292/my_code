@@ -166,6 +166,8 @@ import '../modules/subjects/bindings/subjects_binding.dart';
 import '../modules/subjects/views/subjects_view.dart';
 import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
+import '../modules/te_academic/bindings/te_academic_binding.dart';
+import '../modules/te_academic/views/te_academic_view.dart';
 import '../modules/te_add_homework/bindings/te_add_homework_binding.dart';
 import '../modules/te_add_homework/views/te_add_homework_view.dart';
 import '../modules/te_homework/bindings/te_homework_binding.dart';
@@ -174,6 +176,8 @@ import '../modules/te_homework_evaluation/bindings/te_homework_evaluation_bindin
 import '../modules/te_homework_evaluation/views/te_homework_evaluation_view.dart';
 import '../modules/te_homework_list/bindings/te_homework_list_binding.dart';
 import '../modules/te_homework_list/views/te_homework_list_view.dart';
+import '../modules/te_library/bindings/te_library_binding.dart';
+import '../modules/te_library/views/te_library_view.dart';
 import '../modules/teacher/bindings/teacher_binding.dart';
 import '../modules/teacher/views/teacher_view.dart';
 import '../modules/transport/bindings/transport_binding.dart';
@@ -229,6 +233,8 @@ class AppPages {
         RoutineBinding(),
         FeesBinding(),
         AdminAttendanceBinding(),
+        TeAcademicBinding(),
+        TeHomeworkBinding(),
       ],
     ),
     GetPage(
@@ -720,6 +726,17 @@ class AppPages {
       page: () => const TeHomeworkEvaluationView(),
       binding: TeHomeworkEvaluationBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.TE_ACADEMIC,
+      page: () => const TeAcademicView(),
+      binding: TeAcademicBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.TE_LIBRARY,
+      page: () => const TeLibraryView(),
+      binding: TeLibraryBinding(),
     ),
   ];
 }

@@ -64,7 +64,6 @@ class AppTextStyle {
     color: AppColors.syllabusTextColorBlack,
     fontSize: 14,
     fontWeight: FontWeight.w500,
-
   );
 
   static const fontSize13BlackW400 = TextStyle(
@@ -192,7 +191,8 @@ class AppTextStyle {
   );
 
   static const fontSize12W400ReceivedText = TextStyle(
-      color: AppColors.teacherTextColor,
-      fontSize: 12,
-      fontWeight: FontWeight.w400);
+    color: AppColors.teacherTextColor,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+  );
 }

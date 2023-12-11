@@ -68,12 +68,6 @@ List<HomeTileModelClass> teacherList = [
   HomeTileModelClass(
       icon: ImagePath.teacherStudents, title: 'Students', value: 'Students'),
   HomeTileModelClass(
-      icon: ImagePath.teacherAcademics, title: 'Academic', value: 'Academic'),
-  HomeTileModelClass(
-      icon: ImagePath.teacherClassAttendance,
-      title: 'Attendance',
-      value: 'Attendance'),
-  HomeTileModelClass(
       icon: ImagePath.teacherLeave, title: 'Leave', value: 'Leave'),
   HomeTileModelClass(
       icon: ImagePath.teacherContents, title: 'Content', value: 'Content'),
@@ -81,8 +75,6 @@ List<HomeTileModelClass> teacherList = [
       icon: ImagePath.teacherNotice, title: 'Notice', value: 'Notice'),
   HomeTileModelClass(
       icon: ImagePath.teacherLibrary, title: 'Library', value: 'Library'),
-  HomeTileModelClass(
-      icon: ImagePath.teacherHomework, title: 'HomeWork', value: 'HomeWork'),
   HomeTileModelClass(
       icon: ImagePath.teacherAbout, title: 'About', value: 'About'),
   HomeTileModelClass(
