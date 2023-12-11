@@ -15,6 +15,7 @@ class TeHomeworkView extends GetView<TeHomeworkController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
+      leadingIcon: const SizedBox(),
       title: "Homework",
       body: CustomBackground(
         customWidget: Column(

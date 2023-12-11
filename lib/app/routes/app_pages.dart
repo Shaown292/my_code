@@ -176,6 +176,8 @@ import '../modules/te_homework_evaluation/bindings/te_homework_evaluation_bindin
 import '../modules/te_homework_evaluation/views/te_homework_evaluation_view.dart';
 import '../modules/te_homework_list/bindings/te_homework_list_binding.dart';
 import '../modules/te_homework_list/views/te_homework_list_view.dart';
+import '../modules/te_library/bindings/te_library_binding.dart';
+import '../modules/te_library/views/te_library_view.dart';
 import '../modules/teacher/bindings/teacher_binding.dart';
 import '../modules/teacher/views/teacher_view.dart';
 import '../modules/transport/bindings/transport_binding.dart';
@@ -730,6 +732,11 @@ class AppPages {
       page: () => const TeAcademicView(),
       binding: TeAcademicBinding(),
       transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.TE_LIBRARY,
+      page: () => const TeLibraryView(),
+      binding: TeLibraryBinding(),
     ),
   ];
 }

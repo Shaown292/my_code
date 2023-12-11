@@ -265,6 +265,9 @@ class AppFunctions {
       case 'Homework List':
         Get.toNamed(Routes.TE_HOMEWORK_LIST);
         break;
+      case 'Library':
+        Get.toNamed(Routes.TE_LIBRARY);
+        break;
 
 
     }
