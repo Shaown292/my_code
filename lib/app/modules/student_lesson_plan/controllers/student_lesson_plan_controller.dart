@@ -182,7 +182,7 @@ class StudentLessonPlanController extends GetxController {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Text(
-                            "0${index + 1}. ${studentLessonPlanDetailsData.topic![index].topicTitle}",
+                            "0${index + 1}. ${studentLessonPlanDetailsData.topic![index]}",
                             style: AppTextStyle.blackFontSize12W400,
                             textAlign: TextAlign.justify,
                           ),
@@ -202,7 +202,7 @@ class StudentLessonPlanController extends GetxController {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Text(
-                            "0${index + 1}. ${studentLessonPlanDetailsData.subtopic![index].subTopicTitle}",
+                            "0${index + 1}. ${studentLessonPlanDetailsData.subtopic![index]}",
                             style: AppTextStyle.blackFontSize12W400,
                             textAlign: TextAlign.justify,
                           ),

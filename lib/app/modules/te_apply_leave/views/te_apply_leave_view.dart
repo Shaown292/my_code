@@ -26,7 +26,7 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
           child: SingleChildScrollView(
             child: Obx(() => Column(
               children: [
-                controller.isLoading.value
+                controller.leaveLoader.value
                     ? const CircularProgressIndicator(
                   color: AppColors.primaryColor,
                 )

@@ -266,10 +266,10 @@ class AppFunctions {
         Get.toNamed(Routes.TE_HOMEWORK_LIST);
         break;
       case 'Library':
-        Get.toNamed(Routes.TE_LIBRARY);
+        Get.toNamed(Routes.ADMIN_BOOK_LIST);
         break;
       case 'Notice':
-        Get.toNamed(Routes.TE_NOTICE);
+        Get.toNamed(Routes.ADMIN_NOTICE);
         break;
       case 'Content':
         Get.toNamed(Routes.ADMIN_CONTENT);
@@ -287,7 +287,7 @@ class AppFunctions {
         Get.toNamed(Routes.TE_APPLY_LEAVE);
         break;
       case 'Leave List':
-        Get.toNamed(Routes.TE_LEAVE_LIST);
+        Get.toNamed(Routes.LEAVE_LIST);
         break;
       case 'Attendance':
         Get.toNamed(Routes.TE_ATTENDANCE);

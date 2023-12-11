@@ -2,10 +2,15 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/datepicker_dialogue/date_picker.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_leave/teacher_leave_type_list_response_model.dart';
 import 'package:get/get.dart';
 
 class TeApplyLeaveController extends GetxController {
@@ -85,9 +90,49 @@ class TeApplyLeaveController extends GetxController {
   }
 
 
+  RxList<TeacherApplyLeaveTypeData> teacherLeaveTypeList = <TeacherApplyLeaveTypeData>[].obs;
+  RxBool leaveLoader = false.obs;
+
+  Future<TeacherLeaveTypeListResponseModel> getStudentApplyLeaveTypeList() async {
+    try {
+      leaveLoader.value = true;
+      final response = await BaseClient().getData(
+        url: InfixApi.getTeacherLeaveType,
+        header: GlobalVariable.header,
+      );
+
+      TeacherLeaveTypeListResponseModel teacherLeaveTypeListResponseModel =
+      TeacherLeaveTypeListResponseModel.fromJson(response);
+      if (teacherLeaveTypeListResponseModel.success == true) {
+        leaveLoader.value = false;
+        if (teacherLeaveTypeListResponseModel.data!.isNotEmpty) {
+          for(var element in teacherLeaveTypeListResponseModel.data!){
+            teacherLeaveTypeList.add(element);
+          }
+        }
+      } else {
+        leaveLoader.value = false;
+        showBasicFailedSnackBar(
+            message: teacherLeaveTypeListResponseModel.message ??
+                AppText.somethingWentWrong,);
+      }
+    } catch (e, t) {
+      leaveLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      leaveLoader.value = false;
+    }
+
+
+    return TeacherLeaveTypeListResponseModel();
+  }
+
 
   @override
   void onInit() {
+
+    getStudentApplyLeaveTypeList();
 
     super.onInit();
   }

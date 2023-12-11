@@ -387,6 +387,15 @@ class InfixApi {
   static String teacherContentDelete({required contentId}) => '${baseApi}teacher-delete-content?content_id=$contentId';
 
 
+  /// Teacher Notice
+  static String getTeacherNoticeList = '${baseApi}teacher-notice-list';
+
+  /// Teacher Notice
+  static String getTeacherBookList = '${baseApi}teacher-book-list';
+
+  /// Teacher Leave
+  static String getTeacherLeaveType = '${baseApi}teacher-leave-types';
+
 
 
 

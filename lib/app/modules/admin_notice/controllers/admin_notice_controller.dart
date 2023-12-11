@@ -22,7 +22,7 @@ class AdminNoticeController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminStaffNoticeList, header: GlobalVariable.header);
+          url: GlobalVariable.roleId == 1 ? InfixApi.getAdminStaffNoticeList : InfixApi.getTeacherNoticeList, header: GlobalVariable.header);
 
       AdminStaffNoticeResponseModel adminStaffNoticeResponseModel =
           AdminStaffNoticeResponseModel.fromJson(response);
