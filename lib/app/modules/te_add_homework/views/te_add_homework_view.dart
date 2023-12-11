@@ -9,8 +9,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -30,39 +28,74 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  controller.classLoader.value ?
-                      const CircularProgressIndicator() :
-                  DuplicateDropdown(
-                    dropdownValue: controller.teacherClassInitialValue.value,
-                    dropdownList: controller.teacherClassList,
-                    changeDropdownValue: (value) {
-                      controller.teacherClassInitialValue.value = value!;
-                      controller.teacherClassId.value = value.id;
-                    },
+                  const Text(
+                    'Select class*',
+                    style: AppTextStyle.fontSize13BlackW400,
                   ),
+                  5.verticalSpacing,
+
+                  /// Class Dropdown
+                  controller.classLoader.value
+                      ? const Center(child: CircularProgressIndicator())
+                      : DuplicateDropdown(
+                          dropdownValue:
+                              controller.teacherClassInitialValue.value,
+                          dropdownList: controller.teacherClassList,
+                          changeDropdownValue: (value) {
+                            controller.teacherClassInitialValue.value = value!;
+                            controller.teacherClassId.value = value.id;
+                            controller.getTeacherSubjectList(
+                                classId: controller.teacherClassId.value);
+                          },
+                        ),
                   10.verticalSpacing,
-                  controller.subjectLoader.value ?
-                  const CircularProgressIndicator() :
-                  DuplicateDropdown(
-                    dropdownValue: controller.teacherSubjectInitialValue.value,
-                    dropdownList: controller.teacherSubjectList,
-                    changeDropdownValue: (value) {
-                      controller.teacherSubjectInitialValue.value = value!;
-                      controller.teacherSubjectId.value = value.id;
-                    },
+
+                  const Text(
+                    'Select subject*',
+                    style: AppTextStyle.fontSize13BlackW400,
                   ),
+                  5.verticalSpacing,
+
+                  /// subject Dropdown
+                  controller.subjectLoader.value
+                      ? const Center(child: CircularProgressIndicator())
+                      : DuplicateDropdown(
+                          dropdownValue:
+                              controller.teacherSubjectInitialValue.value,
+                          dropdownList: controller.teacherSubjectList,
+                          changeDropdownValue: (value) {
+                            controller.teacherSubjectInitialValue.value =
+                                value!;
+                            controller.teacherSubjectId.value = value.id;
+                            controller.getTeacherSectionList(
+                                classId: controller.teacherClassId.value,
+                                subjectId: controller.teacherSubjectId.value);
+                          },
+                        ),
                   10.verticalSpacing,
-                  controller.sectionLoader.value ?
-                  const CircularProgressIndicator() :
-                  DuplicateDropdown(
-                    dropdownValue: controller.teacherSectionInitialValue.value,
-                    dropdownList: controller.teacherSectionList,
-                    changeDropdownValue: (value) {
-                      controller.teacherSectionInitialValue.value = value!;
-                      controller.teacherSectionId.value = value.id;
-                    },
+
+                  const Text(
+                    'Select section*',
+                    style: AppTextStyle.fontSize13BlackW400,
                   ),
+                  5.verticalSpacing,
+
+                  /// Class Dropdown
+                  controller.sectionLoader.value
+                      ? const Center(child: CircularProgressIndicator())
+                      : DuplicateDropdown(
+                          dropdownValue:
+                              controller.teacherSectionInitialValue.value,
+                          dropdownList: controller.teacherSectionList,
+                          changeDropdownValue: (value) {
+                            controller.teacherSectionInitialValue.value =
+                                value!;
+                            controller.teacherSectionId.value = value.id;
+                          },
+                        ),
 
                   10.verticalSpacing,
                   CustomTextFormField(
@@ -103,7 +136,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText:
-                    "${controller.file.value.path.isNotEmpty ? controller.file : 'Select File'}",
+                        "${controller.homeworkFile.value.path.isNotEmpty ? controller.homeworkFile : 'Select File'}",
                     fillColor: Colors.white,
                     suffixIcon: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -124,7 +157,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     ),
                     iconOnTap: () {
                       controller.pickFile();
-                      debugPrint("Browser ::: ${controller.file}");
+                      debugPrint("Browser ::: ${controller.homeworkFile}");
                     },
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
@@ -134,9 +167,9 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "Marks",
+                    textInputType: TextInputType.number,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
-                    maxLine: 3,
                     iconOnTap: () {
                       debugPrint("Browser");
                     },
@@ -155,10 +188,16 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     },
                   ),
                   30.verticalSpacing,
-                  PrimaryButton(
-                    text: "Save",
-                    onTap: (){},
-                  )
+                  controller.loadingController.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : PrimaryButton(
+                          text: "Save",
+                          onTap: () {
+                            if (controller.validation()) {
+                              controller.addTeacherHomework();
+                            }
+                          },
+                        )
                 ],
               ),
             ),

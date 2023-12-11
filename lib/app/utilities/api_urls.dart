@@ -377,6 +377,7 @@ class InfixApi {
 
   /// Teacher Homework
   static String getTeacherHomeworkList = '${baseApi}teacher-homework-list';
+  static String teacherAddHomework = '${baseApi}teacher-add-homework';
   static String getTeacherAddHomeworkClassList = '${baseApi}teacher-add-homework-for-class';
   static String getTeacherAddHomeworkSubjectList({required int classId}) => '${baseApi}teacher-add-homework-for-subject?class_id=$classId';
   static String getTeacherAddHomeworkSectionList({required int classId, required int subjectId}) => '${baseApi}teacher-add-homework-for-section?class_id=$classId&subject_id=$subjectId';

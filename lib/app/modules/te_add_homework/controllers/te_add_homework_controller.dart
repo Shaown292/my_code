@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -7,25 +8,28 @@ import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/datepicker_dialogue/date_picker.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_homework_model/teacher_class_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_homework_model/teacher_section_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_homework_model/teacher_subject_list_response_model.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class TeAddHomeworkController extends GetxController {
+  LoadingController loadingController = Get.find();
+
   TextEditingController assignDateTextController = TextEditingController();
   TextEditingController submissionDateTextController = TextEditingController();
   TextEditingController marksTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
-  Rx<File> file = File('').obs;
-
+  Rx<File> homeworkFile = File('').obs;
 
   Rx<TeacherClassListData> teacherClassInitialValue =
       TeacherClassListData(id: -1, name: "Class").obs;
   RxList<TeacherClassListData> teacherClassList = <TeacherClassListData>[].obs;
-  RxInt teacherClassId = 0.obs;
+  RxInt teacherClassId = (-1).obs;
   RxBool classLoader = false.obs;
 
   Rx<TeacherSectionListData> teacherSectionInitialValue =
@@ -33,17 +37,16 @@ class TeAddHomeworkController extends GetxController {
   RxList<TeacherSectionListData> teacherSectionList =
       <TeacherSectionListData>[].obs;
   RxBool sectionLoader = false.obs;
-  RxInt teacherSectionId = 0.obs;
+  RxInt teacherSectionId = (-1).obs;
 
   Rx<TeacherSubjectListData> teacherSubjectInitialValue =
       TeacherSubjectListData(id: -1, name: "Subject").obs;
   RxBool subjectLoader = false.obs;
   RxList<TeacherSubjectListData> teacherSubjectList =
       <TeacherSubjectListData>[].obs;
-  RxInt teacherSubjectId = 0.obs;
+  RxInt teacherSubjectId = (-1).obs;
 
   /// Class, Subject & section Api call
-
 
   /// Add homework dropdown class list
   Future<TeacherClassListResponseModel> getTeacherClassList() async {
@@ -170,19 +173,19 @@ class TeAddHomeworkController extends GetxController {
 
   void assignDate() async {
     DateTime? dateTime =
-    await DatePickerUtils().pickDate(canSelectPastDate: true);
+        await DatePickerUtils().pickDate(canSelectPastDate: true);
 
     if (dateTime != null) {
-      assignDateTextController.text = dateTime.dd_mm_yyyy;
+      assignDateTextController.text = dateTime.yyyy_mm_dd;
     }
   }
 
   void submissionDate() async {
     DateTime? dateTime =
-    await DatePickerUtils().pickDate(canSelectFutureDate: true);
+        await DatePickerUtils().pickDate(canSelectFutureDate: true);
 
     if (dateTime != null) {
-      submissionDateTextController.text = dateTime.dd_mm_yyyy;
+      submissionDateTextController.text = dateTime.yyyy_mm_dd;
     }
   }
 
@@ -193,7 +196,7 @@ class TeAddHomeworkController extends GetxController {
     );
 
     if (result != null) {
-      file.value = File(result.files.single.path!);
+      homeworkFile.value = File(result.files.single.path!);
     } else {
       showBasicFailedSnackBar(message: 'canceled file selection');
       debugPrint("User canceled file selection");
@@ -201,6 +204,27 @@ class TeAddHomeworkController extends GetxController {
   }
 
   bool validation() {
+    if (teacherClassId.value == -1) {
+      showBasicFailedSnackBar(message: 'Select Class.');
+      return false;
+    }
+    if (teacherSubjectId.value == -1) {
+      showBasicFailedSnackBar(message: 'Select Subject.');
+      return false;
+    }
+    if (teacherSectionId.value == -1) {
+      showBasicFailedSnackBar(message: 'Select Section.');
+      return false;
+    }
+    if (assignDateTextController.text.isEmpty) {
+      showBasicFailedSnackBar(message: 'Select Assign Date.');
+      return false;
+    }
+    if (submissionDateTextController.text.isEmpty) {
+      showBasicFailedSnackBar(message: 'Select Submission Date.');
+      return false;
+    }
+
     if (marksTextController.text.isEmpty) {
       showBasicFailedSnackBar(message: 'Add Marks');
       return false;
@@ -211,6 +235,55 @@ class TeAddHomeworkController extends GetxController {
     }
 
     return true;
+  }
+
+  Future<void> addTeacherHomework() async {
+    try {
+      loadingController.isLoading = true;
+
+      debugPrint('${Uri.parse(InfixApi.postAdminContent)}');
+      final request =
+          http.MultipartRequest('POST', Uri.parse(InfixApi.teacherAddHomework));
+      request.headers.addAll(GlobalVariable.header);
+
+      if (homeworkFile.value.path.isNotEmpty) {
+        request.files.add(await http.MultipartFile.fromPath(
+            'homework_file', homeworkFile.value.path));
+      }
+
+      request.fields['class_id'] = teacherClassId.value.toString();
+      request.fields['subject_id'] = teacherSubjectId.value.toString();
+      request.fields['section_id'] = teacherSectionId.value.toString();
+      request.fields['assign_date'] = assignDateTextController.text;
+      request.fields['submission_date'] = submissionDateTextController.text;
+      request.fields['marks'] = marksTextController.text;
+      request.fields['description'] = descriptionTextController.text;
+
+      final response = await request.send();
+      final responseBody = await response.stream.bytesToString();
+      final decodedResponse = json.decode(responseBody);
+      debugPrint(decodedResponse.toString());
+
+      if (response.statusCode == 200) {
+        loadingController.isLoading = false;
+        assignDateTextController.clear();
+        descriptionTextController.clear();
+        submissionDateTextController.clear();
+        marksTextController.clear();
+        homeworkFile.value = File('');
+
+        showBasicSuccessSnackBar(message: decodedResponse['message']);
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(message: decodedResponse['message']);
+      }
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
   }
 
   @override
