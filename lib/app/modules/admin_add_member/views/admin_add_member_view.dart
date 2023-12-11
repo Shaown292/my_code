@@ -171,7 +171,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                             )
                       : const SizedBox(),
                   50.verticalSpacing,
-                  PrimaryButton(
+                  controller.loadingController.isLoading ? const Center(child: CircularProgressIndicator()) : PrimaryButton(
                     text: "Save",
                     onTap: () {
                       if (controller.validation()) {

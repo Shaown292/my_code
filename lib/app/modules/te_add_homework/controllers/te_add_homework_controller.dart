@@ -15,7 +15,6 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_hom
 import 'package:get/get.dart';
 
 class TeAddHomeworkController extends GetxController {
-
   TextEditingController assignDateTextController = TextEditingController();
   TextEditingController submissionDateTextController = TextEditingController();
   TextEditingController marksTextController = TextEditingController();
@@ -29,19 +28,23 @@ class TeAddHomeworkController extends GetxController {
   RxList<String> sectionList = ["A", "B", "C"].obs;
 
   void assignDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate(canSelectPastDate: true);
+    DateTime? dateTime =
+        await DatePickerUtils().pickDate(canSelectPastDate: true);
 
     if (dateTime != null) {
       assignDateTextController.text = dateTime.dd_mm_yyyy;
     }
   }
+
   void submissionDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate(canSelectFutureDate: true);
+    DateTime? dateTime =
+        await DatePickerUtils().pickDate(canSelectFutureDate: true);
 
     if (dateTime != null) {
       submissionDateTextController.text = dateTime.dd_mm_yyyy;
     }
   }
+
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -55,9 +58,8 @@ class TeAddHomeworkController extends GetxController {
       debugPrint("User canceled file selection");
     }
   }
+
   bool validation() {
-
-
     if (marksTextController.text.isEmpty) {
       showBasicFailedSnackBar(message: 'Add Marks');
       return false;
@@ -70,15 +72,16 @@ class TeAddHomeworkController extends GetxController {
     return true;
   }
 
-
   /// Class, Subject & section Api call
   RxBool classLoader = false.obs;
   RxBool subjectLoader = false.obs;
   RxBool sectionLoader = false.obs;
 
   RxList<TeacherClassListData> teacherClassList = <TeacherClassListData>[].obs;
-  RxList<TeachetSubjectListData> teacherSubjectList = <TeachetSubjectListData>[].obs;
-  RxList<TeacherSectionListData> teacherSectionList = <TeacherSectionListData>[].obs;
+  RxList<TeachetSubjectListData> teacherSubjectList =
+      <TeachetSubjectListData>[].obs;
+  RxList<TeacherSectionListData> teacherSectionList =
+      <TeacherSectionListData>[].obs;
 
   RxInt teacherClassId = 0.obs;
   RxInt teacherSubjectId = 0.obs;
@@ -95,7 +98,7 @@ class TeAddHomeworkController extends GetxController {
       );
 
       TeacherClassListResponseModel teacherClassListResponseModel =
-      TeacherClassListResponseModel.fromJson(response);
+          TeacherClassListResponseModel.fromJson(response);
 
       if (teacherClassListResponseModel.success == true) {
         classLoader.value = false;
@@ -123,7 +126,8 @@ class TeAddHomeworkController extends GetxController {
   }
 
   /// Add homework dropdown Subject list
-  Future<TeacherSubjectListResponseModel> getTeacherSubjectList({required int classId}) async {
+  Future<TeacherSubjectListResponseModel> getTeacherSubjectList(
+      {required int classId}) async {
     try {
       teacherSubjectList.clear();
       subjectLoader.value = true;
@@ -133,7 +137,7 @@ class TeAddHomeworkController extends GetxController {
       );
 
       TeacherSubjectListResponseModel teacherSubjectListResponseModel =
-      TeacherSubjectListResponseModel.fromJson(response);
+          TeacherSubjectListResponseModel.fromJson(response);
 
       if (teacherSubjectListResponseModel.success == true) {
         subjectLoader.value = false;
@@ -141,7 +145,8 @@ class TeAddHomeworkController extends GetxController {
           for (var element in teacherSubjectListResponseModel.data!) {
             teacherSubjectList.add(element);
           }
-          teacherSubjectId.value = teacherSubjectListResponseModel.data!.first.id!;
+          teacherSubjectId.value =
+              teacherSubjectListResponseModel.data!.first.id!;
         }
       } else {
         subjectLoader.value = false;
@@ -160,19 +165,22 @@ class TeAddHomeworkController extends GetxController {
     return TeacherSubjectListResponseModel();
   }
 
-
   /// Add homework dropdown Section list
-  Future<TeacherSectionListResponseModel> getTeacherSectionList({required int classId, required int subjectId}) async {
+  Future<TeacherSectionListResponseModel> getTeacherSectionList(
+      {required int classId, required int subjectId}) async {
     try {
       teacherSectionList.clear();
       sectionLoader.value = true;
       final response = await BaseClient().getData(
-        url: InfixApi.getTeacherAddHomeworkSectionList(classId: classId, subjectId: subjectId,),
+        url: InfixApi.getTeacherAddHomeworkSectionList(
+          classId: classId,
+          subjectId: subjectId,
+        ),
         header: GlobalVariable.header,
       );
 
       TeacherSectionListResponseModel teacherSectionListResponseModel =
-      TeacherSectionListResponseModel.fromJson(response);
+          TeacherSectionListResponseModel.fromJson(response);
 
       if (teacherSectionListResponseModel.success == true) {
         sectionLoader.value = false;
@@ -198,20 +206,23 @@ class TeAddHomeworkController extends GetxController {
     return TeacherSectionListResponseModel();
   }
 
-
   @override
   void onInit() {
-    getTeacherClassList().then((value) {
-      if(teacherClassList.isNotEmpty){
-        getTeacherSubjectList(classId: teacherClassId.value).then((value) {
-          if(teacherSubjectList.isNotEmpty){
-            getTeacherSectionList(classId: teacherClassId.value, subjectId: teacherSubjectId.value);
-          }
-        },);
-      }
-    },);
+    getTeacherClassList().then(
+      (value) {
+        if (teacherClassList.isNotEmpty) {
+          getTeacherSubjectList(classId: teacherClassId.value).then(
+            (value) {
+              if (teacherSubjectList.isNotEmpty) {
+                getTeacherSectionList(
+                    classId: teacherClassId.value,
+                    subjectId: teacherSubjectId.value);
+              }
+            },
+          );
+        }
+      },
+    );
     super.onInit();
   }
-
-
 }

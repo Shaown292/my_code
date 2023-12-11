@@ -15,7 +15,6 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_respon
 import 'package:get/get.dart';
 
 class AdminAddMemberController extends GetxController {
-
   LoadingController loadingController = Get.find();
 
   TextEditingController uniqueIdTextController = TextEditingController();
@@ -91,7 +90,6 @@ class AdminAddMemberController extends GetxController {
           }
           rolesDropdownValue.value = rolesList[0];
           rolesId.value = rolesList[0].id!;
-          debugPrint("jasdjahsjkdhjka :::: ${rolesId.value}");
         }
       } else {
         rolesLoader.value = false;
@@ -335,36 +333,37 @@ class AdminAddMemberController extends GetxController {
     return true;
   }
 
-
   Future<PostRequestResponseModel> adminAddMember() async {
-
-    try{
-
-      print('User Id :::::::: $userId');
+    try {
       loadingController.isLoading = true;
-      final response = await BaseClient().postData(url: InfixApi.postAdminLibraryAddMember, header: GlobalVariable.header, payload: {
-        'student': studentId.value,
-        'parent': parentsId.value,
-        'staff': nameId.value,
-        'user_id': userId.value,
-        'member_type': rolesId.value,
-        'member_ud_id': uniqueIdTextController.text,
-      });
+      final response = await BaseClient().postData(
+          url: InfixApi.postAdminLibraryAddMember,
+          header: GlobalVariable.header,
+          payload: {
+            'student': studentId.value,
+            'parent': parentsId.value,
+            'staff': nameId.value,
+            'user_id': userId.value,
+            'member_type': rolesId.value,
+            'member_ud_id': uniqueIdTextController.text,
+          });
 
-      PostRequestResponseModel postRequestResponseModel = PostRequestResponseModel.fromJson(response);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
         loadingController.isLoading = false;
-        showBasicSuccessSnackBar(message: postRequestResponseModel.message ??
-            AppText.somethingWentWrong,);
-
+        showBasicSuccessSnackBar(
+          message:
+              postRequestResponseModel.message ?? AppText.somethingWentWrong,
+        );
       } else {
         loadingController.isLoading = false;
         showBasicFailedSnackBar(
-            message: postRequestResponseModel.message ??
-                AppText.somethingWentWrong,);
+          message:
+              postRequestResponseModel.message ?? AppText.somethingWentWrong,
+        );
       }
-
     } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
@@ -373,13 +372,8 @@ class AdminAddMemberController extends GetxController {
       loadingController.isLoading = false;
     }
 
-
-
-
-
     return PostRequestResponseModel();
   }
-
 
   @override
   void onInit() {
