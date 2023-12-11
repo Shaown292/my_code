@@ -292,6 +292,18 @@ class AppFunctions {
       case 'Attendance':
         Get.toNamed(Routes.TE_ATTENDANCE);
         break;
+      case 'My Routine':
+        Get.toNamed(Routes.TE_MY_ROUTINE);
+        break;
+      case 'Class Routine':
+        Get.toNamed(Routes.TE_SEARCH_CLASS_ROUTINE);
+        break;
+      case 'Subjects':
+        Get.toNamed(Routes.TE_SUBJECTS);
+        break;
+      case 'Class Routine List':
+        Get.toNamed(Routes.TE_SEARCH_CLASS_ROUTINE_LIST);
+        break;
 
 
     }

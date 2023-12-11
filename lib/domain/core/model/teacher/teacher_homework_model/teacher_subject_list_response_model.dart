@@ -1,6 +1,6 @@
 class TeacherSubjectListResponseModel {
   bool? success;
-  List<TeachetSubjectListData>? data;
+  List<TeacherSubjectListData>? data;
   String? message;
 
   TeacherSubjectListResponseModel({this.success, this.data, this.message});
@@ -8,9 +8,9 @@ class TeacherSubjectListResponseModel {
   TeacherSubjectListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
-      data = <TeachetSubjectListData>[];
+      data = <TeacherSubjectListData>[];
       json['data'].forEach((v) {
-        data!.add(TeachetSubjectListData.fromJson(v));
+        data!.add(TeacherSubjectListData.fromJson(v));
       });
     }
     message = json['message'];
@@ -27,21 +27,21 @@ class TeacherSubjectListResponseModel {
   }
 }
 
-class TeachetSubjectListData {
+class TeacherSubjectListData {
   int? id;
-  String? subjectName;
+  String? name; /// changed subject name to name for dropdown
 
-  TeachetSubjectListData({this.id, this.subjectName});
+  TeacherSubjectListData({this.id, this.name});
 
-  TeachetSubjectListData.fromJson(Map<String, dynamic> json) {
+  TeacherSubjectListData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    subjectName = json['subject_name'];
+    name = json['subject_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['subject_name'] = subjectName;
+    data['subject_name'] = name;
     return data;
   }
 }

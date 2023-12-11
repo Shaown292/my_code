@@ -13,7 +13,7 @@ class StudentClassDetailsCard extends StatelessWidget {
   final String? roomNumber;
   final String? buildingName;
   final String? instructorName;
-  final bool isLunchBreak;
+  final bool isBreak;
   final bool hasDetails;
   final Function()? onTap;
   final bool onDetailsButtonTap;
@@ -27,7 +27,7 @@ class StudentClassDetailsCard extends StatelessWidget {
     this.roomNumber,
     this.buildingName,
     this.instructorName,
-    this.isLunchBreak = false,
+    this.isBreak = false,
     this.onTap,
     this.hasDetails = false,
     this.onDetailsButtonTap = false,
@@ -67,7 +67,7 @@ class StudentClassDetailsCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              subject ?? "",
+                              isBreak ? "Lunch Break" : subject ?? "",
                               style: AppTextStyle.fontSize14VioletW600,
                             ),
                             10.verticalSpacing,
@@ -78,7 +78,7 @@ class StudentClassDetailsCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      isLunchBreak
+                      isBreak
                           ? const SizedBox()
                           : Container(
                               padding: const EdgeInsets.all(8),
@@ -107,13 +107,13 @@ class StudentClassDetailsCard extends StatelessWidget {
                 ],
               ),
               10.verticalSpacing,
-              isLunchBreak
+              isBreak
                   ? const SizedBox()
                   : CustomDivider(
                       width: Get.width,
                     ),
               10.verticalSpacing,
-              isLunchBreak
+              isBreak
                   ? const SizedBox()
                   : Row(
                       children: [

@@ -1,23 +1,15 @@
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_dummy_data.dart';
 import 'package:get/get.dart';
 
 class TeAcademicController extends GetxController {
-  //TODO: Implement TeAcademicController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  final selectIndex = RxInt(-1);
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  List<HomeTileModelClass> teacherAcademicTileList = [
+    HomeTileModelClass(icon: ImagePath.adminClass, title: 'My Routine', value: 'My Routine'),
+    HomeTileModelClass(icon: ImagePath.studentLesson, title: 'Class Routine', value: 'Class Routine'),
+    HomeTileModelClass(icon: ImagePath.studentSubjects, title: 'Subjects', value: 'Subjects'),
+  ];
 }

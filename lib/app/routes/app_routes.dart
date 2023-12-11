@@ -114,6 +114,11 @@ abstract class Routes {
   static const TE_APPLY_LEAVE = _Paths.TE_APPLY_LEAVE;
   static const TE_LEAVE_LIST = _Paths.TE_LEAVE_LIST;
   static const TE_ATTENDANCE = _Paths.TE_ATTENDANCE;
+  static const TE_MY_ROUTINE = _Paths.TE_MY_ROUTINE;
+  static const TE_SEARCH_CLASS_ROUTINE = _Paths.TE_SEARCH_CLASS_ROUTINE;
+  static const TE_SEARCH_CLASS_ROUTINE_LIST =
+      _Paths.TE_SEARCH_CLASS_ROUTINE_LIST;
+  static const TE_SUBJECTS = _Paths.TE_SUBJECTS;
 }
 
 abstract class _Paths {
@@ -226,4 +231,8 @@ abstract class _Paths {
   static const TE_APPLY_LEAVE = '/te-apply-leave';
   static const TE_LEAVE_LIST = '/te-leave-list';
   static const TE_ATTENDANCE = '/te-attendance';
+  static const TE_MY_ROUTINE = '/te-my-routine';
+  static const TE_SEARCH_CLASS_ROUTINE = '/te-search-class-routine';
+  static const TE_SEARCH_CLASS_ROUTINE_LIST = '/te-search-class-routine-list';
+  static const TE_SUBJECTS = '/te-subjects';
 }

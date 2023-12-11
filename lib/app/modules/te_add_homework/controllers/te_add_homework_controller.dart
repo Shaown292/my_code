@@ -21,71 +21,29 @@ class TeAddHomeworkController extends GetxController {
   TextEditingController descriptionTextController = TextEditingController();
   Rx<File> file = File('').obs;
 
-  RxString classInitialValue = "one".obs;
-  RxList<String> classList = ["one", "two", "three"].obs;
 
-  RxString sectionInitialValue = "A".obs;
-  RxList<String> sectionList = ["A", "B", "C"].obs;
-
-  void assignDate() async {
-    DateTime? dateTime =
-        await DatePickerUtils().pickDate(canSelectPastDate: true);
-
-    if (dateTime != null) {
-      assignDateTextController.text = dateTime.dd_mm_yyyy;
-    }
-  }
-
-  void submissionDate() async {
-    DateTime? dateTime =
-        await DatePickerUtils().pickDate(canSelectFutureDate: true);
-
-    if (dateTime != null) {
-      submissionDateTextController.text = dateTime.dd_mm_yyyy;
-    }
-  }
-
-  void pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'txt'],
-    );
-
-    if (result != null) {
-      file.value = File(result.files.single.path!);
-    } else {
-      showBasicFailedSnackBar(message: 'canceled file selection');
-      debugPrint("User canceled file selection");
-    }
-  }
-
-  bool validation() {
-    if (marksTextController.text.isEmpty) {
-      showBasicFailedSnackBar(message: 'Add Marks');
-      return false;
-    }
-    if (descriptionTextController.text.isEmpty) {
-      showBasicFailedSnackBar(message: 'Add Description');
-      return false;
-    }
-
-    return true;
-  }
-
-  /// Class, Subject & section Api call
-  RxBool classLoader = false.obs;
-  RxBool subjectLoader = false.obs;
-  RxBool sectionLoader = false.obs;
-
+  Rx<TeacherClassListData> teacherClassInitialValue =
+      TeacherClassListData(id: -1, name: "Class").obs;
   RxList<TeacherClassListData> teacherClassList = <TeacherClassListData>[].obs;
-  RxList<TeachetSubjectListData> teacherSubjectList =
-      <TeachetSubjectListData>[].obs;
+  RxInt teacherClassId = 0.obs;
+  RxBool classLoader = false.obs;
+
+  Rx<TeacherSectionListData> teacherSectionInitialValue =
+      TeacherSectionListData(id: -1, name: "Section").obs;
   RxList<TeacherSectionListData> teacherSectionList =
       <TeacherSectionListData>[].obs;
-
-  RxInt teacherClassId = 0.obs;
-  RxInt teacherSubjectId = 0.obs;
+  RxBool sectionLoader = false.obs;
   RxInt teacherSectionId = 0.obs;
+
+  Rx<TeacherSubjectListData> teacherSubjectInitialValue =
+      TeacherSubjectListData(id: -1, name: "Subject").obs;
+  RxBool subjectLoader = false.obs;
+  RxList<TeacherSubjectListData> teacherSubjectList =
+      <TeacherSubjectListData>[].obs;
+  RxInt teacherSubjectId = 0.obs;
+
+  /// Class, Subject & section Api call
+
 
   /// Add homework dropdown class list
   Future<TeacherClassListResponseModel> getTeacherClassList() async {
@@ -106,6 +64,7 @@ class TeAddHomeworkController extends GetxController {
           for (var element in teacherClassListResponseModel.data!) {
             teacherClassList.add(element);
           }
+          teacherClassInitialValue.value = teacherClassList[0];
           teacherClassId.value = teacherClassListResponseModel.data!.first.id!;
         }
       } else {
@@ -145,6 +104,7 @@ class TeAddHomeworkController extends GetxController {
           for (var element in teacherSubjectListResponseModel.data!) {
             teacherSubjectList.add(element);
           }
+          teacherSubjectInitialValue.value = teacherSubjectList[0];
           teacherSubjectId.value =
               teacherSubjectListResponseModel.data!.first.id!;
         }
@@ -188,6 +148,8 @@ class TeAddHomeworkController extends GetxController {
           for (var element in teacherSectionListResponseModel.data!) {
             teacherSectionList.add(element);
           }
+          teacherSectionId.value = teacherSectionList[0].id!;
+          teacherSectionInitialValue.value = teacherSectionList[0];
         }
       } else {
         sectionLoader.value = false;
@@ -204,6 +166,51 @@ class TeAddHomeworkController extends GetxController {
     }
 
     return TeacherSectionListResponseModel();
+  }
+
+  void assignDate() async {
+    DateTime? dateTime =
+    await DatePickerUtils().pickDate(canSelectPastDate: true);
+
+    if (dateTime != null) {
+      assignDateTextController.text = dateTime.dd_mm_yyyy;
+    }
+  }
+
+  void submissionDate() async {
+    DateTime? dateTime =
+    await DatePickerUtils().pickDate(canSelectFutureDate: true);
+
+    if (dateTime != null) {
+      submissionDateTextController.text = dateTime.dd_mm_yyyy;
+    }
+  }
+
+  void pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'txt'],
+    );
+
+    if (result != null) {
+      file.value = File(result.files.single.path!);
+    } else {
+      showBasicFailedSnackBar(message: 'canceled file selection');
+      debugPrint("User canceled file selection");
+    }
+  }
+
+  bool validation() {
+    if (marksTextController.text.isEmpty) {
+      showBasicFailedSnackBar(message: 'Add Marks');
+      return false;
+    }
+    if (descriptionTextController.text.isEmpty) {
+      showBasicFailedSnackBar(message: 'Add Description');
+      return false;
+    }
+
+    return true;
   }
 
   @override

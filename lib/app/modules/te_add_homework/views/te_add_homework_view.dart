@@ -6,9 +6,11 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -29,29 +31,39 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
               child: Column(
                 children: [
-                  CustomDropdown(
-                    dropdownValue: controller.classInitialValue.value,
-                    dropdownList: controller.classList,
+                  controller.classLoader.value ?
+                      const CircularProgressIndicator() :
+                  DuplicateDropdown(
+                    dropdownValue: controller.teacherClassInitialValue.value,
+                    dropdownList: controller.teacherClassList,
                     changeDropdownValue: (value) {
-                      controller.classInitialValue.value = value!;
+                      controller.teacherClassInitialValue.value = value!;
+                      controller.teacherClassId.value = value.id;
                     },
                   ),
                   10.verticalSpacing,
-                  CustomDropdown(
-                    dropdownValue: controller.sectionInitialValue.value,
-                    dropdownList: controller.sectionList,
+                  controller.subjectLoader.value ?
+                  const CircularProgressIndicator() :
+                  DuplicateDropdown(
+                    dropdownValue: controller.teacherSubjectInitialValue.value,
+                    dropdownList: controller.teacherSubjectList,
                     changeDropdownValue: (value) {
-                      controller.sectionInitialValue.value = value!;
+                      controller.teacherSubjectInitialValue.value = value!;
+                      controller.teacherSubjectId.value = value.id;
                     },
                   ),
                   10.verticalSpacing,
-                  CustomDropdown(
-                    dropdownValue: controller.sectionInitialValue.value,
-                    dropdownList: controller.sectionList,
+                  controller.sectionLoader.value ?
+                  const CircularProgressIndicator() :
+                  DuplicateDropdown(
+                    dropdownValue: controller.teacherSectionInitialValue.value,
+                    dropdownList: controller.teacherSectionList,
                     changeDropdownValue: (value) {
-                      controller.sectionInitialValue.value = value!;
+                      controller.teacherSectionInitialValue.value = value!;
+                      controller.teacherSectionId.value = value.id;
                     },
                   ),
+
                   10.verticalSpacing,
                   CustomTextFormField(
                     iconOnTap: () {
