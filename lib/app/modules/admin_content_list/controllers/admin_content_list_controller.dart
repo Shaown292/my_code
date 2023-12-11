@@ -23,7 +23,7 @@ class AdminContentListController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminContentList, header: GlobalVariable.header);
+          url: GlobalVariable.roleId == 1 ?  InfixApi.getAdminContentList : InfixApi.getTeacherContentList, header: GlobalVariable.header);
 
       AdminContentListResponseModel adminContentListResponseModel =
           AdminContentListResponseModel.fromJson(response);
@@ -59,7 +59,7 @@ class AdminContentListController extends GetxController {
       deleteLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: InfixApi.adminContentDelete(contentId: contentId),
+          url: GlobalVariable.roleId == 1 ? InfixApi.adminContentDelete(contentId: contentId) : InfixApi.teacherContentDelete(contentId: contentId),
           header: GlobalVariable.header);
       PostRequestResponseModel postRequestResponseModel =
           PostRequestResponseModel.fromJson(response);

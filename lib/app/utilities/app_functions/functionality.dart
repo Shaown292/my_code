@@ -272,13 +272,13 @@ class AppFunctions {
         Get.toNamed(Routes.TE_NOTICE);
         break;
       case 'Content':
-        Get.toNamed(Routes.TE_CONTENT);
+        Get.toNamed(Routes.ADMIN_CONTENT);
         break;
       case 'Add Content':
-        Get.toNamed(Routes.TE_ADD_CONTENT);
+        Get.toNamed(Routes.ADMIN_ADD_CONTENT);
         break;
       case 'Content List':
-        Get.toNamed(Routes.TE_CONTENT_LIST);
+        Get.toNamed(Routes.ADMIN_CONTENT_LIST);
         break;
       case 'Leave':
         Get.toNamed(Routes.TE_LEAVE);

@@ -89,7 +89,7 @@ class AdminAddContentController extends GetxController {
 
       debugPrint('${Uri.parse(InfixApi.postAdminContent)}');
       final request =
-          http.MultipartRequest('POST', Uri.parse(InfixApi.postAdminContent));
+          http.MultipartRequest('POST', Uri.parse(GlobalVariable.roleId == 1 ? InfixApi.postAdminContent : InfixApi.postTeacherContent));
       request.headers.addAll(GlobalVariable.header);
 
       if (contentFile.value.path.isNotEmpty) {
