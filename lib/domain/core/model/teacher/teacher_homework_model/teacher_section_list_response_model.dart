@@ -29,19 +29,19 @@ class TeacherSectionListResponseModel {
 
 class TeacherSectionListData {
   int? id;
-  String? sectionName;
+  String? name;  /// Changed section name to name for dropdown
 
-  TeacherSectionListData({this.id, this.sectionName});
+  TeacherSectionListData({this.id, this.name});
 
   TeacherSectionListData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    sectionName = json['section_name'];
+    name = json['section_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['section_name'] = sectionName;
+    data['section_name'] = name;
     return data;
   }
 }
