@@ -304,8 +304,15 @@ class AppFunctions {
       case 'Class Routine List':
         Get.toNamed(Routes.TE_SEARCH_CLASS_ROUTINE_LIST);
         break;
-
-
+      case 'Students':
+        Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH);
+        break;
+      case 'Settings':
+        Get.toNamed(Routes.ADMIN_SETTINGS);
+        break;
+      case 'About':
+        Get.toNamed(Routes.TE_ABOUT);
+        break;
     }
   }
 

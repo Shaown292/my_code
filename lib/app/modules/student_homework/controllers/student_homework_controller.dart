@@ -69,8 +69,10 @@ class StudentHomeworkController extends GetxController {
     Function()? onUploadTap,
     Function()? onTapForSave,
     Function()? onTapBrowse,
+
   }) {
     Get.bottomSheet(
+
       Obx(
         () => Container(
           color: color,
@@ -307,6 +309,8 @@ class StudentHomeworkController extends GetxController {
         ),
       ),
       shape: defaultBottomSheetShape(),
+
+
     );
   }
 
