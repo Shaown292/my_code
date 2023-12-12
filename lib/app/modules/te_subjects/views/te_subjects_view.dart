@@ -5,6 +5,8 @@ import 'package:flutter_single_getx_api_v2/app/modules/subjects/views/widget/sub
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -12,6 +14,7 @@ import '../controllers/te_subjects_controller.dart';
 
 class TeSubjectsView extends GetView<TeSubjectsController> {
   const TeSubjectsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
@@ -69,17 +72,31 @@ class TeSubjectsView extends GetView<TeSubjectsController> {
               ),
             ),
             10.verticalSpacing,
-            Expanded(
-              child: ListView.builder(
-                itemCount: 100,
-                itemBuilder: (context, index) {
-                  return const SubjectTile(
-                    subject: "Subject",
-                    teacher: "TeacherTeacherTeacherTeacherTeacherTeacher" ,
-                    lectureType: "Practical",
-                  );
-                },
-              ),
+            Obx(
+              () => controller.loadingController.isLoading
+                  ? const Expanded(child: LoadingWidget())
+                  : controller.teacherSubjectList.isNotEmpty
+                      ? Expanded(
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              controller.getTeacherSubjectList();
+                            },
+                            child: ListView.builder(
+                              itemCount: controller.teacherSubjectList.length,
+                              itemBuilder: (context, index) {
+                                return SubjectTile(
+                                  subject: controller
+                                      .teacherSubjectList[index].subjectName,
+                                  teacher: controller
+                                      .teacherSubjectList[index].subjectCode,
+                                  lectureType: controller
+                                      .teacherSubjectList[index].subjectType,
+                                );
+                              },
+                            ),
+                          ),
+                        )
+                      : const NoDataAvailableWidget(),
             ),
           ],
         ),

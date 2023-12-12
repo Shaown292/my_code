@@ -371,6 +371,10 @@ class InfixApi {
   static String getAdminBookList = '${baseApi}admin-book-list';
 
 
+  /// Teacher academic module
+  static String getTeacherSubjectList = '${baseApi}subjects';
+
+
 
 
   ///// ..............>>>>>>>>>>>>>>> Teacher Teacher Teacher Teacher ...................>>>>>>>>>>>>>>>>>>
