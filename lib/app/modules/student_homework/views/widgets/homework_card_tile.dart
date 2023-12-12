@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
+import 'package:get/get.dart';
 
 import '../../../../data/constants/app_colors.dart';
 import '../../../../utilities/widgets/colum_tile/column_tile.dart';
@@ -72,43 +73,48 @@ class HomeworkCardTile extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ColumnTile(
                       title: "Created",
                       value: created,
+                      width: Get.width * 0.2,
                     ),
                     ColumnTile(
                       title: "Submission",
                       value: submission,
+                      width: Get.width * 0.23,
                     ),
                     ColumnTile(
                       title: "Evaluation",
                       value: evaluation,
+                      width: Get.width * 0.2,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Status",
-                          style: AppTextStyle.fontSize13BlackW400,
-                        ),
-                        5.verticalSpacing,
-                        status != null
-                            ? Container(
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(3),
-                                    color: statusColor),
-                                child: Center(
-                                  child: Text(
-                                    status ?? "",
-                                    style: AppTextStyle.textStyle10WhiteW400,
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Status",
+                            style: AppTextStyle.fontSize13BlackW400,
+                          ),
+                          8.verticalSpacing,
+                          status != null
+                              ? Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(3),
+                                      color: statusColor,),
+                                  child: Center(
+                                    child: Text(
+                                      status ?? "",
+                                      style: AppTextStyle.textStyle10WhiteW400,
+                                    ),
                                   ),
-                                ),
-                              )
-                            : const SizedBox(),
-                      ],
+                                )
+                              : const SizedBox(),
+                        ],
+                      ),
                     ),
                   ],
                 ),

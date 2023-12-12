@@ -100,7 +100,8 @@ class SubjectsView extends GetView<SubjectsController> {
                           ),
                         )
                       : const NoDataAvailableWidget(),
-            )
+            ),
+
           ],
         ),
       ),

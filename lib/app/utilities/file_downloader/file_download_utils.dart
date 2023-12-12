@@ -50,7 +50,7 @@ class FileDownloadUtils {
               showBasicSuccessSnackBar(
                   message:
                       "Download Completed. File is also available in your download folder.");
-              Get.to((DownloadViewer(filePath: url)));
+              Get.to(()=> DownloadViewer(filePath: url));
             } else {
               var file = await DefaultCacheManager().getSingleFile(url);
               OpenFilex.open(file.path);
