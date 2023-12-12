@@ -63,6 +63,8 @@ class AdminClassSetAttendanceController extends GetxController {
     adminClassSetAttendanceList[index].note = note;
 
     adminClassSetAttendanceList.refresh();
+    noteTextController.clear();
+    Get.back();
   }
 
   void dataFiltering() {
@@ -204,7 +206,7 @@ class AdminClassSetAttendanceController extends GetxController {
                         shape: BoxShape.circle, color: Colors.white),
                     child:  InkWell(
                       onTap: ()=> Get.back(),
-                      child: Icon(
+                      child: const Icon(
                         Icons.close,
                         size: 16,
                       ),
@@ -236,20 +238,15 @@ class AdminClassSetAttendanceController extends GetxController {
                     color: Colors.white,
                     textStyle: AppTextStyle.fontSize13BlackW400,
                     borderColor: AppColors.primaryColor,
-                    onTap: () {},
+                    onTap: ()=> Get.back(),
                   ),
-                  Obx(
-                    () => saveLoader.value == true
-                        ? const CircularProgressIndicator(
-                            color: AppColors.primaryColor,
-                          )
-                        : PrimaryButton(
+                  PrimaryButton(
                             width: Get.width * 0.2,
                             title: "Save",
                             textStyle: AppTextStyle.textStyle12WhiteW500,
-                            onTap: onTapForSave,
+                            onTap: ()=> updateAttendanceNote(index: index, note: noteTextController.text),
                           ),
-                  ),
+
                 ],
               ),
             ),

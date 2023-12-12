@@ -103,6 +103,7 @@ class AdminClassSetAttendanceView
                                 );
                               },
                               onAddNoteTap: (){
+                                controller.noteTextController.text = controller.adminClassSetAttendanceList[index].note ?? '';
                                 controller.showAddNoteBottomSheet(index: index, color: Colors.white);
 
                               },

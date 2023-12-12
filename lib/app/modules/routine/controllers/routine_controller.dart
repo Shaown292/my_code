@@ -33,8 +33,10 @@ class RoutineController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentRoutineList(
+        url: GlobalVariable.roleId == 2 ? InfixApi.getStudentRoutineList(
           GlobalVariable.studentRecordId!,
+        ) : InfixApi.getTeacherMyRoutineList(
+          userId: GlobalVariable.userId!,
         ),
         header: GlobalVariable.header,
       );
@@ -49,7 +51,6 @@ class RoutineController extends GetxController {
               i++) {
             classRoutineList
                 .add(studentRoutineResponseModel.data.classRoutines[i]);
-            debugPrint("SJJS:::::: $today");
           }
         }
       }

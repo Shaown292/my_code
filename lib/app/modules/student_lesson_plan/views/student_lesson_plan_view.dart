@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
@@ -29,10 +31,14 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
         body: CustomBackground(
           customWidget: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: controller.loadingController.isLoading
-                ? const Center(
-              child: CircularProgressIndicator(
+            child: controller.lessonLoader.value
+                ? Center(
+              child: Platform.isAndroid ? const CircularProgressIndicator(
                 color: AppColors.primaryColor,
+              ) : const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(
+                  AppColors.primaryColor,
+                ),
               ),
             )
                 : Column(

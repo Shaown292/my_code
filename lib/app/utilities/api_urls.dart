@@ -394,6 +394,7 @@ class InfixApi {
 
   /// Teacher academic module
   static String getTeacherSubjectList = '${baseApi}subjects';
+  static String getTeacherMyRoutineList({required int userId}) => '${baseApi}teacher-class-routine?user_id=$userId';
 
 
 

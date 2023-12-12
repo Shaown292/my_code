@@ -21,8 +21,11 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
           padding: const EdgeInsets.all(15.0),
           child: Obx(
             () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 20.verticalSpacing,
+                const Text('Select class*'),
+                5.verticalSpacing,
                 CustomDropdown(
                   dropdownValue: controller.classInitValue.value,
                   dropdownList: controller.classList,
@@ -30,7 +33,10 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
                     controller.classInitValue.value = value!;
                   },
                 ),
-                10.verticalSpacing,
+                20.verticalSpacing,
+
+                const Text('Select section*'),
+                5.verticalSpacing,
                 CustomDropdown(
                   dropdownValue: controller.sectionInitValue.value,
                   dropdownList: controller.sectionList,

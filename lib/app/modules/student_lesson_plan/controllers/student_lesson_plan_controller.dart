@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
@@ -29,6 +30,7 @@ class StudentLessonPlanController extends GetxController {
   final selectIndex = RxInt(0);
   RxInt selectTabIndex = 0.obs;
   RxBool isLoading = false.obs;
+  RxBool lessonLoader = false.obs;
 
   String formattedDate = DateFormat("dd MMMM yyyy").format(DateTime.now());
   String today = DateFormat.E().format(DateTime.now());
@@ -48,7 +50,7 @@ class StudentLessonPlanController extends GetxController {
   Future<StudentLessonPlanResponseModel?> getLessonPlanList(
       int userId, int recordId) async {
     try {
-      loadingController.isLoading = true;
+      lessonLoader.value = true;
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentLessonPlan(userId: userId, recordId: recordId),
@@ -58,7 +60,7 @@ class StudentLessonPlanController extends GetxController {
       StudentLessonPlanResponseModel studentLessonPlanResponseModel =
           StudentLessonPlanResponseModel.fromJson(response);
       if (studentLessonPlanResponseModel.success == true) {
-        loadingController.isLoading = false;
+        lessonLoader.value = false;
         if (studentLessonPlanResponseModel.data!.weeks!.isNotEmpty) {
           for (int i = 0;
               i < studentLessonPlanResponseModel.data!.weeks!.length;
@@ -66,13 +68,15 @@ class StudentLessonPlanController extends GetxController {
             weeksList.add(studentLessonPlanResponseModel.data!.weeks![i]);
           }
         }
+      } else{
+        showBasicFailedSnackBar(message: studentLessonPlanResponseModel.message ?? AppText.somethingWentWrong);
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+      lessonLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      lessonLoader.value = false;
     }
     return StudentLessonPlanResponseModel();
   }
