@@ -7,6 +7,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 
@@ -30,11 +31,12 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
                     ? const CircularProgressIndicator(
                   color: AppColors.primaryColor,
                 )
-                    : CustomDropdown(
-                  dropdownValue: controller.dropdownValue.value,
-                  dropdownList: controller.applyLeaveTypeList,
+                    : DuplicateDropdown(
+                  dropdownValue: controller.leaveTypeInitialValue.value,
+                  dropdownList: controller.teacherLeaveTypeList,
                   changeDropdownValue: (v) {
-                    controller.dropdownValue.value = v!;
+                    controller.leaveTypeInitialValue.value = v!;
+                    controller.leaveTypeId.value = v.id;
 
                   },
                 ),

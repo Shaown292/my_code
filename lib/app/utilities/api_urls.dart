@@ -223,25 +223,38 @@ class InfixApi {
   static String addDormitoryFromAdmin = '${baseApi}dormitory-store';
 
   /// Student Class List
-  static String getStudentClassList = '${baseApi}class-list';
+  static String getAdminClassList = '${baseApi}class-list';
+  static String getTeacherClassList = '${baseApi}teacher-attendance-classes';
 
-  static String getStudentSectionList({required int classId}) =>
+  static String getAdminSectionList({required int classId}) =>
       '${baseApi}section-list?class_id=$classId';
+  static String getTeacherSectionList({required int classId}) =>
+      '${baseApi}teacher-attendance-sections?class_id=$classId';
 
   static String getAdminStudentSubjectList(
           {required int classId, required int sectionId}) =>
       '${baseApi}subject-list?class=$classId&section=$sectionId';
+  static String getTeacherStudentSubjectList(
+          {required int classId, required int sectionId}) =>
+      '${baseApi}teacher-attendance-subjects?class=$classId&section=$sectionId';
 
   static String getAdminStudentSearchAttendanceList(
           {required int classId,
           required int sectionId,
           required String selectedDate}) =>
       '${baseApi}student-search?class=$classId&section=$sectionId&attendance_date=$selectedDate';
+  static String getTeacherStudentSearchAttendanceList(
+      {required int classId,
+        required int sectionId,
+        required String selectedDate}) =>
+      '${baseApi}teacher-attendance-students?class=$classId&section=$sectionId&attendance_date=$selectedDate';
 
   /// Attendance
   static String adminSubmitStudentAttendance = '${baseApi}submit-student-class-attendance';
+  static String teacherSubmitStudentAttendance = '${baseApi}teacher-class-attendance-store';
   static String adminSubmitSubjectWiseStudentAttendance = '${baseApi}subject-wise-attendance-submit';
   static String adminAttendanceMarkUnMarkHolyDay = '${baseApi}student-attendance-holiday';
+  static String teacherAttendanceMarkUnMarkHolyDay = '${baseApi}student-attendance-holiday';
 
   static String getAdminStudentSearchList({
     required int classId,
@@ -280,6 +293,14 @@ class InfixApi {
       '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId';
 
   static String getAdminSubjectSearchAttendanceList({
+    required int classId,
+    required int sectionId,
+    required int subjectId,
+    required String attendanceDate,
+  }) =>
+      '${baseApi}subject-attendance-search?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&attendance_date=$attendanceDate';
+
+  static String getTeacherSubjectSearchAttendanceList({
     required int classId,
     required int sectionId,
     required int subjectId,

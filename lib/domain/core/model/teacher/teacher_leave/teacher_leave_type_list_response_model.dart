@@ -29,19 +29,19 @@ class TeacherLeaveTypeListResponseModel {
 
 class TeacherApplyLeaveTypeData {
   int? id;
-  String? type;
+  String? name;  /// change type to name for dropdown
 
-  TeacherApplyLeaveTypeData({this.id, this.type});
+  TeacherApplyLeaveTypeData({this.id, this.name});
 
   TeacherApplyLeaveTypeData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    type = json['type'];
+    name = json['type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['type'] = type;
+    data['type'] = name;
     return data;
   }
 }

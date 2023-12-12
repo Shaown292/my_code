@@ -103,6 +103,7 @@ class AdminClassSetAttendanceView
                                 );
                               },
                               onAddNoteTap: (){
+                                controller.showAddNoteBottomSheet(index: index, color: Colors.white);
 
                               },
                               attendanceType: data.attendanceType ?? '',
