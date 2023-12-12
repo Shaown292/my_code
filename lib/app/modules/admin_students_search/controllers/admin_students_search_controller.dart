@@ -21,34 +21,31 @@ class AdminStudentsSearchController extends GetxController {
   TextEditingController nameTextController = TextEditingController();
   TextEditingController rollTextController = TextEditingController();
 
-  Rx<ClassListData> classValue =
-      ClassListData(id: -1, name: "").obs;
+  Rx<ClassListData> classValue = ClassListData(id: -1, name: "").obs;
   RxList<ClassListData> classList = <ClassListData>[].obs;
   RxInt studentClassId = 0.obs;
-
 
   RxList<SectionListData> sectionList = <SectionListData>[].obs;
   Rx<SectionListData> sectionValue = SectionListData(id: -1, name: "").obs;
   RxInt studentSectionId = 0.obs;
 
-
   RxList<StudentSearchData> studentSearchDataList = <StudentSearchData>[].obs;
 
-
-  Rx<SubjectData> subjectValue =
-      SubjectData(id: -1, name: "").obs;
+  Rx<SubjectData> subjectValue = SubjectData(id: -1, name: "").obs;
   RxList<SubjectData> subjectList = <SubjectData>[].obs;
-  RxInt studentSubjectId = 0.obs ;
+  RxInt studentSubjectId = 0.obs;
 
-
-  /// Get Admin Student Class List
+  /// Get Admin / Teacher Student Class List
   Future<StudentClassListResponseModel> getStudentClassList() async {
     try {
       classList.clear();
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getStudentClassList, header: GlobalVariable.header);
+          url: GlobalVariable.roleId == 1
+              ? InfixApi.getAdminClassList
+              : InfixApi.getTeacherClassList,
+          header: GlobalVariable.header);
 
       StudentClassListResponseModel studentClassListResponseModel =
           StudentClassListResponseModel.fromJson(response);
@@ -79,7 +76,7 @@ class AdminStudentsSearchController extends GetxController {
     return StudentClassListResponseModel();
   }
 
-  /// Get Admin Student Section List
+  /// Get Admin / Teacher Student Section List
   Future<StudentSectionListResponseModel> getStudentSectionList(
       {required int classId}) async {
     try {
@@ -87,7 +84,9 @@ class AdminStudentsSearchController extends GetxController {
       sectionLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getStudentSectionList(classId: classId),
+          url: GlobalVariable.roleId == 1
+              ? InfixApi.getAdminSectionList(classId: classId)
+              : InfixApi.getTeacherSectionList(classId: classId),
           header: GlobalVariable.header);
 
       StudentSectionListResponseModel studentSectionListResponseModel =
@@ -121,16 +120,22 @@ class AdminStudentsSearchController extends GetxController {
     return StudentSectionListResponseModel();
   }
 
-  /// Get Admin Student Subject List
+  /// Get Admin / Teacher Student Subject List
   Future<AdminStudentSubjectListResponseModel> getAdminStudentSubjectList(
       {required int classId, required int sectionId}) async {
     try {
       subjectLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminStudentSubjectList(
-              classId: classId, sectionId: sectionId),
-          header: GlobalVariable.header);
+        url: GlobalVariable.roleId == 1
+            ? InfixApi.getAdminStudentSubjectList(
+                classId: classId, sectionId: sectionId)
+            : InfixApi.getTeacherStudentSubjectList(
+                classId: classId,
+                sectionId: sectionId,
+              ),
+        header: GlobalVariable.header,
+      );
 
       AdminStudentSubjectListResponseModel
           adminStudentSubjectListResponseModel =
@@ -141,12 +146,10 @@ class AdminStudentsSearchController extends GetxController {
           for (int i = 0;
               i < adminStudentSubjectListResponseModel.data!.length;
               i++) {
-            subjectList
-                .add(adminStudentSubjectListResponseModel.data![i]);
+            subjectList.add(adminStudentSubjectListResponseModel.data![i]);
           }
           subjectValue.value = subjectList[0];
           studentSubjectId.value = subjectList[0].id!;
-
         }
       } else {
         subjectLoader.value = false;

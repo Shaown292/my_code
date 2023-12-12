@@ -1,7 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attendance_model/admin_student_search_attendance_response_model.dart';
@@ -76,11 +83,12 @@ class AdminClassSetAttendanceController extends GetxController {
 
   void uploadAttendance() async {
     try {
-
       saveLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: InfixApi.adminSubmitStudentAttendance,
+          url: GlobalVariable.roleId == 1
+              ? InfixApi.adminSubmitStudentAttendance
+              : InfixApi.teacherSubmitStudentAttendance,
           header: GlobalVariable.header,
           payload: {
             'class': attendanceStudentData.classId,
@@ -118,12 +126,10 @@ class AdminClassSetAttendanceController extends GetxController {
   Future<PostRequestResponseModel> markUnMarkHoliday(
       {required String purpose}) async {
     try {
-
-
       holidayLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: InfixApi.adminAttendanceMarkUnMarkHolyDay,
+          url: GlobalVariable.roleId == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
           header: GlobalVariable.header,
           payload: {
             'purpose': purpose,
@@ -160,6 +166,98 @@ class AdminClassSetAttendanceController extends GetxController {
     }
 
     return PostRequestResponseModel();
+  }
+
+  void showAddNoteBottomSheet({
+    required int index,
+    Color? color,
+    Function()? onUploadTap,
+    Function()? onTapForSave,
+  }) {
+    Get.bottomSheet(
+      Container(
+        color: color,
+        height: Get.height * 0.4,
+        child: Column(
+          children: [
+            Container(
+              height: Get.height * 0.1,
+              width: Get.width,
+              padding: const EdgeInsets.all(20),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(8),
+                    topLeft: Radius.circular(8),
+                  ),
+                  color: AppColors.primaryColor),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Add Note",
+                    style: AppTextStyle.cardTextStyle14WhiteW500,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                    child:  InkWell(
+                      onTap: ()=> Get.back(),
+                      child: Icon(
+                        Icons.close,
+                        size: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            20.verticalSpacing,
+             Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+              child: CustomTextFormField(
+                controller: noteTextController,
+                enableBorderActive: true,
+                focusBorderActive: true,
+                fillColor: Colors.white,
+                hintText: "Add Note",
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PrimaryButton(
+                    width: Get.width * 0.15,
+                    title: "Cancel",
+                    color: Colors.white,
+                    textStyle: AppTextStyle.fontSize13BlackW400,
+                    borderColor: AppColors.primaryColor,
+                    onTap: () {},
+                  ),
+                  Obx(
+                    () => saveLoader.value == true
+                        ? const CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          )
+                        : PrimaryButton(
+                            width: Get.width * 0.2,
+                            title: "Save",
+                            textStyle: AppTextStyle.textStyle12WhiteW500,
+                            onTap: onTapForSave,
+                          ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      shape: defaultBottomSheetShape(),
+    );
   }
 
   @override

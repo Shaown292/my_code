@@ -1,7 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attendance_model/admin_sub_search_attendance_response_model.dart';
@@ -9,11 +16,9 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_respon
 import 'package:get/get.dart';
 
 class AdminSubjectAttendanceSearchListController extends GetxController {
-
+  TextEditingController noteTextController = TextEditingController();
 
   RxInt selectIndex = 0.obs;
-
-
   RxInt classId = 0.obs;
   RxInt sectionId = 0.obs;
   RxInt subjectId = 0.obs;
@@ -42,12 +47,19 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
       adminStudentSubSearchList.clear();
       isLoading.value = true;
       final response = await BaseClient().postData(
-        url: InfixApi.getAdminSubjectSearchAttendanceList(
-          classId: studentClassId,
-          sectionId: studentSectionId,
-          subjectId: studentSubjectId,
-          attendanceDate: studentAttendanceDate,
-        ),
+        url: GlobalVariable.roleId == 1
+            ? InfixApi.getAdminSubjectSearchAttendanceList(
+                classId: studentClassId,
+                sectionId: studentSectionId,
+                subjectId: studentSubjectId,
+                attendanceDate: studentAttendanceDate,
+              )
+            : InfixApi.getTeacherSubjectSearchAttendanceList(
+                classId: studentClassId,
+                sectionId: studentSectionId,
+                subjectId: studentSubjectId,
+                attendanceDate: studentAttendanceDate,
+              ),
         header: GlobalVariable.header,
       );
 
@@ -60,7 +72,8 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
         classId.value = adminSubSearchAttendanceResponseModel.data!.classId!;
         sectionId.value = adminSubSearchAttendanceResponseModel.data!.classId!;
         subjectId.value = adminSubSearchAttendanceResponseModel.data!.classId!;
-        attendanceDate.value = adminSubSearchAttendanceResponseModel.data!.date!;
+        attendanceDate.value =
+            adminSubSearchAttendanceResponseModel.data!.date!;
         if (adminSubSearchAttendanceResponseModel.data!.students!.isNotEmpty) {
           for (int i = 0;
               i < adminSubSearchAttendanceResponseModel.data!.students!.length;
@@ -86,11 +99,6 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
 
     return AdminSubSearchAttendanceResponseModel();
   }
-
-
-
-
-
 
   void updateAttendanceStatus({
     required int index,
@@ -118,8 +126,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
     for (int i = 0; i < adminStudentSubSearchList.length; i++) {
       recordIdList.add(adminStudentSubSearchList[i].recordId!);
       studentIdList.add(adminStudentSubSearchList[i].studentId!);
-      attendanceTypeList
-          .add(adminStudentSubSearchList[i].attendanceType ?? '');
+      attendanceTypeList.add(adminStudentSubSearchList[i].attendanceType ?? '');
       noteList.add(adminStudentSubSearchList[i].note ?? '');
     }
 
@@ -127,10 +134,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
   }
 
   Future<PostRequestResponseModel> uploadAttendance() async {
-
-
     try {
-
       saveLoader.value = true;
 
       final response = await BaseClient().postData(
@@ -148,7 +152,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
           });
 
       PostRequestResponseModel postRequestResponseModel =
-      PostRequestResponseModel.fromJson(response);
+          PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
         saveLoader.value = false;
@@ -158,7 +162,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
         saveLoader.value = false;
         showBasicFailedSnackBar(
           message:
-          postRequestResponseModel.message ?? AppText.somethingWentWrong,
+              postRequestResponseModel.message ?? AppText.somethingWentWrong,
         );
       }
     } catch (e, t) {
@@ -171,7 +175,6 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
 
     return PostRequestResponseModel();
   }
-
 
   Future<PostRequestResponseModel> markUnMarkHoliday(
       {required String purpose}) async {
@@ -189,13 +192,13 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
           });
 
       PostRequestResponseModel postRequestResponseModel =
-      PostRequestResponseModel.fromJson(response);
+          PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
         holidayLoader.value = false;
         for (int i = 0; i < adminStudentSubSearchList.length; i++) {
           adminStudentSubSearchList[i].attendanceType =
-          markHoliday.value ? '' : 'P';
+              markHoliday.value ? '' : 'P';
         }
         adminStudentSubSearchList.refresh();
         showBasicSuccessSnackBar(
@@ -204,7 +207,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
         holidayLoader.value = false;
         showBasicFailedSnackBar(
           message:
-          postRequestResponseModel.message ?? AppText.somethingWentWrong,
+              postRequestResponseModel.message ?? AppText.somethingWentWrong,
         );
       }
     } catch (e, t) {
@@ -218,6 +221,93 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
     return PostRequestResponseModel();
   }
 
+  void showAddNoteBottomSheet({
+    required int index,
+    Color? color,
+    Function()? onUploadTap,
+    Function()? onTapForSave,
+  }) {
+    Get.bottomSheet(
+      Container(
+        color: color,
+        height: Get.height * 0.4,
+        child: Column(
+          children: [
+            Container(
+              height: Get.height * 0.1,
+              width: Get.width,
+              padding: const EdgeInsets.all(20),
+              color: AppColors.primaryColor,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Add Note",
+                    style: AppTextStyle.cardTextStyle14WhiteW500,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                    child: InkWell(
+                      onTap: () => Get.back(),
+                      child: const Icon(
+                        Icons.close,
+                        size: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            20.verticalSpacing,
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+              child: CustomTextFormField(
+                controller: noteTextController,
+                enableBorderActive: true,
+                focusBorderActive: true,
+                fillColor: Colors.white,
+                hintText: "Add Note",
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PrimaryButton(
+                    width: Get.width * 0.15,
+                    title: "Cancel",
+                    color: Colors.white,
+                    textStyle: AppTextStyle.fontSize13BlackW400,
+                    borderColor: AppColors.primaryColor,
+                    onTap: () => Get.back(),
+                  ),
+                  Obx(
+                    () => saveLoader.value == true
+                        ? const CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          )
+                        : PrimaryButton(
+                            width: Get.width * 0.2,
+                            title: "Save",
+                            textStyle: AppTextStyle.textStyle12WhiteW500,
+                            onTap: onTapForSave,
+                          ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      shape: defaultBottomSheetShape(),
+    );
+  }
 
   @override
   void onInit() {

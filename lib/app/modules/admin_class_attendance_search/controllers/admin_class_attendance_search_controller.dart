@@ -13,24 +13,18 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AdminClassAttendanceSearchController extends GetxController {
+  TextEditingController selectedDateTextController = TextEditingController(
+      text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
 
-
-  TextEditingController selectedDateTextController = TextEditingController(text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
-
-
-  AdminStudentsSearchController adminStudentsSearchController = Get.put(AdminStudentsSearchController());
+  AdminStudentsSearchController adminStudentsSearchController =
+      Get.put(AdminStudentsSearchController());
 
   AttendanceStudentData attendanceStudentListData = AttendanceStudentData();
   RxBool isLoading = false.obs;
 
-
-
   RxString classNullValue = ''.obs;
 
-
   RxString sectionNullValue = ''.obs;
-
-
 
   void selectDate() async {
     DateTime? dateTime = await DatePickerUtils().pickDate(
@@ -61,49 +55,48 @@ class AdminClassAttendanceSearchController extends GetxController {
     return true;
   }
 
-
   Future<AdminStudentSearchAttendanceResponseModel> getStudentAttendanceList({
     required int studentClassId,
     required int studentSectionId,
     required String selectedDate,
   }) async {
     try {
-
       isLoading.value = true;
 
-
       final response = await BaseClient().postData(
-        url: InfixApi.getAdminStudentSearchAttendanceList(
-          classId: studentClassId,
-          sectionId: studentSectionId,
-          selectedDate: selectedDate,
-        ),
+        url: GlobalVariable.roleId == 1
+            ? InfixApi.getAdminStudentSearchAttendanceList(
+                classId: studentClassId,
+                sectionId: studentSectionId,
+                selectedDate: selectedDate,
+              )
+            : InfixApi.getTeacherStudentSearchAttendanceList(
+                classId: studentClassId,
+                sectionId: studentSectionId,
+                selectedDate: selectedDate,
+              ),
         header: GlobalVariable.header,
       );
 
       AdminStudentSearchAttendanceResponseModel
-      adminStudentSearchAttendanceResponseModel =
-      AdminStudentSearchAttendanceResponseModel.fromJson(response);
+          adminStudentSearchAttendanceResponseModel =
+          AdminStudentSearchAttendanceResponseModel.fromJson(response);
 
       if (adminStudentSearchAttendanceResponseModel.success == true) {
         isLoading.value = false;
 
+        attendanceStudentListData =
+            adminStudentSearchAttendanceResponseModel.data!;
 
-        attendanceStudentListData = adminStudentSearchAttendanceResponseModel.data!;
-
-
-
-          Get.toNamed(Routes.ADMIN_CLASS_SET_ATTENDANCE, arguments: {
-            'student_attendance_list' : attendanceStudentListData,
-            'class_id' : studentClassId ,
-            'section_id' : studentSectionId,
-
-          });
+        Get.toNamed(Routes.ADMIN_CLASS_SET_ATTENDANCE, arguments: {
+          'student_attendance_list': attendanceStudentListData,
+          'class_id': studentClassId,
+          'section_id': studentSectionId,
+        });
 
         // attendanceStudentListData.students?.forEach((studentInfo) {
         //
         // });
-
       } else {
         isLoading.value = false;
         showBasicFailedSnackBar(
@@ -111,7 +104,7 @@ class AdminClassAttendanceSearchController extends GetxController {
               AppText.somethingWentWrong,
         );
         Get.toNamed(Routes.ADMIN_CLASS_SET_ATTENDANCE, arguments: {
-          'student_attendance_list' : attendanceStudentListData,
+          'student_attendance_list': attendanceStudentListData,
         });
       }
     } catch (e, t) {
@@ -124,5 +117,4 @@ class AdminClassAttendanceSearchController extends GetxController {
 
     return AdminStudentSearchAttendanceResponseModel();
   }
-
 }

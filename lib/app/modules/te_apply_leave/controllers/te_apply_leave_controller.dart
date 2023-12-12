@@ -26,8 +26,11 @@ class TeApplyLeaveController extends GetxController {
   bool isValidate = false;
   Rx<File> file = File('').obs;
 
-  RxString  dropdownValue = "Sick Leave".obs;
-  RxList<String> applyLeaveTypeList = ["Sick Leave", 'Casual Leave', 'Make up Leave'].obs;
+  RxList<TeacherApplyLeaveTypeData> teacherLeaveTypeList = <TeacherApplyLeaveTypeData>[].obs;
+  RxBool leaveLoader = false.obs;
+  Rx<TeacherApplyLeaveTypeData> leaveTypeInitialValue =
+      TeacherApplyLeaveTypeData(id: -1, name: "leave_type").obs;
+  RxInt leaveTypeId = 0.obs;
 
   void changeApplyDate() async {
     DateTime? dateTime = await DatePickerUtils().pickDate();
@@ -55,10 +58,10 @@ class TeApplyLeaveController extends GetxController {
   }
 
   bool validation() {
-    // if (dropdownValue.value.id == -1) {
-    //   showBasicFailedSnackBar(message: 'No leave type available.');
-    //   return false;
-    // }
+    if (leaveTypeInitialValue.value.id == -1) {
+      showBasicFailedSnackBar(message: 'No leave type available.');
+      return false;
+    }
     if (applyDateTextController.text.isEmpty) {
       showBasicFailedSnackBar(message: 'Select Apply Date.');
       return false;
@@ -90,8 +93,6 @@ class TeApplyLeaveController extends GetxController {
   }
 
 
-  RxList<TeacherApplyLeaveTypeData> teacherLeaveTypeList = <TeacherApplyLeaveTypeData>[].obs;
-  RxBool leaveLoader = false.obs;
 
   Future<TeacherLeaveTypeListResponseModel> getStudentApplyLeaveTypeList() async {
     try {
@@ -109,6 +110,9 @@ class TeApplyLeaveController extends GetxController {
           for(var element in teacherLeaveTypeListResponseModel.data!){
             teacherLeaveTypeList.add(element);
           }
+          leaveTypeInitialValue.value = teacherLeaveTypeList.first;
+          leaveTypeId.value = teacherLeaveTypeList.first.id!;
+
         }
       } else {
         leaveLoader.value = false;

@@ -122,6 +122,7 @@ class AdminSubjectAttendanceSearchListView
                                       attendanceType: 'H',
                                     );
                                   },
+                                  onAddNoteTap: ()=> controller.showAddNoteBottomSheet(index: index, color: Colors.white),
                                   attendanceType: data.attendanceType ?? '',
                                 );
                               },
