@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/book_list_tile/book_list_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/book_list/views/widget/search_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -17,17 +18,16 @@ class BookListView extends GetView<BookListController> {
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       title: "Book List",
-      body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: CustomBackground(
-          customWidget: RefreshIndicator(
+      body: CustomBackground(
+        customWidget: Obx(
+          () => RefreshIndicator(
             color: AppColors.primaryColor,
             onRefresh: () async {
               controller.bookListData.clear();
               controller.getAllBookList();
             },
-            child: Obx(
-              () => Column(
+            child: SingleChildScrollView(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -104,62 +104,57 @@ class BookListView extends GetView<BookListController> {
                   ),
                   controller.searchController.text.isEmpty
                       ? controller.loadingController.isLoading
-                          ? const Expanded(
-                              child: LoadingWidget(),
-                            )
+                          ? SizedBox(height: Get.height * 0.7 ,child: const LoadingWidget())
                           : controller.bookListData.isNotEmpty
-                              ? Expanded(
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: controller.bookListData.length,
-                                      itemBuilder: (context, index) {
-                                        return BookListTile(
-                                          bookName: controller
-                                              .bookListData[index].bookTitle,
-                                          subject: controller
-                                              .bookListData[index].subject,
-                                          bookNumber: controller
-                                              .bookListData[index].bookNumber,
-                                          onTap: () => controller
-                                              .showBookListDetailsBottomSheet(
-                                                  index: index,
-                                                  bottomSheetBackgroundColor:
-                                                      Colors.white),
-                                          view: "Details",
-                                        );
-                                      }),
-                                )
+                              ? ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: controller.bookListData.length,
+                                  itemBuilder: (context, index) {
+                                    return BookListTile(
+                                      bookName: controller
+                                          .bookListData[index].bookTitle,
+                                      subject: controller
+                                          .bookListData[index].subject,
+                                      bookNumber: controller
+                                          .bookListData[index].bookNumber,
+                                      onTap: () => controller
+                                          .showBookListDetailsBottomSheet(
+                                              index: index,
+                                              bottomSheetBackgroundColor:
+                                                  Colors.white),
+                                      view: "Details",
+                                    );
+                                  })
                               : const Center(child: NoDataAvailableWidget())
                       : controller.loadingController.isLoading
-                          ? const Expanded(
-                              child: LoadingWidget(),
-                            )
+                          ? SizedBox(height: Get.height * 0.7 ,child: const LoadingWidget())
                           : controller.bookSearchList.isNotEmpty
-                              ? Expanded(
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount:
-                                          controller.bookSearchList.length,
-                                      itemBuilder: (context, index) {
-                                        return BookListTile(
-                                          bookName: controller
-                                              .bookSearchList[index].bookTitle,
-                                          subject: controller
-                                              .bookSearchList[index].subject,
-                                          bookNumber: controller
-                                              .bookSearchList[index].bookNumber,
-                                          onTap: () => controller
-                                              .showBookListDetailsBottomSheet(
-                                                  index: index),
-                                        );
-                                      }),
-                                )
+                              ? ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      controller.bookSearchList.length,
+                                  itemBuilder: (context, index) {
+                                    return BookListTile(
+                                      bookName: controller
+                                          .bookSearchList[index].bookTitle,
+                                      subject: controller
+                                          .bookSearchList[index].subject,
+                                      bookNumber: controller
+                                          .bookSearchList[index].bookNumber,
+                                      onTap: () => controller
+                                          .showBookListDetailsBottomSheet(
+                                              index: index),
+                                    );
+                                  })
                               : Center(
                                   child: NoDataAvailableWidget(
                                     message:
                                         "No results for ${controller.searchController.text}",
                                   ),
                                 ),
+                  20.verticalSpacing,
                 ],
               ),
             ),
