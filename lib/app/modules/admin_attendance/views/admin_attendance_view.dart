@@ -16,17 +16,16 @@ class AdminAttendanceView extends GetView<AdminAttendanceController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      leadingIcon: GlobalVariable.roleId == 1 ?  InkWell(
-        onTap: Get.back,
+      leadingIcon: GlobalVariable.roleId == 1 ?   InkWell(
+        onTap: ()=> Get.back(),
         child: Container(
-          height: 20,
-          width: 20,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(ImagePath.back),
-                filterQuality: FilterQuality.high),
-          ),
+          color: Colors.transparent,
+          height: 50,
+          width: 50,
+          child: Image.asset(ImagePath.back, scale: 3,),
         ),
+
+
       ) : const SizedBox(),
       title: "Attendance",
       body: CustomBackground(

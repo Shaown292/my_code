@@ -7,6 +7,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
@@ -461,6 +462,14 @@ class ProfileController extends GetxController {
     } finally {
       deleteLoader.value = false;
     }
+  }
+
+  void fileDownload({required String url, required String title}) {
+    url == ''
+        ? showBasicFailedSnackBar(
+      message: 'No File Available',
+    )
+        : FileDownloadUtils().downloadFiles(url: url, title: title);
   }
 
   @override

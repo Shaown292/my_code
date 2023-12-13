@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/book_list_tile/book_list_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/show_status_tile/show_status_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -20,25 +23,66 @@ class BookIssuedView extends GetView<BookIssuedController> {
         child: CustomBackground(
           customWidget: Column(
             children: [
+              Container(
+                height: Get.height * 0.07,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 15, vertical: 15),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(8),
+                      topLeft: Radius.circular(8)),
+                  color: AppColors.profileCardBackgroundColor,
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: Get.width * 0.12,
+                      child: const Text(
+                        "Book No",
+                        style: AppTextStyle.textStyle12WhiteW500,
+                      ),
+                    ),
+                    const VerticalDivider(
+                      color: AppColors.profileTitleColor,
+                      thickness: 1,
+                    ),
+                    Container(
+                      width: Get.width * 0.2,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: const Text(
+                        "Subject",
+                        style: AppTextStyle.textStyle12WhiteW500,
+                      ),
+                    ),
+                    const VerticalDivider(
+                      color: AppColors.profileTitleColor,
+                      thickness: 1,
+                    ),
+                    const Text(
+                      "Book Name",
+                      style: AppTextStyle.textStyle12WhiteW500,
+                    )
+                  ],
+                ),
+              ),
               10.verticalSpacing,
               controller.loadingController.isLoading
                   ? const Expanded(
-                child: LoadingWidget(),
-              )
+                      child: LoadingWidget(),
+                    )
                   : Expanded(
-                child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return const ShowStatusTile(
-                        firstTitle: "10-03-2023",
-                        secondTitle: "11-03-2023",
-                        firstValue: "Mathematics 102",
-                        thirdTitle: "10",
-                        activeStatus: "Returned",
-                        activeStatusColor: Colors.redAccent,
-                      );
-                    }),
-              ),
+                      child: ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return  BookListTile(
+                              bookNumber: "1010",
+                              bookName: "Book name",
+                              subject: "subject",
+                              view: "Details",
+                              onTap: ()=> controller.showBookListDetailsBottomSheet(index: index, bottomSheetBackgroundColor: Colors.white),
+                            );
+                          }),
+                    ),
             ],
           ),
         ),

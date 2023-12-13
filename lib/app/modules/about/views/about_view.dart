@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -8,15 +10,11 @@ class AboutView extends GetView<AboutController> {
   const AboutView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AboutView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'AboutView is working',
-          style: TextStyle(fontSize: 20),
+    return const InfixEduScaffold(
+      title: "About",
+      body: CustomBackground(
+        customWidget: Column(
+          children: [],
         ),
       ),
     );
