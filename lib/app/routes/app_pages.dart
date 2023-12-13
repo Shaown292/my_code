@@ -1,3 +1,5 @@
+import 'package:flutter_single_getx_api_v2/app/modules/about/bindings/about_binding.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/about/views/about_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/active_exam/bindings/active_exam_binding.dart';
@@ -166,8 +168,6 @@ import '../modules/subjects/bindings/subjects_binding.dart';
 import '../modules/subjects/views/subjects_view.dart';
 import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
-import '../modules/te_about/bindings/te_about_binding.dart';
-import '../modules/te_about/views/te_about_view.dart';
 import '../modules/te_academic/bindings/te_academic_binding.dart';
 import '../modules/te_academic/views/te_academic_view.dart';
 import '../modules/te_add_content/bindings/te_add_content_binding.dart';
@@ -826,9 +826,9 @@ class AppPages {
       binding: TeSubjectsBinding(),
     ),
     GetPage(
-      name: _Paths.TE_ABOUT,
-      page: () => const TeAboutView(),
-      binding: TeAboutBinding(),
+      name: _Paths.ABOUT,
+      page: () => const AboutView(),
+      binding: AboutBinding(),
     ),
   ];
 }

@@ -311,7 +311,7 @@ class AppFunctions {
         Get.toNamed(Routes.ADMIN_SETTINGS);
         break;
       case 'About':
-        Get.toNamed(Routes.TE_ABOUT);
+        Get.toNamed(Routes.ABOUT);
         break;
     }
   }

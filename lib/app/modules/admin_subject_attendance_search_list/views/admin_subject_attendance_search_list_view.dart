@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/set_attendance_tile/set_attendance_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -122,7 +121,11 @@ class AdminSubjectAttendanceSearchListView
                                       attendanceType: 'H',
                                     );
                                   },
-                                  onAddNoteTap: ()=> controller.showAddNoteBottomSheet(index: index, color: Colors.white),
+                                  onAddNoteTap: (){
+                                    controller.noteTextController.text = controller.adminStudentSubSearchList[index].note ?? '';
+                                    controller.showAddNoteBottomSheet(index: index, color: Colors.white);
+
+                                  },
                                   attendanceType: data.attendanceType ?? '',
                                 );
                               },

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
@@ -114,8 +113,9 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
     required String note,
   }) {
     adminStudentSubSearchList[index].note = note;
-
     adminStudentSubSearchList.refresh();
+    noteTextController.clear();
+    Get.back();
   }
 
   void dataFilteringForApiCall() {
@@ -296,7 +296,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
                             width: Get.width * 0.2,
                             title: "Save",
                             textStyle: AppTextStyle.textStyle12WhiteW500,
-                            onTap: onTapForSave,
+                      onTap: ()=> updateAttendanceNote(index: index, note: noteTextController.text),
                           ),
                   ),
                 ],
