@@ -31,7 +31,12 @@ class AdminClassAttendanceSearchIndividualListController
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminSubAttenSearchIndividualList(
+          url: GlobalVariable.roleId == 1?  InfixApi.getAdminSubAttenSearchIndividualList(
+            classId: classId,
+            sectionId: sectionId,
+            rollINo: rollNo,
+            name: name,
+          ) : InfixApi.getTeacherSubAttenSearchIndividualList(
             classId: classId,
             sectionId: sectionId,
             rollINo: rollNo,

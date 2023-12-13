@@ -25,11 +25,19 @@ class AdminSubjectAttendanceSearchIndividualView
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
           child: Obx(
             () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Text(
+                  "Select Class *",
+                  style: AppTextStyle.fontSize13BlackW400,
+                ),
+                10.verticalSpacing,
                 controller.adminStudentsSearchController.loadingController
                         .isLoading
-                    ? const CircularProgressIndicator(
-                        color: AppColors.primaryColor,
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
                       )
                     : DuplicateDropdown(
                         dropdownValue: controller
@@ -43,6 +51,8 @@ class AdminSubjectAttendanceSearchIndividualView
                           controller.adminStudentsSearchController.classValue
                               .value = v!;
                           controller.adminStudentsSearchController
+                              .studentClassId.value = v.id;
+                          controller.adminStudentsSearchController
                               .getStudentSectionList(
                                   classId: controller
                                       .adminStudentsSearchController
@@ -51,9 +61,16 @@ class AdminSubjectAttendanceSearchIndividualView
                         },
                       ),
                 10.verticalSpacing,
+                const Text(
+                  "Select Section *",
+                  style: AppTextStyle.fontSize13BlackW400,
+                ),
+                10.verticalSpacing,
                 controller.adminStudentsSearchController.sectionLoader.value
-                    ? const CircularProgressIndicator(
-                        color: AppColors.primaryColor,
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
                       )
                     : DuplicateDropdown(
                         dropdownValue: controller.adminStudentsSearchController
@@ -67,6 +84,8 @@ class AdminSubjectAttendanceSearchIndividualView
                           controller.adminStudentsSearchController.sectionValue
                               .value = v!;
                           controller.adminStudentsSearchController
+                              .studentSectionId.value = v.id;
+                          controller.adminStudentsSearchController
                               .getAdminStudentSubjectList(
                             classId: controller.adminStudentsSearchController
                                 .studentClassId.value,
@@ -76,9 +95,16 @@ class AdminSubjectAttendanceSearchIndividualView
                         },
                       ),
                 10.verticalSpacing,
+                const Text(
+                  "Select Subject *",
+                  style: AppTextStyle.fontSize13BlackW400,
+                ),
+                10.verticalSpacing,
                 controller.adminStudentsSearchController.subjectLoader.value
-                    ? const CircularProgressIndicator(
-                        color: AppColors.primaryColor,
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
                       )
                     : DuplicateDropdown(
                         dropdownValue: controller.adminStudentsSearchController
@@ -91,6 +117,8 @@ class AdminSubjectAttendanceSearchIndividualView
                         changeDropdownValue: (v) {
                           controller.adminStudentsSearchController.subjectValue
                               .value = v!;
+                          controller.adminStudentsSearchController
+                              .studentSubjectId.value = v.id;
                         },
                       ),
                 10.verticalSpacing,

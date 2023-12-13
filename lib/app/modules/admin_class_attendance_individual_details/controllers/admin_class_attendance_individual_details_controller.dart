@@ -43,8 +43,11 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getAdminStudentSearchDetailsList(
-            studentAttendanceId: studentAttendanceId),
+        url: GlobalVariable.roleId == 1
+            ? InfixApi.getAdminStudentSearchDetailsList(
+                studentAttendanceId: studentAttendanceId)
+            : InfixApi.getTeacherStudentSearchDetailsList(
+                studentAttendanceId: studentAttendanceId),
         header: GlobalVariable.header,
       );
 
@@ -110,8 +113,15 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getAdminStudentSearchDetailsListWithDate(
-            studentAttendanceId: studentAttendanceId, month: month, year: year),
+        url: GlobalVariable.roleId == 1
+            ? InfixApi.getAdminStudentSearchDetailsListWithDate(
+                studentAttendanceId: studentAttendanceId,
+                month: month,
+                year: year)
+            : InfixApi.getTeacherStudentSearchDetailsListWithDate(
+                studentAttendanceId: studentAttendanceId,
+                month: month,
+                year: year),
         header: GlobalVariable.header,
       );
 
@@ -177,7 +187,8 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
               adminStudentAttendanceList[0].attendanceDate!.year,
               adminStudentAttendanceList[0].attendanceDate!.month,
               adminStudentAttendanceList[0].attendanceDate!.day),
-          dot: presentEvent,
+          dot: GlobalVariable.getAttendanceStatus(
+              adminStudentAttendanceList[0].attendanceType ?? ""),
         )
       ];
     }

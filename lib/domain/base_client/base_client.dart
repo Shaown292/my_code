@@ -22,7 +22,7 @@ class BaseClient {
             headers: header,
           )
           .timeout(
-            const Duration(seconds: 30),
+            const Duration(seconds: 180),
           );
 
       return returnResponse(response);
@@ -49,7 +49,7 @@ class BaseClient {
             headers: header,
           )
           .timeout(
-            const Duration(seconds: 30),
+            const Duration(seconds: 180),
           );
       // return response;
       return returnResponse(response);
@@ -76,7 +76,7 @@ class BaseClient {
             headers: header,
           )
           .timeout(
-            const Duration(seconds: 30),
+            const Duration(seconds: 180),
           );
       return returnResponse(response);
     } on SocketException {
@@ -102,7 +102,7 @@ class BaseClient {
             headers: header,
           )
           .timeout(
-            const Duration(seconds: 30),
+            const Duration(seconds: 180),
           );
       return returnResponse(response);
     } on SocketException {

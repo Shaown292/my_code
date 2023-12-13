@@ -138,7 +138,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
       saveLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: InfixApi.adminSubmitSubjectWiseStudentAttendance,
+          url: GlobalVariable.roleId == 1 ?  InfixApi.adminSubmitSubjectWiseStudentAttendance : InfixApi.teacherSubmitSubjectWiseStudentAttendance,
           header: GlobalVariable.header,
           payload: {
             'class': classId.value,
@@ -182,7 +182,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
       holidayLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: InfixApi.adminAttendanceMarkUnMarkHolyDay,
+          url: GlobalVariable.roleId == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
           header: GlobalVariable.header,
           payload: {
             'purpose': purpose,

@@ -348,6 +348,7 @@ class ProfileView extends GetView<ProfileController> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                GlobalVariable.roleId == 2 ?
                                 InkWell(
                                   onTap: () =>
                                       controller.showUploadDocumentsBottomSheet(
@@ -388,7 +389,7 @@ class ProfileView extends GetView<ProfileController> {
                                       ],
                                     ),
                                   ),
-                                ),
+                                ): SizedBox(),
                                 10.verticalSpacing,
 
                                 /// Documents Tiles

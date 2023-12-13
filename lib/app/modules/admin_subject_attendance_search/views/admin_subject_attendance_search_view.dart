@@ -127,16 +127,18 @@ class AdminSubjectAttendanceSearchView
                 PrimaryButton(
                   text: "Search",
                   onTap: () {
-                    Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST,
-                        arguments: {
-                          'class_id': controller.adminStudentsSearchController
-                              .studentClassId.value,
-                          'section_id': controller.adminStudentsSearchController
-                              .studentSectionId.value,
-                          'subject_id': controller.adminStudentsSearchController
-                              .studentSubjectId.value,
-                          'date': controller.selectedDateTextController.text,
-                        });
+                    if(controller.validation()){
+                      Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST,
+                          arguments: {
+                            'class_id': controller.adminStudentsSearchController
+                                .studentClassId.value,
+                            'section_id': controller.adminStudentsSearchController
+                                .studentSectionId.value,
+                            'subject_id': controller.adminStudentsSearchController
+                                .studentSubjectId.value,
+                            'date': controller.selectedDateTextController.text,
+                          });
+                    }
                   },
                 ),
                 50.verticalSpacing,
