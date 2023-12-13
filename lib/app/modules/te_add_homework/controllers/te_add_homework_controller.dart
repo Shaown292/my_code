@@ -173,7 +173,7 @@ class TeAddHomeworkController extends GetxController {
 
   void assignDate() async {
     DateTime? dateTime =
-        await DatePickerUtils().pickDate(canSelectPastDate: true);
+        await DatePickerUtils().pickDate(canSelectPastDate: true, canSelectFutureDate: true,);
 
     if (dateTime != null) {
       assignDateTextController.text = dateTime.yyyy_mm_dd;
@@ -182,7 +182,7 @@ class TeAddHomeworkController extends GetxController {
 
   void submissionDate() async {
     DateTime? dateTime =
-        await DatePickerUtils().pickDate(canSelectFutureDate: true);
+        await DatePickerUtils().pickDate(canSelectFutureDate: true, canSelectPastDate: true);
 
     if (dateTime != null) {
       submissionDateTextController.text = dateTime.yyyy_mm_dd;

@@ -78,7 +78,8 @@ class ApplyLeaveController extends GetxController {
   }
 
   void changeApplyDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate();
+    DateTime? dateTime = await DatePickerUtils().pickDate(canSelectPastDate: true,
+      canSelectFutureDate: true,);
 
     if (dateTime != null) {
       applyDateTextController.text = dateTime.dd_mm_yyyy;
@@ -86,8 +87,10 @@ class ApplyLeaveController extends GetxController {
   }
 
   void changeFromDate() async {
-    DateTime? dateTime = await DatePickerUtils()
-        .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
+    DateTime? dateTime = await DatePickerUtils().pickDate(
+      canSelectPastDate: true,
+      canSelectFutureDate: true,
+    );
 
     if (dateTime != null) {
       fromDateTextController.text = dateTime.dd_mm_yyyy;

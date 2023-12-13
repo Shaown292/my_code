@@ -236,5 +236,5 @@ abstract class _Paths {
   static const TE_SEARCH_CLASS_ROUTINE = '/te-search-class-routine';
   static const TE_SEARCH_CLASS_ROUTINE_LIST = '/te-search-class-routine-list';
   static const TE_SUBJECTS = '/te-subjects';
-  static const ABOUT = '/te-about';
+  static const ABOUT = '/about';
 }

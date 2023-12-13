@@ -324,7 +324,8 @@ class InfixApi {
     required int subjectId,
     required String attendanceDate,
   }) =>
-      '${baseApi}subject-attendance-search?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&attendance_date=$attendanceDate';
+      '${baseApi}subject-attendance-search?class=$classId&section=$sectionId&subject=$subjectId&attendance_date=$attendanceDate';
+      // '${baseApi}subject-attendance-search?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&attendance_date=$attendanceDate';
 
   static String getTeacherSubjectSearchAttendanceList({
     required int classId,
@@ -332,7 +333,7 @@ class InfixApi {
     required int subjectId,
     required String attendanceDate,
   }) =>
-      '${baseApi}teacher-subject-attendance-search?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&attendance_date=$attendanceDate';
+      '${baseApi}teacher-subject-attendance-search?class=$classId&section=$sectionId&subject=$subjectId&attendance_date=$attendanceDate';
 
   static String getAdminStudentSearchDetailsListWithDate({
     required int studentAttendanceId,
@@ -340,6 +341,7 @@ class InfixApi {
     required int year,
   }) =>
       '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId&month=$month&year=$year';
+
   static String getTeacherStudentSearchDetailsListWithDate({
     required int studentAttendanceId,
     required int month,

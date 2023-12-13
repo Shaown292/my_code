@@ -42,6 +42,7 @@ class TeAddContentController extends GetxController {
   void selectDate() async {
     DateTime? dateTime = await DatePickerUtils().pickDate(
       canSelectPastDate: true,
+      canSelectFutureDate: true,
     );
 
     if (dateTime != null) {

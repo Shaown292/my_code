@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AdminAddBookController extends GetxController {
-
   TextEditingController titleTextController = TextEditingController();
   TextEditingController bookNumberTextController = TextEditingController();
   TextEditingController isbnTextController = TextEditingController();
@@ -28,7 +27,8 @@ class AdminAddBookController extends GetxController {
   LoadingController loadingController = Get.find();
   RxBool addBookLoader = false.obs;
 
-  String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now().toLocal());
+  String formattedDate =
+      DateFormat('yyyy-MM-dd').format(DateTime.now().toLocal());
 
   RxList<Categories> bookCategoryList = <Categories>[].obs;
   Rx<Categories> bookCategoryInitValue =
@@ -36,36 +36,47 @@ class AdminAddBookController extends GetxController {
   RxInt bookCategoryId = 0.obs;
 
   RxList<Subjects> bookSubjectList = <Subjects>[].obs;
-  Rx<Subjects> bookSubjectInitValue =
-      Subjects(id: -1, name: "Add Subject").obs;
+  Rx<Subjects> bookSubjectInitValue = Subjects(id: -1, name: "Add Subject").obs;
   RxInt bookSubjectId = 0.obs;
 
-
-
-
-  Future<BookCategoryAndSubjectListResponseModel> getAdminBookCategoryAndSubjectList() async {
+  Future<BookCategoryAndSubjectListResponseModel>
+      getAdminBookCategoryAndSubjectList() async {
     try {
       bookCategoryList.clear();
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminBookCategoryAndSubjectList, header: GlobalVariable.header);
+          url: InfixApi.getAdminBookCategoryAndSubjectList,
+          header: GlobalVariable.header);
 
-
-      BookCategoryAndSubjectListResponseModel bookCategoryAndSubjectListResponseModel = BookCategoryAndSubjectListResponseModel.fromJson(response);
+      BookCategoryAndSubjectListResponseModel
+          bookCategoryAndSubjectListResponseModel =
+          BookCategoryAndSubjectListResponseModel.fromJson(response);
 
       if (bookCategoryAndSubjectListResponseModel.success == true) {
         loadingController.isLoading = false;
-        if (bookCategoryAndSubjectListResponseModel.data!.categories!.isNotEmpty) {
-          for (int i = 0; i < bookCategoryAndSubjectListResponseModel.data!.categories!.length; i++) {
-            bookCategoryList.add(bookCategoryAndSubjectListResponseModel.data!.categories![i]);
+        if (bookCategoryAndSubjectListResponseModel
+            .data!.categories!.isNotEmpty) {
+          for (int i = 0;
+              i <
+                  bookCategoryAndSubjectListResponseModel
+                      .data!.categories!.length;
+              i++) {
+            bookCategoryList.add(
+                bookCategoryAndSubjectListResponseModel.data!.categories![i]);
           }
           bookCategoryId.value = bookCategoryList[0].id!;
           bookCategoryInitValue.value = bookCategoryList[0];
         }
-        if (bookCategoryAndSubjectListResponseModel.data!.subjects!.isNotEmpty) {
-          for (int i = 0; i < bookCategoryAndSubjectListResponseModel.data!.subjects!.length; i++) {
-            bookSubjectList.add(bookCategoryAndSubjectListResponseModel.data!.subjects![i]);
+        if (bookCategoryAndSubjectListResponseModel
+            .data!.subjects!.isNotEmpty) {
+          for (int i = 0;
+              i <
+                  bookCategoryAndSubjectListResponseModel
+                      .data!.subjects!.length;
+              i++) {
+            bookSubjectList.add(
+                bookCategoryAndSubjectListResponseModel.data!.subjects![i]);
           }
           bookSubjectId.value = bookSubjectList[0].id!;
           bookSubjectInitValue.value = bookSubjectList[0];
@@ -88,31 +99,33 @@ class AdminAddBookController extends GetxController {
     return BookCategoryAndSubjectListResponseModel();
   }
 
-
-  Future<void> addAdminBook({required int bookCategoryId, required int bookSubjectId}) async {
-
-    try{
-
+  Future<void> addAdminBook(
+      {required int bookCategoryId, required int bookSubjectId}) async {
+    try {
       addBookLoader.value = true;
 
-      final response = await BaseClient().postData(url: InfixApi.postAdminAddBook, header: GlobalVariable.header, payload: {
-        'book_title': titleTextController.text,
-        'book_category_id': bookCategoryId,
-        'book_number': bookNumberTextController.text,
-        'isbn_no': isbnTextController.text,
-        'publisher_name': publisherNameTextController.text,
-        'author_name': authorNameTextController.text,
-        'subject_id': bookSubjectId,
-        'rack_number': rackNumberTextController.text,
-        'quantity': quantityTextController.text,
-        'book_price': priceTextController.text,
-        'details': descriptionTextController.text,
-        'post_date': dateTextController.text,
-      });
+      final response = await BaseClient().postData(
+          url: InfixApi.postAdminAddBook,
+          header: GlobalVariable.header,
+          payload: {
+            'book_title': titleTextController.text,
+            'book_category_id': bookCategoryId,
+            'book_number': bookNumberTextController.text,
+            'isbn_no': isbnTextController.text,
+            'publisher_name': publisherNameTextController.text,
+            'author_name': authorNameTextController.text,
+            'subject_id': bookSubjectId,
+            'rack_number': rackNumberTextController.text,
+            'quantity': quantityTextController.text,
+            'book_price': priceTextController.text,
+            'details': descriptionTextController.text,
+            'post_date': dateTextController.text,
+          });
 
-      PostRequestResponseModel postRequestResponseModel = PostRequestResponseModel.fromJson(response);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
 
-      if(postRequestResponseModel.success == true){
+      if (postRequestResponseModel.success == true) {
         titleTextController.clear();
         bookNumberTextController.clear();
         isbnTextController.clear();
@@ -124,37 +137,35 @@ class AdminAddBookController extends GetxController {
         descriptionTextController.clear();
         dateTextController.clear();
 
-
-         addBookLoader.value = false;
-        showBasicSuccessSnackBar(message: postRequestResponseModel.message ?? "");
-      } else{
-         addBookLoader.value = false;
-        showBasicSuccessSnackBar(message: postRequestResponseModel.message ?? AppText.somethingWentWrong,);
+        addBookLoader.value = false;
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? "");
+      } else {
+        addBookLoader.value = false;
+        showBasicSuccessSnackBar(
+          message:
+              postRequestResponseModel.message ?? AppText.somethingWentWrong,
+        );
       }
-
-    } catch(e, t){
-       addBookLoader.value = false;
+    } catch (e, t) {
+      addBookLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
       addBookLoader.value = false;
     }
-
-
-
   }
 
   bool validation() {
     if (titleTextController.text == '') {
       showBasicFailedSnackBar(message: 'Add Book Title');
       return false;
-
     }
-    if(bookCategoryList.isEmpty){
+    if (bookCategoryList.isEmpty) {
       showBasicFailedSnackBar(message: 'No Category available');
       return false;
     }
-    if(bookSubjectList.isEmpty) {
+    if (bookSubjectList.isEmpty) {
       showBasicFailedSnackBar(message: 'Select Subject available.');
       return false;
     }
@@ -164,14 +175,14 @@ class AdminAddBookController extends GetxController {
 
   void changeApplyDate() async {
     DateTime? dateTime = await DatePickerUtils().pickDate(
-      canSelectPastDate: true
+      canSelectPastDate: true,
+      canSelectFutureDate: true,
     );
 
     if (dateTime != null) {
       dateTextController.text = dateTime.dd_mm_yyyy;
     }
   }
-
 
   @override
   void onInit() {

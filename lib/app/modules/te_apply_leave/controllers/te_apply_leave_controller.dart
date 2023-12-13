@@ -34,7 +34,10 @@ class TeApplyLeaveController extends GetxController {
   RxInt leaveTypeId = 0.obs;
 
   void changeApplyDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate();
+    DateTime? dateTime = await DatePickerUtils().pickDate(
+      canSelectPastDate: true,
+      canSelectFutureDate: true,
+    );
 
     if (dateTime != null) {
       applyDateTextController.text = dateTime.dd_mm_yyyy;
@@ -42,8 +45,10 @@ class TeApplyLeaveController extends GetxController {
   }
 
   void changeFromDate() async {
-    DateTime? dateTime = await DatePickerUtils()
-        .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
+    DateTime? dateTime = await DatePickerUtils().pickDate(
+      canSelectPastDate: true,
+      canSelectFutureDate: true,
+    );
 
     if (dateTime != null) {
       fromDateTextController.text = dateTime.dd_mm_yyyy;
@@ -51,8 +56,10 @@ class TeApplyLeaveController extends GetxController {
   }
 
   void changeToDate() async {
-    DateTime? dateTime = await DatePickerUtils()
-        .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
+    DateTime? dateTime = await DatePickerUtils().pickDate(
+      canSelectPastDate: true,
+      canSelectFutureDate: true,
+    );
 
     if (dateTime != null) {
       toDateTextController.text = dateTime.dd_mm_yyyy;
