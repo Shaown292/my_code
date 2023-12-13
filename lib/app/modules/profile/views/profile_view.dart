@@ -37,18 +37,17 @@ class ProfileView extends GetView<ProfileController> {
       ],
       leadingIcon: GlobalVariable.roleId == 2
           ? const SizedBox()
-          : InkWell(
-              onTap: Get.back,
-              child: Container(
-                height: 20,
-                width: 20,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(ImagePath.back),
-                      filterQuality: FilterQuality.high),
-                ),
-              ),
-            ),
+          :  InkWell(
+        onTap: ()=> Get.back(),
+        child: Container(
+          color: Colors.transparent,
+          height: 50,
+          width: 50,
+          child: Image.asset(ImagePath.back, scale: 3,),
+        ),
+
+
+      ),
       title: "Profile",
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -441,7 +440,9 @@ class ProfileView extends GetView<ProfileController> {
                                                   ),
 
                                                   /// Download button
-                                                  tapLeftButton: () {},
+                                                  tapLeftButton: () {
+                                                    controller.fileDownload(url: controller.documentsDataList[index].file ?? "", title: controller.documentsDataList[index].title ?? "");
+                                                  }
                                                 );
                                               },
                                             ),

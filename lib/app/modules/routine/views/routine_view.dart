@@ -23,17 +23,16 @@ class RoutineView extends GetView<RoutineController> {
       length: controller.daysOfWeek.length,
       child: InfixEduScaffold(
         title: GlobalVariable.roleId == 4 ? "My Routine" : "Routine",
-        leadingIcon: GlobalVariable.roleId == 4 ? InkWell(
-          onTap: Get.back,
+        leadingIcon: GlobalVariable.roleId == 4 ?  InkWell(
+          onTap: ()=> Get.back(),
           child: Container(
-            height: 20,
-            width: 20,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(ImagePath.back),
-                  filterQuality: FilterQuality.high),
-            ),
+            color: Colors.transparent,
+            height: 50,
+            width: 50,
+            child: Image.asset(ImagePath.back, scale: 3,),
           ),
+
+
         ) : const SizedBox(),
         body: Obx(
           () => CustomBackground(
