@@ -46,10 +46,13 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getAdminSubAttenSearchDetailsList(
+        url: GlobalVariable.roleId == 1 ? InfixApi.getAdminSubAttenSearchDetailsList(
             recordId: recordId,
             subjectNameId: subjectNameId,
-            ),
+            ) : InfixApi.getTeacherSubAttenSearchDetailsList(
+          recordId: recordId,
+          subjectNameId: subjectNameId,
+        ),
         header: GlobalVariable.header,
       );
 
@@ -127,7 +130,11 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
       attendanceList.clear();
       eventList?.clear();
       final response = await BaseClient().getData(
-        url: InfixApi.getAdminSubAttenSearchDetailsWithDateList(
+        url: GlobalVariable.roleId == 1 ?  InfixApi.getAdminSubAttenSearchDetailsWithDateList(
+            recordId: recordId,
+            subjectNameId: subjectNameId,
+            month: month,
+            year: year) : InfixApi.getTeacherSubAttenSearchDetailsWithDateList(
             recordId: recordId,
             subjectNameId: subjectNameId,
             month: month,

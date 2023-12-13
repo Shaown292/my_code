@@ -28,7 +28,7 @@ class CustomAppBar extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Padding(
         padding:
-            const EdgeInsets.only(top: 60.0, bottom: 20, left: 10, right: 10),
+            const EdgeInsets.only(top: 60.0, bottom: 20,  right: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -38,16 +38,15 @@ class CustomAppBar extends GetView<HomeController> {
                 10.horizontalSpacing,
                 leadingIcon ??
                     InkWell(
-                      onTap: Get.back,
+                      onTap: ()=> Get.back(),
                       child: Container(
-                        height: 20,
-                        width: 20,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(ImagePath.back),
-                              filterQuality: FilterQuality.high),
-                        ),
+                        color: Colors.transparent,
+                        height: 50,
+                        width: 50,
+                       child: Image.asset(ImagePath.back, scale: 3,),
                       ),
+
+
                     ),
                 10.horizontalSpacing,
                 titleWidget ?? Text(

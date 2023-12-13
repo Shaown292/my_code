@@ -38,7 +38,13 @@ class AdminSubjectAttendanceSearchIndividualController extends GetxController {
       searchLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: InfixApi.getAdminSubAttenSearchList(
+          url: GlobalVariable.roleId == 1 ? InfixApi.getAdminSubAttenSearchList(
+            classId: classId,
+            sectionId: sectionId,
+            rollINo: rollNo,
+            name: name,
+            subjectId: subjectId,
+          ) : InfixApi.getTeacherSubAttenSearchList(
             classId: classId,
             sectionId: sectionId,
             rollINo: rollNo,

@@ -66,19 +66,12 @@ class ProfileController extends GetxController {
     try {
       personalLoader.value = true;
 
-      if (GlobalVariable.roleId == 1) {
-        final response = await BaseClient().getData(
-          url: InfixApi.getSingleStudentProfile(studentId: studentId!),
-          header: GlobalVariable.header,
-        );
-        profilePersonalModel = ProfilePersonalModel.fromJson(response);
-      } else {
-        final response = await BaseClient().getData(
-          url: InfixApi.profilePersonal(),
-          header: GlobalVariable.header,
-        );
-        profilePersonalModel = ProfilePersonalModel.fromJson(response);
-      }
+      final response = await BaseClient().getData(
+        url: GlobalVariable.roleId == 2 ? InfixApi.profilePersonal() : InfixApi.getSingleStudentProfile(studentId: studentId!),
+        header: GlobalVariable.header,
+      );
+      profilePersonalModel = ProfilePersonalModel.fromJson(response);
+
 
       if (profilePersonalModel.success == true) {
         personalLoader.value = false;
@@ -113,21 +106,14 @@ class ProfileController extends GetxController {
     try {
       parentLoader.value = true;
 
-      if (GlobalVariable.roleId == 1) {
+
         final response = await BaseClient().getData(
-          url: InfixApi.getSingleParentProfile(studentId: studentId!),
+          url: GlobalVariable.roleId == 2 ? InfixApi.profileParents() : InfixApi.getSingleParentProfile(studentId: studentId!),
           header: GlobalVariable.header,
         );
 
         profileParentsModel = ProfileParentsModel.fromJson(response);
-      } else {
-        final response = await BaseClient().getData(
-          url: InfixApi.profileParents(),
-          header: GlobalVariable.header,
-        );
 
-        profileParentsModel = ProfileParentsModel.fromJson(response);
-      }
 
       if (profileParentsModel.success == true) {
         profileParents = profileParentsModel.data?.profileParents;
@@ -150,21 +136,14 @@ class ProfileController extends GetxController {
     try {
       transportLoader.value = true;
 
-      if (GlobalVariable.roleId == 1) {
+
         final response = await BaseClient().getData(
-          url: InfixApi.getSingleStudentTransportData(studentId: studentId!),
+          url:  GlobalVariable.roleId == 2 ? InfixApi.profileTransport() : InfixApi.getSingleStudentTransportData(studentId: studentId!),
           header: GlobalVariable.header,
         );
 
         profileTransportModel = ProfileTransportModel.fromJson(response);
-      } else {
-        final response = await BaseClient().getData(
-          url: InfixApi.profileTransport(),
-          header: GlobalVariable.header,
-        );
 
-        profileTransportModel = ProfileTransportModel.fromJson(response);
-      }
 
       if (profileTransportModel.success == true) {
         profileTransport = profileTransportModel.data?.profileTransport;
@@ -187,18 +166,12 @@ class ProfileController extends GetxController {
     try {
       othersLoader.value = true;
 
-      if (GlobalVariable.roleId == 1) {
+
         final response = await BaseClient().getData(
-            url: InfixApi.getSingleStudentOthersData(studentId: studentId!),
-            header: GlobalVariable.header);
+            url: GlobalVariable.roleId == 2 ? InfixApi.profileOthers() : InfixApi.getSingleStudentOthersData(studentId: studentId!), header: GlobalVariable.header);
 
         profileOthersModel = ProfileOthersModel.fromJson(response);
-      } else {
-        final response = await BaseClient().getData(
-            url: InfixApi.profileOthers(), header: GlobalVariable.header);
 
-        profileOthersModel = ProfileOthersModel.fromJson(response);
-      }
 
       if (profileOthersModel.success == true) {
         profileOthers = profileOthersModel.data?.profileOthers;
@@ -223,23 +196,15 @@ class ProfileController extends GetxController {
       documentLoader.value = true;
       documentsDataList.clear();
 
-      if (GlobalVariable.roleId == 1) {
+
         final response = await BaseClient().getData(
-          url: InfixApi.getSingleStudentDocumentsData(studentId: studentId!),
+          url: GlobalVariable.roleId == 2 ? InfixApi.profileDocumentGet() : InfixApi.getSingleStudentDocumentsData(studentId: studentId!),
           header: GlobalVariable.header,
         );
 
         studentDocumentsResponseModel =
             StudentDocumentsResponseModel.fromJson(response);
-      } else {
-        final response = await BaseClient().getData(
-          url: InfixApi.profileDocumentGet(),
-          header: GlobalVariable.header,
-        );
 
-        studentDocumentsResponseModel =
-            StudentDocumentsResponseModel.fromJson(response);
-      }
 
       if (studentDocumentsResponseModel.success == true) {
         documentLoader.value = false;

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/show_week_tile/show_week_tile.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import '../../../../domain/core/model/student_routine_model/student_routine_response_model.dart';
 import '../../../data/constants/app_colors.dart';
@@ -20,8 +22,19 @@ class RoutineView extends GetView<RoutineController> {
       initialIndex: controller.selectIndex.value,
       length: controller.daysOfWeek.length,
       child: InfixEduScaffold(
-        title: "Routine",
-        leadingIcon: const SizedBox(),
+        title: GlobalVariable.roleId == 4 ? "My Routine" : "Routine",
+        leadingIcon: GlobalVariable.roleId == 4 ? InkWell(
+          onTap: Get.back,
+          child: Container(
+            height: 20,
+            width: 20,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImagePath.back),
+                  filterQuality: FilterQuality.high),
+            ),
+          ),
+        ) : const SizedBox(),
         body: Obx(
           () => CustomBackground(
             customWidget: Padding(

@@ -253,8 +253,9 @@ class InfixApi {
   static String adminSubmitStudentAttendance = '${baseApi}submit-student-class-attendance';
   static String teacherSubmitStudentAttendance = '${baseApi}teacher-class-attendance-store';
   static String adminSubmitSubjectWiseStudentAttendance = '${baseApi}subject-wise-attendance-submit';
+  static String teacherSubmitSubjectWiseStudentAttendance = '${baseApi}teacher-subject-attendance-submit';
   static String adminAttendanceMarkUnMarkHolyDay = '${baseApi}student-attendance-holiday';
-  static String teacherAttendanceMarkUnMarkHolyDay = '${baseApi}student-attendance-holiday';
+  static String teacherAttendanceMarkUnMarkHolyDay = '${baseApi}teacher-subject-holiday';
 
   static String getAdminStudentSearchList({
     required int classId,
@@ -272,6 +273,14 @@ class InfixApi {
     required String name,
   }) =>
       '${baseApi}subject-wise-students?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&name=$name&roll_no=$rollINo';
+  static String getTeacherSubAttenSearchList({
+    required int classId,
+    required int sectionId,
+    required int subjectId,
+    required String rollINo,
+    required String name,
+  }) =>
+      '${baseApi}teacher-subject-wise-students?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&name=$name&roll_no=$rollINo';
 
   static String getAdminSubAttenSearchIndividualList({
     required int classId,
@@ -281,16 +290,33 @@ class InfixApi {
   }) =>
       '${baseApi}student-search-attend?class=$classId&section=$sectionId &name=$name&roll_no=$rollINo';
 
+  static String getTeacherSubAttenSearchIndividualList({
+    required int classId,
+    required int sectionId,
+    required String rollINo,
+    required String name,
+  }) =>
+      '${baseApi}teacher-search-student-attendance?class=$classId&section=$sectionId &name=$name&roll_no=$rollINo';
+
   static String getAdminSubAttenSearchDetailsList({
     required int recordId,
     required int subjectNameId,
   }) =>
       '${baseApi}student-subject-attendance?record_id=$recordId&subject_id=$subjectNameId';
+  static String getTeacherSubAttenSearchDetailsList({
+    required int recordId,
+    required int subjectNameId,
+  }) =>
+      '${baseApi}teacher-subject-wise-students-attendance?record_id=$recordId&subject_id=$subjectNameId';
 
   static String getAdminStudentSearchDetailsList({
     required int studentAttendanceId,
   }) =>
       '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId';
+  static String getTeacherStudentSearchDetailsList({
+    required int studentAttendanceId,
+  }) =>
+      '${baseApi}teacher-search-student-attendance-report?student_attendance_id=$studentAttendanceId';
 
   static String getAdminSubjectSearchAttendanceList({
     required int classId,
@@ -306,7 +332,7 @@ class InfixApi {
     required int subjectId,
     required String attendanceDate,
   }) =>
-      '${baseApi}subject-attendance-search?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&attendance_date=$attendanceDate';
+      '${baseApi}teacher-subject-attendance-search?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&attendance_date=$attendanceDate';
 
   static String getAdminStudentSearchDetailsListWithDate({
     required int studentAttendanceId,
@@ -314,6 +340,12 @@ class InfixApi {
     required int year,
   }) =>
       '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId&month=$month&year=$year';
+  static String getTeacherStudentSearchDetailsListWithDate({
+    required int studentAttendanceId,
+    required int month,
+    required int year,
+  }) =>
+      '${baseApi}teacher-search-student-attendance-report?student_attendance_id=$studentAttendanceId&month=$month&year=$year';
 
   static String getAdminSubAttenSearchDetailsWithDateList({
     required int recordId,
@@ -322,6 +354,14 @@ class InfixApi {
     required int year,
   }) =>
       '${baseApi}student-subject-attendance?record_id=$recordId&subject_id=$subjectNameId&month=$month&year=$year';
+
+  static String getTeacherSubAttenSearchDetailsWithDateList({
+    required int recordId,
+    required int subjectNameId,
+    required int month,
+    required int year,
+  }) =>
+      '${baseApi}teacher-subject-wise-students-attendance?record_id=$recordId&subject_id=$subjectNameId&month=$month&year=$year';
 
   static String adminLeaveStatusUpdate({
     required int leaveId,
