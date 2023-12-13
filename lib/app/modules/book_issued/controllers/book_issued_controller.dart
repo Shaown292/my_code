@@ -15,57 +15,64 @@ import 'package:get/get.dart';
 import '../../../data/constants/app_text_style.dart';
 
 class BookIssuedController extends GetxController {
-
   LoadingController loadingController = Get.find();
 
-  RxList<StudentIssuedBookData> studentIssuedBookList = <StudentIssuedBookData>[].obs;
+  RxList<StudentIssuedBookData> studentIssuedBookList =
+      <StudentIssuedBookData>[].obs;
   RxBool isMembershipAvailable = false.obs;
   RxString memberShipMessage = ''.obs;
 
-  Future<StudentIssuedBookListResponseModel> getIssuedBookList({required int studentId}) async {
-
-    try{
-
+  Future<StudentIssuedBookListResponseModel> getIssuedBookList(
+      {required int studentId}) async {
+    try {
       studentIssuedBookList.clear();
       loadingController.isLoading = true;
 
-      final response = await BaseClient().getData(url: InfixApi.getStudentIssuedBookList(studentId: studentId), header: GlobalVariable.header);
+      final response = await BaseClient().getData(
+          url: InfixApi.getStudentIssuedBookList(studentId: studentId),
+          header: GlobalVariable.header);
 
-      StudentIssuedBookListResponseModel studentIssuedBookListResponseModel = StudentIssuedBookListResponseModel.fromJson(response);
+      StudentIssuedBookListResponseModel studentIssuedBookListResponseModel =
+          StudentIssuedBookListResponseModel.fromJson(response);
 
-      if(studentIssuedBookListResponseModel.success == true){
+      if (studentIssuedBookListResponseModel.success == true) {
         loadingController.isLoading = false;
 
-        if(studentIssuedBookListResponseModel.data!.isNotEmpty){
-          for(var element in studentIssuedBookListResponseModel.data!){
+        if (studentIssuedBookListResponseModel.data!.isNotEmpty) {
+          for (var element in studentIssuedBookListResponseModel.data!) {
             studentIssuedBookList.add(element);
           }
         }
 
-        showBasicSuccessSnackBar(message: studentIssuedBookListResponseModel.message ?? '');
-
-      } else{
+        showBasicSuccessSnackBar(
+            message: studentIssuedBookListResponseModel.message ?? '');
+      } else {
         loadingController.isLoading = false;
-        if(studentIssuedBookListResponseModel.message!.contains('You are not library member ! Please contact with librarian')){
+        if (studentIssuedBookListResponseModel.message!.contains(
+            'You are not library member ! Please contact with librarian')) {
           isMembershipAvailable.value = true;
-          memberShipMessage.value = studentIssuedBookListResponseModel.message ?? 'You are not library member ! Please contact with librarian';
+          memberShipMessage.value =
+              studentIssuedBookListResponseModel.message ??
+                  'You are not library member ! Please contact with librarian';
         }
-        showBasicFailedSnackBar(message:  studentIssuedBookListResponseModel.message ?? AppText.somethingWentWrong,);
+        showBasicFailedSnackBar(
+          message: studentIssuedBookListResponseModel.message ??
+              AppText.somethingWentWrong,
+        );
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       loadingController.isLoading = false;
     }
 
     return StudentIssuedBookListResponseModel();
   }
 
-
-  void showBookListDetailsBottomSheet({required int index, Color? bottomSheetBackgroundColor}) {
+  void showBookListDetailsBottomSheet(
+      {required int index, Color? bottomSheetBackgroundColor}) {
     Get.bottomSheet(
       Container(
         height: Get.height * 0.55,
@@ -76,29 +83,31 @@ class BookIssuedController extends GetxController {
             10.verticalSpacing,
             const Padding(
               padding: EdgeInsets.all(20.0),
-              child: Text( "Title", style:  AppTextStyle.fontSize14BlackW500,),
+              child: Text(
+                "Title",
+                style: AppTextStyle.fontSize14BlackW500,
+              ),
             ),
-             BottomSheetTile(
+            BottomSheetTile(
               title: "Issued Date",
               value: studentIssuedBookList[index].bookTitle,
-              color: AppColors.homeworkWidgetColor ,
+              color: AppColors.homeworkWidgetColor,
             ),
             BottomSheetTile(
               title: "Return date",
               value: studentIssuedBookList[index].returnDate,
-              color:  Colors.white,
+              color: Colors.white,
             ),
             BottomSheetTile(
               title: "Author Name",
               value: studentIssuedBookList[index].authorName,
-              color: AppColors.homeworkWidgetColor ,
+              color: AppColors.homeworkWidgetColor,
             ),
             BottomSheetTile(
               title: "Status",
               value: studentIssuedBookList[index].status,
-              color: Colors.white ,
+              color: Colors.white,
             ),
-
           ],
         ),
       ),
@@ -108,11 +117,10 @@ class BookIssuedController extends GetxController {
 
   @override
   void onInit() {
-    if(GlobalVariable.userId != null){
+    if (GlobalVariable.userId != null) {
       getIssuedBookList(studentId: GlobalVariable.userId!);
     }
 
     super.onInit();
   }
-
 }

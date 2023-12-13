@@ -89,12 +89,19 @@ class BookIssuedView extends GetView<BookIssuedController> {
                             : controller.studentIssuedBookList.isEmpty
                                 ? const NoDataAvailableWidget()
                                 : ListView.builder(
-                                    itemCount: controller.studentIssuedBookList.length,
+                                    itemCount:
+                                        controller.studentIssuedBookList.length,
                                     itemBuilder: (context, index) {
                                       return BookListTile(
-                                        bookNumber: controller.studentIssuedBookList[index].bookNumber,
-                                        bookName: controller.studentIssuedBookList[index].bookTitle,
-                                        subject: controller.studentIssuedBookList[index].subject,
+                                        bookNumber: controller
+                                            .studentIssuedBookList[index]
+                                            .bookNumber,
+                                        bookName: controller
+                                            .studentIssuedBookList[index]
+                                            .bookTitle,
+                                        subject: controller
+                                            .studentIssuedBookList[index]
+                                            .subject,
                                         view: "Details",
                                         onTap: () => controller
                                             .showBookListDetailsBottomSheet(
