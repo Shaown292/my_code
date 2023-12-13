@@ -422,6 +422,7 @@ class InfixApi {
 
   /// Teacher Leave
   static String getTeacherLeaveType = '${baseApi}teacher-leave-types';
+  static String teacherApplyLeave = '${baseApi}teacher-leave-store';
 
 
 

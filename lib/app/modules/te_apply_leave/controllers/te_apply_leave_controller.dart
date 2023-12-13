@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_lea
 import 'package:get/get.dart';
 
 class TeApplyLeaveController extends GetxController {
-
   LoadingController loadingController = Get.find();
   RxBool isLoading = false.obs;
 
@@ -26,7 +26,8 @@ class TeApplyLeaveController extends GetxController {
   bool isValidate = false;
   Rx<File> file = File('').obs;
 
-  RxList<TeacherApplyLeaveTypeData> teacherLeaveTypeList = <TeacherApplyLeaveTypeData>[].obs;
+  RxList<TeacherApplyLeaveTypeData> teacherLeaveTypeList =
+      <TeacherApplyLeaveTypeData>[].obs;
   RxBool leaveLoader = false.obs;
   Rx<TeacherApplyLeaveTypeData> leaveTypeInitialValue =
       TeacherApplyLeaveTypeData(id: -1, name: "leave_type").obs;
@@ -41,8 +42,8 @@ class TeApplyLeaveController extends GetxController {
   }
 
   void changeFromDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate( canSelectPastDate: true , canSelectFutureDate: true);
-
+    DateTime? dateTime = await DatePickerUtils()
+        .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
 
     if (dateTime != null) {
       fromDateTextController.text = dateTime.dd_mm_yyyy;
@@ -50,7 +51,8 @@ class TeApplyLeaveController extends GetxController {
   }
 
   void changeToDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate(canSelectPastDate: true , canSelectFutureDate: true);
+    DateTime? dateTime = await DatePickerUtils()
+        .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
 
     if (dateTime != null) {
       toDateTextController.text = dateTime.dd_mm_yyyy;
@@ -92,9 +94,8 @@ class TeApplyLeaveController extends GetxController {
     }
   }
 
-
-
-  Future<TeacherLeaveTypeListResponseModel> getStudentApplyLeaveTypeList() async {
+  Future<TeacherLeaveTypeListResponseModel>
+      getTeacherApplyLeaveTypeList() async {
     try {
       leaveLoader.value = true;
       final response = await BaseClient().getData(
@@ -103,22 +104,22 @@ class TeApplyLeaveController extends GetxController {
       );
 
       TeacherLeaveTypeListResponseModel teacherLeaveTypeListResponseModel =
-      TeacherLeaveTypeListResponseModel.fromJson(response);
+          TeacherLeaveTypeListResponseModel.fromJson(response);
       if (teacherLeaveTypeListResponseModel.success == true) {
         leaveLoader.value = false;
         if (teacherLeaveTypeListResponseModel.data!.isNotEmpty) {
-          for(var element in teacherLeaveTypeListResponseModel.data!){
+          for (var element in teacherLeaveTypeListResponseModel.data!) {
             teacherLeaveTypeList.add(element);
           }
           leaveTypeInitialValue.value = teacherLeaveTypeList.first;
           leaveTypeId.value = teacherLeaveTypeList.first.id!;
-
         }
       } else {
         leaveLoader.value = false;
         showBasicFailedSnackBar(
-            message: teacherLeaveTypeListResponseModel.message ??
-                AppText.somethingWentWrong,);
+          message: teacherLeaveTypeListResponseModel.message ??
+              AppText.somethingWentWrong,
+        );
       }
     } catch (e, t) {
       leaveLoader.value = false;
@@ -128,15 +129,58 @@ class TeApplyLeaveController extends GetxController {
       leaveLoader.value = false;
     }
 
-
     return TeacherLeaveTypeListResponseModel();
   }
 
+  void applyLeave() async {
+    try {
+      debugPrint(InfixApi.teacherApplyLeave);
+      loadingController.isLoading = true;
+      final request =
+          http.MultipartRequest('POST', Uri.parse(InfixApi.teacherApplyLeave));
+      request.headers['Authorization'] = GlobalVariable.token!;
+
+      if (file.value.path.isNotEmpty) {
+        request.files.add(
+            await http.MultipartFile.fromPath('attach_file', file.value.path));
+      }
+
+      request.fields['type_id'] = leaveTypeId.toString();
+      request.fields['apply_date'] = applyDateTextController.text;
+      request.fields['leave_from'] = fromDateTextController.text;
+      request.fields['leave_to'] = toDateTextController.text;
+      request.fields['reason'] = reasonTextController.text;
+
+      final response = await request.send();
+      final responseBody = await response.stream.bytesToString();
+      final decodedResponse = json.decode(responseBody);
+      debugPrint(decodedResponse.toString());
+
+      if (response.statusCode == 200) {
+        loadingController.isLoading = false;
+        showBasicSuccessSnackBar(message: decodedResponse['message']);
+
+        applyDateTextController.clear();
+        fromDateTextController.clear();
+        toDateTextController.clear();
+        reasonTextController.clear();
+        file.value = File('');
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(message: decodedResponse['message']);
+      }
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
+  }
 
   @override
   void onInit() {
-
-    getStudentApplyLeaveTypeList();
+    getTeacherApplyLeaveTypeList();
 
     super.onInit();
   }

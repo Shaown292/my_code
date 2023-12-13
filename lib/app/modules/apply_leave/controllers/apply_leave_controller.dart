@@ -15,8 +15,6 @@ import '../../../../domain/core/model/student_apply_leave_model/student_apply_le
 import '../../../utilities/api_urls.dart';
 import '../../../utilities/datepicker_dialogue/date_picker.dart';
 
-
-
 class ApplyLeaveController extends GetxController {
   LoadingController loadingController = Get.find();
   RxBool isLoading = false.obs;
@@ -28,13 +26,14 @@ class ApplyLeaveController extends GetxController {
 
   bool isValidate = false;
   Rx<File> file = File('').obs;
+
   // List<LeaveType> applyLeaveTypeList = [];
   List<String> leaveTypeDropdownList = [];
+
   // RxList<LeaveType> leaveTypeDropdownList = <LeaveType>[].obs;
   // RxString dropdownValue = "".obs;
   RxInt leaveTypeId = 0.obs;
-  Rx<LeaveType> dropdownValue =
-      LeaveType(id: -1, name: "leave_type").obs;
+  Rx<LeaveType> dropdownValue = LeaveType(id: -1, name: "leave_type").obs;
 
   RxList<LeaveType> applyLeaveTypeList = <LeaveType>[].obs;
 
@@ -42,8 +41,7 @@ class ApplyLeaveController extends GetxController {
     try {
       isLoading.value = true;
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentApplyLeaveType(
-            roleId: GlobalVariable.roleId!),
+        url: InfixApi.getStudentApplyLeaveType(roleId: GlobalVariable.roleId!),
         header: GlobalVariable.header,
       );
 
@@ -57,8 +55,9 @@ class ApplyLeaveController extends GetxController {
               i++) {
             applyLeaveTypeList
                 .add(studentApplyLeaveTypeResponseModel.data!.leaveType![i]);
-            leaveTypeDropdownList.add(studentApplyLeaveTypeResponseModel
-                    .data!.leaveType![i].name ?? '');
+            leaveTypeDropdownList.add(
+                studentApplyLeaveTypeResponseModel.data!.leaveType![i].name ??
+                    '');
           }
           dropdownValue.value = applyLeaveTypeList[0];
           leaveTypeId.value = applyLeaveTypeList[0].id!;
@@ -87,8 +86,8 @@ class ApplyLeaveController extends GetxController {
   }
 
   void changeFromDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate( canSelectPastDate: true , canSelectFutureDate: true);
-
+    DateTime? dateTime = await DatePickerUtils()
+        .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
 
     if (dateTime != null) {
       fromDateTextController.text = dateTime.dd_mm_yyyy;
@@ -96,7 +95,8 @@ class ApplyLeaveController extends GetxController {
   }
 
   void changeToDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate(canSelectPastDate: true , canSelectFutureDate: true);
+    DateTime? dateTime = await DatePickerUtils()
+        .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
 
     if (dateTime != null) {
       toDateTextController.text = dateTime.dd_mm_yyyy;
@@ -140,6 +140,7 @@ class ApplyLeaveController extends GetxController {
 
   void applyLeave() async {
     try {
+      debugPrint(InfixApi.teacherApplyLeave);
       loadingController.isLoading = true;
       final request =
           http.MultipartRequest('POST', Uri.parse(InfixApi.studentApplyLeave));
@@ -160,6 +161,7 @@ class ApplyLeaveController extends GetxController {
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
       final decodedResponse = json.decode(responseBody);
+      debugPrint(decodedResponse.toString());
 
       if (response.statusCode == 200) {
         loadingController.isLoading = false;
@@ -172,6 +174,7 @@ class ApplyLeaveController extends GetxController {
         file.value = File('');
       } else {
         loadingController.isLoading = false;
+        showBasicFailedSnackBar(message: decodedResponse['message']);
       }
     } catch (e, t) {
       loadingController.isLoading = false;
@@ -184,7 +187,9 @@ class ApplyLeaveController extends GetxController {
 
   @override
   void onInit() {
-    getStudentApplyLeaveTypeList(recordId: GlobalVariable.roleId!);
+    if (GlobalVariable.roleId == 2) {
+      getStudentApplyLeaveTypeList(recordId: GlobalVariable.roleId!);
+    }
     super.onInit();
   }
 }
