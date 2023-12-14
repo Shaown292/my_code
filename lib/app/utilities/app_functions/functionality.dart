@@ -313,6 +313,9 @@ class AppFunctions {
       case 'About':
         Get.toNamed(Routes.ABOUT);
         break;
+      case 'Class':
+        Get.toNamed(Routes.STUDENT_CLASS);
+        break;
     }
   }
 

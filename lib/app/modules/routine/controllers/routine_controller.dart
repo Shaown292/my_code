@@ -28,7 +28,7 @@ class RoutineController extends GetxController {
   String formattedDate = DateFormat("dd MMMM yyyy").format(DateTime.now());
   String today = DateFormat.E().format(DateTime.now());
 
-  void getSyllabusList() async {
+  void getRoutineList() async {
     try {
       loadingController.isLoading = true;
 
@@ -69,7 +69,7 @@ class RoutineController extends GetxController {
 
   @override
   void onInit() async {
-    getSyllabusList();
+    getRoutineList();
     selectTab();
     super.onInit();
   }

@@ -41,16 +41,18 @@ class LoginView extends GetView<LoginController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                            padding: const EdgeInsets.only(top: 50.0),
-                            child: Container(
-                              height: Get.height * 0.1,
-                              width: Get.width * 0.35,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
+                          padding: const EdgeInsets.only(top: 50.0),
+                          child: Container(
+                            height: Get.height * 0.1,
+                            width: Get.width * 0.35,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
                                 image: AssetImage(ImagePath.appLogo),
                                 fit: BoxFit.contain,
-                              )),
-                            )),
+                              ),
+                            ),
+                          ),
+                        ),
                         Container(
                           height: 500,
                           padding: const EdgeInsets.symmetric(horizontal: 10),

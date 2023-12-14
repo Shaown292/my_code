@@ -102,7 +102,7 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
                     attendanceList[i].attendanceDate!.day),
                 dot: GlobalVariable.getAttendanceStatus(
                     attendanceList[i].attendanceType ?? ""),
-              )
+              ),
             ];
           }
         }

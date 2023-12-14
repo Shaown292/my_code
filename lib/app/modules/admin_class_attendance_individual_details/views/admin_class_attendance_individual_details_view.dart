@@ -20,73 +20,81 @@ class AdminClassAttendanceIndividualDetailsView
       title: "Attendance",
       body: Obx(() => CustomBackground(
             customWidget: SingleChildScrollView(
-              child: controller.isLoading.value ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)) : Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15.0, vertical: 0),
-                    child: SizedBox(
-                      height: 50,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 1,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Obx(
-                                () => StudyButton(
-                                  title: "Five (Rose)",
-                                  onItemTap: () {
-                                    controller.selectIndex.value = index;
-                                  },
-                                  isSelected:
-                                      controller.selectIndex.value == index,
-                                ),
-                              ));
-                        },
-                      ),
-                    ),
-                  ),
-                  DisplayCalender(
-                    currentDate: controller.currentDate,
-                    eventList: controller.eventList,
-                    onCalendarChanged: (DateTime date) {
-                      controller
-                          .getAdminStudentSearchAttendanceDetailsListWithDate(
+              child: controller.isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                    ))
+                  : Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 0),
+                          child: SizedBox(
+                            height: 50,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 1,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Obx(
+                                      () => StudyButton(
+                                        title: "Five (Rose)",
+                                        onItemTap: () {
+                                          controller.selectIndex.value = index;
+                                        },
+                                        isSelected:
+                                            controller.selectIndex.value ==
+                                                index,
+                                      ),
+                                    ));
+                              },
+                            ),
+                          ),
+                        ),
+                        DisplayCalender(
+                          currentDate: controller.currentDate,
+                          eventList: controller.eventList,
+                          onCalendarChanged: (DateTime date) {
+                            controller.eventList!.clear();
+                            controller
+                                .getAdminStudentSearchAttendanceDetailsListWithDate(
                               studentAttendanceId:
-                                  controller.studentAttendanceId.value,
+                              controller.studentAttendanceId.value,
                               month: date.month,
-                              year: date.year)
-                          .then((value) => controller.setEventData());
-                    },
-                  ),
-                  EventStatus(
-                    color: const Color(0xFF00C106),
-                    title: "Present",
-                    numberOfDays: controller.present.value,
-                  ),
-                  EventStatus(
-                    color: const Color(0xFF5057FC),
-                    title: "Half day",
-                    numberOfDays: controller.halfDay.value,
-                  ),
-                  EventStatus(
-                    color: const Color(0xFFFF6F00),
-                    title: "Late",
-                    numberOfDays: controller.late.value,
-                  ),
-                  EventStatus(
-                    color: const Color(0xFFF32E21),
-                    title: "Absent",
-                    numberOfDays: controller.absent.value,
-                  ),
-                  EventStatus(
-                    color: const Color(0xFF462564),
-                    title: "Holiday",
-                    numberOfDays: controller.holiday.value,
-                  ),
-                ],
-              ),
+                              year: date.year,
+                            )
+                                .then((value) => controller.setEventData());
+                          },
+                        ),
+                        EventStatus(
+                          color: const Color(0xFF00C106),
+                          title: "Present",
+                          numberOfDays: controller.present.value,
+                        ),
+                        EventStatus(
+                          color: const Color(0xFF5057FC),
+                          title: "Half day",
+                          numberOfDays: controller.halfDay.value,
+                        ),
+                        EventStatus(
+                          color: const Color(0xFFFF6F00),
+                          title: "Late",
+                          numberOfDays: controller.late.value,
+                        ),
+                        EventStatus(
+                          color: const Color(0xFFF32E21),
+                          title: "Absent",
+                          numberOfDays: controller.absent.value,
+                        ),
+                        EventStatus(
+                          color: const Color(0xFF462564),
+                          title: "Holiday",
+                          numberOfDays: controller.holiday.value,
+                        ),
+                      ],
+                    ),
             ),
           )),
     );
