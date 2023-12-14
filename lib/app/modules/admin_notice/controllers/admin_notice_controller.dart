@@ -11,6 +11,8 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_notice_
 import 'package:get/get.dart';
 
 class AdminNoticeController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
   LoadingController loadingController = Get.find();
 
   RxList<AdminStaffNoticeData> adminStaffNoticeList =
@@ -22,7 +24,7 @@ class AdminNoticeController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 1 ? InfixApi.getAdminStaffNoticeList : InfixApi.getTeacherNoticeList, header: GlobalVariable.header);
+          url: globalRxVariableController.roleId.value == 1 ? InfixApi.getAdminStaffNoticeList : InfixApi.getTeacherNoticeList, header: GlobalVariable.header);
 
       AdminStaffNoticeResponseModel adminStaffNoticeResponseModel =
           AdminStaffNoticeResponseModel.fromJson(response);

@@ -19,7 +19,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
-import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import '../../../../config/app_config.dart';
 import '../../../data/constants/app_colors.dart';
@@ -35,7 +34,7 @@ class ProfileView extends GetView<ProfileController> {
       actions: [
         EditProfileRoute(controller: controller),
       ],
-      leadingIcon: GlobalVariable.roleId == 2
+      leadingIcon: controller.globalRxVariableController.roleId.value == 2
           ? const SizedBox()
           :  InkWell(
         onTap: ()=> Get.back(),
@@ -347,7 +346,7 @@ class ProfileView extends GetView<ProfileController> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                GlobalVariable.roleId == 2 ?
+                                controller.globalRxVariableController.roleId.value == 2 ?
                                 InkWell(
                                   onTap: () =>
                                       controller.showUploadDocumentsBottomSheet(
@@ -388,7 +387,7 @@ class ProfileView extends GetView<ProfileController> {
                                       ],
                                     ),
                                   ),
-                                ): SizedBox(),
+                                ): const SizedBox(),
                                 10.verticalSpacing,
 
                                 /// Documents Tiles

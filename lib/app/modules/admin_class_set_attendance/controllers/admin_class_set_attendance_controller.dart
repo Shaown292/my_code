@@ -15,6 +15,8 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_respon
 import 'package:get/get.dart';
 
 class AdminClassSetAttendanceController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
   RxBool saveLoader = false.obs;
 
   TextEditingController noteTextController = TextEditingController();
@@ -87,7 +89,7 @@ class AdminClassSetAttendanceController extends GetxController {
       saveLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: GlobalVariable.roleId == 1
+          url: globalRxVariableController.roleId.value == 1
               ? InfixApi.adminSubmitStudentAttendance
               : InfixApi.teacherSubmitStudentAttendance,
           header: GlobalVariable.header,
@@ -130,7 +132,7 @@ class AdminClassSetAttendanceController extends GetxController {
       holidayLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: GlobalVariable.roleId == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
+          url: globalRxVariableController.roleId.value == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
           header: GlobalVariable.header,
           payload: {
             'purpose': purpose,

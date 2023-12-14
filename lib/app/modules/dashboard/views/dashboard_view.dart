@@ -6,7 +6,6 @@ import 'package:flutter_single_getx_api_v2/app/modules/profile/views/profile_vie
 import 'package:flutter_single_getx_api_v2/app/modules/routine/views/routine_view.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/te_academic/views/te_academic_view.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/te_homework/views/te_homework_view.dart';
-import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../../notification/view/notification_view.dart';
@@ -17,26 +16,26 @@ class DashboardView extends GetView<DashboardController> {
   const DashboardView({super.key});
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
+    return Obx(() => PersistentTabView(
       context,
       controller: controller.tabIndexController,
       screens: [
-        GlobalVariable.roleId == 3
+        controller.globalRxVariableController.roleId.value == 3
             ? const ProfileView()
             : const HomeView(),
 
         const NotificationView(),
 
-        GlobalVariable.roleId == 4
+        controller.globalRxVariableController.roleId.value == 4
             ? const AdminAttendanceView()
             : const FeesView(),
 
 
-        GlobalVariable.roleId == 4
+        controller.globalRxVariableController.roleId.value == 4
             ? const TeAcademicView()
             : const RoutineView(),
 
-        GlobalVariable.roleId == 4
+        controller.globalRxVariableController.roleId.value == 4
             ? const TeHomeworkView()
             : const ProfileView(),
       ],
@@ -79,6 +78,6 @@ class DashboardView extends GetView<DashboardController> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle: NavBarStyle.style15,
-    );
+    ),);
   }
 }

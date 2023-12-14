@@ -13,6 +13,8 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_student
 import 'package:get/get.dart';
 
 class AdminStudentsSearchController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
   LoadingController loadingController = Get.find();
   RxBool sectionLoader = false.obs;
   RxBool searchLoader = false.obs;
@@ -42,7 +44,7 @@ class AdminStudentsSearchController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 1
+          url: globalRxVariableController.roleId.value == 1
               ? InfixApi.getAdminClassList
               : InfixApi.getTeacherClassList,
           header: GlobalVariable.header);
@@ -84,7 +86,7 @@ class AdminStudentsSearchController extends GetxController {
       sectionLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 1
+          url: globalRxVariableController.roleId.value == 1
               ? InfixApi.getAdminSectionList(classId: classId)
               : InfixApi.getTeacherSectionList(classId: classId),
           header: GlobalVariable.header);
@@ -127,7 +129,7 @@ class AdminStudentsSearchController extends GetxController {
       subjectLoader.value = true;
 
       final response = await BaseClient().getData(
-        url: GlobalVariable.roleId == 1
+        url: globalRxVariableController.roleId.value == 1
             ? InfixApi.getAdminStudentSubjectList(
                 classId: classId, sectionId: sectionId)
             : InfixApi.getTeacherStudentSubjectList(

@@ -11,6 +11,8 @@ import '../../../database/auth_database.dart';
 import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class HomeController extends GetxController {
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   List<HomeTileModelClass> homeTileList = <HomeTileModelClass>[];
 
   late ProfileInfoModel profileInfoModel;
@@ -66,9 +68,9 @@ class HomeController extends GetxController {
       debugPrint(t.toString());
     } finally {
       await _authDatabase.logOut();
-      GlobalVariable.token = '';
-      GlobalVariable.userId = null;
-      GlobalVariable.roleId = null;
+      globalRxVariableController.token.value = '';
+      globalRxVariableController.userId.value = -1;
+      globalRxVariableController.roleId.value = -1;
 
       // loadingController.isLoading = false;
       // Get.offAndToNamed(Routes.SPLASH);
@@ -88,7 +90,7 @@ class HomeController extends GetxController {
       StudentRecordResponseModel studentRecordResponseModel =
           StudentRecordResponseModel.fromJson(response);
       if (studentRecordResponseModel.success) {
-        GlobalVariable.studentRecordId =
+        globalRxVariableController.studentRecordId.value =
             studentRecordResponseModel.data.studentRecords.first.id;
         if (studentRecordResponseModel.data.studentRecords.isNotEmpty) {
           for (int i = 0;
@@ -102,8 +104,9 @@ class HomeController extends GetxController {
                 .add(studentRecordResponseModel.data.studentRecords[i].id);
           }
           getAllFeesList(
-              studentId: GlobalVariable.studentId!,
-              recordId: GlobalVariable.studentRecordId!);
+            studentId: globalRxVariableController.studentId.value!,
+            recordId: globalRxVariableController.studentRecordId.value!,
+          );
         }
       }
     } catch (e, t) {
@@ -152,9 +155,10 @@ class HomeController extends GetxController {
     homeTileList = Get.arguments["homeListTile"];
 
     debugPrint(
-        'Role ID: ${GlobalVariable.roleId} :::: Record ID: ${GlobalVariable.studentId}');
-    if (GlobalVariable.roleId == 2 || GlobalVariable.roleId == 3) {
-      getStudentRecord(studentId: GlobalVariable.studentId!);
+        'Role ID: ${globalRxVariableController.roleId} :::: Record ID: ${globalRxVariableController.studentId}');
+    if (globalRxVariableController.roleId.value == 2 ||
+        globalRxVariableController.roleId.value == 3) {
+      getStudentRecord(studentId: globalRxVariableController.studentId.value!,);
     }
     super.onInit();
   }

@@ -5,7 +5,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
-import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 
 import 'package:get/get.dart';
 
@@ -26,7 +25,7 @@ class TransportView extends GetView<TransportController> {
             onRefresh: () async {
               controller.transportDataList.clear();
               controller.getAllTransportList(
-                  studentId: GlobalVariable.studentId!);
+                  studentId: controller.globalRxVariableController.studentId.value!);
             },
             child: Column(
               children: [

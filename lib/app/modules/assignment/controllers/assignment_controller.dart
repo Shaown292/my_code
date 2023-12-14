@@ -11,6 +11,7 @@ import '../../../utilities/api_urls.dart';
 class AssignmentController extends GetxController {
 
   LoadingController loadingController = Get.find();
+  GlobalRxVariableController globalRxVariableController = Get.find();
   List<StudentAssignmentData> studentAssignmentList = [];
 
   void getStudentAssignmentList() async {
@@ -20,7 +21,7 @@ class AssignmentController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getAssignmentList(
-          GlobalVariable.studentRecordId!,
+          globalRxVariableController.studentRecordId.value!,
         ),
         header: GlobalVariable.header,
       );

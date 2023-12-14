@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/display_calender.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/event_status.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
-import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../data/constants/app_colors.dart';
 import '../../../utilities/widgets/common_widgets/custom_background.dart';
 import '../../../utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -52,7 +50,7 @@ class StudentSearchAttendanceView
                                             recordId:
                                                 controller.recordId.toInt(),
                                             studentId:
-                                                GlobalVariable.studentId!);
+                                                controller.globalRxVariableController.studentId.value!,);
                                       },
                                       isSelected:
                                           controller.selectIndex.value == index,
@@ -72,7 +70,7 @@ class StudentSearchAttendanceView
                           if (controller.fromStatus.value) {
                             controller.getSearchSubjectAttendanceListWithDate(
                                 recordId: controller.recordId.toInt(),
-                                studentId: GlobalVariable.studentId!,
+                                studentId: controller.globalRxVariableController.studentId.value!,
                                 year: date.year,
                                 month: date.month,
                                 subjectId: controller.subjectId!);
@@ -80,7 +78,7 @@ class StudentSearchAttendanceView
                             controller
                                 .getAttendanceListWithDate(
                               recordId: controller.recordId.toInt(),
-                              studentId: GlobalVariable.studentId!,
+                              studentId:controller.globalRxVariableController.studentId.value!,
                               year: date.year,
                               month: date.month,
                             ).then((value) => controller.setEventData());

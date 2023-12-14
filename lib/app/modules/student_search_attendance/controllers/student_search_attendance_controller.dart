@@ -13,6 +13,7 @@ import '../../../utilities/widgets/loader/loading.controller.dart';
 import '../../home/controllers/home_controller.dart';
 
 class StudentSearchAttendanceController extends GetxController {
+  GlobalRxVariableController globalRxVariableController = Get.find();
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
 
@@ -333,13 +334,13 @@ class StudentSearchAttendanceController extends GetxController {
 
       getSearchSubjectAttendanceList(
               recordId: recordId.toInt(),
-              studentId: GlobalVariable.studentId!,
+              studentId: globalRxVariableController.studentId.value!,
               subjectId: subjectId!)
           .then((value) => setEventData());
     } else {
       getAttendanceList(
         recordId: recordId.toInt(),
-        studentId: GlobalVariable.studentId!,
+        studentId: globalRxVariableController.studentId.value!,
       ).then((value) => setEventData());
     }
 

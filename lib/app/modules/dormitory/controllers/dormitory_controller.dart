@@ -7,30 +7,31 @@ import '../../../../domain/core/model/dormitory_model/dormitory_response_model.d
 import '../../../utilities/api_urls.dart';
 
 class DormitoryController extends GetxController {
-
   LoadingController loadingController = Get.find();
+  GlobalRxVariableController globalRxVariableController = Get.find();
   List<DormitoryData> dormitoryList = [];
 
   void getDormitoryList() async {
     try {
-
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentDormitory(studentId: GlobalVariable.studentId!),
+        url: InfixApi.getStudentDormitory(
+          studentId: globalRxVariableController.studentId.value!,
+        ),
         header: GlobalVariable.header,
       );
 
-      DormitoryResponseModel dormitoryResponseModel = DormitoryResponseModel.fromJson(response);
-      if(dormitoryResponseModel.success == true){
+      DormitoryResponseModel dormitoryResponseModel =
+          DormitoryResponseModel.fromJson(response);
+      if (dormitoryResponseModel.success == true) {
         loadingController.isLoading = false;
-        if(dormitoryResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < dormitoryResponseModel.data!.length; i++) {
+        if (dormitoryResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < dormitoryResponseModel.data!.length; i++) {
             dormitoryList.add(dormitoryResponseModel.data![i]);
           }
         }
       }
-
     } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
@@ -42,11 +43,10 @@ class DormitoryController extends GetxController {
 
   @override
   void onInit() {
-    if(GlobalVariable.roleId == 2){
+    if (globalRxVariableController.roleId.value == 2) {
       getDormitoryList();
     }
 
     super.onInit();
   }
-
 }

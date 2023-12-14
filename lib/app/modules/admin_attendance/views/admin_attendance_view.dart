@@ -5,7 +5,6 @@ import 'package:flutter_single_getx_api_v2/app/modules/home/views/widgets/custom
 import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 
 import 'package:get/get.dart';
 
@@ -15,8 +14,8 @@ class AdminAttendanceView extends GetView<AdminAttendanceController> {
   const AdminAttendanceView({super.key});
   @override
   Widget build(BuildContext context) {
-    return InfixEduScaffold(
-      leadingIcon: GlobalVariable.roleId == 1 ?   InkWell(
+    return Obx(() => InfixEduScaffold(
+      leadingIcon: controller.globalRxVariableController.roleId.value == 1 ?   InkWell(
         onTap: ()=> Get.back(),
         child: Container(
           color: Colors.transparent,
@@ -54,6 +53,6 @@ class AdminAttendanceView extends GetView<AdminAttendanceController> {
           ],
         ),
       ),
-    );
+    ),);
   }
 }

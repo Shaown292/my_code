@@ -27,6 +27,9 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/message/snack_bars.dart';
 
 class ProfileController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   PageController profilePageController = PageController();
   ProfileDataController profileDataController =
       Get.put(ProfileDataController());
@@ -68,7 +71,7 @@ class ProfileController extends GetxController {
       personalLoader.value = true;
 
       final response = await BaseClient().getData(
-        url: GlobalVariable.roleId == 2 ? InfixApi.profilePersonal() : InfixApi.getSingleStudentProfile(studentId: studentId!),
+        url: globalRxVariableController.roleId.value == 2 ? InfixApi.profilePersonal() : InfixApi.getSingleStudentProfile(studentId: studentId!),
         header: GlobalVariable.header,
       );
       profilePersonalModel = ProfilePersonalModel.fromJson(response);
@@ -109,7 +112,7 @@ class ProfileController extends GetxController {
 
 
         final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 2 ? InfixApi.profileParents() : InfixApi.getSingleParentProfile(studentId: studentId!),
+          url: globalRxVariableController.roleId.value == 2 ? InfixApi.profileParents() : InfixApi.getSingleParentProfile(studentId: studentId!),
           header: GlobalVariable.header,
         );
 
@@ -139,7 +142,7 @@ class ProfileController extends GetxController {
 
 
         final response = await BaseClient().getData(
-          url:  GlobalVariable.roleId == 2 ? InfixApi.profileTransport() : InfixApi.getSingleStudentTransportData(studentId: studentId!),
+          url:  globalRxVariableController.roleId.value == 2 ? InfixApi.profileTransport() : InfixApi.getSingleStudentTransportData(studentId: studentId!),
           header: GlobalVariable.header,
         );
 
@@ -169,7 +172,7 @@ class ProfileController extends GetxController {
 
 
         final response = await BaseClient().getData(
-            url: GlobalVariable.roleId == 2 ? InfixApi.profileOthers() : InfixApi.getSingleStudentOthersData(studentId: studentId!), header: GlobalVariable.header);
+            url: globalRxVariableController.roleId.value == 2 ? InfixApi.profileOthers() : InfixApi.getSingleStudentOthersData(studentId: studentId!), header: GlobalVariable.header);
 
         profileOthersModel = ProfileOthersModel.fromJson(response);
 
@@ -199,7 +202,7 @@ class ProfileController extends GetxController {
 
 
         final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 2 ? InfixApi.profileDocumentGet() : InfixApi.getSingleStudentDocumentsData(studentId: studentId!),
+          url: globalRxVariableController.roleId.value == 2 ? InfixApi.profileDocumentGet() : InfixApi.getSingleStudentDocumentsData(studentId: studentId!),
           header: GlobalVariable.header,
         );
 
@@ -385,17 +388,17 @@ class ProfileController extends GetxController {
       saveLoader.value = true;
       final request = http.MultipartRequest(
           'POST', Uri.parse(InfixApi.studentUploadDocuments));
-      request.headers['Authorization'] = GlobalVariable.token!;
+      request.headers['Authorization'] = globalRxVariableController.token.value!;
 
       if (file.value.path.isNotEmpty) {
         request.files
             .add(await http.MultipartFile.fromPath('photo', file.value.path));
       }
 
-      if (GlobalVariable.roleId == 1) {
+      if (globalRxVariableController.roleId.value == 1) {
         request.fields['student_id'] = studentIdFromAdmin.toString();
       } else {
-        request.fields['student_id'] = '${GlobalVariable.studentId!}';
+        request.fields['student_id'] = '${globalRxVariableController.studentId.value}';
       }
 
       request.fields['title'] = titleTextController.text;

@@ -17,6 +17,7 @@ import '../../../utilities/datepicker_dialogue/date_picker.dart';
 
 class ApplyLeaveController extends GetxController {
   LoadingController loadingController = Get.find();
+  GlobalRxVariableController globalRxVariableController = Get.find();
   RxBool isLoading = false.obs;
 
   TextEditingController applyDateTextController = TextEditingController();
@@ -41,7 +42,8 @@ class ApplyLeaveController extends GetxController {
     try {
       isLoading.value = true;
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentApplyLeaveType(roleId: GlobalVariable.roleId!),
+        url: InfixApi.getStudentApplyLeaveType(
+            roleId: globalRxVariableController.roleId.value!),
         header: GlobalVariable.header,
       );
 
@@ -78,8 +80,10 @@ class ApplyLeaveController extends GetxController {
   }
 
   void changeApplyDate() async {
-    DateTime? dateTime = await DatePickerUtils().pickDate(canSelectPastDate: true,
-      canSelectFutureDate: true,);
+    DateTime? dateTime = await DatePickerUtils().pickDate(
+      canSelectPastDate: true,
+      canSelectFutureDate: true,
+    );
 
     if (dateTime != null) {
       applyDateTextController.text = dateTime.dd_mm_yyyy;
@@ -147,7 +151,8 @@ class ApplyLeaveController extends GetxController {
       loadingController.isLoading = true;
       final request =
           http.MultipartRequest('POST', Uri.parse(InfixApi.studentApplyLeave));
-      request.headers['Authorization'] = GlobalVariable.token!;
+      request.headers['Authorization'] =
+          globalRxVariableController.token.value!;
 
       if (file.value.path.isNotEmpty) {
         request.files.add(
@@ -158,7 +163,8 @@ class ApplyLeaveController extends GetxController {
       request.fields['leave_from'] = fromDateTextController.text;
       request.fields['leave_to'] = toDateTextController.text;
       request.fields['reason'] = reasonTextController.text;
-      request.fields['student_id'] = '${GlobalVariable.studentId!}';
+      request.fields['student_id'] =
+          '${globalRxVariableController.studentId.value}';
       request.fields['leave_type'] = '$leaveTypeId';
 
       final response = await request.send();
@@ -190,8 +196,10 @@ class ApplyLeaveController extends GetxController {
 
   @override
   void onInit() {
-    if (GlobalVariable.roleId == 2) {
-      getStudentApplyLeaveTypeList(recordId: GlobalVariable.roleId!);
+    if (globalRxVariableController.roleId.value == 2) {
+      getStudentApplyLeaveTypeList(
+        recordId: globalRxVariableController.roleId.value!,
+      );
     }
     super.onInit();
   }

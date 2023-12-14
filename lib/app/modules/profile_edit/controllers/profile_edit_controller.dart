@@ -19,6 +19,7 @@ class ProfileEditController extends GetxController {
     super.onInit();
   }
 
+  GlobalRxVariableController globalRxVariableController = Get.find();
   ProfileDataController profileDataController = Get.find();
   LoadingController loadingController = Get.find();
 
@@ -41,7 +42,9 @@ class ProfileEditController extends GetxController {
   void userProfileInfoUpdate() async {
     try {
       final response = await BaseClient().postData(
-        url: InfixApi.updateProfile(GlobalVariable.roleId!),
+        url: InfixApi.updateProfile(
+          globalRxVariableController.roleId.value!,
+        ),
         header: GlobalVariable.header,
         payload: {
           "first_name": firstName.text,
@@ -78,9 +81,13 @@ class ProfileEditController extends GetxController {
     try {
       var headers = GlobalVariable.header;
       var request = http.MultipartRequest(
-          'POST',
-          Uri.parse(InfixApi.studentProfilePhotoUpdate(
-              studentId: GlobalVariable.studentId!)));
+        'POST',
+        Uri.parse(
+          InfixApi.studentProfilePhotoUpdate(
+            studentId: globalRxVariableController.studentId.value!,
+          ),
+        ),
+      );
       request.files.add(await http.MultipartFile.fromPath('photo', file));
       request.headers.addAll(headers);
 

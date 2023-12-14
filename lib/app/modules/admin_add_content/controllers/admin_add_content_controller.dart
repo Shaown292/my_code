@@ -19,6 +19,7 @@ class AdminAddContentController extends GetxController {
   TextEditingController descriptionTextController = TextEditingController();
 
   LoadingController loadingController = Get.find();
+  GlobalRxVariableController globalRxVariableController = Get.find();
   AdminStudentsSearchController adminStudentsSearchController =
       Get.put(AdminStudentsSearchController());
 
@@ -90,7 +91,7 @@ class AdminAddContentController extends GetxController {
 
       debugPrint('${Uri.parse(InfixApi.postAdminContent)}');
       final request =
-          http.MultipartRequest('POST', Uri.parse(GlobalVariable.roleId == 1 ? InfixApi.postAdminContent : InfixApi.postTeacherContent));
+          http.MultipartRequest('POST', Uri.parse(globalRxVariableController.roleId.value == 1 ? InfixApi.postAdminContent : InfixApi.postTeacherContent));
       request.headers.addAll(GlobalVariable.header);
 
       if (contentFile.value.path.isNotEmpty) {

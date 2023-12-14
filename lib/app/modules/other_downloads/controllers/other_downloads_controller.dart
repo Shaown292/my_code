@@ -11,7 +11,7 @@ class OtherDownloadsController extends GetxController {
 
   List<StudentOthersDownloadData> studentOthersDownloadList = [];
   LoadingController loadingController = Get.find();
-
+  GlobalRxVariableController globalRxVariableController = Get.find();
   void getStudentOthersDownloadList() async {
     try {
 
@@ -19,7 +19,7 @@ class OtherDownloadsController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentOthersDownloadList(
-          GlobalVariable.studentRecordId!,
+          globalRxVariableController.studentRecordId.value!,
         ),
         header: GlobalVariable.header,
       );

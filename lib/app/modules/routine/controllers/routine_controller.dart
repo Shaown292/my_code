@@ -8,6 +8,9 @@ import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/api_urls.dart';
 
 class RoutineController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   TabController? tabController;
   List<ClassRoutine> classRoutineList = [];
   LoadingController loadingController = Get.find();
@@ -33,10 +36,10 @@ class RoutineController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: GlobalVariable.roleId == 2 ? InfixApi.getStudentRoutineList(
-          GlobalVariable.studentRecordId!,
+        url: globalRxVariableController.roleId.value == 2 ? InfixApi.getStudentRoutineList(
+          globalRxVariableController.studentRecordId.value!,
         ) : InfixApi.getTeacherMyRoutineList(
-          userId: GlobalVariable.userId!,
+          userId: globalRxVariableController.userId.value!,
         ),
         header: GlobalVariable.header,
       );

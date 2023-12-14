@@ -7,13 +7,15 @@ import 'package:get/get.dart';
 import '../../app/data/module_data/home_data/home_dummy_data.dart';
 
 class GlobalVariable {
+
+
   static List<HomeTileModelClass> homeTileList = [];
-  static int? roleId;
-  static String? token;
-  static int notificationCount = 0;
-  static int? studentRecordId;
-  static int? studentId;
-  static int? userId;
+  // static int? roleId;
+  // static String? token;
+  // static int notificationCount = 0;
+  // static int? studentRecordId;
+  // static int? studentId;
+  // static int? userId;
   static const halfDayEvent = DisplayDot(color: Color(0xFF5057FC));
   static const presentEvent = DisplayDot(color: Color(0xFF00C106));
   static const lateEvent = DisplayDot(color: Color(0xFFFF6F00));
@@ -23,7 +25,7 @@ class GlobalVariable {
   static Map<String, String> header = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': GlobalVariable.token!,
+    'Authorization':  Get.find<GlobalRxVariableController>().token.value!,
   };
 
   static getAttendanceStatus(String attendanceStatus) {
@@ -47,7 +49,20 @@ class GlobalVariable {
 }
 
 class GlobalRxVariableController extends GetxController {
-  RxInt notificationCount = 0.obs;
-  RxInt recordId = 0.obs;
+
+  // RxInt notificationCount = 0.obs;
+  // RxInt? studentRecordId;
+  // RxInt roleId = 0.obs;
+  // RxString token = ''.obs;
+  // RxInt studentId = 0.obs;
+  // RxInt? userId;
+
+  final notificationCount = Rxn<int>();
+  final studentRecordId = Rxn<int>();
+  final roleId = Rxn<int>();
+  final token = Rxn<String>();
+  final studentId = Rxn<int>();
+  final userId = Rxn<int>();
+
 }
 

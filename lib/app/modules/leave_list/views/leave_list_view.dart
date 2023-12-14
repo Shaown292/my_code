@@ -10,7 +10,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_availab
 
 import 'package:get/get.dart';
 
-import '../../../../config/global_variable/global_variable_controller.dart';
 import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 import '../controllers/leave_list_controller.dart';
 
@@ -33,9 +32,13 @@ class LeaveListView extends GetView<LeaveListController> {
                   controller.approvedList.clear();
                   controller.rejectedList.clear();
                   controller.getRemainingLeave(
-                      studentId: GlobalVariable.studentId!);
+                    studentId:
+                        controller.globalRxVariableController.studentId.value!,
+                  );
                   controller.getAllNoticeList(
-                      studentId: GlobalVariable.studentId!);
+                    studentId:
+                        controller.globalRxVariableController.studentId.value!,
+                  );
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +50,10 @@ class LeaveListView extends GetView<LeaveListController> {
                         width: Get.width,
                         padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(topRight: Radius.circular(8), topLeft: Radius.circular(8),),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(8),
+                            topLeft: Radius.circular(8),
+                          ),
                           color: Colors.white,
                         ),
                         child: Column(

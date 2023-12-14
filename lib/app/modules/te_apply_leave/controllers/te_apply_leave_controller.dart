@@ -17,6 +17,7 @@ import 'package:get/get.dart';
 class TeApplyLeaveController extends GetxController {
   LoadingController loadingController = Get.find();
   RxBool isLoading = false.obs;
+  GlobalRxVariableController globalRxVariableController = Get.find();
 
   TextEditingController applyDateTextController = TextEditingController();
   TextEditingController fromDateTextController = TextEditingController();
@@ -145,7 +146,7 @@ class TeApplyLeaveController extends GetxController {
       loadingController.isLoading = true;
       final request =
           http.MultipartRequest('POST', Uri.parse(InfixApi.teacherApplyLeave));
-      request.headers['Authorization'] = GlobalVariable.token!;
+      request.headers['Authorization'] = globalRxVariableController.token.value!;
 
       if (file.value.path.isNotEmpty) {
         request.files.add(

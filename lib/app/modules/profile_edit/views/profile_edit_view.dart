@@ -5,7 +5,6 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
-import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_dimens.dart';
 import '../../../data/constants/app_text.dart';
@@ -159,7 +158,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileEmail,
-                  suffixIconDisable: GlobalVariable.roleId == 1 ? false : true,
+                  suffixIconDisable: controller.globalRxVariableController.roleId.value == 1 ? false : true,
                   hintText: AppText.editProfileEmail,
                   controller: controller.email,
                 ),

@@ -20,6 +20,7 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 
 class StudentLessonPlanController extends GetxController {
+  GlobalRxVariableController globalRxVariableController = Get.find();
   HomeController homeController = Get.find();
   LoadingController loadingController = Get.find();
   TabController? tabController;
@@ -316,8 +317,8 @@ class StudentLessonPlanController extends GetxController {
   @override
   void onInit() {
     selectTab();
-    if (homeController.studentRecordList.isNotEmpty && GlobalVariable.userId != null) {
-      getLessonPlanList(GlobalVariable.userId!,
+    if (homeController.studentRecordList.isNotEmpty && globalRxVariableController.userId != null) {
+      getLessonPlanList(globalRxVariableController.userId.value!,
           homeController.studentRecordList[0].id);
     }
     super.onInit();

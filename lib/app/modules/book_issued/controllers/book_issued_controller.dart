@@ -16,6 +16,7 @@ import '../../../data/constants/app_text_style.dart';
 
 class BookIssuedController extends GetxController {
   LoadingController loadingController = Get.find();
+  GlobalRxVariableController globalRxVariableController = Get.find();
 
   RxList<StudentIssuedBookData> studentIssuedBookList =
       <StudentIssuedBookData>[].obs;
@@ -117,9 +118,7 @@ class BookIssuedController extends GetxController {
 
   @override
   void onInit() {
-    if (GlobalVariable.userId != null) {
-      getIssuedBookList(studentId: GlobalVariable.userId!);
-    }
+    getIssuedBookList(studentId: globalRxVariableController.userId.value!,);
 
     super.onInit();
   }

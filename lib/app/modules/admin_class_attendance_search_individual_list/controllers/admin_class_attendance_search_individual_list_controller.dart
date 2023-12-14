@@ -9,7 +9,9 @@ import 'package:get/get.dart';
 
 class AdminClassAttendanceSearchIndividualListController
     extends GetxController {
-  // AdminClassAttenSearchIndividualResponseModel
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   RxList<AdminStudentsIndividualData> adminStudentIndividualList =
       <AdminStudentsIndividualData>[].obs;
 
@@ -31,7 +33,7 @@ class AdminClassAttendanceSearchIndividualListController
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 1?  InfixApi.getAdminSubAttenSearchIndividualList(
+          url: globalRxVariableController.roleId.value == 1?  InfixApi.getAdminSubAttenSearchIndividualList(
             classId: classId,
             sectionId: sectionId,
             rollINo: rollNo,

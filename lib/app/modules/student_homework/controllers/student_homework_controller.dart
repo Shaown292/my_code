@@ -23,6 +23,7 @@ import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 import '../../../utilities/widgets/button/primary_button.dart';
 
 class StudentHomeworkController extends GetxController {
+  GlobalRxVariableController globalRxVariableController = Get.find();
   List<HomeworkLists> studentHomeworkList = [];
   LoadingController loadingController = Get.find();
   TextEditingController uploadFileTextController = TextEditingController();
@@ -36,7 +37,7 @@ class StudentHomeworkController extends GetxController {
     try {
       loadingController.isLoading = true;
       final response = await BaseClient().getData(
-          url: InfixApi.getStudentHomeWork(GlobalVariable.studentRecordId!),
+          url: InfixApi.getStudentHomeWork(globalRxVariableController.studentRecordId.value!,),
           header: GlobalVariable.header);
 
       StudentHomeWorkModel studentHomeWorkModel =

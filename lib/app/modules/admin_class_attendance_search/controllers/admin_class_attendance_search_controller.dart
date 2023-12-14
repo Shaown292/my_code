@@ -13,11 +13,16 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AdminClassAttendanceSearchController extends GetxController {
+
+  AdminStudentsSearchController adminStudentsSearchController =
+  Get.put(AdminStudentsSearchController());
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   TextEditingController selectedDateTextController = TextEditingController(
       text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
 
-  AdminStudentsSearchController adminStudentsSearchController =
-      Get.put(AdminStudentsSearchController());
+
 
   AttendanceStudentData attendanceStudentListData = AttendanceStudentData();
   RxBool isLoading = false.obs;
@@ -65,7 +70,7 @@ class AdminClassAttendanceSearchController extends GetxController {
       isLoading.value = true;
 
       final response = await BaseClient().postData(
-        url: GlobalVariable.roleId == 1
+        url: globalRxVariableController.roleId.value == 1
             ? InfixApi.getAdminStudentSearchAttendanceList(
                 classId: studentClassId,
                 sectionId: studentSectionId,

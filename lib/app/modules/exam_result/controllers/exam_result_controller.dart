@@ -8,7 +8,7 @@ import '../../../../domain/core/model/student_online_exam_result_model/student_o
 import '../../../utilities/api_urls.dart';
 
 class ExamResultController extends GetxController {
-
+  GlobalRxVariableController globalRxVariableController = Get.find();
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
 
@@ -49,15 +49,15 @@ class ExamResultController extends GetxController {
     }
     return StudentOnlineExamResultResponseModel();
   }
-  
+
   @override
   void onInit() {
-    if(GlobalVariable.studentId != null){
-      getStudentExamResultList(studentId: GlobalVariable.studentId!);
+    if (globalRxVariableController.studentId.value != null) {
+      getStudentExamResultList(
+        studentId: globalRxVariableController.studentId.value!,
+      );
     }
 
     super.onInit();
   }
-  
-  
 }

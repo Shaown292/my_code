@@ -15,6 +15,8 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_respon
 import 'package:get/get.dart';
 
 class AdminSubjectAttendanceSearchListController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
   TextEditingController noteTextController = TextEditingController();
 
   RxInt selectIndex = 0.obs;
@@ -46,7 +48,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
       adminStudentSubSearchList.clear();
       isLoading.value = true;
       final response = await BaseClient().postData(
-        url: GlobalVariable.roleId == 1
+        url: globalRxVariableController.roleId.value == 1
             ? InfixApi.getAdminSubjectSearchAttendanceList(
                 classId: studentClassId,
                 sectionId: studentSectionId,
@@ -138,7 +140,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
       saveLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: GlobalVariable.roleId == 1 ?  InfixApi.adminSubmitSubjectWiseStudentAttendance : InfixApi.teacherSubmitSubjectWiseStudentAttendance,
+          url: globalRxVariableController.roleId.value == 1 ?  InfixApi.adminSubmitSubjectWiseStudentAttendance : InfixApi.teacherSubmitSubjectWiseStudentAttendance,
           header: GlobalVariable.header,
           payload: {
             'class': classId.value,
@@ -182,7 +184,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
       holidayLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: GlobalVariable.roleId == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
+          url: globalRxVariableController.roleId.value == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
           header: GlobalVariable.header,
           payload: {
             'purpose': purpose,

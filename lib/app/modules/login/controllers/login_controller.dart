@@ -12,7 +12,7 @@ import '../../../utilities/message/snack_bars.dart';
 
 class LoginController extends GetxController {
 
-  GlobalRxVariableController globalRxVariableController = Get.find();
+  GlobalRxVariableController globalRxVariableController = Get.find<GlobalRxVariableController>();
 
   RxBool isLoading = false.obs;
   RxBool isObscureText = true.obs;
@@ -39,14 +39,14 @@ class LoginController extends GetxController {
         isLoading.value = false;
         globalRxVariableController.notificationCount.value =
             profileInfoModel.data.unreadNotifications;
-        GlobalVariable.token = profileInfoModel.data.accessToken;
-        GlobalVariable.roleId = profileInfoModel.data.user.roleId;
+        globalRxVariableController.token.value = profileInfoModel.data.accessToken;
+        globalRxVariableController.roleId.value = profileInfoModel.data.user.roleId;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
         if (profileInfoModel.data.user.roleId == 2) {
-          GlobalVariable.studentId = profileInfoModel.data.user.studentId;
+          globalRxVariableController.studentId.value = profileInfoModel.data.user.studentId;
         }
 
         if (status) {
@@ -79,14 +79,16 @@ class LoginController extends GetxController {
         isLoading.value = false;
         globalRxVariableController.notificationCount.value =
             profileInfoModel.data.unreadNotifications;
-        GlobalVariable.token = profileInfoModel.data.accessToken;
-        GlobalVariable.roleId = profileInfoModel.data.user.roleId;
+        globalRxVariableController.token.value = profileInfoModel.data.accessToken;
+        globalRxVariableController.roleId.value = profileInfoModel.data.user.roleId;
+        globalRxVariableController.studentId.value = profileInfoModel.data.user.studentId;
+
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
         if (profileInfoModel.data.user.roleId == 2) {
-          GlobalVariable.studentId = profileInfoModel.data.user.studentId;
+          globalRxVariableController.studentId.value = profileInfoModel.data.user.studentId;
         }
 
         if (status) {

@@ -13,15 +13,14 @@ import '../../../style/bottom_sheet/bottom_sheet_shpe.dart';
 import '../../../utilities/api_urls.dart';
 
 class TransportController extends GetxController {
-
+  GlobalRxVariableController globalRxVariableController = Get.find();
   LoadingController loadingController = Get.find();
 
   List<TransportDataList> transportDataList = [];
 
-  Future<TransportResponseModel?> getAllTransportList({required int studentId}) async {
-
+  Future<TransportResponseModel?> getAllTransportList(
+      {required int studentId}) async {
     try {
-
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
@@ -29,18 +28,16 @@ class TransportController extends GetxController {
         header: GlobalVariable.header,
       );
 
-
-      TransportResponseModel transportResponseModel = TransportResponseModel.fromJson(response);
-      if(transportResponseModel.success == true){
+      TransportResponseModel transportResponseModel =
+          TransportResponseModel.fromJson(response);
+      if (transportResponseModel.success == true) {
         loadingController.isLoading = false;
-        if(transportResponseModel.data!.isNotEmpty){
-          for(int i = 0; i < transportResponseModel.data!.length; i++) {
+        if (transportResponseModel.data!.isNotEmpty) {
+          for (int i = 0; i < transportResponseModel.data!.length; i++) {
             transportDataList.add(transportResponseModel.data![i]);
           }
-
         }
       }
-
     } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
@@ -51,67 +48,73 @@ class TransportController extends GetxController {
     return TransportResponseModel();
   }
 
-  void showTransportDetailsBottomSheet({required int index, Color? bottomSheetBackgroundColor}) {
+  void showTransportDetailsBottomSheet(
+      {required int index, Color? bottomSheetBackgroundColor}) {
     Get.bottomSheet(
       Container(
         color: bottomSheetBackgroundColor,
-          height: Get.height * 0.45,
-          child: transportDataList.isNotEmpty
-              ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        height: Get.height * 0.45,
+        child: transportDataList.isNotEmpty
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   10.verticalSpacing,
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Text(transportDataList[index].route ?? "", style:  AppTextStyle.fontSize14BlackW500,),
+                    child: Text(
+                      transportDataList[index].route ?? "",
+                      style: AppTextStyle.fontSize14BlackW500,
+                    ),
                   ),
-                   BottomSheetTile(
+                  BottomSheetTile(
                     title: "Vehicle",
                     value: transportDataList[index].vehicle,
-                     color: AppColors.homeworkWidgetColor ,
+                    color: AppColors.homeworkWidgetColor,
                   ),
-                   BottomSheetTile(
+                  BottomSheetTile(
                     title: "Vehicle Model",
                     value: transportDataList[index].vehicleModel,
-                     color:  Colors.white,
+                    color: Colors.white,
                   ),
                   BottomSheetTile(
                     title: "Made",
                     value: transportDataList[index].made.toString(),
-                    color: AppColors.homeworkWidgetColor ,
+                    color: AppColors.homeworkWidgetColor,
                   ),
-                   BottomSheetTile(
+                  BottomSheetTile(
                     title: "Driver Name",
                     value: transportDataList[index].driverName,
-                     color:  Colors.white,
+                    color: Colors.white,
                   ),
                   BottomSheetTile(
                     title: "Driver License",
                     value: transportDataList[index].driverLicense,
-                    color: AppColors.homeworkWidgetColor ,
+                    color: AppColors.homeworkWidgetColor,
                   ),
-                   BottomSheetTile(
+                  BottomSheetTile(
                     title: "Driver Contact",
                     value: transportDataList[index].driverContact,
-                     color:  Colors.white,
+                    color: Colors.white,
                   ),
                 ],
               )
-              : const Center(
-            child: Text(
-              "No Details Available",
-              style: AppTextStyle.fontSize16lightBlackW500,
-            ),
-          ),
+            : const Center(
+                child: Text(
+                  "No Details Available",
+                  style: AppTextStyle.fontSize16lightBlackW500,
+                ),
+              ),
       ),
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );
   }
+
   @override
   void onInit() {
-    getAllTransportList(studentId: GlobalVariable.studentId!);
+    getAllTransportList(
+      studentId: globalRxVariableController.studentId.value!,
+    );
     super.onInit();
   }
-
 }

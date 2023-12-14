@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 
 class AdminContentListController extends GetxController {
   LoadingController loadingController = Get.find();
+  GlobalRxVariableController globalRxVariableController = Get.find();
   RxBool deleteLoader = false.obs;
 
   RxList<AdminContentData> contentList = <AdminContentData>[].obs;
@@ -23,7 +24,7 @@ class AdminContentListController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 1 ?  InfixApi.getAdminContentList : InfixApi.getTeacherContentList, header: GlobalVariable.header);
+          url: globalRxVariableController.roleId.value == 1 ?  InfixApi.getAdminContentList : InfixApi.getTeacherContentList, header: GlobalVariable.header);
 
       AdminContentListResponseModel adminContentListResponseModel =
           AdminContentListResponseModel.fromJson(response);
@@ -59,7 +60,7 @@ class AdminContentListController extends GetxController {
       deleteLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: GlobalVariable.roleId == 1 ? InfixApi.adminContentDelete(contentId: contentId) : InfixApi.teacherContentDelete(contentId: contentId),
+          url: globalRxVariableController.roleId.value == 1 ? InfixApi.adminContentDelete(contentId: contentId) : InfixApi.teacherContentDelete(contentId: contentId),
           header: GlobalVariable.header);
       PostRequestResponseModel postRequestResponseModel =
           PostRequestResponseModel.fromJson(response);

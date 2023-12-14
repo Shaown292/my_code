@@ -10,6 +10,8 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attenda
 import 'package:get/get.dart';
 
 class AdminSubjectAttendanceSearchIndividualController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
   AdminStudentsSearchController adminStudentsSearchController =
       Get.put(AdminStudentsSearchController());
 
@@ -38,7 +40,7 @@ class AdminSubjectAttendanceSearchIndividualController extends GetxController {
       searchLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 1 ? InfixApi.getAdminSubAttenSearchList(
+          url: globalRxVariableController.roleId.value == 1 ? InfixApi.getAdminSubAttenSearchList(
             classId: classId,
             sectionId: sectionId,
             rollINo: rollNo,

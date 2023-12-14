@@ -9,14 +9,8 @@ import 'package:get/get.dart';
 import '../../../utilities/api_urls.dart';
 
 class SyllabusController extends GetxController {
-  @override
-  void onInit() {
-    if (homeController.studentRecordList.isNotEmpty) {
-      getSyllabusList();
-    }
+  GlobalRxVariableController globalRxVariableController = Get.find();
 
-    super.onInit();
-  }
 
   LoadingController loadingController = Get.find();
   HomeController homeController = Get.find();
@@ -29,7 +23,7 @@ class SyllabusController extends GetxController {
 
       final response = await BaseClient().getData(
         url: InfixApi.getSyllabusList(
-          GlobalVariable.studentRecordId!,
+          globalRxVariableController.studentRecordId.value!,
         ),
         header: GlobalVariable.header,
       );
@@ -51,5 +45,13 @@ class SyllabusController extends GetxController {
     } finally {
       loadingController.isLoading = false;
     }
+  }
+  @override
+  void onInit() {
+    if (homeController.studentRecordList.isNotEmpty) {
+      getSyllabusList();
+    }
+
+    super.onInit();
   }
 }

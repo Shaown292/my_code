@@ -7,7 +7,7 @@ import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController with GetTickerProviderStateMixin{
 
-  GlobalRxVariableController globalRxVariableController = Get.put(GlobalRxVariableController());
+  GlobalRxVariableController globalRxVariableController = Get.find();
 
   @override
   void onInit() {
@@ -37,13 +37,14 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
     await 4000.milliseconds.delay();
 
     if (authDatabase.auth()) {
-      GlobalVariable.roleId = authDatabase.getUserInfo()!.data.user.roleId;
+      globalRxVariableController.roleId.value = authDatabase.getUserInfo()!.data.user.roleId;
       globalRxVariableController.notificationCount.value = authDatabase.getUnReadNotification() ?? 0;
-      GlobalVariable.token = authDatabase.getToken();
-      GlobalVariable.userId = authDatabase.getUserInfo()!.data.user.id;
-      AppFunctions().getFunctions(GlobalVariable.roleId!);
+      globalRxVariableController.token.value = authDatabase.getToken()!;
+      globalRxVariableController.userId.value = authDatabase.getUserInfo()!.data.user.id;
+      globalRxVariableController.roleId.value = authDatabase.getUserInfo()!.data.user.roleId;
+      AppFunctions().getFunctions(globalRxVariableController.roleId.value!);
       if(authDatabase.getUserInfo()!.data.user.roleId == 2){
-        GlobalVariable.studentId = authDatabase.getUserInfo()!.data.user.studentId;
+        globalRxVariableController.studentId.value = authDatabase.getUserInfo()!.data.user.studentId;
       }
 
     } else {

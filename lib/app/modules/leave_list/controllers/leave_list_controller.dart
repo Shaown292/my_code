@@ -15,6 +15,7 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 
 class LeaveListController extends GetxController {
+  GlobalRxVariableController globalRxVariableController = Get.find();
   TabController? tabController;
   int selectedIndex = 0;
   LoadingController loadingController = Get.find();
@@ -32,7 +33,8 @@ class LeaveListController extends GetxController {
     'Rejected',
   ];
 
-  Future<LeaveListResponseModel?> getAllNoticeList({required int studentId}) async {
+  Future<LeaveListResponseModel?> getAllNoticeList(
+      {required int studentId}) async {
     try {
       loadingController.isLoading = true;
 
@@ -55,22 +57,20 @@ class LeaveListController extends GetxController {
 
         if (leaveListResponseModel.data!.rejected!.isNotEmpty) {
           for (int i = 0;
-          i < leaveListResponseModel.data!.rejected!.length;
-          i++) {
+              i < leaveListResponseModel.data!.rejected!.length;
+              i++) {
             rejectedList.add(leaveListResponseModel.data!.rejected![i]);
           }
         }
 
         if (leaveListResponseModel.data!.approved!.isNotEmpty) {
           for (int i = 0;
-          i < leaveListResponseModel.data!.approved!.length;
-          i++) {
+              i < leaveListResponseModel.data!.approved!.length;
+              i++) {
             approvedList.add(leaveListResponseModel.data!.approved![i]);
           }
         }
       }
-
-
     } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
@@ -81,7 +81,8 @@ class LeaveListController extends GetxController {
     return LeaveListResponseModel();
   }
 
-  Future<RemainingLeaveResponseModel?> getRemainingLeave({required int studentId}) async {
+  Future<RemainingLeaveResponseModel?> getRemainingLeave(
+      {required int studentId}) async {
     try {
       loadingController.isLoading = true;
 
@@ -90,20 +91,16 @@ class LeaveListController extends GetxController {
         header: GlobalVariable.header,
       );
 
-    RemainingLeaveResponseModel remainingLeaveResponseModel = RemainingLeaveResponseModel.fromJson(response);
+      RemainingLeaveResponseModel remainingLeaveResponseModel =
+          RemainingLeaveResponseModel.fromJson(response);
       if (remainingLeaveResponseModel.success == true) {
         loadingController.isLoading = false;
         if (remainingLeaveResponseModel.data!.isNotEmpty) {
-          for (int i = 0;
-          i < remainingLeaveResponseModel.data!.length;
-          i++) {
+          for (int i = 0; i < remainingLeaveResponseModel.data!.length; i++) {
             remainingLeaveList.add(remainingLeaveResponseModel.data![i]);
           }
         }
-
       }
-
-
     } catch (e, t) {
       loadingController.isLoading = false;
       debugPrint('$e');
@@ -115,24 +112,25 @@ class LeaveListController extends GetxController {
     return RemainingLeaveResponseModel();
   }
 
-
-
   void showPendingListDetailsBottomSheet({required int index}) {
     Get.bottomSheet(
       Container(
           padding: const EdgeInsets.all(20),
           height: Get.height * 0.45,
-          child:  Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               10.verticalSpacing,
-              Text("Reason: ${pendingList[index].reason}", style:  AppTextStyle.fontSize14BlackW500,),
+              Text(
+                "Reason: ${pendingList[index].reason}",
+                style: AppTextStyle.fontSize14BlackW500,
+              ),
               20.verticalSpacing,
               BottomSheetTile(
                 title: "Leave Type",
                 value: pendingList[index].leaveType,
-                color: AppColors.homeworkWidgetColor ,
+                color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
                 title: "Apply Date",
@@ -141,7 +139,7 @@ class LeaveListController extends GetxController {
               BottomSheetTile(
                 title: "Leave From",
                 value: pendingList[index].from,
-                color: AppColors.homeworkWidgetColor ,
+                color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
                 title: "Leave To",
@@ -159,17 +157,20 @@ class LeaveListController extends GetxController {
       Container(
           padding: const EdgeInsets.all(20),
           height: Get.height * 0.45,
-          child:  Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               10.verticalSpacing,
-              Text("Reason: ${approvedList[index].reason}", style:  AppTextStyle.fontSize14BlackW500,),
+              Text(
+                "Reason: ${approvedList[index].reason}",
+                style: AppTextStyle.fontSize14BlackW500,
+              ),
               20.verticalSpacing,
               BottomSheetTile(
                 title: "Leave Type",
                 value: approvedList[index].leaveType,
-                color: AppColors.homeworkWidgetColor ,
+                color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
                 title: "Apply Date",
@@ -178,7 +179,7 @@ class LeaveListController extends GetxController {
               BottomSheetTile(
                 title: "Leave From",
                 value: approvedList[index].from,
-                color: AppColors.homeworkWidgetColor ,
+                color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
                 title: "Leave To",
@@ -196,17 +197,20 @@ class LeaveListController extends GetxController {
       Container(
           padding: const EdgeInsets.all(20),
           height: Get.height * 0.45,
-          child:  Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               10.verticalSpacing,
-              Text("Reason: ${rejectedList[index].reason}", style:  AppTextStyle.fontSize14BlackW500,),
+              Text(
+                "Reason: ${rejectedList[index].reason}",
+                style: AppTextStyle.fontSize14BlackW500,
+              ),
               20.verticalSpacing,
               BottomSheetTile(
                 title: "Leave Type",
                 value: rejectedList[index].leaveType,
-                color: AppColors.homeworkWidgetColor ,
+                color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
                 title: "Apply Date",
@@ -215,7 +219,7 @@ class LeaveListController extends GetxController {
               BottomSheetTile(
                 title: "Leave From",
                 value: rejectedList[index].from,
-                color: AppColors.homeworkWidgetColor ,
+                color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
                 title: "Leave To",
@@ -231,8 +235,12 @@ class LeaveListController extends GetxController {
   @override
   void onInit() {
     if (homeController.studentRecordList.isNotEmpty) {
-      getAllNoticeList(studentId: GlobalVariable.studentId!);
-      getRemainingLeave(studentId: GlobalVariable.studentId!);
+      getAllNoticeList(
+        studentId: globalRxVariableController.studentId.value!,
+      );
+      getRemainingLeave(
+        studentId: globalRxVariableController.studentId.value!,
+      );
     }
     super.onInit();
   }

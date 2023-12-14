@@ -10,6 +10,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class DashboardController extends GetxController {
 
+  GlobalRxVariableController globalRxVariableController = Get.find();
   final PersistentTabController tabIndexController =
       PersistentTabController(initialIndex: 0);
 
@@ -18,11 +19,11 @@ class DashboardController extends GetxController {
     navItem(icon :FontAwesomeIcons.house, title:'Home'),
     navItem(icon :FontAwesomeIcons.bell, title:'Notification', isNotification: true),
 
-    GlobalVariable.roleId == 4 ? navItemWithImageIcon(imagePath: ImagePath.studentAttendance, title: 'Attendance')
+    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItemWithImageIcon(imagePath: ImagePath.studentAttendance, title: 'Attendance')
         : navItemWithImageIcon(imagePath: ImagePath.studentWallet, title: 'Fees'),
 
-    GlobalVariable.roleId == 4 ? navItem(icon : FontAwesomeIcons.userGraduate, title:  'Academic') : navItem(icon : FontAwesomeIcons.clipboardList, title:  'Routine'),
-    GlobalVariable.roleId == 4 ? navItem(icon : FontAwesomeIcons.book, title: 'Homework') : navItem(icon : FontAwesomeIcons.user, title: 'Profile'),
+    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItem(icon : FontAwesomeIcons.userGraduate, title:  'Academic') : navItem(icon : FontAwesomeIcons.clipboardList, title:  'Routine'),
+    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItem(icon : FontAwesomeIcons.book, title: 'Homework') : navItem(icon : FontAwesomeIcons.user, title: 'Profile'),
   ];
 }
 

@@ -10,6 +10,9 @@ import 'package:get/get.dart';
 
 class AdminSubjectAttendanceSearchIndividualDetailsController
     extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   final selectIndex = RxInt(0);
   DateTime currentDate = DateTime.now();
   Map<DateTime, List<Event>> customEventList = {};
@@ -46,7 +49,7 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-        url: GlobalVariable.roleId == 1 ? InfixApi.getAdminSubAttenSearchDetailsList(
+        url: globalRxVariableController.roleId.value == 1 ? InfixApi.getAdminSubAttenSearchDetailsList(
             recordId: recordId,
             subjectNameId: subjectNameId,
             ) : InfixApi.getTeacherSubAttenSearchDetailsList(
@@ -130,7 +133,7 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
       attendanceList.clear();
       eventList?.clear();
       final response = await BaseClient().getData(
-        url: GlobalVariable.roleId == 1 ?  InfixApi.getAdminSubAttenSearchDetailsWithDateList(
+        url: globalRxVariableController.roleId.value == 1 ?  InfixApi.getAdminSubAttenSearchDetailsWithDateList(
             recordId: recordId,
             subjectNameId: subjectNameId,
             month: month,

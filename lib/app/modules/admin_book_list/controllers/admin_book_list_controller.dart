@@ -14,6 +14,7 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_library
 import 'package:get/get.dart';
 
 class AdminBookListController extends GetxController {
+  GlobalRxVariableController globalRxVariableController = Get.find();
   LoadingController loadingController = Get.find();
 
   List<AdminBookData> bookList = <AdminBookData>[].obs;
@@ -24,7 +25,7 @@ class AdminBookListController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: GlobalVariable.roleId == 1 ? InfixApi.getAdminBookList : InfixApi.getTeacherBookList, header: GlobalVariable.header);
+          url: globalRxVariableController.roleId.value == 1 ? InfixApi.getAdminBookList : InfixApi.getTeacherBookList, header: GlobalVariable.header);
 
       AdminBookListResponseModel adminBookListResponseModel =
           AdminBookListResponseModel.fromJson(response);

@@ -9,6 +9,9 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_attenda
 import 'package:get/get.dart';
 
 class AdminClassAttendanceIndividualDetailsController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   static const halfDayEvent = DisplayDot(color: Color(0xFF5057FC));
   static const presentEvent = DisplayDot(color: Color(0xFF00C106));
   static const lateEvent = DisplayDot(color: Color(0xFFFF6F00));
@@ -43,7 +46,7 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-        url: GlobalVariable.roleId == 1
+        url: globalRxVariableController.roleId.value == 1
             ? InfixApi.getAdminStudentSearchDetailsList(
                 studentAttendanceId: studentAttendanceId)
             : InfixApi.getTeacherStudentSearchDetailsList(
@@ -114,7 +117,7 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-        url: GlobalVariable.roleId == 1
+        url: globalRxVariableController.roleId.value == 1
             ? InfixApi.getAdminStudentSearchDetailsListWithDate(
                 studentAttendanceId: studentAttendanceId,
                 month: month,
