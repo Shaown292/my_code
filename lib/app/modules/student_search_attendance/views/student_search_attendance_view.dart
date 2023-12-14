@@ -79,11 +79,11 @@ class StudentSearchAttendanceView
                           } else {
                             controller
                                 .getAttendanceListWithDate(
-                                  recordId: controller.recordId.toInt(),
-                                  studentId: GlobalVariable.studentId!,
-                                  year: date.year,
-                                  month: date.month,
-                                ).then((value) => controller.setEventData());
+                              recordId: controller.recordId.toInt(),
+                              studentId: GlobalVariable.studentId!,
+                              year: date.year,
+                              month: date.month,
+                            ).then((value) => controller.setEventData());
 
                           }
                         },

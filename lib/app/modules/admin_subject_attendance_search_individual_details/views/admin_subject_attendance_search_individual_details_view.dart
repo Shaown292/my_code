@@ -58,6 +58,7 @@ class AdminSubjectAttendanceSearchIndividualDetailsView
                           currentDate: controller.currentDate,
                           eventList: controller.eventList,
                           onCalendarChanged: (DateTime date) {
+                            controller.eventList!.clear();
                             controller
                                 .getAdminAttendanceSubDetailsListWithDate(
                                   recordId: controller.recordId.value,

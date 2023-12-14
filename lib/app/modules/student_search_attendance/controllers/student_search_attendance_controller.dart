@@ -104,7 +104,7 @@ class StudentSearchAttendanceController extends GetxController {
                 dot: GlobalVariable.getAttendanceStatus(
                     attendanceList[i].attendanceType ?? ""),
               ),
-              //////Eikhane change hoy colorrrrrr
+
             ];
           }
         }
