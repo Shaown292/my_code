@@ -5,6 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -20,7 +21,7 @@ class AboutView extends GetView<AboutController> {
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-          child: Column(
+          child: Obx(() => controller.loadingController.isLoading ? const LoadingWidget() : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
@@ -38,16 +39,16 @@ class AboutView extends GetView<AboutController> {
                 ],
               ),
               30.verticalSpacing,
-              const Text("INFIX has all in one place. You’ll find everything what you are looking into education management system software. We care! User will never bothered in our real eye catchy user friendly UI & UX  Interface design. You know! Smart Idea always comes to well planners. And Our INFIX is Smart for its Well Documentation. Explore in new support world! It’s now faster & quicker. You’ll find us on Support Ticket, Email, Skype, WhatsApp.", style: AppTextStyle.fontSize13BlackW400,),
+              Text(controller.aboutInformation?.aboutDetails ??'', style: AppTextStyle.fontSize13BlackW400,),
               20.verticalSpacing,
-              const Text("Address: 89/2 Panthapath, Dhaka 1215, Bangladesh", style: AppTextStyle.cardTextStyle14PurpleW500,),
+              Text('Address: ${controller.aboutInformation?.address}', style: AppTextStyle.cardTextStyle14PurpleW500,),
               10.verticalSpacing,
-              const Text("Phone: +8801841412141", style: AppTextStyle.cardTextStyle14PurpleW500,),
+              Text('Phone Number: ${controller.aboutInformation?.phoneNo}', style: AppTextStyle.cardTextStyle14PurpleW500,),
               10.verticalSpacing,
-              const Text("Email: admin@infixedu.com", style: AppTextStyle.cardTextStyle14PurpleW500,),
+              Text('Email: ${controller.aboutInformation?.email}', style: AppTextStyle.cardTextStyle14PurpleW500,),
               10.verticalSpacing,
             ],
-          ),
+          ),),
         ),
       ),
     );

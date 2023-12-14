@@ -151,7 +151,7 @@ class InfixApi {
   }
 
   static String studentProfilePhotoUpdate({required int studentId}) {
-    return "${baseApi}student-profile-update?student_id=$studentId";
+    return "${baseApi}student-profile-img-update?student_id=$studentId";
   }
 
   static String getStudentTransport({required int studentId}) {
@@ -474,9 +474,9 @@ class InfixApi {
 
 
 
+  /// About
 
-
-
+  static String getTeacherAbout = '${baseApi}teacher-about';
 
 
   //////////////////////////.......................................///////////////////////////////////
