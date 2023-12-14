@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_internet/internet_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -26,6 +27,9 @@ class Initializer {
 
     final  internetController             = InternetController();
     Get.put(internetController);
+
+    final globalVariableGetx = GlobalRxVariableController();
+    Get.put(globalVariableGetx);
 
   }
 

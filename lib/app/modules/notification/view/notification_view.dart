@@ -18,6 +18,7 @@ class NotificationView extends GetView<NotificationController> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalRxVariableController globalRxVariableController = Get.find();
     return Obx(
       () => InfixEduScaffold(
         title: 'Notification',

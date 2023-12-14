@@ -13,6 +13,8 @@ import '../../../utilities/message/snack_bars.dart';
 
 class NotificationController extends GetxController {
 
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   @override
   void onInit() {
   fetchNotifications();

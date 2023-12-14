@@ -66,6 +66,10 @@ class HomeController extends GetxController {
       debugPrint(t.toString());
     } finally {
       await _authDatabase.logOut();
+      GlobalVariable.token = '';
+      GlobalVariable.userId = null;
+      GlobalVariable.roleId = null;
+
       // loadingController.isLoading = false;
       // Get.offAndToNamed(Routes.SPLASH);
 
@@ -75,10 +79,10 @@ class HomeController extends GetxController {
     }
   }
 
-  void getStudentRecord() async {
+  void getStudentRecord({required int studentId}) async {
     try {
       final response = await BaseClient().getData(
-          url: InfixApi.getStudentRecord(studentId: GlobalVariable.studentId!),
+          url: InfixApi.getStudentRecord(studentId: studentId),
           header: GlobalVariable.header);
 
       StudentRecordResponseModel studentRecordResponseModel =
@@ -149,8 +153,8 @@ class HomeController extends GetxController {
 
     debugPrint(
         'Role ID: ${GlobalVariable.roleId} :::: Record ID: ${GlobalVariable.studentId}');
-    if (GlobalVariable.roleId == 2) {
-      getStudentRecord();
+    if (GlobalVariable.roleId == 2 || GlobalVariable.roleId == 3) {
+      getStudentRecord(studentId: GlobalVariable.studentId!);
     }
     super.onInit();
   }

@@ -11,6 +11,9 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/message/snack_bars.dart';
 
 class LoginController extends GetxController {
+
+  GlobalRxVariableController globalRxVariableController = Get.find();
+
   RxBool isLoading = false.obs;
   RxBool isObscureText = true.obs;
 

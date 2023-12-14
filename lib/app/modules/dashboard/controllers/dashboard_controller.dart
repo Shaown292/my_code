@@ -9,6 +9,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 
 class DashboardController extends GetxController {
+
   final PersistentTabController tabIndexController =
       PersistentTabController(initialIndex: 0);
 
@@ -68,6 +69,7 @@ class NotificationBell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GlobalRxVariableController globalRxVariableController = Get.find();
     return Stack(
       children: <Widget>[
 

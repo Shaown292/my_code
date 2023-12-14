@@ -51,5 +51,3 @@ class GlobalRxVariableController extends GetxController {
   RxInt recordId = 0.obs;
 }
 
-GlobalRxVariableController globalRxVariableController =
-    Get.put(GlobalRxVariableController());
