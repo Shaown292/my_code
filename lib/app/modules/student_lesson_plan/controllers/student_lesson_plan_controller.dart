@@ -20,7 +20,6 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 
 class StudentLessonPlanController extends GetxController {
-
   LoadingController loadingController = Get.find();
   GlobalRxVariableController globalRxVariableController = Get.find();
   HomeController homeController = Get.find();
@@ -49,13 +48,17 @@ class StudentLessonPlanController extends GetxController {
     'Fri',
   ];
 
-  Future<StudentLessonPlanResponseModel?> getLessonPlanList(
-      int userId, int recordId) async {
+  Future<StudentLessonPlanResponseModel?> getLessonPlanList({
+    required int studentId,
+    required int recordId,
+    required String date,
+  }) async {
     try {
       lessonLoader.value = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentLessonPlan(userId: userId, recordId: recordId),
+        url: InfixApi.getStudentLessonPlan(
+            studentId: studentId, recordId: recordId, date: date),
         header: GlobalVariable.header,
       );
 
@@ -70,8 +73,10 @@ class StudentLessonPlanController extends GetxController {
             weeksList.add(studentLessonPlanResponseModel.data!.weeks![i]);
           }
         }
-      } else{
-        showBasicFailedSnackBar(message: studentLessonPlanResponseModel.message ?? AppText.somethingWentWrong);
+      } else {
+        showBasicFailedSnackBar(
+            message: studentLessonPlanResponseModel.message ??
+                AppText.somethingWentWrong);
       }
     } catch (e, t) {
       lessonLoader.value = false;
@@ -315,11 +320,16 @@ class StudentLessonPlanController extends GetxController {
 
   @override
   void onInit() {
-    print('object:::::::::: ${homeController.studentRecordList.length} ::: ${globalRxVariableController.userId}');
+    print(
+        'object:::::::::: ${globalRxVariableController.studentId} ::: ${globalRxVariableController.studentRecordId}');
     selectTab();
-    if (homeController.studentRecordList.isNotEmpty && globalRxVariableController.userId.value != null) {
-      getLessonPlanList(globalRxVariableController.userId.value!,
-          homeController.studentRecordList[0].id,);
+    if (homeController.studentRecordList.isNotEmpty &&
+        globalRxVariableController.studentId.value != null) {
+      getLessonPlanList(
+        studentId: globalRxVariableController.studentId.value!,
+        recordId: globalRxVariableController.studentRecordId.value!,
+        date: DateTime.now().yyyy_mm_dd,
+      );
     }
     super.onInit();
   }

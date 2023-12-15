@@ -63,9 +63,13 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                                     int recordId = controller.homeController
                                         .studentRecordList[index].id;
                                     controller.getLessonPlanList(
-                                        controller.globalRxVariableController
-                                            .userId.value!,
-                                        recordId);
+                                      studentId: controller
+                                          .globalRxVariableController
+                                          .studentId
+                                          .value!,
+                                      recordId: recordId,
+                                      date: DateTime.now().yyyy_mm_dd,
+                                    );
                                     controller.selectIndex.value = index;
                                   },
                                   isSelected:
@@ -119,7 +123,8 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                                         controller.daysOfWeek[index])
                                     .toList();
 
-                                return Obx(() => controller.loadingController.isLoading
+                                return Obx(() => controller
+                                        .loadingController.isLoading
                                     ? const LoadingWidget()
                                     : weeksList.isNotEmpty
                                         ? ListView.builder(

@@ -1,3 +1,5 @@
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+
 import '../../config/app_config.dart';
 
 class InfixApi {
@@ -191,8 +193,9 @@ class InfixApi {
   }
 
   static String getStudentLessonPlan(
-          {required int userId, required int recordId}) =>
-      '${baseApi}student-lesson-plan?user_id=$userId&record_id=$recordId';
+          {required int studentId, required int recordId, required String date}) =>
+      '${baseApi}student-lesson-plan?student_id=$studentId&record_id=$recordId&next_date=$date';
+      // '${baseApi}student-lesson-plan?user_id=$userId&record_id=$recordId';
 
   static String getStudentLessonPlanDetails({
     required int lessonPlanId,
