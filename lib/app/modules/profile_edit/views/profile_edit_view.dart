@@ -159,14 +159,19 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileEmail,
-                  readOnly: controller.globalRxVariableController.roleId.value == 1 ?  false : true,
-                  suffixIcon:  controller.globalRxVariableController.roleId.value == 1 ? Image.asset(
-                    ImagePath.editBlack,
-                    height: 10,
-                    width: 10,
-                    scale: 3,
-                  ) : const SizedBox(),
-
+                  readOnly:
+                      controller.globalRxVariableController.roleId.value == 1
+                          ? false
+                          : true,
+                  suffixIcon:
+                      controller.globalRxVariableController.roleId.value == 1
+                          ? Image.asset(
+                              ImagePath.editBlack,
+                              height: 10,
+                              width: 10,
+                              scale: 3,
+                            )
+                          : const SizedBox(),
                   hintText: AppText.editProfileEmail,
                   controller: controller.emailTextController,
                 ),
@@ -174,13 +179,19 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfilePhoneNumber,
-                  suffixIcon: controller.globalRxVariableController.roleId.value == 1 ? Image.asset(
-                    ImagePath.editBlack,
-                    height: 10,
-                    width: 10,
-                    scale: 3,
-                  ) : const SizedBox(),
-                  readOnly: controller.globalRxVariableController.roleId.value == 1 ?  false : true,
+                  suffixIcon:
+                      controller.globalRxVariableController.roleId.value == 1
+                          ? Image.asset(
+                              ImagePath.editBlack,
+                              height: 10,
+                              width: 10,
+                              scale: 3,
+                            )
+                          : const SizedBox(),
+                  readOnly:
+                      controller.globalRxVariableController.roleId.value == 1
+                          ? false
+                          : true,
                   hintText: AppText.editProfilePhoneNumber,
                   controller: controller.phoneNumberTextController,
                 ),
@@ -188,15 +199,18 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileDateOfBirth,
+                  suffixIcon: InkWell(
+                    onTap: ()=> controller.dateOfBirth(),
+                    child: Image.asset(
+                      ImagePath.calender,
+                      color: AppColors.profileValueColor,
+                    ),
+                  ),
                   hintText: AppText.editProfileDateOfBirth,
                   controller: controller.dateOfBirthTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
-                  suffixIcon: Image.asset(
-                    ImagePath.calender,
-                    color: AppColors.profileValueColor,
-                  ),
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileCurrentAddress,
                   hintText: AppText.editProfileCurrentAddress,

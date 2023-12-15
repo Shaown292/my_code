@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_dummy_data.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
@@ -33,7 +34,7 @@ class ParentChildView extends GetView<ParentChildController> {
                       return StudentListTile(
                         onTap: () {
                           controller.globalRxVariableController.studentId.value = controller.parentChildList[index].studentId;
-                          Get.toNamed(Routes.HOME, arguments: {
+                          Get.toNamed(Routes.DASHBOARD, arguments: {
                             "homeListTile" : studentList,
                           });
                         },

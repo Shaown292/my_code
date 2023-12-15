@@ -21,7 +21,7 @@ class DashboardView extends GetView<DashboardController> {
       controller: controller.tabIndexController,
       screens: [
         controller.globalRxVariableController.roleId.value == 3
-            ? const ProfileView()
+            ? const HomeView()
             : const HomeView(),
 
         const NotificationView(),
