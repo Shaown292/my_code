@@ -473,6 +473,9 @@ class InfixApi {
 
 
 
+  /// .......................................... Parent Module .....................................................
+static String getParentsChildData({required int parentId}) => '${baseApi}parent-childrens?parent_id=$parentId';
+
 
   /// About
 

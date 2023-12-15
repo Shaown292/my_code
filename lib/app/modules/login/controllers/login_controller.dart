@@ -45,9 +45,23 @@ class LoginController extends GetxController {
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
+
+
         if (profileInfoModel.data.user.roleId == 2) {
           globalRxVariableController.studentId.value = profileInfoModel.data.user.studentId;
           globalRxVariableController.isStudent.value = true;
+          debugPrint('Student Id ::: ${globalRxVariableController.studentId}');
+        }
+
+        if (profileInfoModel.data.user.roleId == 1 || profileInfoModel.data.user.roleId == 4) {
+          globalRxVariableController.staffId.value = profileInfoModel.data.user.staffId;
+
+          debugPrint('Admin/Teacher Id ::: ${globalRxVariableController.staffId}');
+        }
+
+        if (profileInfoModel.data.user.roleId == 3) {
+          globalRxVariableController.parentId.value = profileInfoModel.data.user.parentId;
+          debugPrint('Parent Id ::: ${globalRxVariableController.parentId}');
         }
 
         if (status) {
@@ -88,10 +102,23 @@ class LoginController extends GetxController {
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
         );
+
         if (profileInfoModel.data.user.roleId == 2) {
           globalRxVariableController.studentId.value = profileInfoModel.data.user.studentId;
           globalRxVariableController.isStudent.value = true;
+          debugPrint('Student Id ::: ${globalRxVariableController.studentId}');
         }
+
+        if (profileInfoModel.data.user.roleId == 1 || profileInfoModel.data.user.roleId == 4) {
+          globalRxVariableController.staffId.value = profileInfoModel.data.user.staffId;
+          debugPrint('Admin/Teacher Id ::: ${globalRxVariableController.staffId}');
+        }
+
+        if (profileInfoModel.data.user.roleId == 3) {
+          globalRxVariableController.parentId.value = profileInfoModel.data.user.parentId;
+          debugPrint('Parent Id ::: ${globalRxVariableController.parentId}');
+        }
+
 
         if (status) {
           AppFunctions().getFunctions(profileInfoModel.data.user.roleId);

@@ -139,6 +139,8 @@ class User {
   String avatarUrl;
   bool blockedByMe;
   int studentId;
+  int parentId;
+  int staffId;
 
   User({
     required this.id,
@@ -152,6 +154,8 @@ class User {
     required this.avatarUrl,
     required this.blockedByMe,
     required this.studentId,
+    required this.parentId,
+    required this.staffId,
   });
 
     factory User.fromJson(Map<String, dynamic> j) => User(
@@ -166,6 +170,8 @@ class User {
     avatarUrl: getSafeValue<String>(j, 'avatar_url', ''),
     blockedByMe: getSafeValue<bool>(j, 'blocked_by_me', false),
     studentId: getSafeValue<int>(j, 'student_id', 0),
+    parentId: getSafeValue<int>(j, 'parent_id', 0),
+    staffId: getSafeValue<int>(j, 'staff_id', 0),
   );
 
   // factory User.fromJson(Map<String, dynamic> json) => User(
@@ -194,5 +200,7 @@ class User {
     "avatar_url": avatarUrl,
     "blocked_by_me": blockedByMe,
     "student_id": studentId,
+    "parent_id": parentId,
+    "staff_id": staffId,
   };
 }

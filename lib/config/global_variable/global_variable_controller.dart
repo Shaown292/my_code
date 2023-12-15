@@ -62,6 +62,8 @@ class GlobalRxVariableController extends GetxController {
   final roleId = Rxn<int>();
   final token = Rxn<String>();
   final studentId = Rxn<int>();
+  final parentId = Rxn<int>();
+  final staffId = Rxn<int>();
   final userId = Rxn<int>();
   RxBool isStudent = false.obs;
 }

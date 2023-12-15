@@ -1,4 +1,5 @@
 import 'package:flutter/animation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
@@ -45,6 +46,17 @@ class SplashController extends GetxController with GetTickerProviderStateMixin{
       AppFunctions().getFunctions(globalRxVariableController.roleId.value!);
       if(authDatabase.getUserInfo()!.data.user.roleId == 2){
         globalRxVariableController.studentId.value = authDatabase.getUserInfo()!.data.user.studentId;
+        debugPrint('Student Id ::: ${globalRxVariableController.studentId}');
+      }
+
+      if(authDatabase.getUserInfo()!.data.user.roleId == 3){
+        globalRxVariableController.parentId.value = authDatabase.getUserInfo()!.data.user.parentId;
+        debugPrint('Parent Id ::: ${globalRxVariableController.parentId}');
+      }
+
+      if(authDatabase.getUserInfo()!.data.user.roleId == 1 || authDatabase.getUserInfo()!.data.user.roleId == 4){
+        globalRxVariableController.staffId.value = authDatabase.getUserInfo()!.data.user.staffId;
+        debugPrint('Admin/Teacher Id ::: ${globalRxVariableController.staffId}');
       }
 
     } else {
