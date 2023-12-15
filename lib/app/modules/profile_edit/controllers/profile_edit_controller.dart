@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/datepicker_dialogue/date_picker.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_edit_model/student_profile_edit_response_model.dart';
@@ -13,6 +15,8 @@ import '../../../utilities/message/snack_bars.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileEditController extends GetxController {
+
+
   @override
   void onInit() {
     _initialize();
@@ -23,34 +27,35 @@ class ProfileEditController extends GetxController {
   ProfileDataController profileDataController = Get.find();
   LoadingController loadingController = Get.find();
 
-  TextEditingController firstName = TextEditingController();
-  TextEditingController lastName = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController phoneNumber = TextEditingController();
-  TextEditingController dateOfBirth = TextEditingController();
-  TextEditingController currentAddress = TextEditingController();
+  TextEditingController firstNameTextController = TextEditingController();
+  TextEditingController lastNameTextController = TextEditingController();
+  TextEditingController emailTextController = TextEditingController();
+  TextEditingController phoneNumberTextController = TextEditingController();
+  TextEditingController dateOfBirthTextController = TextEditingController();
+  TextEditingController currentAddressTextController = TextEditingController();
 
   void _initialize() {
-    firstName.text = profileDataController.firstName.toString();
-    lastName.text = profileDataController.lastName.toString();
-    email.text = profileDataController.email.toString();
-    phoneNumber.text = profileDataController.phoneNumber.toString();
-    dateOfBirth.text = profileDataController.dateOfBirth.toString();
-    currentAddress.text = profileDataController.presentAddress.toString();
+    firstNameTextController.text = profileDataController.firstName.toString();
+    lastNameTextController.text = profileDataController.lastName.toString();
+    emailTextController.text = profileDataController.email.toString();
+    phoneNumberTextController.text = profileDataController.phoneNumber.toString();
+    dateOfBirthTextController.text = profileDataController.dateOfBirth.toString();
+    currentAddressTextController.text = profileDataController.presentAddress.toString();
   }
 
   void userProfileInfoUpdate() async {
     try {
       final response = await BaseClient().postData(
         url: InfixApi.updateProfile(
-          globalRxVariableController.roleId.value!,
+          studentId: globalRxVariableController.studentId.value!,
         ),
         header: GlobalVariable.header,
         payload: {
-          "first_name": firstName.text,
-          "last_name": lastName.text,
-          "date_of_birth": dateOfBirth.text,
-          "current_address": currentAddress.text,
+          "first_name": firstNameTextController.text,
+          "last_name": lastNameTextController.text,
+          "date_of_birth": dateOfBirthTextController.text,
+          "current_address": currentAddressTextController.text,
+          "email_address" : emailTextController.text,
         },
       );
 
@@ -118,6 +123,17 @@ class ProfileEditController extends GetxController {
       debugPrint('$t');
     } finally {
       profileDataController.profilePickedImage.value = File('');
+    }
+  }
+
+  void dateOfBirth() async {
+    DateTime? dateTime = await DatePickerUtils().pickDate(
+      canSelectPastDate: true,
+      canSelectFutureDate: true,
+    );
+
+    if (dateTime != null) {
+      dateOfBirthTextController.text = dateTime.dd_mm_yyyy;
     }
   }
 

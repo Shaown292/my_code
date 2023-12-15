@@ -60,7 +60,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                                     borderRadius: 100.circularRadius,
                                     child: CacheImageView(
                                       url:
-                                          '${AppConfig.imageBaseUrl}${controller.profileDataController.profilePhoto.toString()}',
+                                          controller.profileDataController.profilePhoto.toString(),
                                       errorImageLocal:
                                           'assets/image/production/avatar.png',
                                     ),
@@ -145,7 +145,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
 
                 EditProfileTextField(
                   labelText: AppText.editProfileFirstName,
-                  controller: controller.firstName,
+                  controller: controller.firstNameTextController,
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                 ),
                 15.verticalSpacing,
@@ -153,40 +153,54 @@ class ProfileEditView extends GetView<ProfileEditController> {
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileLastName,
                   hintText: AppText.editProfileLastName,
-                  controller: controller.lastName,
+                  controller: controller.lastNameTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileEmail,
-                  suffixIconDisable:
-                      controller.globalRxVariableController.roleId.value == 1
-                          ? false
-                          : true,
+                  readOnly: controller.globalRxVariableController.roleId.value == 1 ?  false : true,
+                  suffixIcon:  controller.globalRxVariableController.roleId.value == 1 ? Image.asset(
+                    ImagePath.editBlack,
+                    height: 10,
+                    width: 10,
+                    scale: 3,
+                  ) : const SizedBox(),
+
                   hintText: AppText.editProfileEmail,
-                  controller: controller.email,
+                  controller: controller.emailTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfilePhoneNumber,
-                  suffixIconDisable: true,
+                  suffixIcon: controller.globalRxVariableController.roleId.value == 1 ? Image.asset(
+                    ImagePath.editBlack,
+                    height: 10,
+                    width: 10,
+                    scale: 3,
+                  ) : const SizedBox(),
+                  readOnly: controller.globalRxVariableController.roleId.value == 1 ?  false : true,
                   hintText: AppText.editProfilePhoneNumber,
-                  controller: controller.phoneNumber,
+                  controller: controller.phoneNumberTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileDateOfBirth,
                   hintText: AppText.editProfileDateOfBirth,
-                  controller: controller.dateOfBirth,
+                  controller: controller.dateOfBirthTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
+                  suffixIcon: Image.asset(
+                    ImagePath.calender,
+                    color: AppColors.profileValueColor,
+                  ),
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileCurrentAddress,
                   hintText: AppText.editProfileCurrentAddress,
-                  controller: controller.currentAddress,
+                  controller: controller.currentAddressTextController,
                 ),
               ],
             ),
