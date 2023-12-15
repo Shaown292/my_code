@@ -20,9 +20,10 @@ import '../../../utilities/api_urls.dart';
 import '../../../utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 
 class StudentLessonPlanController extends GetxController {
+
+  LoadingController loadingController = Get.find();
   GlobalRxVariableController globalRxVariableController = Get.find();
   HomeController homeController = Get.find();
-  LoadingController loadingController = Get.find();
   TabController? tabController;
 
   List<Weeks> weeksList = [];
@@ -104,8 +105,6 @@ class StudentLessonPlanController extends GetxController {
       );
 
       isLoading.value = true;
-      debugPrint("Details ::::::: $isLoading");
-
       final response = await BaseClient().getData(
         url: InfixApi.getStudentLessonPlanDetails(lessonPlanId: lessonPlanId),
         header: GlobalVariable.header,
@@ -316,10 +315,11 @@ class StudentLessonPlanController extends GetxController {
 
   @override
   void onInit() {
+    print('object:::::::::: ${homeController.studentRecordList.length} ::: ${globalRxVariableController.userId}');
     selectTab();
-    if (homeController.studentRecordList.isNotEmpty && globalRxVariableController.userId != null) {
+    if (homeController.studentRecordList.isNotEmpty && globalRxVariableController.userId.value != null) {
       getLessonPlanList(globalRxVariableController.userId.value!,
-          homeController.studentRecordList[0].id);
+          homeController.studentRecordList[0].id,);
     }
     super.onInit();
   }

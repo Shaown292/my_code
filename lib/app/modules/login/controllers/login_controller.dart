@@ -41,6 +41,7 @@ class LoginController extends GetxController {
             profileInfoModel.data.unreadNotifications;
         globalRxVariableController.token.value = profileInfoModel.data.accessToken;
         globalRxVariableController.roleId.value = profileInfoModel.data.user.roleId;
+        globalRxVariableController.userId.value = profileInfoModel.data.user.id;
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(
           profileInfoModelModel: profileInfoModel,
@@ -96,7 +97,7 @@ class LoginController extends GetxController {
             profileInfoModel.data.unreadNotifications;
         globalRxVariableController.token.value = profileInfoModel.data.accessToken;
         globalRxVariableController.roleId.value = profileInfoModel.data.user.roleId;
-        globalRxVariableController.studentId.value = profileInfoModel.data.user.studentId;
+        globalRxVariableController.userId.value = profileInfoModel.data.user.id;
 
         showBasicSuccessSnackBar(message: profileInfoModel.message);
         bool status = await AuthDatabase.instance.saveAuthInfo(

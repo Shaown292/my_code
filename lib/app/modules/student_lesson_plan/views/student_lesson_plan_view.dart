@@ -22,153 +22,176 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => DefaultTabController(
-      initialIndex: controller.selectTabIndex.value,
-      length: controller.daysOfWeek.length,
-      child: InfixEduScaffold(
-        title: "Lesson Plan",
-        body: CustomBackground(
-          customWidget: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: controller.lessonLoader.value
-                ? Center(
-              child: Platform.isAndroid ? const CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ) : const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(
-                  AppColors.primaryColor,
-                ),
-              ),
-            )
-                : Column(
-              children: [
-                SizedBox(
-                  height: 50,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller
-                        .homeController.studentRecordList.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                            right: 8.0, top: 8, bottom: 8),
-                        child: StudyButton(
-                          title:
-                          "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                          onItemTap: () {
-                            controller.weeksList.clear();
-                            int recordId = controller.homeController
-                                .studentRecordList[index].id;
-                            controller.getLessonPlanList(
-                                controller.globalRxVariableController.userId.value!,
-                                recordId);
-                            controller.selectIndex.value = index;
-                          },
-                          isSelected:
-                          controller.selectIndex.value == index,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                20.verticalSpacing,
-                Text(
-                  controller.formattedDate,
-                  style: AppTextStyle.fontSize14VioletW600,
-                ),
-                20.verticalSpacing,
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                        color: AppColors.profileCardTextColor),
-                  ),
-                  child: TabBar(
-                    isScrollable: true,
-                    tabAlignment: TabAlignment.start,
-                    dividerHeight: 0,
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.black,
-                    controller: controller.tabController,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColors.appButtonColor),
-                    tabs: List.generate(
-                      controller.daysOfWeek.length,
-                          (index) => ShowWeekTile(
-                        title: controller.daysOfWeek[index],
-                      ),
-                    ),
-                  ),
-                ),
-                10.verticalSpacing,
-                Expanded(
-                  child: TabBarView(
-                    controller: controller.tabController,
-                    children: List.generate(
-                      controller.daysOfWeek.length,
-                          (index) {
-                        return Obx(() => controller
-                            .loadingController.isLoading
-                            ? const LoadingWidget()
-                            : controller.weeksList[index].classRoutine!
-                            .isNotEmpty
-                            ? ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: controller
-                              .weeksList[index]
-                              .classRoutine!
-                              .length,
-                          itemBuilder:
-                              (context, routineIndex) {
-                            ClassRoutine classRoutine =
-                            controller.weeksList[index]
-                                .classRoutine![
-                            routineIndex];
-                            return StudentClassDetailsCard(
-                              subject:
-                              classRoutine.subjectName,
-                              startingTime:
-                              classRoutine.startTime,
-                              endingTime:
-                              classRoutine.endTime,
-                              roomNumber: classRoutine.room,
-                              buildingName: "Building No",
-                              instructorName:
-                              classRoutine.teacher,
-                              onDetailsButtonTap: controller.isLoading.value,
-                              hasDetails: true,
-                              onTap: () {
-                                controller.isLoading.value = true;
-                                controller.getLessonPlanListDetails(lessonPlanId: controller.weeksList[index].id!, context: context);
-
-                              },
-                              buttonWidget: controller.isLoading.value ? const CircularProgressIndicator() : Container(
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(2),
-                                  color: AppColors.primaryColor,
-                                ),
-                                child: const Text(
-                                  "Details",
-                                  style: AppTextStyle.textStyle12WhiteW400,
-                                ),
+    return Obx(
+      () => DefaultTabController(
+        initialIndex: controller.selectTabIndex.value,
+        length: controller.daysOfWeek.length,
+        child: InfixEduScaffold(
+          title: "Lesson Plan",
+          body: CustomBackground(
+            customWidget: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: controller.lessonLoader.value
+                  ? Center(
+                      child: Platform.isAndroid
+                          ? const CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            )
+                          : const CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(
+                                AppColors.primaryColor,
                               ),
+                            ),
+                    )
+                  : Column(
+                      children: [
+                        SizedBox(
+                          height: 50,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: controller
+                                .homeController.studentRecordList.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 8.0, top: 8, bottom: 8),
+                                child: StudyButton(
+                                  title:
+                                      "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                  onItemTap: () {
+                                    controller.weeksList.clear();
+                                    int recordId = controller.homeController
+                                        .studentRecordList[index].id;
+                                    controller.getLessonPlanList(
+                                        controller.globalRxVariableController
+                                            .userId.value!,
+                                        recordId);
+                                    controller.selectIndex.value = index;
+                                  },
+                                  isSelected:
+                                      controller.selectIndex.value == index,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        20.verticalSpacing,
+                        Text(
+                          controller.formattedDate,
+                          style: AppTextStyle.fontSize14VioletW600,
+                        ),
+                        20.verticalSpacing,
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color: AppColors.profileCardTextColor),
+                          ),
+                          child: TabBar(
+                            isScrollable: true,
+                            tabAlignment: TabAlignment.start,
+                            dividerHeight: 0,
+                            labelColor: Colors.white,
+                            unselectedLabelColor: Colors.black,
+                            controller: controller.tabController,
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            indicator: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: AppColors.appButtonColor),
+                            tabs: List.generate(
+                              controller.daysOfWeek.length,
+                              (index) => ShowWeekTile(
+                                title: controller.daysOfWeek[index],
+                              ),
+                            ),
+                          ),
+                        ),
+                        10.verticalSpacing,
+                        Expanded(
+                          child: TabBarView(
+                            controller: controller.tabController,
+                            children: List.generate(
+                              controller.daysOfWeek.length,
+                              (index) {
+                                List<Weeks> weeksList = controller.weeksList
+                                    .where((element) =>
+                                        element.name?.substring(0, 3) ==
+                                        controller.daysOfWeek[index])
+                                    .toList();
 
-                            );
-                          },
-                        )
-                            : const NoDataAvailableWidget());
-                      },
+                                return Obx(() => controller.loadingController.isLoading
+                                    ? const LoadingWidget()
+                                    : weeksList.isNotEmpty
+                                        ? ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: weeksList.length,
+                                            itemBuilder:
+                                                (context, routineIndex) {
+                                              ClassRoutine classRoutine =
+                                                  controller.weeksList[index]
+                                                          .classRoutine![
+                                                      routineIndex];
+                                              return StudentClassDetailsCard(
+                                                subject:
+                                                    classRoutine.subjectName,
+                                                startingTime:
+                                                    classRoutine.startTime,
+                                                endingTime:
+                                                    classRoutine.endTime,
+                                                roomNumber: classRoutine.room,
+                                                buildingName: "Building No",
+                                                instructorName:
+                                                    classRoutine.teacher,
+                                                onDetailsButtonTap:
+                                                    controller.isLoading.value,
+                                                hasDetails: true,
+                                                onTap: () {
+                                                  controller.isLoading.value =
+                                                      true;
+                                                  controller
+                                                      .getLessonPlanListDetails(
+                                                          lessonPlanId:
+                                                              controller
+                                                                  .weeksList[
+                                                                      index]
+                                                                  .id!,
+                                                          context: context);
+                                                },
+                                                buttonWidget: controller
+                                                        .isLoading.value
+                                                    ? const CircularProgressIndicator()
+                                                    : Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(2),
+                                                          color: AppColors
+                                                              .primaryColor,
+                                                        ),
+                                                        child: const Text(
+                                                          "Details",
+                                                          style: AppTextStyle
+                                                              .textStyle12WhiteW400,
+                                                        ),
+                                                      ),
+                                              );
+                                            },
+                                          )
+                                        : const NoDataAvailableWidget());
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

@@ -10,6 +10,8 @@ import '../../../database/auth_database.dart';
 import '../../../utilities/widgets/loader/loading.controller.dart';
 
 class HomeController extends GetxController {
+
+  LoadingController loadingController = Get.find();
   GlobalRxVariableController globalRxVariableController = Get.find();
 
   List<HomeTileModelClass> homeTileList = <HomeTileModelClass>[];
@@ -21,7 +23,7 @@ class HomeController extends GetxController {
   List<String> studentRecordDropdownList = [];
   List<int> studentRecordIdList = [];
 
-  LoadingController loadingController = Get.find();
+
 
   // void _getUserInfo() {
   //   profileInfoModel = _authDatabase.getUserInfo()!;
@@ -67,8 +69,8 @@ class HomeController extends GetxController {
     } finally {
       await _authDatabase.logOut();
       globalRxVariableController.token.value = '';
-      globalRxVariableController.userId.value = -1;
-      globalRxVariableController.roleId.value = -1;
+      globalRxVariableController.userId.value = null;
+      globalRxVariableController.roleId.value = null;
 
       // loadingController.isLoading = false;
       // Get.offAndToNamed(Routes.SPLASH);

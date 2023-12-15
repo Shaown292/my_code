@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
@@ -43,7 +45,7 @@ class CustomAppBar extends GetView<HomeController> {
                         color: Colors.transparent,
                         height: 50,
                         width: 50,
-                       child: Image.asset(ImagePath.back, scale: 3,),
+                       child: Platform.isAndroid ? Image.asset(ImagePath.back, scale: 3,) : const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,),
                       ),
 
 
