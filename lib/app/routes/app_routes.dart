@@ -120,6 +120,7 @@ abstract class Routes {
       _Paths.TE_SEARCH_CLASS_ROUTINE_LIST;
   static const TE_SUBJECTS = _Paths.TE_SUBJECTS;
   static const ABOUT = _Paths.ABOUT;
+  static const PARENT_CHILD = _Paths.PARENT_CHILD;
 }
 
 abstract class _Paths {
@@ -237,4 +238,5 @@ abstract class _Paths {
   static const TE_SEARCH_CLASS_ROUTINE_LIST = '/te-search-class-routine-list';
   static const TE_SUBJECTS = '/te-subjects';
   static const ABOUT = '/about';
+  static const PARENT_CHILD = '/parent-child';
 }

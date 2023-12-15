@@ -1,7 +1,7 @@
-import 'package:flutter_single_getx_api_v2/app/modules/about/bindings/about_binding.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/about/views/about_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/about/bindings/about_binding.dart';
+import '../modules/about/views/about_view.dart';
 import '../modules/active_exam/bindings/active_exam_binding.dart';
 import '../modules/active_exam/views/active_exam_view.dart';
 import '../modules/admin_add_book/bindings/admin_add_book_binding.dart';
@@ -126,6 +126,8 @@ import '../modules/online_exam/bindings/online_exam_binding.dart';
 import '../modules/online_exam/views/online_exam_view.dart';
 import '../modules/other_downloads/bindings/other_downloads_binding.dart';
 import '../modules/other_downloads/views/other_downloads_view.dart';
+import '../modules/parent_child/bindings/parent_child_binding.dart';
+import '../modules/parent_child/views/parent_child_view.dart';
 import '../modules/profile/bindings/profile_bindings.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/profile_edit/bindings/profile_edit_binding.dart';
@@ -808,27 +810,32 @@ class AppPages {
     GetPage(
       name: _Paths.TE_MY_ROUTINE,
       page: () => const TeMyRoutineView(),
-      binding: TeMyRoutineBinding(),
+      binding: TeMyRoutineBinding(),transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TE_SEARCH_CLASS_ROUTINE,
       page: () => const TeSearchClassRoutineView(),
-      binding: TeSearchClassRoutineBinding(),
+      binding: TeSearchClassRoutineBinding(),transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TE_SEARCH_CLASS_ROUTINE_LIST,
       page: () => const TeSearchClassRoutineListView(),
-      binding: TeSearchClassRoutineListBinding(),
+      binding: TeSearchClassRoutineListBinding(),transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TE_SUBJECTS,
       page: () => const TeSubjectsView(),
-      binding: TeSubjectsBinding(),
+      binding: TeSubjectsBinding(),transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ABOUT,
       page: () => const AboutView(),
-      binding: AboutBinding(),
+      binding: AboutBinding(),transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_CHILD,
+      page: () => const ParentChildView(),
+      binding: ParentChildBinding(),transition: Transition.fade,
     ),
   ];
 }
