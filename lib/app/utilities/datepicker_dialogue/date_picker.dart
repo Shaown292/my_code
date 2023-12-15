@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class DatePickerUtils {
   Future<DateTime?> pickDate({
-    int additionalYear = 1,
+    int additionalYear = 50,
     bool canSelectPastDate = false,
     bool canSelectFutureDate = false,
   }) async {
