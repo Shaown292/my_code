@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_dummy_data.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
@@ -28,7 +27,7 @@ class ParentChildView extends GetView<ParentChildController> {
                   onRefresh: () async {
                     controller.getParentsChildData(parentId: controller.globalRxVariableController.parentId.value!);
                   },
-                  child: controller.loadingController.isLoading ? const LoadingWidget() : controller.parentChildList.isNotEmpty ? ListView.builder(
+                  child: controller.isLoading.value ? const LoadingWidget() : controller.parentChildList.isNotEmpty ? ListView.builder(
                     itemCount: controller.parentChildList.length,
                     itemBuilder: (context, index) {
                       return StudentListTile(
