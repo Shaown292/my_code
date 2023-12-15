@@ -21,7 +21,7 @@ class FeesView extends GetView<FeesController> {
         body: CustomBackground(
           customWidget: RefreshIndicator(
             onRefresh: () async {
-              controller.homeController.getAllFeesList(
+              controller.getAllFeesList(
                 studentId:
                     controller.globalRxVariableController.studentId.value!,
                 recordId: controller
@@ -30,7 +30,7 @@ class FeesView extends GetView<FeesController> {
             },
             child: Column(
               children: [
-                controller.loadingController.isLoading
+                controller.homeController.loadingController.isLoading
                     ? const LoadingWidget()
                     : Padding(
                         padding: const EdgeInsets.symmetric(
@@ -54,7 +54,7 @@ class FeesView extends GetView<FeesController> {
                                           .studentRecordList[index]
                                           .id;
 
-                                      controller.homeController.getAllFeesList(
+                                      controller.getAllFeesList(
                                           studentId: controller
                                               .globalRxVariableController
                                               .studentId
@@ -70,27 +70,27 @@ class FeesView extends GetView<FeesController> {
                         ),
                       ),
                 Expanded(
-                  child: controller.homeController.feesInvoiceList.isEmpty &&
+                  child: controller.feesInvoiceList.isEmpty &&
                           controller
-                                  .homeController.loadingController.isLoading ==
+                                  .feesLoader.value ==
                               false
                       ? const NoDataAvailableWidget()
                       : ListView.builder(
                           itemCount:
-                              controller.homeController.feesInvoiceList.length,
+                              controller.feesInvoiceList.length,
                           itemBuilder: (context, index) {
                             return FeesTile(
                               statusText: controller
-                                  .homeController.feesInvoiceList[index].status,
+                                  .feesInvoiceList[index].status,
                               statusColor: Colors.green,
-                              dueDate: controller.homeController
+                              dueDate: controller
                                   .feesInvoiceList[index].createDate,
                               duration: "Monthly",
                               amount: controller
-                                  .homeController.feesInvoiceList[index].amount,
-                              paid: controller.homeController
+                                  .feesInvoiceList[index].amount,
+                              paid: controller
                                   .feesInvoiceList[index].paidAmount,
-                              balance: controller.homeController
+                              balance: controller
                                   .feesInvoiceList[index].balance,
                               onTap: () {
                                 controller.showFeesDetailsBottomSheet(

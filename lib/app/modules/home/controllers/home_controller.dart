@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_dummy_data.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/profile_ui_model.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/student_fees_response_model/student_fees_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_record/student_record_response_model.dart';
 import 'package:get/get.dart';
 import '../../../../config/global_variable/global_variable_controller.dart';
@@ -21,7 +20,7 @@ class HomeController extends GetxController {
   List<StudentRecord> studentRecordList = [];
   List<String> studentRecordDropdownList = [];
   List<int> studentRecordIdList = [];
-  List<FeesInvoice> feesInvoiceList = [];
+
 
   LoadingController loadingController = Get.find();
 
@@ -103,10 +102,7 @@ class HomeController extends GetxController {
             studentRecordIdList
                 .add(studentRecordResponseModel.data.studentRecords[i].id);
           }
-          getAllFeesList(
-            studentId: globalRxVariableController.studentId.value!,
-            recordId: globalRxVariableController.studentRecordId.value!,
-          );
+
         }
       }
     } catch (e, t) {
@@ -115,40 +111,7 @@ class HomeController extends GetxController {
     } finally {}
   }
 
-  Future<StudentFeesInvoiceResponseModel?> getAllFeesList(
-      {required int studentId, required int recordId}) async {
-    feesInvoiceList.clear();
-    try {
-      loadingController.isLoading = true;
 
-      final response = await BaseClient().getData(
-        url: InfixApi.getStudentFeesList(
-            studentId: studentId, recordId: recordId),
-        header: GlobalVariable.header,
-      );
-
-      StudentFeesInvoiceResponseModel studentFeesInvoiceResponseModel =
-          StudentFeesInvoiceResponseModel.fromJson(response);
-      if (studentFeesInvoiceResponseModel.success == true) {
-        loadingController.isLoading = false;
-        if (studentFeesInvoiceResponseModel.data!.feesInvoice!.isNotEmpty) {
-          for (int i = 0;
-              i < studentFeesInvoiceResponseModel.data!.feesInvoice!.length;
-              i++) {
-            feesInvoiceList
-                .add(studentFeesInvoiceResponseModel.data!.feesInvoice![i]);
-          }
-        }
-      }
-    } catch (e, t) {
-      loadingController.isLoading = false;
-      debugPrint('$e');
-      debugPrint('$t');
-    } finally {
-      loadingController.isLoading = false;
-    }
-    return StudentFeesInvoiceResponseModel();
-  }
 
   @override
   void onInit() {
