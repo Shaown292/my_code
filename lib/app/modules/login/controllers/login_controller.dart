@@ -47,6 +47,7 @@ class LoginController extends GetxController {
         );
         if (profileInfoModel.data.user.roleId == 2) {
           globalRxVariableController.studentId.value = profileInfoModel.data.user.studentId;
+          globalRxVariableController.isStudent.value = true;
         }
 
         if (status) {
@@ -89,6 +90,7 @@ class LoginController extends GetxController {
         );
         if (profileInfoModel.data.user.roleId == 2) {
           globalRxVariableController.studentId.value = profileInfoModel.data.user.studentId;
+          globalRxVariableController.isStudent.value = true;
         }
 
         if (status) {

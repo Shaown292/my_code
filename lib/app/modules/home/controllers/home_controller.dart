@@ -21,7 +21,6 @@ class HomeController extends GetxController {
   List<String> studentRecordDropdownList = [];
   List<int> studentRecordIdList = [];
 
-
   LoadingController loadingController = Get.find();
 
   // void _getUserInfo() {
@@ -102,7 +101,6 @@ class HomeController extends GetxController {
             studentRecordIdList
                 .add(studentRecordResponseModel.data.studentRecords[i].id);
           }
-
         }
       }
     } catch (e, t) {
@@ -110,8 +108,6 @@ class HomeController extends GetxController {
       debugPrint('$t');
     } finally {}
   }
-
-
 
   @override
   void onInit() {
@@ -121,7 +117,13 @@ class HomeController extends GetxController {
         'Role ID: ${globalRxVariableController.roleId} :::: Record ID: ${globalRxVariableController.studentId}');
     if (globalRxVariableController.roleId.value == 2 ||
         globalRxVariableController.roleId.value == 3) {
-      getStudentRecord(studentId: globalRxVariableController.studentId.value!,);
+      if (globalRxVariableController.isStudent.value) {
+        if (globalRxVariableController.studentId.value != null) {
+          getStudentRecord(
+            studentId: globalRxVariableController.studentId.value!,
+          );
+        }
+      }
     }
     super.onInit();
   }
