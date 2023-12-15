@@ -14,7 +14,8 @@ class ActiveExamController extends GetxController {
   List<ActiveExamData> onlineActiveExamList = [];
   final selectIndex = RxInt(0);
 
-  Future<StudentOnlineActiveExamResponseModel> getStudentActiveExamList({required int recordId}) async {
+  Future<StudentOnlineActiveExamResponseModel> getStudentActiveExamList(
+      {required int recordId}) async {
     try {
       loadingController.isLoading = true;
 
@@ -53,7 +54,8 @@ class ActiveExamController extends GetxController {
   void onInit() {
     if (homeController.studentRecordList.isNotEmpty) {
       getStudentActiveExamList(
-          recordId: homeController.studentRecordList[0].id);
+        recordId: homeController.studentRecordList.first.id,
+      );
     }
     super.onInit();
   }
