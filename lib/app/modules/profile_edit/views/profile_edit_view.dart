@@ -31,114 +31,115 @@ class ProfileEditView extends GetView<ProfileEditController> {
               children: [
                 50.verticalSpacing,
 
-                Obx(() => Stack(
-                      alignment: AlignmentDirectional.center,
-                      children: <Widget>[
-                        controller.profileDataController.profilePickedImage
-                                .value.path.isEmpty
-                            ? controller.profileDataController.profilePhoto
-                                        .isEmpty ||
-                                    controller.profileDataController
-                                            .profilePhoto.value ==
-                                        ''
-                                ? Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              ImagePath.editProfileImage),
-                                          fit: BoxFit.cover),
-                                    ),
-                                  )
-                                : SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: ClipRRect(
-                                      borderRadius: 100.circularRadius,
-                                      child: CacheImageView(
-                                        url:
-                                            '${AppConfig.imageBaseUrl}${controller.profileDataController.profilePhoto.toString()}',
-                                        errorImageLocal:
-                                            'assets/image/production/avatar.png',
-                                      ),
-                                    ),
-                                  )
-                            : ClipRRect(
-                                borderRadius:
-                                    AppDimens.radius100.circularRadius,
-                                child: Image.file(
+                Obx(
+                  () => Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: <Widget>[
+                      controller.profileDataController.profilePickedImage.value
+                              .path.isEmpty
+                          ? controller.profileDataController.profilePhoto
+                                      .isEmpty ||
+                                  controller.profileDataController.profilePhoto
+                                          .value ==
+                                      ''
+                              ? Container(
                                   height: 100,
                                   width: 100,
-                                  File(controller.profileDataController
-                                      .profilePickedImage.value.path),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                        Positioned(
-                            bottom: 10,
-                            right: 0,
-                            child: InkWell(
-                              onTap: () {
-                                FlutterImagePickerUtils.imagePickerModalSheet(
-                                  context: context,
-                                  fromGallery: () async {
-                                    controller.profileDataController
-                                            .profilePickedImage.value =
-                                        await FlutterImagePickerUtils
-                                            .getImageGallery(
-                                      context,
-                                    );
-                                    if (controller
-                                        .profileDataController
-                                        .profilePickedImage
-                                        .value
-                                        .path
-                                        .isNotEmpty) {
-                                      controller.profilePhotoUpdate(
-                                          file: controller.profileDataController
-                                              .profilePickedImage.value.path);
-                                    }
-                                  },
-                                  fromCamera: () async {
-                                    controller.profileDataController
-                                            .profilePickedImage.value =
-                                        await FlutterImagePickerUtils
-                                            .getImageCamera(
-                                      context,
-                                    );
-                                    if (controller
-                                        .profileDataController
-                                        .profilePickedImage
-                                        .value
-                                        .path
-                                        .isNotEmpty) {
-                                      controller.profilePhotoUpdate(
-                                          file: controller.profileDataController
-                                              .profilePickedImage.value.path);
-                                    }
-                                  },
-                                );
-                              },
-                              child: Container(
-                                height: 25,
-                                width: 25,
-                                decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: AppColors.primaryColor),
-                                child: Center(
-                                  child: Image.asset(
-                                    ImagePath.edit,
-                                    height: 12,
-                                    width: 12,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            ImagePath.editProfileImage),
+                                        fit: BoxFit.cover),
                                   ),
+                                )
+                              : SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: ClipRRect(
+                                    borderRadius: 100.circularRadius,
+                                    child: CacheImageView(
+                                      url:
+                                          '${AppConfig.imageBaseUrl}${controller.profileDataController.profilePhoto.toString()}',
+                                      errorImageLocal:
+                                          'assets/image/production/avatar.png',
+                                    ),
+                                  ),
+                                )
+                          : ClipRRect(
+                              borderRadius: AppDimens.radius100.circularRadius,
+                              child: Image.file(
+                                height: 100,
+                                width: 100,
+                                File(controller.profileDataController
+                                    .profilePickedImage.value.path),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                      Positioned(
+                          bottom: 10,
+                          right: 0,
+                          child: InkWell(
+                            onTap: () {
+                              FlutterImagePickerUtils.imagePickerModalSheet(
+                                context: context,
+                                fromGallery: () async {
+                                  controller.profileDataController
+                                          .profilePickedImage.value =
+                                      await FlutterImagePickerUtils
+                                          .getImageGallery(
+                                    context,
+                                  );
+                                  if (controller
+                                      .profileDataController
+                                      .profilePickedImage
+                                      .value
+                                      .path
+                                      .isNotEmpty) {
+                                    controller.profilePhotoUpdate(
+                                        file: controller.profileDataController
+                                            .profilePickedImage.value.path);
+                                  }
+                                },
+                                fromCamera: () async {
+                                  controller.profileDataController
+                                          .profilePickedImage.value =
+                                      await FlutterImagePickerUtils
+                                          .getImageCamera(
+                                    context,
+                                  );
+                                  if (controller
+                                      .profileDataController
+                                      .profilePickedImage
+                                      .value
+                                      .path
+                                      .isNotEmpty) {
+                                    controller.profilePhotoUpdate(
+                                        file: controller.profileDataController
+                                            .profilePickedImage.value.path);
+                                  }
+                                },
+                              );
+                            },
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.primaryColor),
+                              child: Center(
+                                child: Image.asset(
+                                  ImagePath.edit,
+                                  height: 12,
+                                  width: 12,
                                 ),
                               ),
-                            ) //Icon
                             ),
-                      ], //<Widget>[]
-                    )),
+                          ) //Icon
+                          ),
+                    ], //<Widget>[]
+                  ),
+                ),
                 //
                 30.verticalSpacing,
 
@@ -158,7 +159,10 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileEmail,
-                  suffixIconDisable: controller.globalRxVariableController.roleId.value == 1 ? false : true,
+                  suffixIconDisable:
+                      controller.globalRxVariableController.roleId.value == 1
+                          ? false
+                          : true,
                   hintText: AppText.editProfileEmail,
                   controller: controller.email,
                 ),

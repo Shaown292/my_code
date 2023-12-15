@@ -48,6 +48,8 @@ class StaffView extends GetView<StaffController> {
                                   arguments: {
                                     "staff_role_id":
                                         controller.staffRoleList[index].id ,
+                                    "staff_role_name" : controller.staffRoleList[index].name
+
                                   },
                                 );
                               },

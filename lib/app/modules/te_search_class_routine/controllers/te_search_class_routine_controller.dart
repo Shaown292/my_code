@@ -1,12 +1,8 @@
+import 'package:flutter_single_getx_api_v2/app/modules/admin_students_search/controllers/admin_students_search_controller.dart';
 import 'package:get/get.dart';
 
 class TeSearchClassRoutineController extends GetxController {
 
-  RxString classInitValue = "One".obs;
-  RxList<String> classList = ['One', 'Two', 'Three'].obs ;
-  RxInt classId = 0.obs;
+  AdminStudentsSearchController adminStudentsSearchController = Get.put(AdminStudentsSearchController());
 
-  RxString sectionInitValue = "A".obs;
-  RxList<String> sectionList = ['A', 'V', 'D'].obs ;
-  RxInt sectionId = 0.obs;
 }

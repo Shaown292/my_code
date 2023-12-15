@@ -66,7 +66,6 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                                     controller.getAdminPendingLeave();
                                   },
                                   child: ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount:
                                         controller.pendingLeaveList.length,

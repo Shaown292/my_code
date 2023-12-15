@@ -20,7 +20,7 @@ class StaffIndividualDetailsView
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Individual",
+        title: "${controller.staffFirstName} ${controller.staffLastName}",
         body: CustomBackground(
           customWidget: controller.loadingController.isLoading
               ? const Center(

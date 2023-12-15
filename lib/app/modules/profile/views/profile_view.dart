@@ -56,6 +56,8 @@ class ProfileView extends GetView<ProfileController> {
               customWidget: Obx(
                 () => Column(
                   children: [
+
+
                     Card(
                       elevation: 5,
                       margin: EdgeInsets.zero,
@@ -119,7 +121,7 @@ class ProfileView extends GetView<ProfileController> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              '${controller.profileDataController.firstName}',
+                                              '${controller.profileDataController.firstName} ${controller.profileDataController.lastName}',
                                               style: AppTextStyle
                                                   .fontSize18WhiteW500,
                                             ),
@@ -346,7 +348,7 @@ class ProfileView extends GetView<ProfileController> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                controller.globalRxVariableController.roleId.value == 2 ?
+                                controller.globalRxVariableController.roleId.value == 2  ?
                                 InkWell(
                                   onTap: () =>
                                       controller.showUploadDocumentsBottomSheet(
