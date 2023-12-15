@@ -249,6 +249,9 @@ class AppFunctions {
       case 'Staff':
         Get.toNamed(Routes.STAFF);
         break;
+      case 'Child':
+        Get.toNamed(Routes.PARENT_CHILD);
+        break;
 
     }
   }
