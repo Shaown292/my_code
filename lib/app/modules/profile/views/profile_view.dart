@@ -117,32 +117,20 @@ class ProfileView extends GetView<ProfileController> {
                                                     BorderRadius.circular(8),
                                               ),
                                             )
-                                          : Container(
-                                        height: Get.height * 0.07,
-                                        width: Get.height * 0.07,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image:
-                                              NetworkImage(controller.profileDataController.profilePhoto.toString()),
-                                              fit: BoxFit.cover
-                                          ),
-                                          borderRadius:
-                                          BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                      // SizedBox(
-                                      //         height: 50,
-                                      //         width: 50,
-                                      //         child: ClipRRect(
-                                      //           borderRadius: 6.circularRadius,
-                                      //           child: CacheImageView(
-                                      //             url:
-                                      //                 controller.profileDataController.profilePhoto.toString(),
-                                      //             errorImageLocal:
-                                      //                 'assets/image/production/avatar.png',
-                                      //           ),
-                                      //         ),
-                                      //       ),
+                                          :
+                                      SizedBox(
+                                              height: 50,
+                                              width: 50,
+                                              child: ClipRRect(
+                                                borderRadius: 6.circularRadius,
+                                                child: CacheImageView(
+                                                  url:
+                                                      controller.profileDataController.profilePhoto.toString(),
+                                                  errorImageLocal:
+                                                      'assets/image/production/avatar.png',
+                                                ),
+                                              ),
+                                            ),
                                       10.horizontalSpacing,
                                       Flexible(
                                         child: Column(
