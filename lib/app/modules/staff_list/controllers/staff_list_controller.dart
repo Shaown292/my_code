@@ -12,6 +12,7 @@ class StaffListController extends GetxController {
   RxBool isLoading = false.obs;
   List<RoleWiseStaffListData> roleWiseStaffList = [];
   int staffId = -1;
+  String staffDesignation = Get.arguments["staff_role_name"];
 
   Future<void> getRoleWiseStaffList({required int staffRoleId}) async {
     try {

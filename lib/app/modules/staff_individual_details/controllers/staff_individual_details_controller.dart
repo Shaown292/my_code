@@ -10,6 +10,9 @@ import '../../../utilities/api_urls.dart';
 class StaffIndividualDetailsController extends GetxController {
   int staffIndividualId = 5;
   LoadingController loadingController = Get.find();
+  String staffFirstName = Get.arguments["staff_first_name"] ?? "";
+  String staffLastName = Get.arguments["staff_last_name"]  ?? "";
+
 
   AdminIndividualStaffDetailsResponseModel? adminIndividualStaffDetailsResponseModel;
 

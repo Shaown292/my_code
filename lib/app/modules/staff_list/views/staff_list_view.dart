@@ -18,7 +18,7 @@ class StaffListView extends GetView<StaffListController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Staff List",
+      title: "${controller.staffDesignation} List",
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -54,7 +54,9 @@ class StaffListView extends GetView<StaffListController> {
                                       Routes.STAFF_INDIVIDUAL_DETAILS,
                                       arguments: {
                                         "staff_individual_id": controller
-                                            .roleWiseStaffList[index].id
+                                            .roleWiseStaffList[index].id,
+                                        "staff_first_name" : controller.roleWiseStaffList[index].firstName,
+                                        "staff_last_name" : controller.roleWiseStaffList[index].lastName,
                                       },
                                     );
                                   },

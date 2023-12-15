@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
@@ -277,6 +279,8 @@ class AdminLeaveController extends GetxController {
     }
   }
 
+
+
   void showPendingListDetailsBottomSheet({
     required int index,
     required String reason,
@@ -324,10 +328,23 @@ class AdminLeaveController extends GetxController {
                 ),
                 10.verticalSpacing,
                 InkWell(
-                  onTap: () {},
-                  child: Text(
-                    "Attached File: $file",
-                    style: AppTextStyle.fontSize16lightBlackW500,
+                  onTap: () => fileDownload(url: file, title: file.toString()),
+                  child: Container(
+                    width: 130,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text("Attached File", style: AppTextStyle.textStyle12WhiteW400,),
+                        10.horizontalSpacing,
+                        Image.asset(ImagePath.download, scale: 5, color: Colors.white,),
+                      ],
+                    ),
                   ),
                 ),
                 30.verticalSpacing,
@@ -386,6 +403,15 @@ class AdminLeaveController extends GetxController {
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );
+  }
+
+
+  void fileDownload({required String url, required String title}) {
+    url == ''
+        ? showBasicFailedSnackBar(
+      message: 'No File Available',
+    )
+        : FileDownloadUtils().downloadFiles(url: url, title: title);
   }
 
   @override
