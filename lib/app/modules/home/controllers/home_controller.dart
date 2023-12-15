@@ -112,12 +112,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
 
-    print('home is calling');
     homeTileList = Get.arguments["homeListTile"];
-
-    for(var i in homeTileList){
-      print(i);
-    }
 
     debugPrint(
         'Role ID: ${globalRxVariableController.roleId} :::: Record ID: ${globalRxVariableController.studentId}');

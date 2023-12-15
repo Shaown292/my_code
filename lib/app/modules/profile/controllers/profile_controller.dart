@@ -479,11 +479,11 @@ class ProfileController extends GetxController {
   void onInit() {
     studentIdFromAdmin = Get.arguments['student_id'];
 
-    fetchProfilePersonalData(studentId: studentIdFromAdmin);
-    fetchProfileParentsData(studentId: studentIdFromAdmin);
-    fetchProfileTransportData(studentId: studentIdFromAdmin);
-    fetchProfileOthersData(studentId: studentIdFromAdmin);
-    getAllDocumentList(studentId: studentIdFromAdmin);
+    globalRxVariableController.roleId.value == 3 ?  fetchProfilePersonalData(studentId: globalRxVariableController.studentId.value!) : fetchProfilePersonalData(studentId: studentIdFromAdmin);
+    globalRxVariableController.roleId.value == 3 ?  fetchProfileParentsData(studentId: globalRxVariableController.studentId.value!) : fetchProfileParentsData(studentId: studentIdFromAdmin);
+    globalRxVariableController.roleId.value == 3 ?  fetchProfileTransportData(studentId: globalRxVariableController.studentId.value!) : fetchProfileTransportData(studentId: studentIdFromAdmin);
+    globalRxVariableController.roleId.value == 3 ?  fetchProfileOthersData(studentId: globalRxVariableController.studentId.value!) : fetchProfileOthersData(studentId: studentIdFromAdmin);
+    globalRxVariableController.roleId.value == 3 ?  getAllDocumentList(studentId: globalRxVariableController.studentId.value!) : getAllDocumentList(studentId: studentIdFromAdmin);
     super.onInit();
   }
 }

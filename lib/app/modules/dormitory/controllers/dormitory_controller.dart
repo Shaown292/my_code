@@ -43,7 +43,7 @@ class DormitoryController extends GetxController {
 
   @override
   void onInit() {
-    if (globalRxVariableController.roleId.value == 2) {
+    if (globalRxVariableController.roleId.value == 2 || globalRxVariableController.roleId.value == 3) {
       getDormitoryList();
     }
 

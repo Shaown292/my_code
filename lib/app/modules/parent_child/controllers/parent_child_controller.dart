@@ -11,37 +11,37 @@ import 'package:get/get.dart';
 class ParentChildController extends GetxController {
 
   GlobalRxVariableController globalRxVariableController = Get.find();
-  LoadingController loadingController = Get.find();
+  RxBool isLoading = false.obs;
 
   RxList<ParentChildData> parentChildList = <ParentChildData>[].obs;
 
   Future<ParentsChildListResponseModel> getParentsChildData({required int parentId}) async {
 
     try{
-
+      isLoading.value = true;
       parentChildList.clear();
-      loadingController.isLoading = true;
+
 
       final response = await BaseClient().getData(url: InfixApi.getParentsChildData(parentId: parentId), header: GlobalVariable.header);
 
       ParentsChildListResponseModel parentsChildListResponseModel = ParentsChildListResponseModel.fromJson(response);
 
       if(parentsChildListResponseModel.success == true){
-        loadingController.isLoading = false;
+        isLoading.value = false;
         for(var element in parentsChildListResponseModel.data!){
           parentChildList.add(element);
         }
       } else{
-        loadingController.isLoading = false;
+        isLoading.value = false;
         showBasicFailedSnackBar(message: parentsChildListResponseModel.message ?? AppText.somethingWentWrong,);
       }
 
     }catch(e, t){
-      loadingController.isLoading = false;
+      isLoading.value = false;
       debugPrint('$e');
       debugPrint('$t');
     }finally{
-      loadingController.isLoading = false;
+      isLoading.value = false;
     }
 
     return ParentsChildListResponseModel();

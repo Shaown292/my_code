@@ -17,6 +17,7 @@ class AssignmentController extends GetxController {
   void getStudentAssignmentList() async {
     try {
 
+      studentAssignmentList.clear();
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
@@ -66,6 +67,7 @@ class AssignmentController extends GetxController {
 
   @override
   void onInit() {
+    print(':::::::::::::::::::::::::::');
     getStudentAssignmentList();
     super.onInit();
   }

@@ -4,7 +4,6 @@ import 'package:flutter_single_getx_api_v2/app/data/module_data/home_data/home_d
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/student_list_tile/student_list_tile.dart';
 
@@ -27,14 +26,15 @@ class ParentChildView extends GetView<ParentChildController> {
                   onRefresh: () async {
                     controller.getParentsChildData(parentId: controller.globalRxVariableController.parentId.value!);
                   },
-                  child: controller.loadingController.isLoading ? const LoadingWidget() : controller.parentChildList.isNotEmpty ? ListView.builder(
+                  child: controller.isLoading.value ? const Center(child: CircularProgressIndicator()) : controller.parentChildList.isNotEmpty ? ListView.builder(
                     itemCount: controller.parentChildList.length,
                     itemBuilder: (context, index) {
                       return StudentListTile(
                         onTap: () {
+
                           controller.globalRxVariableController.studentId.value = controller.parentChildList[index].studentId;
-                          Get.toNamed(Routes.HOME, arguments: {
-                            "homeListTile" : studentList,
+                          Get.toNamed(Routes.DASHBOARD, arguments: {
+                            'homeListTile': studentList,
                           });
                         },
                         studentName: controller.parentChildList[index].fullName,

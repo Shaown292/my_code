@@ -96,6 +96,8 @@ import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/chat_search/bindings/chat_search_binding.dart';
 import '../modules/chat_search/views/chat_search_view.dart';
+import '../modules/child_home/bindings/child_home_binding.dart';
+import '../modules/child_home/views/child_home_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/dormitory/bindings/dormitory_binding.dart';
@@ -261,6 +263,7 @@ class AppPages {
         AdminAttendanceBinding(),
         TeAcademicBinding(),
         TeHomeworkBinding(),
+        ChildHomeBinding(),
       ],
     ),
     GetPage(
@@ -810,32 +813,43 @@ class AppPages {
     GetPage(
       name: _Paths.TE_MY_ROUTINE,
       page: () => const TeMyRoutineView(),
-      binding: TeMyRoutineBinding(),transition: Transition.fade,
+      binding: TeMyRoutineBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TE_SEARCH_CLASS_ROUTINE,
       page: () => const TeSearchClassRoutineView(),
-      binding: TeSearchClassRoutineBinding(),transition: Transition.fade,
+      binding: TeSearchClassRoutineBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TE_SEARCH_CLASS_ROUTINE_LIST,
       page: () => const TeSearchClassRoutineListView(),
-      binding: TeSearchClassRoutineListBinding(),transition: Transition.fade,
+      binding: TeSearchClassRoutineListBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TE_SUBJECTS,
       page: () => const TeSubjectsView(),
-      binding: TeSubjectsBinding(),transition: Transition.fade,
+      binding: TeSubjectsBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ABOUT,
       page: () => const AboutView(),
-      binding: AboutBinding(),transition: Transition.fadeIn,
+      binding: AboutBinding(),
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: _Paths.PARENT_CHILD,
       page: () => const ParentChildView(),
-      binding: ParentChildBinding(),transition: Transition.fade,
+      binding: ParentChildBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.CHILD_HOME,
+      page: () => const ChildHomeView(),
+      binding: ChildHomeBinding(),
     ),
   ];
 }

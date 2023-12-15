@@ -121,6 +121,7 @@ abstract class Routes {
   static const TE_SUBJECTS = _Paths.TE_SUBJECTS;
   static const ABOUT = _Paths.ABOUT;
   static const PARENT_CHILD = _Paths.PARENT_CHILD;
+  static const CHILD_HOME = _Paths.CHILD_HOME;
 }
 
 abstract class _Paths {
@@ -239,4 +240,5 @@ abstract class _Paths {
   static const TE_SUBJECTS = '/te-subjects';
   static const ABOUT = '/about';
   static const PARENT_CHILD = '/parent-child';
+  static const CHILD_HOME = '/child-home';
 }
