@@ -88,7 +88,7 @@ class AppTextStyle {
 
   static const labelText = TextStyle(
       color: AppColors.editProfileTextFieldLabelColor,
-      fontSize: 8,
+      fontSize: 12,
       fontWeight: FontWeight.w400);
 
   ///Homework

@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profile_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/guardian_info.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/others_tile.dart';
@@ -32,7 +33,24 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       actions: [
-        EditProfileRoute(controller: controller),
+        InkWell(
+          onTap: (){
+            Get.toNamed(Routes.PROFILE_EDIT, arguments: {"profile_personal": controller.profilePersonal});
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Container(
+              height: 17,
+              width: 17,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(ImagePath.edit),
+                    filterQuality: FilterQuality.high
+                ),
+              ),
+            ),
+          ),
+        )
       ],
       leadingIcon: controller.globalRxVariableController.roleId.value == 2
           ? const SizedBox()
@@ -99,19 +117,32 @@ class ProfileView extends GetView<ProfileController> {
                                                     BorderRadius.circular(8),
                                               ),
                                             )
-                                          : SizedBox(
-                                              height: 50,
-                                              width: 50,
-                                              child: ClipRRect(
-                                                borderRadius: 6.circularRadius,
-                                                child: CacheImageView(
-                                                  url:
-                                                      '${AppConfig.imageBaseUrl}${controller.profileDataController.profilePhoto.toString()}',
-                                                  errorImageLocal:
-                                                      'assets/image/production/avatar.png',
-                                                ),
-                                              ),
-                                            ),
+                                          : Container(
+                                        height: Get.height * 0.07,
+                                        width: Get.height * 0.07,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image:
+                                              NetworkImage(controller.profileDataController.profilePhoto.toString()),
+                                              fit: BoxFit.cover
+                                          ),
+                                          borderRadius:
+                                          BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //         height: 50,
+                                      //         width: 50,
+                                      //         child: ClipRRect(
+                                      //           borderRadius: 6.circularRadius,
+                                      //           child: CacheImageView(
+                                      //             url:
+                                      //                 controller.profileDataController.profilePhoto.toString(),
+                                      //             errorImageLocal:
+                                      //                 'assets/image/production/avatar.png',
+                                      //           ),
+                                      //         ),
+                                      //       ),
                                       10.horizontalSpacing,
                                       Flexible(
                                         child: Column(

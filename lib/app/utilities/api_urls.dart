@@ -29,8 +29,8 @@ class InfixApi {
     return '${baseApi}student-profile-edit?student_id=$studentId';
   }
 
-  static String updateProfile(int roleId) {
-    return '${baseApi}student-profile-update?student_id=$roleId';
+  static String updateProfile({required int studentId}) {
+    return '${baseApi}student-profile-update?student_id=$studentId';
   }
 
   static String profilePersonal() {

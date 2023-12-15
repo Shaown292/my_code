@@ -246,11 +246,14 @@ class AppFunctions {
   static void getParentHomeNavigation({required String title}) {
     debugPrint(title);
     switch (title) {
-      case 'Staff':
-        Get.toNamed(Routes.STAFF);
-        break;
       case 'Child':
         Get.toNamed(Routes.PARENT_CHILD);
+        break;
+      case 'About':
+        Get.toNamed(Routes.ABOUT);
+        break;
+      case 'Settings':
+        Get.toNamed(Routes.SETTINGS);
         break;
 
     }
