@@ -320,8 +320,7 @@ class StudentLessonPlanController extends GetxController {
 
   @override
   void onInit() {
-    print(
-        'object:::::::::: ${globalRxVariableController.studentId} ::: ${globalRxVariableController.studentRecordId}');
+
     selectTab();
     if (homeController.studentRecordList.isNotEmpty &&
         globalRxVariableController.studentId.value != null) {
