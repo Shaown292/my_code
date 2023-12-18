@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 class AdminVehicleController extends GetxController {
   LoadingController loadingController = Get.find();
+  RxBool saveLoader = false.obs;
   RxBool dropdownLoader = false.obs;
 
   TabController? tabController;
@@ -26,6 +27,7 @@ class AdminVehicleController extends GetxController {
       <AdminVehicleDriverData>[].obs;
   Rx<AdminVehicleDriverData> initialValue =
       AdminVehicleDriverData(id: -1, name: "full_name").obs;
+  final driverId = Rxn<int>();
 
   List<String> tabs = <String>[
     'Add Vehicle',
@@ -106,6 +108,78 @@ class AdminVehicleController extends GetxController {
     }
 
     return AdminVehicleDriverResponseModel();
+  }
+
+  Future<AdminVehicleListResponseModel> addAdminVehicle() async {
+    try {
+      saveLoader.value = true;
+
+      final response = await BaseClient().postData(
+          url: InfixApi.adminAddVehicle,
+          header: GlobalVariable.header,
+          payload: {
+            'vehicle_number': vehicleNoTextController.text,
+            'vehicle_model': vehicleModelTextController.text,
+            'year_made': madeYearTextController.text,
+            'driver_id': driverId.value,
+            'note': noteTextController.text,
+          });
+
+      AdminVehicleListResponseModel adminVehicleListResponseModel =
+          AdminVehicleListResponseModel.fromJson(response);
+
+      if (adminVehicleListResponseModel.success == true) {
+        saveLoader.value = false;
+        // adminVehicleList.add(AdminVehicleData(
+        //   id: adminVehicleListResponseModel.data!.first.id,
+        //   vehicleModel: adminVehicleListResponseModel.data!.first.vehicleModel,
+        //   vehicleNo: adminVehicleListResponseModel.data!.first.vehicleNo,
+        //   madeYear: int.tryParse(
+        //       adminVehicleListResponseModel.data!.first.vehicleNo ?? ''),
+        //   note: adminVehicleListResponseModel.data!.first.note,
+        // ));
+
+        adminVehicleList.add(adminVehicleListResponseModel.data!.first);
+
+        adminVehicleList.refresh();
+        vehicleNoTextController.clear();
+        vehicleModelTextController.clear();
+        madeYearTextController.clear();
+        noteTextController.clear();
+        driverId.value = null;
+        showBasicSuccessSnackBar(
+            message: adminVehicleListResponseModel.message ?? '');
+      } else {
+        saveLoader.value = false;
+        showBasicFailedSnackBar(
+          message: adminVehicleListResponseModel.message ??
+              AppText.somethingWentWrong,
+        );
+      }
+    } catch (e, t) {
+      saveLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      saveLoader.value = false;
+    }
+
+    return AdminVehicleListResponseModel();
+  }
+
+  bool validation() {
+    if (vehicleNoTextController.text.isEmpty) {
+      showBasicFailedSnackBar(message: 'The vehicle number field is required.');
+      return false;
+    } else if (vehicleModelTextController.text.isEmpty) {
+      showBasicFailedSnackBar(message: 'The vehicle model field is required.');
+      return false;
+    } else if (driverId.value == null) {
+      showBasicFailedSnackBar(message: 'The driver id field is required.');
+      return false;
+    }
+
+    return true;
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
@@ -100,9 +101,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 5.verticalSpacing,
                                 /// Driver list dropdown
                                 controller.dropdownLoader.value
-                                    ? const CircularProgressIndicator(
-                                        color: AppColors.primaryColor,
-                                      )
+                                    ? const SecondaryLoadingWidget()
                                     : DuplicateDropdown(
                                         dropdownValue:
                                             controller.initialValue.value,
@@ -111,6 +110,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                         changeDropdownValue: (value) {
                                           controller.initialValue.value =
                                               value!;
+                                          controller.driverId.value = value.id;
                                         },
                                       ),
                                 10.verticalSpacing,
@@ -124,9 +124,15 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                   fillColor: Colors.white,
                                 ),
                                 30.verticalSpacing,
-                                PrimaryButton(
+                                controller.saveLoader.value ? const SecondaryLoadingWidget() : PrimaryButton(
                                   text: "Save",
-                                  onTap: () {},
+                                  onTap: () {
+
+                                    if(controller.validation()){
+                                      controller.addAdminVehicle();
+                                    }
+
+                                  },
                                 ),
                               ],
                             ),
@@ -135,34 +141,38 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                           /// Vehicle List
                           Obx(
                             () => controller.loadingController.isLoading
-                                ? const CircularProgressIndicator(
-                                    color: AppColors.primaryColor,
-                                  )
+                                ? const SecondaryLoadingWidget()
                                 : controller.adminVehicleList.isNotEmpty
-                                    ? ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount:
-                                            controller.adminVehicleList.length,
-                                        itemBuilder: (context, index) {
-                                          return VehicleTile(
-                                            model: controller
-                                                .adminVehicleList[index]
-                                                .vehicleModel,
-                                            number: controller
-                                                .adminVehicleList[index]
-                                                .vehicleNo,
-                                            madeYear: controller
-                                                .adminVehicleList[index]
-                                                .madeYear
-                                                .toString(),
-                                            note: controller
-                                                .adminVehicleList[index].note,
-                                            color: index % 2 == 0
-                                                ? AppColors.profileCardTextColor
-                                                : Colors.white,
-                                          );
-                                        },
-                                      )
+                                    ? RefreshIndicator(
+                                      onRefresh: () async {
+                                        controller.getAdminVehicleList();
+                                      },
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              controller.adminVehicleList.length,
+                                          itemBuilder: (context, index) {
+
+                                            return VehicleTile(
+                                              model: controller
+                                                  .adminVehicleList[index]
+                                                  .vehicleModel,
+                                              number: controller
+                                                  .adminVehicleList[index]
+                                                  .vehicleNo,
+                                              madeYear: controller
+                                                  .adminVehicleList[index]
+                                                  .madeYear
+                                                  .toString(),
+                                              note: controller
+                                                  .adminVehicleList[index].note,
+                                              color: index % 2 == 0
+                                                  ? AppColors.profileCardTextColor
+                                                  : Colors.white,
+                                            );
+                                          },
+                                        ),
+                                    )
                                     : const NoDataAvailableWidget(),
                           ),
                         ],

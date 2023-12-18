@@ -409,6 +409,7 @@ class InfixApi {
 
   /// Admin Transport
   static String getAdminVehicleList = '${baseApi}admin-vehicle-list';
+  static String adminAddVehicle = '${baseApi}admin-vehicle-store';
   static String getAdminTransportList = '${baseApi}assign-vehicle-list';
   static String getAdminTransportRouteList = '${baseApi}admin-route-list';
   static String getAdminDriverList = '${baseApi}admin-vehicle-drivers';
