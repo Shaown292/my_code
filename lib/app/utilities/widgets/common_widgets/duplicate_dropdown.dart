@@ -1,9 +1,9 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 
 class DuplicateDropdown extends StatelessWidget {
   final dynamic dropdownValue;
@@ -13,6 +13,7 @@ class DuplicateDropdown extends StatelessWidget {
   final Color? dropdownColor;
   final Color? activeStatusColor;
   final bool dropdownText;
+  final String? hint;
 
   const DuplicateDropdown({
     super.key,
@@ -22,7 +23,7 @@ class DuplicateDropdown extends StatelessWidget {
     this.color,
     this.dropdownColor,
     this.dropdownText = true,
-    this.activeStatusColor,
+    this.activeStatusColor, this.hint,
   });
 
   @override
@@ -39,6 +40,7 @@ class DuplicateDropdown extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<dynamic>(
+            hint: Text(hint ?? "", style: AppTextStyle.fontSize13BlackW400,),
             menuMaxHeight: Get.height * 0.4,
             isExpanded: true,
             items: dropdownList!
@@ -73,9 +75,9 @@ class DuplicateDropdown extends StatelessWidget {
             )
                 .toList(),
             value: dropdownValue,
-            iconSize: 26,
-            dropdownColor: dropdownColor,
-            iconEnabledColor: color ?? AppColors.profileValueColor,
+            // iconSize: 26,
+            // dropdownColor: dropdownColor,
+            // iconEnabledColor: color ?? AppColors.profileValueColor,
             onChanged: changeDropdownValue,
           ),
         ),

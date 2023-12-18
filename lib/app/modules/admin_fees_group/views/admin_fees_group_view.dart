@@ -104,6 +104,9 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                                               feesId: controller
                                                   .feesGroupList[index].id!,
                                               index: index);
+                                          controller.titleTextController.clear();
+                                          controller.descriptionTextController.clear();
+
                                         } else {
                                           showBasicFailedSnackBar(
                                               message: 'Title is required');

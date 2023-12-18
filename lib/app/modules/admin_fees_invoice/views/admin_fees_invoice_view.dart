@@ -19,18 +19,6 @@ class AdminFeesInvoiceView extends GetView<AdminFeesInvoiceController> {
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       title: "Fees Invoice",
-      actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: InkWell(
-            onTap: () {},
-            child: const Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.all(10.0),

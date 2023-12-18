@@ -11,8 +11,9 @@ import 'package:get/get.dart';
 
 class AdminFeesInvoiceListController extends GetxController {
   LoadingController loadingController = Get.find();
-
   RxList<StudentInvoices> feesInvoiceList = <StudentInvoices>[].obs;
+
+  TextEditingController searchController = TextEditingController();
 
   Future<AdminFeesInvoiceListResponseModel> getFeesInvoiceList() async {
     try {

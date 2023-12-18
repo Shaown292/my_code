@@ -31,26 +31,28 @@ class IndividualDetailsTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
           width: Get.width,
           color: Colors.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Address: ${address ?? AppText.noDataAvailable}",
-                style: AppTextStyle.fontSize13BlackW400,
-              ),
-              10.verticalSpacing,
-              Text(
-                "Phone: ${phone ?? AppText.noDataAvailable}",
-                style: AppTextStyle.fontSize13BlackW400,
-              ),
-            ],
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            color: const Color(0xFFF5F5F5),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Address: ${address ?? AppText.noDataAvailable}",
+                  style: AppTextStyle.fontSize13BlackW400,
+                ),
+                10.verticalSpacing,
+                Text(
+                  "Phone: ${phone ?? AppText.noDataAvailable}",
+                  style: AppTextStyle.fontSize13BlackW400,
+                ),
+              ],
+            ),
           ),
         ),
-        10.verticalSpacing,
         CustomDivider(color: AppColors.profileDividerColor, width: Get.width,),
         10.verticalSpacing,
         Padding(

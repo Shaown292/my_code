@@ -32,9 +32,7 @@ class AdminTransportDetailsController extends GetxController {
 
       if (adminTransportListResponseModel.success == true) {
         loadingController.isLoading = false;
-        showBasicSuccessSnackBar(
-          message: adminTransportListResponseModel.message ?? '',
-        );
+
 
         if (adminTransportListResponseModel.data!.isNotEmpty) {
           for (var element in adminTransportListResponseModel.data!) {

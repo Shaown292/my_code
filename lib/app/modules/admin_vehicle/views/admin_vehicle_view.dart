@@ -61,6 +61,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 15.0, vertical: 10),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomTextFormField(
                                   controller:
@@ -95,6 +96,8 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 ),
                                 10.verticalSpacing,
 
+                                const Text("Add Driver Name*", style: AppTextStyle.fontSize13BlackW400,),
+                                5.verticalSpacing,
                                 /// Driver list dropdown
                                 controller.dropdownLoader.value
                                     ? const CircularProgressIndicator(
