@@ -1,4 +1,3 @@
-import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 
 import '../../config/app_config.dart';
 
@@ -444,6 +443,7 @@ class InfixApi {
   /// Teacher academic module
   static String getTeacherSubjectList = '${baseApi}subjects';
   static String getTeacherMyRoutineList({required int userId}) => '${baseApi}teacher-class-routine?user_id=$userId';
+  static String getTeacherClassRoutineList({required int classId, required int sectionId}) => '${baseApi}class-routine?class_id=$classId&section_id=$sectionId';
 
 
 
@@ -456,6 +456,7 @@ class InfixApi {
   static String getTeacherAddHomeworkClassList = '${baseApi}teacher-add-homework-for-class';
   static String getTeacherAddHomeworkSubjectList({required int classId}) => '${baseApi}teacher-add-homework-for-subject?class_id=$classId';
   static String getTeacherAddHomeworkSectionList({required int classId, required int subjectId}) => '${baseApi}teacher-add-homework-for-section?class_id=$classId&subject_id=$subjectId';
+  static String getTeacherHomeworkEvaluationList({required int classId, required int sectionId, required int homeworkId, }) => '${baseApi}teacher-homework-evaluation-list?class_id=$classId&section_id=$sectionId&homework_id=$homeworkId';
 
   /// Teacher Content
   static String getTeacherContentList = '${baseApi}teacher-content-list';

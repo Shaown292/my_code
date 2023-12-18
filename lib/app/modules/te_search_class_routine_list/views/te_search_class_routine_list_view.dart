@@ -4,8 +4,11 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/show_week_tile/show_week_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/student_class_details_card/student_calss_details_card.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_academic_model/teacher_class_routine_list_response_model.dart';
 
 import 'package:get/get.dart';
 
@@ -25,11 +28,9 @@ class TeSearchClassRoutineListView
               () => CustomBackground(
             customWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: controller.loadingController.isLoading
+              child: controller.isLoading.value
                   ? const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primaryColor,
-                ),
+                child: CustomisedLoadingWidget(),
               )
                   : Column(
                 children: [
@@ -71,20 +72,27 @@ class TeSearchClassRoutineListView
                         controller.daysOfWeek.length,
                             (index) {
 
-                          return ListView.builder(
+                              List<TeacherClassRoutines>? routineList = controller
+                                  .teacherClassRoutineList
+                                  .where((element) =>
+                              element.day?.substring(0, 3) ==
+                                  controller.daysOfWeek[index])
+                                  .toList();
+
+                          return routineList.isNotEmpty ? ListView.builder(
                             shrinkWrap: true,
-                            itemCount: controller.daysOfWeek.length,
+                            itemCount: routineList.length,
                             itemBuilder: (context, index) {
-                              return const StudentClassDetailsCard(
-                                startingTime: "9:30",
-                                subject:"Bangla",
-                                endingTime:"10:30 AM",
-                                roomNumber:"130",
-                                buildingName: 'Building Name',
-                                instructorName: "Murad Takla",
+                              return StudentClassDetailsCard(
+                                startingTime: routineList[index].startTime,
+                                subject:routineList[index].subject,
+                                endingTime:routineList[index].endTime,
+                                roomNumber:routineList[index].room,
+                                buildingName: '',
+                                instructorName: routineList[index].teacher,
                               );
                             },
-                          );
+                          ) : const NoDataAvailableWidget();
                         },
                       ),
                     ),

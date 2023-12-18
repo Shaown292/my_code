@@ -30,40 +30,49 @@ class TeacherHomeworkListResponseModel {
 class TeacherHomeworkData {
   int? id;
   String? subjectName;
-  String? creationDate;
+  String? assignDate;
   String? submissionDate;
   String? evaluation;
   int? marks;
   String? file;
+  int? classId;
+  int? sectionId;
 
-  TeacherHomeworkData(
-      {this.id,
-        this.subjectName,
-        this.creationDate,
-        this.submissionDate,
-        this.evaluation,
-        this.marks,
-        this.file});
+  TeacherHomeworkData({
+    this.id,
+    this.subjectName,
+    this.assignDate,
+    this.submissionDate,
+    this.evaluation,
+    this.marks,
+    this.file,
+    this.classId,
+    this.sectionId,
+  });
 
   TeacherHomeworkData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     subjectName = json['subject_name'];
-    creationDate = json['creation_date'];
+    assignDate = json['assign_date'];
     submissionDate = json['submission_date'];
     evaluation = json['evaluation'];
     marks = json['marks'];
     file = json['file'];
+    classId = json['class_id'];
+    sectionId = json['section_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['subject_name'] = subjectName;
-    data['creation_date'] = creationDate;
+    data['assign_date'] = assignDate;
     data['submission_date'] = submissionDate;
     data['evaluation'] = evaluation;
     data['marks'] = marks;
     data['file'] = file;
+    data['class_id'] = classId;
+    data['section_id'] = sectionId;
     return data;
   }
 }

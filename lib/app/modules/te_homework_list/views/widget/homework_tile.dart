@@ -13,6 +13,7 @@ class HomeworkTile extends StatelessWidget {
   final String? marks;
   final String? subject;
   final Function()? onTap;
+  final Function()? evaluationOnTap;
   final bool isEvaluation;
 
   const HomeworkTile({
@@ -23,6 +24,7 @@ class HomeworkTile extends StatelessWidget {
     this.marks,
     this.subject,
     this.onTap,
+    this.evaluationOnTap,
     this.isEvaluation = false,
   });
 
@@ -43,7 +45,7 @@ class HomeworkTile extends StatelessWidget {
                 onTap: onTap,
                 child: isEvaluation
                     ? InkWell(
-                        onTap: () {},
+                        onTap: evaluationOnTap,
                         child: Image.asset(
                           ImagePath.download,
                           scale: 4,
