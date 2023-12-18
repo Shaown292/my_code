@@ -30,6 +30,8 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
   RxInt absent = 0.obs;
   RxInt holiday = 0.obs;
 
+  RxString classSection = ''.obs;
+
   RxInt recordId = 0.obs;
   RxInt subjectNameId = 0.obs;
   RxBool isLoading = false.obs;
@@ -65,6 +67,7 @@ class AdminSubjectAttendanceSearchIndividualDetailsController
       if (adminAttenSubSearchIndividualDetailsResponseModel.success == true) {
         isLoading.value = false;
 
+        classSection.value = '${adminAttenSubSearchIndividualDetailsResponseModel.data!.className} (${adminAttenSubSearchIndividualDetailsResponseModel.data!.sectionName})';
         present.value = adminAttenSubSearchIndividualDetailsResponseModel
                 .data?.totalPresent ??
             0;

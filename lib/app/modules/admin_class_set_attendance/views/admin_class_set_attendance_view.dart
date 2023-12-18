@@ -40,8 +40,8 @@ class AdminClassSetAttendanceView
                         Obx(() => controller.holidayLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : InkWell(
                           onTap: () {
 
-                            controller.markHoliday.value = !controller.markHoliday.value;
-                            controller.markUnMarkHoliday(purpose: controller.markHoliday.value ? 'mark' : 'unmark',);
+
+                            controller.markUnMarkHoliday(purpose: controller.markHoliday.value ? 'unmark' : 'mark',);
 
                           },
                           child: Container(

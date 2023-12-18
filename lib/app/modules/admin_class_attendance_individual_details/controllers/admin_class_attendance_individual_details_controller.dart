@@ -29,6 +29,8 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
   RxInt absent = 0.obs;
   RxInt holiday = 0.obs;
 
+  RxString classSection = ''.obs;
+
   /// Receive Arguments
   RxInt studentAttendanceId = 0.obs;
   RxBool isLoading = false.obs;
@@ -65,6 +67,8 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
         late.value = adminStudentSearchAttenResponseModel.data?.l ?? 0;
         absent.value = adminStudentSearchAttenResponseModel.data?.a ?? 0;
         holiday.value = adminStudentSearchAttenResponseModel.data?.h ?? 0;
+
+        classSection.value = 'Class ${adminStudentSearchAttenResponseModel.data!.className} (${adminStudentSearchAttenResponseModel.data!.section})';
 
         currentDate = DateTime.tryParse(
                 adminStudentSearchAttenResponseModel.data!.currentDay!) ??

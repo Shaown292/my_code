@@ -105,6 +105,7 @@ class ProfileEditController extends GetxController {
       debugPrint('$resMap');
 
       if (profileEditResponseModel.success == true) {
+        profileDataController.profilePhoto.value = profileEditResponseModel.data?.profilePersonal?.studentPhoto ?? '';
         profileDataController.profilePickedImage.value = File('');
         showBasicSuccessSnackBar(
             message: profileEditResponseModel.message ??
@@ -134,6 +135,7 @@ class ProfileEditController extends GetxController {
 
     if (dateTime != null) {
       dateOfBirthTextController.text = dateTime.dd_mm_yyyy;
+      userProfileInfoUpdate();
     }
   }
 
@@ -151,7 +153,6 @@ class ProfileEditController extends GetxController {
         profileEditResponseModel.data?.profilePersonal?.dateOfBirth ?? '';
     profileDataController.presentAddress.value =
         profileEditResponseModel.data?.profilePersonal?.currentAddress ?? '';
-    profileDataController.profilePhoto.value =
-        profileEditResponseModel.data?.profilePersonal?.studentPhoto ?? '';
+
   }
 }

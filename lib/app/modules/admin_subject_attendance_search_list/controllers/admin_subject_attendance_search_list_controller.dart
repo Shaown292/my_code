@@ -190,6 +190,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
             'purpose': purpose,
             'class_id': classId.value,
             'section_id': sectionId.value,
+            'subject_id': subjectId.value,
             'attendance_date': attendanceDate.value,
           });
 

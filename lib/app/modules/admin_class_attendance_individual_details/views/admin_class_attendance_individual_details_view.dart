@@ -40,7 +40,7 @@ class AdminClassAttendanceIndividualDetailsView
                                     padding: const EdgeInsets.all(8.0),
                                     child: Obx(
                                       () => StudyButton(
-                                        title: "Five (Rose)",
+                                        title: controller.classSection.value,
                                         onItemTap: () {
                                           controller.selectIndex.value = index;
                                         },

@@ -22,30 +22,14 @@ class AdminSubjectAttendanceSearchIndividualDetailsView
             customWidget: SingleChildScrollView(
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15.0, vertical: 0),
-                    child: SizedBox(
-                      height: 50,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 1,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Obx(
-                              () => StudyButton(
-                                title: "Five (Rose)",
-                                onItemTap: () {
-                                  controller.selectIndex.value = index;
-                                },
-                                isSelected:
-                                    controller.selectIndex.value == index,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                  SizedBox(
+                    height: 40,
+                    width: 100,
+                    child: StudyButton(
+                      title: controller.classSection.value,
+                      onItemTap: () {
+                      }, isSelected: true,
+
                     ),
                   ),
                   controller.isLoading.value

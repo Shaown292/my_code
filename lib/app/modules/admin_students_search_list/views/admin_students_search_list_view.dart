@@ -30,6 +30,7 @@ class AdminStudentsSearchListView
                   itemBuilder: (context, index) {
                     return StudentListTile(
                       onTap: () {
+                        controller.globalRxVariableController.studentId.value = controller.studentData![index].id;
                         Get.toNamed(Routes.PROFILE, arguments: {
                           'student_id': controller.studentData![index].id
                         });

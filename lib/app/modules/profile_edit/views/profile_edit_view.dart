@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_dimens.dart';
 import '../../../data/constants/app_text.dart';
@@ -157,7 +156,6 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
-                  iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfileEmail,
                   readOnly:
                       controller.globalRxVariableController.roleId.value == 1
@@ -165,28 +163,33 @@ class ProfileEditView extends GetView<ProfileEditController> {
                           : true,
                   suffixIcon:
                       controller.globalRxVariableController.roleId.value == 1
-                          ? Image.asset(
-                              ImagePath.editBlack,
-                              height: 10,
-                              width: 10,
-                              scale: 3,
-                            )
+                          ? InkWell(
+                        onTap: () => controller.userProfileInfoUpdate(),
+                            child: Image.asset(
+                                ImagePath.editBlack,
+                                height: 10,
+                                width: 10,
+                                scale: 3,
+                              ),
+                          )
                           : const SizedBox(),
                   hintText: AppText.editProfileEmail,
                   controller: controller.emailTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
-                  iconOnTap: () => controller.userProfileInfoUpdate(),
                   labelText: AppText.editProfilePhoneNumber,
                   suffixIcon:
                       controller.globalRxVariableController.roleId.value == 1
-                          ? Image.asset(
-                              ImagePath.editBlack,
-                              height: 10,
-                              width: 10,
-                              scale: 3,
-                            )
+                          ? InkWell(
+                        onTap: () => controller.userProfileInfoUpdate(),
+                            child: Image.asset(
+                                ImagePath.editBlack,
+                                height: 10,
+                                width: 10,
+                                scale: 3,
+                              ),
+                          )
                           : const SizedBox(),
                   readOnly:
                       controller.globalRxVariableController.roleId.value == 1
@@ -197,12 +200,11 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
-
+                  readOnly: true,
                   labelText: AppText.editProfileDateOfBirth,
                   suffixIcon: InkWell(
                     onTap: (){
                       controller.dateOfBirth();
-                      controller.userProfileInfoUpdate();
                     },
                     child: Image.asset(
                       ImagePath.calender,

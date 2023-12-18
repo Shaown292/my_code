@@ -12,7 +12,6 @@ import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/guar
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/others_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/parents_info.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/tranport_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/profile_edit/views/widget/edit_profile_route.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/pages_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/personal_profile_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';

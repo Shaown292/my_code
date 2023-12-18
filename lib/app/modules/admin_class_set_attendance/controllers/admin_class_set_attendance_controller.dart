@@ -147,6 +147,7 @@ class AdminClassSetAttendanceController extends GetxController {
 
       if (postRequestResponseModel.success == true) {
         holidayLoader.value = false;
+        markHoliday.value = !markHoliday.value;
         for (int i = 0; i < adminClassSetAttendanceList.length; i++) {
           adminClassSetAttendanceList[i].attendanceType =
               markHoliday.value ? '' : 'P';
