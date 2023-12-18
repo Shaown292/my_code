@@ -104,69 +104,78 @@ class AdminRouteView extends GetView<AdminRouteController> {
                               color: AppColors.primaryColor,
                             ))
                           : controller.adminTransportRouteList.isNotEmpty
-                              ? ListView.builder(
-                                  itemCount:
-                                      controller.adminTransportRouteList.length,
-                                  itemBuilder: (context, index) {
-                                    return DeleteTile(
-                                      title:
-                                          "${index + 1}. Route Title: ${controller.adminTransportRouteList[index].title}",
-                                      subTitle:
-                                          "Fare: ${controller.adminTransportRouteList[index].fare.toString()}",
+                              ? RefreshIndicator(
+                        color: AppColors.primaryColor,
+                        onRefresh: () async {
+                          controller.adminTransportRouteList.clear();
+                          controller.getAdminTransportRouteList();
+                        },
+                                child: ListView.builder(
+                                    itemCount:
+                                        controller.adminTransportRouteList.length,
+                                    itemBuilder: (context, index) {
+                                      return DeleteTile(
+                                        title:
+                                            "${index + 1}. Route Title: ${controller.adminTransportRouteList[index].title}",
+                                        subTitle:
+                                            "Fare: ${controller.adminTransportRouteList[index].fare.toString()}",
 
-                                      /// Delete button
-                                      rightIconBackgroundColor:
-                                          const Color(0xFFED3B3B),
-                                      rightIcon: ImagePath.delete,
-                                      tapRightButton: () => Get.dialog(
-                                        Obx(
-                                          () => CustomPopupDialogue(
-                                            isLoading:
-                                                controller.deleteLoader.value,
-                                            onYesTap: () {
-                                              controller.deleteSingleRoute(
-                                                  routeId: controller
-                                                      .adminTransportRouteList[
-                                                          index]
-                                                      .id!,
-                                                  index: index);
-                                            },
-                                            title: 'Confirmation',
-                                            subTitle: AppText
-                                                .deleteFeesGroupWarningMsg,
-                                            noText: 'cancel',
-                                            yesText: 'delete',
+                                        /// Delete button
+                                        rightIconBackgroundColor:
+                                            const Color(0xFFED3B3B),
+                                        rightIcon: ImagePath.delete,
+                                        tapRightButton: () => Get.dialog(
+                                          Obx(
+                                            () => CustomPopupDialogue(
+                                              isLoading:
+                                                  controller.deleteLoader.value,
+                                              onYesTap: () {
+                                                controller.deleteSingleRoute(
+                                                    routeId: controller
+                                                        .adminTransportRouteList[
+                                                            index]
+                                                        .id!,
+                                                    index: index);
+                                              },
+                                              title: 'Confirmation',
+                                              subTitle: AppText
+                                                  .deleteFeesGroupWarningMsg,
+                                              noText: 'cancel',
+                                              yesText: 'delete',
+                                            ),
                                           ),
                                         ),
-                                      ),
 
-                                      /// Edit button
-                                      leftIcon: ImagePath.edit,
-                                      leftIconBackgroundColor:
-                                          AppColors.appButtonColor,
-                                      tapLeftButton: () {
-                                        controller.routeTitleTextController
-                                            .text = controller
+                                        /// Edit button
+                                        leftIcon: ImagePath.edit,
+                                        leftIconBackgroundColor:
+                                            AppColors.appButtonColor,
+                                        tapLeftButton: () {
+                                          controller.routeTitleTextController
+                                              .text = controller
+                                                  .adminTransportRouteList[index]
+                                                  .title ??
+                                              '';
+                                          controller
+                                                  .routeFareTextController.text =
+                                              controller
+                                                  .adminTransportRouteList[index]
+                                                  .fare
+                                                  .toString();
+                                          controller
+                                              .showUploadDocumentsBottomSheet(
+                                            routeId: controller
                                                 .adminTransportRouteList[index]
-                                                .title ??
-                                            '';
-                                        controller
-                                                .routeFareTextController.text =
-                                            controller
-                                                .adminTransportRouteList[index]
-                                                .fare
-                                                .toString();
-                                        controller
-                                            .showUploadDocumentsBottomSheet(
-                                          routeId: controller
-                                              .adminTransportRouteList[index]
-                                              .id!,
-                                          index: index,
-                                        );
-                                      },
-                                    );
-                                  },
-                                )
+                                                .id!,
+                                            index: index,
+                                            bottomSheetBackgroundColor: Colors.white,
+                                            header: "Edit Route",
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                              )
                               : const NoDataAvailableWidget(),
                     ),
                   ],

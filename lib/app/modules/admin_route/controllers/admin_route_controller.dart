@@ -228,6 +228,7 @@ class AdminRouteController extends GetxController {
     required int index,
   }) {
     Get.bottomSheet(
+
       Container(
         height: Get.height * 0.45,
         decoration: BoxDecoration(
@@ -336,6 +337,7 @@ class AdminRouteController extends GetxController {
       ),
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
+      // isDismissible: false,
     );
   }
 

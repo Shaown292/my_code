@@ -131,6 +131,7 @@ class ImagePath {
 
 
   //// Admin
-  static String add              = "assets/images/add.png";
+  static String add                  = "assets/images/add.png";
+  static String staffBackground      = "assets/images/staff_background.png";
 }
 

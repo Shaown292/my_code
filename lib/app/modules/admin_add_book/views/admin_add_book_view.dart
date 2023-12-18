@@ -26,9 +26,12 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   10.verticalSpacing,
 
+                  const Text("Add Book Category*", style: AppTextStyle.fontSize13BlackW400,),
+                  5.verticalSpacing,
                   /// Book Category dropdown List
                   controller.loadingController.isLoading
                       ? const CircularProgressIndicator()
@@ -41,7 +44,8 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                           },
                         ),
                   10.verticalSpacing,
-
+                  const Text("Add Subject*", style: AppTextStyle.fontSize13BlackW400,),
+                  5.verticalSpacing,
                   /// Book Subject dropdown List
                   DuplicateDropdown(
                     dropdownValue: controller.bookSubjectInitValue.value,

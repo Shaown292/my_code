@@ -79,6 +79,8 @@ class AdminFeesGroupController extends GetxController {
 
       if (feesGroupListResponseModel.success == true) {
         createUpdateLoader.value = false;
+        titleTextController.clear();
+        descriptionTextController.clear();
         Get.back();
         showBasicSuccessSnackBar(
             message:

@@ -25,7 +25,10 @@ class AdminBookListController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-          url: globalRxVariableController.roleId.value == 1 ? InfixApi.getAdminBookList : InfixApi.getTeacherBookList, header: GlobalVariable.header);
+          url: globalRxVariableController.roleId.value == 4
+              ? InfixApi.getTeacherBookList
+              : InfixApi.getAdminBookList,
+          header: GlobalVariable.header);
 
       AdminBookListResponseModel adminBookListResponseModel =
           AdminBookListResponseModel.fromJson(response);

@@ -53,7 +53,6 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
 
                             controller.getUserNameList(
                                 roleId: controller.rolesId.value);
-
                             if (value.id == 2 || value.id == 3) {
                               controller.getClassList(
                                   roleId: controller.rolesId.value);

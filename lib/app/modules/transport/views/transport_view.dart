@@ -25,7 +25,9 @@ class TransportView extends GetView<TransportController> {
             onRefresh: () async {
               controller.transportDataList.clear();
               controller.getAllTransportList(
-                  studentId: controller.globalRxVariableController.studentId.value!);
+                studentId:
+                    controller.globalRxVariableController.studentId.value!,
+              );
             },
             child: Column(
               children: [

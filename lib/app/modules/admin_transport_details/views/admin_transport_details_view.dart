@@ -23,36 +23,33 @@ class AdminTransportDetailsView
           controller.getAdminTransportList();
         },
         color: AppColors.primaryColor,
-        child: SingleChildScrollView(
-          child: CustomBackground(
-            customWidget: Column(
-              children: [
-                Obx(
-                  () => Expanded(
-                    child: controller.loadingController.isLoading
-                        ? const LoadingWidget()
-                        : controller.adminTransportList.isNotEmpty
-                            ? ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: controller.adminTransportList.length,
-                                itemBuilder: (context, index) {
-                                  return TransportDetailsTile(
-                                    route: controller.adminTransportList[index].routeName,
-                                    vehicleNo: controller.adminTransportList[index].vehicleNo,
-                                    onTap: () => controller
-                                        .showBookListDetailsBottomSheet(
-                                            index: index,
-                                            bottomSheetBackgroundColor:
-                                                Colors.white),
-                                  );
-                                },
-                              )
-                            : const NoDataAvailableWidget(),
-                  ),
+        child: CustomBackground(
+          customWidget: Column(
+            children: [
+              Obx(
+                () => Expanded(
+                  child: controller.loadingController.isLoading
+                      ? const LoadingWidget()
+                      : controller.adminTransportList.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: controller.adminTransportList.length,
+                              itemBuilder: (context, index) {
+                                return TransportDetailsTile(
+                                  route: controller.adminTransportList[index].routeName,
+                                  vehicleNo: controller.adminTransportList[index].vehicleNo,
+                                  onTap: () => controller
+                                      .showBookListDetailsBottomSheet(
+                                          index: index,
+                                          bottomSheetBackgroundColor:
+                                              Colors.white),
+                                );
+                              },
+                            )
+                          : const NoDataAvailableWidget(),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
