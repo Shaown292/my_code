@@ -66,7 +66,7 @@ class ScheduleView extends GetView<ScheduleController> {
                         ),
                       ),
                 controller.examinationController.loadingController.isLoading
-                    ? const CustomisedLoadingWidget()
+                    ? const SecondaryLoadingWidget()
                     : Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 10),

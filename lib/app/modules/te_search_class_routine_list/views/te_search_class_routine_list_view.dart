@@ -30,7 +30,7 @@ class TeSearchClassRoutineListView
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: controller.isLoading.value
                   ? const Center(
-                child: CustomisedLoadingWidget(),
+                child: SecondaryLoadingWidget(),
               )
                   : Column(
                 children: [

@@ -81,7 +81,7 @@ class StudentSearchSubjectAttendanceView
               ),
               10.verticalSpacing,
               controller.subjectsController.loadingController.isLoading
-                  ? const CustomisedLoadingWidget()
+                  ? const SecondaryLoadingWidget()
                   : controller.subjectsController.subjectList.isNotEmpty
                       ? Expanded(
                           child: RefreshIndicator(

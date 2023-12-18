@@ -70,7 +70,7 @@ class ResultView extends GetView<ResultController> {
                   ),
                 ),
                 controller.examinationController.loadingController.isLoading
-                    ? const CustomisedLoadingWidget()
+                    ? const SecondaryLoadingWidget()
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: DuplicateDropdown(

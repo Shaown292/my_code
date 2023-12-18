@@ -62,7 +62,7 @@ class StudentSearchAttendanceView
                         ),
                       ),
                       controller.loadingController.isLoading
-                          ? const CustomisedLoadingWidget()
+                          ? const SecondaryLoadingWidget()
                           :DisplayCalender(
                         currentDate: controller.currentDate,
                         eventList: controller.eventList,

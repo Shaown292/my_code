@@ -40,7 +40,7 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
             10.verticalSpacing,
             Obx(
               () => controller.isLoading.value
-                  ? const CustomisedLoadingWidget()
+                  ? const SecondaryLoadingWidget()
                   : Padding(
                       padding: const EdgeInsets.only(top: 5.0, left: 15),
                       child: Text(

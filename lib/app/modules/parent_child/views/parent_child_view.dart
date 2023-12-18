@@ -27,7 +27,7 @@ class ParentChildView extends GetView<ParentChildController> {
                   onRefresh: () async {
                     controller.getParentsChildData(parentId: controller.globalRxVariableController.parentId.value!);
                   },
-                  child: controller.isLoading.value ? const CustomisedLoadingWidget() : controller.parentChildList.isNotEmpty ? ListView.builder(
+                  child: controller.isLoading.value ? const SecondaryLoadingWidget() : controller.parentChildList.isNotEmpty ? ListView.builder(
                     itemCount: controller.parentChildList.length,
                     itemBuilder: (context, index) {
                       return StudentListTile(
