@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/modules/schedule/views/widget/schedule_details_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/study_button/study_button.dart';
@@ -24,7 +25,10 @@ class ScheduleView extends GetView<ScheduleController> {
             customWidget: Column(
               children: [
                 controller.examinationController.loadingController.isLoading
-                    ? const SizedBox(height: 55, child: LoadingWidget())
+                    ? const SizedBox(
+                        height: 55,
+                        child: LoadingWidget(),
+                      )
                     : Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 7.0, vertical: 0),
@@ -36,34 +40,33 @@ class ScheduleView extends GetView<ScheduleController> {
                                 .homeController.studentRecordList.length,
                             itemBuilder: (context, index) {
                               return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Obx(
-                                    () => StudyButton(
-                                      title:
-                                          "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                                      onItemTap: () {
-                                        controller.selectIndex.value = index;
-                                        controller.examinationController
-                                            .examDropdownList
-                                            .clear();
-                                        int recordId = controller.homeController
-                                            .studentRecordList[index].id;
-                                        controller.examinationController
-                                            .getStudentExamList(
-                                                recordId: recordId);
-                                      },
-                                      isSelected:
-                                          controller.selectIndex.value == index,
-                                    ),
-                                  ));
+                                padding: const EdgeInsets.all(8.0),
+                                child: Obx(
+                                  () => StudyButton(
+                                    title:
+                                        "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                    onItemTap: () {
+                                      controller.selectIndex.value = index;
+                                      controller.examinationController
+                                          .examDropdownList
+                                          .clear();
+                                      int recordId = controller.homeController
+                                          .studentRecordList[index].id;
+                                      controller.examinationController
+                                          .getStudentExamList(
+                                              recordId: recordId);
+                                    },
+                                    isSelected:
+                                        controller.selectIndex.value == index,
+                                  ),
+                                ),
+                              );
                             },
                           ),
                         ),
                       ),
                 controller.examinationController.loadingController.isLoading
-                    ? const CircularProgressIndicator(
-                        color: AppColors.primaryColor,
-                      )
+                    ? const CustomisedLoadingWidget()
                     : Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 10),
@@ -87,7 +90,9 @@ class ScheduleView extends GetView<ScheduleController> {
                         ),
                       ),
                 controller.loadingController.isLoading
-                    ? const Expanded(child: LoadingWidget())
+                    ? const Expanded(
+                        child: LoadingWidget(),
+                      )
                     : controller.scheduleList.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(

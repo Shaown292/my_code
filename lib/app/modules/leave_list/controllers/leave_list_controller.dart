@@ -33,7 +33,7 @@ class LeaveListController extends GetxController {
     'Rejected',
   ];
 
-  Future<LeaveListResponseModel?> getAllNoticeList(
+  Future<LeaveListResponseModel?> getAllLeaveList(
       {required int studentId}) async {
     try {
       loadingController.isLoading = true;
@@ -123,7 +123,7 @@ class LeaveListController extends GetxController {
             children: [
               10.verticalSpacing,
               Text(
-                "Reason: ${pendingList[index].reason}",
+                "Reason: ${pendingList[index].reason ?? ""}",
                 style: AppTextStyle.fontSize14BlackW500,
               ),
               20.verticalSpacing,
@@ -235,7 +235,7 @@ class LeaveListController extends GetxController {
   @override
   void onInit() {
     if (homeController.studentRecordList.isNotEmpty) {
-      getAllNoticeList(
+      getAllLeaveList(
         studentId: globalRxVariableController.studentId.value!,
       );
       getRemainingLeave(

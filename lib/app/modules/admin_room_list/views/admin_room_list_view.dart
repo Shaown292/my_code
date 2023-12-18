@@ -16,7 +16,7 @@ class AdminRoomListView extends GetView<AdminRoomListController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Room",
+        title: "Room List",
         body: CustomBackground(
           customWidget: Column(
             children: [

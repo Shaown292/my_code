@@ -64,7 +64,8 @@ class TeacherView extends GetView<TeacherController> {
                   controller.loadingController.isLoading
                       ? SizedBox(
                           height: Get.height - 200,
-                          child: const LoadingWidget())
+                          child: const LoadingWidget(),
+                        )
                       : controller.teacherList.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
@@ -75,9 +76,7 @@ class TeacherView extends GetView<TeacherController> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10.0, vertical: 10),
                                   child: TeacherTile(
-                                    color: index % 2 == 0
-                                        ? Colors.white
-                                        : AppColors.profileCardTextColor,
+
                                     teachersName:
                                         controller.teacherList[index].fullName,
                                     teachersEmail:
@@ -89,7 +88,9 @@ class TeacherView extends GetView<TeacherController> {
                                 );
                               },
                             )
-                          : const Center(child: NoDataAvailableWidget()),
+                          : const Center(
+                              child: NoDataAvailableWidget(),
+                            ),
                 ],
               ),
             ),

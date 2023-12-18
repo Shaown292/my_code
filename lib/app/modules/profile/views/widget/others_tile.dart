@@ -18,31 +18,50 @@ class OthersTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: Get.width / 2,
-              child: Text(
-                title,
-                style: AppTextStyle.fontSize10GreyW500
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(5),
+            width: Get.width * 0.4,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTextStyle.fontSize10GreyW500
+                ),
+                8.verticalSpacing,
+                CustomDivider(
+                  width: Get.width,
+                  color: AppColors.profileDividerColor,
+                ),
+              ],
             ),
-            Text(
-              value,
-              style: AppTextStyle.fontSize10GreyW500
+          ),
+          Container(
+            padding: const EdgeInsets.all(5),
+            width: Get.width * 0.4,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  value,
+                  style: AppTextStyle.fontSize10GreyW500
+                ),
+                8.verticalSpacing,
+                CustomDivider(
+                  width: Get.width,
+                  color: AppColors.profileDividerColor,
+                ),
+              ],
             ),
-          ],
-        ),
-        10.verticalSpacing,
-        CustomDivider(
-          width: Get.width,
-          color: AppColors.profileDividerColor,
-        ),
-        30.verticalSpacing,
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

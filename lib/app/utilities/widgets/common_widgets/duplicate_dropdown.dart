@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
 
 class DuplicateDropdown extends StatelessWidget {
   final dynamic dropdownValue;
@@ -26,6 +28,7 @@ class DuplicateDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
@@ -36,10 +39,12 @@ class DuplicateDropdown extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<dynamic>(
+            menuMaxHeight: Get.height * 0.4,
             isExpanded: true,
             items: dropdownList!
                 .map(
                   (dynamic item) => DropdownMenuItem<dynamic>(
+
                 value: item,
                 child: dropdownText
                     ? Text(

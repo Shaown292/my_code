@@ -66,8 +66,9 @@ class BookListView extends GetView<BookListController> {
                         horizontal: 15, vertical: 15),
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(8),
-                          topLeft: Radius.circular(8)),
+                        topRight: Radius.circular(8),
+                        topLeft: Radius.circular(8),
+                      ),
                       color: AppColors.profileCardBackgroundColor,
                     ),
                     child: Row(
@@ -104,10 +105,12 @@ class BookListView extends GetView<BookListController> {
                   ),
                   controller.searchController.text.isEmpty
                       ? controller.loadingController.isLoading
-                          ? SizedBox(height: Get.height * 0.7 ,child: const LoadingWidget())
+                          ? SizedBox(
+                              height: Get.height * 0.7,
+                              child: const LoadingWidget())
                           : controller.bookListData.isNotEmpty
                               ? ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: controller.bookListData.length,
                                   itemBuilder: (context, index) {
@@ -128,13 +131,14 @@ class BookListView extends GetView<BookListController> {
                                   })
                               : const Center(child: NoDataAvailableWidget())
                       : controller.loadingController.isLoading
-                          ? SizedBox(height: Get.height * 0.7 ,child: const LoadingWidget())
+                          ? SizedBox(
+                              height: Get.height * 0.7,
+                              child: const LoadingWidget())
                           : controller.bookSearchList.isNotEmpty
                               ? ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
-                                  itemCount:
-                                      controller.bookSearchList.length,
+                                  itemCount: controller.bookSearchList.length,
                                   itemBuilder: (context, index) {
                                     return BookListTile(
                                       bookName: controller

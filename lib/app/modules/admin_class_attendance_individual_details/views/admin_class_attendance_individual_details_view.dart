@@ -57,7 +57,6 @@ class AdminClassAttendanceIndividualDetailsView
                           currentDate: controller.currentDate,
                           eventList: controller.eventList,
                           onCalendarChanged: (DateTime date) {
-                            controller.eventList!.clear();
                             controller
                                 .getAdminStudentSearchAttendanceDetailsListWithDate(
                               studentAttendanceId:
@@ -66,6 +65,17 @@ class AdminClassAttendanceIndividualDetailsView
                               year: date.year,
                             )
                                 .then((value) => controller.setEventData());
+                            controller.eventList!.clear();
+                            // if(controller.adminStudentAttendanceList.isNotEmpty){
+                            //   controller
+                            //       .getAdminStudentSearchAttendanceDetailsListWithDate(
+                            //     studentAttendanceId:
+                            //     controller.studentAttendanceId.value,
+                            //     month: date.month,
+                            //     year: date.year,
+                            //   )
+                            //       .then((value) => controller.setEventData());
+                            // }
                           },
                         ),
                         EventStatus(

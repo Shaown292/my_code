@@ -78,6 +78,7 @@ class SubjectsView extends GetView<SubjectsController> {
                   : controller.subjectList.isNotEmpty
                       ? Expanded(
                           child: RefreshIndicator(
+                            color: AppColors.primaryColor,
                             onRefresh: () async {
                               controller.subjectList.clear();
                               controller.getAllSubjectList(

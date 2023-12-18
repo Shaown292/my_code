@@ -60,6 +60,7 @@ class ActiveExamView extends GetView<ActiveExamController> {
                       )
                     : Expanded(
                         child: RefreshIndicator(
+                          color: AppColors.primaryColor,
                           onRefresh: () async {
                             controller.onlineActiveExamList.clear();
                             controller.getStudentActiveExamList(
@@ -109,7 +110,7 @@ class ActiveExamView extends GetView<ActiveExamController> {
                                           .onlineActiveExamList[index].status,
                                       activeStatusColor:
                                           Color(int.tryParse(colorCode)!),
-                                      color: index % 2 == 0
+                                      color: index % 2 == 1
                                           ? Colors.white
                                           : AppColors.homeworkWidgetColor,
                                     );
@@ -121,6 +122,6 @@ class ActiveExamView extends GetView<ActiveExamController> {
               ],
             ),
           ),
-        ));
+        ),);
   }
 }

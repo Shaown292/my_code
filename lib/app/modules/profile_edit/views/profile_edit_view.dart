@@ -197,10 +197,13 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
-                  iconOnTap: () => controller.userProfileInfoUpdate(),
+
                   labelText: AppText.editProfileDateOfBirth,
                   suffixIcon: InkWell(
-                    onTap: ()=> controller.dateOfBirth(),
+                    onTap: (){
+                      controller.dateOfBirth();
+                      controller.userProfileInfoUpdate();
+                    },
                     child: Image.asset(
                       ImagePath.calender,
                       color: AppColors.profileValueColor,

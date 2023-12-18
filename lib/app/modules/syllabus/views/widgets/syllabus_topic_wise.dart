@@ -36,19 +36,20 @@ class SyllabusTopicWise extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(
-                      child: CustomContainerWidget(
-                        padding: const EdgeInsets.all(10),
+                    Container(
+                      padding: const EdgeInsets.all(7),
+                      width: Get.width * 0.4,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
                         color: const Color(0xFFF2F0F6),
-                        requiredWidget: Center(
-                          child: Text(
-                            contentTitle ?? "",
-                            style: AppTextStyle.fontSize14BlackW500,
-                          ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          contentTitle ?? "",
+                          style: AppTextStyle.fontSize14BlackW500,
                         ),
                       ),
                     ),
-                    10.horizontalSpacing,
                     SizedBox(
                       width: Get.width * 0.3,
                       child: Text(
@@ -61,7 +62,7 @@ class SyllabusTopicWise extends StatelessWidget {
                 10.verticalSpacing,
                 Text(
                   topic ?? "",
-                  style: AppTextStyle.syllabusFontSize16W500,
+                  style: AppTextStyle.blackFontSize14W400,
                 ),
                 20.verticalSpacing,
                 PrimaryButton(

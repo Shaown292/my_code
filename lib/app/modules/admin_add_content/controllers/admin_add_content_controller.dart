@@ -50,7 +50,7 @@ class AdminAddContentController extends GetxController {
     );
 
     if (dateTime != null) {
-      selectedDateTextController.text = dateTime.dd_mm_yyyy;
+      selectedDateTextController.text = dateTime.yyyy_mm_dd;
     }
   }
 

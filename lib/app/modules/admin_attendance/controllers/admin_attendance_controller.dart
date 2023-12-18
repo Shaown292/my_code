@@ -13,7 +13,7 @@ class AdminAttendanceController extends GetxController {
 
     HomeTileModelClass(icon: ImagePath.adminClassAttendance, title: 'Class Atten', value: 'Class Attendance Search'),
     HomeTileModelClass(icon: ImagePath.adminClassAttendance, title: 'Subject Atten', value: 'Subject Attendance Search'),
-    HomeTileModelClass(icon: ImagePath.adminClassAttendance, title: 'Search Atten', value: 'Class Attendance Search Individual'),
+    HomeTileModelClass(icon: ImagePath.adminClassAttendance, title: 'Search Class Atten', value: 'Class Attendance Search Individual'),
     HomeTileModelClass(icon: ImagePath.adminClassAttendance, title: 'Search Sub Atten', value: 'Subject Attendance Search Individual'),
   ];
 }

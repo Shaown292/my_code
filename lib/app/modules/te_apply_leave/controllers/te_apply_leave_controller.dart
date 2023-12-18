@@ -41,7 +41,7 @@ class TeApplyLeaveController extends GetxController {
     );
 
     if (dateTime != null) {
-      applyDateTextController.text = dateTime.dd_mm_yyyy;
+      applyDateTextController.text = dateTime.yyyy_mm_dd;
     }
   }
 
@@ -52,7 +52,7 @@ class TeApplyLeaveController extends GetxController {
     );
 
     if (dateTime != null) {
-      fromDateTextController.text = dateTime.dd_mm_yyyy;
+      fromDateTextController.text = dateTime.yyyy_mm_dd;
     }
   }
 
@@ -63,7 +63,7 @@ class TeApplyLeaveController extends GetxController {
     );
 
     if (dateTime != null) {
-      toDateTextController.text = dateTime.dd_mm_yyyy;
+      toDateTextController.text = dateTime.yyyy_mm_dd;
     }
   }
 

@@ -15,7 +15,6 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_respon
 import 'package:get/get.dart';
 
 class AdminClassSetAttendanceController extends GetxController {
-
   GlobalRxVariableController globalRxVariableController = Get.find();
   RxBool saveLoader = false.obs;
 
@@ -132,7 +131,9 @@ class AdminClassSetAttendanceController extends GetxController {
       holidayLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: globalRxVariableController.roleId.value == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
+          url: globalRxVariableController.roleId.value == 1
+              ? InfixApi.adminAttendanceMarkUnMarkHolyDay
+              : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
           header: GlobalVariable.header,
           payload: {
             'purpose': purpose,
@@ -187,12 +188,7 @@ class AdminClassSetAttendanceController extends GetxController {
               height: Get.height * 0.1,
               width: Get.width,
               padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(8),
-                    topLeft: Radius.circular(8),
-                  ),
-                  color: AppColors.primaryColor),
+              color: AppColors.primaryColor,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -205,8 +201,8 @@ class AdminClassSetAttendanceController extends GetxController {
                     padding: const EdgeInsets.all(5),
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Colors.white),
-                    child:  InkWell(
-                      onTap: ()=> Get.back(),
+                    child: InkWell(
+                      onTap: () => Get.back(),
                       child: const Icon(
                         Icons.close,
                         size: 16,
@@ -217,8 +213,9 @@ class AdminClassSetAttendanceController extends GetxController {
               ),
             ),
             20.verticalSpacing,
-             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
               child: CustomTextFormField(
                 controller: noteTextController,
                 enableBorderActive: true,
@@ -239,15 +236,15 @@ class AdminClassSetAttendanceController extends GetxController {
                     color: Colors.white,
                     textStyle: AppTextStyle.fontSize13BlackW400,
                     borderColor: AppColors.primaryColor,
-                    onTap: ()=> Get.back(),
+                    onTap: () => Get.back(),
                   ),
                   PrimaryButton(
-                            width: Get.width * 0.2,
-                            title: "Save",
-                            textStyle: AppTextStyle.textStyle12WhiteW500,
-                            onTap: ()=> updateAttendanceNote(index: index, note: noteTextController.text),
-                          ),
-
+                    width: Get.width * 0.2,
+                    title: "Save",
+                    textStyle: AppTextStyle.textStyle12WhiteW500,
+                    onTap: () => updateAttendanceNote(
+                        index: index, note: noteTextController.text),
+                  ),
                 ],
               ),
             ),

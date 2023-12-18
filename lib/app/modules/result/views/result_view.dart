@@ -1,10 +1,11 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/result/views/widget/result_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/study_button/study_button.dart';
 import 'package:get/get.dart';
 import '../../../utilities/widgets/loader/loading.widget.dart';
@@ -25,8 +26,9 @@ class ResultView extends GetView<ResultController> {
             onRefresh: () async {
               controller.examResultList.clear();
               controller.getStudentExamResultList(
-                  typeId: controller.currentExamId!,
-                  recordId: controller.currentRecordId!);
+                typeId: controller.currentExamId!,
+                recordId: controller.currentRecordId!,
+              );
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -44,31 +46,31 @@ class ResultView extends GetView<ResultController> {
                           controller.homeController.studentRecordList.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Obx(
-                              () => StudyButton(
-                                title:
-                                    "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                                onItemTap: () {
-                                  controller.selectIndex.value = index;
-                                  controller
-                                      .examinationController.examDropdownList
-                                      .clear();
-                                  int recordId = controller.homeController
-                                      .studentRecordList[index].id;
-                                  controller.examinationController
-                                      .getStudentExamList(recordId: recordId);
-                                },
-                                isSelected:
-                                    controller.selectIndex.value == index,
-                              ),
-                            ));
+                          padding: const EdgeInsets.all(8.0),
+                          child: Obx(
+                            () => StudyButton(
+                              title:
+                                  "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                              onItemTap: () {
+                                controller.selectIndex.value = index;
+                                controller
+                                    .examinationController.examDropdownList
+                                    .clear();
+                                int recordId = controller
+                                    .homeController.studentRecordList[index].id;
+                                controller.examinationController
+                                    .getStudentExamList(recordId: recordId);
+                              },
+                              isSelected: controller.selectIndex.value == index,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
                 ),
                 controller.examinationController.loadingController.isLoading
-                    ? const Center(child: CircularProgressIndicator(color: AppColors.primaryColor,))
+                    ? const CustomisedLoadingWidget()
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: DuplicateDropdown(

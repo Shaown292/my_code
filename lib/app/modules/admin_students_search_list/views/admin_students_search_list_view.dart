@@ -24,26 +24,25 @@ class AdminStudentsSearchListView
               child: controller.studentData!.isNotEmpty
                   ? RefreshIndicator(
                 onRefresh: () async {
-                  controller.studentData!.clear();
                 },
-                    child: ListView.builder(
-                        itemCount: controller.studentData!.length,
-                        itemBuilder: (context, index) {
-                          return StudentListTile(
-                            onTap: () {
-                              Get.toNamed(Routes.PROFILE, arguments: {
-                                'student_id': controller.studentData![index].id
-                              });
-                            },
-                            studentName: controller.studentData![index].fullName,
-                            imageURL: controller.studentData![index].studentPhoto,
-                            isMultipleSectionAvailable: true,
-                            classSectionList:
-                                controller.studentData![index].classSection,
-                          );
-                        },
-                      ),
-                  )
+                child: ListView.builder(
+                  itemCount: controller.studentData!.length,
+                  itemBuilder: (context, index) {
+                    return StudentListTile(
+                      onTap: () {
+                        Get.toNamed(Routes.PROFILE, arguments: {
+                          'student_id': controller.studentData![index].id
+                        });
+                      },
+                      studentName: controller.studentData![index].fullName,
+                      imageURL: controller.studentData![index].studentPhoto,
+                      isMultipleSectionAvailable: true,
+                      classSectionList:
+                      controller.studentData![index].classSection,
+                    );
+                  },
+                ),
+              )
                   : const NoDataAvailableWidget(),
             )
           ],

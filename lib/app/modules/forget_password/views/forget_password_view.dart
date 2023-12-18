@@ -14,6 +14,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
+      title: "Forget Password",
       actions: const [
         SizedBox(),
       ],

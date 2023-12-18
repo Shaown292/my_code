@@ -6,7 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 
 class TeacherTile extends StatelessWidget {
-  final Color? color;
+
   final String? teachersName;
   final String? teachersEmail;
   final String? teachersPhoneNo;
@@ -14,7 +14,6 @@ class TeacherTile extends StatelessWidget {
 
   const TeacherTile({
     super.key,
-    this.color,
     this.teachersName,
     this.teachersEmail,
     this.teachersPhoneNo,

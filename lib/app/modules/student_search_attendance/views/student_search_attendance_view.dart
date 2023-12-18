@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/display_calender.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/event_status.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -61,7 +62,7 @@ class StudentSearchAttendanceView
                         ),
                       ),
                       controller.loadingController.isLoading
-                          ? const CircularProgressIndicator(color: AppColors.primaryColor,)
+                          ? const CustomisedLoadingWidget()
                           :DisplayCalender(
                         currentDate: controller.currentDate,
                         eventList: controller.eventList,
