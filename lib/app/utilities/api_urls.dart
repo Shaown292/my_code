@@ -50,9 +50,7 @@ class InfixApi {
     return '${baseApi}user-demo-login/$role';
   }
 
-  static String readAllNotification(String role) {
-    return '${baseApi}view/all/notification/$role';
-  }
+  static String readAllNotification = '${baseApi}view/all/notification';
 
   static String getStudentRecord({required int studentId}) {
     return "${baseApi}student-record?student_id=$studentId";

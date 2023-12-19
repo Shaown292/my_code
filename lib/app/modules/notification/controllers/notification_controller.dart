@@ -71,7 +71,7 @@ class NotificationController extends GetxController {
 
     try{
       loadingController.isLoading = true;
-      final response = await BaseClient().getData(url: InfixApi.readAllNotification(globalRxVariableController.roleId.value.toString()), header: GlobalVariable.header,);
+      final response = await BaseClient().getData(url: InfixApi.readAllNotification, header: GlobalVariable.header,);
 
     DefaultResponseModel defaultResponseModel = DefaultResponseModel.fromJson(response);
 
