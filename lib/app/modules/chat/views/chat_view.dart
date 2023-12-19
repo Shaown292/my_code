@@ -3,7 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/chat/views/widget/chat_ti
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_colors.dart';
@@ -28,7 +28,7 @@ class ChatView extends GetView<ChatController> {
 
               return SizedBox(
                 width: 110,
-                child: CustomDropdown(
+                child: DuplicateDropdown(
                   dropdownValue: controller.dropdownValue.value,
                   dropdownList: controller.activeStatus,
                   color: Colors.white,
@@ -36,7 +36,7 @@ class ChatView extends GetView<ChatController> {
                   changeDropdownValue: (v){
                     controller.dropdownValue.value = v!;
                   },
-                  activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
+                  // activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
                   dropdownColor: AppColors.activeExamStatusBlueColor,
                 ),
               );

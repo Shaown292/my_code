@@ -62,10 +62,12 @@ class AdminFeesInvoiceView extends GetView<AdminFeesInvoiceController> {
               ),
                10.verticalSpacing,
                Row(
+                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ColumnTile(
                     title: "Amount",
-                    value:  "",
+                    value:  "asdasjdhssajdhasjhdjksahdjkhasjkdhskajhdjkshad",
                     width: Get.width * 0.18,
                   ),
                   ColumnTile(
@@ -83,10 +85,11 @@ class AdminFeesInvoiceView extends GetView<AdminFeesInvoiceController> {
                     value:  "",
                     width: Get.width * 0.18,
                   ),
-                  ColumnTile(
-                    title: "Total",
-                    value:  "",
-                    width: Get.width * 0.18,
+                  const Flexible(
+                    child: ColumnTile(
+                      title: "Total",
+                      value:  "sdjashdkjashdjkahsjkdhsakjdhjksah",
+                    ),
                   ),
 
                 ],
