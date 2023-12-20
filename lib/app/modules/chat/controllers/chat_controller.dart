@@ -6,24 +6,12 @@ import 'package:get/get.dart';
 class ChatController extends GetxController {
 
   RxBool isSearching = false.obs;
+  RxBool singleChatLoader = false.obs;
+  RxBool groupChatLoader = false.obs;
   RxBool isActive = true.obs;
-  LoadingController loadingController = Get.find();
   TabController? tabController;
-  Rx<ChatStatusModel> dropdownValue =ChatStatusModel(name: "ACTIVE", statusColor: const Color(0xFF12AE01)).obs ;
+  Rx<ChatStatusModel> dropdownValue = ChatStatusModel(statusColor: 0xFF12AE01, name: "ACTIVE").obs;
 
-
-  RxList<ChatStatusModel> activeStatus = <ChatStatusModel>[].obs;
-
-
-  void getStatus (){
-    for (int i = 0;
-    i < activeStatusColor.length;
-    i++) {
-      activeStatus
-          .add(activeStatusColor[i]);
-      dropdownValue.value = activeStatusColor[0] ;
-    }
-  }
 
   List<String> chatType = <String>[
     'Chat',
@@ -31,9 +19,11 @@ class ChatController extends GetxController {
 
   ];
 
-  List<ChatStatusModel> activeStatusColor =  [
-   ChatStatusModel(statusColor: const Color(0xFF12AE01), name: "ACTIVE"),
-   ChatStatusModel(statusColor: const Color(0xFFE1E2EC), name: "INACTIVE"),
+  List<ChatStatusModel> activeStatusList =  [
+   ChatStatusModel(statusColor: 0xFF12AE01, name: "ACTIVE"),
+   ChatStatusModel(statusColor: 0xFFE1E2EC, name: "INACTIVE"),
+   ChatStatusModel(statusColor: 0xFFF60003, name: "BUSY"),
+   ChatStatusModel(statusColor: 0xFFF99F15, name: "AWAY"),
   ];
 
 
@@ -53,11 +43,19 @@ class ChatController extends GetxController {
   // }
 
 
+@override
+  void onInit() {
+
+    dropdownValue.value = activeStatusList.first;
+
+    super.onInit();
+  }
+
 
 }
 
 class ChatStatusModel {
-  final Color statusColor;
+  final int statusColor;
   final String name;
   ChatStatusModel({required this.statusColor, required this.name});
 

@@ -23,25 +23,21 @@ class ChatView extends GetView<ChatController> {
       child: InfixEduScaffold(
         title: "Chat",
         actions: [
-          Obx(
-            () {
-
-              return SizedBox(
-                width: 110,
-                child: DuplicateDropdown(
-                  dropdownValue: controller.dropdownValue.value,
-                  dropdownList: controller.activeStatus,
-                  color: Colors.white,
-                  dropdownText: false,
-                  changeDropdownValue: (v){
-                    controller.dropdownValue.value = v!;
-                  },
-                  // activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
-                  dropdownColor: AppColors.activeExamStatusBlueColor,
-                ),
-              );
-
-            }
+          SizedBox(
+            width: 150,
+            child: Obx(() => DuplicateDropdown(
+              dropdownValue: controller.dropdownValue.value,
+              dropdownList: controller.activeStatusList,
+              color: Colors.white,
+              textStyle: AppTextStyle.cardTextStyle14WhiteW500,
+              // isChat: true,
+              dropdownText: false,
+              changeDropdownValue: (v){
+                controller.dropdownValue.value = v!;
+              },
+              // activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
+              dropdownColor: AppColors.activeExamStatusBlueColor,
+            ),),
           ),
           10.horizontalSpacing,
           InkWell(
@@ -94,13 +90,16 @@ class ChatView extends GetView<ChatController> {
                 ),
               ),
               10.verticalSpacing,
+
+
+              /// Single Chat
               Obx(
                 () => Expanded(
                   child: TabBarView(
                     controller: controller.tabController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      controller.loadingController.isLoading
+                      controller.singleChatLoader.value
                           ? const LoadingWidget()
                           : RefreshIndicator(
                               color: AppColors.primaryColor,
@@ -139,7 +138,9 @@ class ChatView extends GetView<ChatController> {
                                     );
                                   }),
                             ),
-                      controller.loadingController.isLoading
+
+                      /// Group Chat
+                      controller.groupChatLoader.value
                           ? const LoadingWidget()
                           : RefreshIndicator(
                               color: AppColors.primaryColor,

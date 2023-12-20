@@ -12,6 +12,8 @@ class DuplicateDropdown extends StatelessWidget {
   final Color? activeStatusColor;
   final bool dropdownText;
   final String? hint;
+  final TextStyle? textStyle;
+  final bool isChat;
 
   const DuplicateDropdown({
     super.key,
@@ -22,6 +24,8 @@ class DuplicateDropdown extends StatelessWidget {
     this.dropdownColor,
     this.dropdownText = true,
     this.activeStatusColor, this.hint,
+    this.textStyle,
+    this.isChat = false,
   });
 
   @override
@@ -49,17 +53,18 @@ class DuplicateDropdown extends StatelessWidget {
                 child: dropdownText
                     ? Text(
                   item.name ?? "Unknown",
-                  style: AppTextStyle.fontSize14lightBlackW400,
+                  style: textStyle ?? AppTextStyle.fontSize14lightBlackW400,
                   overflow: TextOverflow.ellipsis,
                 )
                     : Row(
+
                   children: [
                     Container(
                       height: 8,
                       width: 8,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: activeStatusColor),
+                          color: Color(item.statusColor)),
                     ),
                     10.horizontalSpacing,
                     Text(
@@ -74,7 +79,7 @@ class DuplicateDropdown extends StatelessWidget {
                 .toList(),
             value: dropdownValue,
             // iconSize: 26,
-            // dropdownColor: dropdownColor,
+            dropdownColor: dropdownColor,
             // iconEnabledColor: color ?? AppColors.profileValueColor,
             onChanged: changeDropdownValue,
           ),
