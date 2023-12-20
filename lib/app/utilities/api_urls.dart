@@ -108,6 +108,8 @@ class InfixApi {
   static String getStudentLeaveList(int studentId) {
     return '${baseApi}apply-leave?student_id=$studentId';
   }
+  static String getTeacherLeaveList = '${baseApi}teacher-leave-list';
+
 
   static String getStudentAttendance(
       {required int recordId, required int studentId}) {
@@ -219,6 +221,8 @@ class InfixApi {
 
   static String getFeesTypeList = '${baseApi}fees-type';
   static String getAdminFeesInvoiceList = '${baseApi}fees-invoice';
+  static String searchAdminFeesInvoice({required int classId, required int sectionId, required String studentName}) =>
+      '${baseApi}fees-invoice?class_id=$classId&section_id=$sectionId&name=$studentName';
 
   static String deleteFeesType({required feesTypeId}) =>
       '${baseApi}fees-type-delete?fees_type_id=$feesTypeId';

@@ -41,7 +41,7 @@ class AdminFeesInvoiceTile extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,10 +70,6 @@ class AdminFeesInvoiceTile extends StatelessWidget {
                       PopupMenuItem(
                         onTap: onTapViewTransaction,
                         child: const Text("View Transaction"),
-                      ),
-                      PopupMenuItem(
-                        onTap: onTapDelete,
-                        child: const Text("Delete"),
                       ),
                     ],
                   ),

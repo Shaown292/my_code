@@ -57,102 +57,148 @@ class LoginView extends GetView<LoginController> {
                           height: 500,
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(8),
-                                  topRight: Radius.circular(8)),
-                              color: Colors.white),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(8)),
+                            color: Colors.white,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              /// Demo Login Bar
-                              30.verticalSpacing,
-                              AppConfig.isDemo
-                                  ? const SizedBox()
-                                  : Row(
-                                      children: <Widget>[
-                                        CustomElevatedButton(
-                                          onPressed: () {
-                                            controller.demoUserLogin(role: 2);
-                                          },
-                                          text: 'Student',
-                                          topLeft: 8.0,
-                                          bottomLeft: 8.0,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  /// Demo Login Bar
+                                  30.verticalSpacing,
+                                  AppConfig.isDemo
+                                      ? const SizedBox()
+                                      : Column(
+                                          children: [
+                                            SizedBox(
+                                              width: Get.width * 0.5,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  CustomElevatedButton(
+                                                    onPressed: () {
+                                                      controller.demoUserLogin(
+                                                          role: 2);
+                                                    },
+                                                    text: 'Student',
+                                                    topLeft: 8.0,
+                                                    bottomLeft: 8.0,
+                                                  ),
+                                                  const VerticalDivider(
+                                                    width: 1,
+                                                  ),
+                                                  CustomElevatedButton(
+                                                    onPressed: () {
+                                                      controller.demoUserLogin(
+                                                          role: 4);
+                                                    },
+                                                    text: 'Teacher',
+                                                    topRight: 8.0,
+                                                    bottomRight: 8.0,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: Get.width * 0.5,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  CustomElevatedButton(
+                                                    onPressed: () {
+                                                      controller.demoUserLogin(
+                                                          role: 3);
+                                                    },
+                                                    text: 'Parent',
+                                                    topLeft: 8.0,
+                                                    bottomLeft: 8.0,
+                                                    backgroundColor:
+                                                        AppColors.primaryColor,
+                                                  ),
+                                                  const VerticalDivider(
+                                                    width: 1,
+                                                  ),
+                                                  CustomElevatedButton(
+                                                    onPressed: () {
+                                                      controller.demoUserLogin(
+                                                          role: 1);
+                                                    },
+                                                    text: 'Admin',
+                                                    topRight: 8.0,
+                                                    bottomRight: 8.0,
+                                                    backgroundColor:
+                                                        AppColors.primaryColor,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        CustomElevatedButton(
-                                          onPressed: () {
-                                            controller.demoUserLogin(role: 4);
-                                          },
-                                          text: 'Teacher',
-                                        ),
-                                        CustomElevatedButton(
-                                          onPressed: () {
-                                            controller.demoUserLogin(role: 3);
-                                          },
-                                          text: 'Parent',
-                                        ),
-                                        CustomElevatedButton(
-                                          onPressed: () {
-                                            controller.demoUserLogin(role: 1);
-                                          },
-                                          text: 'Admin',
-                                          topRight: 8.0,
-                                          bottomRight: 8.0,
-                                        ),
-                                      ],
+                                  30.verticalSpacing,
+
+                                  /// Email Text field
+                                  CustomTextFormField(
+                                    controller: controller.emailTextController,
+                                    fillColor: Colors.white,
+                                    focusBorderActive: true,
+                                    enableBorderActive: true,
+                                    hintText: "Email",
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 15),
+                                    textInputType: TextInputType.text,
+                                    hintTextStyle:
+                                        AppTextStyle.fontSize12LightViolateW500,
+                                    suffixIcon: const Icon(
+                                      Icons.email,
+                                      color: AppColors.loginIconColor,
                                     ),
-                              30.verticalSpacing,
+                                  ),
+                                  10.verticalSpacing,
 
-                              /// Email Text field
-                              CustomTextFormField(
-                                controller: controller.emailTextController,
-                                fillColor: Colors.white,
-                                focusBorderActive: true,
-                                enableBorderActive: true,
-                                hintText: "Email",
-                                contentPadding: const EdgeInsets.only(left: 15),
-                                textInputType: TextInputType.text,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize12LightViolateW500,
-                                suffixIcon: const Icon(
-                                  Icons.email,
-                                  color: AppColors.loginIconColor,
-                                ),
-                              ),
-                              10.verticalSpacing,
-
-                              /// Password Text field
-                              CustomTextFormField(
-                                iconOnTap: () {
-                                  controller.isObscureText.value =
-                                      !controller.isObscureText.value;
-                                },
-                                controller: controller.passwordTextController,
-                                obsCureText: controller.isObscureText.value,
-                                fillColor: Colors.white,
-                                hintText: "Password",
-                                hintTextStyle:
-                                    AppTextStyle.fontSize12LightViolateW500,
-                                focusBorderActive: true,
-                                enableBorderActive: true,
-                                contentPadding: const EdgeInsets.only(left: 15),
-                                suffixIcon: Icon(
-                                  controller.isObscureText.value
-                                      ? Icons.lock
-                                      : Icons.lock_open,
-                                  color: AppColors.loginIconColor,
-                                ),
+                                  /// Password Text field
+                                  CustomTextFormField(
+                                    iconOnTap: () {
+                                      controller.isObscureText.value =
+                                          !controller.isObscureText.value;
+                                    },
+                                    controller:
+                                        controller.passwordTextController,
+                                    obsCureText: controller.isObscureText.value,
+                                    fillColor: Colors.white,
+                                    hintText: "Password",
+                                    hintTextStyle:
+                                        AppTextStyle.fontSize12LightViolateW500,
+                                    focusBorderActive: true,
+                                    enableBorderActive: true,
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 15),
+                                    suffixIcon: Icon(
+                                      controller.isObscureText.value
+                                          ? Icons.lock
+                                          : Icons.lock_open,
+                                      color: AppColors.loginIconColor,
+                                    ),
+                                  ),
+                                ],
                               ),
                               15.verticalSpacing,
-                              InkWell(
-                                  onTap: () =>
-                                      Get.toNamed(Routes.FORGET_PASSWORD),
-                                  child: const Text(
-                                    "Forget password?",
-                                    style:
-                                        AppTextStyle.cardTextStyle14PurpleW500,
-                                  )),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  InkWell(
+                                    onTap: () =>
+                                        Get.toNamed(Routes.FORGET_PASSWORD),
+                                    child: const Text(
+                                      "Forget password?",
+                                      style: AppTextStyle
+                                          .cardTextStyle14PurpleW500,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               60.verticalSpacing,
-
                               controller.isLoading.value
                                   ? const Center(
                                       child: CircularProgressIndicator())

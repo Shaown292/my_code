@@ -34,7 +34,7 @@ class AdminLeaveController extends GetxController {
   List<String> status = <String>[
     'Pending',
     'Approved',
-    'Cancelled',
+    'Rejected',
   ];
 
   RxString selectedOption = "P".obs;
@@ -373,7 +373,7 @@ class AdminLeaveController extends GetxController {
                   activeColor: AppColors.primaryColor,
                 ),
                 CustomRadioButton(
-                  title: "Cancel",
+                  title: "Rejected",
                   value: "C",
                   groupValue: selectedOption.value,
                   onChanged: (value) {

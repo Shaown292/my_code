@@ -72,7 +72,7 @@ class HomeworkCardTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ColumnTile(
@@ -83,7 +83,7 @@ class HomeworkCardTile extends StatelessWidget {
                     ColumnTile(
                       title: "Submission",
                       value: submission,
-                      width: Get.width * 0.23,
+                      width: Get.width * 0.2,
                     ),
                     ColumnTile(
                       title: "Evaluation",

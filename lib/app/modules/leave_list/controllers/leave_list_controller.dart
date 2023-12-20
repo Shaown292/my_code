@@ -33,13 +33,12 @@ class LeaveListController extends GetxController {
     'Rejected',
   ];
 
-  Future<LeaveListResponseModel?> getAllLeaveList(
-      {required int studentId}) async {
+  Future<LeaveListResponseModel?> getAllLeaveList(int studentId) async {
     try {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getStudentLeaveList(studentId),
+        url: globalRxVariableController.roleId.value == 4 ? InfixApi.getTeacherLeaveList : InfixApi.getStudentLeaveList(studentId),
         header: GlobalVariable.header,
       );
 
@@ -235,12 +234,13 @@ class LeaveListController extends GetxController {
   @override
   void onInit() {
     if (homeController.studentRecordList.isNotEmpty) {
-      getAllLeaveList(
-        studentId: globalRxVariableController.studentId.value!,
-      );
+      getAllLeaveList(globalRxVariableController.studentId.value!);
       getRemainingLeave(
         studentId: globalRxVariableController.studentId.value!,
       );
+    }
+    else if (globalRxVariableController.roleId.value == 4){
+      getAllLeaveList(0);
     }
     super.onInit();
   }
