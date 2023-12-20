@@ -5,7 +5,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_load
 
 import 'package:get/get.dart';
 
-import '../../../data/constants/app_colors.dart';
 import '../../../utilities/widgets/common_widgets/custom_background.dart';
 import '../../../utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import '../../../utilities/widgets/study_button/study_button.dart';

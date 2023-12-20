@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/admin_class_attendance_individual_details/bindings/admin_class_attendance_individual_details_binding.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/admin_class_attendance_search/controllers/admin_class_attendance_search_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/admin_students_search/controllers/admin_students_search_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/alert_dialog.dart';
@@ -11,9 +14,19 @@ import 'package:get/get.dart';
 
 class AdminFeesInvoiceListController extends GetxController {
   LoadingController loadingController = Get.find();
-  RxList<StudentInvoices> feesInvoiceList = <StudentInvoices>[].obs;
-
   TextEditingController searchController = TextEditingController();
+  AdminStudentsSearchController adminStudentsSearchController =
+  Get.put(AdminStudentsSearchController());
+
+
+
+  RxList<StudentInvoices> feesInvoiceList = <StudentInvoices>[].obs;
+  RxString classNullValue = ''.obs;
+  RxBool sectionLoader = false.obs;
+  RxString sectionNullValue = ''.obs;
+
+
+
 
   Future<AdminFeesInvoiceListResponseModel> getFeesInvoiceList() async {
     try {
@@ -36,6 +49,47 @@ class AdminFeesInvoiceListController extends GetxController {
                   adminFeesInvoiceListResponseModel
                       .data!.studentInvoices!.length;
               i++) {
+            feesInvoiceList.add(
+                adminFeesInvoiceListResponseModel.data!.studentInvoices![i]);
+          }
+        }
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(
+            message: adminFeesInvoiceListResponseModel.message ??
+                AppText.somethingWentWrong);
+      }
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
+
+    return AdminFeesInvoiceListResponseModel();
+  }
+  Future<AdminFeesInvoiceListResponseModel> searchFeesInvoice(int classId, int sectionId, String studentName) async {
+    try {
+      feesInvoiceList.clear();
+      loadingController.isLoading = true;
+
+      final response = await BaseClient().getData(
+          url: InfixApi.searchAdminFeesInvoice(classId: classId, sectionId: sectionId, studentName: studentName), header: GlobalVariable.header);
+
+      AdminFeesInvoiceListResponseModel adminFeesInvoiceListResponseModel =
+      AdminFeesInvoiceListResponseModel.fromJson(response);
+
+      if (adminFeesInvoiceListResponseModel.success == true) {
+        loadingController.isLoading = false;
+
+        if (adminFeesInvoiceListResponseModel
+            .data!.studentInvoices!.isNotEmpty) {
+          for (int i = 0;
+          i <
+              adminFeesInvoiceListResponseModel
+                  .data!.studentInvoices!.length;
+          i++) {
             feesInvoiceList.add(
                 adminFeesInvoiceListResponseModel.data!.studentInvoices![i]);
           }

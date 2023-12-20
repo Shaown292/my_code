@@ -72,7 +72,7 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
             children: [
               ColumnTile(
                 title: "Apply Date",
-                value: "applyDate",
+                value: applyDate,
                 width: Get.width * 0.2,
               ),
               ColumnTile(

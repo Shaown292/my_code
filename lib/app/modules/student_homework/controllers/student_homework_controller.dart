@@ -32,12 +32,15 @@ class StudentHomeworkController extends GetxController {
   RxList<File> pickedFileList = <File>[].obs;
 
   RxBool isUpload = false.obs;
+  RxBool isDismissible = true.obs;
 
   void getHomeWorkList() async {
     try {
       loadingController.isLoading = true;
       final response = await BaseClient().getData(
-          url: InfixApi.getStudentHomeWork(globalRxVariableController.studentRecordId.value!,),
+          url: InfixApi.getStudentHomeWork(
+            globalRxVariableController.studentRecordId.value!,
+          ),
           header: GlobalVariable.header);
 
       StudentHomeWorkModel studentHomeWorkModel =
@@ -70,10 +73,8 @@ class StudentHomeworkController extends GetxController {
     Function()? onUploadTap,
     Function()? onTapForSave,
     Function()? onTapBrowse,
-
   }) {
     Get.bottomSheet(
-
       Obx(
         () => Container(
           color: color,
@@ -86,12 +87,7 @@ class StudentHomeworkController extends GetxController {
                           height: Get.height * 0.1,
                           width: Get.width,
                           padding: const EdgeInsets.all(20),
-                          decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(8),
-                                topLeft: Radius.circular(8),
-                              ),
-                              color: AppColors.primaryColor),
+                          color: AppColors.primaryColor,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -310,8 +306,6 @@ class StudentHomeworkController extends GetxController {
         ),
       ),
       shape: defaultBottomSheetShape(),
-
-
     );
   }
 
@@ -377,8 +371,6 @@ class StudentHomeworkController extends GetxController {
       saveLoader.value = false;
     }
   }
-
-
 
   @override
   void onInit() {

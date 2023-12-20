@@ -38,7 +38,7 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
   RxList<AdminStudentAttendanceSingleData> adminStudentAttendanceList =
       <AdminStudentAttendanceSingleData>[].obs;
 
-  Future<AdminStudentSearchAttenResponseModel>
+  Future<AdminStudentSearchAttenResponseModel?>
       getAdminStudentSearchAttendanceDetailsList({
     required int studentAttendanceId,
   }) async {
