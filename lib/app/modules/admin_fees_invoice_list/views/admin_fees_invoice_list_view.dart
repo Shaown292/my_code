@@ -32,7 +32,7 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      controller.loadingController.isLoading
+                      controller.adminStudentsSearchController.loadingController.isLoading
                           ? const SecondaryLoadingWidget()
                           : DuplicateDropdown(
                               dropdownValue: controller
@@ -49,10 +49,11 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                                     .classValue.value = v!;
                                 controller.adminStudentsSearchController
                                     .studentClassId.value = v.id;
+                                controller.adminStudentsSearchController.getStudentSectionList(classId: controller.adminStudentsSearchController.studentClassId.value);
                               },
                             ),
                       20.verticalSpacing,
-                      controller.sectionLoader.value
+                      controller.adminStudentsSearchController.sectionLoader.value
                           ? const SecondaryLoadingWidget()
                           : DuplicateDropdown(
                               dropdownValue: controller
@@ -108,7 +109,7 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                         ),
                 ),
               ),
-              controller.loadingController.isLoading
+              controller.isLoading.value
                   ? const Expanded(
                       child: LoadingWidget(),
                     )
