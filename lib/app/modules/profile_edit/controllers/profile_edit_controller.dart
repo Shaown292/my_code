@@ -56,6 +56,7 @@ class ProfileEditController extends GetxController {
           "date_of_birth": dateOfBirthTextController.text,
           "current_address": currentAddressTextController.text,
           "email_address" : emailTextController.text,
+          "phone_number" : phoneNumberTextController.text,
         },
       );
 

@@ -68,7 +68,7 @@ class HomeController extends GetxController {
       debugPrint(t.toString());
     } finally {
       await _authDatabase.logOut();
-      globalRxVariableController.token.value = '';
+      globalRxVariableController.token.value = null;
       globalRxVariableController.userId.value = null;
       globalRxVariableController.roleId.value = null;
 
