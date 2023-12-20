@@ -121,7 +121,7 @@ class StudentHomeworkController extends GetxController {
                             focusBorderActive: true,
                             fillColor: Colors.white,
                             hintText: pickedFileList.isNotEmpty
-                                ? pickedFileList.first.path
+                                ? pickedFileList.first.path.split('/').last
                                 : 'Select File',
                             readOnly: true,
                             suffixIcon: InkWell(

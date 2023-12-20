@@ -98,6 +98,7 @@ class HomeController extends GetxController {
               i++) {
             studentRecordList
                 .add(studentRecordResponseModel.data.studentRecords[i]);
+            globalRxVariableController.studentRecordId.value = studentRecordResponseModel.data.studentRecords.first.id;
             studentRecordDropdownList.add(
                 'Class ${studentRecordResponseModel.data.studentRecords[i].studentRecordClass} (${studentRecordResponseModel.data.studentRecords[i].section})');
             studentRecordIdList
