@@ -49,8 +49,9 @@ class ChatController extends GetxController {
   //   return colorCode;
   // }
 
+  /// Get Single Chat List
   RxBool singleChatListLoader = false.obs;
-  List<SingleChatListData> singleChatList = [];
+  RxList<SingleChatListData> singleChatList = <SingleChatListData>[].obs;
   Future<SingleChatListResponseModel?> getSingleChatList() async {
     singleChatList.clear();
     try {
@@ -60,14 +61,6 @@ class ChatController extends GetxController {
         url: InfixApi.getSingleChatList,
         header: GlobalVariable.header,
       );
-
-@override
-  void onInit() {
-
-    dropdownValue.value = activeStatusList.first;
-
-    super.onInit();
-  }
 
 
       SingleChatListResponseModel singleChatListResponseModel =
@@ -97,6 +90,7 @@ class ChatController extends GetxController {
   }
 
 
+  /// Get Group CHat List
   RxBool groupChatListLoader = false.obs;
   List<GroupChatListData> groupChatList = [];
   Future<GroupChatListResponseModel?> getGroupChatList() async {

@@ -46,7 +46,7 @@ class GroupChatListData {
         this.countConversation});
 
   GroupChatListData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['group_id'];
     name = json['name'];
     image = json['image'];
     activeStatus = json['active_status'];
@@ -57,7 +57,7 @@ class GroupChatListData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    data['group_id'] = id;
     data['name'] = name;
     data['image'] = image;
     data['active_status'] = activeStatus;

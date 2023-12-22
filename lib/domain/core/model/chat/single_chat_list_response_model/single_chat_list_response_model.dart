@@ -46,7 +46,7 @@ class SingleChatListData {
         this.countConversation});
 
   SingleChatListData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['user_id'];
     fullName = json['full_name'];
     image = json['image'];
     activeStatus = json['active_status'];
@@ -57,7 +57,7 @@ class SingleChatListData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    data['user_id'] = id;
     data['full_name'] = fullName;
     data['image'] = image;
     data['active_status'] = activeStatus;
