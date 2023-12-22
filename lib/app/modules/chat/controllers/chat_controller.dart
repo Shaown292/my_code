@@ -165,6 +165,7 @@ class ChatController extends GetxController {
 
   @override
   void onInit() {
+    dropdownValue.value = activeStatusList.first;
    getSingleChatList();
    getGroupChatList();
     super.onInit();
@@ -174,6 +175,7 @@ class ChatController extends GetxController {
 class ChatStatusModel {
   final int statusColor;
   final String name;
+
   ChatStatusModel({required this.statusColor, required this.name});
 
 }

@@ -25,10 +25,10 @@ class ChatView extends GetView<ChatController> {
         actions: [
           Obx(() {
             return SizedBox(
-              width: 110,
+              width: 150,
               child: DuplicateDropdown(
                 dropdownValue: controller.dropdownValue.value,
-                dropdownList: controller.activeStatus,
+                dropdownList: controller.activeStatusList,
                 color: Colors.white,
                 dropdownText: false,
                 changeDropdownValue: (v) {
