@@ -43,7 +43,7 @@ class TransportView extends GetView<TransportController> {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: Get.width * 0.1,
+                        width: Get.width * 0.13,
                         child: const Text(
                           "Vehicle",
                           style: AppTextStyle.textStyle12WhiteW500,

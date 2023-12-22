@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/display_calender.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/event_status.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/study_button/study_button.dart';
 
 import 'package:get/get.dart';
@@ -21,23 +21,23 @@ class AdminSubjectAttendanceSearchIndividualDetailsView
       body: Obx(() => CustomBackground(
             customWidget: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 40,
-                    width: 100,
-                    child: StudyButton(
-                      title: controller.classSection.value,
-                      onItemTap: () {
-                      }, isSelected: true,
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SizedBox(
+                      height: 40,
+                      width: 100,
+                      child: StudyButton(
+                        title: controller.classSection.value,
+                        onItemTap: () {
+                        }, isSelected: true,
 
+                      ),
                     ),
                   ),
                   controller.isLoading.value
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.primaryColor,
-                          ),
-                        )
+                      ? const SecondaryLoadingWidget()
                       : DisplayCalender(
                           currentDate: controller.currentDate,
                           eventList: controller.eventList,

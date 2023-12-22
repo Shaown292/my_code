@@ -41,13 +41,17 @@ class NotificationView extends GetView<NotificationController> {
                       "You have ${globalRxVariableController.notificationCount} New notification",
                       style: AppTextStyle.notificationText,
                     ),
-                    controller.unReadNotificationList.isNotEmpty ? controller.loadingController.isLoading ? const CircularProgressIndicator() : PrimaryButton(
-                      onTap: (){
-                        controller.readAllNotifications();
-                      },
-                      title: AppText.notificationMarkAsRaed,
-                      width: 110,
-                    ) : const SizedBox(),
+                    controller.unReadNotificationList.isNotEmpty
+                        ? controller.loadingController.isLoading
+                            ? const CircularProgressIndicator()
+                            : PrimaryButton(
+                                onTap: () {
+                                  controller.readAllNotifications();
+                                },
+                                title: AppText.notificationMarkAsRaed,
+                                width: 110,
+                              )
+                        : const SizedBox(),
                   ],
                 ),
               ),
@@ -70,8 +74,9 @@ class NotificationView extends GetView<NotificationController> {
                                 return NotificationListTile(
                                   message: notificationsItem?.message ?? '',
                                   notificationDate: formatTimeAgo(
-                                      DateTime.parse(
-                                          notificationsItem?.createdAt ?? '')),
+                                    DateTime.parse(
+                                        notificationsItem?.createdAt ?? ''),
+                                  ),
                                   userPhoto: notificationsItem?.userPhoto,
                                 );
                               }),

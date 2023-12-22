@@ -22,10 +22,10 @@ class ParentsItemWidget extends StatelessWidget {
               fontSize: 10,
               fontWeight: FontWeight.w500),
         ),
-        5.verticalSpacing,
+        10.verticalSpacing,
         CustomDivider(
             color: AppColors.profileDividerColor,
-            width: Get.width * 0.65
+            width: Get.width * 0.63
         ),
       ],
     );

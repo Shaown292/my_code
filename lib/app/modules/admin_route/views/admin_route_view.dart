@@ -4,11 +4,12 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/alert_dialog.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
@@ -47,6 +48,10 @@ class AdminRouteView extends GetView<AdminRouteController> {
                       ),
                     ),
                   ),
+
+                  onTap: (index){
+                    controller.tabIndex.value = index ;
+                  },
                 ),
               ),
               Expanded(
@@ -78,20 +83,6 @@ class AdminRouteView extends GetView<AdminRouteController> {
                             fillColor: Colors.white,
                           ),
                           30.verticalSpacing,
-                          Obx(
-                            () => controller.saveLoader.value
-                                ? const CircularProgressIndicator(
-                                    color: AppColors.primaryColor,
-                                  )
-                                : PrimaryButton(
-                                    text: "Save",
-                                    onTap: () {
-                                      if (controller.validation()) {
-                                        controller.addTransportRoute();
-                                      }
-                                    },
-                                  ),
-                          ),
                         ],
                       ),
                     ),
@@ -99,20 +90,17 @@ class AdminRouteView extends GetView<AdminRouteController> {
                     /// Route List
                     Obx(
                       () => controller.loadingController.isLoading
-                          ? const Center(
-                              child: CircularProgressIndicator(
-                              color: AppColors.primaryColor,
-                            ))
+                          ? const SecondaryLoadingWidget()
                           : controller.adminTransportRouteList.isNotEmpty
                               ? RefreshIndicator(
-                        color: AppColors.primaryColor,
-                        onRefresh: () async {
-                          controller.adminTransportRouteList.clear();
-                          controller.getAdminTransportRouteList();
-                        },
-                                child: ListView.builder(
-                                    itemCount:
-                                        controller.adminTransportRouteList.length,
+                                  color: AppColors.primaryColor,
+                                  onRefresh: () async {
+                                    controller.adminTransportRouteList.clear();
+                                    controller.getAdminTransportRouteList();
+                                  },
+                                  child: ListView.builder(
+                                    itemCount: controller
+                                        .adminTransportRouteList.length,
                                     itemBuilder: (context, index) {
                                       return DeleteTile(
                                         title:
@@ -153,13 +141,15 @@ class AdminRouteView extends GetView<AdminRouteController> {
                                         tapLeftButton: () {
                                           controller.routeTitleTextController
                                               .text = controller
-                                                  .adminTransportRouteList[index]
+                                                  .adminTransportRouteList[
+                                                      index]
                                                   .title ??
                                               '';
-                                          controller
-                                                  .routeFareTextController.text =
+                                          controller.routeFareTextController
+                                                  .text =
                                               controller
-                                                  .adminTransportRouteList[index]
+                                                  .adminTransportRouteList[
+                                                      index]
                                                   .fare
                                                   .toString();
                                           controller
@@ -168,22 +158,36 @@ class AdminRouteView extends GetView<AdminRouteController> {
                                                 .adminTransportRouteList[index]
                                                 .id!,
                                             index: index,
-                                            bottomSheetBackgroundColor: Colors.white,
+                                            bottomSheetBackgroundColor:
+                                                Colors.white,
                                             header: "Edit Route",
                                           );
                                         },
                                       );
                                     },
                                   ),
-                              )
+                                )
                               : const NoDataAvailableWidget(),
                     ),
                   ],
                 ),
               ),
+              30.verticalSpacing,
             ],
           ),
         ),
+        bottomNavBar:  Obx(
+          () => controller.saveLoader.value
+              ? const  SecondaryLoadingWidget()
+              :  controller.tabIndex.value == 0 ? BottomNavButton(
+                  text: "Save",
+                  onTap: () {
+                    if (controller.validation()) {
+                      controller.addTransportRoute();
+                    }
+                  },
+                ) : const SizedBox(),
+        ) ,
       ),
     );
   }

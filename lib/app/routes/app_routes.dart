@@ -107,9 +107,6 @@ abstract class Routes {
   static const TE_ACADEMIC = _Paths.TE_ACADEMIC;
   static const TE_LIBRARY = _Paths.TE_LIBRARY;
   static const TE_NOTICE = _Paths.TE_NOTICE;
-  static const TE_CONTENT = _Paths.TE_CONTENT;
-  static const TE_ADD_CONTENT = _Paths.TE_ADD_CONTENT;
-  static const TE_CONTENT_LIST = _Paths.TE_CONTENT_LIST;
   static const TE_LEAVE = _Paths.TE_LEAVE;
   static const TE_APPLY_LEAVE = _Paths.TE_APPLY_LEAVE;
   static const TE_LEAVE_LIST = _Paths.TE_LEAVE_LIST;
@@ -227,9 +224,6 @@ abstract class _Paths {
   static const TE_ACADEMIC = '/te-academic';
   static const TE_LIBRARY = '/te-library';
   static const TE_NOTICE = '/te-notice';
-  static const TE_CONTENT = '/te-content';
-  static const TE_ADD_CONTENT = '/te-add-content';
-  static const TE_CONTENT_LIST = '/te-content-list';
   static const TE_LEAVE = '/te-leave';
   static const TE_APPLY_LEAVE = '/te-apply-leave';
   static const TE_LEAVE_LIST = '/te-leave-list';

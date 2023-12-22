@@ -24,7 +24,7 @@ class BookIssuedView extends GetView<BookIssuedController> {
           customWidget: Column(
             children: [
               Container(
-                height: Get.height * 0.07,
+                height: Get.height * 0.09,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 decoration: const BoxDecoration(

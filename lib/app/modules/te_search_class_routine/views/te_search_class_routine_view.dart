@@ -17,7 +17,7 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Class Routine",
+      title: "Class Routine Search",
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.all(15.0),

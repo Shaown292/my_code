@@ -11,15 +11,17 @@ import 'package:get/get.dart';
 
 class AdminVehicleController extends GetxController {
   LoadingController loadingController = Get.find();
-  RxBool saveLoader = false.obs;
-  RxBool dropdownLoader = false.obs;
-
   TabController? tabController;
-
   TextEditingController vehicleNoTextController = TextEditingController();
   TextEditingController vehicleModelTextController = TextEditingController();
   TextEditingController madeYearTextController = TextEditingController();
   TextEditingController noteTextController = TextEditingController();
+
+
+  RxBool saveLoader = false.obs;
+  RxBool dropdownLoader = false.obs;
+  RxInt tabIndex = 0.obs;
+
 
   RxList<AdminVehicleData> adminVehicleList = <AdminVehicleData>[].obs;
 

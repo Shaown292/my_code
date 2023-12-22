@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
 
 import '../../data/constants/app_text_style.dart';
 
@@ -19,25 +20,28 @@ class TimeAndDateTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(
-          title ?? "",
-          style: AppTextStyle.homeworkElements,
-        ),
-        8.verticalSpacing,
-        Text(
-          date ?? "",
-          style: AppTextStyle.homeworkElements,
-        ),
-        2.verticalSpacing,
-        Text(
-          time ?? "",
-          style: AppTextStyle.homeworkElements,
-        ),
-      ],
+    return SizedBox(
+      width: Get.width * 0.24,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            title ?? "",
+            style: AppTextStyle.fontSize13BlackW400,
+          ),
+          8.verticalSpacing,
+          Text(
+            date ?? "",
+            style: AppTextStyle.homeworkElements,
+          ),
+          2.verticalSpacing,
+          Text(
+            time ?? "",
+            style: AppTextStyle.homeworkElements,
+          ),
+        ],
+      ),
     );
   }
 }

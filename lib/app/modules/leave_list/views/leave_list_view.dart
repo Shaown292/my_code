@@ -36,7 +36,8 @@ class LeaveListView extends GetView<LeaveListController> {
                     studentId:
                         controller.globalRxVariableController.studentId.value!,
                   );
-                  controller.getAllLeaveList(controller.globalRxVariableController.studentId.value!);
+                  controller.getAllLeaveList(
+                      controller.globalRxVariableController.studentId.value!);
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +153,9 @@ class LeaveListView extends GetView<LeaveListController> {
                                         );
                                       })
                                   : const Center(
-                                      child: NoDataAvailableWidget(),
+                                      child: SingleChildScrollView(
+                                        child: NoDataAvailableWidget(),
+                                      ),
                                     ),
 
                           /// Approved
@@ -191,7 +194,9 @@ class LeaveListView extends GetView<LeaveListController> {
                                         );
                                       })
                                   : const Center(
-                                      child: NoDataAvailableWidget(),
+                                      child: SingleChildScrollView(
+                                        child: NoDataAvailableWidget(),
+                                      ),
                                     ),
 
                           /// Rejected
@@ -229,7 +234,9 @@ class LeaveListView extends GetView<LeaveListController> {
                                       },
                                     )
                                   : const Center(
-                                      child: NoDataAvailableWidget(),
+                                      child: SingleChildScrollView(
+                                        child: NoDataAvailableWidget(),
+                                      ),
                                     ),
                         ],
                       ),

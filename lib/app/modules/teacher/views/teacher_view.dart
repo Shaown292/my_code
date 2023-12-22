@@ -52,6 +52,7 @@ class TeacherView extends GetView<TeacherController> {
                                     .homeController.studentRecordList[index].id;
                                 controller.getAllTeacherList(
                                     recordId: recordId);
+                                controller.selectIndex.value = index;
                               },
                               isSelected: controller.selectIndex.value == index,
                             ),

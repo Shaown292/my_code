@@ -174,16 +174,10 @@ import '../modules/syllabus/bindings/syllabus_bindings.dart';
 import '../modules/syllabus/views/syllabus_views.dart';
 import '../modules/te_academic/bindings/te_academic_binding.dart';
 import '../modules/te_academic/views/te_academic_view.dart';
-import '../modules/te_add_content/bindings/te_add_content_binding.dart';
-import '../modules/te_add_content/views/te_add_content_view.dart';
 import '../modules/te_add_homework/bindings/te_add_homework_binding.dart';
 import '../modules/te_add_homework/views/te_add_homework_view.dart';
 import '../modules/te_apply_leave/bindings/te_apply_leave_binding.dart';
 import '../modules/te_apply_leave/views/te_apply_leave_view.dart';
-import '../modules/te_content/bindings/te_content_binding.dart';
-import '../modules/te_content/views/te_content_view.dart';
-import '../modules/te_content_list/bindings/te_content_list_binding.dart';
-import '../modules/te_content_list/views/te_content_list_view.dart';
 import '../modules/te_homework/bindings/te_homework_binding.dart';
 import '../modules/te_homework/views/te_homework_view.dart';
 import '../modules/te_homework_evaluation/bindings/te_homework_evaluation_binding.dart';
@@ -194,12 +188,6 @@ import '../modules/te_leave/bindings/te_leave_binding.dart';
 import '../modules/te_leave/views/te_leave_view.dart';
 import '../modules/te_leave_list/bindings/te_leave_list_binding.dart';
 import '../modules/te_leave_list/views/te_leave_list_view.dart';
-import '../modules/te_library/bindings/te_library_binding.dart';
-import '../modules/te_library/views/te_library_view.dart';
-import '../modules/te_my_routine/bindings/te_my_routine_binding.dart';
-import '../modules/te_my_routine/views/te_my_routine_view.dart';
-import '../modules/te_notice/bindings/te_notice_binding.dart';
-import '../modules/te_notice/views/te_notice_view.dart';
 import '../modules/te_search_class_routine/bindings/te_search_class_routine_binding.dart';
 import '../modules/te_search_class_routine/views/te_search_class_routine_view.dart';
 import '../modules/te_search_class_routine_list/bindings/te_search_class_routine_list_binding.dart';
@@ -763,36 +751,6 @@ class AppPages {
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: _Paths.TE_LIBRARY,
-      page: () => const TeLibraryView(),
-      binding: TeLibraryBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: _Paths.TE_NOTICE,
-      page: () => const TeNoticeView(),
-      binding: TeNoticeBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: _Paths.TE_CONTENT,
-      page: () => const TeContentView(),
-      binding: TeContentBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: _Paths.TE_ADD_CONTENT,
-      page: () => const TeAddContentView(),
-      binding: TeAddContentBinding(),
-      transition: Transition.fade,
-    ),
-    GetPage(
-      name: _Paths.TE_CONTENT_LIST,
-      page: () => const TeContentListView(),
-      binding: TeContentListBinding(),
-      transition: Transition.fade,
-    ),
-    GetPage(
       name: _Paths.TE_LEAVE,
       page: () => const TeLeaveView(),
       binding: TeLeaveBinding(),
@@ -808,12 +766,6 @@ class AppPages {
       name: _Paths.TE_LEAVE_LIST,
       page: () => const TeLeaveListView(),
       binding: TeLeaveListBinding(),
-      transition: Transition.fade,
-    ),
-    GetPage(
-      name: _Paths.TE_MY_ROUTINE,
-      page: () => const TeMyRoutineView(),
-      binding: TeMyRoutineBinding(),
       transition: Transition.fade,
     ),
     GetPage(

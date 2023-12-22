@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:get/get.dart';
 
 import '../../../../data/constants/app_colors.dart';
 import '../../../../data/constants/app_text_style.dart';
@@ -73,54 +72,54 @@ class FeesTile extends StatelessWidget {
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ColumnTile(
-                    title: "Due Date",
-                    value: dueDate,
-                    width: Get.width * 0.17,
-                  ),
+
                   ColumnTile(
                     title: "Amount",
                     value: amount,
-                    width: Get.width * 0.17,
                   ),
                   ColumnTile(
                     title: "Paid",
                     value: paid,
-                    width: Get.width * 0.17,
                   ),
                   ColumnTile(
                     title: "Balance",
                     value: balance,
-                    width: Get.width * 0.17,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Status",
-                        style: AppTextStyle.homeworkElements,
-                      ),
-                      5.verticalSpacing,
-                      Container(
-                        width: 65,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3),
-                            color: statusColor ??
-                                AppColors.homeworkStatusRedColor),
-                        child: Center(
-                          child: Text(
-                            statusText ?? "",
-                            style: AppTextStyle.textStyle10WhiteW400,
-                          ),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Status",
+                          style: AppTextStyle.fontSize13BlackW400,
                         ),
-                      )
-                    ],
+                        5.verticalSpacing,
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: statusColor ??
+                                  AppColors.homeworkStatusRedColor),
+                          child: Center(
+                            child: Text(
+                              statusText ?? "",
+                              style: AppTextStyle.textStyle10WhiteW400,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
+              20.verticalSpacing,
+              ColumnTile(
+                title: "Due Date",
+                value: dueDate,
+              ),
+              10.verticalSpacing,
+              const CustomDivider(color: AppColors.customDividerColor,)
             ],
           ),
         ],

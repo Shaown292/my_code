@@ -39,7 +39,7 @@ class ForgetPasswordController extends GetxController {
 
       } else {
 
-        showBasicSuccessSnackBar(message: "Enter a valid email");
+        showBasicFailedSnackBar(message: decodedResponse['message']);
       }
     } catch (e, t) {
       showBasicSuccessSnackBar(message: "$e");
@@ -48,5 +48,15 @@ class ForgetPasswordController extends GetxController {
     } finally {
       loadingController.isLoading = false;
     }
+  }
+
+  bool validation() {
+    if (forgetTextController.text == '') {
+      showBasicFailedSnackBar(message: 'Enter your E-mail first');
+      return false;
+    }
+
+
+    return true;
   }
 }

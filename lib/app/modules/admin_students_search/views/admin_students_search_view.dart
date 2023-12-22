@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../data/constants/app_colors.dart';
@@ -77,22 +78,24 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   50.verticalSpacing,
-                  controller.searchLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : PrimaryButton(
-                    text: "Search",
-                    onTap: () {
-                      controller.getSearchStudentDataList(
-                        classId: controller.studentClassId.value,
-                        sectionId: controller.studentSectionId.value,
-                        rollNo: controller.rollTextController.text,
-                        name: controller.nameTextController.text,
-                      );
-                    },
-                  )
                 ],
               ),
             ),
           ),
         ),
+        bottomNavBar: controller.searchLoader.value
+            ? const SecondaryLoadingWidget(isBottomNav: true,)
+            : BottomNavButton(
+                text: "Search",
+                onTap: () {
+                  controller.getSearchStudentDataList(
+                    classId: controller.studentClassId.value,
+                    sectionId: controller.studentSectionId.value,
+                    rollNo: controller.rollTextController.text,
+                    name: controller.nameTextController.text,
+                  );
+                },
+              ),
       ),
     );
   }

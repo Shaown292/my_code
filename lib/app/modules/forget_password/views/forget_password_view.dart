@@ -69,9 +69,9 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                       height: Get.height * 0.05,
                       radius: 6,
                       onTap: (){
-                        controller.forgetPassword();
-                        debugPrint(
-                            "Email is ${controller.forgetTextController}");
+                       if(controller.validation()){
+                         controller.forgetPassword();
+                       }
                       },
                     )
                   ],

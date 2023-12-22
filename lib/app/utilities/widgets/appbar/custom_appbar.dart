@@ -29,67 +29,74 @@ class CustomAppBar extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding:
-            const EdgeInsets.only(top: 60.0, bottom: 20,  right: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                10.horizontalSpacing,
-                leadingIcon ??
-                    InkWell(
-                      onTap: ()=> Get.back(),
-                      child: Container(
-                        color: Colors.transparent,
-                        height: 50,
-                        width: 50,
-                       child: Platform.isAndroid ? Image.asset(ImagePath.back, scale: 3,) : const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,),
-                      ),
-
-
+      padding: const EdgeInsets.only(top: 60.0, bottom: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              5.horizontalSpacing,
+              leadingIcon ??
+                  InkWell(
+                    onTap: () => Get.back(),
+                    child: Container(
+                      color: Colors.transparent,
+                      height: 50,
+                      width: 50,
+                      child: Platform.isAndroid
+                          ? Image.asset(
+                              ImagePath.back,
+                              scale: 3,
+                            )
+                          : const Icon(
+                              Icons.arrow_back_ios_new_outlined,
+                              color: Colors.white,
+                            ),
                     ),
-                10.horizontalSpacing,
-                titleWidget ?? Text(
-                  title ?? "",
-                  style: AppTextStyle.textStyle16WhiteW500,
-                ),
-              ],
-            ),
-            Row(
-              children: actions ??
-                  [
-                    InkWell(
-                      onTap: () {
-                        Get.dialog(
-                          CustomPopupDialogue(
-                            onYesTap: () {
-                              controller.logout();
-                            },
-                            title: 'Confirmation',
-                            subTitle: AppText.logoutWarningMsg,
-                            noText: 'cancel',
-                            yesText: 'logout',
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Container(
-                          height: 17,
-                          width: 17,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(ImagePath.logout),
-                                filterQuality: FilterQuality.high),
-                          ),
+                  ),
+              5.horizontalSpacing,
+              titleWidget ??
+                  Text(
+                    title ?? "",
+                    style: AppTextStyle.cardTextStyle14WhiteW500,
+                  ),
+            ],
+          ),
+          Row(
+            children: actions ??
+                [
+                  InkWell(
+                    onTap: () {
+                      Get.dialog(
+                        CustomPopupDialogue(
+                          onYesTap: () {
+                            controller.logout();
+                          },
+                          title: 'Confirmation',
+                          subTitle: AppText.logoutWarningMsg,
+                          noText: 'cancel',
+                          yesText: 'logout',
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Container(
+                        height: 17,
+                        width: 17,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(ImagePath.logout),
+                              filterQuality: FilterQuality.high),
                         ),
                       ),
-                    )
-                  ],
-            ),
-          ],
-        ));
+                    ),
+                  )
+                ],
+          ),
+        ],
+      ),
+    );
   }
 }

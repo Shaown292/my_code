@@ -81,10 +81,12 @@ class AdminFeesInvoiceTile extends StatelessWidget {
                   ColumnTile(
                     title: "Amount",
                     value: amount ?? "",
+
                   ),
                   ColumnTile(
                     title: "Paid",
                     value: paid ?? "",
+                    width: Get.width * 0.2,
                   ),
                   ColumnTile(
                     title: "Balance",
@@ -95,11 +97,11 @@ class AdminFeesInvoiceTile extends StatelessWidget {
                     children: [
                       const Text(
                         "Status",
-                        style: AppTextStyle.homeworkElements,
+                        style: AppTextStyle.fontSize13BlackW400,
                       ),
                       5.verticalSpacing,
                       Container(
-                        width: 60,
+                        width: Get.width * 0.2,
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(3),

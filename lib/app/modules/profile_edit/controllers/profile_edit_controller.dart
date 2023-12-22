@@ -135,7 +135,7 @@ class ProfileEditController extends GetxController {
     );
 
     if (dateTime != null) {
-      dateOfBirthTextController.text = dateTime.dd_mm_yyyy;
+      dateOfBirthTextController.text = dateTime.yyyy_mm_dd;
       userProfileInfoUpdate();
     }
   }

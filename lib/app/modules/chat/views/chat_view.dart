@@ -4,11 +4,12 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_colors.dart';
 import '../../../data/constants/app_text_style.dart';
-import '../../../data/constants/image_path.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/chat_controller.dart';
 
@@ -17,28 +18,27 @@ class ChatView extends GetView<ChatController> {
 
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: controller.chatType.length,
       child: InfixEduScaffold(
         title: "Chat",
         actions: [
-          SizedBox(
-            width: 150,
-            child: Obx(() => DuplicateDropdown(
-              dropdownValue: controller.dropdownValue.value,
-              dropdownList: controller.activeStatusList,
-              color: Colors.white,
-              textStyle: AppTextStyle.cardTextStyle14WhiteW500,
-              // isChat: true,
-              dropdownText: false,
-              changeDropdownValue: (v){
-                controller.dropdownValue.value = v!;
-              },
-              // activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
-              dropdownColor: AppColors.activeExamStatusBlueColor,
-            ),),
-          ),
+          Obx(() {
+            return SizedBox(
+              width: 110,
+              child: DuplicateDropdown(
+                dropdownValue: controller.dropdownValue.value,
+                dropdownList: controller.activeStatus,
+                color: Colors.white,
+                dropdownText: false,
+                changeDropdownValue: (v) {
+                  controller.dropdownValue.value = v!;
+                },
+                // activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
+                dropdownColor: AppColors.activeExamStatusBlueColor,
+              ),
+            );
+          }),
           10.horizontalSpacing,
           InkWell(
             onTap: () {
@@ -54,19 +54,16 @@ class ChatView extends GetView<ChatController> {
             padding: EdgeInsets.zero,
             iconColor: Colors.white,
             onSelected: (value) {
-              if (value == 1) {
-
-              }
+              if (value == 1) {}
             },
             itemBuilder: (context) => [
-               PopupMenuItem(
+              PopupMenuItem(
                 value: 1,
                 child: const Text("Blocked Users"),
                 onTap: () => Get.toNamed(Routes.BLOCKED_USERS),
               ),
             ],
           ),
-
         ],
         body: CustomBackground(
           customWidget: Column(
@@ -88,96 +85,129 @@ class ChatView extends GetView<ChatController> {
                     ),
                   ),
                 ),
+                onTap: (index) {
+                  controller.tabIndex.value = index;
+                },
               ),
               10.verticalSpacing,
-
-
-              /// Single Chat
               Obx(
                 () => Expanded(
                   child: TabBarView(
                     controller: controller.tabController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      controller.singleChatLoader.value
-                          ? const LoadingWidget()
+                      controller.singleChatListLoader.value
+                          ? const SecondaryLoadingWidget()
                           : RefreshIndicator(
                               color: AppColors.primaryColor,
                               onRefresh: () async {},
-                              child: ListView.builder(
-                                  itemCount: 10,
-                                  itemBuilder: (context, index) {
-                                    String colorCode = '';
-                                    String status = 'AWAY';
-                                    if (status == 'ACTIVE') {
-                                      colorCode = '0xFF12AE01';
-                                    } else if (status == 'INACTIVE') {
-                                      colorCode = '0xFFE1E2EC';
-                                    } else if (status == 'BUSY') {
-                                      colorCode = '0xFFF60003';
-                                    } else {
-                                      colorCode = '0xFFF99F15';
-                                    }
-                                    return ChatTile(
-                                      profileImage: ImagePath.editProfileImage,
-                                      name: "Mr. Beast",
-                                      message:
-                                          "Hey Buddy you have won 50m dollars. Come and grab it bro.",
-                                      messageReceivedTime: "5 min ago",
-                                      numberOfUnreadMessage: "3",
-                                      unreadMessageColor: controller
-                                              .isActive.value
-                                          ? AppColors
-                                              .editProfileTextFieldLabelColor
-                                          : AppColors.homeTextColor,
-                                      activeStatusColor:
-                                          Color(int.tryParse(colorCode)!),
-                                      onTap: () {
-                                        Get.toNamed(Routes.SINGLE_CHAT);
-                                      },
-                                    );
-                                  }),
+                              child: controller.singleChatList.isNotEmpty
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount:
+                                          controller.singleChatList.length,
+                                      itemBuilder: (context, index) {
+                                        String colorCode = '';
+                                        String status = 'AWAY';
+                                        if (status == 'ACTIVE') {
+                                          colorCode = '0xFF12AE01';
+                                        } else if (status == 'INACTIVE') {
+                                          colorCode = '0xFFE1E2EC';
+                                        } else if (status == 'BUSY') {
+                                          colorCode = '0xFFF60003';
+                                        } else {
+                                          colorCode = '0xFFF99F15';
+                                        }
+                                        return ChatTile(
+                                          profileImageUrl: controller
+                                              .singleChatList[index].image,
+                                          name: controller
+                                              .singleChatList[index].fullName,
+                                          message: controller
+                                              .singleChatList[index]
+                                              .lastMessage,
+                                          messageReceivedTime:
+                                              controller.formatTimeAgo(
+                                            DateTime.parse(controller
+                                                    .singleChatList[index]
+                                                    .lastMessageTime ??
+                                                ''),
+                                          ),
+                                          numberOfUnreadMessage: controller
+                                              .singleChatList[index]
+                                              .countConversation
+                                              .toString(),
+                                          unreadMessageColor: controller.isActive
+                                                  .value
+                                              ? AppColors
+                                                  .editProfileTextFieldLabelColor
+                                              : AppColors.homeTextColor,
+                                          activeStatusColor:
+                                              Color(int.tryParse(colorCode)!),
+                                          onTap: () {
+                                            Get.toNamed(Routes.SINGLE_CHAT, arguments: {'to_user_id': controller.singleChatList[index].id});
+                                          },
+                                        );
+                                      })
+                                  : const Center(
+                                      child: NoDataAvailableWidget()),
                             ),
-
-                      /// Group Chat
-                      controller.groupChatLoader.value
+                      controller.groupChatListLoader.value
                           ? const LoadingWidget()
                           : RefreshIndicator(
                               color: AppColors.primaryColor,
                               onRefresh: () async {},
-                              child: ListView.builder(
-                                itemCount: 6,
-                                itemBuilder: (context, index) {
-                                  String colorCode = '';
-                                  String status = 'AWAY';
-                                  if (status == 'ACTIVE') {
-                                    colorCode = '0xFF12AE01';
-                                  } else if (status == 'INACTIVE') {
-                                    colorCode = '0xFFE1E2EC';
-                                  } else if (status == 'AWAY') {
-                                    colorCode = '0xFFF99F15';
-                                  } else {
-                                    colorCode = '0xFFF60003';
-                                  }
-                                  return ChatTile(
-                                    profileImage: ImagePath.editProfileImage,
-                                    name: "Group Chat",
-                                    message:
-                                        "Hey Buddy you have won 50m dollars. Come and grab it bro.",
-                                    messageReceivedTime: "5 min ago",
-                                    numberOfUnreadMessage: "3",
-                                    unreadMessageColor:
-                                        controller.isActive.value
-                                            ? AppColors
-                                                .editProfileTextFieldLabelColor
-                                            : AppColors.homeTextColor,
-                                    activeStatusColor:
-                                        Color(int.tryParse(colorCode)!),
-                                    onTap: () {
-                                    },
-                                  );
-                                },
-                              ),
+                              child: controller.groupChatList.isNotEmpty
+                                  ? ListView.builder(
+                                      itemCount:
+                                          controller.groupChatList.length,
+                                      itemBuilder: (context, index) {
+                                        String colorCode = '';
+                                        String status = 'AWAY';
+                                        if (status == 'ACTIVE') {
+                                          colorCode = '0xFF12AE01';
+                                        } else if (status == 'INACTIVE') {
+                                          colorCode = '0xFFE1E2EC';
+                                        } else if (status == 'AWAY') {
+                                          colorCode = '0xFFF99F15';
+                                        } else {
+                                          colorCode = '0xFFF60003';
+                                        }
+                                        return ChatTile(
+                                          profileImageUrl: controller
+                                                  .groupChatList[index].image ??
+                                              "",
+                                          name: controller
+                                              .groupChatList[index].name,
+                                          message: controller
+                                              .groupChatList[index].lastMessage,
+                                          messageReceivedTime:
+                                              controller.formatTimeAgo(
+                                            DateTime.parse(controller
+                                                    .groupChatList[index]
+                                                    .lastMessageTime ??
+                                                ''),
+                                          ),
+                                          numberOfUnreadMessage: controller
+                                              .groupChatList[index]
+                                              .countConversation
+                                              .toString(),
+                                          unreadMessageColor: controller.isActive
+                                                  .value
+                                              ? AppColors
+                                                  .editProfileTextFieldLabelColor
+                                              : AppColors.homeTextColor,
+                                          activeStatusColor:
+                                              Color(int.tryParse(colorCode)!),
+                                          onTap: () {
+                                            Get.toNamed(Routes.SINGLE_CHAT);
+                                          },
+                                        );
+                                      },
+                                    )
+                                  : const Center(
+                                      child: NoDataAvailableWidget(),
+                                    ),
                             ),
                     ],
                   ),

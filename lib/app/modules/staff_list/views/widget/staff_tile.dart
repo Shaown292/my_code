@@ -32,28 +32,30 @@ class StaffTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             Row(
               children: [
                 isImageEmpty
                     ? Container(
-                        height: 70,
-                        width: 70,
+                        height: Get.height * 0.12,
+                        width: Get.width * 0.18,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: ClipRRect(
                           child: CacheImageView(
+                            height: Get.height * 0.12,
+                            width: Get.width * 0.18,
                             url: imageUrl,
                             errorImageLocal: ImagePath.dp,
                           ),
                         ),
                       )
                     : Container(
-                        height: 70,
-                        width: 70,
+                        height: Get.height * 0.12,
+                        width: Get.width * 0.18,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -75,7 +77,6 @@ class StaffTile extends StatelessWidget {
                 )
               ],
             ),
-            10.verticalSpacing,
             CustomDivider(
               width: Get.width,
               color: AppColors.transportDividerColor,

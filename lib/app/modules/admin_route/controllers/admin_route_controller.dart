@@ -20,9 +20,9 @@ class AdminRouteController extends GetxController {
   RxBool saveLoader = false.obs;
   RxBool createUpdateLoader = false.obs;
   RxBool deleteLoader = false.obs;
+  RxInt tabIndex = 0.obs;
 
   TabController? tabController;
-
   TextEditingController routeTitleTextController = TextEditingController();
   TextEditingController routeFareTextController = TextEditingController();
 
