@@ -1,6 +1,10 @@
+import 'package:get/get.dart';
+
+import 'package:get/get.dart';
+
 class LanguageSelection {
-  String? drop;
-  String val = 'en_US';
+  RxString drop = ''.obs;
+  RxString val = 'en_US'.obs;
 
   String langName = 'English';
 

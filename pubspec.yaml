@@ -29,6 +29,7 @@ dependencies:
   image_picker: ^1.0.5
   file_picker: ^6.1.1
   device_info_plus: ^9.1.1
+  shared_preferences: ^2.2.2
   pdf_flutter:
     git: https://github.com/erluxman/pdf_flutter
 
@@ -51,6 +52,7 @@ flutter:
   assets:
     - assets/config/
     - assets/images/
+    - assets/locale/
     - assets/config/
     - assets/icons/student/
     - assets/icons/teacher/

@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_internet/internet_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'app/database/auth_database.dart';
 import 'app/utilities/widgets/loader/loading.controller.dart';
 import 'config.dart';
@@ -13,11 +14,13 @@ import 'config.dart';
 class Initializer {
   static Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
+    _initGlobalLoading();
+    _getStoredLanguage();
     _initRotation();
     _initBinding();
     await _initStorage();
     _initGetConnect();
-    _initGlobalLoading();
+
   }
 
   /// global loader
@@ -31,6 +34,19 @@ class Initializer {
     final globalVariableGetx = GlobalRxVariableController();
     Get.put(globalVariableGetx);
 
+    final languageController = LanguageController();
+    Get.put(languageController);
+
+  }
+
+  static void _getStoredLanguage() async {
+    LanguageController languageController = Get.find();
+    final sharedPref = await SharedPreferences.getInstance();
+    languageController.langName.value = sharedPref.getString('language_name') ?? 'English';
+    language = sharedPref.getString('language') ?? 'en_US';
+    Get.updateLocale(Locale(languageController.appLocale));
+
+    debugPrint('::::::::::::::::: $language');
   }
 
   /// http client

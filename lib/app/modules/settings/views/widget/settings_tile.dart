@@ -12,6 +12,7 @@ class SettingsTile extends StatelessWidget {
   final double? iconHeight;
   final double? iconWidth;
   final bool isLanguage;
+  final String? languageName;
   final Color? backgroundColor;
   final Function()? onTileTap;
 
@@ -20,6 +21,7 @@ class SettingsTile extends StatelessWidget {
     this.icon,
     this.title,
     this.isLanguage = true,
+    this.languageName,
     this.onTileTap,
     this.iconColor,
     this.iconHeight,
@@ -67,12 +69,12 @@ class SettingsTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         color: AppColors.homeTextColor,
                       ),
-                      child: const Padding(
+                      child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                            const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
                         child: Center(
                           child: Text(
-                            "English",
+                            languageName ?? "English",
                             style: AppTextStyle.textStyle12WhiteW500,
                           ),
                         ),

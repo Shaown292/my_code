@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/settings/views/widget/set
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_text.dart';
 import '../../../routes/app_pages.dart';
@@ -14,23 +15,27 @@ class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
   @override
   Widget build(BuildContext context) {
-    return  InfixEduScaffold(
+    return  Obx(() => InfixEduScaffold(
       title: "Settings",
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
           child: Column(
             children: [
-               SettingsTile(
+
+              SettingsTile(
                 icon: ImagePath.settingLanguage,
-                title: "Change Language",
+                title: "Change Language".tr,
+                languageName: controller.languageController.langName.value,
                 isLanguage: true,
                 onTileTap: (){
                   controller.showLanguageBottomSheet();
                 },
               ),
+
+
               10.verticalSpacing,
-               SettingsTile(
+              SettingsTile(
                 icon: ImagePath.changePassword,
                 title: "Change Password",
                 isLanguage: false,
@@ -63,6 +68,6 @@ class SettingsView extends GetView<SettingsController> {
         ),
 
       ),
-    );
+    ));
   }
 }
