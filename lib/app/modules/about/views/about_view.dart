@@ -21,34 +21,55 @@ class AboutView extends GetView<AboutController> {
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-          child: Obx(() => controller.loadingController.isLoading ? const LoadingWidget() : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    child: Image.asset(
-                      ImagePath.appLogo,
-                      color: AppColors.primaryColor,
-                      scale: 5,
+          child: Obx(
+            () => controller.loadingController.isLoading
+                ? const LoadingWidget()
+                : SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(20),
+                              child: Image.asset(
+                                ImagePath.appLogo,
+                                color: AppColors.primaryColor,
+                                scale: 5,
+                              ),
+                            ),
+                            const Text(
+                              "Infix Edu",
+                              style: AppTextStyle.fontSize14BlackW500,
+                            ),
+                          ],
+                        ),
+                        30.verticalSpacing,
+                        Text(
+                          controller.aboutInformation?.aboutDetails ?? '',
+                          style: AppTextStyle.fontSize13BlackW400,
+                        ),
+                        20.verticalSpacing,
+                        Text(
+                          'Address: ${controller.aboutInformation?.address}',
+                          style: AppTextStyle.cardTextStyle14PurpleW500,
+                        ),
+                        10.verticalSpacing,
+                        Text(
+                          'Phone Number: ${controller.aboutInformation?.phoneNo}',
+                          style: AppTextStyle.cardTextStyle14PurpleW500,
+                        ),
+                        10.verticalSpacing,
+                        Text(
+                          'Email: ${controller.aboutInformation?.email}',
+                          style: AppTextStyle.cardTextStyle14PurpleW500,
+                        ),
+                        10.verticalSpacing,
+                      ],
                     ),
                   ),
-                  const Text("Infix Edu", style: AppTextStyle.fontSize14BlackW500,),
-                ],
-              ),
-              30.verticalSpacing,
-              Text(controller.aboutInformation?.aboutDetails ??'', style: AppTextStyle.fontSize13BlackW400,),
-              20.verticalSpacing,
-              Text('Address: ${controller.aboutInformation?.address}', style: AppTextStyle.cardTextStyle14PurpleW500,),
-              10.verticalSpacing,
-              Text('Phone Number: ${controller.aboutInformation?.phoneNo}', style: AppTextStyle.cardTextStyle14PurpleW500,),
-              10.verticalSpacing,
-              Text('Email: ${controller.aboutInformation?.email}', style: AppTextStyle.cardTextStyle14PurpleW500,),
-              10.verticalSpacing,
-            ],
-          ),),
+          ),
         ),
       ),
     );

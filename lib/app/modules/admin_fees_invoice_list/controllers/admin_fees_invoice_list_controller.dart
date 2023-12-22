@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/admin_class_attendance_individual_details/bindings/admin_class_attendance_individual_details_binding.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/admin_class_attendance_search/controllers/admin_class_attendance_search_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/admin_students_search/controllers/admin_students_search_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';

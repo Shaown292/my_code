@@ -221,6 +221,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                   hintText: AppText.editProfileCurrentAddress,
                   controller: controller.currentAddressTextController,
                 ),
+                50.verticalSpacing,
               ],
             ),
           ),

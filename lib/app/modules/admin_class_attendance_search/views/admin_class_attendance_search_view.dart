@@ -3,11 +3,12 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 
 import 'package:get/get.dart';
 
@@ -87,34 +88,32 @@ class AdminClassAttendanceSearchView
                     color: AppColors.profileValueColor,
                   ),
                 ),
-                const Spacer(),
-                controller.isLoading.value
-                    ? const CircularProgressIndicator(
-                        color: AppColors.primaryColor,
-                      )
-                    : PrimaryButton(
-                        text: "Search",
-                        onTap: () {
-                          if (controller.validation()) {
-                            controller.getStudentAttendanceList(
-                              studentClassId: controller
-                                  .adminStudentsSearchController
-                                  .studentClassId
-                                  .value,
-                              studentSectionId: controller
-                                  .adminStudentsSearchController
-                                  .studentSectionId
-                                  .value,
-                              selectedDate:
-                                  controller.selectedDateTextController.text,
-                            );
-                          }
-                        },
-                      ),
+
                 50.verticalSpacing,
               ],
             ),
           ),
+        ),
+        bottomNavBar:    controller.isLoading.value
+            ? const SecondaryLoadingWidget(isBottomNav: true,)
+            : BottomNavButton(
+          text: "Search",
+          onTap: () {
+            if (controller.validation()) {
+              controller.getStudentAttendanceList(
+                studentClassId: controller
+                    .adminStudentsSearchController
+                    .studentClassId
+                    .value,
+                studentSectionId: controller
+                    .adminStudentsSearchController
+                    .studentSectionId
+                    .value,
+                selectedDate:
+                controller.selectedDateTextController.text,
+              );
+            }
+          },
         ),
       ),
     );

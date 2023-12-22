@@ -35,8 +35,6 @@ class Data {
   int? totalLate;
   int? totalHalfDay;
   int? totalHolyDay;
-  int? year;
-  int? month;
   String? currentDay;
   String? status;
 
@@ -51,8 +49,6 @@ class Data {
         this.totalLate,
         this.totalHalfDay,
         this.totalHolyDay,
-        this.year,
-        this.month,
         this.currentDay,
         this.status,});
 
@@ -72,8 +68,6 @@ class Data {
     totalLate = json['total_late'];
     totalHalfDay = json['total_half_day'];
     totalHolyDay = json['total_holiday'];
-    year = json['year'].runtimeType == int ? json['year'] : int.tryParse(json['year']);
-    month = json['month'].runtimeType == int ? json['month'] :  int.tryParse(json['month']);
     currentDay = json['current_day'];
     status = json['status'];
   }
@@ -92,8 +86,6 @@ class Data {
     data['total_late'] = totalLate;
     data['total_half_day'] = totalHalfDay;
     data['total_holiday'] = totalHolyDay;
-    data['year'] = year;
-    data['month'] = month;
     data['current_day'] = currentDay;
     data['status'] = status;
     return data;

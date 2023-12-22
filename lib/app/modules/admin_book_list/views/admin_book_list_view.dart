@@ -16,7 +16,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Book List",
+      title: "Book ",
       body: RefreshIndicator(
         onRefresh: () async {
           controller.getAdminBookList();
@@ -26,7 +26,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: Get.height * 0.07,
+                height: Get.height * 0.1,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 decoration: const BoxDecoration(

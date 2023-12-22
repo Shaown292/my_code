@@ -37,7 +37,7 @@ class ContentTile extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.only(right: 15),
-                width: Get.width * 0.65,
+                width: Get.width * 0.64,
                 child: Text(
                   title ?? "",
                   style: AppTextStyle.fontSize14BlackW500,

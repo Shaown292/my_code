@@ -61,7 +61,7 @@ class BookListView extends GetView<BookListController> {
                     ),
                   ),
                   Container(
-                    height: Get.height * 0.07,
+                    height: Get.height * 0.09,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 15),
                     decoration: const BoxDecoration(
@@ -115,8 +115,7 @@ class BookListView extends GetView<BookListController> {
                                   itemCount: controller.bookListData.length,
                                   itemBuilder: (context, index) {
                                     return BookListTile(
-                                      bookName: controller
-                                          .bookListData[index].bookTitle,
+                                      bookName: controller.bookListData[index].bookTitle,
                                       subject: controller
                                           .bookListData[index].subject,
                                       bookNumber: controller

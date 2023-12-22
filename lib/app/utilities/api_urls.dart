@@ -489,6 +489,17 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String getTeacherAbout = '${baseApi}teacher-about';
 
 
+  /// Chat
+  static String getSingleChatList = '${baseApi}admin-chat-users';
+  static String getGroupChatList = '${baseApi}admin-chat-groups';
+  static String sendSingleChat = '${baseApi}admin-chat-send';
+
+
+
+
+
+
+
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////..........PREVIOUS APP URLS................///////////////////////////////////

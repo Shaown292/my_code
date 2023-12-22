@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/image_view/cache_image_view.dart';
 import 'package:get/get.dart';
 import '../../../../data/constants/app_colors.dart';
 
 class ChatTile extends StatelessWidget {
-  final String? profileImage;
+  final String? profileImageUrl;
   final String? name;
   final String? message;
   final String? messageReceivedTime;
@@ -17,7 +19,7 @@ class ChatTile extends StatelessWidget {
 
   const ChatTile({
     super.key,
-    this.profileImage,
+    this.profileImageUrl,
     this.name,
     this.message,
     this.messageReceivedTime,
@@ -31,7 +33,7 @@ class ChatTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(
           children: [
             Row(
@@ -39,19 +41,34 @@ class ChatTile extends StatelessWidget {
                 Stack(
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
+
+                    profileImageUrl == '' ?
                     Container(
-                      height: 50,
-                      width: 50,
+                      height: Get.height * 0.1,
+                      width: Get.width * 0.15,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                            image: AssetImage(profileImage ?? ""),
+                            image: AssetImage(ImagePath.dp),
                             fit: BoxFit.cover),
+                      ),
+                    ):
+                    SizedBox(
+                      height: Get.height * 0.1,
+                      width: Get.width * 0.15,
+                      child: ClipRRect(
+                        borderRadius:
+                        6.circularRadius,
+                        child: CacheImageView(
+                          url: profileImageUrl,
+                          errorImageLocal:
+                          ImagePath.errorImage,
+                        ),
                       ),
                     ),
                    Positioned(
-                      right: 0,
-                      top: 10,
+                      right: Get.width * 0.015,
+                      top: Get.height * 0.02,
                       child: Container(
                         height: 8,
                         width: 8,
@@ -73,7 +90,7 @@ class ChatTile extends StatelessWidget {
                     ),
                     5.verticalSpacing,
                     SizedBox(
-                      width: Get.width * 0.5,
+                      width: Get.width * 0.48,
                       child: Text(
                         message ?? "",
                         style: TextStyle(

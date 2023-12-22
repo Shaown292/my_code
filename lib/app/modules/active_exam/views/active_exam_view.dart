@@ -15,113 +15,112 @@ class ActiveExamView extends GetView<ActiveExamController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => InfixEduScaffold(
-          title: "Active Exam",
-          body: CustomBackground(
-            customWidget: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                20.verticalSpacing,
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
-                  child: SizedBox(
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          controller.homeController.studentRecordList.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Obx(
-                            () => StudyButton(
-                              title:
-                                  "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                              onItemTap: () {
-                                controller.onlineActiveExamList.clear();
-                                controller.selectIndex.value = index;
-                                int recordId = controller
-                                    .homeController.studentRecordList[index].id;
-                                controller.getStudentActiveExamList(
-                                    recordId: recordId);
-                              },
-                              isSelected: controller.selectIndex.value == index,
-                            ),
+    return Obx(
+      () => InfixEduScaffold(
+        title: "Active Exam",
+        body: CustomBackground(
+          customWidget: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              20.verticalSpacing,
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                child: SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount:
+                        controller.homeController.studentRecordList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 5),
+                        child: Obx(
+                          () => StudyButton(
+                            title:
+                                "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                            onItemTap: () {
+                              controller.onlineActiveExamList.clear();
+                              controller.selectIndex.value = index;
+                              int recordId = controller
+                                  .homeController.studentRecordList[index].id;
+                              controller.getStudentActiveExamList(
+                                  recordId: recordId);
+                            },
+                            isSelected: controller.selectIndex.value == index,
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ),
-                controller.loadingController.isLoading
-                    ? const Expanded(
-                        child: LoadingWidget(),
-                      )
-                    : Expanded(
-                        child: RefreshIndicator(
-                          color: AppColors.primaryColor,
-                          onRefresh: () async {
-                            controller.onlineActiveExamList.clear();
-                            controller.getStudentActiveExamList(
-                                recordId: controller
-                                    .homeController.studentRecordList[0].id);
-                          },
-                          child: controller.onlineActiveExamList.isNotEmpty
-                              ? ListView.builder(
-                                  itemCount:
-                                      controller.onlineActiveExamList.length,
-                                  itemBuilder: (context, index) {
-                                    String colorCode = '';
-                                    if (controller.onlineActiveExamList[index]
-                                            .status ==
-                                        'Closed') {
-                                      colorCode = '0xFFF95452';
-                                    } else if (controller
-                                            .onlineActiveExamList[index]
-                                            .status ==
-                                        'Already Submitted') {
-                                      colorCode = '0xFF404FB6';
-                                    } else if (controller
-                                            .onlineActiveExamList[index]
-                                            .status ==
-                                        'Take Exam') {
-                                      colorCode = '0xFF943AE3';
-                                    } else {
-                                      colorCode = '0xFF412C56';
-                                    }
+              ),
+              controller.loadingController.isLoading
+                  ? const Expanded(
+                      child: LoadingWidget(),
+                    )
+                  : Expanded(
+                      child: RefreshIndicator(
+                        color: AppColors.primaryColor,
+                        onRefresh: () async {
+                          controller.onlineActiveExamList.clear();
+                          controller.getStudentActiveExamList(
+                              recordId: controller
+                                  .homeController.studentRecordList[0].id);
+                        },
+                        child: controller.onlineActiveExamList.isNotEmpty
+                            ? ListView.builder(
+                                itemCount:
+                                    controller.onlineActiveExamList.length,
+                                itemBuilder: (context, index) {
+                                  String colorCode = '';
+                                  if (controller
+                                          .onlineActiveExamList[index].status ==
+                                      'Closed') {
+                                    colorCode = '0xFFF95452';
+                                  } else if (controller
+                                          .onlineActiveExamList[index].status ==
+                                      'Already Submitted') {
+                                    colorCode = '0xFF404FB6';
+                                  } else if (controller
+                                          .onlineActiveExamList[index].status ==
+                                      'Take Exam') {
+                                    colorCode = '0xFF943AE3';
+                                  } else {
+                                    colorCode = '0xFF412C56';
+                                  }
 
-                                    return ActiveExamTile(
-                                      title: controller
-                                          .onlineActiveExamList[index].title,
-                                      subject: controller
-                                          .onlineActiveExamList[index].subject,
-                                      startingTime: controller
-                                          .onlineActiveExamList[index]
-                                          .startTime,
-                                      startDate: controller
-                                          .onlineActiveExamList[index]
-                                          .startDate,
-                                      endDate: controller
-                                          .onlineActiveExamList[index].endDate,
-                                      endingTime: controller
-                                          .onlineActiveExamList[index].endTime,
-                                      activeStatus: controller
-                                          .onlineActiveExamList[index].status,
-                                      activeStatusColor:
-                                          Color(int.tryParse(colorCode)!),
-                                      color: index % 2 == 1
-                                          ? Colors.white
-                                          : AppColors.homeworkWidgetColor,
-                                    );
-                                  },
-                                )
-                              : const Center(child: NoDataAvailableWidget()),
-                        ),
-                      )
-              ],
-            ),
+                                  return ActiveExamTile(
+                                    title: controller
+                                        .onlineActiveExamList[index].title,
+                                    subject: controller
+                                        .onlineActiveExamList[index].subject,
+                                    startingTime: controller
+                                        .onlineActiveExamList[index].startTime,
+                                    startDate: controller
+                                        .onlineActiveExamList[index].startDate,
+                                    endDate: controller
+                                        .onlineActiveExamList[index].endDate,
+                                    endingTime: controller
+                                        .onlineActiveExamList[index].endTime,
+                                    activeStatus: controller
+                                        .onlineActiveExamList[index].status,
+                                    activeStatusColor:
+                                        Color(int.tryParse(colorCode)!),
+                                    color: index % 2 == 1
+                                        ? Colors.white
+                                        : AppColors.homeworkWidgetColor,
+                                  );
+                                },
+                              )
+                            : const Center(child: NoDataAvailableWidget()),
+                      ),
+                    )
+            ],
           ),
-        ),);
+        ),
+      ),
+    );
   }
 }

@@ -46,8 +46,8 @@ class StudentListTile extends StatelessWidget {
               children: [
                 isPhotoAvailable
                     ? Container(
-                        height: 70,
-                        width: 70,
+                        height: Get.height * 0.1,
+                        width: Get.width * 0.18,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -56,8 +56,8 @@ class StudentListTile extends StatelessWidget {
                         ),
                       )
                     : SizedBox(
-                        height: 70,
-                        width: 70,
+                  height: Get.height * 0.1,
+                  width: Get.width * 0.18,
                         child: CacheImageView(
                           url: '${AppConfig.imageBaseUrl}$imageURL',
                           errorImageLocal: ImagePath.dp,
@@ -84,7 +84,7 @@ class StudentListTile extends StatelessWidget {
                           )
                         : Text(
                             classSection ?? '',
-                            style: AppTextStyle.fontSize14lightBlackW400,
+                            style: AppTextStyle.fontSize13BlackW400,
                           ),
                   ],
                 ),

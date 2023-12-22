@@ -15,16 +15,6 @@ class AdminAssignVehicleController extends GetxController {
   RxBool dropdownLoader = false.obs;
 
 
-
-
-
-  RxString initialValue = "Rohit Sharma".obs;
-  RxList <String> list = [
-    "Rohit Sharma",
-    "Virat Kohli",
-    "Subhman Gill"
-  ].obs;
-
   Rx<AdminVehicleAssignRoutes> assignRouteInitialValue =
       AdminVehicleAssignRoutes(id: -1, name: "Assign Route").obs;
   RxList<AdminVehicleAssignRoutes> assignRouteList = <AdminVehicleAssignRoutes>[].obs;
@@ -59,6 +49,7 @@ class AdminAssignVehicleController extends GetxController {
                 .add(adminAssignVehicleAndRouteResponseModel.data!.routes![i]);
           }
           assignRouteInitialValue.value = assignRouteList[0];
+          routeId.value = assignRouteList[0].id!;
         }
 
 
@@ -70,6 +61,7 @@ class AdminAssignVehicleController extends GetxController {
                 .add(adminAssignVehicleAndRouteResponseModel.data!.vehicles![i]);
           }
           assignVehicleInitialValue.value = assignVehicleList[0];
+          vehicleId.value = assignVehicleList[0].id!;
         }
 
       } else {

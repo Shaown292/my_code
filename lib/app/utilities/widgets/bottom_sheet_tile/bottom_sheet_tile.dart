@@ -23,7 +23,7 @@ class BottomSheetTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return hasMultipleData == true
         ? Container(
-            height: Get.height * 0.05,
+            height: Get.height * 0.06,
             decoration: BoxDecoration(
               border: Border.all(
                 color: AppColors.homeworkWidgetColor,
@@ -34,7 +34,7 @@ class BottomSheetTile extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  width: Get.width * 0.3,
+                  width: Get.width * 0.41,
                   child: Text(
                     title ?? "",
                     style: AppTextStyle.fontSize12lightViolateW400,
@@ -53,7 +53,7 @@ class BottomSheetTile extends StatelessWidget {
             ),
           )
         : Container(
-            height: Get.height * 0.05,
+            height: Get.height * 0.06,
             decoration: BoxDecoration(
               border: Border.all(
                 color: AppColors.homeworkWidgetColor,
@@ -64,7 +64,7 @@ class BottomSheetTile extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  width: Get.width * 0.35,
+                  width: Get.width * 0.41,
                   child: Text(
                     title ?? "",
                     style: AppTextStyle.fontSize12lightViolateW400,

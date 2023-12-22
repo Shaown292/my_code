@@ -29,7 +29,7 @@ class TransportTile extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: Get.width * 0.1,
+                width: Get.width * 0.13,
                 padding: const EdgeInsets.all(10),
                 color: tileBackgroundColor,
                 decoration: BoxDecoration(

@@ -123,70 +123,72 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                                         controller.daysOfWeek[index])
                                     .toList();
 
-                                return Obx(() => controller
-                                        .loadingController.isLoading
-                                    ? const LoadingWidget()
-                                    : weeksList.isNotEmpty
-                                        ? ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: weeksList.length,
-                                            itemBuilder:
-                                                (context, routineIndex) {
-                                              ClassRoutine classRoutine =
-                                                  controller.weeksList[index]
-                                                          .classRoutine![
-                                                      routineIndex];
-                                              return StudentClassDetailsCard(
-                                                subject:
-                                                    classRoutine.subjectName,
-                                                startingTime:
-                                                    classRoutine.startTime,
-                                                endingTime:
-                                                    classRoutine.endTime,
-                                                roomNumber: classRoutine.room,
-                                                buildingName: "Building No",
-                                                instructorName:
-                                                    classRoutine.teacher,
-                                                onDetailsButtonTap:
-                                                    controller.isLoading.value,
-                                                hasDetails: true,
-                                                onTap: () {
-                                                  controller.isLoading.value =
-                                                      true;
-                                                  controller
-                                                      .getLessonPlanListDetails(
-                                                          lessonPlanId:
-                                                              controller
-                                                                  .weeksList[
-                                                                      index]
-                                                                  .id!,
-                                                          context: context);
-                                                },
-                                                buttonWidget: controller
-                                                        .isLoading.value
-                                                    ? const CircularProgressIndicator()
-                                                    : Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(5),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(2),
-                                                          color: AppColors
-                                                              .primaryColor,
+                                return Obx(
+                                  () => controller.loadingController.isLoading
+                                      ? const LoadingWidget()
+                                      : weeksList.isNotEmpty
+                                          ? ListView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: weeksList.length,
+                                              itemBuilder:
+                                                  (context, routineIndex) {
+                                                ClassRoutine classRoutine =
+                                                    controller.weeksList[index]
+                                                            .classRoutine![
+                                                        routineIndex];
+                                                return StudentClassDetailsCard(
+                                                  subject:
+                                                      classRoutine.subjectName,
+                                                  startingTime:
+                                                      classRoutine.startTime,
+                                                  endingTime:
+                                                      classRoutine.endTime,
+                                                  roomNumber: classRoutine.room,
+                                                  buildingName: "Building No",
+                                                  instructorName:
+                                                      classRoutine.teacher,
+                                                  onDetailsButtonTap: controller
+                                                      .isLoading.value,
+                                                  hasDetails: true,
+                                                  onTap: () {
+                                                    controller.isLoading.value =
+                                                        true;
+                                                    controller
+                                                        .getLessonPlanListDetails(
+                                                            lessonPlanId:
+                                                                controller
+                                                                    .weeksList[
+                                                                        index]
+                                                                    .id!,
+                                                            context: context);
+                                                  },
+                                                  buttonWidget: controller
+                                                          .isLoading.value
+                                                      ? const CircularProgressIndicator()
+                                                      : Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        2),
+                                                            color: AppColors
+                                                                .primaryColor,
+                                                          ),
+                                                          child: const Text(
+                                                            "Details",
+                                                            style: AppTextStyle
+                                                                .textStyle12WhiteW400,
+                                                          ),
                                                         ),
-                                                        child: const Text(
-                                                          "Details",
-                                                          style: AppTextStyle
-                                                              .textStyle12WhiteW400,
-                                                        ),
-                                                      ),
-                                              );
-                                            },
-                                          )
-                                        : const NoDataAvailableWidget());
+                                                );
+                                              },
+                                            )
+                                          : const SingleChildScrollView(child: NoDataAvailableWidget()),
+                                );
                               },
                             ),
                           ),

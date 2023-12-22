@@ -42,10 +42,12 @@ class StaffIndividualDetailsView
                             width: Get.width,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(
-                                    ImagePath.staffBackground,
-                                  ),
-                                  fit: BoxFit.cover),
+                                image: AssetImage(
+                                  ImagePath.staffBackground,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                              borderRadius: const BorderRadius.only(topRight: Radius.circular(8))
                             ),
                           ),
                           Positioned(
@@ -70,7 +72,7 @@ class StaffIndividualDetailsView
                                         .staffPhoto!
                                         .isEmpty
                                 ? Container(
-                                    height: Get.height * 0.12,
+                                    height: Get.height * 0.14,
                                     width: Get.width * 0.24,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
@@ -82,7 +84,7 @@ class StaffIndividualDetailsView
                                     ),
                                   )
                                 : Container(
-                                    height: Get.height * 0.12,
+                                    height: Get.height * 0.14,
                                     width: Get.width * 0.24,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,

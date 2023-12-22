@@ -186,8 +186,6 @@ class StudentLessonPlanController extends GetxController {
                       scrollDirection: Axis.horizontal,
                       itemCount: studentLessonPlanDetailsData.topic?.length,
                       itemBuilder: (context, index) {
-                        debugPrint(
-                            "Topic ::::::: ${studentLessonPlanDetailsData.topic?.length}");
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Text(
@@ -206,8 +204,6 @@ class StudentLessonPlanController extends GetxController {
                       scrollDirection: Axis.horizontal,
                       itemCount: studentLessonPlanDetailsData.subtopic?.length,
                       itemBuilder: (context, index) {
-                        debugPrint(
-                            "Topic ::::::: ${studentLessonPlanDetailsData.subtopic?.length}");
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Text(
@@ -224,7 +220,7 @@ class StudentLessonPlanController extends GetxController {
                   color: AppColors.homeworkWidgetColor,
                 ),
                 Container(
-                  height: Get.height * 0.05,
+                  height: Get.height * 0.06,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.homeworkWidgetColor,
@@ -234,7 +230,7 @@ class StudentLessonPlanController extends GetxController {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        width: Get.width * 0.3,
+                        width: Get.width * 0.41,
                         child: const Text(
                           "Documents",
                           style: AppTextStyle.fontSize12lightViolateW400,
@@ -277,7 +273,7 @@ class StudentLessonPlanController extends GetxController {
                   color: AppColors.homeworkWidgetColor,
                 ),
                 Container(
-                  height: Get.height * 0.05,
+                  height: Get.height * 0.06,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.homeworkWidgetColor,
@@ -287,7 +283,7 @@ class StudentLessonPlanController extends GetxController {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        width: Get.width * 0.3,
+                        width: Get.width * 0.41,
                         child: const Text(
                           "Status",
                           style: AppTextStyle.fontSize12lightViolateW400,

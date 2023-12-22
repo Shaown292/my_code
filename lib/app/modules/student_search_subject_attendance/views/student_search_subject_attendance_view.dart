@@ -60,7 +60,7 @@ class StudentSearchSubjectAttendanceView
                 margin: EdgeInsets.zero,
                 child: Container(
                   padding: const EdgeInsets.all(15),
-                  height: Get.height * 0.07,
+                  height: Get.height * 0.09,
                   color: AppColors.profileCardTextColor,
                   child: Row(
                     children: [

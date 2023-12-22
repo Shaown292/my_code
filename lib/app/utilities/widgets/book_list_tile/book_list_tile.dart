@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_colors.dart';
 import '../common_widgets/custom_divider.dart';
@@ -53,7 +54,7 @@ class BookListTile extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.all(10),
-                  width: Get.width * 0.2,
+                  width: Get.width * 0.19,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       color: AppColors.homeworkStatusGreenColor),
@@ -76,26 +77,31 @@ class BookListTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: Get.width * 0.27,
+                        width: Get.width * 0.25,
                         child: Text(
                           bookName ?? "",
                           style: const TextStyle(
-                              color: AppColors.profileTitleColor,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400),
+                            color: AppColors.profileTitleColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
-                      InkWell(
-                        onTap: onTap,
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
+                      5.horizontalSpacing,
+                      Flexible(
+                        child: InkWell(
+                          onTap: onTap,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2),
-                              color: AppColors.appButtonColor),
-                          child:  Center(
-                            child: Text(
-                              view ?? "View",
-                              style: AppTextStyle.textStyle12WhiteW400,
+                              color: AppColors.appButtonColor,
+                            ),
+                            child: Center(
+                              child: Text(
+                                view ?? "View",
+                                style: AppTextStyle.textStyle12WhiteW400,
+                              ),
                             ),
                           ),
                         ),

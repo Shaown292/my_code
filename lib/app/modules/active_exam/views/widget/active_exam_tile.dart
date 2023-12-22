@@ -47,7 +47,6 @@ class ActiveExamTile extends StatelessWidget {
           10.verticalSpacing,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ColumnTile(
                 title: "Subject",
@@ -64,31 +63,33 @@ class ActiveExamTile extends StatelessWidget {
                 date: endDate ?? "",
                 time: "(${endingTime ?? ''})",
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Status",
-                    style: AppTextStyle.homeworkElements,
-                  ),
-                  5.verticalSpacing,
-                  activeStatus != null
-                      ? Container(
-                    width: 60,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: activeStatusColor ??
-                                  AppColors.homeworkStatusRedColor),
-                          child: Center(
-                            child: Text(
-                              activeStatus ?? "",
-                              style: AppTextStyle.textStyle10WhiteW400,
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Status",
+                      style: AppTextStyle.fontSize13BlackW400,
+                    ),
+                    5.verticalSpacing,
+                    activeStatus != null
+                        ? Container(
+                      width: 60,
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                color: activeStatusColor ??
+                                    AppColors.homeworkStatusRedColor),
+                            child: Center(
+                              child: Text(
+                                activeStatus ?? "",
+                                style: AppTextStyle.textStyle10WhiteW400,
+                              ),
                             ),
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
+                          )
+                        : const SizedBox(),
+                  ],
+                ),
               ),
             ],
           ),

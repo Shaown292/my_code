@@ -44,7 +44,7 @@ class OthersTile extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.all(5),
-            width: Get.width * 0.4,
+            width: Get.width * 0.38,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

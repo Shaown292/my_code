@@ -23,7 +23,7 @@ class StudentLessonPlanResponseModel {
 }
 
 class StudentLessonData {
-  String? thisWeek;
+  int? thisWeek;
   List<Weeks>? weeks;
 
   StudentLessonData({this.thisWeek, this.weeks});

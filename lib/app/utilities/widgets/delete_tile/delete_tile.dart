@@ -31,7 +31,7 @@ class DeleteTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
       child: Card(
         elevation: 5,
         margin: EdgeInsets.zero,
@@ -53,7 +53,7 @@ class DeleteTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: Get.width * 0.58,
+                  width: Get.width * 0.5,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -72,6 +72,7 @@ class DeleteTile extends StatelessWidget {
                     ],
                   ),
                 ),
+                10.horizontalSpacing,
                 Row(
                   children: [
                     leftIcon == null
@@ -79,8 +80,8 @@ class DeleteTile extends StatelessWidget {
                         : InkWell(
                             onTap: tapLeftButton,
                             child: Container(
-                              height: 30,
-                              width: 30,
+                              height: Get.height * 0.05,
+                              width: Get.width * 0.08,
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
@@ -92,14 +93,14 @@ class DeleteTile extends StatelessWidget {
                               ),
                             ),
                           ),
-                    7.horizontalSpacing,
+                    8.horizontalSpacing,
                     rightIcon == null
                         ? const SizedBox()
                         : InkWell(
                             onTap: tapRightButton,
                             child: Container(
-                              height: 30,
-                              width: 30,
+                              height: Get.height * 0.05,
+                              width: Get.width * 0.08,
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,

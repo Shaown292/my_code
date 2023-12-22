@@ -233,20 +233,20 @@ class SingleChatView extends GetView<SingleChatController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    controller.singleChatPickedImage.value.path.isNotEmpty
+                    controller.singleChatPickImage.value.path.isNotEmpty
                         ? Row(
                             children: [
                               Image.file(
                                 height: 60,
                                 width: 80,
                                 File(controller
-                                    .singleChatPickedImage.value.path),
+                                    .singleChatPickImage.value.path),
                                 fit: BoxFit.cover,
                               ),
                               5.horizontalSpacing,
                               InkWell(
                                 onTap: () {
-                                  controller.singleChatPickedImage.value =
+                                  controller.singleChatPickImage.value =
                                       File('');
                                 },
                                 child: const Icon(
@@ -265,14 +265,14 @@ class SingleChatView extends GetView<SingleChatController> {
                             FlutterImagePickerUtils.imagePickerModalSheet(
                               context: context,
                               fromGallery: () async {
-                                controller.singleChatPickedImage.value =
+                                controller.singleChatPickImage.value =
                                     await FlutterImagePickerUtils
                                         .getImageGallery(
                                   context,
                                 );
                               },
                               fromCamera: () async {
-                                controller.singleChatPickedImage.value =
+                                controller.singleChatPickImage.value =
                                     await FlutterImagePickerUtils
                                         .getImageCamera(
                                   context,
@@ -301,7 +301,11 @@ class SingleChatView extends GetView<SingleChatController> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            if(controller.validation()){
+                              controller.singleChatSend();
+                            }
+                          },
                           child: Container(
                             height: 45,
                             width: 45,

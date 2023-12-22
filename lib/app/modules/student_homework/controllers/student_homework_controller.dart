@@ -81,116 +81,129 @@ class StudentHomeworkController extends GetxController {
           height: Get.height * 0.4,
           child: studentHomeworkList.isNotEmpty
               ? isUpload.value
-                  ? Column(
-                      children: [
-                        Container(
-                          height: Get.height * 0.1,
-                          width: Get.width,
-                          padding: const EdgeInsets.all(20),
-                          color: AppColors.primaryColor,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Upload Homework",
-                                style: AppTextStyle.cardTextStyle14WhiteW500,
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white),
-                                child: InkWell(
-                                  onTap: () => isUpload.value = false,
-                                  child: const Icon(
-                                    Icons.close,
-                                    size: 16,
+                  ? SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            height: Get.height * 0.1,
+                            width: Get.width,
+                            padding: const EdgeInsets.all(20),
+                            color: AppColors.primaryColor,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Upload Homework",
+                                  style: AppTextStyle.cardTextStyle14WhiteW500,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white),
+                                  child: InkWell(
+                                    onTap: () => isUpload.value = false,
+                                    child: const Icon(
+                                      Icons.close,
+                                      size: 16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        20.verticalSpacing,
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20),
-                          child: CustomTextFormField(
-                            enableBorderActive: true,
-                            focusBorderActive: true,
-                            fillColor: Colors.white,
-                            hintText: pickedFileList.isNotEmpty
-                                ? pickedFileList.first.path
-                                : 'Select File',
-                            readOnly: true,
-                            suffixIcon: InkWell(
-                              onTap: onTapBrowse,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  width: 80,
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: AppColors.primaryColor),
-                                  child: const Center(
-                                    child: Text(
-                                      "BROWSE",
-                                      style: AppTextStyle.textStyle12WhiteW400,
+                          20.verticalSpacing,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20),
+                            child: CustomTextFormField(
+                              enableBorderActive: true,
+                              focusBorderActive: true,
+                              fillColor: Colors.white,
+                              hintText: pickedFileList.isNotEmpty
+                                  ? pickedFileList.first.path
+                                  : 'Select File',
+                              readOnly: true,
+                              suffixIcon: InkWell(
+                                onTap: onTapBrowse,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    width: 80,
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: AppColors.primaryColor),
+                                    child: const Center(
+                                      child: Text(
+                                        "BROWSE",
+                                        style:
+                                            AppTextStyle.textStyle12WhiteW400,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Column(
-                          children: pickedFileList
-                              .map((element) => Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(element.path.split('/').last),
-                                      const Icon(Icons.cancel_outlined),
-                                    ],
-                                  ))
-                              .toList(),
-                        ),
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PrimaryButton(
-                                width: Get.width * 0.15,
-                                title: "Cancel",
-                                color: Colors.white,
-                                textStyle: AppTextStyle.fontSize13BlackW400,
-                                borderColor: AppColors.primaryColor,
-                                onTap: () {
-                                  isUpload.value = false;
-                                },
-                              ),
-                              Obx(
-                                () => saveLoader.value == true
-                                    ? const CircularProgressIndicator(
-                                        color: AppColors.primaryColor,
-                                      )
-                                    : PrimaryButton(
-                                        width: Get.width * 0.2,
-                                        title: "Save",
-                                        textStyle:
-                                            AppTextStyle.textStyle12WhiteW500,
-                                        onTap: onTapForSave,
-                                      ),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                            child: Column(
+                              children: pickedFileList
+                                  .map((element) => Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(element.path.split('/').last),
+                                          InkWell(
+                                            onTap: (){
+                                              pickedFileList.removeAt(index);
+                                            },
+                                            child: const Icon(
+                                              Icons.cancel_outlined,
+                                            ),
+                                          ),
+                                        ],
+                                      ))
+                                  .toList(),
+                            ),
                           ),
-                        ),
-                      ],
+                          // const Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                PrimaryButton(
+                                  width: Get.width * 0.15,
+                                  title: "Cancel",
+                                  color: Colors.white,
+                                  textStyle: AppTextStyle.fontSize13BlackW400,
+                                  borderColor: AppColors.primaryColor,
+                                  onTap: () {
+                                    isUpload.value = false;
+                                  },
+                                ),
+                                Obx(
+                                  () => saveLoader.value == true
+                                      ? const CircularProgressIndicator(
+                                          color: AppColors.primaryColor,
+                                        )
+                                      : PrimaryButton(
+                                          width: Get.width * 0.2,
+                                          title: "Save",
+                                          textStyle:
+                                              AppTextStyle.textStyle12WhiteW500,
+                                          onTap: onTapForSave,
+                                        ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     )
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
