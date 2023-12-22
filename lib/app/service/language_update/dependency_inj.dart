@@ -18,6 +18,7 @@ Future<Map<String, Map<String, String>>> init() async {
     String jsonStringValues = await rootBundle.loadString('assets/locale/${languageModel.languageCode}.json');
     Map<String, dynamic> _mappedJson = json.decode(jsonStringValues);
 
+
     Map<String, String> _json = Map();
     _mappedJson.forEach((key, value){
       _json[key] = value.toString();
