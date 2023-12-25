@@ -310,7 +310,6 @@ class StudentLessonPlanController extends GetxController {
     );
   }
 
-
   void selectTab() {
     selectTabIndex.value = daysOfWeek.indexOf(today);
   }
