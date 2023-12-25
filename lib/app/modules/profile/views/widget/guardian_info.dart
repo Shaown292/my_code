@@ -47,8 +47,8 @@ class GuardianInfo extends StatelessWidget {
               child: SizedBox(
                 width: Get.width * 0.2,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    10.verticalSpacing,
                     Text(
                       designation,
                       style: const TextStyle(
@@ -56,7 +56,6 @@ class GuardianInfo extends StatelessWidget {
                           fontSize: 10,
                           fontWeight: FontWeight.w500),
                     ),
-                    8.verticalSpacing,
                     Container(
                       height: 35,
                       width: 35,

@@ -170,6 +170,9 @@ class InfixApi {
   static String getBookSearch({required String bookName}) {
     return "${baseApi}student-library?book_title=$bookName";
   }
+  static String getChatUserSearch({required String keyword}) {
+    return "${baseApi}admin-chat-user-search?keywords=$keyword";
+  }
 
   static String getStudentSubjects(int recordId) {
     return "${baseApi}student-subject?record_id=$recordId";

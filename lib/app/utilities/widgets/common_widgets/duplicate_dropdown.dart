@@ -14,7 +14,7 @@ class DuplicateDropdown extends StatelessWidget {
   final String? hint;
   final TextStyle? textStyle;
   final bool isChat;
-
+  final double? padding;
   const DuplicateDropdown({
     super.key,
     this.dropdownValue,
@@ -25,7 +25,7 @@ class DuplicateDropdown extends StatelessWidget {
     this.dropdownText = true,
     this.activeStatusColor, this.hint,
     this.textStyle,
-    this.isChat = false,
+    this.isChat = false, this.padding,
   });
 
   @override
@@ -39,7 +39,7 @@ class DuplicateDropdown extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding:  EdgeInsets.all(padding ?? 8.0),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<dynamic>(
             hint: Text(hint ?? "", style: AppTextStyle.fontSize13BlackW400,),
@@ -57,7 +57,6 @@ class DuplicateDropdown extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 )
                     : Row(
-
                   children: [
                     Container(
                       height: 8,

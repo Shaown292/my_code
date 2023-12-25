@@ -7,6 +7,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/guardian_info.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/others_tile.dart';
@@ -201,14 +202,7 @@ class ProfileView extends GetView<ProfileController> {
                             children: [
                               /// Personal
                               controller.personalLoader.value
-                                  ? Center(
-                                      child: Platform.isAndroid
-                                          ? const CircularProgressIndicator(
-                                              color: AppColors.primaryColor,
-                                            )
-                                          : const CircularProgressIndicator(
-                                              color: AppColors.primaryColor,
-                                            ))
+                                  ? const SecondaryLoadingWidget()
                                   : Column(
                                       children: [
                                         ProfilePersonalWidget(
@@ -248,99 +242,99 @@ class ProfileView extends GetView<ProfileController> {
                               controller.parentLoader.value
                                   ? const LoadingWidget()
                                   : SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        ParentsInfo(
+                                      child: Column(
+                                        children: [
+                                          ParentsInfo(
+                                              designation:
+                                                  AppText.profileFather,
+                                              icon: ImagePath.parentsProfile,
+                                              name: controller.profileParents
+                                                      ?.fathersName ??
+                                                  AppText.noDataAvailable,
+                                              phone: controller.profileParents
+                                                      ?.fathersMobile ??
+                                                  AppText.noDataAvailable,
+                                              occupation: controller
+                                                      .profileParents
+                                                      ?.fathersOccupation ??
+                                                  AppText.noDataAvailable),
+                                          20.verticalSpacing,
+                                          ParentsInfo(
+                                              designation:
+                                                  AppText.profileMother,
+                                              icon: ImagePath.parentsProfile,
+                                              name: controller.profileParents
+                                                      ?.mothersName ??
+                                                  AppText.noDataAvailable,
+                                              phone: controller.profileParents
+                                                      ?.mothersMobile ??
+                                                  AppText.noDataAvailable,
+                                              occupation: controller
+                                                      .profileParents
+                                                      ?.mothersOccupation ??
+                                                  AppText.noDataAvailable),
+                                          20.verticalSpacing,
+                                          GuardianInfo(
                                             designation:
-                                                AppText.profileFather,
+                                                AppText.profileGuardian,
                                             icon: ImagePath.parentsProfile,
                                             name: controller.profileParents
-                                                    ?.fathersName ??
+                                                    ?.guardiansName ??
+                                                AppText.noDataAvailable,
+                                            email: controller.profileParents
+                                                    ?.guardiansEmail ??
                                                 AppText.noDataAvailable,
                                             phone: controller.profileParents
-                                                    ?.fathersMobile ??
+                                                    ?.guardiansMobile ??
                                                 AppText.noDataAvailable,
                                             occupation: controller
                                                     .profileParents
-                                                    ?.fathersOccupation ??
-                                                AppText.noDataAvailable),
-                                        20.verticalSpacing,
-                                        ParentsInfo(
-                                            designation:
-                                                AppText.profileMother,
-                                            icon: ImagePath.parentsProfile,
-                                            name: controller.profileParents
-                                                    ?.mothersName ??
+                                                    ?.guardiansOccupation ??
                                                 AppText.noDataAvailable,
-                                            phone: controller.profileParents
-                                                    ?.mothersMobile ??
+                                            relation: controller.profileParents
+                                                    ?.guardiansRelation ??
                                                 AppText.noDataAvailable,
-                                            occupation: controller
-                                                    .profileParents
-                                                    ?.mothersOccupation ??
-                                                AppText.noDataAvailable),
-                                        20.verticalSpacing,
-                                        GuardianInfo(
-                                          designation:
-                                              AppText.profileGuardian,
-                                          icon: ImagePath.parentsProfile,
-                                          name: controller.profileParents
-                                                  ?.guardiansName ??
-                                              AppText.noDataAvailable,
-                                          email: controller.profileParents
-                                                  ?.guardiansEmail ??
-                                              AppText.noDataAvailable,
-                                          phone: controller.profileParents
-                                                  ?.guardiansMobile ??
-                                              AppText.noDataAvailable,
-                                          occupation: controller
-                                                  .profileParents
-                                                  ?.guardiansOccupation ??
-                                              AppText.noDataAvailable,
-                                          relation: controller.profileParents
-                                                  ?.guardiansRelation ??
-                                              AppText.noDataAvailable,
-                                          other: "Other",
-                                        ),
-                                        150.verticalSpacing,
-                                      ],
+                                            other: "Other",
+                                          ),
+                                          SizedBox(
+                                            height: Get.height * 0.3,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
 
                               /// Transport
                               controller.transportLoader.value
                                   ? const LoadingWidget()
                                   : Column(
-                                    children: [
-                                      TransportWidget(
+                                      children: [
+                                        TransportWidget(
                                           title: AppText.transportRoute,
-                                          value: controller.profileTransport
-                                                  ?.route ??
-                                              AppText.noDataAvailable),
-                                      TransportWidget(
+                                          value: controller
+                                              .profileTransport?.route,
+                                        ),
+                                        TransportWidget(
                                           title: AppText.transportVehicleNo,
-                                          value: controller.profileTransport
-                                                  ?.vehicle ??
-                                              AppText.noDataAvailable),
-                                      TransportWidget(
-                                          title:
-                                              AppText.transportDriverName,
-                                          value: controller.profileTransport
-                                                  ?.driver ??
-                                              AppText.noDataAvailable),
-                                      TransportWidget(
-                                          title: AppText
-                                              .transportDriverPhoneNo,
-                                          value: controller.profileTransport
-                                                  ?.mobile ??
-                                              AppText.noDataAvailable),
-                                      TransportWidget(
+                                          value: controller
+                                              .profileTransport?.vehicle,
+                                        ),
+                                        TransportWidget(
+                                          title: AppText.transportDriverName,
+                                          value: controller
+                                              .profileTransport?.driver,
+                                        ),
+                                        TransportWidget(
+                                          title: AppText.transportDriverPhoneNo,
+                                          value: controller
+                                              .profileTransport?.mobile,
+                                        ),
+                                        TransportWidget(
                                           title: AppText.transportDormitory,
-                                          value: controller.profileTransport
-                                                  ?.dormitory ??
-                                              AppText.noDataAvailable),
-                                    ],
-                                  ),
+                                          value: controller
+                                              .profileTransport?.dormitory,
+                                        ),
+                                      ],
+                                    ),
 
                               ///Others
                               controller.othersLoader.value
@@ -348,35 +342,41 @@ class ProfileView extends GetView<ProfileController> {
                                   : Column(
                                       children: [
                                         OthersTile(
-                                            title: "Height",
-                                            value: controller
-                                                    .profileOthers?.height ??
-                                                AppText.noDataAvailable),
+                                          title: "Height",
+                                          value: controller
+                                                  .profileOthers?.height ??
+                                              AppText.noDataAvailable,
+                                        ),
                                         OthersTile(
-                                            title: "Weight",
-                                            value: controller
-                                                    .profileOthers?.weight ??
-                                                AppText.noDataAvailable),
+                                          title: "Weight",
+                                          value: controller
+                                                  .profileOthers?.weight ??
+                                              AppText.noDataAvailable,
+                                        ),
                                         OthersTile(
-                                            title: "National ID Number",
-                                            value: controller.profileOthers
-                                                    ?.nationalIdNo ??
-                                                AppText.noDataAvailable),
+                                          title: "National ID Number",
+                                          value: controller.profileOthers
+                                                  ?.nationalIdNo ??
+                                              AppText.noDataAvailable,
+                                        ),
                                         OthersTile(
-                                            title: "Local ID Number",
-                                            value: controller
-                                                    .profileOthers?.localIdNo ??
-                                                AppText.noDataAvailable),
+                                          title: "Local ID Number",
+                                          value: controller
+                                                  .profileOthers?.localIdNo ??
+                                              AppText.noDataAvailable,
+                                        ),
                                         OthersTile(
-                                            title: "Bank Name",
-                                            value: controller
-                                                    .profileOthers?.bankName ??
-                                                AppText.noDataAvailable),
+                                          title: "Bank Name",
+                                          value: controller
+                                                  .profileOthers?.bankName ??
+                                              AppText.noDataAvailable,
+                                        ),
                                         OthersTile(
-                                            title: "Bank Account Number",
-                                            value: controller.profileOthers
-                                                    ?.bankAccountNo ??
-                                                AppText.noDataAvailable),
+                                          title: "Bank Account Number",
+                                          value: controller.profileOthers
+                                                  ?.bankAccountNo ??
+                                              AppText.noDataAvailable,
+                                        ),
                                       ],
                                     ),
 
@@ -441,7 +441,8 @@ class ProfileView extends GetView<ProfileController> {
                                       : controller.documentsDataList.isNotEmpty
                                           ? Expanded(
                                               child: ListView.builder(
-                                                physics: const NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
                                                 itemCount: controller
                                                     .documentsDataList.length,
                                                 itemBuilder: (context, index) {

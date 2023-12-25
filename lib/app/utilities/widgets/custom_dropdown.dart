@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 
 class CustomDropdown extends StatelessWidget {
   final String? dropdownValue;
+  final String? hint;
   final List<String>? dropdownList;
   final Function(String? v)? changeDropdownValue;
   final Color? color;
@@ -19,7 +20,7 @@ class CustomDropdown extends StatelessWidget {
     this.color,
     this.dropdownColor,
     this.dropdownText = true,
-    this.activeStatusColor,
+    this.activeStatusColor, this.hint,
   });
 
   @override
@@ -36,6 +37,7 @@ class CustomDropdown extends StatelessWidget {
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
             isExpanded: true,
+            hint: Text(hint ?? ""),
             items: dropdownList!
                 .map(
                   (String item) => DropdownMenuItem<String>(

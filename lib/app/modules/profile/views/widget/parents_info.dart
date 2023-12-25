@@ -28,7 +28,7 @@ class ParentsInfo extends StatelessWidget {
       elevation: 3,
       margin: EdgeInsets.zero,
       child: Container(
-        height: Get.height * 0.21,
+        height: Get.height * 0.17,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(4),

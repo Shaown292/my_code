@@ -145,19 +145,21 @@ class StudentHomeworkController extends GetxController {
                             ),
                           ),
                         ),
-                        Column(
-                          children: pickedFileList
-                              .map((element) => Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(element.path.split('/').last),
-                                      const Icon(Icons.cancel_outlined),
-                                    ],
-                                  ))
-                              .toList(),
+                        SingleChildScrollView(
+                          child: Column(
+                            children: pickedFileList
+                                .map((element) => Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(element.path.split('/').last),
+                                        const Icon(Icons.cancel_outlined),
+                                      ],
+                                    ))
+                                .toList(),
+                          ),
                         ),
-                        const Spacer(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 20),
@@ -192,111 +194,113 @@ class StudentHomeworkController extends GetxController {
                         ),
                       ],
                     )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            10.verticalSpacing,
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                studentHomeworkList[index].subject ?? "",
-                                style: AppTextStyle.fontSize14BlackW500,
-                              ),
-                            ),
-                            BottomSheetTile(
-                              title: "Created at",
-                              value: studentHomeworkList[index].createdAt,
-                              color: AppColors.homeworkWidgetColor,
-                            ),
-                            BottomSheetTile(
-                              title: "Submission",
-                              value: studentHomeworkList[index].submissionDate,
-                              color: Colors.white,
-                            ),
-                            BottomSheetTile(
-                              title: "Evaluation",
-                              value: studentHomeworkList[index].evaluationDate,
-                              color: AppColors.homeworkWidgetColor,
-                            ),
-                            BottomSheetTile(
-                              title: "Obtained Marks",
-                              value:
-                                  studentHomeworkList[index].marks.toString(),
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  : SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              InkWell(
-                                onTap: onDownloadTap,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.appButtonColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        ImagePath.download,
-                                        scale: 4,
-                                        color: Colors.white,
-                                      ),
-                                      5.horizontalSpacing,
-                                      const Text(
-                                        "Download",
-                                        style: AppTextStyle
-                                            .cardTextStyle14WhiteW500,
-                                      ),
-                                    ],
-                                  ),
+                              10.verticalSpacing,
+                              Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Text(
+                                  studentHomeworkList[index].subject ?? "",
+                                  style: AppTextStyle.fontSize14BlackW500,
                                 ),
                               ),
-                              InkWell(
-                                onTap: onUploadTap,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.appButtonColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Transform.flip(
-                                        flipY: true,
-                                        child: Image.asset(
+                              BottomSheetTile(
+                                title: "Created at",
+                                value: studentHomeworkList[index].createdAt,
+                                color: AppColors.homeworkWidgetColor,
+                              ),
+                              BottomSheetTile(
+                                title: "Submission",
+                                value: studentHomeworkList[index].submissionDate,
+                                color: Colors.white,
+                              ),
+                              BottomSheetTile(
+                                title: "Evaluation",
+                                value: studentHomeworkList[index].evaluationDate,
+                                color: AppColors.homeworkWidgetColor,
+                              ),
+                              BottomSheetTile(
+                                title: "Obtained Marks",
+                                value:
+                                    studentHomeworkList[index].marks.toString(),
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: onDownloadTap,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.appButtonColor,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
                                           ImagePath.download,
                                           scale: 4,
                                           color: Colors.white,
                                         ),
-                                      ),
-                                      5.horizontalSpacing,
-                                      const Text(
-                                        "Upload",
-                                        style: AppTextStyle
-                                            .cardTextStyle14WhiteW500,
-                                      ),
-                                    ],
+                                        5.horizontalSpacing,
+                                        const Text(
+                                          "Download",
+                                          style: AppTextStyle
+                                              .cardTextStyle14WhiteW500,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    )
+                                InkWell(
+                                  onTap: onUploadTap,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.appButtonColor,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Transform.flip(
+                                          flipY: true,
+                                          child: Image.asset(
+                                            ImagePath.download,
+                                            scale: 4,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        5.horizontalSpacing,
+                                        const Text(
+                                          "Upload",
+                                          style: AppTextStyle
+                                              .cardTextStyle14WhiteW500,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                  )
               : const Center(
                   child: Text(
                     "No Details Available",

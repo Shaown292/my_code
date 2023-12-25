@@ -37,7 +37,8 @@ class StudentWalletView extends GetView<StudentWalletController> {
                       padding: const EdgeInsets.all(10),
                       onTap: () => controller.showAddBalanceBottomSheet(
                         color: Colors.white,
-                        controller: controller.amountTextController,
+                        amountController: controller.amountTextController,
+                        noteController: controller.noteTextController,
                       ),
                     ),
                   ],
