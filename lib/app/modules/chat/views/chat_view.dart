@@ -27,6 +27,7 @@ class ChatView extends GetView<ChatController> {
             return SizedBox(
               width: 150,
               child: DuplicateDropdown(
+                padding: 0,
                 dropdownValue: controller.dropdownValue.value,
                 dropdownList: controller.activeStatusList,
                 color: Colors.white,
@@ -145,6 +146,7 @@ class ChatView extends GetView<ChatController> {
                                           activeStatusColor:
                                               Color(int.tryParse(colorCode)!),
                                           onTap: () {
+
                                             Get.toNamed(Routes.SINGLE_CHAT, arguments: {'to_user_id': controller.singleChatList[index].id});
                                           },
                                         );

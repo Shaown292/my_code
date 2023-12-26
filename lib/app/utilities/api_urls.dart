@@ -492,10 +492,13 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String getTeacherAbout = '${baseApi}teacher-about';
 
 
-  /// Chat
-  static String getSingleChatList = '${baseApi}admin-chat-users';
-  static String getGroupChatList = '${baseApi}admin-chat-groups';
+  /// ..............................................................................................................
+  /// ........................................... Chat Module ......................................................
+  /// ..............................................................................................................
+  static String getSingleChatUserList = '${baseApi}admin-chat-users';
+  static String getGroupChatUserList = '${baseApi}admin-chat-groups';
   static String sendSingleChat = '${baseApi}admin-chat-send';
+  static String getSingleChatList({required int userId}) => '${baseApi}admin-chat-list?to_user_id=$userId';
 
 
 
@@ -1072,7 +1075,8 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
     return "${baseApi}onlineexam/online-exam-result/$studentId/$recordId";
   }
 
-  static String chatBroadCastAuth = "${baseApi}broadcasting/auth";
+  static String chatBroadCastAuth = "https://spondan.com/infixedu/api/chat/broadcasting/auth";
+  // static String chatBroadCastAuth = "${baseApi}broadcasting/auth";
 
   //Lesson Plan
   static String studentLessonPlan = "${baseApi}student-lesson-plan";

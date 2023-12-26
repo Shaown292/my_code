@@ -1,23 +1,31 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/chat/pusher_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/conversation_model/single_chat_list_response_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../utilities/api_urls.dart';
 
 class SingleChatController extends GetxController {
 
+
+  PusherController pusherController = Get.put(PusherController());
   GlobalRxVariableController globalRxVariableController = Get.find();
   TextEditingController sendTextController = TextEditingController();
 
 
 
-  Rx<File> singleChatPickImage       = File('').obs;
+
+  Rx<File> singleChatPickImage = File('').obs;
   RxBool singleChatSendLoader = false.obs;
+  RxBool isLoading = false.obs;
   RxInt toUserId = 0.obs;
 
 
@@ -36,8 +44,8 @@ class SingleChatController extends GetxController {
       }
 
       request.fields['message'] = sendTextController.text;
-      request.fields['from_id'] = globalRxVariableController.userId.value.toString();
-      request.fields['to_id'] = toUserId.value.toString();
+      request.fields['from_user_id'] = globalRxVariableController.userId.value.toString();
+      request.fields['to_user_id'] = toUserId.value.toString();
 
 
       final response = await request.send();
@@ -92,10 +100,54 @@ class SingleChatController extends GetxController {
     "Fine"
   ];
 
+
+  RxList<SingleConversationListData> singleConversationList = <SingleConversationListData>[].obs;
+
+
+
+  Future<SingleChatListResponseModel> getChatOpen({required int userId}) async {
+    try {
+      isLoading.value = true;
+
+      final response = await BaseClient().postData(url: InfixApi.getSingleChatList(userId: userId), header: GlobalVariable.header);
+
+      SingleChatListResponseModel singleChatListResponseModel = SingleChatListResponseModel.fromJson(response);
+
+      if(singleChatListResponseModel.success == true){
+        isLoading.value = false;
+
+        if(singleChatListResponseModel.data!.isNotEmpty){
+          for(var element in singleChatListResponseModel.data!){
+            singleConversationList.add(element);
+          }
+        }
+
+
+      } else{
+        isLoading.value = false;
+      }
+
+    } catch (e, t) {
+      isLoading.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      isLoading.value = false;
+    }
+    return SingleChatListResponseModel();
+  }
+
+
+
+
+
   @override
   void onInit() {
 
     toUserId.value = Get.arguments['to_user_id'];
+    getChatOpen(userId: toUserId.value);
+    pusherController.chatOpenSingle(globalRxVariableController.userId.value!);
+
     super.onInit();
   }
 }

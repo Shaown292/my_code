@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/chat/group_chat_list_response_model/group_chat_list_response_model.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_list_response_model/single_chat_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/group_chat_user_list_response_model/group_chat_user_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_user_list_response_model/single_chat_user_list_response_model.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
@@ -51,14 +50,14 @@ class ChatController extends GetxController {
 
   /// Get Single Chat List
   RxBool singleChatListLoader = false.obs;
-  RxList<SingleChatListData> singleChatList = <SingleChatListData>[].obs;
+  RxList<SingleChatUserListData> singleChatList = <SingleChatUserListData>[].obs;
   Future<SingleChatListResponseModel?> getSingleChatList() async {
     singleChatList.clear();
     try {
       singleChatListLoader.value = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getSingleChatList,
+        url: InfixApi.getSingleChatUserList,
         header: GlobalVariable.header,
       );
 
@@ -92,14 +91,14 @@ class ChatController extends GetxController {
 
   /// Get Group CHat List
   RxBool groupChatListLoader = false.obs;
-  List<GroupChatListData> groupChatList = [];
+  List<GroupChatUserListData> groupChatList = [];
   Future<GroupChatListResponseModel?> getGroupChatList() async {
     groupChatList.clear();
     try {
       groupChatListLoader.value = true;
 
       final response = await BaseClient().getData(
-        url:  InfixApi.getGroupChatList,
+        url:  InfixApi.getGroupChatUserList,
         header: GlobalVariable.header,
       );
 

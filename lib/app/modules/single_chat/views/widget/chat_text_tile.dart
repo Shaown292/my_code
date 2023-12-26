@@ -8,6 +8,7 @@ class ChatTextTile extends StatelessWidget {
   final double? radiusBottomRight;
   final double? textLeftPadding;
   final double? textRightPadding;
+  final String? imageUrl;
 
   const ChatTextTile({
     super.key,
@@ -18,6 +19,7 @@ class ChatTextTile extends StatelessWidget {
     this.radiusBottomRight,
     this.textLeftPadding,
     this.textRightPadding,
+    this.imageUrl,
   });
 
   @override
@@ -38,10 +40,25 @@ class ChatTextTile extends StatelessWidget {
               bottomRight: Radius.circular(radiusBottomRight ?? 0),
             ),
             color: color),
-        child: Text(
-          text ?? "",
-          style: textStyle,
-        ),
+        child: Column(
+          children: [
+            Text(
+              text ?? "",
+              style: textStyle,
+            ),
+            imageUrl == "" || imageUrl == null ?
+            const SizedBox() :
+            Container(
+              height: 200,
+              width: 200,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(imageUrl!,)
+                  )
+              ),
+            )
+          ],
+        )  ,
       ),
     );
   }
