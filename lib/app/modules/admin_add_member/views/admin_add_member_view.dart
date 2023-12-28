@@ -50,11 +50,11 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                           dropdownList: controller.rolesList,
                           changeDropdownValue: (value) {
                             controller.rolesDropdownValue.value = value!;
-                            controller.rolesId.value = value.id;
+                            controller.rolesId.value = value.groupId;
 
                             controller.getUserNameList(
                                 roleId: controller.rolesId.value);
-                            if (value.id == 2 || value.id == 3) {
+                            if (value.groupId == 2 || value.groupId == 3) {
                               controller.getClassList(
                                   roleId: controller.rolesId.value);
                             }
@@ -76,7 +76,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                                   changeDropdownValue: (value) {
                                     controller.classDropdownValue.value =
                                         value!;
-                                    controller.classId.value = value.id;
+                                    controller.classId.value = value.groupId;
 
                                     controller.getSectionList(
                                         classId: controller.classId.value);
@@ -100,7 +100,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                                 changeDropdownValue: (value) {
                                   controller.sectionDropdownValue.value =
                                       value!;
-                                  controller.sectionId.value = value.id;
+                                  controller.sectionId.value = value.groupId;
 
                                   if (controller.rolesId.value == 2) {
                                     controller.getStudentList(
@@ -132,7 +132,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                               dropdownList: controller.userNameList,
                               changeDropdownValue: (value) {
                                 controller.userNameDropdownValue.value = value!;
-                                controller.nameId.value = value.id;
+                                controller.nameId.value = value.groupId;
                                 controller.userId.value = value.userId;
                               },
                             ),
@@ -149,7 +149,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                               dropdownList: controller.studentList,
                               changeDropdownValue: (value) {
                                 controller.studentDropdownValue.value = value!;
-                                controller.studentId.value = value.id;
+                                controller.studentId.value = value.groupId;
                                 controller.userId.value = value.userId;
                               },
                             )
@@ -165,7 +165,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                               dropdownList: controller.parentsList,
                               changeDropdownValue: (value) {
                                 controller.parentsDropdownValue.value = value!;
-                                controller.parentsId.value = value.id;
+                                controller.parentsId.value = value.groupId;
                                 controller.userId.value = value.userId;
                               },
                             )

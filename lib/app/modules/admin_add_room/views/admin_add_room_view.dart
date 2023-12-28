@@ -66,7 +66,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         dropdownList: controller.dormitoryList,
                         changeDropdownValue: (v) {
                           controller.dormitoryValue.value = v;
-                          controller.dormitoryId.value = v.id;
+                          controller.dormitoryId.value = v.groupId;
                         },
                       ),
                       10.verticalSpacing,
@@ -77,7 +77,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         dropdownList: controller.roomTypeList,
                         changeDropdownValue: (v) {
                           controller.roomTypeValue.value = v;
-                          controller.roomTypeId.value = v.id;
+                          controller.roomTypeId.value = v.groupId;
                         },
                       ),
                       10.verticalSpacing,

@@ -46,7 +46,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                           dropdownList: controller.teacherClassList,
                           changeDropdownValue: (value) {
                             controller.teacherClassInitialValue.value = value!;
-                            controller.teacherClassId.value = value.id;
+                            controller.teacherClassId.value = value.groupId;
                             controller.getTeacherSubjectList(
                                 classId: controller.teacherClassId.value);
                           },
@@ -69,7 +69,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                           changeDropdownValue: (value) {
                             controller.teacherSubjectInitialValue.value =
                                 value!;
-                            controller.teacherSubjectId.value = value.id;
+                            controller.teacherSubjectId.value = value.groupId;
                             controller.getTeacherSectionList(
                                 classId: controller.teacherClassId.value,
                                 subjectId: controller.teacherSubjectId.value);
@@ -93,7 +93,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                           changeDropdownValue: (value) {
                             controller.teacherSectionInitialValue.value =
                                 value!;
-                            controller.teacherSectionId.value = value.id;
+                            controller.teacherSectionId.value = value.groupId;
                           },
                         ),
 

@@ -1,6 +1,10 @@
 class GroupChatListResponseModel {
   bool? success;
+<<<<<<<< HEAD:lib/domain/core/model/chat/group_chat_user_list_response_model/group_chat_user_list_response_model.dart
   List<GroupChatUserListData>? data;
+========
+  List<GroupChatData>? data;
+>>>>>>>> dev_shaown:lib/domain/core/model/chat/group_chat_list_response_model/group_chat_list_response_model.dart
   String? message;
 
   GroupChatListResponseModel({this.success, this.data, this.message});
@@ -8,9 +12,15 @@ class GroupChatListResponseModel {
   GroupChatListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
+<<<<<<<< HEAD:lib/domain/core/model/chat/group_chat_user_list_response_model/group_chat_user_list_response_model.dart
       data = <GroupChatUserListData>[];
       json['data'].forEach((v) {
         data!.add(GroupChatUserListData.fromJson(v));
+========
+      data = <GroupChatData>[];
+      json['data'].forEach((v) {
+        data!.add(GroupChatData.fromJson(v));
+>>>>>>>> dev_shaown:lib/domain/core/model/chat/group_chat_list_response_model/group_chat_list_response_model.dart
       });
     }
     message = json['message'];
@@ -27,6 +37,7 @@ class GroupChatListResponseModel {
   }
 }
 
+<<<<<<<< HEAD:lib/domain/core/model/chat/group_chat_user_list_response_model/group_chat_user_list_response_model.dart
 class GroupChatUserListData {
   String? id;
   String? name;
@@ -53,17 +64,53 @@ class GroupChatUserListData {
     lastMessage = json['last_message'];
     lastMessageTime = json['last_message_time'];
     countConversation = json['count_conversation'];
+========
+class GroupChatData {
+  int? threadId;
+  int? messageId;
+  String? message;
+  int? status;
+  int? messageType;
+  String? file;
+  String? originalFileName;
+  bool? sender;
+  bool? receiver;
+
+  GroupChatData(
+      {this.threadId,
+        this.messageId,
+        this.message,
+        this.status,
+        this.messageType,
+        this.file,
+        this.originalFileName,
+        this.sender,
+        this.receiver});
+
+  GroupChatData.fromJson(Map<String, dynamic> json) {
+    threadId = json['thread_id'];
+    messageId = json['message_id'];
+    message = json['message'];
+    status = json['status'];
+    messageType = json['message_type'];
+    file = json['file'];
+    originalFileName = json['original_file_name'];
+    sender = json['sender'];
+    receiver = json['receiver'];
+>>>>>>>> dev_shaown:lib/domain/core/model/chat/group_chat_list_response_model/group_chat_list_response_model.dart
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['group_id'] = id;
-    data['name'] = name;
-    data['image'] = image;
-    data['active_status'] = activeStatus;
-    data['last_message'] = lastMessage;
-    data['last_message_time'] = lastMessageTime;
-    data['count_conversation'] = countConversation;
+    data['thread_id'] = threadId;
+    data['message_id'] = messageId;
+    data['message'] = message;
+    data['status'] = status;
+    data['message_type'] = messageType;
+    data['file'] = file;
+    data['original_file_name'] = originalFileName;
+    data['sender'] = sender;
+    data['receiver'] = receiver;
     return data;
   }
 }

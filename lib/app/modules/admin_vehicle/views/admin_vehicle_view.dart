@@ -112,7 +112,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                           controller.adminVehicleDriverList,
                                       changeDropdownValue: (value) {
                                         controller.initialValue.value = value!;
-                                        controller.driverId.value = value.id;
+                                        controller.driverId.value = value.groupId;
                                       },
                                     ),
                               10.verticalSpacing,

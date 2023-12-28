@@ -48,7 +48,7 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                                 controller.adminStudentsSearchController
                                     .classValue.value = v!;
                                 controller.adminStudentsSearchController
-                                    .studentClassId.value = v.id;
+                                    .studentClassId.value = v.groupId;
                                 controller.adminStudentsSearchController.getStudentSectionList(classId: controller.adminStudentsSearchController.studentClassId.value);
                               },
                             ),
@@ -69,7 +69,7 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                                 controller.adminStudentsSearchController
                                     .sectionValue.value = v!;
                                 controller.adminStudentsSearchController
-                                    .studentSectionId.value = v.id;
+                                    .studentSectionId.value = v.groupId;
                               },
                             )
                     ],

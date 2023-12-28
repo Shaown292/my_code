@@ -36,7 +36,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                           dropdownList: controller.classList,
                           changeDropdownValue: (v) {
                             controller.classValue.value = v!;
-                            controller.studentClassId.value = v.id;
+                            controller.studentClassId.value = v.groupId;
 
                             controller.getStudentSectionList(
                               classId: controller.studentClassId.value,
@@ -55,7 +55,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                           dropdownList: controller.sectionList,
                           changeDropdownValue: (v) {
                             controller.sectionValue.value = v!;
-                            controller.studentSectionId.value = v.id;
+                            controller.studentSectionId.value = v.groupId;
                           },
                         ),
                   10.verticalSpacing,

@@ -12,6 +12,7 @@ class ChatSearchController extends GetxController {
 
   RxBool searchLoader = false.obs;
   RxList<SearchChatData> searchChatDataList = <SearchChatData>[].obs;
+
   Future<SearchChatUser?> getSearchChat(String searchKey) async {
 
     try {
@@ -42,4 +43,5 @@ class ChatSearchController extends GetxController {
     }
     return SearchChatUser();
   }
+
 }

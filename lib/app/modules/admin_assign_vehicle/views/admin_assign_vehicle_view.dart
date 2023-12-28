@@ -41,7 +41,7 @@ class AdminAssignVehicleView extends GetView<AdminAssignVehicleController> {
                         dropdownList: controller.assignRouteList,
                         changeDropdownValue: (value) {
                           controller.assignRouteInitialValue.value = value!;
-                          controller.routeId.value = value.id;
+                          controller.routeId.value = value.groupId;
                         },
                       ),
               ),
@@ -64,7 +64,7 @@ class AdminAssignVehicleView extends GetView<AdminAssignVehicleController> {
                         dropdownList: controller.assignVehicleList,
                         changeDropdownValue: (value) {
                           controller.assignVehicleInitialValue.value = value!;
-                          controller.vehicleId.value = value.id;
+                          controller.vehicleId.value = value.groupId;
                         },
                       ),
               ),

@@ -130,7 +130,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                                 controller.adminStudentsSearchController
                                     .classValue.value = v!;
                                 controller.adminStudentsSearchController
-                                    .studentClassId.value = v.id;
+                                    .studentClassId.value = v.groupId;
                               },
                             )
                       : const SizedBox(),
@@ -157,7 +157,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                                 controller.adminStudentsSearchController
                                     .sectionValue.value = v!;
                                 controller.adminStudentsSearchController
-                                    .studentSectionId.value = v.id;
+                                    .studentSectionId.value = v.groupId;
                               },
                             )
                       : const SizedBox(),

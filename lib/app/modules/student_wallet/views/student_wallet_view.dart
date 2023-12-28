@@ -39,6 +39,7 @@ class StudentWalletView extends GetView<StudentWalletController> {
                         color: Colors.white,
                         amountController: controller.amountTextController,
                         noteController: controller.noteTextController,
+                        browseFileTextController: controller.browseFileTextController,
                       ),
                     ),
                   ],
