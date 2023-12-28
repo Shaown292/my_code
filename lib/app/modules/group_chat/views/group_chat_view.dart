@@ -94,7 +94,7 @@ class GroupChatView extends GetView<GroupChatController> {
                             style: AppTextStyle.fontSize10GreenW700,
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ],
@@ -106,8 +106,7 @@ class GroupChatView extends GetView<GroupChatController> {
 
                 /// Add People
                 else if (v == 2) {
-                  Get.dialog(
-                      Material(
+                  Get.dialog(Material(
                     child: Obx(
                       () => SingleChildScrollView(
                         child: Column(
@@ -116,7 +115,8 @@ class GroupChatView extends GetView<GroupChatController> {
                               searchTextController:
                                   controller.searchTextController,
                               onChange: (searchKey) {
-                                controller.chatSearchController.searchChatDataList
+                                controller
+                                    .chatSearchController.searchChatDataList
                                     .clear();
                                 controller.chatSearchController
                                     .getSearchChat(searchKey);
@@ -124,96 +124,100 @@ class GroupChatView extends GetView<GroupChatController> {
                               onAddButtonTap: controller.userList.isEmpty
                                   ? null
                                   : () {
-                                      controller.groupAddMember(groupId: controller.groupId.value, userList: controller.userList);
+                                      controller.groupAddMember(
+                                          groupId: controller.groupId.value,
+                                          userList: controller.userList);
                                       controller.clearCheckboxData();
                                       controller.searchTextController.clear();
                                     },
-                              textStyle: controller.userList.isEmpty ? AppTextStyle.fontSize13GreyW300 : AppTextStyle.blackFontSize14W400,
-                              backOnTap: (){
+                              textStyle: controller.userList.isEmpty
+                                  ? AppTextStyle.fontSize13GreyW300
+                                  : AppTextStyle.blackFontSize14W400,
+                              backOnTap: () {
                                 controller.clearCheckboxData();
                                 controller.searchTextController.clear();
                                 Get.back();
-
                               },
                             ),
                             20.verticalSpacing,
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20.0),
-                              child: controller
-                                  .chatSearchController.searchLoader.value ||  controller.addMemberLoader.value
+                              child: controller.chatSearchController
+                                          .searchLoader.value ||
+                                      controller.addMemberLoader.value
                                   ? const SecondaryLoadingWidget()
                                   : controller
-                                  .searchTextController.text.isNotEmpty
-                                  ? ListView.builder(
-                                      physics: const NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: controller
-                                          .chatSearchController
-                                          .searchChatDataList
-                                          .length,
-                                      itemBuilder: (context, index) {
-                                        return SuggestedSearchTile(
-                                          profileImage:
-                                          ImagePath.editProfileImage,
-                                          name: controller
+                                          .searchTextController.text.isNotEmpty
+                                      ? ListView.builder(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount: controller
                                               .chatSearchController
-                                              .searchChatDataList[index]
-                                              .fullName,
-                                          onTap: () {},
-                                          checkboxValue: controller
-                                              .chatSearchController
-                                              .searchChatDataList[index]
-                                              .isSelected,
-                                          onCheckboxTap: (bool? value) {
-                                            controller
-                                                .chatSearchController
-                                                .searchChatDataList[index]
-                                                .isSelected =
-                                            !controller
-                                                .chatSearchController
-                                                .searchChatDataList[
-                                            index]
-                                                .isSelected;
-                                            controller.chatSearchController
-                                                .searchChatDataList
-                                                .refresh();
-                                            if (controller
-                                                .chatSearchController
-                                                .searchChatDataList[
-                                            index]
-                                                .isSelected ==
-                                                true) {
-                                              controller.userList.add(
-                                                  controller
-                                                      .chatSearchController
-                                                      .searchChatDataList[
-                                                  index]
-                                                      .userId
-                                                      .toString());
-                                            }
+                                              .searchChatDataList
+                                              .length,
+                                          itemBuilder: (context, index) {
+                                            return SuggestedSearchTile(
+                                              profileImage:
+                                                  ImagePath.editProfileImage,
+                                              name: controller
+                                                  .chatSearchController
+                                                  .searchChatDataList[index]
+                                                  .fullName,
+                                              onTap: () {},
+                                              checkboxValue: controller
+                                                  .chatSearchController
+                                                  .searchChatDataList[index]
+                                                  .isSelected,
+                                              onCheckboxTap: (bool? value) {
+                                                controller
+                                                        .chatSearchController
+                                                        .searchChatDataList[index]
+                                                        .isSelected =
+                                                    !controller
+                                                        .chatSearchController
+                                                        .searchChatDataList[
+                                                            index]
+                                                        .isSelected;
+                                                controller.chatSearchController
+                                                    .searchChatDataList
+                                                    .refresh();
+                                                if (controller
+                                                        .chatSearchController
+                                                        .searchChatDataList[
+                                                            index]
+                                                        .isSelected ==
+                                                    true) {
+                                                  controller.userList.add(
+                                                      controller
+                                                          .chatSearchController
+                                                          .searchChatDataList[
+                                                              index]
+                                                          .userId
+                                                          .toString());
+                                                }
 
-                                            if (controller
-                                                .chatSearchController
-                                                .searchChatDataList[
-                                            index]
-                                                .isSelected ==
-                                                false) {
-                                              controller.userList.remove(
-                                                  controller
-                                                      .chatSearchController
-                                                      .searchChatDataList[
-                                                  index]
-                                                      .userId
-                                                      .toString());
-                                            }
-
-                                          },
-                                        );
-                                      })
-                                  : const Center(
-                                child: NoDataAvailableWidget(),
-                              ),
+                                                if (controller
+                                                        .chatSearchController
+                                                        .searchChatDataList[
+                                                            index]
+                                                        .isSelected ==
+                                                    false) {
+                                                  controller.userList.remove(
+                                                      controller
+                                                          .chatSearchController
+                                                          .searchChatDataList[
+                                                              index]
+                                                          .userId
+                                                          .toString());
+                                                }
+                                              },
+                                            );
+                                          })
+                                      : const Center(
+                                          child: NoDataAvailableWidget(),
+                                        ),
                             )
                           ],
                         ),
@@ -227,19 +231,17 @@ class GroupChatView extends GetView<GroupChatController> {
                   GroupChatHelper().showUploadDocumentsBottomSheet(
                     header: "Members",
                     bottomSheetBackgroundColor: Colors.white,
-
                   );
                 }
 
                 /// Group Leave
                 else if (v == 5) {
-                  controller.groupMemberLeave(groupId: controller.groupId.value);
+                  controller.groupMemberLeave(
+                      groupId: controller.groupId.value);
                 }
 
                 /// Delete Group
-                else if (v == 6){
-
-                }
+                else if (v == 6) {}
               })
             ],
           ),
@@ -356,7 +358,10 @@ class GroupChatView extends GetView<GroupChatController> {
                                                           debugPrint(
                                                               "Tapped on quote");
                                                         },
-                                                        isReceiver: controller.groupChatData[index].receiver!,
+                                                        isReceiver: controller
+                                                            .groupChatData[
+                                                                index]
+                                                            .receiver!,
                                                       ),
                                                     ),
                                                   );
@@ -482,8 +487,7 @@ class GroupChatView extends GetView<GroupChatController> {
                                                 false
                                             ? InkWell(
                                                 onTap: () {
-                                                  Get.dialog(
-                                                      Material(
+                                                  Get.dialog(Material(
                                                     color: Colors.transparent,
                                                     child: PopupActionMenu(
                                                       positionLeft: 20,
@@ -533,7 +537,9 @@ class GroupChatView extends GetView<GroupChatController> {
                                                         debugPrint(
                                                             "Tapped on quote");
                                                       },
-                                                      isReceiver: controller.groupChatData[index].receiver!,
+                                                      isReceiver: controller
+                                                          .groupChatData[index]
+                                                          .receiver!,
                                                     ),
                                                   ));
                                                 },
@@ -556,11 +562,9 @@ class GroupChatView extends GetView<GroupChatController> {
           ),
         ),
 
-
         bottomNavBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
-
             padding: const EdgeInsets.all(15),
             color: const Color(0xFFFDFBFF),
             child: SingleChildScrollView(
@@ -569,26 +573,25 @@ class GroupChatView extends GetView<GroupChatController> {
                 children: [
                   controller.groupChatPickImage.value.path.isNotEmpty
                       ? Row(
-                    children: [
-                      Image.file(
-                        height: 60,
-                        width: 80,
-                        File(controller.groupChatPickImage.value.path),
-                        fit: BoxFit.cover,
-                      ),
-                      5.horizontalSpacing,
-                      InkWell(
-                        onTap: () {
-                          controller.groupChatPickImage.value =
-                              File('');
-                        },
-                        child: const Icon(
-                          Icons.clear,
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ],
-                  )
+                          children: [
+                            Image.file(
+                              height: 60,
+                              width: 80,
+                              File(controller.groupChatPickImage.value.path),
+                              fit: BoxFit.cover,
+                            ),
+                            5.horizontalSpacing,
+                            InkWell(
+                              onTap: () {
+                                controller.groupChatPickImage.value = File('');
+                              },
+                              child: const Icon(
+                                Icons.clear,
+                                color: AppColors.primaryColor,
+                              ),
+                            ),
+                          ],
+                        )
                       : const SizedBox(),
                   10.verticalSpacing,
                   Row(
@@ -599,15 +602,13 @@ class GroupChatView extends GetView<GroupChatController> {
                             context: context,
                             fromGallery: () async {
                               controller.groupChatPickImage.value =
-                              await FlutterImagePickerUtils
-                                  .getImageGallery(
+                                  await FlutterImagePickerUtils.getImageGallery(
                                 context,
                               );
                             },
                             fromCamera: () async {
                               controller.groupChatPickImage.value =
-                              await FlutterImagePickerUtils
-                                  .getImageCamera(
+                                  await FlutterImagePickerUtils.getImageCamera(
                                 context,
                               );
                             },

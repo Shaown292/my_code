@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_text_style.dart';
@@ -101,27 +103,49 @@ class SingleChatView extends GetView<SingleChatController> {
         // titleWidget:
         body: CustomBackground(
           customWidget: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Obx(() => controller.isLoading.value ? const CircularProgressIndicator() : controller.singleConversationList.isNotEmpty ? Expanded(
+              controller.singleChatSendLoader.value
+                  ? const Expanded(child: SecondaryLoadingWidget())
+                  : controller.singleConversationList.isNotEmpty
+                  ? Expanded(
                 child: ListView.builder(
                   // reverse: true,
                   shrinkWrap: true,
                   itemCount: controller.singleConversationList.length,
                   itemBuilder: (context, index) {
                     return Column(
-                      crossAxisAlignment: controller.singleConversationList[index].sender!
+                      crossAxisAlignment:
+                      controller.singleConversationList[index].sender ==
+                          true
                           ? CrossAxisAlignment.end
                           : CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.only(left: controller.singleConversationList[index].sender! ? 60 : 0, right: controller.singleConversationList[index].sender! ? 0 : 60),
+                          padding: EdgeInsets.only(
+                              left: controller.singleConversationList[index]
+                                  .sender ==
+                                  true
+                                  ? 60
+                                  : 0,
+                              right: controller.singleConversationList[index]
+                                  .sender ==
+                                  true
+                                  ? 0
+                                  : 60),
                           child: Row(
-                            mainAxisAlignment: controller.singleConversationList[index].sender!
+                            mainAxisAlignment: controller
+                                .singleConversationList[index]
+                                .sender ==
+                                true
                                 ? MainAxisAlignment.end
                                 : MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment:
+                            CrossAxisAlignment.center,
                             children: [
-                              controller.singleConversationList[index].sender!
+                              controller.singleConversationList[index]
+                                  .sender ==
+                                  true
                                   ? InkWell(
                                 onTap: () {
                                   Get.dialog(
@@ -130,29 +154,69 @@ class SingleChatView extends GetView<SingleChatController> {
                                       child: PopupActionMenu(
                                         positionRight: 20,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.end,
-                                        text: controller.singleConversationList[index].message,
-                                        color: controller.singleConversationList[index].sender!
-                                            ? AppColors.primaryColor
-                                            : AppColors.homeworkWidgetColor,
-                                        textStyle: controller.singleConversationList[index].sender!
+                                        CrossAxisAlignment
+                                            .end,
+                                        text: controller
+                                            .singleConversationList[
+                                        index]
+                                            .message,
+                                        imageUrl: controller
+                                            .singleConversationList[
+                                        index]
+                                            .file ??
+                                            "",
+                                        color: controller
+                                            .singleConversationList[
+                                        index]
+                                            .sender ==
+                                            true
+                                            ? AppColors
+                                            .primaryColor
+                                            : AppColors
+                                            .homeworkWidgetColor,
+                                        textStyle: controller
+                                            .singleConversationList[
+                                        index]
+                                            .sender ==
+                                            true
                                             ? AppTextStyle
                                             .textStyle12WhiteW400
                                             : AppTextStyle
                                             .fontSize12W400ReceivedText,
-                                        radiusBottomLeft:
-                                        controller.singleConversationList[index].sender! ? 20 : 0,
-                                        radiusBottomRight:
-                                        controller.singleConversationList[index].sender! ? 0 : 20,
+                                        radiusBottomLeft: controller
+                                            .singleConversationList[
+                                        index]
+                                            .sender ==
+                                            true
+                                            ? 20
+                                            : 0,
+                                        radiusBottomRight: controller
+                                            .singleConversationList[
+                                        index]
+                                            .sender ==
+                                            true
+                                            ? 0
+                                            : 20,
                                         onDeleteTap: () {
-                                          debugPrint("Tapped on delete");
+                                          // controller.deleteSingleChat(
+                                          //     threadId: controller
+                                          //         .singleConversationList[
+                                          //     index]
+                                          //         .threadId!,
+                                          //     index: index);
                                         },
                                         onForwardTap: () {
-                                          debugPrint("Tapped on forward");
+                                          debugPrint(
+                                              "Tapped on forward");
                                         },
                                         onQuoteTap: () {
-                                          debugPrint("Tapped on quote");
+                                          debugPrint(
+                                              "Tapped on quote");
                                         },
+                                        isReceiver: controller
+                                            .singleConversationList[
+                                        index]
+                                            .receiver!,
                                       ),
                                     ),
                                   );
@@ -165,55 +229,174 @@ class SingleChatView extends GetView<SingleChatController> {
                                   : const SizedBox(),
                               Flexible(
                                 child: ChatTextTile(
-                                  text: controller.singleConversationList[index].message,
-                                  imageUrl: controller.singleConversationList[index].file,
-                                  color: controller.singleConversationList[index].sender!
+                                  text: controller
+                                      .singleConversationList[index]
+                                      .message ??
+                                      "",
+                                  color: controller
+                                      .singleConversationList[index]
+                                      .sender ==
+                                      true
                                       ? AppColors.primaryColor
                                       : AppColors.homeworkWidgetColor,
-                                  textStyle: controller.singleConversationList[index].sender!
-                                      ? AppTextStyle.textStyle12WhiteW400
-                                      : AppTextStyle.fontSize12W400ReceivedText,
-                                  radiusBottomLeft: controller.singleConversationList[index].sender! ? 20 : 0,
-                                  radiusBottomRight: controller.singleConversationList[index].sender! ? 0 : 20,
-                                  textLeftPadding: controller.singleConversationList[index].sender! ? 0 : 10,
-                                  textRightPadding: controller.singleConversationList[index].sender! ? 10 : 0,
-                                ),
-                              ),
-                              controller.singleConversationList[index].sender!
-                                  ? InkWell(
-                                onTap: () {
-                                  Get.dialog(
+                                  textStyle: controller
+                                      .singleConversationList[index]
+                                      .sender ==
+                                      true
+                                      ? AppTextStyle
+                                      .textStyle12WhiteW400
+                                      : AppTextStyle
+                                      .fontSize12W400ReceivedText,
+                                  radiusBottomLeft: controller
+                                      .singleConversationList[index]
+                                      .sender ==
+                                      true
+                                      ? 20
+                                      : 0,
+                                  radiusBottomRight: controller
+                                      .singleConversationList[index]
+                                      .sender ==
+                                      true
+                                      ? 0
+                                      : 20,
+                                  textLeftPadding: controller
+                                      .singleConversationList[index]
+                                      .sender ==
+                                      true
+                                      ? 0
+                                      : 10,
+                                  textRightPadding: controller
+                                      .singleConversationList[index]
+                                      .sender ==
+                                      true
+                                      ? 10
+                                      : 0,
+                                  imageUrl: controller
+                                      .singleConversationList[index]
+                                      .file ??
+                                      "",
+                                  onImageTap: () {
+                                    Get.dialog(
                                       Material(
                                         color: Colors.transparent,
-                                        child: PopupActionMenu(
-                                          positionLeft: 20,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          text: controller.singleConversationList[index].message,
-                                          color: controller.singleConversationList[index].sender!
-                                              ? AppColors.primaryColor
-                                              : AppColors.homeworkWidgetColor,
-                                          textStyle: controller.singleConversationList[index].sender!
-                                              ? AppTextStyle
-                                              .textStyle12WhiteW400
-                                              : AppTextStyle
-                                              .fontSize12W400ReceivedText,
-                                          radiusBottomLeft:
-                                          controller.singleConversationList[index].sender! ? 30 : 0,
-                                          radiusBottomRight:
-                                          controller.singleConversationList[index].sender! ? 0 : 30,
-                                          onDeleteTap: () {
-                                            Get.back();
-                                            debugPrint("Tapped on delete");
-                                          },
-                                          onForwardTap: () {
-                                            debugPrint("Tapped on forward");
-                                          },
-                                          onQuoteTap: () {
-                                            debugPrint("Tapped on quote");
-                                          },
+                                        child: InkWell(
+                                          onTap: () => Get.back(),
+                                          child: Stack(
+                                            alignment:
+                                            AlignmentDirectional
+                                                .center,
+                                            children: [
+                                              Expanded(
+                                                child: InkWell(
+                                                  onTap: () =>
+                                                      Get.back(),
+                                                  child:
+                                                  Positioned.fill(
+                                                    child:
+                                                    BackdropFilter(
+                                                      filter:
+                                                      ImageFilter
+                                                          .blur(
+                                                        sigmaX: 10,
+                                                        sigmaY: 10,
+                                                      ),
+                                                      child:
+                                                      Container(
+                                                        color: Colors
+                                                            .black12,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                height:
+                                                Get.height * 0.7,
+                                                width:
+                                                Get.width * 0.7,
+                                                decoration:
+                                                BoxDecoration(
+                                                  image:
+                                                  DecorationImage(
+                                                    image:
+                                                    NetworkImage(
+                                                      controller
+                                                          .singleConversationList[
+                                                      index]
+                                                          .file ??
+                                                          "",
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ));
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              controller.singleConversationList[index]
+                                  .sender ==
+                                  false
+                                  ? InkWell(
+                                onTap: () {
+                                  Get.dialog(Material(
+                                    color: Colors.transparent,
+                                    child: PopupActionMenu(
+                                      positionLeft: 20,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      text: controller
+                                          .singleConversationList[index]
+                                          .message,
+                                      color: controller
+                                          .singleConversationList[
+                                      index]
+                                          .sender ==
+                                          true
+                                          ? AppColors
+                                          .primaryColor
+                                          : AppColors
+                                          .homeworkWidgetColor,
+                                      textStyle: controller
+                                          .singleConversationList[
+                                      index]
+                                          .sender ==
+                                          true
+                                          ? AppTextStyle
+                                          .textStyle12WhiteW400
+                                          : AppTextStyle
+                                          .fontSize12W400ReceivedText,
+                                      radiusBottomLeft: controller
+                                          .singleConversationList[
+                                      index]
+                                          .sender ==
+                                          true
+                                          ? 30
+                                          : 0,
+                                      radiusBottomRight: controller
+                                          .singleConversationList[
+                                      index]
+                                          .sender ==
+                                          true
+                                          ? 0
+                                          : 30,
+                                      onForwardTap: () {
+                                        debugPrint(
+                                            "Tapped on forward");
+                                      },
+                                      onQuoteTap: () {
+                                        debugPrint(
+                                            "Tapped on quote");
+                                      },
+                                      isReceiver: controller
+                                          .singleConversationList[index]
+                                          .receiver!,
+                                    ),
+                                  ));
                                 },
                                 child: const Icon(
                                   Icons.more_vert,
@@ -228,116 +411,119 @@ class SingleChatView extends GetView<SingleChatController> {
                     );
                   },
                 ),
-              ) : const Expanded(child: NoDataAvailableWidget()),),
-              Container(
-                padding: const EdgeInsets.all(15),
-                color: const Color(0xFFFDFBFF),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    controller.singleChatPickImage.value.path.isNotEmpty
-                        ? Row(
-                            children: [
-                              Image.file(
-                                height: 60,
-                                width: 80,
-                                File(controller
-                                    .singleChatPickImage.value.path),
-                                fit: BoxFit.cover,
+              )
+                  : const Expanded(child: NoDataAvailableWidget()),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  color: const Color(0xFFFDFBFF),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        controller.singleChatPickImage.value.path.isNotEmpty
+                            ? Row(
+                          children: [
+                            Image.file(
+                              height: 60,
+                              width: 80,
+                              File(controller.singleChatPickImage.value.path),
+                              fit: BoxFit.cover,
+                            ),
+                            5.horizontalSpacing,
+                            InkWell(
+                              onTap: () {
+                                controller.singleChatPickImage.value = File('');
+                              },
+                              child: const Icon(
+                                Icons.clear,
+                                color: AppColors.primaryColor,
                               ),
-                              5.horizontalSpacing,
-                              InkWell(
-                                onTap: () {
-                                  controller.singleChatPickImage.value =
-                                      File('');
-                                },
-                                child: const Icon(
-                                  Icons.clear,
+                            ),
+                          ],
+                        )
+                            : const SizedBox(),
+                        10.verticalSpacing,
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                FlutterImagePickerUtils.imagePickerModalSheet(
+                                  context: context,
+                                  fromGallery: () async {
+                                    controller.singleChatPickImage.value =
+                                    await FlutterImagePickerUtils.getImageGallery(
+                                      context,
+                                    );
+                                  },
+                                  fromCamera: () async {
+                                    controller.singleChatPickImage.value =
+                                    await FlutterImagePickerUtils.getImageCamera(
+                                      context,
+                                    );
+                                  },
+                                );
+                              },
+                              child: Image.asset(
+                                ImagePath.camera,
+                                color: AppColors.editProfileTextFieldLabelColor,
+                              ),
+                            ),
+                            10.horizontalSpacing,
+                            const SizedBox(
+                              height: 30,
+                              child: VerticalDivider(
+                                color: AppColors.dividerColor,
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextFormField(
+                                inputBorder: InputBorder.none,
+                                hintTextStyle: AppTextStyle.homeworkElements,
+                                hintText: "Type something...",
+                                controller: controller.sendTextController,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                if (controller.validation()) {
+                                  controller.singleChatSend();
+                                }
+                              },
+                              child: Container(
+                                height: 45,
+                                width: 45,
+                                padding: const EdgeInsets.all(5),
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
                                   color: AppColors.primaryColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        blurRadius: 5,
+                                        spreadRadius: 1,
+                                        color: AppColors.primaryColor),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    ImagePath.send,
+                                    scale: 2.5,
+                                  ),
                                 ),
                               ),
-                            ],
-                          )
-                        : const SizedBox(),
-                    10.verticalSpacing,
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            FlutterImagePickerUtils.imagePickerModalSheet(
-                              context: context,
-                              fromGallery: () async {
-                                controller.singleChatPickImage.value =
-                                    await FlutterImagePickerUtils
-                                        .getImageGallery(
-                                  context,
-                                );
-                              },
-                              fromCamera: () async {
-                                controller.singleChatPickImage.value =
-                                    await FlutterImagePickerUtils
-                                        .getImageCamera(
-                                  context,
-                                );
-                              },
-                            );
-                          },
-                          child: Image.asset(
-                            ImagePath.camera,
-                            color: AppColors.editProfileTextFieldLabelColor,
-                          ),
+                            )
+                          ],
                         ),
-                        10.horizontalSpacing,
-                        const SizedBox(
-                          height: 30,
-                          child: VerticalDivider(
-                            color: AppColors.dividerColor,
-                          ),
-                        ),
-                        Expanded(
-                          child: CustomTextFormField(
-                            inputBorder: InputBorder.none,
-                            hintTextStyle: AppTextStyle.homeworkElements,
-                            hintText: "Type something...",
-                            controller: controller.sendTextController,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if(controller.validation()){
-                              controller.singleChatSend();
-                            }
-                          },
-                          child: Container(
-                            height: 45,
-                            width: 45,
-                            padding: const EdgeInsets.all(5),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors.primaryColor,
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 5,
-                                    spreadRadius: 1,
-                                    color: AppColors.primaryColor),
-                              ],
-                            ),
-                            child: Center(
-                              child: Image.asset(
-                                ImagePath.send,
-                                scale: 2.5,
-                              ),
-                            ),
-                          ),
-                        )
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
           ),
         ),
+
       ),
     );
   }
