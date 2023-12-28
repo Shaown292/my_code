@@ -104,7 +104,7 @@ class SingleChatView extends GetView<SingleChatController> {
             children: [
               Obx(() => controller.isLoading.value ? const CircularProgressIndicator() : controller.singleConversationList.isNotEmpty ? Expanded(
                 child: ListView.builder(
-                  reverse: true,
+                  // reverse: true,
                   shrinkWrap: true,
                   itemCount: controller.singleConversationList.length,
                   itemBuilder: (context, index) {
@@ -131,7 +131,7 @@ class SingleChatView extends GetView<SingleChatController> {
                                         positionRight: 20,
                                         crossAxisAlignment:
                                         CrossAxisAlignment.end,
-                                        text: controller.dummyList[index],
+                                        text: controller.singleConversationList[index].message,
                                         color: controller.singleConversationList[index].sender!
                                             ? AppColors.primaryColor
                                             : AppColors.homeworkWidgetColor,
@@ -189,7 +189,7 @@ class SingleChatView extends GetView<SingleChatController> {
                                           positionLeft: 20,
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                          text: controller.dummyList[index],
+                                          text: controller.singleConversationList[index].message,
                                           color: controller.singleConversationList[index].sender!
                                               ? AppColors.primaryColor
                                               : AppColors.homeworkWidgetColor,

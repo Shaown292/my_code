@@ -1075,7 +1075,7 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
     return "${baseApi}onlineexam/online-exam-result/$studentId/$recordId";
   }
 
-  static String chatBroadCastAuth = "https://spondan.com/infixedu/api/chat/broadcasting/auth";
+  static String chatBroadCastAuth = "https://spondan.com/infixedu/api/broadcasting/auth";
   // static String chatBroadCastAuth = "${baseApi}broadcasting/auth";
 
   //Lesson Plan

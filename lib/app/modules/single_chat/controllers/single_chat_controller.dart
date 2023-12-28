@@ -14,28 +14,22 @@ import 'package:http/http.dart' as http;
 import '../../../utilities/api_urls.dart';
 
 class SingleChatController extends GetxController {
-
-
   PusherController pusherController = Get.put(PusherController());
   GlobalRxVariableController globalRxVariableController = Get.find();
   TextEditingController sendTextController = TextEditingController();
-
-
-
 
   Rx<File> singleChatPickImage = File('').obs;
   RxBool singleChatSendLoader = false.obs;
   RxBool isLoading = false.obs;
   RxInt toUserId = 0.obs;
 
-
-  Future<void> singleChatSend() async {
+  Future<SingleChatListResponseModel> singleChatSend() async {
     try {
       singleChatSendLoader.value = true;
 
       debugPrint('${Uri.parse(InfixApi.sendSingleChat)}');
       final request =
-      http.MultipartRequest('POST', Uri.parse(InfixApi.sendSingleChat));
+          http.MultipartRequest('POST', Uri.parse(InfixApi.sendSingleChat));
       request.headers.addAll(GlobalVariable.header);
 
       if (singleChatPickImage.value.path.isNotEmpty) {
@@ -44,19 +38,26 @@ class SingleChatController extends GetxController {
       }
 
       request.fields['message'] = sendTextController.text;
-      request.fields['from_user_id'] = globalRxVariableController.userId.value.toString();
+      request.fields['from_user_id'] =
+          globalRxVariableController.userId.value.toString();
       request.fields['to_user_id'] = toUserId.value.toString();
-
 
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
       final decodedResponse = json.decode(responseBody);
       debugPrint(decodedResponse.toString());
 
-      if (response.statusCode == 200) {
+      SingleChatListResponseModel singleChatListResponseModel =
+          SingleChatListResponseModel.fromJson(json.decode(responseBody));
+
+      if (singleChatListResponseModel.success == true) {
         singleChatSendLoader.value = false;
         sendTextController.clear();
         singleChatPickImage.value = File('');
+
+        singleConversationList.add(singleChatListResponseModel.data!.first);
+        singleConversationList.refresh();
+
         showBasicSuccessSnackBar(message: decodedResponse['message']);
       } else {
         singleChatSendLoader.value = false;
@@ -69,7 +70,10 @@ class SingleChatController extends GetxController {
     } finally {
       singleChatSendLoader.value = false;
     }
+
+    return SingleChatListResponseModel();
   }
+
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -85,48 +89,40 @@ class SingleChatController extends GetxController {
   }
 
   bool validation() {
-    if (sendTextController.text.isEmpty && singleChatPickImage.value.path.isEmpty) {
+    if (sendTextController.text.isEmpty &&
+        singleChatPickImage.value.path.isEmpty) {
       showBasicFailedSnackBar(message: 'Enter something');
       return false;
     }
     return true;
   }
 
-  List<String> dummyList = [
-    "Hello",
-    "Hi",
-    "How are you? How are you? How are you? How are you? How are you? How are you? How are you?",
-    "How are you? How are you? How are you? How are you? How are you? How are you? How are you?",
-    "Fine"
-  ];
 
-
-  RxList<SingleConversationListData> singleConversationList = <SingleConversationListData>[].obs;
-
-
+  RxList<SingleConversationListData> singleConversationList =
+      <SingleConversationListData>[].obs;
 
   Future<SingleChatListResponseModel> getChatOpen({required int userId}) async {
     try {
       isLoading.value = true;
 
-      final response = await BaseClient().postData(url: InfixApi.getSingleChatList(userId: userId), header: GlobalVariable.header);
+      final response = await BaseClient().postData(
+          url: InfixApi.getSingleChatList(userId: userId),
+          header: GlobalVariable.header);
 
-      SingleChatListResponseModel singleChatListResponseModel = SingleChatListResponseModel.fromJson(response);
+      SingleChatListResponseModel singleChatListResponseModel =
+          SingleChatListResponseModel.fromJson(response);
 
-      if(singleChatListResponseModel.success == true){
+      if (singleChatListResponseModel.success == true) {
         isLoading.value = false;
 
-        if(singleChatListResponseModel.data!.isNotEmpty){
-          for(var element in singleChatListResponseModel.data!){
+        if (singleChatListResponseModel.data!.isNotEmpty) {
+          for (var element in singleChatListResponseModel.data!) {
             singleConversationList.add(element);
           }
         }
-
-
-      } else{
+      } else {
         isLoading.value = false;
       }
-
     } catch (e, t) {
       isLoading.value = false;
       debugPrint('$e');
@@ -137,16 +133,13 @@ class SingleChatController extends GetxController {
     return SingleChatListResponseModel();
   }
 
-
-
-
-
   @override
   void onInit() {
-
     toUserId.value = Get.arguments['to_user_id'];
     getChatOpen(userId: toUserId.value);
-    pusherController.chatOpenSingle(globalRxVariableController.userId.value!);
+    pusherController.chatOpenSingle(
+        chatOpenId: globalRxVariableController.userId.value!,
+        chatListId: toUserId.value);
 
     super.onInit();
   }
