@@ -202,7 +202,7 @@ class ChatView extends GetView<ChatController> {
                                           activeStatusColor:
                                               Color(int.tryParse(colorCode)!),
                                           onTap: () {
-                                            Get.toNamed(Routes.SINGLE_CHAT);
+                                            Get.toNamed(Routes.GROUP_CHAT, arguments: {'group_id': controller.groupChatList[index].groupId, 'name' : controller.groupChatList[index].name});
                                           },
                                         );
                                       },

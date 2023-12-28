@@ -92,7 +92,7 @@ class ChatController extends GetxController {
   /// Get Group CHat List
   RxBool groupChatListLoader = false.obs;
   List<GroupChatUserListData> groupChatList = [];
-  Future<GroupChatListResponseModel?> getGroupChatList() async {
+  Future<GroupChatUserListResponseModel?> getGroupChatList() async {
     groupChatList.clear();
     try {
       groupChatListLoader.value = true;
@@ -103,7 +103,7 @@ class ChatController extends GetxController {
       );
 
 
-      GroupChatListResponseModel groupChatListResponseModel = GroupChatListResponseModel.fromJson(response);
+      GroupChatUserListResponseModel groupChatListResponseModel = GroupChatUserListResponseModel.fromJson(response);
       if (groupChatListResponseModel.success == true) {
         groupChatListLoader.value = false;
         if (groupChatListResponseModel.data!.isNotEmpty) {
@@ -125,7 +125,7 @@ class ChatController extends GetxController {
     } finally {
       groupChatListLoader.value = false;
     }
-    return GroupChatListResponseModel();
+    return GroupChatUserListResponseModel();
   }
 
   String formatTimeAgo(DateTime date) {

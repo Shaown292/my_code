@@ -85,7 +85,7 @@ class GroupChatView extends GetView<GroupChatController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            controller.groupChatListData!.name ?? "",
+                            controller.chatName.value,
                             style: AppTextStyle.cardTextStyle14WhiteW500,
                           ),
                           3.verticalSpacing,

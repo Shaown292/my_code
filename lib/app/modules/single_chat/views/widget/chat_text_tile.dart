@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChatTextTile extends StatelessWidget {
   final String? text;
@@ -9,6 +10,7 @@ class ChatTextTile extends StatelessWidget {
   final double? textLeftPadding;
   final double? textRightPadding;
   final String? imageUrl;
+  final Function()? onImageTap;
 
   const ChatTextTile({
     super.key,
@@ -19,12 +21,31 @@ class ChatTextTile extends StatelessWidget {
     this.radiusBottomRight,
     this.textLeftPadding,
     this.textRightPadding,
-    this.imageUrl,
+    this.imageUrl, this.onImageTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return text == "" && imageUrl!.isNotEmpty
+        ? InkWell(
+      onTap: onImageTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: Container(
+          height: Get.height * 0.3,
+          width: Get.width * 0.35,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                imageUrl!,
+              ),
+            ),
+          ),
+        ),
+      ),
+    )
+        :
+    Padding(
       padding: EdgeInsets.only(
           top: 10.0,
           bottom: 10,
@@ -42,23 +63,32 @@ class ChatTextTile extends StatelessWidget {
             color: color),
         child: Column(
           children: [
+            imageUrl == null || imageUrl!.isEmpty
+                ? const SizedBox()
+                : Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: InkWell(
+                onTap: onImageTap,
+                child: Container(
+                  height: Get.height * 0.15,
+                  width: Get.width * 0.2,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        imageUrl!,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Text(
               text ?? "",
               style: textStyle,
             ),
-            imageUrl == "" || imageUrl == null ?
-            const SizedBox() :
-            Container(
-              height: 200,
-              width: 200,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(imageUrl!,)
-                  )
-              ),
-            )
           ],
-        )  ,
+        ),
+
       ),
     );
   }

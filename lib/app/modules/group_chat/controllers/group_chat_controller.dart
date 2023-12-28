@@ -24,7 +24,9 @@ class GroupChatController extends GetxController {
   TextEditingController sendTextController = TextEditingController();
   TextEditingController searchTextController = TextEditingController();
   ChatController chatController = Get.find();
-  GroupChatUserData? groupChatListData ;
+  // RxList<GroupChatUserListData> groupChatListData = <GroupChatUserListData>[].obs ;
+  RxString chatGroupId = "".obs;
+  RxString chatName = "".obs;
 
   RxList<GroupChatMemberListData> groupChatMemberList = <GroupChatMemberListData>[].obs;
   RxList<GroupChatData> groupChatData = <GroupChatData>[].obs;
@@ -196,7 +198,8 @@ class GroupChatController extends GetxController {
 
         const SecondaryLoadingWidget();
         chatController.groupChatList.removeWhere((element) => element.groupId == groupId);
-        chatController.groupChatList.refresh();
+        // chatController.groupChatList.refresh();
+
         Get.back();
         showBasicSuccessSnackBar(
             message: postRequestResponseModel.message ?? 'Group Leave');
@@ -230,7 +233,7 @@ class GroupChatController extends GetxController {
 
       request.fields['message'] = sendTextController.text;
       request.fields['user_id'] = globalRxVariableController.userId.value.toString();
-      request.fields['group_id'] = groupChatListData!.groupId!.toString();
+      request.fields['group_id'] = groupId.value;
 
 
       final response = await request.send();
@@ -370,8 +373,8 @@ class GroupChatController extends GetxController {
 
   @override
   void onInit() {
-    groupChatListData = Get.arguments["group_id"];
-    groupId.value = groupChatListData!.groupId!;
+    groupId.value = Get.arguments["group_id"];
+    chatName.value = Get.arguments["name"];
     getGroupChatMemberList(groupId: groupId.value);
     getGroupChatData(groupId: groupId.value);
     super.onInit();
