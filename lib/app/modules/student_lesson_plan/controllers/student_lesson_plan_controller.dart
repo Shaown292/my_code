@@ -298,6 +298,7 @@ class StudentLessonPlanController extends GetxController {
                           onChanged: (bool value) {
                             value =
                                 studentLessonPlanDetailsData.status ?? false;
+
                           }),
                     ],
                   ),
