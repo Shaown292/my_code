@@ -299,7 +299,6 @@ class StudentLessonPlanController extends GetxController {
                             value =
                                 studentLessonPlanDetailsData.status ?? false;
 
-
                           }),
                     ],
                   ),
