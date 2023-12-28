@@ -38,12 +38,12 @@ class GroupChatUserListData {
 
   GroupChatUserListData(
       {this.groupId,
-        this.name,
-        this.image,
-        this.activeStatus,
-        this.lastMessage,
-        this.lastMessageTime,
-        this.countConversation});
+      this.name,
+      this.image,
+      this.activeStatus,
+      this.lastMessage,
+      this.lastMessageTime,
+      this.countConversation});
 
   GroupChatUserListData.fromJson(Map<String, dynamic> json) {
     groupId = json['group_id'];

@@ -105,314 +105,281 @@ class SingleChatView extends GetView<SingleChatController> {
           customWidget: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              controller.singleChatSendLoader.value
+              controller.isLoading.value
                   ? const Expanded(child: SecondaryLoadingWidget())
                   : controller.singleConversationList.isNotEmpty
-                  ? Expanded(
-                child: ListView.builder(
-                  // reverse: true,
-                  shrinkWrap: true,
-                  itemCount: controller.singleConversationList.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      crossAxisAlignment:
-                      controller.singleConversationList[index].sender ==
-                          true
-                          ? CrossAxisAlignment.end
-                          : CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: controller.singleConversationList[index]
-                                  .sender ==
-                                  true
-                                  ? 60
-                                  : 0,
-                              right: controller.singleConversationList[index]
-                                  .sender ==
-                                  true
-                                  ? 0
-                                  : 60),
-                          child: Row(
-                            mainAxisAlignment: controller
-                                .singleConversationList[index]
-                                .sender ==
-                                true
-                                ? MainAxisAlignment.end
-                                : MainAxisAlignment.start,
-                            crossAxisAlignment:
-                            CrossAxisAlignment.center,
-                            children: [
-                              controller.singleConversationList[index]
-                                  .sender ==
-                                  true
-                                  ? InkWell(
-                                onTap: () {
-                                  Get.dialog(
-                                    Material(
-                                      color: Colors.transparent,
-                                      child: PopupActionMenu(
-                                        positionRight: 20,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .end,
-                                        text: controller
-                                            .singleConversationList[
-                                        index]
-                                            .message,
-                                        imageUrl: controller
-                                            .singleConversationList[
-                                        index]
-                                            .file ??
-                                            "",
-                                        color: controller
-                                            .singleConversationList[
-                                        index]
-                                            .sender ==
-                                            true
-                                            ? AppColors
-                                            .primaryColor
-                                            : AppColors
-                                            .homeworkWidgetColor,
-                                        textStyle: controller
-                                            .singleConversationList[
-                                        index]
-                                            .sender ==
-                                            true
-                                            ? AppTextStyle
-                                            .textStyle12WhiteW400
-                                            : AppTextStyle
-                                            .fontSize12W400ReceivedText,
-                                        radiusBottomLeft: controller
-                                            .singleConversationList[
-                                        index]
-                                            .sender ==
-                                            true
-                                            ? 20
+                      ? Expanded(
+                          child: ListView.builder(
+                            reverse: true,
+                            shrinkWrap: true,
+                            itemCount: controller.singleConversationList.length,
+                            itemBuilder: (context, index) {
+                              var reversedList = List.from(
+                                  controller.singleConversationList.reversed);
+                              return Column(
+                                crossAxisAlignment:
+                                    reversedList[index].sender == true
+                                        ? CrossAxisAlignment.end
+                                        : CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: reversedList[index].sender == true
+                                            ? 60
                                             : 0,
-                                        radiusBottomRight: controller
-                                            .singleConversationList[
-                                        index]
-                                            .sender ==
-                                            true
-                                            ? 0
-                                            : 20,
-                                        onDeleteTap: () {
-                                          // controller.deleteSingleChat(
-                                          //     threadId: controller
-                                          //         .singleConversationList[
-                                          //     index]
-                                          //         .threadId!,
-                                          //     index: index);
-                                        },
-                                        onForwardTap: () {
-                                          debugPrint(
-                                              "Tapped on forward");
-                                        },
-                                        onQuoteTap: () {
-                                          debugPrint(
-                                              "Tapped on quote");
-                                        },
-                                        isReceiver: controller
-                                            .singleConversationList[
-                                        index]
-                                            .receiver!,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: const Icon(
-                                  Icons.more_vert,
-                                  size: 16,
-                                ),
-                              )
-                                  : const SizedBox(),
-                              Flexible(
-                                child: ChatTextTile(
-                                  text: controller
-                                      .singleConversationList[index]
-                                      .message ??
-                                      "",
-                                  color: controller
-                                      .singleConversationList[index]
-                                      .sender ==
-                                      true
-                                      ? AppColors.primaryColor
-                                      : AppColors.homeworkWidgetColor,
-                                  textStyle: controller
-                                      .singleConversationList[index]
-                                      .sender ==
-                                      true
-                                      ? AppTextStyle
-                                      .textStyle12WhiteW400
-                                      : AppTextStyle
-                                      .fontSize12W400ReceivedText,
-                                  radiusBottomLeft: controller
-                                      .singleConversationList[index]
-                                      .sender ==
-                                      true
-                                      ? 20
-                                      : 0,
-                                  radiusBottomRight: controller
-                                      .singleConversationList[index]
-                                      .sender ==
-                                      true
-                                      ? 0
-                                      : 20,
-                                  textLeftPadding: controller
-                                      .singleConversationList[index]
-                                      .sender ==
-                                      true
-                                      ? 0
-                                      : 10,
-                                  textRightPadding: controller
-                                      .singleConversationList[index]
-                                      .sender ==
-                                      true
-                                      ? 10
-                                      : 0,
-                                  imageUrl: controller
-                                      .singleConversationList[index]
-                                      .file ??
-                                      "",
-                                  onImageTap: () {
-                                    Get.dialog(
-                                      Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          onTap: () => Get.back(),
-                                          child: Stack(
-                                            alignment:
-                                            AlignmentDirectional
-                                                .center,
-                                            children: [
-                                              Expanded(
-                                                child: InkWell(
-                                                  onTap: () =>
-                                                      Get.back(),
-                                                  child:
-                                                  Positioned.fill(
-                                                    child:
-                                                    BackdropFilter(
-                                                      filter:
-                                                      ImageFilter
-                                                          .blur(
-                                                        sigmaX: 10,
-                                                        sigmaY: 10,
+                                        right:
+                                            reversedList[index].sender == true
+                                                ? 0
+                                                : 60),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          reversedList[index].sender == true
+                                              ? MainAxisAlignment.end
+                                              : MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        reversedList[index].sender == true
+                                            ? InkWell(
+                                                onTap: () {
+                                                  Get.dialog(
+                                                    Material(
+                                                      color: Colors.transparent,
+                                                      child: PopupActionMenu(
+                                                        positionRight: 20,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        text:
+                                                            reversedList[index]
+                                                                .message,
+                                                        imageUrl:
+                                                            reversedList[index]
+                                                                    .file ??
+                                                                "",
+                                                        color: reversedList[
+                                                                        index]
+                                                                    .sender ==
+                                                                true
+                                                            ? AppColors
+                                                                .primaryColor
+                                                            : AppColors
+                                                                .homeworkWidgetColor,
+                                                        textStyle: reversedList[
+                                                                        index]
+                                                                    .sender ==
+                                                                true
+                                                            ? AppTextStyle
+                                                                .textStyle12WhiteW400
+                                                            : AppTextStyle
+                                                                .fontSize12W400ReceivedText,
+                                                        radiusBottomLeft:
+                                                            reversedList[index]
+                                                                        .sender ==
+                                                                    true
+                                                                ? 20
+                                                                : 0,
+                                                        radiusBottomRight:
+                                                            reversedList[index]
+                                                                        .sender ==
+                                                                    true
+                                                                ? 0
+                                                                : 20,
+                                                        onDeleteTap: () {
+                                                          // controller.deleteSingleChat(
+                                                          //     threadId: controller
+                                                          //         .singleConversationList[
+                                                          //     index]
+                                                          //         .threadId!,
+                                                          //     index: index);
+                                                        },
+                                                        onForwardTap: () {
+                                                          debugPrint(
+                                                              "Tapped on forward");
+                                                        },
+                                                        onQuoteTap: () {
+                                                          debugPrint(
+                                                              "Tapped on quote");
+                                                        },
+                                                        isReceiver:
+                                                            reversedList[index]
+                                                                .receiver!,
                                                       ),
-                                                      child:
-                                                      Container(
-                                                        color: Colors
-                                                            .black12,
-                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: const Icon(
+                                                  Icons.more_vert,
+                                                  size: 16,
+                                                ),
+                                              )
+                                            : const SizedBox(),
+                                        Flexible(
+                                          child: ChatTextTile(
+                                            text: reversedList[index].message ??
+                                                "",
+                                            color: reversedList[index].sender ==
+                                                    true
+                                                ? AppColors.primaryColor
+                                                : AppColors.homeworkWidgetColor,
+                                            textStyle: reversedList[index]
+                                                        .sender ==
+                                                    true
+                                                ? AppTextStyle
+                                                    .textStyle12WhiteW400
+                                                : AppTextStyle
+                                                    .fontSize12W400ReceivedText,
+                                            radiusBottomLeft:
+                                                reversedList[index].sender ==
+                                                        true
+                                                    ? 20
+                                                    : 0,
+                                            radiusBottomRight:
+                                                reversedList[index].sender ==
+                                                        true
+                                                    ? 0
+                                                    : 20,
+                                            textLeftPadding:
+                                                reversedList[index].sender ==
+                                                        true
+                                                    ? 0
+                                                    : 10,
+                                            textRightPadding:
+                                                reversedList[index].sender ==
+                                                        true
+                                                    ? 10
+                                                    : 0,
+                                            imageUrl:
+                                                reversedList[index].file ?? "",
+                                            onImageTap: () {
+                                              Get.dialog(
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: InkWell(
+                                                    onTap: () => Get.back(),
+                                                    child: Stack(
+                                                      alignment:
+                                                          AlignmentDirectional
+                                                              .center,
+                                                      children: [
+                                                        Expanded(
+                                                          child: InkWell(
+                                                            onTap: () =>
+                                                                Get.back(),
+                                                            child:
+                                                                Positioned.fill(
+                                                              child:
+                                                                  BackdropFilter(
+                                                                filter:
+                                                                    ImageFilter
+                                                                        .blur(
+                                                                  sigmaX: 10,
+                                                                  sigmaY: 10,
+                                                                ),
+                                                                child:
+                                                                    Container(
+                                                                  color: Colors
+                                                                      .black12,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          height:
+                                                              Get.height * 0.7,
+                                                          width:
+                                                              Get.width * 0.7,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image:
+                                                                DecorationImage(
+                                                              image:
+                                                                  NetworkImage(
+                                                                reversedList[
+                                                                            index]
+                                                                        .file ??
+                                                                    "",
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              Container(
-                                                height:
-                                                Get.height * 0.7,
-                                                width:
-                                                Get.width * 0.7,
-                                                decoration:
-                                                BoxDecoration(
-                                                  image:
-                                                  DecorationImage(
-                                                    image:
-                                                    NetworkImage(
-                                                      controller
-                                                          .singleConversationList[
-                                                      index]
-                                                          .file ??
-                                                          "",
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                              );
+                                            },
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              controller.singleConversationList[index]
-                                  .sender ==
-                                  false
-                                  ? InkWell(
-                                onTap: () {
-                                  Get.dialog(Material(
-                                    color: Colors.transparent,
-                                    child: PopupActionMenu(
-                                      positionLeft: 20,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment
-                                          .start,
-                                      text: controller
-                                          .singleConversationList[index]
-                                          .message,
-                                      color: controller
-                                          .singleConversationList[
-                                      index]
-                                          .sender ==
-                                          true
-                                          ? AppColors
-                                          .primaryColor
-                                          : AppColors
-                                          .homeworkWidgetColor,
-                                      textStyle: controller
-                                          .singleConversationList[
-                                      index]
-                                          .sender ==
-                                          true
-                                          ? AppTextStyle
-                                          .textStyle12WhiteW400
-                                          : AppTextStyle
-                                          .fontSize12W400ReceivedText,
-                                      radiusBottomLeft: controller
-                                          .singleConversationList[
-                                      index]
-                                          .sender ==
-                                          true
-                                          ? 30
-                                          : 0,
-                                      radiusBottomRight: controller
-                                          .singleConversationList[
-                                      index]
-                                          .sender ==
-                                          true
-                                          ? 0
-                                          : 30,
-                                      onForwardTap: () {
-                                        debugPrint(
-                                            "Tapped on forward");
-                                      },
-                                      onQuoteTap: () {
-                                        debugPrint(
-                                            "Tapped on quote");
-                                      },
-                                      isReceiver: controller
-                                          .singleConversationList[index]
-                                          .receiver!,
+                                        reversedList[index].sender == false
+                                            ? InkWell(
+                                                onTap: () {
+                                                  Get.dialog(Material(
+                                                    color: Colors.transparent,
+                                                    child: PopupActionMenu(
+                                                      positionLeft: 20,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      text: reversedList[index]
+                                                          .message,
+                                                      color: reversedList[index]
+                                                                  .sender ==
+                                                              true
+                                                          ? AppColors
+                                                              .primaryColor
+                                                          : AppColors
+                                                              .homeworkWidgetColor,
+                                                      textStyle: reversedList[
+                                                                      index]
+                                                                  .sender ==
+                                                              true
+                                                          ? AppTextStyle
+                                                              .textStyle12WhiteW400
+                                                          : AppTextStyle
+                                                              .fontSize12W400ReceivedText,
+                                                      radiusBottomLeft:
+                                                          reversedList[index]
+                                                                      .sender ==
+                                                                  true
+                                                              ? 30
+                                                              : 0,
+                                                      radiusBottomRight:
+                                                          reversedList[index]
+                                                                      .sender ==
+                                                                  true
+                                                              ? 0
+                                                              : 30,
+                                                      onForwardTap: () {
+                                                        debugPrint(
+                                                            "Tapped on forward");
+                                                      },
+                                                      onQuoteTap: () {
+                                                        debugPrint(
+                                                            "Tapped on quote");
+                                                      },
+                                                      isReceiver:
+                                                          reversedList[index]
+                                                              .receiver!,
+                                                    ),
+                                                  ));
+                                                },
+                                                child: const Icon(
+                                                  Icons.more_vert,
+                                                  size: 16,
+                                                ),
+                                              )
+                                            : const SizedBox(),
+                                      ],
                                     ),
-                                  ));
-                                },
-                                child: const Icon(
-                                  Icons.more_vert,
-                                  size: 16,
-                                ),
-                              )
-                                  : const SizedBox(),
-                            ],
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              )
-                  : const Expanded(child: NoDataAvailableWidget()),
+                        )
+                      : const Expanded(child: NoDataAvailableWidget()),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Container(
@@ -424,25 +391,27 @@ class SingleChatView extends GetView<SingleChatController> {
                       children: [
                         controller.singleChatPickImage.value.path.isNotEmpty
                             ? Row(
-                          children: [
-                            Image.file(
-                              height: 60,
-                              width: 80,
-                              File(controller.singleChatPickImage.value.path),
-                              fit: BoxFit.cover,
-                            ),
-                            5.horizontalSpacing,
-                            InkWell(
-                              onTap: () {
-                                controller.singleChatPickImage.value = File('');
-                              },
-                              child: const Icon(
-                                Icons.clear,
-                                color: AppColors.primaryColor,
-                              ),
-                            ),
-                          ],
-                        )
+                                children: [
+                                  Image.file(
+                                    height: 60,
+                                    width: 80,
+                                    File(controller
+                                        .singleChatPickImage.value.path),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  5.horizontalSpacing,
+                                  InkWell(
+                                    onTap: () {
+                                      controller.singleChatPickImage.value =
+                                          File('');
+                                    },
+                                    child: const Icon(
+                                      Icons.clear,
+                                      color: AppColors.primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              )
                             : const SizedBox(),
                         10.verticalSpacing,
                         Row(
@@ -453,13 +422,15 @@ class SingleChatView extends GetView<SingleChatController> {
                                   context: context,
                                   fromGallery: () async {
                                     controller.singleChatPickImage.value =
-                                    await FlutterImagePickerUtils.getImageGallery(
+                                        await FlutterImagePickerUtils
+                                            .getImageGallery(
                                       context,
                                     );
                                   },
                                   fromCamera: () async {
                                     controller.singleChatPickImage.value =
-                                    await FlutterImagePickerUtils.getImageCamera(
+                                        await FlutterImagePickerUtils
+                                            .getImageCamera(
                                       context,
                                     );
                                   },
@@ -523,7 +494,6 @@ class SingleChatView extends GetView<SingleChatController> {
             ],
           ),
         ),
-
       ),
     );
   }
