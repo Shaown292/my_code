@@ -52,14 +52,14 @@ class GroupChatHelper {
     );
   }
 
-  void showUploadDocumentsBottomSheet({
+  void showGroupMemberListBottomSheet({
     Color? bottomSheetBackgroundColor,
     String? header,
     Function()? onDeleteTap,
 
   }) {
     Get.bottomSheet(
-      Container(
+      Obx(() => Container(
         height: Get.height ,
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
@@ -121,34 +121,37 @@ class GroupChatHelper {
                               children: [
                                 groupChatController.groupChatMemberList[index].image == ""
                                     ? Container(
-                                        height: Get.height * 0.07,
-                                        width: Get.width * 0.13,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(ImagePath.dp),
-                                          ),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                      )
+                                  height: Get.height * 0.07,
+                                  width: Get.width * 0.13,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(ImagePath.dp),
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                )
                                     : SizedBox(
-                                        height: Get.height * 0.055,
-                                        width: Get.width * 0.11,
-                                        child: ClipRRect(
-                                          borderRadius: 6.circularRadius,
-                                          child: CacheImageView(
-                                            url: groupChatController.groupChatMemberList[index].image,
-                                            errorImageLocal: ImagePath.errorImage,
-                                          ),
-                                        ),
-                                      ),
+                                  height: Get.height * 0.055,
+                                  width: Get.width * 0.11,
+                                  child: ClipRRect(
+                                    borderRadius: 6.circularRadius,
+                                    child: CacheImageView(
+                                      url: groupChatController.groupChatMemberList[index].image,
+                                      errorImageLocal: ImagePath.errorImage,
+                                    ),
+                                  ),
+                                ),
                                 20.horizontalSpacing,
-                                 Text(groupChatController.groupChatMemberList[index].fullName ?? "",
+                                Text(groupChatController.groupChatMemberList[index].fullName ?? "",
                                   style: AppTextStyle.fontSize13BlackW400,
                                 ),
                                 const Spacer(),
                                 InkWell(
                                   onTap: (){
-                                    groupChatController.removeSingleMemberFromGroup(groupId: groupChatController.groupId.value, userId: groupChatController.groupChatMemberList[index].userId!);
+                                    groupChatController.removeSingleMemberFromGroup(groupId: groupChatController.groupId.value, userId: groupChatController.groupChatMemberList[index].userId!,
+                                        index: index,
+                                        context: context
+                                    );
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -158,7 +161,7 @@ class GroupChatHelper {
                                       color: AppColors.activeStatusRedColor,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -172,7 +175,7 @@ class GroupChatHelper {
             ],
           ),
         ),
-      ),
+      ),),
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
     );

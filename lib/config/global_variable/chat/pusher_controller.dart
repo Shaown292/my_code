@@ -141,6 +141,27 @@ class PusherController extends GetxController {
                 data["message"]["from_id"],
           ));
       Get.find<SingleChatController>().singleConversationList.refresh();
+    } else if (event.channelName ==
+        'private-group-chat.${Get.find<GlobalRxVariableController>().userId.value}-${Get.find<SingleChatController>().toUserId}') {
+      final data = jsonDecode(event.data);
+      // print('On Event :: ${data["message"]["message"]}');
+
+      Get.find<SingleChatController>()
+          .singleConversationList
+          .add(SingleConversationListData(
+            messageId: data["message"]["id"],
+            message: data["message"]["message"],
+            status: data["message"]["status"],
+            messageType: data["message"]["message_type"],
+            file: data["message"]["file_name"],
+            originalFileName: data["message"]["original_file_name"],
+            reply: data["message"]["reply"],
+            sender: Get.find<GlobalRxVariableController>().userId.value ==
+                data["message"]["from_id"],
+            receiver: Get.find<GlobalRxVariableController>().userId.value !=
+                data["message"]["from_id"],
+          ));
+      Get.find<SingleChatController>().singleConversationList.refresh();
     }
 
     // final message = SingleChatListResponseModel.fromJson(data["message"]);
@@ -214,16 +235,13 @@ class PusherController extends GetxController {
     }
   }
 
-  chatOpenSingle({required int chatOpenId, required int chatListId}) async {
-    print('Chat Id:: $chatOpenId ::: Chat list ID :: $chatListId');
-    print(
-        'Chanel Id :::::::: private-single-chat.$chatListId-${Get.find<GlobalRxVariableController>().userId.value}');
+  chatOpenSingle({required int authUserId, required int chatListId}) async {
     try {
       // await pusher.subscribe(
       //     channelName: 'private-single-chat' '.$chatListId');
       // await pusher.connect();
       await pusher.subscribe(
-          channelName: 'private-single-chat.$chatOpenId-$chatListId');
+          channelName: 'private-single-chat.$authUserId-$chatListId');
       // channelName: 'private-single-chat.$chatListId-$chatOpenId');
       await pusher.connect();
     } catch (e, t) {
@@ -232,12 +250,14 @@ class PusherController extends GetxController {
     }
   }
 
-  chatOpenGroup(int chatGroupId) async {
+  chatOpenGroup({required int authUserId, required String chatListId}) async {
     try {
-      await pusher.subscribe(channelName: 'private-group-chat.$chatGroupId');
+      await pusher.subscribe(
+          channelName: 'private-group-chat.$authUserId-$chatListId');
       await pusher.connect();
-    } catch (e) {
+    } catch (e, t) {
       debugPrint("ERROR: $e");
+      debugPrint("ERROR: $t");
     }
   }
 

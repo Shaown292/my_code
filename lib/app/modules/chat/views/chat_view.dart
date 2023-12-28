@@ -97,6 +97,7 @@ class ChatView extends GetView<ChatController> {
                     controller: controller.tabController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
+                      /// Single Chat List
                       controller.singleChatListLoader.value
                           ? const SecondaryLoadingWidget()
                           : RefreshIndicator(
@@ -154,6 +155,9 @@ class ChatView extends GetView<ChatController> {
                                   : const Center(
                                       child: NoDataAvailableWidget()),
                             ),
+
+
+                      /// Group Chat List
                       controller.groupChatListLoader.value
                           ? const LoadingWidget()
                           : RefreshIndicator(

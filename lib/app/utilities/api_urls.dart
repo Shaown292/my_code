@@ -498,6 +498,7 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String getSingleChatUserList = '${baseApi}admin-chat-users';
   static String getGroupChatUserList = '${baseApi}admin-chat-groups';
   static String sendSingleChat = '${baseApi}admin-chat-send';
+  static String sendGroupChat = '${baseApi}admin-group-chat-send';
   static String getSingleChatList({required int userId}) => '${baseApi}admin-chat-list?to_user_id=$userId';
 
 

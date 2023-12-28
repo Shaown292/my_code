@@ -97,11 +97,10 @@ class SingleChatController extends GetxController {
     return true;
   }
 
-
   RxList<SingleConversationListData> singleConversationList =
       <SingleConversationListData>[].obs;
 
-  Future<SingleChatListResponseModel> getChatOpen({required int userId}) async {
+  Future<SingleChatListResponseModel> getChtConversationList({required int userId}) async {
     try {
       isLoading.value = true;
 
@@ -136,10 +135,11 @@ class SingleChatController extends GetxController {
   @override
   void onInit() {
     toUserId.value = Get.arguments['to_user_id'];
-    getChatOpen(userId: toUserId.value);
+    getChtConversationList(userId: toUserId.value);
     pusherController.chatOpenSingle(
-        chatOpenId: globalRxVariableController.userId.value!,
-        chatListId: toUserId.value);
+      authUserId: globalRxVariableController.userId.value!,
+      chatListId: toUserId.value,
+    );
 
     super.onInit();
   }
