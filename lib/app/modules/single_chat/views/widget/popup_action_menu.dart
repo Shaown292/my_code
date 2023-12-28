@@ -16,11 +16,13 @@ class PopupActionMenu extends StatelessWidget {
   final double? positionRight;
   final double? positionLeft;
   final String? text;
+  final String? imageUrl;
   final Color? color;
   final TextStyle? textStyle;
   final double? radiusBottomLeft;
   final double? radiusBottomRight;
   final CrossAxisAlignment? crossAxisAlignment;
+  final bool isReceiver;
 
   const PopupActionMenu({
     super.key,
@@ -34,7 +36,7 @@ class PopupActionMenu extends StatelessWidget {
     this.textStyle,
     this.radiusBottomLeft,
     this.radiusBottomRight,
-    this.crossAxisAlignment,
+    this.crossAxisAlignment, this.imageUrl,  this.isReceiver = false,
   });
 
   @override
@@ -66,6 +68,7 @@ class PopupActionMenu extends StatelessWidget {
                   child: ChatTextTile(
                     text: text,
                     color: color,
+                    imageUrl: imageUrl,
                     textStyle: textStyle,
                     radiusBottomLeft: radiusBottomLeft,
                     radiusBottomRight: radiusBottomRight,
@@ -123,10 +126,12 @@ class PopupActionMenu extends StatelessWidget {
                           ),
                         ),
                       ),
-                      CustomDivider(
+
+
+                      isReceiver  ? const SizedBox() :CustomDivider(
                         width: Get.width,
-                      ),
-                      InkWell(
+                      )  ,
+                      isReceiver ?  const SizedBox() : InkWell(
                         onTap: onDeleteTap,
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -145,7 +150,7 @@ class PopupActionMenu extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
+                      ) ,
                     ],
                   ),
                 ),

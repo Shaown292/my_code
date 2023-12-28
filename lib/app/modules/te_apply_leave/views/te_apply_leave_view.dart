@@ -38,7 +38,7 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
                           dropdownList: controller.teacherLeaveTypeList,
                           changeDropdownValue: (v) {
                             controller.leaveTypeInitialValue.value = v!;
-                            controller.leaveTypeId.value = v.id;
+                            controller.leaveTypeId.value = v.groupId;
                           },
                         ),
                   10.verticalSpacing,

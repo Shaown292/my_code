@@ -79,7 +79,7 @@ class ScheduleView extends GetView<ScheduleController> {
                             controller
                                 .examinationController.dropdownValue.value = v!;
                             controller.scheduleList.clear();
-                            int examId = v.id;
+                            int examId = v.groupId;
                             int recordId = controller
                                 .homeController.studentRecordList[0].id;
                             controller.getStudentExamScheduleList(

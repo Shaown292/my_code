@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_checkbox/custom_checkbox.dart';
 
 import '../../../../data/constants/app_colors.dart';
 
@@ -8,12 +9,14 @@ class SuggestedSearchTile extends StatelessWidget {
   final String? profileImage;
   final String? name;
   final Function()? onTap;
+  final bool checkboxValue;
+  final Function(bool?)? onCheckboxTap;
 
   const SuggestedSearchTile({
     super.key,
     this.profileImage,
     this.name,
-    this.onTap,
+    this.onTap, this.checkboxValue = false, this.onCheckboxTap,
   });
 
   @override
@@ -33,7 +36,8 @@ class SuggestedSearchTile extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        image: AssetImage(profileImage ?? ""), fit: BoxFit.cover),
+                        image: AssetImage(profileImage ?? ""),
+                        fit: BoxFit.cover),
                   ),
                 ),
                 Positioned(
@@ -50,9 +54,14 @@ class SuggestedSearchTile extends StatelessWidget {
               ], //<Widget>[]
             ),
             20.horizontalSpacing,
-             Text(
+            Text(
               name ?? "",
               style: AppTextStyle.fontSize13BlackW400,
+            ),
+            const Spacer(),
+            CustomCheckbox(
+              checkboxValue: checkboxValue,
+              onChange: onCheckboxTap,
             )
           ],
         ),

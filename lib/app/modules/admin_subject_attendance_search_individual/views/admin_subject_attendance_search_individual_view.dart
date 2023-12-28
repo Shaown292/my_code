@@ -53,7 +53,7 @@ class AdminSubjectAttendanceSearchIndividualView
                             controller.adminStudentsSearchController.classValue
                                 .value = v!;
                             controller.adminStudentsSearchController
-                                .studentClassId.value = v.id;
+                                .studentClassId.value = v.groupId;
                             controller.adminStudentsSearchController
                                 .getStudentSectionList(
                                     classId: controller
@@ -88,7 +88,7 @@ class AdminSubjectAttendanceSearchIndividualView
                             controller.adminStudentsSearchController
                                 .sectionValue.value = v!;
                             controller.adminStudentsSearchController
-                                .studentSectionId.value = v.id;
+                                .studentSectionId.value = v.groupId;
                             controller.adminStudentsSearchController
                                 .getAdminStudentSubjectList(
                               classId: controller.adminStudentsSearchController
@@ -126,7 +126,7 @@ class AdminSubjectAttendanceSearchIndividualView
                             controller.adminStudentsSearchController
                                 .subjectValue.value = v!;
                             controller.adminStudentsSearchController
-                                .studentSubjectId.value = v.id;
+                                .studentSubjectId.value = v.groupId;
                           },
                         ),
                   10.verticalSpacing,

@@ -41,7 +41,7 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                           dropdownList: controller.bookCategoryList,
                           changeDropdownValue: (value) {
                             controller.bookCategoryInitValue.value = value!;
-                            controller.bookCategoryId.value = value.id;
+                            controller.bookCategoryId.value = value.groupId;
                           },
                         ),
                   10.verticalSpacing,
@@ -53,7 +53,7 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     dropdownList: controller.bookSubjectList,
                     changeDropdownValue: (value) {
                       controller.bookSubjectInitValue.value = value!;
-                      controller.bookSubjectId.value = value.id;
+                      controller.bookSubjectId.value = value.groupId;
                     },
                   ),
                   10.verticalSpacing,

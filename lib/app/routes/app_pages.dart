@@ -110,6 +110,8 @@ import '../modules/fees/bindings/fees_binding.dart';
 import '../modules/fees/views/fees_view.dart';
 import '../modules/forget_password/bindings/forget_password_binding.dart';
 import '../modules/forget_password/views/forget_password_view.dart';
+import '../modules/group_chat/bindings/group_chat_binding.dart';
+import '../modules/group_chat/views/group_chat_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/leave/bindings/leave_binding.dart';
@@ -802,6 +804,11 @@ class AppPages {
       name: _Paths.CHILD_HOME,
       page: () => const ChildHomeView(),
       binding: ChildHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.GROUP_CHAT,
+      page: () => const GroupChatView(),
+      binding: GroupChatBinding(),
     ),
   ];
 }
