@@ -12,12 +12,14 @@ class FilesPopupDialog extends StatelessWidget {
   final Function(int)? onTap;
   final int? numberOfImage ;
   final String? imageUrl;
+  final Widget? imageWidget ;
+  final Widget? fileWidget ;
 
   const FilesPopupDialog({
     super.key,
     this.tabController,
     required this.tabBarLength,
-    this.tabs, this.onTap, this.numberOfImage, this.imageUrl,
+    this.tabs, this.onTap, this.numberOfImage, this.imageUrl, this.imageWidget, this.fileWidget,
   });
 
   @override
@@ -62,24 +64,8 @@ class FilesPopupDialog extends StatelessWidget {
               controller: tabController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: numberOfImage,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(imageUrl ?? "")
-                        )
-                      ),
-                    );
-                  },
-                ),
-                Text("Data 2"),
+                imageWidget!,
+                fileWidget!,
               ],
             ),
           )
