@@ -1,11 +1,11 @@
-class SingleChatListResponseModel {
+class SingleChatUserListResponseModel {
   bool? success;
   List<SingleChatUserListData>? data;
   String? message;
 
-  SingleChatListResponseModel({this.success, this.data, this.message});
+  SingleChatUserListResponseModel({this.success, this.data, this.message});
 
-  SingleChatListResponseModel.fromJson(Map<String, dynamic> json) {
+  SingleChatUserListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
       data = <SingleChatUserListData>[];

@@ -55,7 +55,7 @@ class ChatController extends GetxController {
   RxList<SingleChatUserListData> singleChatList =
       <SingleChatUserListData>[].obs;
 
-  Future<SingleChatListResponseModel?> getSingleChatList() async {
+  Future<SingleChatUserListResponseModel?> getSingleChatList() async {
     singleChatList.clear();
     try {
       singleChatListLoader.value = true;
@@ -65,8 +65,8 @@ class ChatController extends GetxController {
         header: GlobalVariable.header,
       );
 
-      SingleChatListResponseModel singleChatListResponseModel =
-          SingleChatListResponseModel.fromJson(response);
+      SingleChatUserListResponseModel singleChatListResponseModel =
+          SingleChatUserListResponseModel.fromJson(response);
       if (singleChatListResponseModel.success == true) {
         singleChatListLoader.value = false;
         if (singleChatListResponseModel.data!.isNotEmpty) {
@@ -88,12 +88,12 @@ class ChatController extends GetxController {
     } finally {
       singleChatListLoader.value = false;
     }
-    return SingleChatListResponseModel();
+    return SingleChatUserListResponseModel();
   }
 
   /// Get Group CHat List
   RxBool groupChatListLoader = false.obs;
-  List<GroupChatUserListData> groupChatList = [];
+  RxList<GroupChatUserListData> groupChatList = <GroupChatUserListData>[].obs;
 
   Future<GroupChatUserListResponseModel?> getGroupChatList() async {
     groupChatList.clear();
