@@ -100,12 +100,11 @@ class GroupChatView extends GetView<GroupChatController> {
                 ],
               ),
               GroupChatHelper().popupMenu(onTap: (v) {
-                if (v == 1) {
-                }
 
                 /// Add People
-                else if (v == 2) {
-                  Get.dialog(Material(
+                 if (v == 1) {
+                  Get.dialog
+                    (Material(
                     child: Obx(
                       () => SingleChildScrollView(
                         child: Column(
@@ -170,15 +169,8 @@ class GroupChatView extends GetView<GroupChatController> {
                                                   .searchChatDataList[index]
                                                   .isSelected,
                                               onCheckboxTap: (bool? value) {
-                                                controller
-                                                        .chatSearchController
-                                                        .searchChatDataList[index]
-                                                        .isSelected =
-                                                    !controller
-                                                        .chatSearchController
-                                                        .searchChatDataList[
-                                                            index]
-                                                        .isSelected;
+                                                controller.chatSearchController.searchChatDataList[index].isSelected =
+                                                    !controller.chatSearchController.searchChatDataList[index].isSelected;
                                                 controller.chatSearchController
                                                     .searchChatDataList
                                                     .refresh();
@@ -225,6 +217,12 @@ class GroupChatView extends GetView<GroupChatController> {
                   ));
                 }
 
+                 /// File
+
+                 else if (v== 2){
+
+                 }
+
                 /// Member List
                 else if (v == 3) {
                   GroupChatHelper().showGroupMemberListBottomSheet(
@@ -233,14 +231,18 @@ class GroupChatView extends GetView<GroupChatController> {
                   );
                 }
 
+                /// Delete Group
+
+                 else if(v == 4) {
+                   controller.groupDelete(groupId: controller.groupId.value);
+                 }
+
                 /// Group Leave
                 else if (v == 5) {
-                  controller.groupMemberLeave(
+                  controller.groupLeaveMember(
                       groupId: controller.groupId.value);
                 }
 
-                /// Delete Group
-                else if (v == 6) {}
               })
             ],
           ),
@@ -248,6 +250,7 @@ class GroupChatView extends GetView<GroupChatController> {
         // titleWidget:
         body: CustomBackground(
           customWidget: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               controller.groupChatDataLoader.value
                   ? const Expanded(child: SecondaryLoadingWidget())
@@ -339,8 +342,7 @@ class GroupChatView extends GetView<GroupChatController> {
                                                               index: index);
                                                         },
                                                         onForwardTap: () {
-                                                          debugPrint(
-                                                              "Tapped on forward");
+
                                                         },
                                                         onQuoteTap: () {
                                                           debugPrint(
@@ -525,21 +527,17 @@ class GroupChatView extends GetView<GroupChatController> {
                           ),
                         )
                       : const Expanded(child: NoDataAvailableWidget()),
-            ],
-          ),
-        ),
-
-        bottomNavBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Container(
-            padding: const EdgeInsets.all(15),
-            color: const Color(0xFFFDFBFF),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  controller.groupChatPickImage.value.path.isNotEmpty
-                      ? Row(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  color: const Color(0xFFFDFBFF),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        controller.groupChatPickImage.value.path.isNotEmpty
+                            ? Row(
                           children: [
                             Image.file(
                               height: 60,
@@ -559,81 +557,84 @@ class GroupChatView extends GetView<GroupChatController> {
                             ),
                           ],
                         )
-                      : const SizedBox(),
-                  10.verticalSpacing,
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          FlutterImagePickerUtils.imagePickerModalSheet(
-                            context: context,
-                            fromGallery: () async {
-                              controller.groupChatPickImage.value =
-                                  await FlutterImagePickerUtils.getImageGallery(
-                                context,
-                              );
-                            },
-                            fromCamera: () async {
-                              controller.groupChatPickImage.value =
-                                  await FlutterImagePickerUtils.getImageCamera(
-                                context,
-                              );
-                            },
-                          );
-                        },
-                        child: Image.asset(
-                          ImagePath.camera,
-                          color: AppColors.editProfileTextFieldLabelColor,
-                        ),
-                      ),
-                      10.horizontalSpacing,
-                      const SizedBox(
-                        height: 30,
-                        child: VerticalDivider(
-                          color: AppColors.dividerColor,
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomTextFormField(
-                          inputBorder: InputBorder.none,
-                          hintTextStyle: AppTextStyle.homeworkElements,
-                          hintText: "Type something...",
-                          controller: controller.sendTextController,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          if (controller.validation()) {
-                            controller.groupChatSend();
-                          }
-                        },
-                        child: Container(
-                          height: 45,
-                          width: 45,
-                          padding: const EdgeInsets.all(5),
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.primaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 5,
-                                  spreadRadius: 1,
-                                  color: AppColors.primaryColor),
-                            ],
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              ImagePath.send,
-                              scale: 2.5,
+                            : const SizedBox(),
+                        10.verticalSpacing,
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                FlutterImagePickerUtils.imagePickerModalSheet(
+                                  context: context,
+                                  fromGallery: () async {
+                                    controller.groupChatPickImage.value =
+                                    await FlutterImagePickerUtils.getImageGallery(
+                                      context,
+                                    );
+                                  },
+                                  fromCamera: () async {
+                                    controller.groupChatPickImage.value =
+                                    await FlutterImagePickerUtils.getImageCamera(
+                                      context,
+                                    );
+                                  },
+                                );
+                              },
+                              child: Image.asset(
+                                ImagePath.camera,
+                                color: AppColors.editProfileTextFieldLabelColor,
+                              ),
                             ),
-                          ),
+                            10.horizontalSpacing,
+                            const SizedBox(
+                              height: 30,
+                              child: VerticalDivider(
+                                color: AppColors.dividerColor,
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextFormField(
+                                inputBorder: InputBorder.none,
+                                hintTextStyle: AppTextStyle.homeworkElements,
+                                hintText: "Type something...",
+                                controller: controller.sendTextController,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                if (controller.validation()) {
+                                  controller.groupChatSend();
+                                }
+                              },
+                              child: Container(
+                                height: 45,
+                                width: 45,
+                                padding: const EdgeInsets.all(5),
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.primaryColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        blurRadius: 5,
+                                        spreadRadius: 1,
+                                        color: AppColors.primaryColor),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    ImagePath.send,
+                                    scale: 2.5,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

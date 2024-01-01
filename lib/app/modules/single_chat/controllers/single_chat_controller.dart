@@ -1,14 +1,26 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/chat/controllers/chat_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/chat_search/controllers/chat_search_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/chat_search/views/widget/suggested_search_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/chat/pusher_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/conversation_model/single_chat_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_file_list_response_model/single_chat_file_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_user_list_response_model/single_chat_user_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../utilities/api_urls.dart';
@@ -16,13 +28,40 @@ import '../../../utilities/api_urls.dart';
 class SingleChatController extends GetxController {
   PusherController pusherController = Get.put(PusherController());
   GlobalRxVariableController globalRxVariableController = Get.find();
+  ChatController chatController = Get.find();
+  ChatSearchController chatSearchController = Get.put(ChatSearchController());
   TextEditingController sendTextController = TextEditingController();
+  TabController? tabController;
+
+  SingleChatUserListData? singleChatUserListData;
 
   Rx<File> singleChatPickImage = File('').obs;
   RxBool singleChatSendLoader = false.obs;
   RxBool isLoading = false.obs;
+  RxBool deleteChatLoader = false.obs;
+  RxBool blockLoaded = false.obs;
+  RxBool forwardChatLoader = false.obs;
   RxInt toUserId = 0.obs;
+  RxInt messageId = 0.obs;
+  RxString userName = "".obs;
+  RxString userImage = "".obs;
+  RxInt userActiveStatus = 0.obs;
+  RxInt tabIndex = 0.obs;
+  RxBool isBlocked = false.obs;
+  RxList<SingleChatFileList> singleChatFileList = <SingleChatFileList>[].obs;
+  RxBool fileLoader = false.obs;
 
+
+  List filesList = [
+    "Images",
+    "Files",
+  ];
+
+  RxList<String> userList = <String>[].obs;
+  RxList<SingleConversationListData> singleConversationList =
+      <SingleConversationListData>[].obs;
+
+  /// Send a text or image
   Future<SingleChatListResponseModel> singleChatSend() async {
     try {
       singleChatSendLoader.value = true;
@@ -74,33 +113,10 @@ class SingleChatController extends GetxController {
     return SingleChatListResponseModel();
   }
 
-  void pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'txt'],
-    );
 
-    if (result != null) {
-      singleChatPickImage.value = File(result.files.single.path!);
-    } else {
-      showBasicFailedSnackBar(message: 'canceled file selection');
-      debugPrint("User canceled file selection");
-    }
-  }
-
-  bool validation() {
-    if (sendTextController.text.isEmpty &&
-        singleChatPickImage.value.path.isEmpty) {
-      showBasicFailedSnackBar(message: 'Enter something');
-      return false;
-    }
-    return true;
-  }
-
-  RxList<SingleConversationListData> singleConversationList =
-      <SingleConversationListData>[].obs;
-
-  Future<SingleChatListResponseModel> getChtConversationList({required int userId}) async {
+  /// Conversation List
+  Future<SingleChatListResponseModel> getChatConversationList(
+      {required int userId}) async {
     try {
       isLoading.value = true;
 
@@ -132,10 +148,267 @@ class SingleChatController extends GetxController {
     return SingleChatListResponseModel();
   }
 
+
+
+  Future<SingleChatFileListResponseModel> getSingleChatFileList(
+      {required int userId}) async {
+    try {
+
+      fileLoader.value = true;
+      final response = await BaseClient().getData(
+        url: InfixApi.getSingleChatFileList(userID: userId),
+        header: GlobalVariable.header,
+      );
+
+      SingleChatFileListResponseModel singleChatFileListResponseModel = SingleChatFileListResponseModel.fromJson(response);
+
+      if (singleChatFileListResponseModel.success == true) {
+        fileLoader.value = false;
+        if (singleChatFileListResponseModel.data!.isNotEmpty) {
+          for (int i = 0;
+          i < singleChatFileListResponseModel.data!.length;
+          i++) {
+            singleChatFileList
+                .add(singleChatFileListResponseModel.data![i]);
+          }
+        }
+      } else{
+        fileLoader.value = false;
+        showBasicFailedSnackBar(message: singleChatFileListResponseModel.message ?? AppText.somethingWentWrong,);
+      }
+    } catch (e, t) {
+      Get.back();
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      fileLoader.value = false;
+    }
+
+    return SingleChatFileListResponseModel();
+  }
+
+  /// Forward message
+  Future<void> forwardSingleChat(
+      {required int userId,
+      required int messageId,
+  required BuildContext context,
+      }) async {
+    try {
+      ///Show Loader Dialog
+
+      // AlertDialog alert = AlertDialog(
+      //   elevation: 0,
+      //   backgroundColor: Colors.transparent,
+      //   iconColor: Colors.transparent,
+      //   content: Center(child: Lottie.asset('assets/images/loader.json')),
+      // );
+      //
+      // showDialog(
+      //   barrierDismissible: false,
+      //   context: context,
+      //   barrierColor: AppColors.secondaryColor.withOpacity(0.15),
+      //   builder: (BuildContext context) {
+      //     return alert;
+      //   },
+      // );
+
+      forwardChatLoader.value = true;
+      final response = await BaseClient().postData(
+          url: InfixApi.forwardSingleChat(userId: userId, messageId: messageId),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        forwardChatLoader.value = false;
+        // const SecondaryLoadingWidget();
+        // userList.clear();
+        Get.back();
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'Chat Forward');
+      } else {
+        forwardChatLoader.value = false;
+        showBasicFailedSnackBar(
+            message:
+                postRequestResponseModel.message ?? 'Something went wrong');
+      }
+    } catch (e, t) {
+      forwardChatLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      forwardChatLoader.value = false;
+    }
+  }
+
+  /// Function to forward a chat
+  void forwardChat( {required BuildContext context, required int messageId}) {
+
+    Get.dialog(
+      Obx(
+        () => Material(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                30.verticalSpacing,
+                Row(
+                  children: [
+                    15.horizontalSpacing,
+                    InkWell(
+                      onTap: () => Get.back(),
+                      child: Image.asset(
+                        ImagePath.back,
+                        scale: 4,
+                        color: Colors.black,
+                      ),
+                    ),
+                    30.horizontalSpacing,
+                    const Text(
+                      "Forward Text",
+                      style: AppTextStyle.fontSize16lightBlackW500,
+                    ),
+                  ],
+                ),
+                20.verticalSpacing,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: chatController.singleChatList.length,
+                      itemBuilder: (context, index) {
+                        return SuggestedSearchTile(
+                          profileImage: ImagePath.editProfileImage,
+                          name: chatController.singleChatList[index].fullName,
+                          isForward: true,
+                          onTapSend: () {
+                            forwardSingleChat(
+                                userId: chatController.singleChatList[index].id!,
+                                messageId: messageId,
+                              context: context,
+                               );
+                          },
+                        );
+                      }),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
+  void filePopup ({required Widget widget}){
+    Get.dialog(
+      Material(
+        child: widget,
+      )
+    );
+  }
+
+  /// Delete Single Message
+  Future<void> deleteSingleChat(
+      {required int messageId, required int index}) async {
+    try {
+
+      deleteChatLoader.value = true;
+      final response = await BaseClient().postData(
+          url: InfixApi.deleteSingleChat(messageId: messageId),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        deleteChatLoader.value = false;
+        Get.back();
+        singleConversationList.removeAt(index);
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'Data deleted');
+      } else {
+        deleteChatLoader.value = false;
+        showBasicFailedSnackBar(
+            message:
+                postRequestResponseModel.message ?? 'Something went wrong');
+      }
+    } catch (e, t) {
+      deleteChatLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      deleteChatLoader.value = false;
+    }
+  }
+
+  /// Block a single user
+  Future<void> blockSingleUser(
+      {required String type, required int userId}) async {
+    try {
+
+      blockLoaded.value = true;
+      final response = await BaseClient().postData(
+          url: InfixApi.blockSingleUser(type: type, userId: userId),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+      PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        blockLoaded.value = false;
+        chatController.singleChatList.clear();
+        chatController.getSingleChatList();
+        Get.back();
+
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'operation successful');
+      } else {
+        blockLoaded.value = false;
+        showBasicFailedSnackBar(
+            message:
+            postRequestResponseModel.message ?? 'Something went wrong');
+      }
+    } catch (e, t) {
+      blockLoaded.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      blockLoaded.value = false;
+    }
+  }
+
+
+  void pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'txt'],
+    );
+
+    if (result != null) {
+      singleChatPickImage.value = File(result.files.single.path!);
+    } else {
+      showBasicFailedSnackBar(message: 'canceled file selection');
+      debugPrint("User canceled file selection");
+    }
+  }
+
+  bool validation() {
+    if (sendTextController.text.isEmpty &&
+        singleChatPickImage.value.path.isEmpty) {
+      showBasicFailedSnackBar(message: 'Enter something');
+      return false;
+    }
+    return true;
+  }
   @override
   void onInit() {
-    toUserId.value = Get.arguments['to_user_id'];
-    getChtConversationList(userId: toUserId.value);
+
+    singleChatUserListData = Get.arguments['single_chat_list'];
+    toUserId.value = singleChatUserListData!.id! ;
+     userName.value = singleChatUserListData!.fullName!;
+     userImage.value = singleChatUserListData!.image!;
+     userActiveStatus.value = singleChatUserListData!.activeStatus!;
+     isBlocked.value = singleChatUserListData!.blocked!;
+    getChatConversationList(userId: toUserId.value);
     pusherController.chatOpenSingle(
       authUserId: globalRxVariableController.userId.value!,
       chatListId: toUserId.value,

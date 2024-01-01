@@ -178,21 +178,27 @@ class ChatSearchView extends GetView<ChatSearchController> {
                   20.verticalSpacing,
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Obx(() => controller.searchLoader.value
-                        ? const SecondaryLoadingWidget()
-                        : controller.searchController.text.isNotEmpty
-                            ? ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: controller.searchChatDataList.length,
-                                itemBuilder: (context, index) {
-                                  return SuggestedSearchTile(
-                                    profileImage: ImagePath.editProfileImage,
-                                    name: controller
-                                        .searchChatDataList[index].fullName,
-                                    onTap: () {},
-                                  );
-                                })
-                            : const Center(child: NoDataAvailableWidget())),
+                    child: Obx(
+                      () => controller.searchLoader.value
+                          ? const SecondaryLoadingWidget()
+                          : controller.searchController.text.isNotEmpty
+                              ? ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      controller.searchChatDataList.length,
+                                  itemBuilder: (context, index) {
+                                    return SuggestedSearchTile(
+                                      profileImage: ImagePath.editProfileImage,
+                                      name: controller
+                                          .searchChatDataList[index].fullName,
+                                      onTap: () {},
+                                      isSearch: true,
+                                    );
+                                  })
+                              : const Center(
+                                  child: NoDataAvailableWidget(),
+                                ),
+                    ),
                   )
                 ],
               ),

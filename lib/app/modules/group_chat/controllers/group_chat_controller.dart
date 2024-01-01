@@ -44,7 +44,7 @@ class GroupChatController extends GetxController {
   RxBool groupChatDataLoader = false.obs;
 
   RxBool deleteChatLoader = false.obs;
-
+  RxBool forwardChatLoader = false.obs;
   RxBool addMemberLoader = false.obs;
 
   RxBool checkboxSelect = false.obs;
@@ -83,8 +83,7 @@ class GroupChatController extends GetxController {
       groupMemberListLoader.value = true;
 
       final response = await BaseClient().getData(
-        url:
-            "https://spondan.com/infixedu/api/v2/admin-group-members?group_id=$groupId",
+        url: InfixApi.getGroupChatMemberList(groupId: groupId),
         header: GlobalVariable.header,
       );
 
@@ -117,15 +116,14 @@ class GroupChatController extends GetxController {
   }
 
   /// Group Chat data
-  Future<GroupChatListResponseModel?> getGroupChatData(
+  Future<GroupChatListResponseModel?> getGroupChatList(
       {required String groupId}) async {
     groupChatConversationList.clear();
     try {
       groupChatDataLoader.value = true;
 
       final response = await BaseClient().getData(
-        url:
-            "https://spondan.com/infixedu/api/v2/admin-group-chats?group_id=$groupId",
+        url: InfixApi.getGroupChatList(groupId: groupId),
         header: GlobalVariable.header,
       );
 
@@ -161,7 +159,7 @@ class GroupChatController extends GetxController {
     try {
       addMemberLoader.value = true;
       final response = await BaseClient().postData(
-          url: "https://spondan.com/infixedu/api/v2/admin-add-group-member",
+          url: InfixApi.groupAddMember,
           payload: {
             "group_id": groupId,
             "user_id": userList,
@@ -193,12 +191,11 @@ class GroupChatController extends GetxController {
   }
 
   /// Group Member Leave
-  Future<void> groupMemberLeave({required String groupId}) async {
+  Future<void> groupLeaveMember({required String groupId}) async {
     try {
       addMemberLoader.value = true;
       final response = await BaseClient().postData(
-          url:
-              "https://spondan.com/infixedu/api/v2/admin-group-leave?group_id=$groupId",
+          url: InfixApi.groupLeaveMember(groupId: groupId),
           header: GlobalVariable.header);
       PostRequestResponseModel postRequestResponseModel =
           PostRequestResponseModel.fromJson(response);
@@ -209,7 +206,7 @@ class GroupChatController extends GetxController {
         const SecondaryLoadingWidget();
         chatController.groupChatList
             .removeWhere((element) => element.groupId == groupId);
-        // chatController.groupChatList.refresh();
+        chatController.groupChatList.refresh();
 
         Get.back();
         showBasicSuccessSnackBar(
@@ -219,6 +216,42 @@ class GroupChatController extends GetxController {
         showBasicFailedSnackBar(
             message:
                 postRequestResponseModel.message ?? 'Something went wrong');
+      }
+    } catch (e, t) {
+      addMemberLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      addMemberLoader.value = false;
+    }
+  }
+
+  /// Group delete group
+  Future<void> groupDelete({required String groupId}) async {
+    try {
+      addMemberLoader.value = true;
+      final response = await BaseClient().postData(
+          url: InfixApi.groupDelete(groupId: groupId),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+      PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        addMemberLoader.value = false;
+
+        const SecondaryLoadingWidget();
+        chatController.groupChatList
+            .removeWhere((element) => element.groupId == groupId);
+        chatController.groupChatList.refresh();
+
+        Get.back();
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'Group Deleted');
+      } else {
+        addMemberLoader.value = false;
+        showBasicFailedSnackBar(
+            message:
+            postRequestResponseModel.message ?? 'Something went wrong');
       }
     } catch (e, t) {
       addMemberLoader.value = false;
@@ -292,8 +325,7 @@ class GroupChatController extends GetxController {
     try {
       deleteChatLoader.value = true;
       final response = await BaseClient().postData(
-          url:
-              "https://spondan.com/infixedu/api/v2/admin-group-chat-remove?thread_id=$threadId",
+          url: InfixApi.groupDeleteSingleChat(threadId: threadId),
           header: GlobalVariable.header);
       PostRequestResponseModel postRequestResponseModel =
           PostRequestResponseModel.fromJson(response);
@@ -326,7 +358,7 @@ class GroupChatController extends GetxController {
       required String message,
       required String userId}) async {
     try {
-      deleteChatLoader.value = true;
+      forwardChatLoader.value = true;
       final response = await BaseClient().postData(
           url: "https://spondan.com/infixedu/api/v2/admin-group-chat-forward",
           payload: {
@@ -340,23 +372,23 @@ class GroupChatController extends GetxController {
           PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
-        deleteChatLoader.value = false;
+        forwardChatLoader.value = false;
         Get.back();
         showBasicSuccessSnackBar(
             message: postRequestResponseModel.message ??
                 'Text Forward Successfully ');
       } else {
-        deleteChatLoader.value = false;
+        forwardChatLoader.value = false;
         showBasicFailedSnackBar(
             message:
                 postRequestResponseModel.message ?? 'Something went wrong');
       }
     } catch (e, t) {
-      deleteChatLoader.value = false;
+      forwardChatLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      deleteChatLoader.value = false;
+      forwardChatLoader.value = false;
     }
   }
 
@@ -423,7 +455,7 @@ class GroupChatController extends GetxController {
   void onInit() {
     groupId.value = Get.arguments["group_id"];
     chatName.value = Get.arguments["name"];
-    getGroupChatData(groupId: groupId.value);
+    getGroupChatList(groupId: groupId.value);
 
     pusherController.chatOpenGroup(
       authUserId: globalRxVariableController.userId.value!,

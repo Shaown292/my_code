@@ -35,6 +35,7 @@ class SingleChatUserListData {
   String? lastMessage;
   String? lastMessageTime;
   int? countConversation;
+  bool? blocked;
 
   SingleChatUserListData(
       {this.id,
@@ -43,7 +44,9 @@ class SingleChatUserListData {
         this.activeStatus,
         this.lastMessage,
         this.lastMessageTime,
-        this.countConversation});
+        this.countConversation,
+        this.blocked,
+      });
 
   SingleChatUserListData.fromJson(Map<String, dynamic> json) {
     id = json['user_id'];
@@ -53,6 +56,7 @@ class SingleChatUserListData {
     lastMessage = json['last_message'];
     lastMessageTime = json['last_message_time'];
     countConversation = json['count_conversation'];
+    blocked = json['blocked'];
   }
 
   Map<String, dynamic> toJson() {
@@ -64,6 +68,7 @@ class SingleChatUserListData {
     data['last_message'] = lastMessage;
     data['last_message_time'] = lastMessageTime;
     data['count_conversation'] = countConversation;
+    data['blocked'] = blocked;
     return data;
   }
 }
