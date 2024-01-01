@@ -30,21 +30,50 @@ class ChatAuthActiveStatusResponseModel {
 class Data {
   String? status;
   String? color;
-  String? statusInfo;
+  List<StatusInfo>? statusInfo;
 
   Data({this.status, this.color, this.statusInfo});
 
   Data.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     color = json['color'];
-    statusInfo = json['status_info'];
+    if (json['status_info'] != null) {
+      statusInfo = <StatusInfo>[];
+      json['status_info'].forEach((v) {
+        statusInfo!.add(StatusInfo.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['color'] = color;
-    data['status_info'] = statusInfo;
+    if (statusInfo != null) {
+      data['status_info'] = statusInfo!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class StatusInfo {
+  int? key;
+  String? name;
+  String? color;
+
+  StatusInfo({this.key, this.name, this.color});
+
+  StatusInfo.fromJson(Map<String, dynamic> json) {
+    key = json['key'];
+    name = json['name'];
+    color = json['color'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['key'] = key;
+    data['name'] = name;
+    data['color'] = color;
     return data;
   }
 }

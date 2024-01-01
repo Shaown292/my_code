@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
@@ -6,8 +8,10 @@ import 'package:flutter_single_getx_api_v2/config/global_variable/global_variabl
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/auth_status_model/chat_auth_active_status_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/group_chat_user_list_response_model/group_chat_user_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/settings/chat_settings_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_user_list_response_model/single_chat_user_list_response_model.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class ChatController extends GetxController {
   RxBool isSearching = false.obs;
@@ -28,12 +32,14 @@ class ChatController extends GetxController {
     'Group Chat',
   ];
 
-  List<ChatStatusModel> activeStatusList = [
-    ChatStatusModel(statusColor: 0xFF12AE01, name: "ACTIVE"),
-    ChatStatusModel(statusColor: 0xFFE1E2EC, name: "INACTIVE"),
-    ChatStatusModel(statusColor: 0xFFF60003, name: "BUSY"),
-    ChatStatusModel(statusColor: 0xFFF99F15, name: "AWAY"),
-  ];
+  // List<ChatStatusModel> activeStatusList = [
+  //   ChatStatusModel(statusColor: 0xFF12AE01, name: "ACTIVE"),
+  //   ChatStatusModel(statusColor: 0xFFE1E2EC, name: "INACTIVE"),
+  //   ChatStatusModel(statusColor: 0xFFF60003, name: "BUSY"),
+  //   ChatStatusModel(statusColor: 0xFFF99F15, name: "AWAY"),
+  // ];
+
+  RxList<StatusInfo> activeStatusList = <StatusInfo>[].obs;
 
   //  changeActiveStatusColor (){
   //   String colorCode = '';
@@ -155,6 +161,7 @@ class ChatController extends GetxController {
     }
   }
 
+  /// Get Chat Active Status
   Future<ChatAuthActiveStatusResponseModel> getAuthActiveStatus() async {
     try {
       statusLoader.value = true;
@@ -167,11 +174,13 @@ class ChatController extends GetxController {
           ChatAuthActiveStatusResponseModel.fromJson(response);
       if (responseModel.success == true) {
         statusLoader.value = false;
+
+        for(var element in responseModel.data!.first.statusInfo!){
+          activeStatusList.add(element);
+        }
+
         activeStatus.value = responseModel.data!.first.status ?? 'ACTIVE';
         activeColor.value = responseModel.data!.first.color ?? '0xFF12AE01';
-        dropdownValue.value = ChatStatusModel(
-            statusColor: int.tryParse(activeColor.value)!,
-            name: activeStatus.value);
       } else {
         statusLoader.value = false;
         showBasicFailedSnackBar(
@@ -188,6 +197,40 @@ class ChatController extends GetxController {
     return ChatAuthActiveStatusResponseModel();
   }
 
+  /// Get Chat Settings
+  Future<void> getChatSettings() async {
+
+    try{
+
+      var request = http.Request('GET', Uri.parse('https://spondan.com/infixedu/api/chat/settings/permission'));
+
+      request.headers.addAll(GlobalVariable.header);
+
+      http.StreamedResponse response = await request.send();
+
+      String res = await response.stream.bytesToString();
+      Map<String, dynamic> mapResponse = json.decode(res);
+
+      ChatSettingsResponseModel chatSettingsResponseModel = ChatSettingsResponseModel.fromJson(mapResponse);
+
+      if (response.statusCode == 200) {
+        Get.find<GlobalRxVariableController>().pusherApiKey.value =  chatSettingsResponseModel.chatSettings?.pusherAppKey;
+        Get.find<GlobalRxVariableController>().pusherClusterKey.value = chatSettingsResponseModel.chatSettings?.pusherAppCluster;
+      }
+      else {
+        print(response.reasonPhrase);
+      }
+
+
+    }catch(e, t){
+      debugPrint('$e');
+      debugPrint('$t');
+    }finally{
+
+    }
+
+  }
+
   RxInt tabIndex = 0.obs;
 
   @override
@@ -195,9 +238,8 @@ class ChatController extends GetxController {
     // dropdownValue.value = activeStatusList.first;
     // dropdownValue.value = ChatStatusModel(statusColor: int.tryParse(activeColor.value)!, name: activeStatus.value);
 
-    getAuthActiveStatus().then((value) => dropdownValue.value = ChatStatusModel(
-        statusColor: int.tryParse(activeColor.value)!,
-        name: activeStatus.value));
+    getChatSettings();
+    getAuthActiveStatus();
     getSingleChatList();
     getGroupChatList();
     super.onInit();

@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
@@ -23,6 +22,7 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_respon
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 import '../../../utilities/api_urls.dart';
 
 class SingleChatController extends GetxController {
@@ -58,8 +58,8 @@ class SingleChatController extends GetxController {
   ];
 
   RxList<String> userList = <String>[].obs;
-  RxList<SingleConversationListData> singleConversationList =
-      <SingleConversationListData>[].obs;
+  RxList<SingleConversationListData> singleConversationList = <SingleConversationListData>[].obs;
+  RxList<SingleConversationListData> reversedList = <SingleConversationListData>[].obs;
 
   /// Send a text or image
   Future<SingleChatListResponseModel> singleChatSend() async {
@@ -114,7 +114,7 @@ class SingleChatController extends GetxController {
   }
 
 
-  /// Conversation List
+  /// Get Conversation List
   Future<SingleChatListResponseModel> getChatConversationList(
       {required int userId}) async {
     try {
@@ -150,10 +150,12 @@ class SingleChatController extends GetxController {
 
 
 
+  /// Get Chat Files
   Future<SingleChatFileListResponseModel> getSingleChatFileList(
       {required int userId}) async {
     try {
 
+      singleChatFileList.clear();
       fileLoader.value = true;
       final response = await BaseClient().getData(
         url: InfixApi.getSingleChatFileList(userID: userId),
@@ -196,21 +198,21 @@ class SingleChatController extends GetxController {
     try {
       ///Show Loader Dialog
 
-      // AlertDialog alert = AlertDialog(
-      //   elevation: 0,
-      //   backgroundColor: Colors.transparent,
-      //   iconColor: Colors.transparent,
-      //   content: Center(child: Lottie.asset('assets/images/loader.json')),
-      // );
-      //
-      // showDialog(
-      //   barrierDismissible: false,
-      //   context: context,
-      //   barrierColor: AppColors.secondaryColor.withOpacity(0.15),
-      //   builder: (BuildContext context) {
-      //     return alert;
-      //   },
-      // );
+      AlertDialog alert = AlertDialog(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconColor: Colors.transparent,
+        content: Center(child: Lottie.asset('assets/images/loader.json')),
+      );
+
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        barrierColor: AppColors.secondaryColor.withOpacity(0.15),
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
 
       forwardChatLoader.value = true;
       final response = await BaseClient().postData(
@@ -300,16 +302,8 @@ class SingleChatController extends GetxController {
   }
 
 
-  void filePopup ({required Widget widget}){
-    Get.dialog(
-      Material(
-        child: widget,
-      )
-    );
-  }
-
   /// Delete Single Message
-  Future<void> deleteSingleChat(
+  Future<PostRequestResponseModel> deleteSingleChat(
       {required int messageId, required int index}) async {
     try {
 
@@ -321,16 +315,34 @@ class SingleChatController extends GetxController {
           PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
-        deleteChatLoader.value = false;
+
         Get.back();
-        singleConversationList.removeAt(index);
+        int messageIdIndex = reversedList.indexWhere((element) => element.messageId == messageId);
+
+        if(messageIdIndex != -1){
+          reversedList.removeAt(messageIdIndex);
+          reversedList.refresh();
+          print("messageId reversedList ::::::::;: $messageIdIndex");
+        }
+
+        int messageIdIndex1 = singleConversationList.indexWhere((element) => element.messageId == messageId);
+
+        if(messageIdIndex1 != -1){
+          singleConversationList.removeAt(messageIdIndex1);
+          singleConversationList.refresh();
+          print("messageId singleConversationList ::::::::;: $messageIdIndex");
+        }
+
+
+        deleteChatLoader.value = false;
+
         showBasicSuccessSnackBar(
             message: postRequestResponseModel.message ?? 'Data deleted');
       } else {
         deleteChatLoader.value = false;
         showBasicFailedSnackBar(
             message:
-                postRequestResponseModel.message ?? 'Something went wrong');
+                postRequestResponseModel.message ?? AppText.somethingWentWrong);
       }
     } catch (e, t) {
       deleteChatLoader.value = false;
@@ -339,6 +351,8 @@ class SingleChatController extends GetxController {
     } finally {
       deleteChatLoader.value = false;
     }
+
+    return PostRequestResponseModel();
   }
 
   /// Block a single user
