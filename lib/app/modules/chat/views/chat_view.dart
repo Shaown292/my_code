@@ -24,7 +24,7 @@ class ChatView extends GetView<ChatController> {
         title: "Chat",
         actions: [
           Obx(() {
-            return SizedBox(
+            return controller.statusLoader.value ? CircularProgressIndicator() : SizedBox(
               width: 150,
               child: DuplicateDropdown(
                 padding: 0,
