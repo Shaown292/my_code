@@ -148,7 +148,7 @@ class ChatView extends GetView<ChatController> {
                                               Color(int.tryParse(colorCode)!),
                                           onTap: () {
 
-                                            Get.toNamed(Routes.SINGLE_CHAT, arguments: {'to_user_id': controller.singleChatList[index].id});
+                                            Get.toNamed(Routes.SINGLE_CHAT, arguments: {'single_chat_list': controller.singleChatList[index]});
                                           },
                                         );
                                       })
