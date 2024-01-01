@@ -9,14 +9,21 @@ class SuggestedSearchTile extends StatelessWidget {
   final String? profileImage;
   final String? name;
   final Function()? onTap;
+  final Function()? onTapSend;
   final bool checkboxValue;
   final Function(bool?)? onCheckboxTap;
+  final bool isForward;
+  final bool isSearch;
 
   const SuggestedSearchTile({
     super.key,
     this.profileImage,
     this.name,
-    this.onTap, this.checkboxValue = false, this.onCheckboxTap,
+    this.onTap,
+    this.checkboxValue = false,
+    this.onCheckboxTap,
+    this.isForward = false,
+    this.onTapSend,  this.isSearch = false,
   });
 
   @override
@@ -59,10 +66,25 @@ class SuggestedSearchTile extends StatelessWidget {
               style: AppTextStyle.fontSize13BlackW400,
             ),
             const Spacer(),
-            CustomCheckbox(
-              checkboxValue: checkboxValue,
-              onChange: onCheckboxTap,
-            )
+            isForward
+                ? InkWell(
+                    onTap: onTapSend,
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: AppColors.primaryColor,
+                      ),
+                      child: const Text(
+                        "Forward",
+                        style: AppTextStyle.textStyle12WhiteW400,
+                      ),
+                    ),
+                  )
+                : isSearch? const SizedBox() : CustomCheckbox(
+                    checkboxValue: checkboxValue,
+                    onChange: onCheckboxTap,
+                  )
           ],
         ),
       ),

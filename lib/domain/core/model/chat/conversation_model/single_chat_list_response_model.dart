@@ -37,6 +37,7 @@ class SingleConversationListData {
   int? reply;
   bool? sender;
   bool? receiver;
+  bool? forwarded;
 
   SingleConversationListData(
       {this.messageId,
@@ -47,7 +48,9 @@ class SingleConversationListData {
         this.originalFileName,
         this.reply,
         this.sender,
-        this.receiver});
+        this.receiver,
+        this.forwarded,
+      });
 
   SingleConversationListData.fromJson(Map<String, dynamic> json) {
     messageId = json['message_id'];
@@ -59,6 +62,7 @@ class SingleConversationListData {
     reply = json['reply'];
     sender = json['sender'];
     receiver = json['receiver'];
+    forwarded = json['forwarded'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +76,7 @@ class SingleConversationListData {
     data['reply'] = reply;
     data['sender'] = sender;
     data['receiver'] = receiver;
+    data['forwarded'] = forwarded;
     return data;
   }
 }

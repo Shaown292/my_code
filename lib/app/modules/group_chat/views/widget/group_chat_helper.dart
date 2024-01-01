@@ -7,11 +7,13 @@ import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_s
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/image_view/cache_image_view.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 
 class GroupChatHelper {
 
   GroupChatController groupChatController = Get.find();
+  GlobalRxVariableController globalRxVariableController = Get.find();
 
   PopupMenuButton<int> popupMenu({required Function(int) onTap}) {
     return PopupMenuButton(
@@ -22,32 +24,26 @@ class GroupChatHelper {
       itemBuilder: (context) => [
         const PopupMenuItem(
           value: 1,
-          child: Text("User Role"),
+          child: Text("Add People"),
         ),
         const PopupMenuItem(
           value: 2,
-          child: Text("Add People"),
+          child: Text("File"),
         ),
         const PopupMenuItem(
           value: 3,
           child: Text("Members"),
         ),
-        const PopupMenuItem(
+         if(globalRxVariableController.roleId.value == 1 )
+         const PopupMenuItem(
           value: 4,
-          child: Text("File"),
-        ),
+          child:  Text("Delete ") ,
+        ) ,
         const PopupMenuItem(
           value: 5,
           child: Text("Leave Group"),
         ),
-        const PopupMenuItem(
-          value: 6,
-          child: Text("Delete Group"),
-        ),
-        const PopupMenuItem(
-          value: 7,
-          child: Text("Mark as Read only"),
-        ),
+
       ],
     );
   }

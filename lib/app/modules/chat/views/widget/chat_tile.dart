@@ -111,19 +111,19 @@ class ChatTile extends StatelessWidget {
                       messageReceivedTime ?? "",
                       style: AppTextStyle.homeworkElements,
                     ),
-                    5.verticalSpacing,
-                    Container(
-                      height: 15,
-                      width: 15,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: AppColors.unreadChat),
-                      child: Center(
-                        child: Text(
-                          numberOfUnreadMessage ?? "",
-                          style: AppTextStyle.textStyle12WhiteW400,
-                        ),
-                      ),
-                    )
+                    // 5.verticalSpacing,
+                    // Container(
+                    //   height: 15,
+                    //   width: 15,
+                    //   decoration: const BoxDecoration(
+                    //       shape: BoxShape.circle, color: AppColors.unreadChat),
+                    //   child: Center(
+                    //     child: Text(
+                    //       numberOfUnreadMessage ?? "",
+                    //       style: AppTextStyle.textStyle12WhiteW400,
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
               ],

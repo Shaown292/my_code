@@ -500,6 +500,17 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String sendSingleChat = '${baseApi}admin-chat-send';
   static String sendGroupChat = '${baseApi}admin-group-chat-send';
   static String getSingleChatList({required int userId}) => '${baseApi}admin-chat-list?to_user_id=$userId';
+  static String getGroupChatList({required String groupId}) => '${baseApi}admin-group-chats?group_id=$groupId';
+  static String getSingleChatFileList({required int userID}) => '${baseApi}admin-single-chat-files?user_id=$userID';
+  static String getGroupChatMemberList({required String groupId}) => '${baseApi}admin-group-members?group_id=$groupId';
+  static String groupLeaveMember({required String groupId}) => '${baseApi}admin-group-leave?group_id=$groupId';
+  static String groupDelete({required String groupId}) => '${baseApi}admin-group-delete?group_id=$groupId';
+  static String groupDeleteSingleChat({required int threadId}) => '${baseApi}admin-group-chat-remove?thread_id=$threadId';
+  static String deleteSingleChat({required int messageId}) => '${baseApi}delete-admin-chat-single-message?message_id=$messageId';
+  static String groupAddMember='${baseApi}admin-add-group-member';
+  static String forwardSingleChat({required int userId, required int messageId}) => '${baseApi}forward-admin-chat-single-message?to_user_id=$userId&message_id=$messageId';
+  static String blockSingleUser({required String type, required int userId}) => '${baseApi}chat-user-block-action?type=$type&user_id=$userId';
+
 
 
 
