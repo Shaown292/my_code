@@ -79,7 +79,7 @@ class DuplicateDropdown extends StatelessWidget {
             value: dropdownValue,
             // iconSize: 26,
             dropdownColor: dropdownColor,
-            // iconEnabledColor: color ?? AppColors.profileValueColor,
+            iconEnabledColor: color ,
             onChanged: changeDropdownValue,
           ),
         ),

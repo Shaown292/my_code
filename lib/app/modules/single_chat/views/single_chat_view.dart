@@ -121,14 +121,14 @@ class SingleChatView extends GetView<SingleChatController> {
                         userId: controller.toUserId.value);
                     Get.dialog(Material(
                       child: Obx(
-                            () => FilesPopupDialog(
+                        () => FilesPopupDialog(
                           tabBarLength: controller.filesList.length,
                           tabController: controller.tabController,
                           tabs: List.generate(
                             controller.filesList.length,
-                                (index) => Padding(
+                            (index) => Padding(
                               padding:
-                              const EdgeInsets.symmetric(vertical: 8.0),
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: Text(
                                 controller.filesList[index],
                               ),
@@ -137,31 +137,29 @@ class SingleChatView extends GetView<SingleChatController> {
                           imageWidget: controller.fileLoader.value
                               ? const SecondaryLoadingWidget()
                               : GridView.builder(
-                            shrinkWrap: true,
-                            itemCount:
-                            controller.singleChatFileList.length,
-                            gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                            ),
-                            itemBuilder: (context, index) {
-                              print(
-                                  "Len :::::::: ${controller.singleChatFileList.length}");
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(controller
-                                            .singleChatFileList[index]
-                                            .file ??
-                                            ""),
-                                        fit: BoxFit.cover),
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      controller.singleChatFileList.length,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
                                   ),
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(controller
+                                                      .singleChatFileList[index]
+                                                      .file ??
+                                                  ""),
+                                              fit: BoxFit.cover),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
                           fileWidget: ListView.builder(
                               itemCount: 5,
                               itemBuilder: (context, index) {
@@ -172,21 +170,23 @@ class SingleChatView extends GetView<SingleChatController> {
                                     height: Get.height * 0.1,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: AppColors
-                                          .transportDividerColor.withOpacity(0.4),
+                                      color: AppColors.transportDividerColor
+                                          .withOpacity(0.4),
                                     ),
                                     child: Row(
                                       children: [
                                         Container(
                                           width: Get.width * 0.15,
                                           height: Get.height * 0.1,
-
-                                          decoration:  BoxDecoration(
-                                            borderRadius: const BorderRadius.only(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.only(
                                               topLeft: Radius.circular(10),
                                               bottomLeft: Radius.circular(10),
                                             ),
-                                            color: AppColors.transportDividerColor.withOpacity(0.8),
+                                            color: AppColors
+                                                .transportDividerColor
+                                                .withOpacity(0.8),
                                           ),
                                           child: Image.asset(
                                             ImagePath.adminFees,
@@ -198,7 +198,7 @@ class SingleChatView extends GetView<SingleChatController> {
                                         const Text(
                                           "Sajsdhjashjd",
                                           style:
-                                          AppTextStyle.fontSize13BlackW400,
+                                              AppTextStyle.fontSize13BlackW400,
                                         )
                                       ],
                                     ),
@@ -243,303 +243,338 @@ class SingleChatView extends GetView<SingleChatController> {
                   ? const Expanded(child: SecondaryLoadingWidget())
                   : controller.singleConversationList.isNotEmpty
                       ? Expanded(
-                child: ListView.builder(
-                  reverse: true,
-                  shrinkWrap: true,
-                  itemCount: controller.singleConversationList.length,
-                  itemBuilder: (context, index) {
-                    controller.reversedList.value = List.from(controller.singleConversationList.reversed);
-                    return Column(
-                      crossAxisAlignment:
-                      controller.reversedList[index].sender == true
-                          ? CrossAxisAlignment.end
-                          : CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: controller.reversedList[index].sender == true
-                                  ? 60
-                                  : 0,
-                              right:
-                              controller.reversedList[index].sender == true
-                                  ? 0
-                                  : 60),
-                          child: Row(
-                            mainAxisAlignment:
-                            controller.reversedList[index].sender == true
-                                ? MainAxisAlignment.end
-                                : MainAxisAlignment.start,
-                            crossAxisAlignment:
-                            CrossAxisAlignment.center,
-                            children: [
-                              controller.reversedList[index].sender == true
-                                  ? InkWell(
-                                onTap: () {
-                                  Get.dialog(
-                                    Material(
-                                      color: Colors.transparent,
-                                      child: PopupActionMenu(
-                                        positionRight: 20,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .end,
-                                        text:
-                                        controller.reversedList[index]
-                                            .message,
-                                        imageUrl:
-                                        controller.reversedList[index]
-                                            .file ??
-                                            "",
-                                        color: controller.reversedList[
-                                        index]
-                                            .sender ==
+                          child: ListView.builder(
+                            reverse: true,
+                            shrinkWrap: true,
+                            itemCount: controller.singleConversationList.length,
+                            itemBuilder: (context, index) {
+                              controller.reversedList.value = List.from(
+                                  controller.singleConversationList.reversed);
+                              return Column(
+                                crossAxisAlignment:
+                                    controller.reversedList[index].sender ==
                                             true
-                                            ? AppColors
-                                            .primaryColor
-                                            : AppColors
-                                            .homeworkWidgetColor,
-                                        textStyle: controller.reversedList[
-                                        index]
-                                            .sender ==
-                                            true
-                                            ? AppTextStyle
-                                            .textStyle12WhiteW400
-                                            : AppTextStyle
-                                            .fontSize12W400ReceivedText,
-                                        radiusBottomLeft:
-                                        controller.reversedList[index]
-                                            .sender ==
-                                            true
-                                            ? 20
+                                        ? CrossAxisAlignment.end
+                                        : CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: controller.reversedList[index]
+                                                    .sender ==
+                                                true
+                                            ? 60
                                             : 0,
-                                        radiusBottomRight:
-                                        controller.reversedList[index]
-                                            .sender ==
-                                            true
+                                        right: controller.reversedList[index]
+                                                    .sender ==
+                                                true
                                             ? 0
-                                            : 20,
-                                        onDeleteTap: () {
-                                          controller.deleteSingleChat(
-                                              messageId: controller.reversedList[index].messageId!, index: index);
-                                        },
-                                        onForwardTap: () {
-                                          controller
-                                              .forwardChat(
-                                            messageId:
-                                            controller.reversedList[
-                                            index]
-                                                .messageId!,
-                                            context: context,
-                                          );
-                                        },
-                                        onQuoteTap: () {
-                                          debugPrint(
-                                              "Tapped on quote");
-                                        },
-                                        isReceiver:
-                                        controller.reversedList[index]
-                                            .receiver!,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: const Icon(
-                                  Icons.more_vert,
-                                  size: 16,
-                                ),
-                              )
-                                  : const SizedBox(),
-                              Flexible(
-                                child: ChatTextTile(
-                                  text: controller.reversedList[index].message ??
-                                      "",
-                                  color: controller.reversedList[index].sender ==
-                                      true
-                                      ? AppColors.primaryColor
-                                      : AppColors.homeworkWidgetColor,
-                                  forwardImageBackgroundColor:
-                                  controller.reversedList[index].sender ==
-                                      true
-                                      ? AppColors.primaryColor
-                                      : AppColors
-                                      .homeworkWidgetColor,
-                                  textStyle: controller.reversedList[index]
-                                      .sender ==
-                                      true
-                                      ? AppTextStyle
-                                      .textStyle12WhiteW400
-                                      : AppTextStyle
-                                      .fontSize12W400ReceivedText,
-                                  forwardedTextStyle: controller.reversedList[
-                                  index]
-                                      .sender ==
-                                      true
-                                      ? AppTextStyle
-                                      .textStyle12WhiteW400
-                                      : AppTextStyle
-                                      .fontSize12W400ReceivedText,
-                                  radiusBottomLeft:
-                                  controller.reversedList[index].sender ==
-                                      true
-                                      ? 20
-                                      : 0,
-                                  radiusBottomRight:
-                                  controller.reversedList[index].sender ==
-                                      true
-                                      ? 0
-                                      : 20,
-                                  textLeftPadding:
-                                  controller.reversedList[index].sender ==
-                                      true
-                                      ? 0
-                                      : 10,
-                                  textRightPadding:
-                                  controller.reversedList[index].sender ==
-                                      true
-                                      ? 10
-                                      : 0,
-                                  imageUrl:
-                                  controller.reversedList[index].file ?? "",
-                                  isForwardedText:
-                                  controller.reversedList[index].forwarded ??
-                                      false,
-                                  onImageTap: () {
-                                    Get.dialog(
-                                      Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          onTap: () => Get.back(),
-                                          child: Stack(
-                                            alignment:
-                                            AlignmentDirectional
-                                                .center,
-                                            children: [
-                                              Expanded(
-                                                child: InkWell(
-                                                  onTap: () =>
-                                                      Get.back(),
-                                                  child:
-                                                  Positioned.fill(
-                                                    child:
-                                                    BackdropFilter(
-                                                      filter:
-                                                      ImageFilter
-                                                          .blur(
-                                                        sigmaX: 10,
-                                                        sigmaY: 10,
+                                            : 60),
+                                    child: Row(
+                                      mainAxisAlignment: controller
+                                                  .reversedList[index].sender ==
+                                              true
+                                          ? MainAxisAlignment.end
+                                          : MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        controller.reversedList[index].sender ==
+                                                true
+                                            ? InkWell(
+                                                onTap: () {
+                                                  Get.dialog(
+                                                    Material(
+                                                      color: Colors.transparent,
+                                                      child: PopupActionMenu(
+                                                        positionRight: 20,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        text: controller
+                                                            .reversedList[index]
+                                                            .message,
+                                                        imageUrl: controller
+                                                                .reversedList[
+                                                                    index]
+                                                                .file ??
+                                                            "",
+                                                        color: controller
+                                                                    .reversedList[
+                                                                        index]
+                                                                    .sender ==
+                                                                true
+                                                            ? AppColors
+                                                                .primaryColor
+                                                            : AppColors
+                                                                .homeworkWidgetColor,
+                                                        textStyle: controller
+                                                                    .reversedList[
+                                                                        index]
+                                                                    .sender ==
+                                                                true
+                                                            ? AppTextStyle
+                                                                .textStyle12WhiteW400
+                                                            : AppTextStyle
+                                                                .fontSize12W400ReceivedText,
+                                                        radiusBottomLeft: controller
+                                                                    .reversedList[
+                                                                        index]
+                                                                    .sender ==
+                                                                true
+                                                            ? 20
+                                                            : 0,
+                                                        radiusBottomRight: controller
+                                                                    .reversedList[
+                                                                        index]
+                                                                    .sender ==
+                                                                true
+                                                            ? 0
+                                                            : 20,
+                                                        onDeleteTap: () {
+                                                          controller.deleteSingleChat(
+                                                              messageId: controller
+                                                                  .reversedList[
+                                                                      index]
+                                                                  .messageId!,
+                                                              index: index);
+                                                        },
+                                                        onForwardTap: () {
+                                                          controller
+                                                              .forwardChat(
+                                                            messageId: controller
+                                                                .reversedList[
+                                                                    index]
+                                                                .messageId!,
+                                                            context: context,
+                                                          );
+                                                        },
+                                                        onQuoteTap: () {
+                                                          debugPrint(
+                                                              "Tapped on quote");
+                                                        },
+                                                        isReceiver: controller
+                                                            .reversedList[index]
+                                                            .receiver!,
                                                       ),
-                                                      child:
-                                                      Container(
-                                                        color: Colors
-                                                            .black12,
-                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: const Icon(
+                                                  Icons.more_vert,
+                                                  size: 16,
+                                                ),
+                                              )
+                                            : const SizedBox(),
+                                        Flexible(
+                                          child: ChatTextTile(
+                                            text: controller.reversedList[index]
+                                                    .message ??
+                                                "",
+                                            color: controller
+                                                        .reversedList[index]
+                                                        .sender ==
+                                                    true
+                                                ? AppColors.primaryColor
+                                                : AppColors.homeworkWidgetColor,
+                                            forwardImageBackgroundColor:
+                                                controller.reversedList[index]
+                                                            .sender ==
+                                                        true
+                                                    ? AppColors.primaryColor
+                                                    : AppColors
+                                                        .homeworkWidgetColor,
+                                            textStyle: controller
+                                                        .reversedList[index]
+                                                        .sender ==
+                                                    true
+                                                ? AppTextStyle
+                                                    .textStyle12WhiteW400
+                                                : AppTextStyle
+                                                    .fontSize12W400ReceivedText,
+                                            forwardedTextStyle: controller
+                                                        .reversedList[index]
+                                                        .sender ==
+                                                    true
+                                                ? AppTextStyle
+                                                    .textStyle12WhiteW400
+                                                : AppTextStyle
+                                                    .fontSize12W400ReceivedText,
+                                            radiusBottomLeft: controller
+                                                        .reversedList[index]
+                                                        .sender ==
+                                                    true
+                                                ? 20
+                                                : 0,
+                                            radiusBottomRight: controller
+                                                        .reversedList[index]
+                                                        .sender ==
+                                                    true
+                                                ? 0
+                                                : 20,
+                                            textLeftPadding: controller
+                                                        .reversedList[index]
+                                                        .sender ==
+                                                    true
+                                                ? 0
+                                                : 10,
+                                            textRightPadding: controller
+                                                        .reversedList[index]
+                                                        .sender ==
+                                                    true
+                                                ? 10
+                                                : 0,
+                                            imageUrl: controller
+                                                    .reversedList[index].file ??
+                                                "",
+                                            isForwardedText: controller
+                                                    .reversedList[index]
+                                                    .forwarded ??
+                                                false,
+                                            onImageTap: () {
+                                              Get.dialog(
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: InkWell(
+                                                    onTap: () => Get.back(),
+                                                    child: Stack(
+                                                      alignment:
+                                                          AlignmentDirectional
+                                                              .center,
+                                                      children: [
+                                                        Expanded(
+                                                          child: InkWell(
+                                                            onTap: () =>
+                                                                Get.back(),
+                                                            child:
+                                                                Positioned.fill(
+                                                              child:
+                                                                  BackdropFilter(
+                                                                filter:
+                                                                    ImageFilter
+                                                                        .blur(
+                                                                  sigmaX: 10,
+                                                                  sigmaY: 10,
+                                                                ),
+                                                                child:
+                                                                    Container(
+                                                                  color: Colors
+                                                                      .black12,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          height:
+                                                              Get.height * 0.7,
+                                                          width:
+                                                              Get.width * 0.7,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image:
+                                                                DecorationImage(
+                                                              image:
+                                                                  NetworkImage(
+                                                                controller
+                                                                        .reversedList[
+                                                                            index]
+                                                                        .file ??
+                                                                    "",
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              Container(
-                                                height:
-                                                Get.height * 0.7,
-                                                width:
-                                                Get.width * 0.7,
-                                                decoration:
-                                                BoxDecoration(
-                                                  image:
-                                                  DecorationImage(
-                                                    image:
-                                                    NetworkImage(
-                                                      controller.reversedList[
-                                                      index]
-                                                          .file ??
-                                                          "",
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                              );
+                                            },
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              controller.reversedList[index].sender == false
-                                  ? InkWell(
-                                onTap: () {
-                                  Get.dialog(Material(
-                                    color: Colors.transparent,
-                                    child: PopupActionMenu(
-                                      positionLeft: 20,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment
-                                          .start,
-                                      text: controller.reversedList[index]
-                                          .message,
-                                      color: controller.reversedList[index]
-                                          .sender ==
-                                          true
-                                          ? AppColors
-                                          .primaryColor
-                                          : AppColors
-                                          .homeworkWidgetColor,
-                                      textStyle: controller.reversedList[
-                                      index]
-                                          .sender ==
-                                          true
-                                          ? AppTextStyle
-                                          .textStyle12WhiteW400
-                                          : AppTextStyle
-                                          .fontSize12W400ReceivedText,
-                                      radiusBottomLeft:
-                                      controller.reversedList[index]
-                                          .sender ==
-                                          true
-                                          ? 30
-                                          : 0,
-                                      radiusBottomRight:
-                                      controller.reversedList[index]
-                                          .sender ==
-                                          true
-                                          ? 0
-                                          : 30,
-                                      onForwardTap: () {
-                                        print(
-                                            "text:::: ${controller.reversedList[index].message}");
-                                        print(
-                                            "msg id:::: ${controller.reversedList[index].messageId}");
-                                        controller.forwardChat(
-                                          messageId:
-                                          controller.reversedList[
-                                          index]
-                                              .messageId!,
-                                          context: context,
-                                        );
-                                      },
-                                      onQuoteTap: () {
-                                        debugPrint(
-                                            "Tapped on quote");
-                                      },
-                                      isReceiver:
-                                      controller.reversedList[index]
-                                          .receiver!,
+                                        controller.reversedList[index].sender ==
+                                                false
+                                            ? InkWell(
+                                                onTap: () {
+                                                  Get.dialog(Material(
+                                                    color: Colors.transparent,
+                                                    child: PopupActionMenu(
+                                                      positionLeft: 20,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      text: controller
+                                                          .reversedList[index]
+                                                          .message,
+                                                      color: controller
+                                                                  .reversedList[
+                                                                      index]
+                                                                  .sender ==
+                                                              true
+                                                          ? AppColors
+                                                              .primaryColor
+                                                          : AppColors
+                                                              .homeworkWidgetColor,
+                                                      textStyle: controller
+                                                                  .reversedList[
+                                                                      index]
+                                                                  .sender ==
+                                                              true
+                                                          ? AppTextStyle
+                                                              .textStyle12WhiteW400
+                                                          : AppTextStyle
+                                                              .fontSize12W400ReceivedText,
+                                                      radiusBottomLeft: controller
+                                                                  .reversedList[
+                                                                      index]
+                                                                  .sender ==
+                                                              true
+                                                          ? 30
+                                                          : 0,
+                                                      radiusBottomRight: controller
+                                                                  .reversedList[
+                                                                      index]
+                                                                  .sender ==
+                                                              true
+                                                          ? 0
+                                                          : 30,
+                                                      onForwardTap: () {
+                                                        print(
+                                                            "text:::: ${controller.reversedList[index].message}");
+                                                        print(
+                                                            "msg id:::: ${controller.reversedList[index].messageId}");
+                                                        controller.forwardChat(
+                                                          messageId: controller
+                                                              .reversedList[
+                                                                  index]
+                                                              .messageId!,
+                                                          context: context,
+                                                        );
+                                                      },
+                                                      onQuoteTap: () {
+                                                        debugPrint(
+                                                            "Tapped on quote");
+                                                      },
+                                                      isReceiver: controller
+                                                          .reversedList[index]
+                                                          .receiver!,
+                                                    ),
+                                                  ));
+                                                },
+                                                child: const Icon(
+                                                  Icons.more_vert,
+                                                  size: 16,
+                                                ),
+                                              )
+                                            : const SizedBox(),
+                                      ],
                                     ),
-                                  ));
-                                },
-                                child: const Icon(
-                                  Icons.more_vert,
-                                  size: 16,
-                                ),
-                              )
-                                  : const SizedBox(),
-                            ],
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              )
+                        )
                       : const Expanded(child: NoDataAvailableWidget()),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
