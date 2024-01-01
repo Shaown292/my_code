@@ -39,7 +39,7 @@ class ChatTextTile extends StatelessWidget {
             onTap: onImageTap,
             child: Padding(
               padding:  const EdgeInsets.symmetric(vertical:  10.0 ),
-              child:  Container(
+              child: isForwardedText ?   Container(
                 padding:  EdgeInsets.all(isForwardedText ? 10 : 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(isForwardedText ? 5 : 0),
@@ -48,6 +48,7 @@ class ChatTextTile extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    5.verticalSpacing,
                     Container(
                       height: Get.height * 0.3,
                       width: Get.width * 0.35,
@@ -56,13 +57,24 @@ class ChatTextTile extends StatelessWidget {
                           image: NetworkImage(
                             imageUrl!,
                           ),
-                
+
                         ),
                       ),
                     ),
                     5.verticalSpacing,
                     isForwardedText ?  Text("This is a forwarded message", style: forwardedTextStyle,) :const SizedBox()
                   ],
+                ),
+              ) :  Container(
+                height: Get.height * 0.3,
+                width: Get.width * 0.35,
+                decoration:  BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      imageUrl!,
+                    ),
+
+                  ),
                 ),
               ),
             ),
