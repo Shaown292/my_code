@@ -22,8 +22,13 @@ class ChatController extends GetxController {
   TabController? tabController;
 
   /// Active Status
-  RxString activeStatus = ''.obs;
+
+  Rx<StatusInfo> activeStatus = StatusInfo(statusColor: 0xFF12AE01, name: "ACTIVE").obs;
+  RxInt key = (-1).obs;
   RxString activeColor = ''.obs;
+  RxList<StatusInfo> activeStatusList = <StatusInfo>[].obs;
+
+
   Rx<ChatStatusModel> dropdownValue =
       ChatStatusModel(statusColor: 0xFF12AE01, name: "ACTIVE").obs;
 
@@ -39,7 +44,7 @@ class ChatController extends GetxController {
   //   ChatStatusModel(statusColor: 0xFFF99F15, name: "AWAY"),
   // ];
 
-  RxList<StatusInfo> activeStatusList = <StatusInfo>[].obs;
+
 
   //  changeActiveStatusColor (){
   //   String colorCode = '';
@@ -167,7 +172,7 @@ class ChatController extends GetxController {
       statusLoader.value = true;
 
       final response = await BaseClient().getData(
-          url: 'https://spondan.com/infixedu/api/v2/single-user-chat-status',
+          url: InfixApi.chatStatus,
           header: GlobalVariable.header);
 
       ChatAuthActiveStatusResponseModel responseModel =
@@ -175,12 +180,31 @@ class ChatController extends GetxController {
       if (responseModel.success == true) {
         statusLoader.value = false;
 
-        for(var element in responseModel.data!.first.statusInfo!){
-          activeStatusList.add(element);
+        if (responseModel.data!.isNotEmpty) {
+          for (int i = 0;
+          i < responseModel.data!.first.statusInfo!.length;
+          i++) {
+            activeStatusList
+                .add(responseModel.data!.first.statusInfo![i]);
+          }
+
+
+
+          int index = activeStatusList.indexWhere((element) => element.name == responseModel.data!.first.status);
+          activeStatus.value = activeStatusList[index];
+          key.value = activeStatusList[index].key!;
+
+          print("LEN:::::: ${activeStatusList.length}");
+          activeColor.value = responseModel.data!.first.color ?? '0xFF12AE01';
         }
 
-        activeStatus.value = responseModel.data!.first.status ?? 'ACTIVE';
-        activeColor.value = responseModel.data!.first.color ?? '0xFF12AE01';
+        // for(var element in responseModel.data!.first.statusInfo!){
+        //   activeStatusList.add(element);
+        //   activeStatus.value = response.data;
+        //   activeColor.value = responseModel.data!.first.color ?? '0xFF12AE01';
+        // }
+
+
       } else {
         statusLoader.value = false;
         showBasicFailedSnackBar(
@@ -197,12 +221,14 @@ class ChatController extends GetxController {
     return ChatAuthActiveStatusResponseModel();
   }
 
+
+
   /// Get Chat Settings
   Future<void> getChatSettings() async {
 
     try{
 
-      var request = http.Request('GET', Uri.parse('https://spondan.com/infixedu/api/chat/settings/permission'));
+      var request = http.Request('GET', Uri.parse(InfixApi.chatSetting));
 
       request.headers.addAll(GlobalVariable.header);
 

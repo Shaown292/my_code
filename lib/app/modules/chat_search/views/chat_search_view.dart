@@ -191,7 +191,13 @@ class ChatSearchView extends GetView<ChatSearchController> {
                                       profileImage: ImagePath.editProfileImage,
                                       name: controller
                                           .searchChatDataList[index].fullName,
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.toNamed(Routes.SINGLE_CHAT,
+                                            arguments: {
+                                              'new_chat': controller
+                                                  .searchChatDataList[index]
+                                            });
+                                      },
                                       isSearch: true,
                                     );
                                   })

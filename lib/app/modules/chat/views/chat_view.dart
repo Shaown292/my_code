@@ -24,21 +24,23 @@ class ChatView extends GetView<ChatController> {
         title: "Chat",
         actions: [
           Obx(() {
-            return controller.statusLoader.value ? CircularProgressIndicator() : SizedBox(
-              width: 150,
-              child: DuplicateDropdown(
-                padding: 0,
-                dropdownValue: controller.dropdownValue.value,
-                dropdownList: controller.activeStatusList,
-                color: Colors.white,
-                dropdownText: false,
-                changeDropdownValue: (v) {
-                  controller.dropdownValue.value = v!;
-                },
-                // activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
-                dropdownColor: AppColors.activeExamStatusBlueColor,
-              ),
-            );
+            return  SizedBox(
+                    width: 150,
+                    child: DuplicateDropdown(
+                      padding: 0,
+                      dropdownValue: controller.activeStatus.value,
+                      dropdownList: controller.activeStatusList,
+                      color: Colors.white,
+                      dropdownText: false,
+                      changeDropdownValue: (v) {
+                        controller.activeStatus.value = v!;
+                        controller.key.value = v.key;
+                        print(controller.key.value);
+                      },
+                      // activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
+                      dropdownColor: AppColors.activeExamStatusBlueColor,
+                    ),
+                  );
           }),
           10.horizontalSpacing,
           InkWell(
@@ -147,15 +149,17 @@ class ChatView extends GetView<ChatController> {
                                           activeStatusColor:
                                               Color(int.tryParse(colorCode)!),
                                           onTap: () {
-
-                                            Get.toNamed(Routes.SINGLE_CHAT, arguments: {'single_chat_list': controller.singleChatList[index]});
+                                            Get.toNamed(Routes.SINGLE_CHAT,
+                                                arguments: {
+                                                  'single_chat_list': controller
+                                                      .singleChatList[index]
+                                                });
                                           },
                                         );
                                       })
                                   : const Center(
                                       child: NoDataAvailableWidget()),
                             ),
-
 
                       /// Group Chat List
                       controller.groupChatListLoader.value
@@ -206,7 +210,14 @@ class ChatView extends GetView<ChatController> {
                                           activeStatusColor:
                                               Color(int.tryParse(colorCode)!),
                                           onTap: () {
-                                            Get.toNamed(Routes.GROUP_CHAT, arguments: {'group_id': controller.groupChatList[index].groupId, 'name' : controller.groupChatList[index].name});
+                                            Get.toNamed(Routes.GROUP_CHAT,
+                                                arguments: {
+                                                  'group_id': controller
+                                                      .groupChatList[index]
+                                                      .groupId,
+                                                  'name': controller
+                                                      .groupChatList[index].name
+                                                });
                                           },
                                         );
                                       },
