@@ -11,9 +11,15 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/student/wallet/my_wallet.dart';
 import 'package:get/get.dart';
 
 class StudentWalletController extends GetxController {
+
+  RxBool isLoading = false.obs;
+
   TextEditingController amountTextController = TextEditingController();
   TextEditingController noteTextController = TextEditingController();
   TextEditingController browseFileTextController = TextEditingController();
@@ -28,6 +34,36 @@ class StudentWalletController extends GetxController {
     'Bank Asia',
     'UCB Bank',
   ].obs;
+
+  RxList<WalletTransactions> paymentList = <WalletTransactions>[].obs;
+  RxString balance = ''.obs;
+
+  Future<MyWalletModel> paymentListData() async {
+
+    try{
+      isLoading.value = true;
+
+      final response = await BaseClient().getData(url: 'https://spondan.com/infixedu/api/v2/my-wallet', header: GlobalVariable.header);
+
+      MyWalletModel myWalletModel = MyWalletModel.fromJson(response);
+
+      if(myWalletModel.success == true){
+        isLoading.value = false;
+        balance.value = '${myWalletModel.data!.first.currencySymbol}${myWalletModel.data!.first.myBalance}';
+        for(int i = 0; i < myWalletModel.data!.first.walletTransactions!.length; i++){
+          paymentList.add(myWalletModel.data!.first.walletTransactions![i]);
+        }
+      }
+
+
+    }catch(e){
+      isLoading.value = false;
+      print('$e');
+
+    }
+
+    return MyWalletModel();
+  }
 
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -163,4 +199,12 @@ class StudentWalletController extends GetxController {
 
     return true;
   }
+
+
+  @override
+  void onInit() {
+    paymentListData();
+    super.onInit();
+  }
+
 }

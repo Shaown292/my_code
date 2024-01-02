@@ -23,13 +23,13 @@ class StudentWalletView extends GetView<StudentWalletController> {
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
             child: Column(
               children: [
-                Row(
+                Obx(() => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const PrimaryButton(
-                      text: "Balance : 30000",
+                    PrimaryButton(
+                      text: "Balance : ${controller.balance}",
                       borderRadius: 6,
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                     ),
                     PrimaryButton(
                       text: "Add Balance",
@@ -43,24 +43,24 @@ class StudentWalletView extends GetView<StudentWalletController> {
                       ),
                     ),
                   ],
-                ),
+                ),),
                 20.verticalSpacing,
-                ListView.builder(
+                Obx(() => controller.isLoading.value ? const Center(child: CircularProgressIndicator()) : ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 100,
+                    itemCount: controller.paymentList.length,
                     itemBuilder: (context, index) {
-                      return const ShowStatusTile(
+                      return ShowStatusTile(
                         firstTitle: "Date",
-                        firstValue: "07-12-2023",
+                        firstValue: DateTime.tryParse(controller.paymentList[index].createdAt ?? '')?.yyyy_mm_dd,
                         secondTitle: "Method",
-                        secondValue: "Cheque",
+                        secondValue: controller.paymentList[index].paymentMethod,
                         thirdTitle: "Amount",
-                        thirdValue: "3000",
-                        activeStatus: "Approved",
+                        thirdValue: controller.paymentList[index].amount.toString(),
+                        activeStatus: controller.paymentList[index].status,
                         activeStatusColor: AppColors.activeStatusRedColor,
                       );
-                    }),
+                    })),
                 30.verticalSpacing,
 
               ],
