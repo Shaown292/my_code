@@ -100,11 +100,9 @@ class GroupChatView extends GetView<GroupChatController> {
                 ],
               ),
               GroupChatHelper().popupMenu(onTap: (v) {
-
                 /// Add People
-                 if (v == 1) {
-                  Get.dialog
-                    (Material(
+                if (v == 1) {
+                  Get.dialog(Material(
                     child: Obx(
                       () => SingleChildScrollView(
                         child: Column(
@@ -169,8 +167,15 @@ class GroupChatView extends GetView<GroupChatController> {
                                                   .searchChatDataList[index]
                                                   .isSelected,
                                               onCheckboxTap: (bool? value) {
-                                                controller.chatSearchController.searchChatDataList[index].isSelected =
-                                                    !controller.chatSearchController.searchChatDataList[index].isSelected;
+                                                controller
+                                                        .chatSearchController
+                                                        .searchChatDataList[index]
+                                                        .isSelected =
+                                                    !controller
+                                                        .chatSearchController
+                                                        .searchChatDataList[
+                                                            index]
+                                                        .isSelected;
                                                 controller.chatSearchController
                                                     .searchChatDataList
                                                     .refresh();
@@ -217,14 +222,15 @@ class GroupChatView extends GetView<GroupChatController> {
                   ));
                 }
 
-                 /// File
+                /// File
 
-                 else if (v== 2){
-
-                 }
+                else if (v == 2) {
+                }
 
                 /// Member List
                 else if (v == 3) {
+                  controller.getGroupChatMemberList(
+                      groupId: controller.groupId.value);
                   GroupChatHelper().showGroupMemberListBottomSheet(
                     header: "Members",
                     bottomSheetBackgroundColor: Colors.white,
@@ -233,16 +239,15 @@ class GroupChatView extends GetView<GroupChatController> {
 
                 /// Delete Group
 
-                 else if(v == 4) {
-                   controller.groupDelete(groupId: controller.groupId.value);
-                 }
+                else if (v == 4) {
+                  controller.groupDelete(groupId: controller.groupId.value);
+                }
 
                 /// Group Leave
                 else if (v == 5) {
                   controller.groupLeaveMember(
                       groupId: controller.groupId.value);
                 }
-
               })
             ],
           ),
@@ -262,32 +267,49 @@ class GroupChatView extends GetView<GroupChatController> {
                             itemCount:
                                 controller.groupChatConversationList.length,
                             itemBuilder: (context, index) {
-                              var reversedList = List.from(controller
-                                  .groupChatConversationList.reversed);
+                              controller.reversedConversationList.value =
+                                  List.from(controller
+                                      .groupChatConversationList.reversed);
                               return Column(
-                                crossAxisAlignment:
-                                    reversedList[index].sender == true
-                                        ? CrossAxisAlignment.end
-                                        : CrossAxisAlignment.start,
+                                crossAxisAlignment: controller
+                                            .reversedConversationList[index]
+                                            .sender ==
+                                        true
+                                    ? CrossAxisAlignment.end
+                                    : CrossAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        left: reversedList[index].sender == true
+                                        left: controller
+                                                    .reversedConversationList[
+                                                        index]
+                                                    .sender ==
+                                                true
                                             ? 60
                                             : 0,
-                                        right:
-                                            reversedList[index].sender == true
-                                                ? 0
-                                                : 60),
+                                        right: controller
+                                                    .reversedConversationList[
+                                                        index]
+                                                    .sender ==
+                                                true
+                                            ? 0
+                                            : 60),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          reversedList[index].sender == true
-                                              ? MainAxisAlignment.end
-                                              : MainAxisAlignment.start,
+                                      mainAxisAlignment: controller
+                                                  .reversedConversationList[
+                                                      index]
+                                                  .sender ==
+                                              true
+                                          ? MainAxisAlignment.end
+                                          : MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        reversedList[index].sender == true
+                                        controller
+                                                    .reversedConversationList[
+                                                        index]
+                                                    .sender ==
+                                                true
                                             ? InkWell(
                                                 onTap: () {
                                                   Get.dialog(
@@ -298,14 +320,17 @@ class GroupChatView extends GetView<GroupChatController> {
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .end,
-                                                        text:
-                                                            reversedList[index]
-                                                                .message,
-                                                        imageUrl:
-                                                            reversedList[index]
-                                                                    .file ??
-                                                                "",
-                                                        color: reversedList[
+                                                        text: controller
+                                                            .reversedConversationList[
+                                                                index]
+                                                            .message,
+                                                        imageUrl: controller
+                                                                .reversedConversationList[
+                                                                    index]
+                                                                .file ??
+                                                            "",
+                                                        color: controller
+                                                                    .reversedConversationList[
                                                                         index]
                                                                     .sender ==
                                                                 true
@@ -313,7 +338,8 @@ class GroupChatView extends GetView<GroupChatController> {
                                                                 .primaryColor
                                                             : AppColors
                                                                 .homeworkWidgetColor,
-                                                        textStyle: reversedList[
+                                                        textStyle: controller
+                                                                    .reversedConversationList[
                                                                         index]
                                                                     .sender ==
                                                                 true
@@ -321,36 +347,49 @@ class GroupChatView extends GetView<GroupChatController> {
                                                                 .textStyle12WhiteW400
                                                             : AppTextStyle
                                                                 .fontSize12W400ReceivedText,
-                                                        radiusBottomLeft:
-                                                            reversedList[index]
-                                                                        .sender ==
-                                                                    true
-                                                                ? 20
-                                                                : 0,
-                                                        radiusBottomRight:
-                                                            reversedList[index]
-                                                                        .sender ==
-                                                                    true
-                                                                ? 0
-                                                                : 20,
+                                                        radiusBottomLeft: controller
+                                                                    .reversedConversationList[
+                                                                        index]
+                                                                    .sender ==
+                                                                true
+                                                            ? 20
+                                                            : 0,
+                                                        radiusBottomRight: controller
+                                                                    .reversedConversationList[
+                                                                        index]
+                                                                    .sender ==
+                                                                true
+                                                            ? 0
+                                                            : 20,
                                                         onDeleteTap: () {
                                                           controller.deleteSingleChat(
-                                                              threadId:
-                                                                  reversedList[
-                                                                          index]
-                                                                      .threadId!,
+                                                              threadId: controller
+                                                                  .reversedConversationList[
+                                                                      index]
+                                                                  .threadId!,
                                                               index: index);
                                                         },
                                                         onForwardTap: () {
+                                                          controller
+                                                              .forwardChat(
+                                                            context: context,
+                                                            messageId: controller
+                                                                .reversedConversationList[
+                                                                    index]
+                                                                .messageId!,
+                                                            message: controller.reversedConversationList[index].message ?? ""
+
+                                                          );
 
                                                         },
                                                         onQuoteTap: () {
                                                           debugPrint(
                                                               "Tapped on quote");
                                                         },
-                                                        isReceiver:
-                                                            reversedList[index]
-                                                                .receiver!,
+                                                        isReceiver: controller
+                                                            .reversedConversationList[
+                                                                index]
+                                                            .receiver!,
                                                       ),
                                                     ),
                                                   );
@@ -363,41 +402,80 @@ class GroupChatView extends GetView<GroupChatController> {
                                             : const SizedBox(),
                                         Flexible(
                                           child: ChatTextTile(
-                                            text: reversedList[index].message ??
+                                            text: controller
+                                                    .reversedConversationList[
+                                                        index]
+                                                    .message ??
                                                 "",
-                                            color: reversedList[index].sender ==
+                                            color: controller
+                                                        .reversedConversationList[
+                                                            index]
+                                                        .sender ==
                                                     true
                                                 ? AppColors.primaryColor
                                                 : AppColors.homeworkWidgetColor,
-                                            textStyle: reversedList[index]
+                                            forwardImageBackgroundColor: controller
+                                                        .reversedConversationList[
+                                                            index]
+                                                        .sender ==
+                                                    true
+                                                ? AppColors.primaryColor
+                                                : AppColors.homeworkWidgetColor,
+                                            textStyle: controller
+                                                        .reversedConversationList[
+                                                            index]
                                                         .sender ==
                                                     true
                                                 ? AppTextStyle
                                                     .textStyle12WhiteW400
                                                 : AppTextStyle
                                                     .fontSize12W400ReceivedText,
-                                            radiusBottomLeft:
-                                                reversedList[index].sender ==
-                                                        true
-                                                    ? 20
-                                                    : 0,
-                                            radiusBottomRight:
-                                                reversedList[index].sender ==
-                                                        true
-                                                    ? 0
-                                                    : 20,
-                                            textLeftPadding:
-                                                reversedList[index].sender ==
-                                                        true
-                                                    ? 0
-                                                    : 10,
-                                            textRightPadding:
-                                                reversedList[index].sender ==
-                                                        true
-                                                    ? 10
-                                                    : 0,
-                                            imageUrl:
-                                                reversedList[index].file ?? "",
+                                            forwardedTextStyle: controller
+                                                        .reversedConversationList[
+                                                            index]
+                                                        .sender ==
+                                                    true
+                                                ? AppTextStyle
+                                                    .textStyle12WhiteW400
+                                                : AppTextStyle
+                                                    .fontSize12W400ReceivedText,
+                                            radiusBottomLeft: controller
+                                                        .reversedConversationList[
+                                                            index]
+                                                        .sender ==
+                                                    true
+                                                ? 20
+                                                : 0,
+                                            radiusBottomRight: controller
+                                                        .reversedConversationList[
+                                                            index]
+                                                        .sender ==
+                                                    true
+                                                ? 0
+                                                : 20,
+                                            textLeftPadding: controller
+                                                        .reversedConversationList[
+                                                            index]
+                                                        .sender ==
+                                                    true
+                                                ? 0
+                                                : 10,
+                                            textRightPadding: controller
+                                                        .reversedConversationList[
+                                                            index]
+                                                        .sender ==
+                                                    true
+                                                ? 10
+                                                : 0,
+                                            imageUrl: controller
+                                                    .reversedConversationList[
+                                                        index]
+                                                    .file ??
+                                                "",
+                                            // isForwardedText: controller
+                                            //     .reversedConversationList[index]
+                                            //     .forwarded ??
+                                            //     false,
                                             onImageTap: () {
                                               Get.dialog(
                                                 Material(
@@ -443,7 +521,8 @@ class GroupChatView extends GetView<GroupChatController> {
                                                                 DecorationImage(
                                                               image:
                                                                   NetworkImage(
-                                                                reversedList[
+                                                                controller
+                                                                        .reversedConversationList[
                                                                             index]
                                                                         .file ??
                                                                     "",
@@ -459,7 +538,11 @@ class GroupChatView extends GetView<GroupChatController> {
                                             },
                                           ),
                                         ),
-                                        reversedList[index].sender == false
+                                        controller
+                                                    .reversedConversationList[
+                                                        index]
+                                                    .sender ==
+                                                false
                                             ? InkWell(
                                                 onTap: () {
                                                   Get.dialog(Material(
@@ -469,16 +552,21 @@ class GroupChatView extends GetView<GroupChatController> {
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
-                                                      text: reversedList[index]
+                                                      text: controller
+                                                          .reversedConversationList[
+                                                              index]
                                                           .message,
-                                                      color: reversedList[index]
+                                                      color: controller
+                                                                  .reversedConversationList[
+                                                                      index]
                                                                   .sender ==
                                                               true
                                                           ? AppColors
                                                               .primaryColor
                                                           : AppColors
                                                               .homeworkWidgetColor,
-                                                      textStyle: reversedList[
+                                                      textStyle: controller
+                                                                  .reversedConversationList[
                                                                       index]
                                                                   .sender ==
                                                               true
@@ -486,29 +574,40 @@ class GroupChatView extends GetView<GroupChatController> {
                                                               .textStyle12WhiteW400
                                                           : AppTextStyle
                                                               .fontSize12W400ReceivedText,
-                                                      radiusBottomLeft:
-                                                          reversedList[index]
-                                                                      .sender ==
-                                                                  true
-                                                              ? 30
-                                                              : 0,
-                                                      radiusBottomRight:
-                                                          reversedList[index]
-                                                                      .sender ==
-                                                                  true
-                                                              ? 0
-                                                              : 30,
+                                                      radiusBottomLeft: controller
+                                                                  .reversedConversationList[
+                                                                      index]
+                                                                  .sender ==
+                                                              true
+                                                          ? 30
+                                                          : 0,
+                                                      radiusBottomRight: controller
+                                                                  .reversedConversationList[
+                                                                      index]
+                                                                  .sender ==
+                                                              true
+                                                          ? 0
+                                                          : 30,
                                                       onForwardTap: () {
-                                                        debugPrint(
-                                                            "Tapped on forward");
+                                                        controller
+                                                            .forwardChat(
+                                                            context: context,
+                                                            messageId: controller
+                                                                .reversedConversationList[
+                                                            index]
+                                                                .messageId!,
+                                                            message: controller.reversedConversationList[index].message ?? ""
+
+                                                        );
                                                       },
                                                       onQuoteTap: () {
                                                         debugPrint(
                                                             "Tapped on quote");
                                                       },
-                                                      isReceiver:
-                                                          reversedList[index]
-                                                              .receiver!,
+                                                      isReceiver: controller
+                                                          .reversedConversationList[
+                                                              index]
+                                                          .receiver!,
                                                     ),
                                                   ));
                                                 },
@@ -526,7 +625,16 @@ class GroupChatView extends GetView<GroupChatController> {
                             },
                           ),
                         )
-                      : const Expanded(child: NoDataAvailableWidget()),
+                      : const Expanded(
+                          child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              NoDataAvailableWidget(
+                                message: "No message available",
+                              ),
+                            ],
+                          ),
+                        )),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Container(
@@ -538,25 +646,27 @@ class GroupChatView extends GetView<GroupChatController> {
                       children: [
                         controller.groupChatPickImage.value.path.isNotEmpty
                             ? Row(
-                          children: [
-                            Image.file(
-                              height: 60,
-                              width: 80,
-                              File(controller.groupChatPickImage.value.path),
-                              fit: BoxFit.cover,
-                            ),
-                            5.horizontalSpacing,
-                            InkWell(
-                              onTap: () {
-                                controller.groupChatPickImage.value = File('');
-                              },
-                              child: const Icon(
-                                Icons.clear,
-                                color: AppColors.primaryColor,
-                              ),
-                            ),
-                          ],
-                        )
+                                children: [
+                                  Image.file(
+                                    height: 60,
+                                    width: 80,
+                                    File(controller
+                                        .groupChatPickImage.value.path),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  5.horizontalSpacing,
+                                  InkWell(
+                                    onTap: () {
+                                      controller.groupChatPickImage.value =
+                                          File('');
+                                    },
+                                    child: const Icon(
+                                      Icons.clear,
+                                      color: AppColors.primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              )
                             : const SizedBox(),
                         10.verticalSpacing,
                         Row(
@@ -567,13 +677,15 @@ class GroupChatView extends GetView<GroupChatController> {
                                   context: context,
                                   fromGallery: () async {
                                     controller.groupChatPickImage.value =
-                                    await FlutterImagePickerUtils.getImageGallery(
+                                        await FlutterImagePickerUtils
+                                            .getImageGallery(
                                       context,
                                     );
                                   },
                                   fromCamera: () async {
                                     controller.groupChatPickImage.value =
-                                    await FlutterImagePickerUtils.getImageCamera(
+                                        await FlutterImagePickerUtils
+                                            .getImageCamera(
                                       context,
                                     );
                                   },
