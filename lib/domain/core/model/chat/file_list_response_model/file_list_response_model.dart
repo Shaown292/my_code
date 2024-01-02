@@ -1,16 +1,16 @@
-class SingleChatFileListResponseModel {
+class FileListResponseModel {
   bool? success;
-  List<SingleChatFileList>? data;
+  List<FileList>? data;
   String? message;
 
-  SingleChatFileListResponseModel({this.success, this.data, this.message});
+  FileListResponseModel({this.success, this.data, this.message});
 
-  SingleChatFileListResponseModel.fromJson(Map<String, dynamic> json) {
+  FileListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
-      data = <SingleChatFileList>[];
+      data = <FileList>[];
       json['data'].forEach((v) {
-        data!.add(SingleChatFileList.fromJson(v));
+        data!.add(FileList.fromJson(v));
       });
     }
     message = json['message'];
@@ -27,14 +27,14 @@ class SingleChatFileListResponseModel {
   }
 }
 
-class SingleChatFileList {
+class FileList {
   int? messageId;
   String? file;
   String? originalFileName;
 
-  SingleChatFileList({this.messageId, this.file, this.originalFileName});
+  FileList({this.messageId, this.file, this.originalFileName});
 
-  SingleChatFileList.fromJson(Map<String, dynamic> json) {
+  FileList.fromJson(Map<String, dynamic> json) {
     messageId = json['message_id'];
     file = json['file'];
     originalFileName = json['original_file_name'];

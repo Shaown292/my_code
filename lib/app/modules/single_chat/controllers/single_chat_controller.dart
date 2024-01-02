@@ -17,8 +17,8 @@ import 'package:flutter_single_getx_api_v2/config/global_variable/chat/pusher_co
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/conversation_model/single_chat_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/file_list_response_model/file_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/search_chat_user/search_chat_user.dart';
-import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_file_list_response_model/single_chat_file_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_user_list_response_model/single_chat_user_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 
@@ -51,8 +51,8 @@ class SingleChatController extends GetxController {
   RxInt userActiveStatus = 0.obs;
   RxInt tabIndex = 0.obs;
   RxBool isBlocked = false.obs;
-  RxList<SingleChatFileList> singleChatFilesList = <SingleChatFileList>[].obs;
-  RxList<SingleChatFileList> singleChatImageList = <SingleChatFileList>[].obs;
+  RxList<FileList> singleChatFilesList = <FileList>[].obs;
+  RxList<FileList> singleChatImageList = <FileList>[].obs;
   RxBool fileLoader = false.obs;
   RxBool isSearchPage = false.obs;
 
@@ -154,7 +154,7 @@ class SingleChatController extends GetxController {
   }
 
   /// Get Chat Files
-  Future<SingleChatFileListResponseModel> getSingleChatFileList(
+  Future<FileListResponseModel> getSingleChatFileList(
       {required int userId}) async {
     try {
       singleChatFilesList.clear();
@@ -165,8 +165,8 @@ class SingleChatController extends GetxController {
         header: GlobalVariable.header,
       );
 
-      SingleChatFileListResponseModel singleChatFileListResponseModel =
-          SingleChatFileListResponseModel.fromJson(response);
+      FileListResponseModel singleChatFileListResponseModel =
+          FileListResponseModel.fromJson(response);
 
       if (singleChatFileListResponseModel.success == true) {
         fileLoader.value = false;
@@ -198,7 +198,7 @@ class SingleChatController extends GetxController {
       fileLoader.value = false;
     }
 
-    return SingleChatFileListResponseModel();
+    return FileListResponseModel();
   }
 
   /// Forward message

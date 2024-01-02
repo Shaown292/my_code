@@ -11,12 +11,14 @@ import 'package:flutter_single_getx_api_v2/app/modules/chat/controllers/chat_con
 import 'package:flutter_single_getx_api_v2/app/modules/chat_search/controllers/chat_search_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat_search/views/widget/suggested_search_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/helper_functions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/chat/pusher_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/file_list_response_model/file_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/group_chat_list_response_model/group_chat_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/group_chat_member_list_response_model/group_chat_member_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
@@ -28,6 +30,7 @@ class GroupChatController extends GetxController {
   PusherController pusherController = Get.put(PusherController());
   GlobalRxVariableController globalRxVariableController = Get.find();
   ChatSearchController chatSearchController = Get.put(ChatSearchController());
+  TabController? tabController;
 
   TextEditingController sendTextController = TextEditingController();
   TextEditingController searchTextController = TextEditingController();
@@ -42,11 +45,16 @@ class GroupChatController extends GetxController {
   RxList<GroupChatData> groupChatConversationList = <GroupChatData>[].obs;
   RxList<GroupChatData> reversedConversationList = <GroupChatData>[].obs;
 
+  RxList<FileList> groupChatFilesList = <FileList>[].obs;
+  RxList<FileList> groupChatImageList = <FileList>[].obs;
+
   Rx<File> groupChatPickImage = File('').obs;
   RxBool singleChatSendLoader = false.obs;
   RxString groupId = "".obs;
   RxBool groupMemberListLoader = false.obs;
   RxBool groupChatDataLoader = false.obs;
+  RxBool fileLoader = false.obs;
+  RxInt tabIndex = 0.obs;
 
   RxBool deleteChatLoader = false.obs;
   RxBool forwardChatLoader = false.obs;
@@ -55,6 +63,11 @@ class GroupChatController extends GetxController {
   RxBool checkboxSelect = false.obs;
 
   RxList<String> userList = <String>[].obs;
+
+  List filesList = [
+    "Images",
+    "Files",
+  ];
 
   /// Pick a file for sending
   void pickFile() async {
@@ -521,6 +534,56 @@ class GroupChatController extends GetxController {
       ),
     );
   }
+
+  /// Get Chat Files
+  Future<FileListResponseModel> getGroupChatFileList(
+      {required String groupId}) async {
+    try {
+      groupChatFilesList.clear();
+      groupChatImageList.clear();
+      fileLoader.value = true;
+      final response = await BaseClient().getData(
+        url: InfixApi.getGroupChatFileList(groupId: groupId),
+        header: GlobalVariable.header,
+      );
+
+      FileListResponseModel singleChatFileListResponseModel =
+      FileListResponseModel.fromJson(response);
+
+      if (singleChatFileListResponseModel.success == true) {
+        fileLoader.value = false;
+        if (singleChatFileListResponseModel.data!.isNotEmpty) {
+          for (int i = 0;
+          i < singleChatFileListResponseModel.data!.length;
+          i++) {
+            if (HelperFunctions().isExtensionImage(
+                singleChatFileListResponseModel.data![i].file!)) {
+              groupChatImageList.add(singleChatFileListResponseModel.data![i]);
+            } else if (HelperFunctions().isExtensionFile(
+                singleChatFileListResponseModel.data![i].file!)) {
+              groupChatFilesList.add(singleChatFileListResponseModel.data![i]);
+            }
+          }
+        }
+      } else {
+        fileLoader.value = false;
+        showBasicFailedSnackBar(
+          message: singleChatFileListResponseModel.message ??
+              AppText.somethingWentWrong,
+        );
+      }
+    } catch (e, t) {
+      Get.back();
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      fileLoader.value = false;
+    }
+
+    return FileListResponseModel();
+  }
+
+
 
   @override
   void onInit() {

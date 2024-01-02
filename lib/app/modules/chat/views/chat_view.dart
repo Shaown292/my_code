@@ -35,9 +35,8 @@ class ChatView extends GetView<ChatController> {
                       changeDropdownValue: (v) {
                         controller.activeStatus.value = v!;
                         controller.key.value = v.key;
-                        print(controller.key.value);
+                        controller.changeStatus(statusKey: controller.key.value);
                       },
-                      // activeStatusColor:  Color(int.parse(controller.changeActiveStatusColor()!)),
                       dropdownColor: AppColors.activeExamStatusBlueColor,
                     ),
                   );
@@ -111,17 +110,7 @@ class ChatView extends GetView<ChatController> {
                                       itemCount:
                                           controller.singleChatList.length,
                                       itemBuilder: (context, index) {
-                                        String colorCode = '';
-                                        String status = 'AWAY';
-                                        if (status == 'ACTIVE') {
-                                          colorCode = '0xFF12AE01';
-                                        } else if (status == 'INACTIVE') {
-                                          colorCode = '0xFFE1E2EC';
-                                        } else if (status == 'BUSY') {
-                                          colorCode = '0xFFF60003';
-                                        } else {
-                                          colorCode = '0xFFF99F15';
-                                        }
+
                                         return ChatTile(
                                           profileImageUrl: controller
                                               .singleChatList[index].image,
@@ -146,8 +135,7 @@ class ChatView extends GetView<ChatController> {
                                               ? AppColors
                                                   .editProfileTextFieldLabelColor
                                               : AppColors.homeTextColor,
-                                          activeStatusColor:
-                                              Color(int.tryParse(colorCode)!),
+
                                           onTap: () {
                                             Get.toNamed(Routes.SINGLE_CHAT,
                                                 arguments: {
@@ -172,17 +160,7 @@ class ChatView extends GetView<ChatController> {
                                       itemCount:
                                           controller.groupChatList.length,
                                       itemBuilder: (context, index) {
-                                        String colorCode = '';
-                                        String status = 'AWAY';
-                                        if (status == 'ACTIVE') {
-                                          colorCode = '0xFF12AE01';
-                                        } else if (status == 'INACTIVE') {
-                                          colorCode = '0xFFE1E2EC';
-                                        } else if (status == 'AWAY') {
-                                          colorCode = '0xFFF99F15';
-                                        } else {
-                                          colorCode = '0xFFF60003';
-                                        }
+
                                         return ChatTile(
                                           profileImageUrl: controller
                                                   .groupChatList[index].image ??
@@ -207,8 +185,6 @@ class ChatView extends GetView<ChatController> {
                                               ? AppColors
                                                   .editProfileTextFieldLabelColor
                                               : AppColors.homeTextColor,
-                                          activeStatusColor:
-                                              Color(int.tryParse(colorCode)!),
                                           onTap: () {
                                             Get.toNamed(Routes.GROUP_CHAT,
                                                 arguments: {
