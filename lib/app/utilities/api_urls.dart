@@ -509,9 +509,8 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String deleteSingleChat({required int messageId}) => '${baseApi}delete-admin-chat-single-message?message_id=$messageId';
   static String groupAddMember='${baseApi}admin-add-group-member';
   static String forwardSingleChat({required int userId, required int messageId}) => '${baseApi}forward-admin-chat-single-message?to_user_id=$userId&message_id=$messageId';
+  static String forwardGroupChat = '${baseApi}admin-group-chat-forward';
   static String blockSingleUser({required String type, required int userId}) => '${baseApi}chat-user-block-action?type=$type&user_id=$userId';
-
-
 
   static String chatSetting='${AppConfig.domainName}/api/chat/settings/permission';
   static String chatStatus='${baseApi}single-user-chat-status';

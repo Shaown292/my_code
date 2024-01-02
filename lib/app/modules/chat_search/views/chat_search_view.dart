@@ -195,7 +195,8 @@ class ChatSearchView extends GetView<ChatSearchController> {
                                         Get.toNamed(Routes.SINGLE_CHAT,
                                             arguments: {
                                               'new_chat': controller
-                                                  .searchChatDataList[index]
+                                                  .searchChatDataList[index],
+                                              "search_chat" : true
                                             });
                                       },
                                       isSearch: true,

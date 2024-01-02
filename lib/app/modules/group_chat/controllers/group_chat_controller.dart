@@ -5,9 +5,13 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat/controllers/chat_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat_search/controllers/chat_search_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/chat_search/views/widget/suggested_search_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/chat/pusher_controller.dart';
@@ -36,6 +40,7 @@ class GroupChatController extends GetxController {
   RxList<GroupChatMemberListData> groupChatMemberList =
       <GroupChatMemberListData>[].obs;
   RxList<GroupChatData> groupChatConversationList = <GroupChatData>[].obs;
+  RxList<GroupChatData> reversedConversationList = <GroupChatData>[].obs;
 
   Rx<File> groupChatPickImage = File('').obs;
   RxBool singleChatSendLoader = false.obs;
@@ -115,10 +120,10 @@ class GroupChatController extends GetxController {
     return GroupChatMemberListResponseModel();
   }
 
-  /// Group Chat data
+  /// Group Conversation
   Future<GroupChatListResponseModel?> getGroupChatList(
       {required String groupId}) async {
-    groupChatConversationList.clear();
+
     try {
       groupChatDataLoader.value = true;
 
@@ -172,7 +177,7 @@ class GroupChatController extends GetxController {
         addMemberLoader.value = false;
         const SecondaryLoadingWidget();
         userList.clear();
-        // Get.back();
+        Get.back();
         showBasicSuccessSnackBar(
             message: postRequestResponseModel.message ?? 'Member Added');
       } else {
@@ -285,12 +290,6 @@ class GroupChatController extends GetxController {
       final decodedResponse = json.decode(responseBody);
       debugPrint(decodedResponse.toString());
 
-      // if (response.statusCode == 200) {
-      //   singleChatSendLoader.value = false;
-      //   sendTextController.clear();
-      //   groupChatPickImage.value = File('');
-      //   showBasicSuccessSnackBar(message: decodedResponse['message']);
-      // }
 
       GroupChatListResponseModel groupChatListResponseModel =
           GroupChatListResponseModel.fromJson(json.decode(responseBody));
@@ -333,7 +332,20 @@ class GroupChatController extends GetxController {
       if (postRequestResponseModel.success == true) {
         deleteChatLoader.value = false;
         Get.back();
-        groupChatConversationList.removeAt(index);
+        int messageIdIndex = reversedConversationList.indexWhere((element) => element.threadId == threadId);
+
+        if(messageIdIndex != -1){
+          reversedConversationList.removeAt(messageIdIndex);
+          reversedConversationList.refresh();
+        }
+
+        int messageIdIndex1 = groupChatConversationList.indexWhere((element) => element.threadId == threadId);
+
+        if(messageIdIndex1 != -1){
+          groupChatConversationList.removeAt(messageIdIndex1);
+          groupChatConversationList.refresh();
+
+        }
         showBasicSuccessSnackBar(
             message: postRequestResponseModel.message ?? 'Data deleted');
       } else {
@@ -354,18 +366,18 @@ class GroupChatController extends GetxController {
   /// Forward a message
   Future<void> forwardSingleChat(
       {required String groupId,
-      required String messageId,
-      required String message,
-      required String userId}) async {
+      required int messageId,
+        required String message,
+       }) async {
     try {
       forwardChatLoader.value = true;
       final response = await BaseClient().postData(
-          url: "https://spondan.com/infixedu/api/v2/admin-group-chat-forward",
+          url: InfixApi.forwardGroupChat,
           payload: {
             "group_id": groupId,
             "message_id": messageId,
             "message": message,
-            "user_id": userId,
+            // "user_id": toGroupId,
           },
           header: GlobalVariable.header);
       PostRequestResponseModel postRequestResponseModel =
@@ -451,6 +463,65 @@ class GroupChatController extends GetxController {
     return true;
   }
 
+  void forwardChat( {required BuildContext context, required int messageId, required String message}) {
+
+    Get.dialog(
+      Obx(
+            () => Material(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                30.verticalSpacing,
+                Row(
+                  children: [
+                    15.horizontalSpacing,
+                    InkWell(
+                      onTap: () => Get.back(),
+                      child: Image.asset(
+                        ImagePath.back,
+                        scale: 4,
+                        color: Colors.black,
+                      ),
+                    ),
+                    30.horizontalSpacing,
+                    const Text(
+                      "Forward Text",
+                      style: AppTextStyle.fontSize16lightBlackW500,
+                    ),
+                  ],
+                ),
+                20.verticalSpacing,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: chatController.groupChatList.length,
+                      itemBuilder: (context, index) {
+                        return SuggestedSearchTile(
+                          profileImage: ImagePath.editProfileImage,
+                          name: chatController.groupChatList[index].name,
+                          isForward: true,
+                          onTapSend: () {
+                            forwardSingleChat(
+                              groupId: chatController.groupChatList[index].groupId!,
+                              messageId: messageId,
+                              message:message
+
+                            );
+                            print("Group ID :::: ${chatController.groupChatList[index].groupId!}");
+                          },
+                        );
+                      }),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void onInit() {
     groupId.value = Get.arguments["group_id"];
@@ -462,7 +533,7 @@ class GroupChatController extends GetxController {
       chatListId: groupId.value,
     );
 
-    getGroupChatMemberList(groupId: groupId.value);
+    // getGroupChatMemberList(groupId: groupId.value);
 
     super.onInit();
   }
