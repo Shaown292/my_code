@@ -502,6 +502,7 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String getSingleChatList({required int userId}) => '${baseApi}admin-chat-list?to_user_id=$userId';
   static String getGroupChatList({required String groupId}) => '${baseApi}admin-group-chats?group_id=$groupId';
   static String getSingleChatFileList({required int userID}) => '${baseApi}admin-single-chat-files?user_id=$userID';
+  static String getGroupChatFileList({required String groupId}) => '${baseApi}admin-group-chat-files?group_id=$groupId';
   static String getGroupChatMemberList({required String groupId}) => '${baseApi}admin-group-members?group_id=$groupId';
   static String groupLeaveMember({required String groupId}) => '${baseApi}admin-group-leave?group_id=$groupId';
   static String groupDelete({required String groupId}) => '${baseApi}admin-group-delete?group_id=$groupId';
@@ -511,6 +512,7 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String forwardSingleChat({required int userId, required int messageId}) => '${baseApi}forward-admin-chat-single-message?to_user_id=$userId&message_id=$messageId';
   static String forwardGroupChat = '${baseApi}admin-group-chat-forward';
   static String blockSingleUser({required String type, required int userId}) => '${baseApi}chat-user-block-action?type=$type&user_id=$userId';
+  static String changeActiveStatus({ required int statusKey}) => '${baseApi}change-admin-chat-user-status?status=$statusKey';
 
   static String chatSetting='${AppConfig.domainName}/api/chat/settings/permission';
   static String chatStatus='${baseApi}single-user-chat-status';

@@ -10,6 +10,7 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/chat/auth_status_mo
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/group_chat_user_list_response_model/group_chat_user_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/settings/chat_settings_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_user_list_response_model/single_chat_user_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,6 +20,7 @@ class ChatController extends GetxController {
   RxBool groupChatLoader = false.obs;
   RxBool statusLoader = false.obs;
   RxBool isActive = true.obs;
+  RxBool changeStatusLoader = true.obs;
   TabController? tabController;
 
   /// Active Status
@@ -27,7 +29,7 @@ class ChatController extends GetxController {
   RxInt key = (-1).obs;
   RxString activeColor = ''.obs;
   RxList<StatusInfo> activeStatusList = <StatusInfo>[].obs;
-
+  RxInt tabIndex = 0.obs;
 
   Rx<ChatStatusModel> dropdownValue =
       ChatStatusModel(statusColor: 0xFF12AE01, name: "ACTIVE").obs;
@@ -36,30 +38,6 @@ class ChatController extends GetxController {
     'Chat',
     'Group Chat',
   ];
-
-  // List<ChatStatusModel> activeStatusList = [
-  //   ChatStatusModel(statusColor: 0xFF12AE01, name: "ACTIVE"),
-  //   ChatStatusModel(statusColor: 0xFFE1E2EC, name: "INACTIVE"),
-  //   ChatStatusModel(statusColor: 0xFFF60003, name: "BUSY"),
-  //   ChatStatusModel(statusColor: 0xFFF99F15, name: "AWAY"),
-  // ];
-
-
-
-  //  changeActiveStatusColor (){
-  //   String colorCode = '';
-  //   String status = dropdownValue.value;
-  //   if (status == 'ACTIVE') {
-  //     colorCode = '0xFF12AE01';
-  //   } else if (status == 'INACTIVE') {
-  //     colorCode = '0xFFE1E2EC';
-  //   } else if (status == 'AWAY') {
-  //     colorCode = '0xFFF99F15';
-  //   } else {
-  //     colorCode = '0xFFF60003';
-  //   }
-  //   return colorCode;
-  // }
 
   /// Get Single Chat List
   RxBool singleChatListLoader = false.obs;
@@ -141,6 +119,38 @@ class ChatController extends GetxController {
     }
     return GroupChatUserListResponseModel();
   }
+  Future<void> changeStatus({
+    required int statusKey,
+
+  }) async {
+    try {
+
+      changeStatusLoader.value = true;
+      final response = await BaseClient().postData(
+          url: InfixApi.changeActiveStatus(statusKey: statusKey),
+          header: GlobalVariable.header);
+      PostRequestResponseModel postRequestResponseModel =
+      PostRequestResponseModel.fromJson(response);
+
+      if (postRequestResponseModel.success == true) {
+        changeStatusLoader.value = false;
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? 'Status changed');
+      } else {
+        changeStatusLoader.value = false;
+        showBasicFailedSnackBar(
+            message:
+            postRequestResponseModel.message ?? 'Something went wrong');
+      }
+    } catch (e, t) {
+      changeStatusLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      changeStatusLoader.value = false;
+    }
+  }
+
 
   String formatTimeAgo(DateTime date) {
     final now = DateTime.now();
@@ -260,7 +270,7 @@ class ChatController extends GetxController {
 
   }
 
-  RxInt tabIndex = 0.obs;
+
 
   @override
   void onInit() {

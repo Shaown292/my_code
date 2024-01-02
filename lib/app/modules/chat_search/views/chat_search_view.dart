@@ -81,8 +81,9 @@ class ChatSearchView extends GetView<ChatSearchController> {
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 20),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Color(0xFF8335C8)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFF8335C8),
+                            ),
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -176,35 +177,44 @@ class ChatSearchView extends GetView<ChatSearchController> {
                   //   ),
                   // ),
                   20.verticalSpacing,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Obx(
-                      () => controller.searchLoader.value
-                          ? const SecondaryLoadingWidget()
-                          : controller.searchController.text.isNotEmpty
-                              ? ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      controller.searchChatDataList.length,
-                                  itemBuilder: (context, index) {
-                                    return SuggestedSearchTile(
-                                      profileImage: ImagePath.editProfileImage,
-                                      name: controller
-                                          .searchChatDataList[index].fullName,
-                                      onTap: () {
-                                        Get.toNamed(Routes.SINGLE_CHAT,
-                                            arguments: {
-                                              'new_chat': controller
-                                                  .searchChatDataList[index],
-                                              "search_chat" : true
-                                            });
-                                      },
-                                      isSearch: true,
-                                    );
-                                  })
-                              : const Center(
-                                  child: NoDataAvailableWidget(),
-                                ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Obx(
+                        () => controller.searchLoader.value
+                            ? const SecondaryLoadingWidget()
+                            : controller.searchController.text.isNotEmpty
+                                ? SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      ListView.builder(
+                                        physics: const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              controller.searchChatDataList.length,
+                                          itemBuilder: (context, index) {
+                                            return SuggestedSearchTile(
+                                              profileImage: ImagePath.editProfileImage,
+                                              name: controller
+                                                  .searchChatDataList[index].fullName,
+                                              onTap: () {
+                                                Get.toNamed(Routes.SINGLE_CHAT,
+                                                    arguments: {
+                                                      'new_chat': controller
+                                                          .searchChatDataList[index],
+                                                      "search_chat": true
+                                                    });
+                                              },
+                                              isSearch: true,
+                                            );
+                                          }),
+                                    ],
+                                  ),
+                                )
+                                : const Center(
+                                    child: NoDataAvailableWidget(),
+                                  ),
+                      ),
                     ),
                   )
                 ],

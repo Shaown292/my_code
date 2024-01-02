@@ -8,6 +8,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/chat_search/views/widget/
 import 'package:flutter_single_getx_api_v2/app/modules/group_chat/views/widget/group_chat_helper.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/group_chat/views/widget/selecting_member.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/chat_text_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/files_popup_dialog.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/popup_action_menu.dart';
 import 'package:flutter_single_getx_api_v2/app/service/image/image_picker_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
@@ -225,6 +226,97 @@ class GroupChatView extends GetView<GroupChatController> {
                 /// File
 
                 else if (v == 2) {
+                  controller.getGroupChatFileList(
+                    groupId: controller.groupId.value,
+                  );
+                  Get.dialog(Material(
+                    child: Obx(
+                      () => FilesPopupDialog(
+                        tabBarLength: controller.filesList.length,
+                        tabController: controller.tabController,
+                        tabs: List.generate(
+                          controller.filesList.length,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              controller.filesList[index],
+                            ),
+                          ),
+                        ),
+                        imageWidget: controller.fileLoader.value
+                            ? const SecondaryLoadingWidget()
+                            : GridView.builder(
+                                shrinkWrap: true,
+                                itemCount:
+                                    controller.groupChatImageList.length,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                ),
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(controller
+                                                    .groupChatImageList[index]
+                                                    .file ??
+                                                ""),
+                                            fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                        fileWidget: ListView.builder(
+                            itemCount: controller.groupChatFilesList.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0, vertical: 10),
+                                child: Container(
+                                  height: Get.height * 0.1,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: AppColors.transportDividerColor
+                                        .withOpacity(0.4),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: Get.width * 0.15,
+                                        height: Get.height * 0.1,
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(10),
+                                            bottomLeft: Radius.circular(10),
+                                          ),
+                                          color: AppColors.transportDividerColor
+                                              .withOpacity(0.8),
+                                        ),
+                                        child: Image.asset(
+                                          ImagePath.adminFees,
+                                          scale: 4,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      30.horizontalSpacing,
+                                       Text(
+                                        controller.groupChatFilesList[index].originalFileName!,
+                                        style: AppTextStyle.fontSize13BlackW400,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                        onTap: (index) {
+                          controller.tabIndex.value = index;
+                        },
+                      ),
+                    ),
+                  ));
                 }
 
                 /// Member List
@@ -370,17 +462,17 @@ class GroupChatView extends GetView<GroupChatController> {
                                                               index: index);
                                                         },
                                                         onForwardTap: () {
-                                                          controller
-                                                              .forwardChat(
-                                                            context: context,
-                                                            messageId: controller
-                                                                .reversedConversationList[
-                                                                    index]
-                                                                .messageId!,
-                                                            message: controller.reversedConversationList[index].message ?? ""
-
-                                                          );
-
+                                                          controller.forwardChat(
+                                                              context: context,
+                                                              messageId: controller
+                                                                  .reversedConversationList[
+                                                                      index]
+                                                                  .messageId!,
+                                                              message: controller
+                                                                      .reversedConversationList[
+                                                                          index]
+                                                                      .message ??
+                                                                  "");
                                                         },
                                                         onQuoteTap: () {
                                                           debugPrint(
@@ -589,16 +681,17 @@ class GroupChatView extends GetView<GroupChatController> {
                                                           ? 0
                                                           : 30,
                                                       onForwardTap: () {
-                                                        controller
-                                                            .forwardChat(
+                                                        controller.forwardChat(
                                                             context: context,
                                                             messageId: controller
                                                                 .reversedConversationList[
-                                                            index]
+                                                                    index]
                                                                 .messageId!,
-                                                            message: controller.reversedConversationList[index].message ?? ""
-
-                                                        );
+                                                            message: controller
+                                                                    .reversedConversationList[
+                                                                        index]
+                                                                    .message ??
+                                                                "");
                                                       },
                                                       onQuoteTap: () {
                                                         debugPrint(

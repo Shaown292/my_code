@@ -38,11 +38,11 @@ class SingleChatView extends GetView<SingleChatController> {
                   10.horizontalSpacing,
                   InkWell(
                     onTap: () {
-                      ////////// NEEEEEED TOOOO CHEEEECCKKKKKKK
+
                       Get.back();
                       controller.chatController.singleChatList.clear();
                       controller.chatController.getSingleChatList();
-                      // controller.chatController.singleChatList.refresh();
+
                     },
                     child: Container(
                       height: 20,
@@ -208,7 +208,7 @@ class SingleChatView extends GetView<SingleChatController> {
                   }
                   if (v == 2) {
                     // controller.blockSingleUser(
-                    //     type: controller.isSearchPage.value ? controller.searchChatData!.! : controller.singleChatUserListData!.blocked! ? "" : "block",
+                    //     type: controller.isSearchPage.value ? controller.searchChatData!. : controller.singleChatUserListData!.blocked! ? "" : "block",
                     //     userId: controller.singleChatUserListData!.id!);
                   }
                 },
