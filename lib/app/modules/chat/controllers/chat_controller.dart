@@ -242,6 +242,9 @@ class ChatController extends GetxController {
       if (response.statusCode == 200) {
         Get.find<GlobalRxVariableController>().pusherApiKey.value =  chatSettingsResponseModel.chatSettings?.pusherAppKey;
         Get.find<GlobalRxVariableController>().pusherClusterKey.value = chatSettingsResponseModel.chatSettings?.pusherAppCluster;
+
+        print('::::::: ${Get.find<GlobalRxVariableController>().pusherApiKey} :::::::::: ${Get.find<GlobalRxVariableController>().pusherClusterKey}');
+
       }
       else {
         print(response.reasonPhrase);

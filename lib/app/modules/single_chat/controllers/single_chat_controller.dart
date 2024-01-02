@@ -10,12 +10,14 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat/controllers/chat_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat_search/controllers/chat_search_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat_search/views/widget/suggested_search_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/helper_functions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/chat/pusher_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/conversation_model/single_chat_list_response_model.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/chat/search_chat_user/search_chat_user.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_file_list_response_model/single_chat_file_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/chat/single_chat_user_list_response_model/single_chat_user_list_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
@@ -34,6 +36,7 @@ class SingleChatController extends GetxController {
   TabController? tabController;
 
   SingleChatUserListData? singleChatUserListData;
+  SearchChatData? searchChatData;
 
   Rx<File> singleChatPickImage = File('').obs;
   RxBool singleChatSendLoader = false.obs;
@@ -48,9 +51,10 @@ class SingleChatController extends GetxController {
   RxInt userActiveStatus = 0.obs;
   RxInt tabIndex = 0.obs;
   RxBool isBlocked = false.obs;
-  RxList<SingleChatFileList> singleChatFileList = <SingleChatFileList>[].obs;
+  RxList<SingleChatFileList> singleChatFilesList = <SingleChatFileList>[].obs;
+  RxList<SingleChatFileList> singleChatImageList = <SingleChatFileList>[].obs;
   RxBool fileLoader = false.obs;
-
+  RxBool isSearchPage = false.obs;
 
   List filesList = [
     "Images",
@@ -58,8 +62,10 @@ class SingleChatController extends GetxController {
   ];
 
   RxList<String> userList = <String>[].obs;
-  RxList<SingleConversationListData> singleConversationList = <SingleConversationListData>[].obs;
-  RxList<SingleConversationListData> reversedList = <SingleConversationListData>[].obs;
+  RxList<SingleConversationListData> singleConversationList =
+      <SingleConversationListData>[].obs;
+  RxList<SingleConversationListData> reversedList =
+      <SingleConversationListData>[].obs;
 
   /// Send a text or image
   Future<SingleChatListResponseModel> singleChatSend() async {
@@ -113,7 +119,6 @@ class SingleChatController extends GetxController {
     return SingleChatListResponseModel();
   }
 
-
   /// Get Conversation List
   Future<SingleChatListResponseModel> getChatConversationList(
       {required int userId}) async {
@@ -148,35 +153,42 @@ class SingleChatController extends GetxController {
     return SingleChatListResponseModel();
   }
 
-
-
   /// Get Chat Files
   Future<SingleChatFileListResponseModel> getSingleChatFileList(
       {required int userId}) async {
     try {
-
-      singleChatFileList.clear();
+      singleChatFilesList.clear();
+      singleChatImageList.clear();
       fileLoader.value = true;
       final response = await BaseClient().getData(
         url: InfixApi.getSingleChatFileList(userID: userId),
         header: GlobalVariable.header,
       );
 
-      SingleChatFileListResponseModel singleChatFileListResponseModel = SingleChatFileListResponseModel.fromJson(response);
+      SingleChatFileListResponseModel singleChatFileListResponseModel =
+          SingleChatFileListResponseModel.fromJson(response);
 
       if (singleChatFileListResponseModel.success == true) {
         fileLoader.value = false;
         if (singleChatFileListResponseModel.data!.isNotEmpty) {
           for (int i = 0;
-          i < singleChatFileListResponseModel.data!.length;
-          i++) {
-            singleChatFileList
-                .add(singleChatFileListResponseModel.data![i]);
+              i < singleChatFileListResponseModel.data!.length;
+              i++) {
+            if (HelperFunctions().isExtensionImage(
+                singleChatFileListResponseModel.data![i].file!)) {
+              singleChatImageList.add(singleChatFileListResponseModel.data![i]);
+            } else if (HelperFunctions().isExtensionFile(
+                singleChatFileListResponseModel.data![i].file!)) {
+              singleChatFilesList.add(singleChatFileListResponseModel.data![i]);
+            }
           }
         }
-      } else{
+      } else {
         fileLoader.value = false;
-        showBasicFailedSnackBar(message: singleChatFileListResponseModel.message ?? AppText.somethingWentWrong,);
+        showBasicFailedSnackBar(
+          message: singleChatFileListResponseModel.message ??
+              AppText.somethingWentWrong,
+        );
       }
     } catch (e, t) {
       Get.back();
@@ -190,11 +202,11 @@ class SingleChatController extends GetxController {
   }
 
   /// Forward message
-  Future<void> forwardSingleChat(
-      {required int userId,
-      required int messageId,
-  required BuildContext context,
-      }) async {
+  Future<void> forwardSingleChat({
+    required int userId,
+    required int messageId,
+    required BuildContext context,
+  }) async {
     try {
       ///Show Loader Dialog
 
@@ -223,8 +235,6 @@ class SingleChatController extends GetxController {
 
       if (postRequestResponseModel.success == true) {
         forwardChatLoader.value = false;
-        // const SecondaryLoadingWidget();
-        // userList.clear();
         Get.back();
         showBasicSuccessSnackBar(
             message: postRequestResponseModel.message ?? 'Chat Forward');
@@ -244,8 +254,7 @@ class SingleChatController extends GetxController {
   }
 
   /// Function to forward a chat
-  void forwardChat( {required BuildContext context, required int messageId}) {
-
+  void forwardChat({required BuildContext context, required int messageId}) {
     Get.dialog(
       Obx(
         () => Material(
@@ -285,10 +294,10 @@ class SingleChatController extends GetxController {
                           isForward: true,
                           onTapSend: () {
                             forwardSingleChat(
-                                userId: chatController.singleChatList[index].id!,
-                                messageId: messageId,
+                              userId: chatController.singleChatList[index].id!,
+                              messageId: messageId,
                               context: context,
-                               );
+                            );
                           },
                         );
                       }),
@@ -301,12 +310,10 @@ class SingleChatController extends GetxController {
     );
   }
 
-
   /// Delete Single Message
   Future<PostRequestResponseModel> deleteSingleChat(
       {required int messageId, required int index}) async {
     try {
-
       deleteChatLoader.value = true;
       final response = await BaseClient().postData(
           url: InfixApi.deleteSingleChat(messageId: messageId),
@@ -315,24 +322,22 @@ class SingleChatController extends GetxController {
           PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
-
         Get.back();
-        int messageIdIndex = reversedList.indexWhere((element) => element.messageId == messageId);
+        int messageIdIndex = reversedList
+            .indexWhere((element) => element.messageId == messageId);
 
-        if(messageIdIndex != -1){
+        if (messageIdIndex != -1) {
           reversedList.removeAt(messageIdIndex);
           reversedList.refresh();
-          print("messageId reversedList ::::::::;: $messageIdIndex");
         }
 
-        int messageIdIndex1 = singleConversationList.indexWhere((element) => element.messageId == messageId);
+        int messageIdIndex1 = singleConversationList
+            .indexWhere((element) => element.messageId == messageId);
 
-        if(messageIdIndex1 != -1){
+        if (messageIdIndex1 != -1) {
           singleConversationList.removeAt(messageIdIndex1);
           singleConversationList.refresh();
-          print("messageId singleConversationList ::::::::;: $messageIdIndex");
         }
-
 
         deleteChatLoader.value = false;
 
@@ -359,13 +364,12 @@ class SingleChatController extends GetxController {
   Future<void> blockSingleUser(
       {required String type, required int userId}) async {
     try {
-
       blockLoaded.value = true;
       final response = await BaseClient().postData(
           url: InfixApi.blockSingleUser(type: type, userId: userId),
           header: GlobalVariable.header);
       PostRequestResponseModel postRequestResponseModel =
-      PostRequestResponseModel.fromJson(response);
+          PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
         blockLoaded.value = false;
@@ -374,12 +378,13 @@ class SingleChatController extends GetxController {
         Get.back();
 
         showBasicSuccessSnackBar(
-            message: postRequestResponseModel.message ?? 'operation successful');
+            message:
+                postRequestResponseModel.message ?? 'operation successful');
       } else {
         blockLoaded.value = false;
         showBasicFailedSnackBar(
             message:
-            postRequestResponseModel.message ?? 'Something went wrong');
+                postRequestResponseModel.message ?? 'Something went wrong');
       }
     } catch (e, t) {
       blockLoaded.value = false;
@@ -389,7 +394,6 @@ class SingleChatController extends GetxController {
       blockLoaded.value = false;
     }
   }
-
 
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -413,20 +417,33 @@ class SingleChatController extends GetxController {
     }
     return true;
   }
+
   @override
   void onInit() {
 
     singleChatUserListData = Get.arguments['single_chat_list'];
-    toUserId.value = singleChatUserListData!.id! ;
-     userName.value = singleChatUserListData!.fullName!;
-     userImage.value = singleChatUserListData!.image!;
-     userActiveStatus.value = singleChatUserListData!.activeStatus!;
-     isBlocked.value = singleChatUserListData!.blocked!;
-    getChatConversationList(userId: toUserId.value);
-    pusherController.chatOpenSingle(
-      authUserId: globalRxVariableController.userId.value!,
-      chatListId: toUserId.value,
-    );
+    print('true:::::: ${Get.arguments['new_chat']}');
+    isSearchPage.value = Get.arguments["search_chat"] ?? false;
+
+    if(isSearchPage.value == false){
+      toUserId.value = singleChatUserListData!.id!;
+      getChatConversationList(userId: toUserId.value);
+      pusherController.chatOpenSingle(
+        authUserId: globalRxVariableController.userId.value!,
+        chatListId: singleChatUserListData!.id!,
+      );
+    }
+    if(isSearchPage.value){
+      searchChatData = Get.arguments['new_chat'];
+      toUserId.value = searchChatData!.userId!;
+      getChatConversationList(userId: toUserId.value);
+      pusherController.chatOpenSingle(
+        authUserId: globalRxVariableController.userId.value!,
+        chatListId: searchChatData!.userId!,
+      );
+    }
+
+
 
     super.onInit();
   }

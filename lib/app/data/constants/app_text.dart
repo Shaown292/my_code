@@ -34,7 +34,7 @@ class AppText {
 
   /// Notification
   static const String notificationMarkAsRaed = 'Mark all as read';
-  static const String noDataAvailable = 'No data available.';
+  static const String noDataAvailable = 'No Data Available.';
   static const String notificationTitle = 'Notification';
 
   /// Edit Profile
