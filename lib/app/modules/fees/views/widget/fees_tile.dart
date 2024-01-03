@@ -16,6 +16,8 @@ class FeesTile extends StatelessWidget {
   final String? statusText;
   final Color? statusColor;
   final Function()? onTap;
+  final Function()? onViewInvoiceTap;
+  final Function()? onAddPaymentTap;
 
   const FeesTile({
     super.key,
@@ -26,7 +28,7 @@ class FeesTile extends StatelessWidget {
     this.balance,
     this.onTap,
     this.statusColor,
-    this.statusText,
+    this.statusText, this.onViewInvoiceTap, this.onAddPaymentTap,
   });
 
   @override
@@ -44,22 +46,28 @@ class FeesTile extends StatelessWidget {
                 duration ?? "",
                 style: AppTextStyle.homeworkSubject,
               ),
-              InkWell(
-                onTap: onTap,
-                child: const Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "View",
-                        style: AppTextStyle.homeworkView,
-                      ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: PopupMenuButton(
+                  padding: EdgeInsets.zero,
+                  color: Colors.white,
+                  iconColor: Colors.white,
+
+                  child: const Text(
+                    "View", style: AppTextStyle.fontSize13BlackW400,),
+                  itemBuilder: (context) =>
+                  [
+                     PopupMenuItem(
+                      value: 1,
+                      onTap: onViewInvoiceTap ,
+                      child: const Text("View Invoice"),
                     ),
-                    CustomDivider(
-                      width: 35,
-                      height: 1,
-                      color: AppColors.homeworkViewColor,
+                     PopupMenuItem(
+                      value: 2,
+                      onTap: onAddPaymentTap ,
+                      child: const Text("Add Payment"),
                     ),
+
                   ],
                 ),
               )

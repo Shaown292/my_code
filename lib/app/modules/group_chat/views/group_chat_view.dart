@@ -39,10 +39,10 @@ class GroupChatView extends GetView<GroupChatController> {
                 children: [
                   10.horizontalSpacing,
                   InkWell(
-                    onTap: Get.back,
+                    onTap: () => Get.back(),
                     child: Container(
-                      height: 20,
-                      width: 20,
+                      height: Get.height * 0.07,
+                      width: Get.width * 0.07,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(ImagePath.back),
@@ -55,30 +55,26 @@ class GroupChatView extends GetView<GroupChatController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: <Widget>[
-                          Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage(ImagePath.dp),
-                                  fit: BoxFit.cover),
-                            ),
-                          ),
-                          Positioned(
-                            right: Get.width * 0.005,
-                            top: Get.height * 0.01,
-                            child: Container(
-                              height: 8,
-                              width: 8,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.green),
-                            ), //Icon
-                          ),
-                        ], //<Widget>[]
+                      controller.groupImage.value.isNotEmpty
+                          ? Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  controller.groupImage.value),
+                              filterQuality: FilterQuality.high),
+                        ),
+                      )
+                          : Container(
+                        height: Get.height * 0.15,
+                        width: Get.width * 0.12,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: AssetImage(ImagePath.dp),
+                              fit: BoxFit.cover),
+                        ),
                       ),
                       10.horizontalSpacing,
                       Column(
@@ -88,11 +84,6 @@ class GroupChatView extends GetView<GroupChatController> {
                           Text(
                             controller.chatName.value,
                             style: AppTextStyle.cardTextStyle14WhiteW500,
-                          ),
-                          3.verticalSpacing,
-                          const Text(
-                            "Online now",
-                            style: AppTextStyle.fontSize10GreenW700,
                           ),
                         ],
                       ),
@@ -247,8 +238,7 @@ class GroupChatView extends GetView<GroupChatController> {
                             ? const SecondaryLoadingWidget()
                             : GridView.builder(
                                 shrinkWrap: true,
-                                itemCount:
-                                    controller.groupChatImageList.length,
+                                itemCount: controller.groupChatImageList.length,
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
@@ -302,8 +292,9 @@ class GroupChatView extends GetView<GroupChatController> {
                                         ),
                                       ),
                                       30.horizontalSpacing,
-                                       Text(
-                                        controller.groupChatFilesList[index].originalFileName!,
+                                      Text(
+                                        controller.groupChatFilesList[index]
+                                            .originalFileName!,
                                         style: AppTextStyle.fontSize13BlackW400,
                                       )
                                     ],

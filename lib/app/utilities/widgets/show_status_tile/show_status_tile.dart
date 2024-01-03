@@ -37,10 +37,12 @@ class ShowStatusTile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        10.verticalSpacing,
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+
             ColumnTile(
               title: firstTitle,
               value: firstValue,

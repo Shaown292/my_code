@@ -205,6 +205,15 @@ class InfixApi {
       '${baseApi}view-lesson-plan-lesson?lesson_plan_id=$lessonPlanId';
   static String forgetPassword = "${baseApi}forget-password";
 
+
+
+  //// Student Wallet
+  static String getPaymentList = '${baseApi}my-wallet';
+  static String getPaymentMethodList = '${baseApi}add-amount-methods';
+  static String getBankList = '${baseApi}add-amount-banks';
+
+
+
   //// .....................................................For Admin Module.....................................................
 
   static String getAdminStaffRoleList = '${baseApi}role-list';
