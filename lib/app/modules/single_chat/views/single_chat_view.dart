@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/chat_text_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/files_popup_dialog.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/popup_action_menu.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/quote_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -38,11 +39,9 @@ class SingleChatView extends GetView<SingleChatController> {
                   10.horizontalSpacing,
                   InkWell(
                     onTap: () {
-
                       Get.back();
                       controller.chatController.singleChatList.clear();
                       controller.chatController.getSingleChatList();
-
                     },
                     child: Container(
                       height: 20,
@@ -145,7 +144,8 @@ class SingleChatView extends GetView<SingleChatController> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: NetworkImage(controller
-                                                      .singleChatImageList[index]
+                                                      .singleChatImageList[
+                                                          index]
                                                       .file ??
                                                   ""),
                                               fit: BoxFit.cover),
@@ -207,9 +207,20 @@ class SingleChatView extends GetView<SingleChatController> {
                     ));
                   }
                   if (v == 2) {
-                    // controller.blockSingleUser(
-                    //     type: controller.isSearchPage.value ? controller.searchChatData!. : controller.singleChatUserListData!.blocked! ? "" : "block",
-                    //     userId: controller.singleChatUserListData!.id!);
+                    if (controller.isSearchPage.value == false) {
+                      controller.blockSingleUser(
+                          type: controller.singleChatUserListData!.blocked!
+                              ? ""
+                              : "block",
+                          userId: controller.singleChatUserListData!.id!);
+                    }
+                    if (controller.isSearchPage.value) {
+                      controller.blockSingleUser(
+                          type: controller.searchChatData!.blocked!
+                              ? ""
+                              : "block",
+                          userId: controller.searchChatData!.userId!);
+                    }
                   }
                 },
                 itemBuilder: (context) => [
@@ -217,12 +228,12 @@ class SingleChatView extends GetView<SingleChatController> {
                     value: 1,
                     child: Text("Files"),
                   ),
-                  // PopupMenuItem(
-                  //   value: 2,
-                  //   child: controller.singleChatUserListData!.blocked!
-                  //       ? const Text("Unblock User")
-                  //       : const Text("Block User"),
-                  // ),
+                  PopupMenuItem(
+                    value: 2,
+                    child: controller.singleChatUserListData!.blocked!
+                        ? const Text("Unblock User")
+                        : const Text("Block User"),
+                  ),
                 ],
               ),
             ],
@@ -273,6 +284,7 @@ class SingleChatView extends GetView<SingleChatController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
+                                        //// Sender Side
                                         controller.reversedList[index].sender ==
                                                 true
                                             ? InkWell(
@@ -334,7 +346,8 @@ class SingleChatView extends GetView<SingleChatController> {
                                                               index: index);
                                                         },
                                                         onForwardTap: () {
-                                                          controller.forwardChat(
+                                                          controller
+                                                              .forwardChat(
                                                             messageId: controller
                                                                 .reversedList[
                                                                     index]
@@ -343,8 +356,18 @@ class SingleChatView extends GetView<SingleChatController> {
                                                           );
                                                         },
                                                         onQuoteTap: () {
-                                                          debugPrint(
-                                                              "Tapped on quote");
+                                                          Get.back();
+                                                          controller.quotedText
+                                                              .value = controller
+                                                                  .reversedList[
+                                                                      index]
+                                                                  .message ??
+                                                              "";
+                                                          controller.onTapQuote
+                                                              .value = true;
+
+                                                          print(
+                                                              "object :::: ${controller.quotedText.value}");
                                                         },
                                                         isReceiver: controller
                                                             .reversedList[index]
@@ -359,6 +382,8 @@ class SingleChatView extends GetView<SingleChatController> {
                                                 ),
                                               )
                                             : const SizedBox(),
+
+                                        /// Main Chat Screen
                                         Flexible(
                                           child: ChatTextTile(
                                             text: controller.reversedList[index]
@@ -424,6 +449,10 @@ class SingleChatView extends GetView<SingleChatController> {
                                                     .reversedList[index]
                                                     .forwarded ??
                                                 false,
+                                            isQuotedText:
+                                                controller.onTapQuote.value,
+                                            quotedText:
+                                                controller.quotedText.value,
                                             onImageTap: () {
                                               Get.dialog(
                                                 Material(
@@ -486,6 +515,8 @@ class SingleChatView extends GetView<SingleChatController> {
                                             },
                                           ),
                                         ),
+
+                                        /// Receiver side
                                         controller.reversedList[index].sender ==
                                                 false
                                             ? InkWell(
@@ -533,10 +564,6 @@ class SingleChatView extends GetView<SingleChatController> {
                                                           ? 0
                                                           : 30,
                                                       onForwardTap: () {
-                                                        print(
-                                                            "text:::: ${controller.reversedList[index].message}");
-                                                        print(
-                                                            "msg id:::: ${controller.reversedList[index].messageId}");
                                                         controller.forwardChat(
                                                           messageId: controller
                                                               .reversedList[
@@ -546,8 +573,16 @@ class SingleChatView extends GetView<SingleChatController> {
                                                         );
                                                       },
                                                       onQuoteTap: () {
-                                                        debugPrint(
-                                                            "Tapped on quote");
+                                                        Get.back();
+                                                        controller.quotedText
+                                                            .value = controller
+                                                            .reversedList[
+                                                        index]
+                                                            .message ??
+                                                            "";
+                                                        controller.onTapQuote
+                                                            .value = true;
+
                                                       },
                                                       isReceiver: controller
                                                           .reversedList[index]
@@ -576,119 +611,133 @@ class SingleChatView extends GetView<SingleChatController> {
                   padding: const EdgeInsets.all(15),
                   color: const Color(0xFFFDFBFF),
                   child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        controller.singleChatPickImage.value.path.isNotEmpty
-                            ? Row(
-                                children: [
-                                  Image.file(
-                                    height: 60,
-                                    width: 80,
-                                    File(controller
-                                        .singleChatPickImage.value.path),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  5.horizontalSpacing,
-                                  InkWell(
-                                    onTap: () {
-                                      controller.singleChatPickImage.value =
-                                          File('');
-                                    },
-                                    child: const Icon(
-                                      Icons.clear,
-                                      color: AppColors.primaryColor,
+                    child: Obx(
+                      () => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          controller.onTapQuote.value
+                              ? QuoteText(
+                                  repliedText: controller.quotedText.value == "" ? "Attachment"  : controller.quotedText.value,
+                                )
+                              : const SizedBox(),
+                          controller.singleChatPickImage.value.path.isNotEmpty
+                              ? Row(
+                                  children: [
+                                    Image.file(
+                                      height: 60,
+                                      width: 80,
+                                      File(controller
+                                          .singleChatPickImage.value.path),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    5.horizontalSpacing,
+                                    InkWell(
+                                      onTap: () {
+                                        controller.singleChatPickImage.value =
+                                            File('');
+                                      },
+                                      child: const Icon(
+                                        Icons.clear,
+                                        color: AppColors.primaryColor,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : const SizedBox(),
+                          10.verticalSpacing,
+                          controller.searchChatData?.blocked == true ||
+                                  controller.singleChatUserListData?.blocked ==
+                                      true
+                              ? SizedBox(
+                                  width: Get.width,
+                                  child: const Center(
+                                    child: Text(
+                                      "You can't to reply this conversation",
+                                      style:
+                                          AppTextStyle.fontSize16lightBlackW500,
                                     ),
                                   ),
-                                ],
-                              )
-                            : const SizedBox(),
-                        10.verticalSpacing,
-                        // controller.singleChatUserListData!.blocked!
-                        //     ? SizedBox(
-                        //         width: Get.width,
-                        //         child: const Center(
-                        //           child: Text(
-                        //             "You can't to reply this conversation",
-                        //             style:
-                        //                 AppTextStyle.fontSize16lightBlackW500,
-                        //           ),
-                        //         ),
-                        //       )
-                        //     :
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                FlutterImagePickerUtils.imagePickerModalSheet(
-                                  context: context,
-                                  fromGallery: () async {
-                                    controller.singleChatPickImage.value =
-                                        await FlutterImagePickerUtils
-                                            .getImageGallery(
-                                      context,
-                                    );
-                                  },
-                                  fromCamera: () async {
-                                    controller.singleChatPickImage.value =
-                                        await FlutterImagePickerUtils
-                                            .getImageCamera(
-                                      context,
-                                    );
-                                  },
-                                );
-                              },
-                              child: Image.asset(
-                                ImagePath.camera,
-                                color: AppColors.editProfileTextFieldLabelColor,
-                              ),
-                            ),
-                            10.horizontalSpacing,
-                            const SizedBox(
-                              height: 30,
-                              child: VerticalDivider(
-                                color: AppColors.dividerColor,
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomTextFormField(
-                                inputBorder: InputBorder.none,
-                                hintTextStyle: AppTextStyle.homeworkElements,
-                                hintText: "Type something...",
-                                controller: controller.sendTextController,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                if (controller.validation()) {
-                                  controller.singleChatSend();
-                                }
-                              },
-                              child: Container(
-                                height: 45,
-                                width: 45,
-                                padding: const EdgeInsets.all(5),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.primaryColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 5,
-                                        spreadRadius: 1,
-                                        color: AppColors.primaryColor),
+                                )
+                              : Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        FlutterImagePickerUtils
+                                            .imagePickerModalSheet(
+                                          context: context,
+                                          fromGallery: () async {
+                                            controller
+                                                    .singleChatPickImage.value =
+                                                await FlutterImagePickerUtils
+                                                    .getImageGallery(
+                                              context,
+                                            );
+                                          },
+                                          fromCamera: () async {
+                                            controller
+                                                    .singleChatPickImage.value =
+                                                await FlutterImagePickerUtils
+                                                    .getImageCamera(
+                                              context,
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Image.asset(
+                                        ImagePath.camera,
+                                        color: AppColors
+                                            .editProfileTextFieldLabelColor,
+                                      ),
+                                    ),
+                                    10.horizontalSpacing,
+                                    const SizedBox(
+                                      height: 30,
+                                      child: VerticalDivider(
+                                        color: AppColors.dividerColor,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: CustomTextFormField(
+                                        inputBorder: InputBorder.none,
+                                        hintTextStyle:
+                                            AppTextStyle.homeworkElements,
+                                        hintText: "Type something...",
+                                        controller:
+                                            controller.sendTextController,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        if (controller.validation()) {
+                                          controller.singleChatSend();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 45,
+                                        width: 45,
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: AppColors.primaryColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                blurRadius: 5,
+                                                spreadRadius: 1,
+                                                color: AppColors.primaryColor),
+                                          ],
+                                        ),
+                                        child: Center(
+                                          child: Image.asset(
+                                            ImagePath.send,
+                                            scale: 2.5,
+                                          ),
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
-                                child: Center(
-                                  child: Image.asset(
-                                    ImagePath.send,
-                                    scale: 2.5,
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

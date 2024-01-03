@@ -36,6 +36,7 @@ class SearchChatData {
   String? lastMessageTime;
   int? countConversation;
   bool isSelected = false;
+  bool? blocked ;
 
   SearchChatData(
       {this.userId,
@@ -46,6 +47,7 @@ class SearchChatData {
         this.lastMessageTime,
         this.countConversation,
         this.isSelected = false,
+        this.blocked,
       });
 
   SearchChatData.fromJson(Map<String, dynamic> json) {
@@ -56,6 +58,7 @@ class SearchChatData {
     lastMessage = json['last_message'];
     lastMessageTime = json['last_message_time'];
     countConversation = json['count_conversation'];
+    blocked = json['blocked'];
   }
 
   Map<String, dynamic> toJson() {
@@ -68,6 +71,7 @@ class SearchChatData {
     data['last_message_time'] = lastMessageTime;
     data['count_conversation'] = countConversation;
     data['is_select'] = isSelected;
+    data['blocked'] = blocked;
 
     return data;
   }

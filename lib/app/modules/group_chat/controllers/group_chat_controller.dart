@@ -39,6 +39,7 @@ class GroupChatController extends GetxController {
   // RxList<GroupChatUserListData> groupChatListData = <GroupChatUserListData>[].obs ;
   RxString chatGroupId = "".obs;
   RxString chatName = "".obs;
+  RxString groupImage = "".obs;
 
   RxList<GroupChatMemberListData> groupChatMemberList =
       <GroupChatMemberListData>[].obs;
@@ -381,8 +382,26 @@ class GroupChatController extends GetxController {
       {required String groupId,
       required int messageId,
         required String message,
+        required BuildContext context,
        }) async {
     try {
+      ///Show Loader Dialog
+
+      AlertDialog alert = AlertDialog(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconColor: Colors.transparent,
+        content: Center(child: Lottie.asset('assets/images/loader.json')),
+      );
+
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        barrierColor: AppColors.secondaryColor.withOpacity(0.15),
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
       forwardChatLoader.value = true;
       final response = await BaseClient().postData(
           url: InfixApi.forwardGroupChat,
@@ -517,12 +536,13 @@ class GroupChatController extends GetxController {
                           isForward: true,
                           onTapSend: () {
                             forwardSingleChat(
-                              groupId: chatController.groupChatList[index].groupId!,
+                              groupId: groupId.value,
                               messageId: messageId,
-                              message:message
-
+                              message:message,
+                              context: context
                             );
-                            print("Group ID :::: ${chatController.groupChatList[index].groupId!}");
+
+
                           },
                         );
                       }),
@@ -589,8 +609,9 @@ class GroupChatController extends GetxController {
   void onInit() {
     groupId.value = Get.arguments["group_id"];
     chatName.value = Get.arguments["name"];
+    // groupImage.value = Get.arguments["image"];
     getGroupChatList(groupId: groupId.value);
-
+    print("GROUP ID :::::::: ${groupId.value}");
     pusherController.chatOpenGroup(
       authUserId: globalRxVariableController.userId.value!,
       chatListId: groupId.value,

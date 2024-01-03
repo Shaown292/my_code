@@ -55,6 +55,8 @@ class SingleChatController extends GetxController {
   RxList<FileList> singleChatImageList = <FileList>[].obs;
   RxBool fileLoader = false.obs;
   RxBool isSearchPage = false.obs;
+  RxBool onTapQuote = false.obs;
+  RxString quotedText = "".obs;
 
   List filesList = [
     "Images",
@@ -422,7 +424,6 @@ class SingleChatController extends GetxController {
   void onInit() {
 
     singleChatUserListData = Get.arguments['single_chat_list'];
-    print('true:::::: ${Get.arguments['new_chat']}');
     isSearchPage.value = Get.arguments["search_chat"] ?? false;
 
     if(isSearchPage.value == false){

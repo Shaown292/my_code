@@ -45,7 +45,7 @@ class StudentWalletView extends GetView<StudentWalletController> {
                   ],
                 ),),
                 20.verticalSpacing,
-                Obx(() => controller.isLoading.value ? const Center(child: CircularProgressIndicator()) : ListView.builder(
+                Obx(() => controller.paymentMethodLoader.value ? const Center(child: CircularProgressIndicator()) : ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.paymentList.length,

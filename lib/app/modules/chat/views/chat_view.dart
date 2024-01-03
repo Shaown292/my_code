@@ -192,7 +192,8 @@ class ChatView extends GetView<ChatController> {
                                                       .groupChatList[index]
                                                       .groupId,
                                                   'name': controller
-                                                      .groupChatList[index].name
+                                                      .groupChatList[index].name,
+                                                  'image' : controller.groupChatList[index].image  ,
                                                 });
                                           },
                                         );
