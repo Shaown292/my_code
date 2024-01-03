@@ -182,6 +182,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/NWWebSocket/NWWebSocket.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeApplePay/StripeApplePay.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeCore/StripeCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeFinancialConnections/StripeFinancialConnections.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePaymentSheet/StripePaymentSheet.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePayments/StripePayments.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePaymentsUI/StripePaymentsUI.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeUICore/StripeUICore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/device_info_plus/device_info_plus.framework"
@@ -193,6 +201,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/pusher_channels_flutter/pusher_channels_flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/stripe_ios/stripe_ios.framework"
 fi
 if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/DKImagePickerController/DKImagePickerController.framework"
@@ -201,6 +210,14 @@ if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/NWWebSocket/NWWebSocket.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeApplePay/StripeApplePay.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeCore/StripeCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeFinancialConnections/StripeFinancialConnections.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePaymentSheet/StripePaymentSheet.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePayments/StripePayments.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePaymentsUI/StripePaymentsUI.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeUICore/StripeUICore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/device_info_plus/device_info_plus.framework"
@@ -212,6 +229,7 @@ if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/pusher_channels_flutter/pusher_channels_flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/stripe_ios/stripe_ios.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/DKImagePickerController/DKImagePickerController.framework"
@@ -220,6 +238,14 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/NWWebSocket/NWWebSocket.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeApplePay/StripeApplePay.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeCore/StripeCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeFinancialConnections/StripeFinancialConnections.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePaymentSheet/StripePaymentSheet.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePayments/StripePayments.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripePaymentsUI/StripePaymentsUI.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StripeUICore/StripeUICore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/device_info_plus/device_info_plus.framework"
@@ -231,6 +257,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/pusher_channels_flutter/pusher_channels_flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/stripe_ios/stripe_ios.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -54,5 +54,11 @@
     <key>NSCameraUsageDescription</key>
     <string>To capture profile photo please grant camera access</string>
 
+    <key>NSCameraUsageDescription</key>
+    <string>Scan your card to add it automatically</string>
+    <key>NSCameraUsageDescription
+    &lt;string&gt;To scan cards&lt;/string&gt;</key>
+    <string>To scan cards</string>
+
 </dict>
 </plist>
