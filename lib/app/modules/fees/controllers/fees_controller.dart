@@ -5,7 +5,6 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/credit_card.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/fees_tile.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/two_value_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_wallet/controllers/student_wallet_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
@@ -16,12 +15,12 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_ti
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/payment/stripe_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/student_fees_response_model/fees_invoice_response_model/fees_invoice_response_model.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_fees_response_model/student_fees_response_model.dart';
 import 'package:get/get.dart';
 
@@ -366,7 +365,7 @@ class FeesController extends GetxController {
                     },
                   ),
                   10.verticalSpacing,
-                  studentWalletController.initValue.value == "Bank"
+                  studentWalletController.paymentMethodName.value == "Bank"
                       ? Padding(
                           padding: const EdgeInsets.only(top: 10.0),
                           child: studentWalletController.bankListLoader.value
@@ -385,9 +384,9 @@ class FeesController extends GetxController {
                                 ),
                         )
                       : const SizedBox(),
-                  studentWalletController.initValue.value == "Bank" ?  10.verticalSpacing : const SizedBox(),
-                  studentWalletController.initValue.value == "Bank" ||
-                          studentWalletController.initValue.value == "Cheque"
+                  studentWalletController.paymentMethodName.value == "Bank" ?  10.verticalSpacing : const SizedBox(),
+                  studentWalletController.paymentMethodName.value == "Bank" ||
+                          studentWalletController.paymentMethodName.value == "Cheque"
                       ? CustomTextFormField(
                           controller: noteTextController,
                           enableBorderActive: true,
@@ -398,9 +397,9 @@ class FeesController extends GetxController {
                           fillColor: Colors.white,
                         )
                       : const SizedBox(),
-                  studentWalletController.initValue.value == "Bank" ?  10.verticalSpacing : const SizedBox(),
-                  studentWalletController.initValue.value == "Bank" ||
-                          studentWalletController.initValue.value == "Cheque"
+                  studentWalletController.paymentMethodName.value == "Bank" ?  10.verticalSpacing : const SizedBox(),
+                  studentWalletController.paymentMethodName.value == "Bank" ||
+                          studentWalletController.paymentMethodName.value == "Cheque"
                       ? CustomTextFormField(
                           enableBorderActive: true,
                           focusBorderActive: true,
@@ -437,8 +436,8 @@ class FeesController extends GetxController {
                   PrimaryButton(
                     text: 'Pay',
                     onTap: () {
-                      if (studentWalletController.initValue.value != '') {
-                        _selectedPaymentGateway(studentWalletController.initValue.value, index);
+                      if (studentWalletController.paymentMethodName.value != '') {
+                        _selectedPaymentGateway(studentWalletController.paymentMethodName.value, index);
                       }
                     },
                     padding: const EdgeInsets.all(10),
