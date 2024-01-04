@@ -98,11 +98,11 @@ class FeesView extends GetView<FeesController> {
                                             .feesInvoiceList[index].createDate,
                                         duration: "Monthly",
                                         amount: controller
-                                            .feesInvoiceList[index].amount,
+                                            .feesInvoiceList[index].amount.toString(),
                                         paid: controller
-                                            .feesInvoiceList[index].paidAmount,
+                                            .feesInvoiceList[index].paidAmount.toString(),
                                         balance: controller
-                                            .feesInvoiceList[index].balance,
+                                            .feesInvoiceList[index].balance.toString(),
                                         onAddPaymentTap: (){
                                           controller.showAddPayment(index: index);
                                         },

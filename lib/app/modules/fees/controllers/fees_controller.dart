@@ -3,6 +3,9 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/credit_card.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/fees_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/two_value_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_wallet/controllers/student_wallet_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
@@ -120,28 +123,113 @@ class FeesController extends GetxController {
     Get.dialog(
       Material(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              20.verticalSpacing,
-              Row(
-                children: [
-
-                  InkWell(
-                    onTap: () => Get.back(),
-                    child: Image.asset(
-                      ImagePath.back,
-                      scale: 4,
-                      color: Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Column(
+              children: [
+                20.verticalSpacing,
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () => Get.back(),
+                      child: Image.asset(
+                        ImagePath.back,
+                        scale: 4,
+                        color: Colors.black,
+                      ),
                     ),
+                    20.horizontalSpacing,
+                    const Text(
+                      "Invoice",
+                      style: AppTextStyle.fontSize16lightBlackW500,
+                    ),
+                  ],
+                ),
+                20.verticalSpacing,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset(
+                      ImagePath.appLogo,
+                      height: Get.height * 0.2,
+                      width: Get.width * 0.3,
+                      color: AppColors.primaryColor,
+                    ),
+                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text(
+                          "Invoice: ",
+                          style: AppTextStyle.fontSize13BlackW400,
+                        ),
+                        5.verticalSpacing,
+                        const Text(
+                          "Created Date: ",
+                          style: AppTextStyle.fontSize13BlackW400,
+                        ),
+                        5.verticalSpacing,
+                        const Text(
+                          "Due Date: ",
+                          style: AppTextStyle.fontSize13BlackW400,
+                        ),
+
+                      ],
+                    )
+                  ],
+                ),
+                30.verticalSpacing,
+                const FeesTile(
+                  statusText: "Partial",
+                  statusColor: Colors.green,
+                  duration: "Monthly",
+                  amount: "2000",
+                  paid: "100",
+                  fine: "100",
+                  waiver: "100",
+                  subTotal: "100",
+                  isInvoice: true,
+
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Column(
+                    children: [
+                      TwoValueTile(
+                        title: "Total Amount",
+                        amount: 1000,
+                      ),
+                      TwoValueTile(
+                        title: "Total Waiver",
+                        amount: 1000,
+                      ),
+                      TwoValueTile(
+                        title: "Total Fine",
+                        amount: 1000,
+                      ),
+                      TwoValueTile(
+                        title: "Total Paid",
+                        amount: 1000,
+                      ),
+                      TwoValueTile(
+                        title: "Grand Total",
+                        amount: 1000,
+                      ),
+                      TwoValueTile(
+                        title: "Due Balance",
+                        amount: 1000,
+                        isDueBalance: true,
+                      ),
+                      CreditCard(
+                        bankName: "Bank Alfalah",
+                        accountName: "Zakirashdjashdjkahsjkdhajkshdjkashdjkhajk",
+                        accountNumber: 12931290390123000102912,
+                        type: "Savings",
+                      ),
+                    ],
                   ),
-                  20.horizontalSpacing,
-                  const Text(
-                    "Invoice",
-                    style: AppTextStyle.fontSize16lightBlackW500,
-                  ),
-                ],
-              ),
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
