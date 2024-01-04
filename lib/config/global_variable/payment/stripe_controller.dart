@@ -5,38 +5,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
-class PaymentController extends GetxController{
+class StripeController extends GetxController {
   Map<String, dynamic>? paymentIntent;
-  Future<void> makePayment(amount, currency) async {
-    try {
 
-      paymentIntent = await createPaymentIntent(amount, AppConfig.stripeCurrency);
+  Future<void> makePayment(String amount, currency) async {
+    try {
+      paymentIntent =
+          await createPaymentIntent(amount, currency);
 
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
           .initPaymentSheet(
-          paymentSheetParameters: SetupPaymentSheetParameters(
-              paymentIntentClientSecret: paymentIntent![
-              'client_secret'], //Gotten from payment intent
+            paymentSheetParameters: SetupPaymentSheetParameters(
+              paymentIntentClientSecret:
+                  paymentIntent!['client_secret'], //Gotten from payment intent
               style: ThemeMode.dark,
-              merchantDisplayName: 'Ikay'))
+              merchantDisplayName: 'Ikay',
+            ),
+          )
           .then((value) {});
 
       //STEP 3: Display Payment sheet
       displayPaymentSheet();
-
-      print('try::::::::');
     } catch (e, t) {
-      print('catch::::::::');
-      print(e);
-      print(t);
+      debugPrint('$e');
+      debugPrint('$t');
     }
   }
 
   displayPaymentSheet() async {
     try {
-      print('display::::::::');
-      await Stripe.instance.presentPaymentSheet().then((value) {
+      await Stripe.instance.presentPaymentSheet().then((value) async {
+
 
         Get.dialog(
             barrierDismissible: false,
@@ -64,33 +64,22 @@ class PaymentController extends GetxController{
                   ),
                 ),
               ),
-            )
-        );
+            ));
 
-        // showDialog(
-        //     context: Get.context,
-        //     builder: (_) => const AlertDialog(
-        //       content: Column(
-        //         mainAxisSize: MainAxisSize.min,
-        //         children: [
-        //           Icon(
-        //             Icons.check_circle,
-        //             color: Colors.green,
-        //             size: 100.0,
-        //           ),
-        //           SizedBox(height: 10.0),
-        //           Text("Payment Successful!"),
-        //         ],
-        //       ),
-        //     ));
-        print('Payment Intent ::::: $paymentIntent');
+        print('Payment Intent ::::: ${paymentIntent?['id']}');
+
+        // Delay for 2 seconds and then close the alert dialog
+        await Future.delayed(const Duration(seconds: 2));
+
+        // Close the alert dialog
+        Get.back();
 
         paymentIntent = null;
       }).onError((error, stackTrace) {
         throw Exception(error);
       });
     } on StripeException catch (e) {
-      print('Error is:---> $e');
+      debugPrint('Error is:---> $e');
       const AlertDialog(
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -107,34 +96,31 @@ class PaymentController extends GetxController{
           ],
         ),
       );
-    } catch (e) {
-      print('$e');
+    } catch (e, t) {
+      debugPrint('$e');
+      debugPrint('$t');
     }
   }
 
   createPaymentIntent(String amount, String currency) async {
-    print('object::::::::::');
     try {
-      print('try::::::::::');
       //Request body
       Map<String, dynamic> body = {
         'amount': calculateAmount(amount),
         'currency': currency,
       };
 
-      //Make post request to Stripe
       var response = await http.post(
         Uri.parse(AppConfig.stripeServerURL),
         headers: {
-          'Authorization': 'Bearer sk_test_51OTydVHHgGZ1rB2oIpSFP0VPpk92x5vXBC30rGfbjITnq3IfjSYZRqOQ78sqTqEX7opbWgqxGxQkPOWbIjUbmBtL00kbanmzce',
+          'Authorization':
+              'Bearer sk_test_51OTydVHHgGZ1rB2oIpSFP0VPpk92x5vXBC30rGfbjITnq3IfjSYZRqOQ78sqTqEX7opbWgqxGxQkPOWbIjUbmBtL00kbanmzce',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body,
       );
-      // print('Response ::: ${response.body}');
       return json.decode(response.body);
     } catch (e, t) {
-      print('catch::::::::::');
       debugPrint('$e');
       debugPrint('$t');
     }
@@ -145,5 +131,4 @@ class PaymentController extends GetxController{
 
     return calculatedAmount.toString();
   }
-
 }
