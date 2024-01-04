@@ -31,8 +31,14 @@ class StudentWalletController extends GetxController {
   TextEditingController browseFileTextController = TextEditingController();
 
   Rx<File> file = File('').obs;
-  RxString initValue = "".obs;
-  List<String> paymentMethodList = [];
+
+
+
+
+  RxList<PaymentMethodList> paymentMethodList = <PaymentMethodList>[].obs;
+  Rx<PaymentMethodList> initValue = PaymentMethodList(id: -1, name: "Payment Method").obs;
+  RxInt paymentMethodId = (-1).obs;
+  RxString paymentMethodName = "".obs;
 
   RxList<BankList> bankList = <BankList>[].obs;
   Rx<BankList> initBankValue = BankList(id: -1, name: "Bank Name").obs;
@@ -84,6 +90,8 @@ class StudentWalletController extends GetxController {
           paymentMethodList.add(paymentMethodListResponseModel.data![i]);
         }
         initValue.value = paymentMethodList.first;
+        paymentMethodId.value = paymentMethodList.first.id!;
+        paymentMethodName.value = paymentMethodList.first.name!;
       }
     } catch (e) {
       paymentMethodLoader.value = false;
@@ -167,14 +175,16 @@ class StudentWalletController extends GetxController {
                 10.verticalSpacing,
 
                 /// Payment Method
-                CustomDropdown(
+                DuplicateDropdown(
                   dropdownValue: initValue.value,
                   dropdownList: paymentMethodList,
                   changeDropdownValue: (value) {
                     initValue.value = value!;
+                    paymentMethodId.value = value.id;
+                    paymentMethodName.value = value.name;
                   },
                 ),
-                initValue.value == "Bank"
+                paymentMethodName.value == "Bank"
                     ? Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: bankListLoader.value
@@ -190,7 +200,7 @@ class StudentWalletController extends GetxController {
                       )
                     : const SizedBox(),
                 10.verticalSpacing,
-                initValue.value == "Bank" || initValue.value == "Cheque"
+                paymentMethodName.value == "Bank" || paymentMethodName.value == "Cheque"
                     ? CustomTextFormField(
                         controller: noteController,
                         enableBorderActive: true,
@@ -202,7 +212,7 @@ class StudentWalletController extends GetxController {
                       )
                     : const SizedBox(),
                 10.verticalSpacing,
-                initValue.value == "Bank" || initValue.value == "Cheque"
+                paymentMethodName.value == "Bank" || paymentMethodName.value == "Cheque"
                     ? CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,

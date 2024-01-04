@@ -55,9 +55,6 @@ class ChatView extends GetView<ChatController> {
           PopupMenuButton(
             padding: EdgeInsets.zero,
             iconColor: Colors.white,
-            onSelected: (value) {
-              if (value == 1) {}
-            },
             itemBuilder: (context) => [
               PopupMenuItem(
                 value: 1,
@@ -208,15 +205,6 @@ class ChatView extends GetView<ChatController> {
                 ),
               ),
             ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          elevation: 15,
-          backgroundColor: AppColors.primaryColor,
-          onPressed: () {},
-          child: const Icon(
-            Icons.add,
-            size: 30,
           ),
         ),
       ),

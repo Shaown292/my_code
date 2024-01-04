@@ -103,32 +103,30 @@ class RoutineView extends GetView<RoutineController> {
                                       
                                         return routineList.isEmpty
                                             ? const NoDataAvailableWidget()
-                                            : Expanded(
-                                              child: ListView.builder(
-                                                shrinkWrap: true,
-                                                  itemCount: routineList.length,
-                                                  itemBuilder: (context, index) {
-                                                    return StudentClassDetailsCard(
-                                                      subject:
-                                                          routineList[index].subject,
-                                                      startingTime:
-                                                          routineList[index].startTime,
-                                                      endingTime:
-                                                          routineList[index].endTime,
-                                                      roomNumber:
-                                                          routineList[index].room,
-                                                      buildingName: 'Building Name',
-                                                      instructorName:
-                                                          routineList[index].teacher,
-                                                    );
-                                                  },
-                                                ),
-                                            );
+                                            : ListView.builder(
+                                              shrinkWrap: true,
+                                                itemCount: routineList.length,
+                                                itemBuilder: (context, index) {
+                                                  return StudentClassDetailsCard(
+                                                    subject:
+                                                        routineList[index].subject,
+                                                    startingTime:
+                                                        routineList[index].startTime,
+                                                    endingTime:
+                                                        routineList[index].endTime,
+                                                    roomNumber:
+                                                        routineList[index].room,
+                                                    buildingName: 'Building Name',
+                                                    instructorName:
+                                                        routineList[index].teacher,
+                                                  );
+                                                },
+                                              );
                                       },
                                     ),
                                   ),
                                 ),
-                                150.verticalSpacing,
+                                200.verticalSpacing,
                               ],
                             ),
                     ),

@@ -14,7 +14,7 @@ class ChatTextTile extends StatelessWidget {
   final String? imageUrl;
   final Function()? onImageTap;
   final bool isForwardedText;
-  final bool isQuotedText;
+  final int? isQuotedText;
   final String? quotedText;
   final Color? forwardImageBackgroundColor;
   final TextStyle? forwardedTextStyle;
@@ -33,7 +33,7 @@ class ChatTextTile extends StatelessWidget {
     this.isForwardedText = false,
     this.forwardImageBackgroundColor,
     this.forwardedTextStyle,
-    this.isQuotedText = false,
+    this.isQuotedText,
     this.quotedText,
   });
 
@@ -44,7 +44,7 @@ class ChatTextTile extends StatelessWidget {
             onTap: onImageTap,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: isForwardedText || isQuotedText
+              child: isForwardedText || isQuotedText != 0
                   ? Container(
                       margin: const EdgeInsets.only(right: 10),
                       padding: EdgeInsets.all(isForwardedText ? 10 : 0),
@@ -128,7 +128,7 @@ class ChatTextTile extends StatelessWidget {
                             ),
                           ),
                         ),
-                  isQuotedText
+                  isQuotedText != 0
                       ? Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(

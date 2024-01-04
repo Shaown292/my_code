@@ -3,7 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 
 class TwoValueTile extends StatelessWidget {
   final String? title;
-  final double? amount;
+  final String? amount;
   final bool isDueBalance;
 
   const TwoValueTile({

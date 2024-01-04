@@ -352,7 +352,9 @@ class AdminAddMemberController extends GetxController {
           PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
+        uniqueIdTextController.clear();
         loadingController.isLoading = false;
+        uniqueIdTextController.clear();
         showBasicSuccessSnackBar(
           message:
               postRequestResponseModel.message ?? AppText.somethingWentWrong,

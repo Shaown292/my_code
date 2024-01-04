@@ -178,8 +178,8 @@ class InfixApi {
     return "${baseApi}student-subject?record_id=$recordId";
   }
 
-  static String getStudentFeesDetails() {
-    return "${baseApi}fees-invoice-view?fees_invoice_id=1";
+  static String getStudentFeesDetails({required int invoiceId}) {
+    return "${baseApi}fees-invoice-view?fees_invoice_id=$invoiceId";
   }
 
   static String getStudentFeesList(
