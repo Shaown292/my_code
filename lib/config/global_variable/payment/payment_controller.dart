@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -6,10 +7,10 @@ import 'package:get/get.dart';
 
 class PaymentController extends GetxController{
   Map<String, dynamic>? paymentIntent;
-  Future<void> makePayment() async {
+  Future<void> makePayment(amount, currency) async {
     try {
 
-      paymentIntent = await createPaymentIntent('100', 'USD');
+      paymentIntent = await createPaymentIntent(amount, AppConfig.stripeCurrency);
 
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
@@ -112,26 +113,37 @@ class PaymentController extends GetxController{
   }
 
   createPaymentIntent(String amount, String currency) async {
+    print('object::::::::::');
     try {
+      print('try::::::::::');
       //Request body
       Map<String, dynamic> body = {
-        'amount': amount,
+        'amount': calculateAmount(amount),
         'currency': currency,
       };
 
       //Make post request to Stripe
       var response = await http.post(
-        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        Uri.parse(AppConfig.stripeServerURL),
         headers: {
           'Authorization': 'Bearer sk_test_51OTydVHHgGZ1rB2oIpSFP0VPpk92x5vXBC30rGfbjITnq3IfjSYZRqOQ78sqTqEX7opbWgqxGxQkPOWbIjUbmBtL00kbanmzce',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body,
       );
+      // print('Response ::: ${response.body}');
       return json.decode(response.body);
-    } catch (err) {
-      throw Exception(err.toString());
+    } catch (e, t) {
+      print('catch::::::::::');
+      debugPrint('$e');
+      debugPrint('$t');
     }
+  }
+
+  calculateAmount(String amount) {
+    final calculatedAmount = (int.parse(amount)) * 100;
+
+    return calculatedAmount.toString();
   }
 
 }

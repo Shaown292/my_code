@@ -53,11 +53,11 @@ class FeesInvoice {
   String? fullName;
   String? feesClass;
   String? section;
-  String? amount;
-  String? waiver;
-  String? fine;
-  String? paidAmount;
-  String? balance;
+  int? amount;
+  int? waiver;
+  int? fine;
+  int? paidAmount;
+  int? balance;
   String? status;
   String? createDate;
 
