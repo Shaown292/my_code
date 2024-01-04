@@ -527,6 +527,8 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String chatStatus='${baseApi}single-user-chat-status';
 
 
+  /// Payment Gateway Handler
+  static String paymentHandler ='${baseApi}handle-payment-request';
 
 
 

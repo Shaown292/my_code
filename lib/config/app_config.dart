@@ -18,8 +18,8 @@ class AppConfig{
       'https://api.stripe.com/v1/payment_intents';
   static const String stripeCurrency = "USD";
   static const String stripeMerchantID = "merchant.thegreatestmarkeplace";
-  static const String stripePublishableKey =
-      "pk_test_51JAWNlKS0igSTFP16dhgcM1fBayh6DStrpu5OA7jjAzYiFX3Bht0X8ARULBpIAVkgmws7PWEliNi4Q35Iyk8ThQL00aoNnF3OE";
+  static const String stripePublishableKey = "pk_test_51JAWNlKS0igSTFP16dhgcM1fBayh6DStrpu5OA7jjAzYiFX3Bht0X8ARULBpIAVkgmws7PWEliNi4Q35Iyk8ThQL00aoNnF3OE";
+  static const String stripeToken = 'sk_test_51OTydVHHgGZ1rB2oIpSFP0VPpk92x5vXBC30rGfbjITnq3IfjSYZRqOQ78sqTqEX7opbWgqxGxQkPOWbIjUbmBtL00kbanmzce';
   static const String appPackageName = "com.infix.lms";
 
 }

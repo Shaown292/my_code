@@ -27,7 +27,6 @@ import 'package:get/get.dart';
 import '../../../utilities/widgets/common_widgets/primary_button.dart';
 
 class FeesController extends GetxController {
-
   StripeController stripeController = Get.put(StripeController());
   GlobalRxVariableController globalRxVariableController = Get.find();
   StudentWalletController studentWalletController =
@@ -103,7 +102,7 @@ class FeesController extends GetxController {
       );
 
       FeesInvoiceResponseModel feesInvoiceResponseModel =
-      FeesInvoiceResponseModel.fromJson(response);
+          FeesInvoiceResponseModel.fromJson(response);
       if (feesInvoiceResponseModel.success == true) {
         feesInvoiceLoader.value = false;
 
@@ -111,25 +110,24 @@ class FeesController extends GetxController {
 
         if (feesInvoiceResponseModel.data!.invoiceDetails!.isNotEmpty) {
           for (int i = 0;
-          i < feesInvoiceResponseModel.data!.invoiceDetails!.length;
-          i++) {
+              i < feesInvoiceResponseModel.data!.invoiceDetails!.length;
+              i++) {
             invoiceDetails
                 .add(feesInvoiceResponseModel.data!.invoiceDetails![i]);
           }
         }
         if (feesInvoiceResponseModel.data!.banks!.isNotEmpty) {
           for (int i = 0;
-          i < feesInvoiceResponseModel.data!.banks!.length;
-          i++) {
-            banks
-                .add(feesInvoiceResponseModel.data!.banks![i]);
+              i < feesInvoiceResponseModel.data!.banks!.length;
+              i++) {
+            banks.add(feesInvoiceResponseModel.data!.banks![i]);
           }
         }
       } else {
         feesInvoiceLoader.value = false;
         showBasicFailedSnackBar(
           message:
-          feesInvoiceResponseModel.message ?? AppText.somethingWentWrong,
+              feesInvoiceResponseModel.message ?? AppText.somethingWentWrong,
         );
       }
     } catch (e, t) {
@@ -185,7 +183,7 @@ class FeesController extends GetxController {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Obx(
-                () => SingleChildScrollView(
+            () => SingleChildScrollView(
               child: Column(
                 children: [
                   20.verticalSpacing,
@@ -210,73 +208,72 @@ class FeesController extends GetxController {
                   feesInvoiceLoader.value
                       ? const SecondaryLoadingWidget()
                       : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        ImagePath.appLogo,
-                        height: Get.height * 0.2,
-                        width: Get.width * 0.3,
-                        color: AppColors.primaryColor,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Invoice: ${feesInvoiceInfo?.invoiceId}",
-                            style: AppTextStyle.fontSize13BlackW400,
-                          ),
-                          5.verticalSpacing,
-                          Text(
-                            "Created Date: ${feesInvoiceInfo?.createDate}",
-                            style: AppTextStyle.fontSize13BlackW400,
-                          ),
-                          5.verticalSpacing,
-                          Text(
-                            "Due Date: ${feesInvoiceInfo?.dueDate}",
-                            style: AppTextStyle.fontSize13BlackW400,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset(
+                              ImagePath.appLogo,
+                              height: Get.height * 0.2,
+                              width: Get.width * 0.3,
+                              color: AppColors.primaryColor,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Invoice: ${feesInvoiceInfo?.invoiceId}",
+                                  style: AppTextStyle.fontSize13BlackW400,
+                                ),
+                                5.verticalSpacing,
+                                Text(
+                                  "Created Date: ${feesInvoiceInfo?.createDate}",
+                                  style: AppTextStyle.fontSize13BlackW400,
+                                ),
+                                5.verticalSpacing,
+                                Text(
+                                  "Due Date: ${feesInvoiceInfo?.dueDate}",
+                                  style: AppTextStyle.fontSize13BlackW400,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                   30.verticalSpacing,
                   feesInvoiceLoader.value
                       ? const SecondaryLoadingWidget()
                       : ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: invoiceDetails.length,
-                      itemBuilder: (context, index) {
-                        return FeesTile(
-                          amount: invoiceDetails[index].amount,
-                          paid: invoiceDetails[index].paidAmount,
-                          fine: invoiceDetails[index].fine,
-                          waiver: invoiceDetails[index].weaver,
-                          subTotal: invoiceDetails[index].subTotal,
-                          isInvoice: true,
-                          totalAmount: invoiceDetails[index].totalAmount,
-                          totalWaiver: invoiceDetails[index].weaver,
-                          totalFine: invoiceDetails[index].fine,
-                          totalPaid: invoiceDetails[index].paidAmount,
-                          grandTotal: invoiceDetails[index].grandTotal,
-                          dueBalance: invoiceDetails[index].dueBalance,
-                        );
-                      }),
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: invoiceDetails.length,
+                          itemBuilder: (context, index) {
+                            return FeesTile(
+                              amount: invoiceDetails[index].amount,
+                              paid: invoiceDetails[index].paidAmount,
+                              fine: invoiceDetails[index].fine,
+                              waiver: invoiceDetails[index].weaver,
+                              subTotal: invoiceDetails[index].subTotal,
+                              isInvoice: true,
+                              totalAmount: invoiceDetails[index].totalAmount,
+                              totalWaiver: invoiceDetails[index].weaver,
+                              totalFine: invoiceDetails[index].fine,
+                              totalPaid: invoiceDetails[index].paidAmount,
+                              grandTotal: invoiceDetails[index].grandTotal,
+                              dueBalance: invoiceDetails[index].dueBalance,
+                            );
+                          }),
                   feesInvoiceLoader.value
                       ? const SecondaryLoadingWidget()
-                      :  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: banks.length,
-                      itemBuilder: (context, index){
-                        return CreditCard(
-                          bankName: banks[index].bankName ?? "",
-                          accountNumber: banks[index].accountNumber ?? "",
-                          accountName: banks[index].accountName ?? "",
-                          type: banks[index].accountType ?? "",
-
-                        );
-                      }),
+                      : ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: banks.length,
+                          itemBuilder: (context, index) {
+                            return CreditCard(
+                              bankName: banks[index].bankName ?? "",
+                              accountNumber: banks[index].accountNumber ?? "",
+                              accountName: banks[index].accountName ?? "",
+                              type: banks[index].accountType ?? "",
+                            );
+                          }),
                   30.verticalSpacing,
                 ],
               ),
@@ -360,8 +357,8 @@ class FeesController extends GetxController {
                     changeDropdownValue: (value) {
                       studentWalletController.initValue.value = value!;
                       studentWalletController.paymentMethodId.value = value.id;
-                      studentWalletController.paymentMethodName.value = value.name;
-
+                      studentWalletController.paymentMethodName.value =
+                          value.name;
                     },
                   ),
                   10.verticalSpacing,
@@ -384,9 +381,12 @@ class FeesController extends GetxController {
                                 ),
                         )
                       : const SizedBox(),
-                  studentWalletController.paymentMethodName.value == "Bank" ?  10.verticalSpacing : const SizedBox(),
+                  studentWalletController.paymentMethodName.value == "Bank"
+                      ? 10.verticalSpacing
+                      : const SizedBox(),
                   studentWalletController.paymentMethodName.value == "Bank" ||
-                          studentWalletController.paymentMethodName.value == "Cheque"
+                          studentWalletController.paymentMethodName.value ==
+                              "Cheque"
                       ? CustomTextFormField(
                           controller: noteTextController,
                           enableBorderActive: true,
@@ -397,9 +397,12 @@ class FeesController extends GetxController {
                           fillColor: Colors.white,
                         )
                       : const SizedBox(),
-                  studentWalletController.paymentMethodName.value == "Bank" ?  10.verticalSpacing : const SizedBox(),
+                  studentWalletController.paymentMethodName.value == "Bank"
+                      ? 10.verticalSpacing
+                      : const SizedBox(),
                   studentWalletController.paymentMethodName.value == "Bank" ||
-                          studentWalletController.paymentMethodName.value == "Cheque"
+                          studentWalletController.paymentMethodName.value ==
+                              "Cheque"
                       ? CustomTextFormField(
                           enableBorderActive: true,
                           focusBorderActive: true,
@@ -436,8 +439,11 @@ class FeesController extends GetxController {
                   PrimaryButton(
                     text: 'Pay',
                     onTap: () {
-                      if (studentWalletController.paymentMethodName.value != '') {
-                        _selectedPaymentGateway(studentWalletController.paymentMethodName.value, index);
+                      if (studentWalletController.paymentMethodName.value !=
+                          '') {
+                        _selectedPaymentGateway(
+                            studentWalletController.paymentMethodName.value,
+                            index);
                       }
                     },
                     padding: const EdgeInsets.all(10),
@@ -451,38 +457,37 @@ class FeesController extends GetxController {
     );
   }
 
-void _selectedPaymentGateway(value, index){
-  switch (value) {
-    case 'Cash':
+  void _selectedPaymentGateway(value, index) {
+    switch (value) {
+      case 'Cash':
+        break;
+      case 'Cheque':
+        break;
+      case 'Bank':
+        break;
+      case 'Paypal':
+        break;
+      case 'Stripe':
+        // stripeController.makePayment(feesInvoiceList[index].amount.toString(), AppConfig.stripeCurrency);
+        stripeController.makePayment(
+          amount: feesInvoiceList[index].amount.toString(),
+          currency: AppConfig.stripeCurrency,
+          type: 'feesInvoice',
+          paymentMethod:
+              studentWalletController.paymentMethodId.value.toString(),
+          invoiceId: feesInvoiceList[index].id.toString(),
+        );
+        break;
 
-      break;
-    case 'Cheque':
+      case 'Paystack':
+        break;
+      case 'Xendit':
+        break;
 
-      break;
-    case 'Bank':
-
-      break;
-    case 'Paypal':
-
-      break;
-    case 'Stripe':
-      stripeController.makePayment(feesInvoiceList[index].amount.toString(), AppConfig.stripeCurrency);
-      break;
-
-    case 'Paystack':
-
-      break;
-    case 'Xendit':
-
-      break;
-
-    case 'Khalti':
-
-      break;
-
-
+      case 'Khalti':
+        break;
+    }
   }
-}
 
   @override
   void onInit() {

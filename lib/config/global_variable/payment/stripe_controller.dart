@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/payment/payment_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -8,10 +9,9 @@ import 'package:get/get.dart';
 class StripeController extends GetxController {
   Map<String, dynamic>? paymentIntent;
 
-  Future<void> makePayment(String amount, currency) async {
+  Future<void> makePayment({required String amount, required String currency, required String type, required String paymentMethod, required String invoiceId,}) async {
     try {
-      paymentIntent =
-          await createPaymentIntent(amount, currency);
+      paymentIntent = await createPaymentIntent(amount, currency);
 
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
@@ -26,17 +26,17 @@ class StripeController extends GetxController {
           .then((value) {});
 
       //STEP 3: Display Payment sheet
-      displayPaymentSheet();
+      displayPaymentSheet(amount: amount, type: type, paymentMethod: paymentMethod, invoiceId: invoiceId,);
     } catch (e, t) {
       debugPrint('$e');
       debugPrint('$t');
     }
   }
 
-  displayPaymentSheet() async {
+  displayPaymentSheet({required String amount, required String type, required String paymentMethod, required String invoiceId,}) async {
+    PaymentHandlerController paymentHandlerController = Get.put(PaymentHandlerController());
     try {
       await Stripe.instance.presentPaymentSheet().then((value) async {
-
 
         Get.dialog(
             barrierDismissible: false,
@@ -64,7 +64,14 @@ class StripeController extends GetxController {
                   ),
                 ),
               ),
-            ));
+            )).then((value) => paymentHandlerController.paymentSuccessHandler(
+          type: type,
+          amount: amount,
+          paymentMethod: paymentMethod,
+          invoiceId: invoiceId,
+        ));
+
+
 
         print('Payment Intent ::::: ${paymentIntent?['id']}');
 
@@ -114,7 +121,7 @@ class StripeController extends GetxController {
         Uri.parse(AppConfig.stripeServerURL),
         headers: {
           'Authorization':
-              'Bearer sk_test_51OTydVHHgGZ1rB2oIpSFP0VPpk92x5vXBC30rGfbjITnq3IfjSYZRqOQ78sqTqEX7opbWgqxGxQkPOWbIjUbmBtL00kbanmzce',
+              'Bearer ${AppConfig.stripeToken}',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body,
