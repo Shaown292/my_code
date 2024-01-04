@@ -9,7 +9,7 @@ class CreditCard extends StatelessWidget {
   final String? bankName;
   final String? accountName;
   final String? type;
-  final double? accountNumber;
+  final String? accountNumber;
 
   const CreditCard({
     super.key,
@@ -21,34 +21,37 @@ class CreditCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          bankName ?? "",
-          style: AppTextStyle.blackFontSize14W400,
-        ),
-        10.verticalSpacing,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-             ColumnTile(
-            title: "Account Name",
-              value: accountName,
-            ),
-             ColumnTile(
-               width: Get.width * 0.25,
-            title: "Account Number",
-              value: accountNumber.toString(),
-            ),
-             ColumnTile(
-            title: "Type",
-              value: type ,
-            ),
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            bankName ?? "",
+            style: AppTextStyle.blackFontSize14W400,
+          ),
+          10.verticalSpacing,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+               ColumnTile(
+              title: "Account Name",
+                value: accountName,
+              ),
+               ColumnTile(
+                 width: Get.width * 0.25,
+              title: "Account Number",
+                value: accountNumber.toString(),
+              ),
+               ColumnTile(
+              title: "Type",
+                value: type ,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

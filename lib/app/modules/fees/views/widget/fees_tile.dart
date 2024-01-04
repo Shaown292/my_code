@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/credit_card.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 
 import '../../../../data/constants/app_colors.dart';
 import '../../../../data/constants/app_text_style.dart';
 import '../../../../utilities/widgets/colum_tile/column_tile.dart';
 import '../../../../utilities/widgets/common_widgets/custom_divider.dart';
+import 'two_value_tile.dart';
 
 class FeesTile extends StatelessWidget {
   final String? duration;
@@ -13,10 +15,16 @@ class FeesTile extends StatelessWidget {
   final String? paid;
   final String? balance;
   final String? fine;
+  final String? status;
   final String? waiver;
   final String? subTotal;
-
   final String? statusText;
+  final String? totalAmount;
+  final String? totalFine;
+  final String? totalPaid;
+  final String? grandTotal;
+  final String? dueBalance;
+  final String? totalWaiver;
   final Color? statusColor;
   final Function()? onTap;
   final Function()? onViewInvoiceTap;
@@ -35,7 +43,16 @@ class FeesTile extends StatelessWidget {
     this.statusText,
     this.onViewInvoiceTap,
     this.onAddPaymentTap,
-    this.isInvoice = false, this.fine, this.waiver, this.subTotal,
+    this.isInvoice = false,
+    this.fine,
+    this.waiver,
+    this.subTotal,
+    this.totalAmount,
+    this.totalFine,
+    this.totalPaid,
+    this.grandTotal,
+    this.dueBalance,
+    this.totalWaiver, this.status,
   });
 
   @override
@@ -71,7 +88,7 @@ class FeesTile extends StatelessWidget {
                             onTap: onViewInvoiceTap,
                             child: const Text("View Invoice"),
                           ),
-                          PopupMenuItem(
+                          if(status != "Paid" ) PopupMenuItem(
                             value: 2,
                             onTap: onAddPaymentTap,
                             child: const Text("Add Payment"),
@@ -103,11 +120,11 @@ class FeesTile extends StatelessWidget {
                   ),
                   isInvoice
                       ? Flexible(
-                        child: ColumnTile(
-                            title: "Waiver" ,
+                          child: ColumnTile(
+                            title: "Waiver",
                             value: waiver,
                           ),
-                      )
+                        )
                       : Flexible(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,10 +153,9 @@ class FeesTile extends StatelessWidget {
                 ],
               ),
               20.verticalSpacing,
-
               ColumnTile(
                 title: isInvoice ? "Sub Total" : "Due Date",
-                value: isInvoice ? subTotal :dueDate,
+                value: isInvoice ? subTotal : dueDate,
               ),
               10.verticalSpacing,
               const CustomDivider(
@@ -147,6 +163,39 @@ class FeesTile extends StatelessWidget {
               )
             ],
           ),
+          10.verticalSpacing,
+          isInvoice
+              ? Column(
+                children: [
+                  TwoValueTile(
+                    title: "Total Amount",
+                    amount: totalAmount,
+                  ),
+                  TwoValueTile(
+                    title: "Total Waiver",
+                    amount: totalWaiver,
+                  ),
+                  TwoValueTile(
+                    title: "Total Fine",
+                    amount: totalFine,
+                  ),
+                  TwoValueTile(
+                    title: "Total Paid",
+                    amount: totalPaid,
+                  ),
+                  TwoValueTile(
+                    title: "Grand Total",
+                    amount: grandTotal,
+                  ),
+                  5.verticalSpacing,
+                  TwoValueTile(
+                    title: "Due Balance",
+                    amount: dueBalance,
+                    isDueBalance: true,
+                  ),
+                ],
+              )
+              : const SizedBox()
         ],
       ),
     );

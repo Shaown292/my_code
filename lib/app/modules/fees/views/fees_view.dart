@@ -90,10 +90,24 @@ class FeesView extends GetView<FeesController> {
                                     shrinkWrap: true,
                                     itemCount: controller.feesInvoiceList.length,
                                     itemBuilder: (context, index) {
+                                      String colorCode = '';
+                                      if (controller
+                                          .feesInvoiceList[index].status ==
+                                          'Unpaid') {
+                                        colorCode = '0xFFE3342F';
+                                      } else if (controller
+                                          .feesInvoiceList[index].status ==
+                                          'Paid') {
+                                        colorCode = '0xFF3AC172';
+                                      } else if (controller
+                                          .feesInvoiceList[index].status ==
+                                          'Partial') {
+                                        colorCode = '0xFFFFBE00';
+                                      }
                                       return FeesTile(
                                         statusText: controller
                                             .feesInvoiceList[index].status,
-                                        statusColor: Colors.green,
+                                        statusColor:   Color(int.tryParse(colorCode)!),
                                         dueDate: controller
                                             .feesInvoiceList[index].createDate,
                                         duration: "Monthly",
@@ -103,11 +117,14 @@ class FeesView extends GetView<FeesController> {
                                             .feesInvoiceList[index].paidAmount.toString(),
                                         balance: controller
                                             .feesInvoiceList[index].balance.toString(),
+                                        status:    controller.feesInvoiceList[index].status!,
                                         onAddPaymentTap: (){
                                           controller.showAddPayment(index: index);
                                         },
                                         onViewInvoiceTap: (){
+                                          controller.getFeesInvoice(invoiceId: controller.feesInvoiceList[index].id!);
                                           controller.showInvoice(index: index);
+
                                         },
                                       );
                                     },

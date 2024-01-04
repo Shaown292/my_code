@@ -45,6 +45,7 @@ class SingleChatController extends GetxController {
   RxBool blockLoaded = false.obs;
   RxBool forwardChatLoader = false.obs;
   RxInt toUserId = 0.obs;
+  RxInt replyId = 0.obs;
   RxInt messageId = 0.obs;
   RxString userName = "".obs;
   RxString userImage = "".obs;
@@ -88,6 +89,7 @@ class SingleChatController extends GetxController {
       request.fields['from_user_id'] =
           globalRxVariableController.userId.value.toString();
       request.fields['to_user_id'] = toUserId.value.toString();
+      request.fields['reply'] = replyId.value.toString();
 
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
