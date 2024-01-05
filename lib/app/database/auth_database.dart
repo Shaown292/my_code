@@ -20,6 +20,7 @@ class AuthDatabase {
     await GetStorage.init(AuthDBKeys.dbName);
   }
 
+
   Future<bool> saveAuthInfo({
     required ProfileInfoModel profileInfoModelModel,
     // String? token,
