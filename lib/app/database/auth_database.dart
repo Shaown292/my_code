@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../domain/core/model/profile_ui_model.dart';
@@ -97,11 +99,25 @@ class AuthDatabase {
   }
 
   Future<bool> logOut() async {
+    GlobalRxVariableController globalRxVariableController = Get.find();
     try {
       final storage = GetStorage(AuthDBKeys.dbName);
       await storage.remove(AuthDBKeys.data);
       await storage.remove(AuthDBKeys.token);
       await storage.save();
+
+      globalRxVariableController.token.value = null;
+      globalRxVariableController.userId.value = null;
+      globalRxVariableController.roleId.value = null;
+
+      globalRxVariableController.notificationCount.value = null;
+      globalRxVariableController.studentRecordId.value = null;
+      globalRxVariableController.email.value = null;
+      globalRxVariableController.studentId.value = null;
+      globalRxVariableController.parentId.value = null;
+      globalRxVariableController.staffId.value = null;
+      globalRxVariableController.isStudent.value = false;
+
       return true;
     } catch (e) {
       return false;

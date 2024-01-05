@@ -25,6 +25,7 @@ class InfixApi {
   // }
 
   static String login() => '${baseApi}login';
+  static String logout = '${baseApi}auth/logout';
 
   static String editProfile(int studentId) {
     return '${baseApi}student-profile-edit?student_id=$studentId';
@@ -822,9 +823,6 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
     return "${baseApi}child-bank-slip-store?amount=$amount&class_id=$classID&section_id=$sectionID&user_id=$userID&fees_type_id=$feeTypeID&payment_mode=$paymentMode&date=$paymentDate";
   }
 
-  static String logout() {
-    return "${baseApi}auth/logout";
-  }
 
   static String bankList = "${baseApi}banks";
 

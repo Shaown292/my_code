@@ -67,6 +67,11 @@ class LoginController extends GetxController {
         }
 
         if (status) {
+          GlobalVariable.header = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization':  profileInfoModel.data.accessToken,
+          };
           AppFunctions().getFunctions(profileInfoModel.data.user.roleId);
         }
       } else {
@@ -124,6 +129,11 @@ class LoginController extends GetxController {
 
 
         if (status) {
+          GlobalVariable.header = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization':  profileInfoModel.data.accessToken,
+          };
           AppFunctions().getFunctions(profileInfoModel.data.user.roleId);
         }
       } else {

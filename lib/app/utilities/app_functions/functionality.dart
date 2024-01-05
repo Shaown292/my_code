@@ -238,7 +238,7 @@ class AppFunctions {
         Get.toNamed(Routes.ADMIN_TRANSPORT_DETAILS);
         break;
       case 'Settings':
-        Get.toNamed(Routes.ADMIN_SETTINGS);
+        Get.toNamed(Routes.SETTINGS);
         break;
     }
   }
@@ -314,7 +314,7 @@ class AppFunctions {
         Get.toNamed(Routes.ADMIN_STUDENTS_SEARCH);
         break;
       case 'Settings':
-        Get.toNamed(Routes.ADMIN_SETTINGS);
+        Get.toNamed(Routes.SETTINGS);
         break;
       case 'About':
         Get.toNamed(Routes.ABOUT);

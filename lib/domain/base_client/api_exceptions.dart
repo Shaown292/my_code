@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_single_getx_api_v2/app/database/auth_database.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class AppException implements Exception {
@@ -33,6 +35,7 @@ class InvalidInputException extends AppException {
 }
 
 dynamic returnResponse(http.Response response) {
+  final AuthDatabase _authDatabase = AuthDatabase.instance;
   debugPrint(response.body);
   switch (response.statusCode) {
     case HttpStatus.ok:
@@ -47,6 +50,13 @@ dynamic returnResponse(http.Response response) {
       var responseJson = json.decode(response.body.toString());
       return responseJson;
     case HttpStatus.unauthorized:
+      showBasicFailedSnackBar(message: json.decode(response.body.toString())["message"]);
+      _authDatabase.logOut();
+      Future.delayed(const Duration(seconds: 2)).then((val) {
+        Get.offNamedUntil('/splash', (route) => false);
+      });
+
+
     case HttpStatus.forbidden:
     showBasicFailedSnackBar(message: json.decode(response.body.toString())["message"]);
       throw UnauthorisedException(response.body.toString());
