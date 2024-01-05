@@ -17,7 +17,7 @@ class ActiveExamView extends GetView<ActiveExamController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Active Exam",
+        title: "Active Exam".tr,
         body: CustomBackground(
           customWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

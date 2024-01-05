@@ -22,7 +22,7 @@ class FeesView extends GetView<FeesController> {
         title: "Fees",
         leadingIcon: const SizedBox(),
         body: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Column(
             children: [
               CustomBackground(

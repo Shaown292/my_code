@@ -18,7 +18,7 @@ class BookIssuedView extends GetView<BookIssuedController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Book Issued",
+      title: "Book Issued".tr,
       body: SingleChildScrollView(
         child: CustomBackground(
           customWidget: Column(
@@ -37,8 +37,8 @@ class BookIssuedView extends GetView<BookIssuedController> {
                   children: [
                     SizedBox(
                       width: Get.width * 0.12,
-                      child: const Text(
-                        "Book No",
+                      child:  Text(
+                        "Book No".tr,
                         style: AppTextStyle.textStyle12WhiteW500,
                       ),
                     ),
@@ -49,8 +49,8 @@ class BookIssuedView extends GetView<BookIssuedController> {
                     Container(
                       width: Get.width * 0.2,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: const Text(
-                        "Subject",
+                      child:  Text(
+                        "Subject".tr,
                         style: AppTextStyle.textStyle12WhiteW500,
                       ),
                     ),
@@ -58,8 +58,8 @@ class BookIssuedView extends GetView<BookIssuedController> {
                       color: AppColors.profileTitleColor,
                       thickness: 1,
                     ),
-                    const Text(
-                      "Book Name",
+                     Text(
+                      "Book Name".tr,
                       style: AppTextStyle.textStyle12WhiteW500,
                     )
                   ],

@@ -17,7 +17,7 @@ class ExamResultView extends GetView<ExamResultController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Exam Result",
+        title: "Exam Result".tr,
         body: CustomBackground(
           customWidget: Column(
             mainAxisAlignment: MainAxisAlignment.start,

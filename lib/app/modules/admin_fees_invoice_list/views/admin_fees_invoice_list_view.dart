@@ -139,6 +139,23 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                                 shrinkWrap: true,
                                 itemCount: controller.feesInvoiceList.length,
                                 itemBuilder: (context, index) {
+                                  String colorCode = '';
+                                  if (controller
+                                      .feesInvoiceList[index].status ==
+                                      'Unpaid') {
+                                    colorCode = '0xFFE3342F';
+                                  } else if (controller
+                                      .feesInvoiceList[index].status ==
+                                      'Paid') {
+                                    colorCode = '0xFF3AC172';
+                                  } else if (controller
+                                      .feesInvoiceList[index].status ==
+                                      'Partial') {
+                                    colorCode = '0xFFFFBE00';
+                                  }
+                                  else {
+                                    colorCode = '0xFFFFBE00';
+                                  }
                                   return AdminFeesInvoiceTile(
                                     studentName: controller
                                         .feesInvoiceList[index].fullName,
@@ -156,9 +173,9 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                                         .feesInvoiceList[index].balance,
                                     status: controller
                                         .feesInvoiceList[index].status,
-                                    statusColor: AppColors.activeStatusRedColor,
+                                    statusColor:  Color(int.tryParse(colorCode)!),
                                     onTapView: () =>
-                                        Get.toNamed(Routes.ADMIN_FEES_INVOICE),
+                                        Get.toNamed(Routes.ADMIN_FEES_INVOICE, arguments: { "invoice_id" : controller.feesInvoiceList[index].id}),
                                   );
                                 },
                               ),

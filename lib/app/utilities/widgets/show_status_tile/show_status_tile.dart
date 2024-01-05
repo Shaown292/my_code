@@ -58,8 +58,8 @@ class ShowStatusTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Status",
+                 Text(
+                  "Status".tr,
                   style: AppTextStyle.fontSize13BlackW400,
                 ),
                 5.verticalSpacing,

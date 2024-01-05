@@ -17,7 +17,7 @@ class StudentHomeworkView extends GetView<StudentHomeworkController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => InfixEduScaffold(
-          title: "Homework",
+          title: "Homework".tr,
           body: RefreshIndicator(
             onRefresh: () async {
               controller.studentHomeworkList.clear();

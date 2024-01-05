@@ -13,7 +13,7 @@ class LeaveView extends GetView<LeaveController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Leave",
+      title: "Leave".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -28,7 +28,7 @@ class LeaveView extends GetView<LeaveController> {
                 return Obx(
                   () => CustomCardTile(
                     icon: controller.leaveTileList[index].icon,
-                    title: controller.leaveTileList[index].title,
+                    title: controller.leaveTileList[index].title.tr,
                     onTap: () {
                       controller.selectIndex.value = index;
                       AppFunctions.getStudentDashboardNavigation(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
 
 import '../../../data/constants/app_colors.dart';
 import '../button/primary_button.dart';
@@ -59,7 +60,7 @@ class ContentTile extends StatelessWidget {
                         color: const Color(0xFFFE3E3E)),
                     child: Center(
                       child: Text(
-                        "Due - $dueDate",
+                        "Due  - $dueDate",
                         style: AppTextStyle.cardTextStyle14WhiteW500,
                       ),
                     ),
@@ -67,7 +68,7 @@ class ContentTile extends StatelessWidget {
                   5.horizontalSpacing,
                   Expanded(
                     child: PrimaryButton(
-                      title: "DOWNLOAD",
+                      title: "DOWNLOAD".capitalizeFirst?.tr,
                       onTap: onTap,
                     ),
                   )

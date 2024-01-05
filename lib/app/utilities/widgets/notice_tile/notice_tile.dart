@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
 
 import '../../../data/constants/app_colors.dart';
 import '../../../data/constants/app_text_style.dart';
@@ -74,9 +75,9 @@ class NoticeTile extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(6),
                               color: AppColors.appButtonColor),
-                          child: const Center(
+                          child:  Center(
                             child: Text(
-                              "View",
+                              "View".tr,
                               style: AppTextStyle.cardTextStyle14WhiteW500,
                             ),
                           ),

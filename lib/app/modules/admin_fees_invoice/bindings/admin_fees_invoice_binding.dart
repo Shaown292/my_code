@@ -5,8 +5,8 @@ import '../controllers/admin_fees_invoice_controller.dart';
 class AdminFeesInvoiceBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AdminFeesInvoiceController>(
-      () => AdminFeesInvoiceController(),
+    Get.put<AdminFeesInvoiceController>(
+      AdminFeesInvoiceController(),
     );
   }
 }

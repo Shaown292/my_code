@@ -50,31 +50,31 @@ class DormitoryCardTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ColumnTile(
-                title: isAdminRoomList ? "Room Name" : "Room no",
+                title: isAdminRoomList ? "Room Name".tr : "Room no".tr,
                 value: roomNoName ?? "",
                 width: Get.width * 0.2,
               ),
               ColumnTile(
-                title: "No. Of Bed",
+                title: "No. Of Bed".tr,
                 value: "${numberOfBed ?? ""}",
                 width: Get.width * 0.2,
               ),
               ColumnTile(
-                title: "Cost",
+                title: "Cost".tr,
                 value: "${cost ?? ""}",
                 width: Get.width * 0.2,
               ),
               isAdminRoomList
                   ? ColumnTile(
-                      title: "Room Type",
+                      title: "Room Type".tr,
                       value: roomType ?? "",
                       width: Get.width * 0.2,
                     )
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Status",
+                         Text(
+                          "Status".tr,
                           style: AppTextStyle.homeworkElements,
                         ),
                         5.verticalSpacing,

@@ -14,7 +14,7 @@ class HomeTileModelClass {
 
 List<HomeTileModelClass> studentList = [
   HomeTileModelClass(
-      icon: ImagePath.studentHomeWork, title: 'HomeWork', value: 'Homework'),
+      icon: ImagePath.studentHomeWork, title: 'Homework', value: 'Homework'),
   HomeTileModelClass(
       icon: ImagePath.studentStudyMaterials,
       title: 'Study Materials',

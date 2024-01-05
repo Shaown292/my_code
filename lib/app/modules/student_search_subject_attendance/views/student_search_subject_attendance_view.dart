@@ -64,16 +64,16 @@ class StudentSearchSubjectAttendanceView
                   color: AppColors.profileCardTextColor,
                   child: Row(
                     children: [
-                      const SubjectCardTitle(
-                        title: 'Subject',
+                       SubjectCardTitle(
+                        title: 'Subject'.tr,
                       ),
                       5.horizontalSpacing,
-                      const SubjectCardTitle(
-                        title: 'Teacher',
+                       SubjectCardTitle(
+                        title: 'Teacher'.tr,
                       ),
                       5.horizontalSpacing,
-                      const SubjectCardTitle(
-                        title: 'Type',
+                       SubjectCardTitle(
+                        title: 'Type'.tr,
                       ),
                     ],
                   ),

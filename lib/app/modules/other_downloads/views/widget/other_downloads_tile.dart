@@ -68,7 +68,7 @@ class OtherDownloadsTile extends StatelessWidget {
                 20.verticalSpacing,
                 PrimaryButton(
                   onTap: onTap,
-                  title: "Download",
+                  title: "Download".tr,
                 ),
               ],
             ),

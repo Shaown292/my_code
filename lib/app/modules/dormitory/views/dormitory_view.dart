@@ -16,7 +16,7 @@ class DormitoryView extends GetView<DormitoryController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Dormitory",
+        title: "Dormitory".tr,
         body: CustomBackground(
           customWidget: Column(
             children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
 import '../../../../data/constants/app_colors.dart';
 import '../../../../data/constants/app_text_style.dart';
 import '../../../../utilities/widgets/colum_tile/column_tile.dart';
@@ -38,7 +39,7 @@ class ExamResultTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title ?? "Title",
+            title ?? "",
             style: AppTextStyle.fontSize14lightBlackW400,
           ),
           10.verticalSpacing,
@@ -47,24 +48,24 @@ class ExamResultTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ColumnTile(
-                title: "Title",
+                title: "Title".tr,
                 value: title,
               ),
               TimeAndDateTile(
-                title: "Start",
+                title: "Start".tr,
                 date: startDate ?? "",
                 time: "(${startingTime ?? ''})",
               ),
               TimeAndDateTile(
-                title: "End",
+                title: "End".tr,
                 date: endDate ?? "",
                 time: "(${endingTime ?? ''})",
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Status",
+                   Text(
+                    "Status".tr,
                     style: AppTextStyle.homeworkElements,
                   ),
                   5.verticalSpacing,
