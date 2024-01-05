@@ -22,6 +22,7 @@ class FeesView extends GetView<FeesController> {
         title: "Fees",
         leadingIcon: const SizedBox(),
         body: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: Column(
             children: [
               CustomBackground(
@@ -86,7 +87,7 @@ class FeesView extends GetView<FeesController> {
                             : controller.feesLoader.value
                                 ? const SecondaryLoadingWidget()
                                 : ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount: controller.feesInvoiceList.length,
                                     itemBuilder: (context, index) {
@@ -130,7 +131,7 @@ class FeesView extends GetView<FeesController> {
                                     },
                                   ),
                       ),
-                      100.verticalSpacing,
+                      200.verticalSpacing,
                     ],
                   ),
                 ),

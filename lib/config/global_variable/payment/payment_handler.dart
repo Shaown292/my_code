@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class PaymentHandlerController extends GetxController{
 
-  Future<PaymentResponseModel> paymentSuccessHandler({required String type, required String amount, required String paymentMethod, required String invoiceId,}) async {
+  Future<PaymentResponseModel> paymentSuccessHandler({required String type, required double amount, required int paymentMethod, required int invoiceId,}) async {
     
     try{
       final response = await BaseClient().postData(url: InfixApi.paymentHandler, header: GlobalVariable.header, payload: {

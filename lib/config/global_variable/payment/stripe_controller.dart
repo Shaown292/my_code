@@ -9,9 +9,9 @@ import 'package:get/get.dart';
 class StripeController extends GetxController {
   Map<String, dynamic>? paymentIntent;
 
-  Future<void> makePayment({required String amount, required String currency, required String type, required String paymentMethod, required String invoiceId,}) async {
+  Future<void> makePayment({required String amount, required String currency, required String type, required int paymentMethod, required int invoiceId,}) async {
     try {
-      paymentIntent = await createPaymentIntent(amount, currency);
+      paymentIntent = await createPaymentIntent(amount.toString(), currency);
 
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
@@ -33,7 +33,7 @@ class StripeController extends GetxController {
     }
   }
 
-  displayPaymentSheet({required String amount, required String type, required String paymentMethod, required String invoiceId,}) async {
+  displayPaymentSheet({required String amount, required String type, required int paymentMethod, required int invoiceId,}) async {
     PaymentHandlerController paymentHandlerController = Get.put(PaymentHandlerController());
     try {
       await Stripe.instance.presentPaymentSheet().then((value) async {
@@ -66,7 +66,7 @@ class StripeController extends GetxController {
               ),
             )).then((value) => paymentHandlerController.paymentSuccessHandler(
           type: type,
-          amount: amount,
+          amount: double.tryParse(amount)!,
           paymentMethod: paymentMethod,
           invoiceId: invoiceId,
         ));

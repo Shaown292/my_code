@@ -61,6 +61,7 @@ class GlobalRxVariableController extends GetxController {
   final studentRecordId = Rxn<int>();
   final roleId = Rxn<int>();
   final token = Rxn<String>();
+  final email = Rxn<String>();
   final studentId = Rxn<int>();
   final parentId = Rxn<int>();
   final staffId = Rxn<int>();

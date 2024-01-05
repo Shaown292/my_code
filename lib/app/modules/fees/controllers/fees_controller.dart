@@ -18,6 +18,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/payment/paypal_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/payment/stripe_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_fees_response_model/fees_invoice_response_model/fees_invoice_response_model.dart';
@@ -27,6 +28,9 @@ import 'package:get/get.dart';
 import '../../../utilities/widgets/common_widgets/primary_button.dart';
 
 class FeesController extends GetxController {
+
+
+  PaypalController paypalController = Get.put(PaypalController());
   StripeController stripeController = Get.put(StripeController());
   GlobalRxVariableController globalRxVariableController = Get.find();
   StudentWalletController studentWalletController =
@@ -458,6 +462,7 @@ class FeesController extends GetxController {
   }
 
   void _selectedPaymentGateway(value, index) {
+    print(value);
     switch (value) {
       case 'Cash':
         break;
@@ -465,17 +470,23 @@ class FeesController extends GetxController {
         break;
       case 'Bank':
         break;
-      case 'Paypal':
+      case 'PayPal':
+        paypalController.makePayment(
+          amount: feesInvoiceList[index].amount!.toString(),
+          currency: AppConfig.stripeCurrency,
+          type: 'feesInvoice',
+          paymentMethod: studentWalletController.paymentMethodId.value,
+          invoiceId: feesInvoiceList[index].id!,
+        );
         break;
       case 'Stripe':
         // stripeController.makePayment(feesInvoiceList[index].amount.toString(), AppConfig.stripeCurrency);
         stripeController.makePayment(
-          amount: feesInvoiceList[index].amount.toString(),
+          amount: feesInvoiceList[index].amount!.toString(),
           currency: AppConfig.stripeCurrency,
           type: 'feesInvoice',
-          paymentMethod:
-              studentWalletController.paymentMethodId.value.toString(),
-          invoiceId: feesInvoiceList[index].id.toString(),
+          paymentMethod: studentWalletController.paymentMethodId.value,
+          invoiceId: feesInvoiceList[index].id!,
         );
         break;
 

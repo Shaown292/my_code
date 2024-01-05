@@ -28,7 +28,7 @@ class MyWalletModel {
 }
 
 class Data {
-  int? myBalance;
+  String? myBalance;
   String? currencySymbol;
   List<WalletTransactions>? walletTransactions;
 
