@@ -50,13 +50,13 @@ class HomeworkCardTile extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: onTap,
-                  child: const Column(
+                  child:  Column(
                     children: [
                       Text(
-                        "View",
+                        "View".tr,
                         style: AppTextStyle.homeworkView,
                       ),
-                      CustomDivider(
+                      const CustomDivider(
                         width: 35,
                         height: 1,
                         color: AppColors.homeworkViewColor,

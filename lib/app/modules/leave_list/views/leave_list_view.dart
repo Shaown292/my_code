@@ -21,7 +21,7 @@ class LeaveListView extends GetView<LeaveListController> {
     return DefaultTabController(
       length: controller.status.length,
       child: InfixEduScaffold(
-        title: "Leave List",
+        title: "Leave List".tr,
         body: SingleChildScrollView(
           child: CustomBackground(
             customWidget: Obx(
@@ -58,8 +58,8 @@ class LeaveListView extends GetView<LeaveListController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "My Remaining Leave",
+                             Text(
+                              "My Remaining Leave".tr,
                               style: AppTextStyle.fontSize14BlackW500,
                             ),
                             10.verticalSpacing,
@@ -84,10 +84,10 @@ class LeaveListView extends GetView<LeaveListController> {
                       ),
                     ),
                     30.verticalSpacing,
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        "Leave List",
+                        "Leave List".tr,
                         style: AppTextStyle.blackFontSize14W400,
                       ),
                     ),

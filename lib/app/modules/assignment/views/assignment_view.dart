@@ -21,7 +21,7 @@ class AssignmentView extends GetView<AssignmentController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Assignment",
+        title: "Assignment".tr,
         body: RefreshIndicator(
           onRefresh: () async {
             controller.studentAssignmentList.clear();
@@ -64,12 +64,12 @@ class AssignmentView extends GetView<AssignmentController> {
                                                     index]
                                                 .contentTitle!)
                                         : showBasicSuccessSnackBar(
-                                            message: 'No File Available.');
+                                            message: 'No File Available.'.tr);
                                   },
-                                  title: 'Confirmation',
-                                  subTitle: AppText.downloadMessage,
-                                  noText: 'No',
-                                  yesText: 'Download',
+                                  title: 'Confirmation'.tr,
+                                  subTitle: AppText.downloadMessage.tr,
+                                  noText: 'No'.tr,
+                                  yesText: 'Download'.tr,
                                 ),
                               );
                             },

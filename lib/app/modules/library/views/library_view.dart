@@ -14,7 +14,7 @@ class LibraryView extends GetView<LibraryController> {
   @override
   Widget build(BuildContext context) {
     return  InfixEduScaffold(
-      title: "Library",
+      title: "Library".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -29,7 +29,7 @@ class LibraryView extends GetView<LibraryController> {
                 return Obx(
                       () => CustomCardTile(
                     icon: controller.libraryTileList[index].icon,
-                    title: controller.libraryTileList[index].title,
+                    title: controller.libraryTileList[index].title.tr,
                     onTap: () {
                       controller.selectIndex.value = index;
                       AppFunctions.getStudentDashboardNavigation(

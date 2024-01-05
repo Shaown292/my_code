@@ -16,7 +16,7 @@ class SettingsView extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
     return  Obx(() => InfixEduScaffold(
-      title: "Settings",
+      title: "Settings".tr,
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
@@ -37,7 +37,7 @@ class SettingsView extends GetView<SettingsController> {
               10.verticalSpacing,
               SettingsTile(
                 icon: ImagePath.changePassword,
-                title: "Change Password",
+                title: "Change Password".tr,
                 isLanguage: false,
                 onTileTap: (){
                   Get.toNamed(Routes.CHANGE_PASSWORD);
@@ -47,7 +47,7 @@ class SettingsView extends GetView<SettingsController> {
               10.verticalSpacing,
               SettingsTile(
                 icon: ImagePath.delete,
-                title: "Delete Account",
+                title: "Delete Account".tr,
                 isLanguage: false,
                 onTileTap: (){
                   Get.dialog(
@@ -55,10 +55,10 @@ class SettingsView extends GetView<SettingsController> {
                       onYesTap: () {
 
                       },
-                      title: 'Confirmation',
+                      title: 'Confirmation'.tr,
                       subTitle: AppText.deleteAccountWarningMsg,
-                      noText: 'cancel',
-                      yesText: 'delete',
+                      noText: 'cancel'.tr,
+                      yesText: 'delete'.tr,
                     ),
                   );
                 },

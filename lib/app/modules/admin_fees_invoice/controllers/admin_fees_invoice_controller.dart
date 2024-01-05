@@ -5,5 +5,13 @@ class AdminFeesInvoiceController extends GetxController {
 
   FeesController feesController = Get.put(FeesController());
 
+  RxInt invoiceId = 0.obs;
 
+  @override
+  void onInit() {
+    invoiceId.value = Get.arguments["invoice_id"];
+    feesController.getFeesInvoice(invoiceId: invoiceId.value);
+    // TODO: implement onInit
+    super.onInit();
+  }
 }

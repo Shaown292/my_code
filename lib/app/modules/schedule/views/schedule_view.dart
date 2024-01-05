@@ -18,7 +18,7 @@ class ScheduleView extends GetView<ScheduleController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Schedule",
+        title: "Schedule".tr,
         body: RefreshIndicator(
           onRefresh: () async {},
           child: CustomBackground(

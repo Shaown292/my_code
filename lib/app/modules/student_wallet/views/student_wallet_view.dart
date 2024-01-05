@@ -16,7 +16,7 @@ class StudentWalletView extends GetView<StudentWalletController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "My Wallet",
+      title: "My Wallet".tr,
       body: CustomBackground(
         customWidget: SingleChildScrollView(
           child: Padding(
@@ -32,7 +32,7 @@ class StudentWalletView extends GetView<StudentWalletController> {
                       padding: const EdgeInsets.all(10),
                     ),
                     PrimaryButton(
-                      text: "Add Balance",
+                      text: "Add Balance".tr,
                       borderRadius: 6,
                       padding: const EdgeInsets.all(10),
                       onTap: () => controller.showAddBalanceBottomSheet(
@@ -51,11 +51,11 @@ class StudentWalletView extends GetView<StudentWalletController> {
                     itemCount: controller.paymentList.length,
                     itemBuilder: (context, index) {
                       return ShowStatusTile(
-                        firstTitle: "Date",
+                        firstTitle: "Date".tr,
                         firstValue: DateTime.tryParse(controller.paymentList[index].createdAt ?? '')?.yyyy_mm_dd,
-                        secondTitle: "Method",
+                        secondTitle: "Method".tr,
                         secondValue: controller.paymentList[index].paymentMethod,
-                        thirdTitle: "Amount",
+                        thirdTitle: "Amount".tr,
                         thirdValue: controller.paymentList[index].amount.toString(),
                         activeStatus: controller.paymentList[index].status,
                         activeStatusColor: AppColors.activeStatusRedColor,

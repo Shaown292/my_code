@@ -14,7 +14,7 @@ class AttendanceView extends GetView<AttendanceController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: 'Attendance',
+      title: 'Attendance'.tr,
 
       body: CustomBackground(
         customWidget: Column(
@@ -29,7 +29,7 @@ class AttendanceView extends GetView<AttendanceController> {
               itemBuilder: (context, index) {
                 return Obx(() => CustomCardTile(
                   icon: controller.attendanceTileList[index].icon,
-                  title: controller.attendanceTileList[index].title,
+                  title: controller.attendanceTileList[index].title.tr,
                   onTap: () {
                     controller.selectIndex.value = index;
                     AppFunctions.getStudentDashboardNavigation(title: controller.attendanceTileList[index].value);

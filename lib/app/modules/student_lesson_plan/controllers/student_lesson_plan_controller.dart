@@ -167,20 +167,20 @@ class StudentLessonPlanController extends GetxController {
                   ),
                 ),
                 BottomSheetTile(
-                  title: "Subject Name",
+                  title: "Subject Name".tr,
                   value: studentLessonPlanDetailsData.subject,
                 ),
                 BottomSheetTile(
-                  title: "Date",
+                  title: "Date".tr,
                   value: studentLessonPlanDetailsData.date,
                   color: AppColors.homeworkWidgetColor,
                 ),
                 BottomSheetTile(
-                  title: "Lesson",
+                  title: "Lesson".tr,
                   value: studentLessonPlanDetailsData.lesson,
                 ),
                 BottomSheetTile(
-                  title: "Topic",
+                  title: "Topic".tr,
                   hasMultipleData: true,
                   listview: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -198,7 +198,7 @@ class StudentLessonPlanController extends GetxController {
                   color: AppColors.homeworkWidgetColor,
                 ),
                 BottomSheetTile(
-                  title: "Sub Topic",
+                  title: "Sub Topic".tr,
                   hasMultipleData: true,
                   listview: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -231,8 +231,8 @@ class StudentLessonPlanController extends GetxController {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         width: Get.width * 0.41,
-                        child: const Text(
-                          "Documents",
+                        child:  Text(
+                          "Documents".tr,
                           style: AppTextStyle.fontSize12lightViolateW400,
                         ),
                       ),
@@ -254,9 +254,9 @@ class StudentLessonPlanController extends GetxController {
                                 color: Color(0xFF3490DC),
                               ),
                               5.horizontalSpacing,
-                              const Text(
-                                "Download",
-                                style: TextStyle(
+                               Text(
+                                "Download".tr,
+                                style: const TextStyle(
                                   color: Color(0xFF3490DC),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -270,7 +270,7 @@ class StudentLessonPlanController extends GetxController {
                   ),
                 ),
                 BottomSheetTile(
-                  title: "Youtube Link",
+                  title: "Youtube Link".tr,
                   value: studentLessonPlanDetailsData.lectureYoutubeLink,
                   color: AppColors.homeworkWidgetColor,
                 ),
@@ -286,8 +286,8 @@ class StudentLessonPlanController extends GetxController {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         width: Get.width * 0.41,
-                        child: const Text(
-                          "Status",
+                        child:  Text(
+                          "Status".tr,
                           style: AppTextStyle.fontSize12lightViolateW400,
                         ),
                       ),

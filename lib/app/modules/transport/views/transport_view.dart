@@ -17,7 +17,7 @@ class TransportView extends GetView<TransportController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Transport",
+      title: "Transport".tr,
       body: SingleChildScrollView(
         child: CustomBackground(
           customWidget: RefreshIndicator(
@@ -44,8 +44,8 @@ class TransportView extends GetView<TransportController> {
                     children: [
                       SizedBox(
                         width: Get.width * 0.13,
-                        child: const Text(
-                          "Vehicle",
+                        child:  Text(
+                          "Vehicle".tr,
                           style: AppTextStyle.textStyle12WhiteW500,
                         ),
                       ),
@@ -59,8 +59,8 @@ class TransportView extends GetView<TransportController> {
                       Container(
                         width: Get.width * 0.2,
                         padding: const EdgeInsets.all(10),
-                        child: const Text(
-                          "Status",
+                        child:  Text(
+                          "Status".tr,
                           style: AppTextStyle.textStyle12WhiteW500,
                         ),
                       ),
@@ -71,8 +71,8 @@ class TransportView extends GetView<TransportController> {
                           thickness: 1,
                         ),
                       ),
-                      const Text(
-                        "Route",
+                       Text(
+                        "Route".tr,
                         style: AppTextStyle.textStyle12WhiteW500,
                       )
                     ],

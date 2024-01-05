@@ -67,7 +67,7 @@ class HomeView extends GetView<HomeController> {
                     return Obx(
                       () => CustomCardTile(
                         icon: controller.homeTileList[index].icon,
-                        title: controller.homeTileList[index].title,
+                        title: controller.homeTileList[index].title.tr,
                         onTap: () {
                           controller.selectIndex.value = index;
                           AppFunctions.routingDecisionForRoleId(

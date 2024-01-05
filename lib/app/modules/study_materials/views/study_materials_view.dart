@@ -14,7 +14,7 @@ class StudyMaterialsView extends GetView<StudyMaterialsController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: 'Study Materials',
+      title: 'Study Materials'.tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -29,7 +29,7 @@ class StudyMaterialsView extends GetView<StudyMaterialsController> {
                 return Obx(
                   () => CustomCardTile(
                     icon: controller.studyMaterialTileList[index].icon,
-                    title: controller.studyMaterialTileList[index].title,
+                    title: controller.studyMaterialTileList[index].title.tr,
                     onTap: () {
                       controller.selectIndex.value = index;
                       AppFunctions.getStudentDashboardNavigation(

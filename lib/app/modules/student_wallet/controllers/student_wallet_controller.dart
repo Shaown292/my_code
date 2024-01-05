@@ -164,8 +164,8 @@ class StudentWalletController extends GetxController {
             child: Column(
               children: [
                 10.verticalSpacing,
-                const Text(
-                  "Add Balance",
+                 Text(
+                  "Add Balance".tr,
                   style: AppTextStyle.fontSize14BlackW500,
                 ),
                 10.verticalSpacing,
@@ -173,7 +173,7 @@ class StudentWalletController extends GetxController {
                   controller: amountController,
                   enableBorderActive: true,
                   focusBorderActive: true,
-                  hintText: "Amount",
+                  hintText: "Amount".tr,
                   textInputType: TextInputType.number,
                   hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   fillColor: Colors.white,
@@ -212,7 +212,7 @@ class StudentWalletController extends GetxController {
                         controller: noteController,
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Note",
+                        hintText: "Note".tr,
                         textInputType: TextInputType.number,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                         fillColor: Colors.white,
@@ -225,18 +225,18 @@ class StudentWalletController extends GetxController {
                         enableBorderActive: true,
                         focusBorderActive: true,
                         hintText:
-                            "${file.value.path.isNotEmpty ? file : 'Select File'}",
+                            "${file.value.path.isNotEmpty ? file : 'Select File'.tr}",
                         fillColor: Colors.white,
-                        suffixIcon: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        suffixIcon:  Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Browse",
+                                "Browse".tr,
                                 style: AppTextStyle.fontSize12lightViolateW400,
                               ),
-                              CustomDivider(
+                              const CustomDivider(
                                 width: 42,
                                 height: 1,
                                 color: AppColors.profileValueColor,
@@ -253,7 +253,7 @@ class StudentWalletController extends GetxController {
                     : const SizedBox(),
                 30.verticalSpacing,
                 PrimaryButton(
-                  text: 'Submit',
+                  text: 'Submit'.tr,
                   onTap: () {
                     if (validation()) {
                       _selectedPaymentGateway(paymentMethodName.value);
@@ -272,10 +272,10 @@ class StudentWalletController extends GetxController {
 
   bool validation() {
     if (amountTextController.text.isEmpty) {
-      showBasicFailedSnackBar(message: 'Enter an amount');
+      showBasicFailedSnackBar(message: 'Enter an amount'.tr);
       return false;
     } else if (paymentMethodName.value == '') {
-      showBasicFailedSnackBar(message: 'Select payment method.');
+      showBasicFailedSnackBar(message: 'Select payment method.'.tr);
       return false;
     }
 

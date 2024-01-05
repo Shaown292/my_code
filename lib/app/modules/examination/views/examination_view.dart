@@ -13,7 +13,7 @@ class ExaminationView extends GetView<ExaminationController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: 'Examination',
+      title: 'Examination'.tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -29,7 +29,7 @@ class ExaminationView extends GetView<ExaminationController> {
 
                       () => CustomCardTile(
                     icon: controller.examinationTileList[index].icon,
-                    title: controller.examinationTileList[index].title,
+                    title: controller.examinationTileList[index].title.tr,
                     onTap: () {
                       controller.selectIndex.value = index;
                       AppFunctions.getStudentDashboardNavigation(

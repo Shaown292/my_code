@@ -90,9 +90,9 @@ class TransportTile extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: AppColors.appButtonColor),
-                        child: const Center(
+                        child:  Center(
                           child: Text(
-                            "View",
+                            "View".tr,
                             style: AppTextStyle.textStyle12WhiteW400,
                           ),
                         ),

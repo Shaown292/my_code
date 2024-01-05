@@ -20,7 +20,7 @@ class SyllabusView extends GetView<SyllabusController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Syllabus",
+        title: "Syllabus".tr,
         body: CustomBackground(
           customWidget: controller.loadingController.isLoading
               ? const LoadingWidget()
@@ -47,12 +47,12 @@ class SyllabusView extends GetView<SyllabusController> {
                                         title: controller
                                             .syllabusList[index].contentTitle!)
                                     : showBasicSuccessSnackBar(
-                                        message: 'No File Available.');
+                                        message: 'No File Available.'.tr);
                               },
-                              title: 'Confirmation',
+                              title: 'Confirmation'.tr,
                               subTitle: AppText.downloadMessage,
-                              noText: 'No',
-                              yesText: 'Download',
+                              noText: 'No'.tr,
+                              yesText: 'Download'.tr,
                             ),
                           );
                         },

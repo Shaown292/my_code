@@ -27,7 +27,7 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
         initialIndex: controller.selectTabIndex.value,
         length: controller.daysOfWeek.length,
         child: InfixEduScaffold(
-          title: "Lesson Plan",
+          title: "Lesson Plan".tr,
           body: CustomBackground(
             customWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -178,8 +178,8 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                                                             color: AppColors
                                                                 .primaryColor,
                                                           ),
-                                                          child: const Text(
-                                                            "Details",
+                                                          child:  Text(
+                                                            "Details".tr,
                                                             style: AppTextStyle
                                                                 .textStyle12WhiteW400,
                                                           ),

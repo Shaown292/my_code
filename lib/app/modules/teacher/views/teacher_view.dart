@@ -19,7 +19,7 @@ class TeacherView extends GetView<TeacherController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Teacher",
+        title: "Teacher".tr,
         body: CustomBackground(
           customWidget: RefreshIndicator(
             color: AppColors.primaryColor,

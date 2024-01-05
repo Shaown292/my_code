@@ -61,59 +61,61 @@ class BookListController extends GetxController {
         height: Get.height * 0.55,
         color: bottomSheetBackgroundColor,
         child: bookListData.isNotEmpty
-            ? Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            10.verticalSpacing,
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(bookListData[index].bookTitle ?? "", style:  AppTextStyle.fontSize14BlackW500,),
-            ),
-            BottomSheetTile(
-              title: "Book No",
-              value: bookListData[index].bookNumber,
-              color: AppColors.homeworkWidgetColor ,
-            ),
-            BottomSheetTile(
-              title: "ISBN No",
-              value: bookListData[index].isbnNo,
-              color:  Colors.white,
-            ),
-            BottomSheetTile(
-              title: "Category",
-              value: bookListData[index].category,
-              color: AppColors.homeworkWidgetColor ,
-            ),
-            BottomSheetTile(
-              title: "Subject",
-              value: bookListData[index].subject,
-              color:  Colors.white,
-            ),
-            BottomSheetTile(
-              title: "Publisher Name",
-              value: bookListData[index].publisherName,
-              color: AppColors.homeworkWidgetColor ,
-            ),
-            BottomSheetTile(
-              title: "Author Name",
-              value: bookListData[index].authorName,
-              color:  Colors.white,
-            ),
-            BottomSheetTile(
-              title: "Quantity",
-              value: "${bookListData[index].quantity}",
-              color: AppColors.homeworkWidgetColor ,
-            ),
-            BottomSheetTile(
-              title: "Price",
-              value: "\$${bookListData[index].price}",
-              color:  Colors.white,
-            ),
-          ],
-        )
-            : const Center(
+            ? SingleChildScrollView(
+              child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+              10.verticalSpacing,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(bookListData[index].bookTitle ?? "", style:  AppTextStyle.fontSize14BlackW500,),
+              ),
+              BottomSheetTile(
+                title: "Book No".tr,
+                value: bookListData[index].bookNumber,
+                color: AppColors.homeworkWidgetColor ,
+              ),
+              BottomSheetTile(
+                title: "ISBN No".tr,
+                value: bookListData[index].isbnNo,
+                color:  Colors.white,
+              ),
+              BottomSheetTile(
+                title: "Category".tr,
+                value: bookListData[index].category,
+                color: AppColors.homeworkWidgetColor ,
+              ),
+              BottomSheetTile(
+                title: "Subject".tr,
+                value: bookListData[index].subject,
+                color:  Colors.white,
+              ),
+              BottomSheetTile(
+                title: "Publisher Name".tr,
+                value: bookListData[index].publisherName,
+                color: AppColors.homeworkWidgetColor ,
+              ),
+              BottomSheetTile(
+                title: "Author Name".tr,
+                value: bookListData[index].authorName,
+                color:  Colors.white,
+              ),
+              BottomSheetTile(
+                title: "Quantity".tr,
+                value: "${bookListData[index].quantity}",
+                color: AppColors.homeworkWidgetColor ,
+              ),
+              BottomSheetTile(
+                title: "Price".tr,
+                value: "\$${bookListData[index].price}",
+                color:  Colors.white,
+              ),
+                        ],
+                      ),
+            )
+            :  Center(
           child: Text(
-            "No Details Available",
+            "No Details Available".tr,
             style: AppTextStyle.fontSize16lightBlackW500,
           ),
         ),

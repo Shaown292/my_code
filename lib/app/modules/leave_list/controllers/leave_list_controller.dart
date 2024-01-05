@@ -28,9 +28,9 @@ class LeaveListController extends GetxController {
   List<RemainingLeaveListData> remainingLeaveList = [];
 
   List<String> status = <String>[
-    'Pending',
-    'Approved',
-    'Rejected',
+    'Pending'.tr,
+    'Approved'.tr,
+    'Rejected'.tr,
   ];
 
   Future<LeaveListResponseModel?> getAllLeaveList(int studentId) async {

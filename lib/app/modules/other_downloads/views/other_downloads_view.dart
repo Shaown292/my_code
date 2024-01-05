@@ -19,7 +19,7 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Other Downloads",
+        title: "Other Downloads".tr,
         body: RefreshIndicator(
           onRefresh: () async {
             controller.studentOthersDownloadList.clear();
@@ -74,12 +74,12 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
                                                           .contentTitle!)
                                                   : showBasicSuccessSnackBar(
                                                       message:
-                                                          'No File Available.');
+                                                          'No File Available.'.tr);
                                             },
-                                            title: 'Confirmation',
+                                            title: 'Confirmation'.tr,
                                             subTitle: AppText.downloadMessage,
-                                            noText: 'No',
-                                            yesText: 'Download',
+                                            noText: 'No'.tr,
+                                            yesText: 'Download'.tr,
                                           ),
                                         );
                                       },

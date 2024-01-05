@@ -17,7 +17,7 @@ class NoticeView extends GetView<NoticeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Notice",
+        title: "Notice".tr,
         body: CustomBackground(
           customWidget: RefreshIndicator(
             color: AppColors.primaryColor,

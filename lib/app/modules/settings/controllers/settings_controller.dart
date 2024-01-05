@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_selection.dart';
-import 'package:flutter_single_getx_api_v2/config/language/controller/languages/bn.dart';
 import 'package:get/get.dart';
 import 'package:get_cli/core/internationalization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
