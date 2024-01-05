@@ -70,7 +70,7 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
                       ),
                 50.verticalSpacing,
                 PrimaryButton(
-                  text: "Save",
+                  text: "Search",
                   onTap: () {
                     Get.toNamed(Routes.TE_SEARCH_CLASS_ROUTINE_LIST);
                   },

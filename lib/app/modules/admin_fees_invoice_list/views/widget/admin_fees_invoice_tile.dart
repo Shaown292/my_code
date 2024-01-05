@@ -67,10 +67,7 @@ class AdminFeesInvoiceTile extends StatelessWidget {
                         onTap: onTapView,
                         child: const Text("View"),
                       ),
-                      PopupMenuItem(
-                        onTap: onTapViewTransaction,
-                        child: const Text("View Transaction"),
-                      ),
+                    
                     ],
                   ),
                 ],

@@ -46,7 +46,6 @@ class StaffListView extends GetView<StaffListController> {
                                       .roleWiseStaffList[index].currentAddress,
                                   staffPhoneNo: controller
                                       .roleWiseStaffList[index].mobile,
-                                  staffImage: ImagePath.dp,
                                   isImageEmpty: controller.roleWiseStaffList[index].staffPhoto.toString() == '' || controller.roleWiseStaffList[index].staffPhoto.toString().isEmpty ? true : false,
                                   imageUrl: controller.roleWiseStaffList[index].staffPhoto.toString(),
                                   onTap: () {
@@ -57,6 +56,7 @@ class StaffListView extends GetView<StaffListController> {
                                             .roleWiseStaffList[index].id,
                                         "staff_first_name" : controller.roleWiseStaffList[index].firstName,
                                         "staff_last_name" : controller.roleWiseStaffList[index].lastName,
+                                        "staff_image" : controller.roleWiseStaffList[index].staffPhoto,
                                       },
                                     );
                                   },

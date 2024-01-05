@@ -208,14 +208,14 @@ class SingleChatView extends GetView<SingleChatController> {
                   }
                   if (v == 2) {
                     if (controller.isSearchPage.value == false) {
-                      controller.blockSingleUser(
+                      controller.blockedUsersController.blockSingleUser(
                           type: controller.singleChatUserListData!.blocked!
                               ? ""
                               : "block",
                           userId: controller.singleChatUserListData!.id!);
                     }
                     if (controller.isSearchPage.value) {
-                      controller.blockSingleUser(
+                      controller.blockedUsersController.blockSingleUser(
                           type: controller.searchChatData!.blocked!
                               ? ""
                               : "block",
@@ -365,11 +365,12 @@ class SingleChatView extends GetView<SingleChatController> {
                                                               "";
                                                           controller.onTapQuote
                                                               .value = true;
-                                                          controller.replyId.value = controller.reversedList[index].messageId!;
-                                                          print("Reply ID :::::: ${controller.replyId.value}");
-
-                                                          print(
-                                                              "object :::: ${controller.quotedText.value}");
+                                                          controller.replyId
+                                                                  .value =
+                                                              controller
+                                                                  .reversedList[
+                                                                      index]
+                                                                  .messageId!;
                                                         },
                                                         isReceiver: controller
                                                             .reversedList[index]
@@ -451,8 +452,10 @@ class SingleChatView extends GetView<SingleChatController> {
                                                     .reversedList[index]
                                                     .forwarded ??
                                                 false,
-                                            isQuotedText: controller.reversedList[index].reply,
-
+                                            isQuotedText: controller
+                                                .reversedList[index].reply!,
+                                            quotedText: controller
+                                                .reversedList[index].replyFor,
                                             onImageTap: () {
                                               Get.dialog(
                                                 Material(
@@ -582,7 +585,12 @@ class SingleChatView extends GetView<SingleChatController> {
                                                             "";
                                                         controller.onTapQuote
                                                             .value = true;
-
+                                                        controller.replyId
+                                                            .value =
+                                                        controller
+                                                            .reversedList[
+                                                        index]
+                                                            .messageId!;
                                                       },
                                                       isReceiver: controller
                                                           .reversedList[index]
@@ -617,7 +625,9 @@ class SingleChatView extends GetView<SingleChatController> {
                         children: [
                           controller.onTapQuote.value
                               ? QuoteText(
-                                  repliedText: controller.quotedText.value == "" ? "Attachment"  : controller.quotedText.value,
+                                  repliedText: controller.quotedText.value == ""
+                                      ? "Attachment"
+                                      : controller.quotedText.value,
                                 )
                               : const SizedBox(),
                           controller.singleChatPickImage.value.path.isNotEmpty

@@ -37,6 +37,9 @@ class GroupChatData {
   String? originalFileName;
   bool? sender;
   bool? receiver;
+  String? replyFor;
+  bool? reply;
+  bool? forwarded;
 
   GroupChatData(
       {this.threadId,
@@ -47,7 +50,11 @@ class GroupChatData {
         this.file,
         this.originalFileName,
         this.sender,
-        this.receiver});
+        this.receiver,
+        this.forwarded,
+        this.replyFor,
+        this.reply,
+      });
 
   GroupChatData.fromJson(Map<String, dynamic> json) {
     threadId = json['thread_id'];
@@ -59,6 +66,9 @@ class GroupChatData {
     originalFileName = json['original_file_name'];
     sender = json['sender'];
     receiver = json['receiver'];
+    forwarded = json['forwarded'];
+    replyFor = json['reply_for'];
+    reply = json['reply'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +82,9 @@ class GroupChatData {
     data['original_file_name'] = originalFileName;
     data['sender'] = sender;
     data['receiver'] = receiver;
+    data['forwarded'] = forwarded;
+    data['reply'] = reply;
+    data['reply_for'] = replyFor;
     return data;
   }
 }

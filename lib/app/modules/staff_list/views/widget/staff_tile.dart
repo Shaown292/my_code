@@ -71,8 +71,7 @@ class StaffTile extends StatelessWidget {
                   children: [
                     Text("Name :  ${staffName ?? AppText.noDataAvailable}"),
                     Text("Phone : ${staffAddress ?? AppText.noDataAvailable}"),
-                    Text(
-                        "Address : ${staffPhoneNo ?? AppText.noDataAvailable}"),
+                    Text("Address : ${staffPhoneNo ?? AppText.noDataAvailable}"),
                   ],
                 )
               ],

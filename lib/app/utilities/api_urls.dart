@@ -525,6 +525,7 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
 
   static String chatSetting='${AppConfig.domainName}/api/chat/settings/permission';
   static String chatStatus='${baseApi}single-user-chat-status';
+  static String blockedChatUser ='${baseApi}blocked-chat-users';
 
 
   /// Payment Gateway Handler
