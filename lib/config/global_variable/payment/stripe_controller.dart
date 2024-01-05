@@ -9,7 +9,14 @@ import 'package:get/get.dart';
 class StripeController extends GetxController {
   Map<String, dynamic>? paymentIntent;
 
-  Future<void> makePayment({required String amount, required String currency, required String type, required int paymentMethod, required int invoiceId,}) async {
+  Future<void> makePayment({
+    required String amount,
+    required String currency,
+    required String type,
+    required int paymentMethod,
+    int? invoiceId,
+    required String from,
+  }) async {
     try {
       paymentIntent = await createPaymentIntent(amount.toString(), currency);
 
@@ -26,18 +33,30 @@ class StripeController extends GetxController {
           .then((value) {});
 
       //STEP 3: Display Payment sheet
-      displayPaymentSheet(amount: amount, type: type, paymentMethod: paymentMethod, invoiceId: invoiceId,);
+      displayPaymentSheet(
+        amount: amount,
+        type: type,
+        paymentMethod: paymentMethod,
+        invoiceId: invoiceId,
+        from: from,
+      );
     } catch (e, t) {
       debugPrint('$e');
       debugPrint('$t');
     }
   }
 
-  displayPaymentSheet({required String amount, required String type, required int paymentMethod, required int invoiceId,}) async {
-    PaymentHandlerController paymentHandlerController = Get.put(PaymentHandlerController());
+  displayPaymentSheet({
+    required String amount,
+    required String type,
+    required int paymentMethod,
+    int? invoiceId,
+    required String from,
+  }) async {
+    PaymentHandlerController paymentHandlerController =
+        Get.put(PaymentHandlerController());
     try {
       await Stripe.instance.presentPaymentSheet().then((value) async {
-
         Get.dialog(
             barrierDismissible: false,
             Dialog(
@@ -65,13 +84,12 @@ class StripeController extends GetxController {
                 ),
               ),
             )).then((value) => paymentHandlerController.paymentSuccessHandler(
-          type: type,
-          amount: double.tryParse(amount)!,
-          paymentMethod: paymentMethod,
-          invoiceId: invoiceId,
-        ));
-
-
+              type: type,
+              amount: double.tryParse(amount)!,
+              paymentMethod: paymentMethod,
+              invoiceId: invoiceId,
+              from: from,
+            ));
 
         print('Payment Intent ::::: ${paymentIntent?['id']}');
 
@@ -120,8 +138,7 @@ class StripeController extends GetxController {
       var response = await http.post(
         Uri.parse(AppConfig.stripeServerURL),
         headers: {
-          'Authorization':
-              'Bearer ${AppConfig.stripeToken}',
+          'Authorization': 'Bearer ${AppConfig.stripeToken}',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body,

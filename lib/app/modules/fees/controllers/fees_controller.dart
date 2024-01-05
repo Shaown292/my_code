@@ -29,7 +29,6 @@ import 'package:get/get.dart';
 import '../../../utilities/widgets/common_widgets/primary_button.dart';
 
 class FeesController extends GetxController {
-
   PayStackController payStackController = Get.put(PayStackController());
   PaypalController paypalController = Get.put(PaypalController());
   StripeController stripeController = Get.put(StripeController());
@@ -463,7 +462,6 @@ class FeesController extends GetxController {
   }
 
   void _selectedPaymentGateway(value, index) {
-    print(value);
     switch (value) {
       case 'Cash':
         break;
@@ -478,6 +476,7 @@ class FeesController extends GetxController {
           type: 'feesInvoice',
           paymentMethod: studentWalletController.paymentMethodId.value,
           invoiceId: feesInvoiceList[index].id!,
+          from: 'feesInvoice',
         );
         break;
       case 'Stripe':
@@ -488,17 +487,18 @@ class FeesController extends GetxController {
           type: 'feesInvoice',
           paymentMethod: studentWalletController.paymentMethodId.value,
           invoiceId: feesInvoiceList[index].id!,
+          from: 'feesInvoice',
         );
         break;
 
       case 'Paystack':
-
         payStackController.makePayment(
           amount: feesInvoiceList[index].amount!.toString(),
           currency: AppConfig.stripeCurrency,
           type: 'feesInvoice',
           paymentMethod: studentWalletController.paymentMethodId.value,
           invoiceId: feesInvoiceList[index].id!,
+          from: 'feesInvoice',
         );
 
         break;

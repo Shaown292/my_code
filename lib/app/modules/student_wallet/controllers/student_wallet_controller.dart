@@ -12,9 +12,12 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
+import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/payment/pay_stack_controller.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/payment/paypal_controller.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/payment/stripe_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student/wallet/bank_list/bank_list.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student/wallet/my_wallet/my_wallet.dart';
@@ -22,6 +25,10 @@ import 'package:flutter_single_getx_api_v2/domain/core/model/student/wallet/paym
 import 'package:get/get.dart';
 
 class StudentWalletController extends GetxController {
+  PayStackController payStackController = Get.put(PayStackController());
+  PaypalController paypalController = Get.put(PaypalController());
+  StripeController stripeController = Get.put(StripeController());
+
   RxBool paymentMethodLoader = false.obs;
   RxBool bankListLoader = false.obs;
   RxBool isLoading = false.obs;
@@ -32,11 +39,9 @@ class StudentWalletController extends GetxController {
 
   Rx<File> file = File('').obs;
 
-
-
-
   RxList<PaymentMethodList> paymentMethodList = <PaymentMethodList>[].obs;
-  Rx<PaymentMethodList> initValue = PaymentMethodList(id: -1, name: "Payment Method").obs;
+  Rx<PaymentMethodList> initValue =
+      PaymentMethodList(id: -1, name: "Payment Method").obs;
   RxInt paymentMethodId = (-1).obs;
   RxString paymentMethodName = "".obs;
 
@@ -49,6 +54,7 @@ class StudentWalletController extends GetxController {
 
   Future<MyWalletModel> getPaymentDetails() async {
     try {
+      paymentList.clear();
       isLoading.value = true;
 
       final response = await BaseClient()
@@ -200,7 +206,8 @@ class StudentWalletController extends GetxController {
                       )
                     : const SizedBox(),
                 10.verticalSpacing,
-                paymentMethodName.value == "Bank" || paymentMethodName.value == "Cheque"
+                paymentMethodName.value == "Bank" ||
+                        paymentMethodName.value == "Cheque"
                     ? CustomTextFormField(
                         controller: noteController,
                         enableBorderActive: true,
@@ -212,7 +219,8 @@ class StudentWalletController extends GetxController {
                       )
                     : const SizedBox(),
                 10.verticalSpacing,
-                paymentMethodName.value == "Bank" || paymentMethodName.value == "Cheque"
+                paymentMethodName.value == "Bank" ||
+                        paymentMethodName.value == "Cheque"
                     ? CustomTextFormField(
                         enableBorderActive: true,
                         focusBorderActive: true,
@@ -247,7 +255,9 @@ class StudentWalletController extends GetxController {
                 PrimaryButton(
                   text: 'Submit',
                   onTap: () {
-                    if (validation()) {}
+                    if (validation()) {
+                      _selectedPaymentGateway(paymentMethodName.value);
+                    }
                   },
                   padding: const EdgeInsets.all(10),
                 ),
@@ -264,9 +274,58 @@ class StudentWalletController extends GetxController {
     if (amountTextController.text.isEmpty) {
       showBasicFailedSnackBar(message: 'Enter an amount');
       return false;
+    } else if (paymentMethodName.value == '') {
+      showBasicFailedSnackBar(message: 'Select payment method.');
+      return false;
     }
 
     return true;
+  }
+
+  void _selectedPaymentGateway(value) {
+    switch (value) {
+      case 'Cash':
+        break;
+      case 'Cheque':
+        break;
+      case 'Bank':
+        break;
+      case 'PayPal':
+        paypalController.makePayment(
+          amount: amountTextController.text,
+          currency: AppConfig.stripeCurrency,
+          type: 'walletAddBallence',
+          paymentMethod: paymentMethodId.value,
+          from: 'walletAddBallence',
+        );
+        break;
+      case 'Stripe':
+        // stripeController.makePayment(feesInvoiceList[index].amount.toString(), AppConfig.stripeCurrency);
+        stripeController.makePayment(
+          amount: amountTextController.text,
+          currency: AppConfig.stripeCurrency,
+          type: 'walletAddBallence',
+          paymentMethod: paymentMethodId.value,
+          from: 'walletAddBallence',
+        );
+        break;
+
+      case 'Paystack':
+        payStackController.makePayment(
+          amount: amountTextController.text,
+          currency: AppConfig.stripeCurrency,
+          type: 'walletAddBallence',
+          paymentMethod: paymentMethodId.value,
+          from: 'walletAddBallence',
+        );
+
+        break;
+      case 'Xendit':
+        break;
+
+      case 'Khalti':
+        break;
+    }
   }
 
   @override

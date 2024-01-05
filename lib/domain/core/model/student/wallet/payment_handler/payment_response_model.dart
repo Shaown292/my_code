@@ -31,7 +31,7 @@ class PaymentData {
   PaymentData({this.addAmount, this.addMethod, this.addStatus, this.addType});
 
   PaymentData.fromJson(Map<String, dynamic> json) {
-    addAmount = json['add_amount'];
+    addAmount = json['add_amount'].toString();
     addMethod = json['add_method'];
     addStatus = json['add_status'];
     addType = json['add_type'];
