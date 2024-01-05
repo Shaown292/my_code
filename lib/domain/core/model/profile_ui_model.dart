@@ -130,6 +130,7 @@ class Data {
 class User {
   int id;
   String fullName;
+  String email;
   String phoneNumber;
   int roleId;
   int schoolId;
@@ -145,6 +146,7 @@ class User {
   User({
     required this.id,
     required this.fullName,
+    required this.email,
     required this.phoneNumber,
     required this.roleId,
     required this.schoolId,
@@ -161,6 +163,7 @@ class User {
     factory User.fromJson(Map<String, dynamic> j) => User(
     id: getSafeValue<int>(j, 'id', 0),
     fullName: getSafeValue<String>(j, 'full_name', ''),
+    email: getSafeValue<String>(j, 'email', ''),
     phoneNumber: getSafeValue<String>(j, 'phone_number', ''),
     roleId: getSafeValue<int>(j, 'role_id', 0),
     schoolId: getSafeValue<int>(j, 'school_id', 0),
@@ -191,6 +194,7 @@ class User {
   Map<String, dynamic> toJson() => {
     "id": id,
     "full_name": fullName,
+    "email": email,
     "phone_number": phoneNumber,
     "role_id": roleId,
     "school_id": schoolId,

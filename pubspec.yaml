@@ -37,6 +37,7 @@ dependencies:
   # Payment Gateways
   flutter_stripe: ^10.0.0
   flutter_paypal_checkout: ^1.0.1
+  flutter_paystack: ^1.0.7
 
   flutter: 
     sdk: flutter

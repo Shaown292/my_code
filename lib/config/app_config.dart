@@ -34,4 +34,11 @@ class AppConfig{
   static const String paypalClientSecret = 'ELLoQfnZ4kRbDkul81U_RNRsgHgFPDumlUloCcX6nO6ziXRXKob8gVYaTn6CGCeNVJtBqsfv7VtbsuR2';
   static const bool sandboxMood = true;
 
+
+  ///
+  /// Paystack
+  ///
+  static const String payStackPublicKey = "pk_test_cb290d59b9ec539d7bc3617d1fee3d8a9cdb78b3";
+  static const String payStackCurrency = 'ZAR';
+
 }

@@ -18,6 +18,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/payment/pay_stack_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/payment/paypal_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/payment/stripe_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
@@ -29,7 +30,7 @@ import '../../../utilities/widgets/common_widgets/primary_button.dart';
 
 class FeesController extends GetxController {
 
-
+  PayStackController payStackController = Get.put(PayStackController());
   PaypalController paypalController = Get.put(PaypalController());
   StripeController stripeController = Get.put(StripeController());
   GlobalRxVariableController globalRxVariableController = Get.find();
@@ -491,6 +492,15 @@ class FeesController extends GetxController {
         break;
 
       case 'Paystack':
+
+        payStackController.makePayment(
+          amount: feesInvoiceList[index].amount!.toString(),
+          currency: AppConfig.stripeCurrency,
+          type: 'feesInvoice',
+          paymentMethod: studentWalletController.paymentMethodId.value,
+          invoiceId: feesInvoiceList[index].id!,
+        );
+
         break;
       case 'Xendit':
         break;
