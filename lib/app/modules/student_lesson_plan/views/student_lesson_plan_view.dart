@@ -13,7 +13,7 @@ import '../../../data/constants/app_text_style.dart';
 import '../../../utilities/widgets/common_widgets/custom_background.dart';
 import '../../../utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import '../../../utilities/widgets/show_week_tile/show_week_tile.dart';
-import '../../../utilities/widgets/student_class_details_card/student_calss_details_card.dart';
+import '../../../utilities/widgets/student_class_details_card/student_class_details_card.dart';
 import '../../../utilities/widgets/study_button/study_button.dart';
 import '../controllers/student_lesson_plan_controller.dart';
 

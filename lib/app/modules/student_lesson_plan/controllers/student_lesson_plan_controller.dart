@@ -207,7 +207,7 @@ class StudentLessonPlanController extends GetxController {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Text(
-                            "0${index + 1}. ${studentLessonPlanDetailsData.subtopic![index]}",
+                            "${index + 1}. ${studentLessonPlanDetailsData.subtopic![index]}",
                             style: AppTextStyle.blackFontSize12W400,
                             textAlign: TextAlign.justify,
                           ),
@@ -243,7 +243,9 @@ class StudentLessonPlanController extends GetxController {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+
+                          },
                           child: Row(
                             children: [
                               const Icon(

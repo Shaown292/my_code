@@ -9,7 +9,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/show_week_tile/
 import 'package:get/get.dart';
 import '../../../../domain/core/model/student_routine_model/student_routine_response_model.dart';
 import '../../../data/constants/app_colors.dart';
-import '../../../utilities/widgets/student_class_details_card/student_calss_details_card.dart';
+import '../../../utilities/widgets/student_class_details_card/student_class_details_card.dart';
 import '../controllers/routine_controller.dart';
 
 class RoutineView extends GetView<RoutineController> {

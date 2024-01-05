@@ -29,51 +29,58 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    children: [
-                      controller.adminStudentsSearchController.loadingController.isLoading
-                          ? const SecondaryLoadingWidget()
-                          : DuplicateDropdown(
-                              dropdownValue: controller
-                                      .adminStudentsSearchController
-                                      .classList
-                                      .isEmpty
-                                  ? controller.classNullValue.value
-                                  : controller.adminStudentsSearchController
-                                      .classValue.value,
-                              dropdownList: controller
-                                  .adminStudentsSearchController.classList,
-                              changeDropdownValue: (v) {
-                                controller.adminStudentsSearchController
-                                    .classValue.value = v!;
-                                controller.adminStudentsSearchController
-                                    .studentClassId.value = v.groupId;
-                                controller.adminStudentsSearchController.getStudentSectionList(classId: controller.adminStudentsSearchController.studentClassId.value);
-                              },
-                            ),
-                      20.verticalSpacing,
-                      controller.adminStudentsSearchController.sectionLoader.value
-                          ? const SecondaryLoadingWidget()
-                          : DuplicateDropdown(
-                              dropdownValue: controller
-                                      .adminStudentsSearchController
-                                      .sectionList
-                                      .isEmpty
-                                  ? controller.sectionNullValue.value
-                                  : controller.adminStudentsSearchController
-                                      .sectionValue.value,
-                              dropdownList: controller
-                                  .adminStudentsSearchController.sectionList,
-                              changeDropdownValue: (v) {
-                                controller.adminStudentsSearchController
-                                    .sectionValue.value = v!;
-                                controller.adminStudentsSearchController
-                                    .studentSectionId.value = v.groupId;
-                              },
-                            )
-                    ],
-                  )),
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    controller.adminStudentsSearchController.loadingController
+                            .isLoading
+                        ? const SecondaryLoadingWidget()
+                        : DuplicateDropdown(
+                            dropdownValue: controller
+                                    .adminStudentsSearchController
+                                    .classList
+                                    .isEmpty
+                                ? controller.classNullValue.value
+                                : controller.adminStudentsSearchController
+                                    .classValue.value,
+                            dropdownList: controller
+                                .adminStudentsSearchController.classList,
+                            changeDropdownValue: (v) {
+                              controller.adminStudentsSearchController
+                                  .classValue.value = v!;
+                              controller.adminStudentsSearchController
+                                  .studentClassId.value = v.groupId;
+                              controller.adminStudentsSearchController
+                                  .getStudentSectionList(
+                                      classId: controller
+                                          .adminStudentsSearchController
+                                          .studentClassId
+                                          .value);
+                            },
+                          ),
+                    20.verticalSpacing,
+                    controller.adminStudentsSearchController.sectionLoader.value
+                        ? const SecondaryLoadingWidget()
+                        : DuplicateDropdown(
+                            dropdownValue: controller
+                                    .adminStudentsSearchController
+                                    .sectionList
+                                    .isEmpty
+                                ? controller.sectionNullValue.value
+                                : controller.adminStudentsSearchController
+                                    .sectionValue.value,
+                            dropdownList: controller
+                                .adminStudentsSearchController.sectionList,
+                            changeDropdownValue: (v) {
+                              controller.adminStudentsSearchController
+                                  .sectionValue.value = v!;
+                              controller.adminStudentsSearchController
+                                  .studentSectionId.value = v.groupId;
+                            },
+                          )
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: SearchField(
@@ -120,7 +127,13 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                         },
                         child: controller.feesInvoiceList.isEmpty
                             ? const Center(
-                                child: NoDataAvailableWidget(),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      NoDataAvailableWidget(),
+                                    ],
+                                  ),
+                                ),
                               )
                             : ListView.builder(
                                 shrinkWrap: true,
@@ -146,8 +159,6 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                                     statusColor: AppColors.activeStatusRedColor,
                                     onTapView: () =>
                                         Get.toNamed(Routes.ADMIN_FEES_INVOICE),
-                                    onTapDelete: (() =>
-                                        controller.showAlertDialog()),
                                   );
                                 },
                               ),

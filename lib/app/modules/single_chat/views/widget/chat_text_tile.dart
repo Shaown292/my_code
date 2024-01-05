@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class ChatTextTile extends StatelessWidget {
   final String? imageUrl;
   final Function()? onImageTap;
   final bool isForwardedText;
-  final int? isQuotedText;
+  final bool isQuotedText;
   final String? quotedText;
   final Color? forwardImageBackgroundColor;
   final TextStyle? forwardedTextStyle;
@@ -33,7 +34,7 @@ class ChatTextTile extends StatelessWidget {
     this.isForwardedText = false,
     this.forwardImageBackgroundColor,
     this.forwardedTextStyle,
-    this.isQuotedText,
+    this.isQuotedText = false,
     this.quotedText,
   });
 
@@ -44,7 +45,7 @@ class ChatTextTile extends StatelessWidget {
             onTap: onImageTap,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: isForwardedText || isQuotedText != 0
+              child: isForwardedText
                   ? Container(
                       margin: const EdgeInsets.only(right: 10),
                       padding: EdgeInsets.all(isForwardedText ? 10 : 0),
@@ -52,7 +53,7 @@ class ChatTextTile extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(isForwardedText ? 5 : 0),
                         color: forwardImageBackgroundColor,
-                        // color: isForwardedText ? AppColors.primaryColor : Colors.transparent,
+
                       ),
                       child: Column(
                         children: [
@@ -70,9 +71,9 @@ class ChatTextTile extends StatelessWidget {
                           ),
                           5.verticalSpacing,
                           isForwardedText
-                              ? Text(
+                              ? const Text(
                                   "This is a forwarded message",
-                                  style: forwardedTextStyle,
+                                  style: AppTextStyle.textStyle12WhiteW500,
                                 )
                               : const SizedBox()
                         ],
@@ -97,62 +98,74 @@ class ChatTextTile extends StatelessWidget {
                 bottom: 10,
                 left: textLeftPadding ?? 0,
                 right: textRightPadding ?? 0),
-            child: Container(
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: const Radius.circular(20),
-                    topLeft: const Radius.circular(20),
-                    bottomLeft: Radius.circular(radiusBottomLeft ?? 0),
-                    bottomRight: Radius.circular(radiusBottomRight ?? 0),
-                  ),
-                  color: color),
-              child: Column(
-                children: [
-                  imageUrl == null || imageUrl!.isEmpty
-                      ? const SizedBox()
-                      : Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: InkWell(
-                            onTap: onImageTap,
-                            child: Container(
-                              height: Get.height * 0.15,
-                              width: Get.width * 0.2,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    imageUrl!,
+            child: Column(
+              children: [
+                isQuotedText
+                    ? Container(
+                        width: Get.width * 0.5,
+                        alignment: Alignment.topLeft,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 13),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20),
+                          ),
+                          color: AppColors.transportDividerColor,
+                        ),
+                        child: Text(
+                          quotedText  ?? "",
+                          style: AppTextStyle.fontSize13BlackW400,
+                        ),
+                      )
+                    : const SizedBox(),
+                Container(
+                  width: isQuotedText ? Get.width * 0.5 : null,
+                  alignment: isQuotedText ? Alignment.topRight : null,
+                  padding: const EdgeInsets.all(13),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(isQuotedText ? 0 : 20),
+                        topLeft: Radius.circular(isQuotedText ? 0 : 20),
+                        bottomLeft: Radius.circular(radiusBottomLeft ?? 0),
+                        bottomRight: Radius.circular(radiusBottomRight ?? 0),
+                      ),
+                      color: color),
+                  child: Column(
+                    children: [
+                      imageUrl == null || imageUrl!.isEmpty
+                          ? const SizedBox()
+                          : Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: InkWell(
+                                onTap: onImageTap,
+                                child: Container(
+                                  height: Get.height * 0.15,
+                                  width: Get.width * 0.2,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                        imageUrl!,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                  isQuotedText != 0
-                      ? Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: AppColors.dividerColor,
-                          ),
-                          child: Text(
-                            quotedText ?? "",
-                            style: forwardedTextStyle,
-                          ),
-                        )
-                      : const SizedBox(),
-                  Text(
-                    text ?? "",
-                    style: textStyle,
+                      Text(
+                        text ?? "",
+                        style: textStyle,
+                      ),
+                      isForwardedText
+                          ? const Text(
+                        "This is a forwarded message",
+                        style: AppTextStyle.textStyle12WhiteW500,
+                      )
+                          : const SizedBox(),
+                    ],
                   ),
-                  isForwardedText
-                      ? Text(
-                          "This is a forwarded message",
-                          style: forwardedTextStyle,
-                        )
-                      : const SizedBox()
-                ],
-              ),
+                ),
+              ],
             ),
           );
   }

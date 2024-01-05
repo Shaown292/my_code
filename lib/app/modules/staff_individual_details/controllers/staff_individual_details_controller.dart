@@ -14,6 +14,7 @@ class StaffIndividualDetailsController extends GetxController {
   String staffLastName = Get.arguments["staff_last_name"]  ?? "";
 
 
+
   AdminIndividualStaffDetailsResponseModel? adminIndividualStaffDetailsResponseModel;
 
   Future getIndividualStaffData({required int staffIndividualId}) async {

@@ -7,6 +7,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/blocked_users/controllers/blocked_users_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat/controllers/chat_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat_search/controllers/chat_search_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/chat_search/views/widget/suggested_search_tile.dart';
@@ -30,6 +31,7 @@ import '../../../utilities/api_urls.dart';
 class SingleChatController extends GetxController {
   PusherController pusherController = Get.put(PusherController());
   GlobalRxVariableController globalRxVariableController = Get.find();
+  BlockedUsersController blockedUsersController = Get.put(BlockedUsersController());
   ChatController chatController = Get.find();
   ChatSearchController chatSearchController = Get.put(ChatSearchController());
   TextEditingController sendTextController = TextEditingController();
@@ -58,6 +60,8 @@ class SingleChatController extends GetxController {
   RxBool isSearchPage = false.obs;
   RxBool onTapQuote = false.obs;
   RxString quotedText = "".obs;
+
+
 
   List filesList = [
     "Images",
@@ -102,6 +106,7 @@ class SingleChatController extends GetxController {
       if (singleChatListResponseModel.success == true) {
         singleChatSendLoader.value = false;
         sendTextController.clear();
+        onTapQuote.value = false;
         singleChatPickImage.value = File('');
 
         singleConversationList.add(singleChatListResponseModel.data!.first);
@@ -364,40 +369,7 @@ class SingleChatController extends GetxController {
     return PostRequestResponseModel();
   }
 
-  /// Block a single user
-  Future<void> blockSingleUser(
-      {required String type, required int userId}) async {
-    try {
-      blockLoaded.value = true;
-      final response = await BaseClient().postData(
-          url: InfixApi.blockSingleUser(type: type, userId: userId),
-          header: GlobalVariable.header);
-      PostRequestResponseModel postRequestResponseModel =
-          PostRequestResponseModel.fromJson(response);
-
-      if (postRequestResponseModel.success == true) {
-        blockLoaded.value = false;
-        chatController.singleChatList.clear();
-        chatController.getSingleChatList();
-        Get.back();
-
-        showBasicSuccessSnackBar(
-            message:
-                postRequestResponseModel.message ?? 'operation successful');
-      } else {
-        blockLoaded.value = false;
-        showBasicFailedSnackBar(
-            message:
-                postRequestResponseModel.message ?? 'Something went wrong');
-      }
-    } catch (e, t) {
-      blockLoaded.value = false;
-      debugPrint('$e');
-      debugPrint('$t');
-    } finally {
-      blockLoaded.value = false;
-    }
-  }
+ 
 
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(

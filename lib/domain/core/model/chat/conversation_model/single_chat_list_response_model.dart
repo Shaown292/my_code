@@ -34,7 +34,8 @@ class SingleConversationListData {
   int? messageType;
   String? file;
   String? originalFileName;
-  int? reply;
+  String? replyFor;
+  bool? reply;
   bool? sender;
   bool? receiver;
   bool? forwarded;
@@ -50,6 +51,7 @@ class SingleConversationListData {
         this.sender,
         this.receiver,
         this.forwarded,
+        this.replyFor,
       });
 
   SingleConversationListData.fromJson(Map<String, dynamic> json) {
@@ -63,6 +65,7 @@ class SingleConversationListData {
     sender = json['sender'];
     receiver = json['receiver'];
     forwarded = json['forwarded'];
+    replyFor= json['reply_for'];
   }
 
   Map<String, dynamic> toJson() {
@@ -77,6 +80,7 @@ class SingleConversationListData {
     data['sender'] = sender;
     data['receiver'] = receiver;
     data['forwarded'] = forwarded;
+    data['reply_for'] = replyFor;
     return data;
   }
 }

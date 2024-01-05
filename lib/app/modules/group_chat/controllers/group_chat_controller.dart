@@ -56,7 +56,9 @@ class GroupChatController extends GetxController {
   RxBool groupChatDataLoader = false.obs;
   RxBool fileLoader = false.obs;
   RxInt tabIndex = 0.obs;
-
+  RxBool onTapQuote = false.obs;
+  RxString quotedText = "".obs;
+  RxInt replyId = (-1).obs;
   RxBool deleteChatLoader = false.obs;
   RxBool forwardChatLoader = false.obs;
   RxBool addMemberLoader = false.obs;
@@ -285,6 +287,7 @@ class GroupChatController extends GetxController {
   Future<GroupChatListResponseModel> groupChatSend() async {
     try {
       singleChatSendLoader.value = true;
+
       final request =
           http.MultipartRequest('POST', Uri.parse(InfixApi.sendGroupChat));
       request.headers.addAll(GlobalVariable.header);
@@ -298,6 +301,7 @@ class GroupChatController extends GetxController {
       request.fields['user_id'] =
           globalRxVariableController.userId.value.toString();
       request.fields['group_id'] = groupId.value;
+      request.fields['reply'] = replyId.value.toString();
 
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
@@ -312,6 +316,7 @@ class GroupChatController extends GetxController {
         singleChatSendLoader.value = false;
         sendTextController.clear();
         groupChatPickImage.value = File('');
+        onTapQuote.value = false;
 
         groupChatConversationList.add(groupChatListResponseModel.data!.first);
         groupChatConversationList.refresh();
@@ -536,7 +541,7 @@ class GroupChatController extends GetxController {
                           isForward: true,
                           onTapSend: () {
                             forwardSingleChat(
-                              groupId: groupId.value,
+                              groupId: chatController.groupChatList[index].groupId!,
                               messageId: messageId,
                               message:message,
                               context: context

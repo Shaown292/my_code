@@ -10,6 +10,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/group_chat/views/widget/s
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/chat_text_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/files_popup_dialog.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/popup_action_menu.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/single_chat/views/widget/quote_text.dart';
 import 'package:flutter_single_getx_api_v2/app/service/image/image_picker_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -57,25 +58,25 @@ class GroupChatView extends GetView<GroupChatController> {
                     children: [
                       controller.groupImage.value.isNotEmpty
                           ? Container(
-                        height: 20,
-                        width: 20,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  controller.groupImage.value),
-                              filterQuality: FilterQuality.high),
-                        ),
-                      )
+                              height: 20,
+                              width: 20,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        controller.groupImage.value),
+                                    filterQuality: FilterQuality.high),
+                              ),
+                            )
                           : Container(
-                        height: Get.height * 0.15,
-                        width: Get.width * 0.12,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage(ImagePath.dp),
-                              fit: BoxFit.cover),
-                        ),
-                      ),
+                              height: Get.height * 0.15,
+                              width: Get.width * 0.12,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: AssetImage(ImagePath.dp),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
                       10.horizontalSpacing,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -466,8 +467,21 @@ class GroupChatView extends GetView<GroupChatController> {
                                                                   "");
                                                         },
                                                         onQuoteTap: () {
-                                                          debugPrint(
-                                                              "Tapped on quote");
+                                                          Get.back();
+                                                          controller.quotedText
+                                                              .value = controller
+                                                                  .reversedConversationList[
+                                                                      index]
+                                                                  .message ??
+                                                              "";
+                                                          controller.onTapQuote
+                                                              .value = true;
+                                                          controller.replyId
+                                                                  .value =
+                                                              controller
+                                                                  .reversedConversationList[
+                                                                      index]
+                                                                  .messageId!;
                                                         },
                                                         isReceiver: controller
                                                             .reversedConversationList[
@@ -513,15 +527,6 @@ class GroupChatView extends GetView<GroupChatController> {
                                                     .textStyle12WhiteW400
                                                 : AppTextStyle
                                                     .fontSize12W400ReceivedText,
-                                            forwardedTextStyle: controller
-                                                        .reversedConversationList[
-                                                            index]
-                                                        .sender ==
-                                                    true
-                                                ? AppTextStyle
-                                                    .textStyle12WhiteW400
-                                                : AppTextStyle
-                                                    .fontSize12W400ReceivedText,
                                             radiusBottomLeft: controller
                                                         .reversedConversationList[
                                                             index]
@@ -555,10 +560,17 @@ class GroupChatView extends GetView<GroupChatController> {
                                                         index]
                                                     .file ??
                                                 "",
-                                            // isForwardedText: controller
-                                            //     .reversedConversationList[index]
-                                            //     .forwarded ??
-                                            //     false,
+                                            isForwardedText: controller
+                                                    .reversedConversationList[
+                                                        index]
+                                                    .forwarded ??
+                                                false,
+                                            isQuotedText: controller
+                                                .reversedConversationList[index]
+                                                .reply!,
+                                            quotedText: controller
+                                                .reversedConversationList[index]
+                                                .replyFor,
                                             onImageTap: () {
                                               Get.dialog(
                                                 Material(
@@ -685,8 +697,21 @@ class GroupChatView extends GetView<GroupChatController> {
                                                                 "");
                                                       },
                                                       onQuoteTap: () {
-                                                        debugPrint(
-                                                            "Tapped on quote");
+                                                        Get.back();
+                                                        controller.quotedText
+                                                            .value = controller
+                                                                .reversedConversationList[
+                                                                    index]
+                                                                .message ??
+                                                            "";
+                                                        controller.onTapQuote
+                                                            .value = true;
+                                                        controller
+                                                                .replyId.value =
+                                                            controller
+                                                                .reversedConversationList[
+                                                                    index]
+                                                                .messageId!;
                                                       },
                                                       isReceiver: controller
                                                           .reversedConversationList[
@@ -711,121 +736,132 @@ class GroupChatView extends GetView<GroupChatController> {
                         )
                       : const Expanded(
                           child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              NoDataAvailableWidget(
-                                message: "No message available",
-                              ),
-                            ],
+                            child: Column(
+                              children: [
+                                NoDataAvailableWidget(
+                                  message: "No message available",
+                                ),
+                              ],
+                            ),
                           ),
-                        )),
+                        ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Container(
                   padding: const EdgeInsets.all(15),
                   color: const Color(0xFFFDFBFF),
                   child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        controller.groupChatPickImage.value.path.isNotEmpty
-                            ? Row(
-                                children: [
-                                  Image.file(
-                                    height: 60,
-                                    width: 80,
-                                    File(controller
-                                        .groupChatPickImage.value.path),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  5.horizontalSpacing,
-                                  InkWell(
-                                    onTap: () {
+                    child: Obx(
+                      () => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          controller.onTapQuote.value
+                              ? QuoteText(
+                                  repliedText: controller.quotedText.value == ""
+                                      ? "Attachment"
+                                      : controller.quotedText.value,
+                                )
+                              : const SizedBox(),
+                          controller.groupChatPickImage.value.path.isNotEmpty
+                              ? Row(
+                                  children: [
+                                    Image.file(
+                                      height: 60,
+                                      width: 80,
+                                      File(controller
+                                          .groupChatPickImage.value.path),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    5.horizontalSpacing,
+                                    InkWell(
+                                      onTap: () {
+                                        controller.groupChatPickImage.value =
+                                            File('');
+                                      },
+                                      child: const Icon(
+                                        Icons.clear,
+                                        color: AppColors.primaryColor,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : const SizedBox(),
+                          10.verticalSpacing,
+                          Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  FlutterImagePickerUtils.imagePickerModalSheet(
+                                    context: context,
+                                    fromGallery: () async {
                                       controller.groupChatPickImage.value =
-                                          File('');
+                                          await FlutterImagePickerUtils
+                                              .getImageGallery(
+                                        context,
+                                      );
                                     },
-                                    child: const Icon(
-                                      Icons.clear,
-                                      color: AppColors.primaryColor,
+                                    fromCamera: () async {
+                                      controller.groupChatPickImage.value =
+                                          await FlutterImagePickerUtils
+                                              .getImageCamera(
+                                        context,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Image.asset(
+                                  ImagePath.camera,
+                                  color:
+                                      AppColors.editProfileTextFieldLabelColor,
+                                ),
+                              ),
+                              10.horizontalSpacing,
+                              const SizedBox(
+                                height: 30,
+                                child: VerticalDivider(
+                                  color: AppColors.dividerColor,
+                                ),
+                              ),
+                              Expanded(
+                                child: CustomTextFormField(
+                                  inputBorder: InputBorder.none,
+                                  hintTextStyle: AppTextStyle.homeworkElements,
+                                  hintText: "Type something...",
+                                  controller: controller.sendTextController,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (controller.validation()) {
+                                    controller.groupChatSend();
+                                  }
+                                },
+                                child: Container(
+                                  height: 45,
+                                  width: 45,
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.primaryColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 5,
+                                          spreadRadius: 1,
+                                          color: AppColors.primaryColor),
+                                    ],
+                                  ),
+                                  child: Center(
+                                    child: Image.asset(
+                                      ImagePath.send,
+                                      scale: 2.5,
                                     ),
                                   ),
-                                ],
+                                ),
                               )
-                            : const SizedBox(),
-                        10.verticalSpacing,
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                FlutterImagePickerUtils.imagePickerModalSheet(
-                                  context: context,
-                                  fromGallery: () async {
-                                    controller.groupChatPickImage.value =
-                                        await FlutterImagePickerUtils
-                                            .getImageGallery(
-                                      context,
-                                    );
-                                  },
-                                  fromCamera: () async {
-                                    controller.groupChatPickImage.value =
-                                        await FlutterImagePickerUtils
-                                            .getImageCamera(
-                                      context,
-                                    );
-                                  },
-                                );
-                              },
-                              child: Image.asset(
-                                ImagePath.camera,
-                                color: AppColors.editProfileTextFieldLabelColor,
-                              ),
-                            ),
-                            10.horizontalSpacing,
-                            const SizedBox(
-                              height: 30,
-                              child: VerticalDivider(
-                                color: AppColors.dividerColor,
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomTextFormField(
-                                inputBorder: InputBorder.none,
-                                hintTextStyle: AppTextStyle.homeworkElements,
-                                hintText: "Type something...",
-                                controller: controller.sendTextController,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                if (controller.validation()) {
-                                  controller.groupChatSend();
-                                }
-                              },
-                              child: Container(
-                                height: 45,
-                                width: 45,
-                                padding: const EdgeInsets.all(5),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.primaryColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 5,
-                                        spreadRadius: 1,
-                                        color: AppColors.primaryColor),
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Image.asset(
-                                    ImagePath.send,
-                                    scale: 2.5,
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -15,7 +15,9 @@ class ChatTile extends StatelessWidget {
   final String? numberOfUnreadMessage;
   final Color? unreadMessageColor;
   final Function()? onTap;
+  final Function()? onTapUnblock;
   final Color? activeStatusColor;
+  final bool isBlocked;
 
   const ChatTile({
     super.key,
@@ -25,7 +27,7 @@ class ChatTile extends StatelessWidget {
     this.messageReceivedTime,
     this.numberOfUnreadMessage,
     this.unreadMessageColor,
-    this.onTap, this.activeStatusColor,
+    this.onTap, this.activeStatusColor, this.isBlocked = false, this.onTapUnblock,
   });
 
   @override
@@ -52,7 +54,7 @@ class ChatTile extends StatelessWidget {
                             image: AssetImage(ImagePath.dp),
                             fit: BoxFit.cover),
                       ),
-                    ):
+                    ) :
                     SizedBox(
                       height: Get.height * 0.1,
                       width: Get.width * 0.15,
@@ -66,15 +68,15 @@ class ChatTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                   Positioned(
+                    Positioned(
                       right: Get.width * 0.015,
                       top: Get.height * 0.02,
                       child: Container(
                         height: 8,
                         width: 8,
-                        decoration:  BoxDecoration(
+                        decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: activeStatusColor ),
+                            color: activeStatusColor),
                       ), //Icon
                     ),
                   ], //<Widget>[]
@@ -103,28 +105,21 @@ class ChatTile extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      messageReceivedTime ?? "",
-                      style: AppTextStyle.homeworkElements,
+                isBlocked ? InkWell(
+                  onTap: onTapUnblock,
+                  child: Container(
+                   padding: const EdgeInsets.all(7),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: AppColors.activeStatusGreenColor,
                     ),
-                    // 5.verticalSpacing,
-                    // Container(
-                    //   height: 15,
-                    //   width: 15,
-                    //   decoration: const BoxDecoration(
-                    //       shape: BoxShape.circle, color: AppColors.unreadChat),
-                    //   child: Center(
-                    //     child: Text(
-                    //       numberOfUnreadMessage ?? "",
-                    //       style: AppTextStyle.textStyle12WhiteW400,
-                    //     ),
-                    //   ),
-                    // )
-                  ],
+                    child: const Text(
+                      "Unblock", style: AppTextStyle.cardTextStyle14WhiteW500,),
+
+                  ),
+                ) : Text(
+                  messageReceivedTime ?? "",
+                  style: AppTextStyle.homeworkElements,
                 ),
               ],
             ),
