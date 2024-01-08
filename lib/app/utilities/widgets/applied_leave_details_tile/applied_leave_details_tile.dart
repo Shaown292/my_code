@@ -44,18 +44,18 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                leaveType ?? "title",
+                leaveType ?? "",
                 style: AppTextStyle.fontSize14lightBlackW400,
               ),
                InkWell(
                 onTap: onTap,
-                child: const Column(
+                child:  Column(
                   children: [
                     Text(
-                      "View",
+                      "View".tr,
                       style: AppTextStyle.homeworkView,
                     ),
-                    CustomDivider(
+                    const CustomDivider(
                       width: 35,
                       height: 1,
                       color: AppColors.homeworkViewColor,
@@ -71,25 +71,25 @@ class AppliedLeaveDetailsTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ColumnTile(
-                title: "Apply Date",
+                title: "Apply Date".tr,
                 value: applyDate,
                 width: Get.width * 0.2,
               ),
               ColumnTile(
-                title: "From",
+                title: "From".tr,
                 value: leaveFrom,
                 width: Get.width * 0.2,
               ),
               ColumnTile(
-                title: "To",
+                title: "To".tr,
                 value: leaveTo,
                 width: Get.width * 0.2,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Status",
+                   Text(
+                    "Status".tr,
                     style: AppTextStyle.fontSize13BlackW400,
                   ),
                   15.verticalSpacing,

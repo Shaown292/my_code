@@ -16,7 +16,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Book ",
+      title: "Book List".tr,
       body: RefreshIndicator(
         onRefresh: () async {
           controller.getAdminBookList();
@@ -39,8 +39,8 @@ class AdminBookListView extends GetView<AdminBookListController> {
                   children: [
                     SizedBox(
                       width: Get.width * 0.12,
-                      child: const Text(
-                        "Book No",
+                      child:  Text(
+                        "Book No".tr,
                         style: AppTextStyle.textStyle12WhiteW500,
                       ),
                     ),
@@ -51,8 +51,8 @@ class AdminBookListView extends GetView<AdminBookListController> {
                     Container(
                       width: Get.width * 0.2,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: const Text(
-                        "Subject",
+                      child:  Text(
+                        "Subject".tr,
                         style: AppTextStyle.textStyle12WhiteW500,
                       ),
                     ),
@@ -60,8 +60,8 @@ class AdminBookListView extends GetView<AdminBookListController> {
                       color: AppColors.profileTitleColor,
                       thickness: 1,
                     ),
-                    const Text(
-                      "Book Name",
+                     Text(
+                      "Book Name".tr,
                       style: AppTextStyle.textStyle12WhiteW500,
                     )
                   ],

@@ -1,4 +1,5 @@
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
+import 'package:get/get.dart';
 
 class HomeTileModelClass {
   final String icon;
@@ -14,45 +15,45 @@ class HomeTileModelClass {
 
 List<HomeTileModelClass> studentList = [
   HomeTileModelClass(
-      icon: ImagePath.studentHomeWork, title: 'Homework', value: 'Homework'),
+      icon: ImagePath.studentHomeWork, title: 'Homework'.tr, value: 'Homework'),
   HomeTileModelClass(
       icon: ImagePath.studentStudyMaterials,
-      title: 'Study Materials',
+      title: 'Study Materials'.tr,
       value: 'Study Materials'),
   HomeTileModelClass(
       icon: ImagePath.studentAttendance,
-      title: 'Attendance',
+      title: 'Attendance'.tr,
       value: 'Attendance'),
   HomeTileModelClass(
-      icon: ImagePath.studentWallet, title: 'Wallet', value: 'Wallet'),
+      icon: ImagePath.studentWallet, title: 'Wallet'.tr, value: 'Wallet'),
   HomeTileModelClass(
       icon: ImagePath.studentExamination,
-      title: 'Examination',
+      title: 'Examination'.tr,
       value: 'Examination'),
   HomeTileModelClass(
       icon: ImagePath.studentOnlineExam,
-      title: 'Online Exam',
+      title: 'Online Exam'.tr,
       value: 'Online Exam'),
   HomeTileModelClass(
-      icon: ImagePath.studentLesson, title: 'Lesson', value: 'Lesson'),
+      icon: ImagePath.studentLesson, title: 'Lesson'.tr, value: 'Lesson'),
   HomeTileModelClass(
-      icon: ImagePath.studentLeave, title: 'Leave', value: 'Leave'),
+      icon: ImagePath.studentLeave, title: 'Leave'.tr, value: 'Leave'),
   HomeTileModelClass(
-      icon: ImagePath.studentNotice, title: 'Notice', value: 'Notice'),
+      icon: ImagePath.studentNotice, title: 'Notice'.tr, value: 'Notice'),
   HomeTileModelClass(
-      icon: ImagePath.studentSubjects, title: 'Subjects', value: 'Subjects'),
+      icon: ImagePath.studentSubjects, title: 'Subjects'.tr, value: 'Subjects'),
   HomeTileModelClass(
-      icon: ImagePath.studentTeacher, title: 'Teacher', value: 'Teacher'),
+      icon: ImagePath.studentTeacher, title: 'Teacher'.tr, value: 'Teacher'),
   HomeTileModelClass(
-      icon: ImagePath.studentLibrary, title: 'Library', value: 'Library'),
+      icon: ImagePath.studentLibrary, title: 'Library'.tr, value: 'Library'),
   HomeTileModelClass(
-      icon: ImagePath.studentTransport, title: 'Transport', value: 'Transport'),
+      icon: ImagePath.studentTransport, title: 'Transport'.tr, value: 'Transport'),
   HomeTileModelClass(
-      icon: ImagePath.studentDormitory, title: 'Dormitory', value: 'Dormitory'),
+      icon: ImagePath.studentDormitory, title: 'Dormitory'.tr, value: 'Dormitory'),
   HomeTileModelClass(
-      icon: ImagePath.studentClass, title: 'Class', value: 'Class'),
+      icon: ImagePath.studentClass, title: 'Class'.tr, value: 'Class'),
   HomeTileModelClass(
-      icon: ImagePath.studentSettings, title: 'Settings', value: 'Settings'),
+      icon: ImagePath.studentSettings, title: 'Settings'.tr, value: 'Settings'),
 ];
 
 List<HomeTileModelClass> parentList = [

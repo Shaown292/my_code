@@ -19,7 +19,7 @@ class AdminClassAttendanceSearchIndividualView
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Search Attendance",
+        title: "Search Attendance".tr,
         body: CustomBackground(
           customWidget: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -73,7 +73,7 @@ class AdminClassAttendanceSearchIndividualView
                     controller: controller.nameTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Name",
+                    hintText: "Name".tr,
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
@@ -83,7 +83,7 @@ class AdminClassAttendanceSearchIndividualView
                     enableBorderActive: true,
                     focusBorderActive: true,
                     textInputType: TextInputType.number,
-                    hintText: "Roll",
+                    hintText: "Roll".tr,
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
@@ -99,7 +99,7 @@ class AdminClassAttendanceSearchIndividualView
                     color: AppColors.primaryColor,
                   )
                 : BottomNavButton(
-                    text: "Search",
+                    text: "Search".tr,
                     onTap: () {
                       Get.toNamed(
                         Routes.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST,

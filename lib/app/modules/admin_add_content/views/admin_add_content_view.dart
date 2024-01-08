@@ -24,7 +24,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Add Content",
+        title: "Add Content".tr,
         body: CustomBackground(
           customWidget: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
@@ -34,7 +34,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                 children: [
                   10.verticalSpacing,
 
-                  const Text('Content type*'),
+                   Text('${"Content Type".tr}*'),
                   5.verticalSpacing,
                   CustomDropdown(
                     dropdownValue: controller.contentInitialValue.value,
@@ -54,20 +54,20 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     controller: controller.titleTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Title*",
+                    hintText: "${"Title".tr}*",
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   15.verticalSpacing,
-                  const Text(
-                    "Available For*",
+                   Text(
+                    "${"Available For".tr}*",
                     style: AppTextStyle.fontSize14BlackW500,
                   ),
 
                   //All Admin radio button
                   CustomCheckbox(
                     checkboxValue: controller.isAdminSelected.value,
-                    checkboxTitle: "All Admin",
+                    checkboxTitle: "All Admin".tr,
                     onChange: (bool? value) {
                       controller.isAdminSelected.value = value!;
                       controller.isStudent.value = true;
@@ -81,7 +81,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                   //student radio button
                   CustomCheckbox(
                     checkboxValue: controller.isStudentSelected.value,
-                    checkboxTitle: "Student",
+                    checkboxTitle: "Student".tr,
                     onChange: (bool? value) {
                       controller.isStudentSelected.value = value!;
                       controller.isStudent.value = true;
@@ -96,7 +96,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                   controller.isStudentSelected.value
                       ? CustomCheckbox(
                           checkboxValue: controller.isAllStudent.value,
-                          checkboxTitle: "All Students",
+                          checkboxTitle: "All Students".tr,
                           onChange: (bool? value) {
                             controller.isAllStudent.value = value!;
                             controller.isStudent.value = false;
@@ -172,7 +172,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     controller: controller.selectedDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Assign Date*",
+                    hintText: "${"Assign Date".tr}*",
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
@@ -188,18 +188,18 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     focusBorderActive: true,
                     readOnly: true,
                     hintText:
-                        "${controller.contentFile.value.path.isNotEmpty ? controller.contentFile : 'Select File'}",
+                        "${controller.contentFile.value.path.isNotEmpty ? controller.contentFile : 'Select File'.tr}",
                     fillColor: Colors.white,
-                    suffixIcon: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    suffixIcon:  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Browse",
+                            "Browse".tr,
                             style: AppTextStyle.fontSize12lightViolateW400,
                           ),
-                          CustomDivider(
+                          const CustomDivider(
                             width: 42,
                             height: 1,
                             color: AppColors.profileValueColor,
@@ -219,7 +219,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     controller: controller.descriptionTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Description",
+                    hintText: "Description".tr,
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     minLine: 1,
@@ -234,7 +234,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
         bottomNavBar: controller.saveLoader.value
             ? const SecondaryLoadingWidget(isBottomNav: true,)
             : BottomNavButton(
-          text: "Save",
+          text: "Save".tr,
           onTap: () {
             if (controller.validation()) {
               controller.uploadContent();

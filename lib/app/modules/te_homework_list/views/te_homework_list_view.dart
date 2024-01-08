@@ -17,7 +17,7 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Homework List",
+      title: "Homework List".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [

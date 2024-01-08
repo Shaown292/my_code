@@ -15,7 +15,7 @@ class TeAcademicView extends GetView<TeAcademicController> {
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       leadingIcon: const SizedBox(),
-      title: "Academic",
+      title: "Academic".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -30,7 +30,7 @@ class TeAcademicView extends GetView<TeAcademicController> {
                 return Obx(
                       () => CustomCardTile(
                     icon: controller.teacherAcademicTileList[index].icon,
-                    title: controller.teacherAcademicTileList[index].title,
+                    title: controller.teacherAcademicTileList[index].title.tr,
                     iconColor: AppColors.primaryColor,
                     onTap: () {
                       controller.selectIndex.value = index;

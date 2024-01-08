@@ -202,8 +202,8 @@ class FeesController extends GetxController {
                         ),
                       ),
                       20.horizontalSpacing,
-                      const Text(
-                        "Invoice",
+                       Text(
+                        "Invoice".tr,
                         style: AppTextStyle.fontSize16lightBlackW500,
                       ),
                     ],
@@ -224,17 +224,17 @@ class FeesController extends GetxController {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  "Invoice: ${feesInvoiceInfo?.invoiceId}",
+                                  "${"Invoice".tr}: ${feesInvoiceInfo?.invoiceId}",
                                   style: AppTextStyle.fontSize13BlackW400,
                                 ),
                                 5.verticalSpacing,
                                 Text(
-                                  "Created Date: ${feesInvoiceInfo?.createDate}",
+                                  "${"Created Date".tr}: ${feesInvoiceInfo?.createDate}",
                                   style: AppTextStyle.fontSize13BlackW400,
                                 ),
                                 5.verticalSpacing,
                                 Text(
-                                  "Due Date: ${feesInvoiceInfo?.dueDate}",
+                                  "${"Due Date".tr}: ${feesInvoiceInfo?.dueDate}",
                                   style: AppTextStyle.fontSize13BlackW400,
                                 ),
                               ],
@@ -310,8 +310,8 @@ class FeesController extends GetxController {
                         ),
                       ),
                       20.horizontalSpacing,
-                      const Text(
-                        "Add Payment",
+                       Text(
+                        "Add Payment".tr,
                         style: AppTextStyle.fontSize16lightBlackW500,
                       ),
                     ],
@@ -326,23 +326,23 @@ class FeesController extends GetxController {
                         width: Get.width * 0.3,
                         color: AppColors.primaryColor,
                       ),
-                      const Column(
+                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            "Invoice: ",
+                            "${"Invoice".tr}: ",
                             style: AppTextStyle.fontSize13BlackW400,
                           ),
                           Text(
-                            "Due Date: ",
+                            "${"Due Date".tr}: ",
                             style: AppTextStyle.fontSize13BlackW400,
                           ),
                           Text(
-                            "Wallet Balance: ",
+                            "${"Wallet Balance".tr}: ",
                             style: AppTextStyle.blackFontSize14W400,
                           ),
                           Text(
-                            "Add in wallet: ",
+                            "${"Add In wallet".tr}: ",
                             style: AppTextStyle.blackFontSize14W400,
                           ),
                         ],
@@ -350,8 +350,8 @@ class FeesController extends GetxController {
                     ],
                   ),
                   30.verticalSpacing,
-                  const Text(
-                    "Select Payment:",
+                   Text(
+                    "${"Select Payment".tr}:",
                     style: AppTextStyle.blackFontSize14W400,
                   ),
                   20.verticalSpacing,
@@ -395,7 +395,7 @@ class FeesController extends GetxController {
                           controller: noteTextController,
                           enableBorderActive: true,
                           focusBorderActive: true,
-                          hintText: "Note",
+                          hintText: "Note".tr,
                           textInputType: TextInputType.number,
                           hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                           fillColor: Colors.white,
@@ -413,17 +413,17 @@ class FeesController extends GetxController {
                           hintText:
                               "${studentWalletController.file.value.path.isNotEmpty ? studentWalletController.file : 'Select File'}",
                           fillColor: Colors.white,
-                          suffixIcon: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          suffixIcon:  Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Browse",
+                                  "Browse".tr,
                                   style:
                                       AppTextStyle.fontSize12lightViolateW400,
                                 ),
-                                CustomDivider(
+                                const CustomDivider(
                                   width: 42,
                                   height: 1,
                                   color: AppColors.profileValueColor,
@@ -441,7 +441,7 @@ class FeesController extends GetxController {
                       : const SizedBox(),
                   30.verticalSpacing,
                   PrimaryButton(
-                    text: 'Pay',
+                    text: 'Pay'.tr,
                     onTap: () {
                       if (studentWalletController.paymentMethodName.value !=
                           '') {

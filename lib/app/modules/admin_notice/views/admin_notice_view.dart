@@ -17,7 +17,7 @@ class AdminNoticeView extends GetView<AdminNoticeController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Notice",
+      title: "Notice".tr,
       body: CustomBackground(
         customWidget: RefreshIndicator(
           color: AppColors.primaryColor,

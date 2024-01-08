@@ -124,7 +124,7 @@ class StudentLessonPlanController extends GetxController {
 
         // studentLessonPlanDetailsData = studentLessonPlanDetailsResponseModel.data;
         if (studentLessonPlanDetailsResponseModel.data == null) {
-          showBasicFailedSnackBar(message: 'No Details Available');
+          showBasicFailedSnackBar(message: 'No Details Available'.tr);
         } else {
           showLessonPlanDetailsBottomSheet(
               studentLessonPlanDetailsData:
@@ -215,7 +215,7 @@ class StudentLessonPlanController extends GetxController {
                       }),
                 ),
                 BottomSheetTile(
-                  title: "Note",
+                  title: "Note".tr,
                   value: studentLessonPlanDetailsData.note,
                   color: AppColors.homeworkWidgetColor,
                 ),

@@ -67,7 +67,7 @@ class StudentClassDetailsCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              isBreak ? "Lunch Break" : subject ?? "",
+                              isBreak ? "Lunch Break".tr : subject ?? "",
                               style: AppTextStyle.fontSize14VioletW600,
                             ),
                             10.verticalSpacing,
@@ -90,7 +90,7 @@ class StudentClassDetailsCard extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Room - ${roomNumber ?? ''}",
+                                    "${"Room".tr} - ${roomNumber ?? ''}",
                                     style: AppTextStyle.fontSize12GreyW400,
                                   ),
                                   5.verticalSpacing,
@@ -131,8 +131,8 @@ class StudentClassDetailsCard extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(2),
                                         color: AppColors.primaryColor,
                                       ),
-                                      child: const Text(
-                                        "Details",
+                                      child:  Text(
+                                        "Details".tr,
                                         style: AppTextStyle.textStyle12WhiteW400,
                                       ),
                                     ),

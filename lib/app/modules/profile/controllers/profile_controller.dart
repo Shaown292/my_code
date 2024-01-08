@@ -269,8 +269,8 @@ class ProfileController extends GetxController {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Upload Documents",
+                      Text(
+                        "Upload Document".tr,
                         style: AppTextStyle.cardTextStyle14WhiteW500,
                       ),
                       Container(
@@ -296,7 +296,7 @@ class ProfileController extends GetxController {
                         controller: titleTextController,
                         enableBorderActive: true,
                         focusBorderActive: true,
-                        hintText: "Title",
+                        hintText: "Title".tr,
                         fillColor: Colors.white,
                       ),
                       10.verticalSpacing,
@@ -305,7 +305,7 @@ class ProfileController extends GetxController {
                         focusBorderActive: true,
                         fillColor: Colors.white,
                         hintText:
-                            "${file.value.path.isNotEmpty ? file : 'Select File'}",
+                            "${file.value.path.isNotEmpty ? file : 'Select File'.tr}",
                         readOnly: true,
                         suffixIcon: InkWell(
                           onTap: onTap,
@@ -317,9 +317,9 @@ class ProfileController extends GetxController {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color: AppColors.primaryColor),
-                              child: const Center(
+                              child:  Center(
                                 child: Text(
-                                  "BROWSE",
+                                  "Browse".tr,
                                   style: AppTextStyle.textStyle12WhiteW400,
                                 ),
                               ),
@@ -338,7 +338,7 @@ class ProfileController extends GetxController {
                     children: [
                       PrimaryButton(
                         width: Get.width * 0.15,
-                        title: "Cancel",
+                        title: "Cancel".tr,
                         color: Colors.white,
                         textStyle: AppTextStyle.fontSize13BlackW400,
                         borderColor: AppColors.primaryColor,
@@ -351,7 +351,7 @@ class ProfileController extends GetxController {
                               )
                             : PrimaryButton(
                                 width: Get.width * 0.2,
-                                title: "Save",
+                                title: "Save".tr,
                                 textStyle: AppTextStyle.textStyle12WhiteW500,
                                 onTap: onTapForSave,
                               ),

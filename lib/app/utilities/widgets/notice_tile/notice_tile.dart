@@ -60,7 +60,7 @@ class NoticeTile extends StatelessWidget {
                           color: const Color(0xFFFE3E3E)),
                       child: Center(
                         child: Text(
-                          "Published: ${noticeDate ?? AppText.noDataAvailable}",
+                          "${"Published".tr}: ${noticeDate ?? AppText.noDataAvailable}",
                           style: AppTextStyle.cardTextStyle14WhiteW500,
                         ),
                       ),

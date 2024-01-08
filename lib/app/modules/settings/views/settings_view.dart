@@ -56,9 +56,9 @@ class SettingsView extends GetView<SettingsController> {
 
                       },
                       title: 'Confirmation'.tr,
-                      subTitle: AppText.deleteAccountWarningMsg,
-                      noText: 'cancel'.tr,
-                      yesText: 'delete'.tr,
+                      subTitle: AppText.deleteAccountWarningMsg.tr,
+                      noText: 'Cancel'.tr,
+                      yesText: 'Delete'.tr,
                     ),
                   );
                 },

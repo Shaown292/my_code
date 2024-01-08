@@ -36,16 +36,16 @@ class CreditCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                ColumnTile(
-              title: "Account Name",
+              title: "Account Name".tr,
                 value: accountName,
               ),
                ColumnTile(
                  width: Get.width * 0.25,
-              title: "Account Number",
+              title: "Account Number".tr,
                 value: accountNumber.toString(),
               ),
                ColumnTile(
-              title: "Type",
+              title: "Type".tr,
                 value: type ,
               ),
             ],

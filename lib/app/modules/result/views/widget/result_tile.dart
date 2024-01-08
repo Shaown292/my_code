@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/result/views/widget/flexible_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
 
 class ResultTile extends StatelessWidget {
   final String? title;
@@ -34,20 +35,20 @@ class ResultTile extends StatelessWidget {
 
           ),
           10.verticalSpacing,
-          const Row(
+           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FlexibleText(
-                text: "Subject",
+                text: "Subject".tr,
               ),
               FlexibleText(
-                text: "Marks",
+                text: "Marks".tr,
               ),
               FlexibleText(
-                text: "Obtain",
+                text: "Obtain".tr,
               ),
               FlexibleText(
-                text: "Grade",
+                text: "Grade".tr,
               ),
             ],
           ),

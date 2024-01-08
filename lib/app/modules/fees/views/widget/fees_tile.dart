@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/credit_card.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:get/get.dart';
 
 import '../../../../data/constants/app_colors.dart';
 import '../../../../data/constants/app_text_style.dart';
@@ -78,20 +78,20 @@ class FeesTile extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         color: Colors.white,
                         iconColor: Colors.white,
-                        child: const Text(
-                          "View",
+                        child:  Text(
+                          "View".tr,
                           style: AppTextStyle.fontSize13BlackW400,
                         ),
                         itemBuilder: (context) => [
                           PopupMenuItem(
                             value: 1,
                             onTap: onViewInvoiceTap,
-                            child: const Text("View Invoice"),
+                            child:  Text("View Invoice".tr),
                           ),
                           if(status != "Paid" ) PopupMenuItem(
                             value: 2,
                             onTap: onAddPaymentTap,
-                            child: const Text("Add Payment"),
+                            child:  Text("Add Payment".tr),
                           ),
                         ],
                       ),
@@ -107,21 +107,21 @@ class FeesTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ColumnTile(
-                    title: "Amount",
+                    title: "Amount".tr,
                     value: amount,
                   ),
                   ColumnTile(
-                    title: "Paid",
+                    title: "Paid".tr,
                     value: paid,
                   ),
                   ColumnTile(
-                    title: isInvoice ? "Fine" : "Balance",
+                    title: isInvoice ? "Fine".tr : "Balance".tr,
                     value: isInvoice ? fine : balance,
                   ),
                   isInvoice
                       ? Flexible(
                           child: ColumnTile(
-                            title: "Waiver",
+                            title: "Waiver".tr,
                             value: waiver,
                           ),
                         )
@@ -129,8 +129,8 @@ class FeesTile extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Status",
+                               Text(
+                                "Status".tr,
                                 style: AppTextStyle.fontSize13BlackW400,
                               ),
                               5.verticalSpacing,
@@ -154,7 +154,7 @@ class FeesTile extends StatelessWidget {
               ),
               20.verticalSpacing,
               ColumnTile(
-                title: isInvoice ? "Sub Total" : "Due Date",
+                title: isInvoice ? "Sub Total".tr : "Due Date".tr,
                 value: isInvoice ? subTotal : dueDate,
               ),
               10.verticalSpacing,
@@ -168,28 +168,28 @@ class FeesTile extends StatelessWidget {
               ? Column(
                 children: [
                   TwoValueTile(
-                    title: "Total Amount",
+                    title: "Total Amount".tr,
                     amount: totalAmount,
                   ),
                   TwoValueTile(
-                    title: "Total Waiver",
+                    title: "Total Waiver".tr,
                     amount: totalWaiver,
                   ),
                   TwoValueTile(
-                    title: "Total Fine",
+                    title: "Total Fine".tr,
                     amount: totalFine,
                   ),
                   TwoValueTile(
-                    title: "Total Paid",
+                    title: "Total Paid".tr,
                     amount: totalPaid,
                   ),
                   TwoValueTile(
-                    title: "Grand Total",
+                    title: "Grand Total".tr,
                     amount: grandTotal,
                   ),
                   5.verticalSpacing,
                   TwoValueTile(
-                    title: "Due Balance",
+                    title: "Due Balance".tr,
                     amount: dueBalance,
                     isDueBalance: true,
                   ),

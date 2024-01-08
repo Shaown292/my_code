@@ -22,12 +22,12 @@ class TransportWidget extends StatelessWidget {
             SizedBox(
               width: Get.width * 0.35,
               child: Text(
-                title ?? AppText.noDataAvailable,
+                title ?? AppText.noDataAvailable.tr,
                 style: AppTextStyle.fontSize10GreyW500,
               ),
             ),
             Text(
-              value ?? AppText.noDataAvailable,
+              value ?? AppText.noDataAvailable.tr,
               style: AppTextStyle.fontSize10GreyW500,
             ),
           ],

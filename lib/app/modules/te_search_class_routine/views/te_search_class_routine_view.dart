@@ -17,7 +17,7 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Class Routine Search",
+      title: "Class Routine Search".tr,
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -26,7 +26,7 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 20.verticalSpacing,
-                const Text('Select class*'),
+                 Text('${"Select".tr} ${"Class".tr}*'),
                 5.verticalSpacing,
                 controller.adminStudentsSearchController.loadingController
                         .isLoading
@@ -48,7 +48,7 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
                         },
                       ),
                 20.verticalSpacing,
-                const Text('Select section*'),
+                 Text('${"Select".tr} ${"Section".tr}*'),
                 5.verticalSpacing,
                 controller.adminStudentsSearchController.sectionLoader.value
                     ? const Center(
@@ -70,7 +70,7 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
                       ),
                 50.verticalSpacing,
                 PrimaryButton(
-                  text: "Search",
+                  text: "Search".tr,
                   onTap: () {
                     Get.toNamed(Routes.TE_SEARCH_CLASS_ROUTINE_LIST);
                   },

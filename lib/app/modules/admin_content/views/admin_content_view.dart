@@ -15,7 +15,7 @@ class AdminContentView extends GetView<AdminContentController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Content",
+      title: "Content".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -29,7 +29,7 @@ class AdminContentView extends GetView<AdminContentController> {
               itemBuilder: (context, index) {
                 return Obx(() => CustomCardTile(
                       icon: controller.contentTileList[index].icon,
-                      title: controller.contentTileList[index].title,
+                      title: controller.contentTileList[index].title.tr,
                       iconColor: AppColors.primaryColor,
                       onTap: () {
                         controller.selectIndex.value = index;

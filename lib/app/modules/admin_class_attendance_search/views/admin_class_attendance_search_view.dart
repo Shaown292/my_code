@@ -22,7 +22,7 @@ class AdminClassAttendanceSearchView
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Class Attendance Search",
+        title: "Class Attendance Search".tr,
         body: CustomBackground(
           customWidget: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
@@ -97,7 +97,7 @@ class AdminClassAttendanceSearchView
         bottomNavBar:    controller.isLoading.value
             ? const SecondaryLoadingWidget(isBottomNav: true,)
             : BottomNavButton(
-          text: "Search",
+          text: "Search".tr,
           onTap: () {
             if (controller.validation()) {
               controller.getStudentAttendanceList(

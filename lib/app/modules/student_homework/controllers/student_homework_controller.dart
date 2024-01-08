@@ -92,8 +92,8 @@ class StudentHomeworkController extends GetxController {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                "Upload Homework",
+                               Text(
+                                "Upload Homework".tr,
                                 style: AppTextStyle.cardTextStyle14WhiteW500,
                               ),
                               Container(
@@ -122,7 +122,7 @@ class StudentHomeworkController extends GetxController {
                             fillColor: Colors.white,
                             hintText: pickedFileList.isNotEmpty
                                 ? pickedFileList.first.path.split('/').last
-                                : 'Select File',
+                                : 'Select File'.tr,
                             readOnly: true,
                             suffixIcon: InkWell(
                               onTap: onTapBrowse,
@@ -134,9 +134,9 @@ class StudentHomeworkController extends GetxController {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
                                       color: AppColors.primaryColor),
-                                  child: const Center(
+                                  child:  Center(
                                     child: Text(
-                                      "BROWSE",
+                                      "Browse".tr,
                                       style: AppTextStyle.textStyle12WhiteW400,
                                     ),
                                   ),
@@ -168,7 +168,7 @@ class StudentHomeworkController extends GetxController {
                             children: [
                               PrimaryButton(
                                 width: Get.width * 0.15,
-                                title: "Cancel",
+                                title: "Cancel".tr,
                                 color: Colors.white,
                                 textStyle: AppTextStyle.fontSize13BlackW400,
                                 borderColor: AppColors.primaryColor,
@@ -183,7 +183,7 @@ class StudentHomeworkController extends GetxController {
                                       )
                                     : PrimaryButton(
                                         width: Get.width * 0.2,
-                                        title: "Save",
+                                        title: "Save".tr,
                                         textStyle:
                                             AppTextStyle.textStyle12WhiteW500,
                                         onTap: onTapForSave,
@@ -210,22 +210,22 @@ class StudentHomeworkController extends GetxController {
                                 ),
                               ),
                               BottomSheetTile(
-                                title: "Created at",
+                                title: "Created at".tr,
                                 value: studentHomeworkList[index].createdAt,
                                 color: AppColors.homeworkWidgetColor,
                               ),
                               BottomSheetTile(
-                                title: "Submission",
+                                title: "Submission".tr,
                                 value: studentHomeworkList[index].submissionDate,
                                 color: Colors.white,
                               ),
                               BottomSheetTile(
-                                title: "Evaluation",
+                                title: "Evaluation".tr,
                                 value: studentHomeworkList[index].evaluationDate,
                                 color: AppColors.homeworkWidgetColor,
                               ),
                               BottomSheetTile(
-                                title: "Obtained Marks",
+                                title: "Obtained Marks".tr,
                                 value:
                                     studentHomeworkList[index].marks.toString(),
                                 color: Colors.white,
@@ -256,8 +256,8 @@ class StudentHomeworkController extends GetxController {
                                           color: Colors.white,
                                         ),
                                         5.horizontalSpacing,
-                                        const Text(
-                                          "Download",
+                                         Text(
+                                          "Download".tr,
                                           style: AppTextStyle
                                               .cardTextStyle14WhiteW500,
                                         ),
@@ -286,8 +286,8 @@ class StudentHomeworkController extends GetxController {
                                           ),
                                         ),
                                         5.horizontalSpacing,
-                                        const Text(
-                                          "Upload",
+                                         Text(
+                                          "Upload".tr,
                                           style: AppTextStyle
                                               .cardTextStyle14WhiteW500,
                                         ),
@@ -301,9 +301,9 @@ class StudentHomeworkController extends GetxController {
                         ],
                       ),
                   )
-              : const Center(
+              :  Center(
                   child: Text(
-                    "No Details Available",
+                    "No Details Available".tr,
                     style: AppTextStyle.fontSize16lightBlackW500,
                   ),
                 ),

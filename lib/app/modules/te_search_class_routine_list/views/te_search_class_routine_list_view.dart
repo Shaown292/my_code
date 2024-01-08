@@ -23,7 +23,7 @@ class TeSearchClassRoutineListView
       initialIndex: controller.selectIndex.value,
       length: controller.daysOfWeek.length,
       child: InfixEduScaffold(
-        title: "Class Routine",
+        title: "Class Routine".tr,
         body: Obx(
               () => CustomBackground(
             customWidget: Padding(

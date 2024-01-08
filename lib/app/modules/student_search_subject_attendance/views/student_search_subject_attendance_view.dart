@@ -22,7 +22,7 @@ class StudentSearchSubjectAttendanceView
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Select Subject",
+        title: "Select Subject".tr,
         body: CustomBackground(
           customWidget: Column(
             children: [
@@ -39,7 +39,7 @@ class StudentSearchSubjectAttendanceView
                         padding: const EdgeInsets.all(8.0),
                         child: StudyButton(
                           title:
-                              "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                              "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                           onItemTap: () {
                             controller.selectIndex.value = index;
                             controller.recordId.value = controller

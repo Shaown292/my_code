@@ -41,7 +41,7 @@ class ActiveExamTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title ?? "title",
+            title ?? "",
             style: AppTextStyle.fontSize14lightBlackW400,
           ),
           10.verticalSpacing,
@@ -49,17 +49,17 @@ class ActiveExamTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ColumnTile(
-                title: "Subject",
+                title: "Subject".tr,
                 value: subject,
                 width: Get.width * 0.18,
               ),
               TimeAndDateTile(
-                title: "Start",
+                title: "Start".tr,
                 date: startDate ?? "",
                 time: "(${startingTime ?? ''})",
               ),
               TimeAndDateTile(
-                title: "End",
+                title: "End".tr,
                 date: endDate ?? "",
                 time: "(${endingTime ?? ''})",
               ),
@@ -67,8 +67,8 @@ class ActiveExamTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Status",
+                     Text(
+                      "Status".tr,
                       style: AppTextStyle.fontSize13BlackW400,
                     ),
                     5.verticalSpacing,

@@ -19,7 +19,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Students",
+        title: "Students".tr,
         body: CustomBackground(
           customWidget: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -63,7 +63,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                     controller: controller.nameTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Name",
+                    hintText: "Name".tr,
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
@@ -73,7 +73,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     textInputType: TextInputType.number,
-                    hintText: "Roll",
+                    hintText: "Roll".tr,
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
@@ -86,7 +86,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
         bottomNavBar: controller.searchLoader.value
             ? const SecondaryLoadingWidget(isBottomNav: true,)
             : BottomNavButton(
-                text: "Search",
+                text: "Search".tr,
                 onTap: () {
                   controller.getSearchStudentDataList(
                     classId: controller.studentClassId.value,

@@ -15,7 +15,7 @@ class AdminSubjectAttendanceSearchIndividualListView
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Students List",
+      title: "Students List".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [

@@ -20,7 +20,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Edit Profile",
+      title: "Edit Profile".tr,
       actions: const [SizedBox()],
       body: CustomBackground(
         customWidget: Padding(
@@ -143,20 +143,20 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 30.verticalSpacing,
 
                 EditProfileTextField(
-                  labelText: AppText.editProfileFirstName,
+                  labelText: AppText.editProfileFirstName.tr,
                   controller: controller.firstNameTextController,
                   iconOnTap: () => controller.userProfileInfoUpdate(),
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
-                  labelText: AppText.editProfileLastName,
-                  hintText: AppText.editProfileLastName,
+                  labelText: AppText.editProfileLastName.tr,
+                  hintText: AppText.editProfileLastName.tr,
                   controller: controller.lastNameTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
-                  labelText: AppText.editProfileEmail,
+                  labelText: AppText.editProfileEmail.tr,
                   readOnly:
                       controller.globalRxVariableController.roleId.value == 1
                           ? false
@@ -173,12 +173,12 @@ class ProfileEditView extends GetView<ProfileEditController> {
                               ),
                           )
                           : const SizedBox(),
-                  hintText: AppText.editProfileEmail,
+                  hintText: AppText.editProfileEmail.tr,
                   controller: controller.emailTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
-                  labelText: AppText.editProfilePhoneNumber,
+                  labelText: AppText.editProfilePhoneNumber.tr,
                   suffixIcon:
                       controller.globalRxVariableController.roleId.value == 1
                           ? InkWell(
@@ -195,13 +195,13 @@ class ProfileEditView extends GetView<ProfileEditController> {
                       controller.globalRxVariableController.roleId.value == 1
                           ? false
                           : true,
-                  hintText: AppText.editProfilePhoneNumber,
+                  hintText: AppText.editProfilePhoneNumber.tr,
                   controller: controller.phoneNumberTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
                   readOnly: true,
-                  labelText: AppText.editProfileDateOfBirth,
+                  labelText: AppText.editProfileDateOfBirth.tr,
                   suffixIcon: InkWell(
                     onTap: (){
                       controller.dateOfBirth();
@@ -211,14 +211,14 @@ class ProfileEditView extends GetView<ProfileEditController> {
                       color: AppColors.profileValueColor,
                     ),
                   ),
-                  hintText: AppText.editProfileDateOfBirth,
+                  hintText: AppText.editProfileDateOfBirth.tr,
                   controller: controller.dateOfBirthTextController,
                 ),
                 15.verticalSpacing,
                 EditProfileTextField(
                   iconOnTap: () => controller.userProfileInfoUpdate(),
-                  labelText: AppText.editProfileCurrentAddress,
-                  hintText: AppText.editProfileCurrentAddress,
+                  labelText: AppText.editProfileCurrentAddress.tr,
+                  hintText: AppText.editProfileCurrentAddress.tr,
                   controller: controller.currentAddressTextController,
                 ),
                 50.verticalSpacing,

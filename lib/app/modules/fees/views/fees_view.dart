@@ -19,7 +19,7 @@ class FeesView extends GetView<FeesController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Fees",
+        title: "Fees".tr,
         leadingIcon: const SizedBox(),
         body: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
@@ -55,7 +55,7 @@ class FeesView extends GetView<FeesController> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: StudyButton(
                                           title:
-                                              "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                              "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                           onItemTap: () {
                                             controller.selectIndex.value = index;
                                             controller.recordId.value = controller
@@ -111,7 +111,7 @@ class FeesView extends GetView<FeesController> {
                                         statusColor:   Color(int.tryParse(colorCode)!),
                                         dueDate: controller
                                             .feesInvoiceList[index].createDate,
-                                        duration: "Monthly",
+                                        duration: "Monthly".tr,
                                         amount: controller
                                             .feesInvoiceList[index].amount.toString(),
                                         paid: controller

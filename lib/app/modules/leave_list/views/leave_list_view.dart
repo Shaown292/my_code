@@ -85,7 +85,7 @@ class LeaveListView extends GetView<LeaveListController> {
                     ),
                     30.verticalSpacing,
                      Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Text(
                         "Leave List".tr,
                         style: AppTextStyle.blackFontSize14W400,

@@ -44,7 +44,7 @@ class ScheduleView extends GetView<ScheduleController> {
                                 child: Obx(
                                   () => StudyButton(
                                     title:
-                                        "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                        "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                     onItemTap: () {
                                       controller.selectIndex.value = index;
                                       controller.examinationController

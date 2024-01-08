@@ -23,7 +23,7 @@ class AdminSubjectAttendanceSearchListView
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Set Attendance",
+        title: "Set Attendance".tr,
         body: CustomBackground(
           customWidget: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -34,8 +34,8 @@ class AdminSubjectAttendanceSearchListView
                   children: [
                     SizedBox(
                       width: Get.width * 0.58,
-                      child: const Text(
-                          "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
+                      child:  Text(
+                          "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day".tr),
                     ),
                     Obx(
                       () => controller.holidayLoader.value
@@ -60,8 +60,8 @@ class AdminSubjectAttendanceSearchListView
                                 ),
                                 child: Text(
                                   controller.markHoliday.value
-                                      ? "Unmark Holiday"
-                                      : "Mark Holiday",
+                                      ? "Unmarked Holiday".tr
+                                      : "Mark Holiday".tr,
                                   style: AppTextStyle.textStyle12WhiteW400,
                                 ),
                               ),
@@ -141,7 +141,7 @@ class AdminSubjectAttendanceSearchListView
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             PrimaryButton(
-                              text: "Save",
+                              text: "Save".tr,
                               onTap: () {
                                 controller.dataFilteringForApiCall();
                               },

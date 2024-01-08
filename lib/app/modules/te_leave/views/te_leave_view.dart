@@ -14,7 +14,7 @@ class TeLeaveView extends GetView<TeLeaveController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Leave",
+      title: "Leave".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -29,7 +29,7 @@ class TeLeaveView extends GetView<TeLeaveController> {
                 return Obx(
                       () => CustomCardTile(
                     icon: controller.teacherLeaveTileList[index].icon,
-                    title: controller.teacherLeaveTileList[index].title,
+                    title: controller.teacherLeaveTileList[index].title.tr,
                     iconColor: AppColors.primaryColor,
                     onTap: () {
                       controller.selectIndex.value = index;

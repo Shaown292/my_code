@@ -21,7 +21,7 @@ class NotificationView extends GetView<NotificationController> {
     GlobalRxVariableController globalRxVariableController = Get.find();
     return Obx(
       () => InfixEduScaffold(
-        title: 'Notification',
+        title: 'Notification'.tr,
         leadingIcon: const SizedBox(),
         body: CustomBackground(
             customWidget: RefreshIndicator(
@@ -38,7 +38,7 @@ class NotificationView extends GetView<NotificationController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "You have ${globalRxVariableController.notificationCount} New notification",
+                      "${"You have".tr} ${globalRxVariableController.notificationCount} ${"New notification".tr}",
                       style: AppTextStyle.notificationText,
                     ),
                     controller.unReadNotificationList.isNotEmpty
@@ -48,7 +48,7 @@ class NotificationView extends GetView<NotificationController> {
                                 onTap: () {
                                   controller.readAllNotifications();
                                 },
-                                title: AppText.notificationMarkAsRaed,
+                                title: AppText.notificationMarkAsRaed.tr,
                                 width: 110,
                               )
                         : const SizedBox(),
