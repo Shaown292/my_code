@@ -18,7 +18,7 @@ class AdminSubjectAttendanceSearchIndividualView
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Subject Wise Attendance Search",
+      title: "Subject Wise Attendance Search".tr,
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
@@ -27,8 +27,8 @@ class AdminSubjectAttendanceSearchIndividualView
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Select Class *",
+                   Text(
+                    "${"Select".tr} ${"Class".tr} *",
                     style: AppTextStyle.fontSize13BlackW400,
                   ),
                   10.verticalSpacing,
@@ -63,8 +63,8 @@ class AdminSubjectAttendanceSearchIndividualView
                           },
                         ),
                   10.verticalSpacing,
-                  const Text(
-                    "Select Section *",
+                   Text(
+                    "${"Select".tr} ${"Section".tr} *",
                     style: AppTextStyle.fontSize13BlackW400,
                   ),
                   10.verticalSpacing,
@@ -101,8 +101,8 @@ class AdminSubjectAttendanceSearchIndividualView
                           },
                         ),
                   10.verticalSpacing,
-                  const Text(
-                    "Select Subject *",
+                   Text(
+                    "${"Select".tr} ${"Subject".tr} *",
                     style: AppTextStyle.fontSize13BlackW400,
                   ),
                   10.verticalSpacing,
@@ -134,7 +134,7 @@ class AdminSubjectAttendanceSearchIndividualView
                     controller: controller.nameTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Name",
+                    hintText: "Name".tr,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                   ),
@@ -143,7 +143,7 @@ class AdminSubjectAttendanceSearchIndividualView
                     controller: controller.rollTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Roll",
+                    hintText: "Roll".tr,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                   ),
@@ -158,7 +158,7 @@ class AdminSubjectAttendanceSearchIndividualView
       bottomNavBar: controller.searchLoader.value
           ? const SecondaryLoadingWidget(isBottomNav: true,)
           : BottomNavButton(
-              text: "Search",
+              text: "Search".tr,
               onTap: () {
                 controller.getSearchStudentDataList(
                   classId: controller

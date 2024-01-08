@@ -122,26 +122,26 @@ class LeaveListController extends GetxController {
             children: [
               10.verticalSpacing,
               Text(
-                "Reason: ${pendingList[index].reason ?? ""}",
+                "${"Reason".tr}: ${pendingList[index].reason ?? ""}",
                 style: AppTextStyle.fontSize14BlackW500,
               ),
               20.verticalSpacing,
               BottomSheetTile(
-                title: "Leave Type",
+                title: "Leave Type".tr,
                 value: pendingList[index].leaveType,
                 color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
-                title: "Apply Date",
+                title: "Apply Date".tr,
                 value: pendingList[index].applyDate,
               ),
               BottomSheetTile(
-                title: "Leave From",
+                title: "Leave From".tr,
                 value: pendingList[index].from,
                 color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
-                title: "Leave To",
+                title: "Leave To".tr,
                 value: pendingList[index].to,
               ),
             ],
@@ -162,26 +162,26 @@ class LeaveListController extends GetxController {
             children: [
               10.verticalSpacing,
               Text(
-                "Reason: ${approvedList[index].reason}",
+                "${"Reason".tr}: ${approvedList[index].reason}",
                 style: AppTextStyle.fontSize14BlackW500,
               ),
               20.verticalSpacing,
               BottomSheetTile(
-                title: "Leave Type",
+                title: "Leave Type".tr,
                 value: approvedList[index].leaveType,
                 color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
-                title: "Apply Date",
+                title: "Apply Date".tr,
                 value: approvedList[index].applyDate,
               ),
               BottomSheetTile(
-                title: "Leave From",
+                title: "Leave From".tr,
                 value: approvedList[index].from,
                 color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
-                title: "Leave To",
+                title: "Leave To".tr,
                 value: approvedList[index].to,
               ),
             ],
@@ -202,26 +202,26 @@ class LeaveListController extends GetxController {
             children: [
               10.verticalSpacing,
               Text(
-                "Reason: ${rejectedList[index].reason}",
+                "${"Reason".tr}: ${rejectedList[index].reason}",
                 style: AppTextStyle.fontSize14BlackW500,
               ),
               20.verticalSpacing,
               BottomSheetTile(
-                title: "Leave Type",
+                title: "Leave Type".tr,
                 value: rejectedList[index].leaveType,
                 color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
-                title: "Apply Date",
+                title: "Apply Date".tr,
                 value: rejectedList[index].applyDate,
               ),
               BottomSheetTile(
-                title: "Leave From",
+                title: "Leave From".tr,
                 value: rejectedList[index].from,
                 color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
-                title: "Leave To",
+                title: "Leave To".tr,
                 value: rejectedList[index].to,
               ),
             ],

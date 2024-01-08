@@ -18,7 +18,7 @@ class TeSubjectsView extends GetView<TeSubjectsController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Subject",
+      title: "Subject".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -37,10 +37,10 @@ class TeSubjectsView extends GetView<TeSubjectsController> {
                   children: [
                     SizedBox(
                       width: Get.width * 0.25,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                      child:  Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Text(
-                          "Subject",
+                          "Subject".tr,
                           style: AppTextStyle.fontSize14BlackW500,
                         ),
                       ),
@@ -48,10 +48,10 @@ class TeSubjectsView extends GetView<TeSubjectsController> {
                     5.horizontalSpacing,
                     SizedBox(
                       width: Get.width * 0.25,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                      child:  Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Text(
-                          "Teacher",
+                          "Teacher".tr,
                           style: AppTextStyle.fontSize14BlackW500,
                         ),
                       ),
@@ -59,10 +59,10 @@ class TeSubjectsView extends GetView<TeSubjectsController> {
                     5.horizontalSpacing,
                     SizedBox(
                       width: Get.width * 0.25,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                      child:  Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Text(
-                          "Type",
+                          "Type".tr,
                           style: AppTextStyle.fontSize14BlackW500,
                         ),
                       ),

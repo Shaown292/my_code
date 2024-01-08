@@ -16,7 +16,7 @@ class TeHomeworkView extends GetView<TeHomeworkController> {
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       leadingIcon: const SizedBox(),
-      title: "Homework",
+      title: "Homework".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -31,7 +31,7 @@ class TeHomeworkView extends GetView<TeHomeworkController> {
                 return Obx(
                   () => CustomCardTile(
                     icon: controller.teacherHomeworkTileList[index].icon,
-                    title: controller.teacherHomeworkTileList[index].title,
+                    title: controller.teacherHomeworkTileList[index].title.tr,
                     iconColor: AppColors.primaryColor,
                     onTap: () {
                       controller.selectIndex.value = index;

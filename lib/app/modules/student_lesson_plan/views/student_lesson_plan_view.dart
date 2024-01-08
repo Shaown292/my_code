@@ -57,7 +57,7 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                                     right: 8.0, top: 8, bottom: 8),
                                 child: StudyButton(
                                   title:
-                                      "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                      "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                   onItemTap: () {
                                     controller.weeksList.clear();
                                     int recordId = controller.homeController
@@ -144,7 +144,7 @@ class StudentLessonPlanView extends GetView<StudentLessonPlanController> {
                                                   endingTime:
                                                       classRoutine.endTime,
                                                   roomNumber: classRoutine.room,
-                                                  buildingName: "Building No",
+                                                  buildingName: "Building No".tr,
                                                   instructorName:
                                                       classRoutine.teacher,
                                                   onDetailsButtonTap: controller

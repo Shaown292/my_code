@@ -50,7 +50,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                     controller: controller.applyDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Apply Date *".tr,
+                    hintText: "${"Apply Date".tr} *".tr,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -67,7 +67,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                     controller: controller.fromDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "From Date *".tr,
+                    hintText: "${"From Date".tr} *".tr,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -84,7 +84,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                     controller: controller.toDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "To Date *".tr,
+                    hintText: "${"To Date".tr} *".tr,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
@@ -97,7 +97,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText:
-                        "${controller.file.value.path.isNotEmpty ? controller.file : 'Select File'}",
+                        "${controller.file.value.path.isNotEmpty ? controller.file : 'Select File'.tr}",
                     fillColor: Colors.white,
                     suffixIcon:  Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),

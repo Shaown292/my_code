@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SearchField extends StatelessWidget {
   final TextEditingController controller;
@@ -22,7 +23,7 @@ class SearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-          hintText: "Search",
+          hintText: "Search".tr,
           hintStyle: hintTextStyle,
           suffixIcon: icon,
           focusedBorder: OutlineInputBorder(

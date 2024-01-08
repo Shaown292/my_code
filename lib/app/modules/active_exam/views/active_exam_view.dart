@@ -39,7 +39,7 @@ class ActiveExamView extends GetView<ActiveExamController> {
                         child: Obx(
                           () => StudyButton(
                             title:
-                                "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                             onItemTap: () {
                               controller.onlineActiveExamList.clear();
                               controller.selectIndex.value = index;

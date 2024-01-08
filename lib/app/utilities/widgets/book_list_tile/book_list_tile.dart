@@ -99,7 +99,7 @@ class BookListTile extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                view ?? "View",
+                                view ?? "View".tr,
                                 style: AppTextStyle.textStyle12WhiteW400,
                               ),
                             ),

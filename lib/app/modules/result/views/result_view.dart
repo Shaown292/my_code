@@ -18,7 +18,7 @@ class ResultView extends GetView<ResultController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Result",
+      title: "Result".tr,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -53,7 +53,7 @@ class ResultView extends GetView<ResultController> {
                                 child: Obx(
                                   () => StudyButton(
                                     title:
-                                        "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                        "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                     onItemTap: () {
                                       controller.selectIndex.value = index;
                                       controller

@@ -18,7 +18,7 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Homework Evaluation",
+      title: "${"Homework".tr} ${"Evaluation".tr}",
       body: CustomBackground(
         customWidget: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -45,7 +45,7 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
                       padding: const EdgeInsets.only(top: 5.0, left: 15),
                       child: Text(
                         controller.evaluationSubjectList.first.subjectName ??
-                            'Subject',
+                            'Subject'.tr,
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,

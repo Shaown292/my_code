@@ -22,7 +22,7 @@ class AdminSubjectAttendanceSearchView
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Subject Attendance Search",
+        title: "Subject Attendance Search".tr,
         body: CustomBackground(
           customWidget: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
@@ -130,7 +130,7 @@ class AdminSubjectAttendanceSearchView
           ),
         ),
         bottomNavBar:   BottomNavButton(
-          text: "Search",
+          text: "Search".tr,
           onTap: () {
             if(controller.validation()){
               Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST,

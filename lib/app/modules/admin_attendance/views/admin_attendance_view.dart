@@ -26,7 +26,7 @@ class AdminAttendanceView extends GetView<AdminAttendanceController> {
 
 
       ) : const SizedBox(),
-      title: "Attendance",
+      title: "Attendance".tr,
       body: CustomBackground(
         customWidget: Column(
           children: [
@@ -40,7 +40,7 @@ class AdminAttendanceView extends GetView<AdminAttendanceController> {
               itemBuilder: (context, index) {
                 return Obx(() => CustomCardTile(
                   icon: controller.adminAttendanceTileList[index].icon,
-                  title: controller.adminAttendanceTileList[index].title,
+                  title: controller.adminAttendanceTileList[index].title.tr,
                   iconColor: AppColors.primaryColor.withOpacity(0.7),
                   onTap: () {
                     controller.selectIndex.value = index;

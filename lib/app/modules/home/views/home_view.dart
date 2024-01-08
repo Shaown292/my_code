@@ -23,8 +23,8 @@ class HomeView extends GetView<HomeController> {
       leadingIcon: const SizedBox(),
       appBar: Obx(() => PrimaryAppBar(
         title: controller.globalRxVariableController.roleId.value == 1
-            ? 'Welcome to Admin'
-            : 'Welcome to our school',
+            ? 'Welcome to Admin'.tr
+            : 'Welcome to our school'.tr,
         actions: [
           CustomIconButton(
             icon: FontAwesomeIcons.facebookMessenger,

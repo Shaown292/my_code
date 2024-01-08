@@ -60,7 +60,7 @@ class ContentTile extends StatelessWidget {
                         color: const Color(0xFFFE3E3E)),
                     child: Center(
                       child: Text(
-                        "Due  - $dueDate",
+                        "${"Due".tr}  - $dueDate",
                         style: AppTextStyle.cardTextStyle14WhiteW500,
                       ),
                     ),
@@ -71,7 +71,7 @@ class ContentTile extends StatelessWidget {
                       title: "DOWNLOAD".capitalizeFirst?.tr,
                       onTap: onTap,
                     ),
-                  )
+                  ),
                 ],
               )
             ],

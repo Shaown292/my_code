@@ -96,9 +96,9 @@ class SetAttendanceTile extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
                                 color: AppColors.appButtonColor),
-                            child: const Center(
+                            child:  Center(
                               child: Text(
-                                "Add Note",
+                                "Add Note".tr,
                                 style: AppTextStyle.textStyle12WhiteW400,
                               ),
                             ),
@@ -107,7 +107,7 @@ class SetAttendanceTile extends StatelessWidget {
                       ],
                     ),
                     5.verticalSpacing,
-                    Text("Class: $studentClass  |  Section: $section"),
+                    Text("${"Class".tr}: $studentClass  |  ${"Section".tr}: $section"),
                     8.verticalSpacing,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +131,7 @@ class SetAttendanceTile extends StatelessWidget {
                               padding: EdgeInsets.all(Get.width * 0.02),
                               child: Center(
                                 child: Text(
-                                  "Present",
+                                  "Present".tr,
                                   style: attendanceType == "P"
                                       ? AppTextStyle.textStyle12WhiteW500
                                       : AppTextStyle.cardTextStyle12PurpleW400,
@@ -160,7 +160,7 @@ class SetAttendanceTile extends StatelessWidget {
                               padding: EdgeInsets.all(Get.width * 0.02),
                               child: Center(
                                 child: Text(
-                                  "Absent",
+                                  "Absent".tr,
                                   style: attendanceType == "A"
                                       ? AppTextStyle.textStyle12WhiteW500
                                       : AppTextStyle.cardTextStyle12PurpleW400,
@@ -190,7 +190,7 @@ class SetAttendanceTile extends StatelessWidget {
                               padding: EdgeInsets.all(Get.width * 0.02),
                               child: Center(
                                 child: Text(
-                                  "Late",
+                                  "Late".tr,
                                   style: attendanceType == "L"
                                       ? AppTextStyle.textStyle12WhiteW500
                                       : AppTextStyle.cardTextStyle12PurpleW400,
@@ -219,7 +219,7 @@ class SetAttendanceTile extends StatelessWidget {
                               padding: EdgeInsets.all(Get.width * 0.02),
                               child: Center(
                                 child: Text(
-                                  "Half day",
+                                  "Half day".tr,
                                   style: attendanceType == "H"
                                       ? AppTextStyle.textStyle12WhiteW500
                                       : AppTextStyle.cardTextStyle12PurpleW400,

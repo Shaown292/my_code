@@ -23,8 +23,8 @@ class RoutineView extends GetView<RoutineController> {
       child: Obx(
         () => InfixEduScaffold(
           title: controller.globalRxVariableController.roleId.value == 4
-              ? "My Routine"
-              : "Routine",
+              ? "My Routine".tr
+              : "Routine".tr,
           leadingIcon: controller.globalRxVariableController.roleId.value == 4
               ? InkWell(
                   onTap: () => Get.back(),
@@ -116,7 +116,6 @@ class RoutineView extends GetView<RoutineController> {
                                                         routineList[index].endTime,
                                                     roomNumber:
                                                         routineList[index].room,
-                                                    buildingName: 'Building Name',
                                                     instructorName:
                                                         routineList[index].teacher,
                                                   );

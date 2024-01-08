@@ -54,7 +54,7 @@ class OtherDownloadsTile extends StatelessWidget {
                     SizedBox(
                       width: Get.width * 0.3,
                       child: Text(
-                        "Date: $date",
+                        "${"Date".tr}: $date",
                         style: AppTextStyle.blackFontSize14W400,
                       ),
                     ),

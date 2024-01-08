@@ -16,7 +16,7 @@ class AdminContentListView extends GetView<AdminContentListController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Content List",
+      title: "Content List".tr,
       body: CustomBackground(
         customWidget: RefreshIndicator(
           color: AppColors.primaryColor,

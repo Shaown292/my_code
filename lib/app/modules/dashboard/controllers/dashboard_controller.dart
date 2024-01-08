@@ -16,14 +16,14 @@ class DashboardController extends GetxController {
 
   List<PersistentBottomNavBarItem> tabItem = [
 
-    navItem(icon :FontAwesomeIcons.house, title:'Home'),
-    navItem(icon :FontAwesomeIcons.bell, title:'Notification', isNotification: true),
+    navItem(icon :FontAwesomeIcons.house, title:'Home'.tr),
+    navItem(icon :FontAwesomeIcons.bell, title:'Notification'.tr, isNotification: true),
 
-    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItemWithImageIcon(imagePath: ImagePath.studentAttendance, title: 'Attendance')
-        : navItemWithImageIcon(imagePath: ImagePath.studentWallet, title: 'Fees'),
+    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItemWithImageIcon(imagePath: ImagePath.studentAttendance, title: 'Attendance'.tr)
+        : navItemWithImageIcon(imagePath: ImagePath.studentWallet, title: 'Fees'.tr),
 
-    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItem(icon : FontAwesomeIcons.userGraduate, title:  'Academic') : navItem(icon : FontAwesomeIcons.clipboardList, title:  'Routine'),
-    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItem(icon : FontAwesomeIcons.book, title: 'Homework') : navItem(icon : FontAwesomeIcons.user, title: 'Profile'),
+    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItem(icon : FontAwesomeIcons.userGraduate, title:  'Academic'.tr) : navItem(icon : FontAwesomeIcons.clipboardList, title:  'Routine'.tr),
+    Get.find<GlobalRxVariableController>().roleId.value == 4 ? navItem(icon : FontAwesomeIcons.book, title: 'Homework'.tr) : navItem(icon : FontAwesomeIcons.user, title: 'Profile'.tr),
   ];
 }
 

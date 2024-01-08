@@ -24,9 +24,9 @@ class AppText {
   static const String transportDriverPhoneNo = 'Driver Phone Number';
   static const String transportDormitory = 'Dormitory Name';
   static const String profileClass = 'Class';
-  static const String profileSection = 'Section:';
-  static const String profileAdmission = 'Admission No:';
-  static const String profileRoll = 'Roll:';
+  static const String profileSection = 'Section';
+  static const String profileAdmission = 'Admission No';
+  static const String profileRoll = 'Roll';
   static const String profileFather = 'Father';
   static const String profileGuardian = 'Guardian';
   static const String profileMother = 'Mother';
@@ -34,7 +34,7 @@ class AppText {
 
   /// Notification
   static const String notificationMarkAsRaed = 'Mark all as read';
-  static const String noDataAvailable = 'No Data Available.';
+  static const String noDataAvailable = 'No Data Available';
   static const String notificationTitle = 'Notification';
 
   /// Edit Profile
@@ -42,7 +42,7 @@ class AppText {
   static const String editProfileLastName = 'Last Name';
   static const String editProfilePhoneNumber = 'Phone Number';
   static const String editProfileEmail = 'Email';
-  static const String editProfileDateOfBirth = 'Date of Birth';
+  static const String editProfileDateOfBirth = 'Date of birth';
   static const String editProfileCurrentAddress = 'Current Address';
 
 

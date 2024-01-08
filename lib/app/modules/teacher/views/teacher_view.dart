@@ -45,7 +45,7 @@ class TeacherView extends GetView<TeacherController> {
                             padding: const EdgeInsets.all(8.0),
                             child: StudyButton(
                               title:
-                                  "Class ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                                  "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                               onItemTap: () {
                                 controller.teacherList.clear();
                                 int recordId = controller

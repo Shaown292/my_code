@@ -74,15 +74,15 @@ class ContentTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ColumnTile(
-                title: "Type",
+                title: "Type".tr,
                 value: contentType,
               ),
               ColumnTile(
-                title: "Date",
+                title: "Date".tr,
                 value: date,
               ),
               ColumnTile(
-                title: "Available For",
+                title: "Available For".tr,
                 value: availableFor,
               ),
             ],

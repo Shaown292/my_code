@@ -5,6 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/column_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
+import 'package:get/get.dart';
 
 class HomeworkTile extends StatelessWidget {
   final String? createDate;
@@ -52,11 +53,11 @@ class HomeworkTile extends StatelessWidget {
                           color: AppColors.primaryColor,
                         ),
                       )
-                    : const Padding(
-                        padding: EdgeInsets.only(top: 5.0),
+                    :  Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
                         child: Text(
-                          "Evaluation",
-                          style: TextStyle(
+                          "Evaluation".tr,
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: Colors.transparent,
@@ -81,19 +82,19 @@ class HomeworkTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ColumnTile(
-                title: "Created",
+                title: "Created".tr,
                 value: createDate,
               ),
               ColumnTile(
-                title: "Submission",
+                title: "Submission".tr,
                 value: submissionDate,
               ),
               ColumnTile(
-                title: "Evaluation",
+                title: "Evaluation".tr,
                 value: evaluation,
               ),
               ColumnTile(
-                title: "Marks",
+                title: "Marks".tr,
                 value: marks,
               ),
             ],

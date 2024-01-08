@@ -27,7 +27,7 @@ class StudentWalletView extends GetView<StudentWalletController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PrimaryButton(
-                      text: "Balance : ${controller.balance}",
+                      text: "${"Balance".tr} : ${controller.balance}",
                       borderRadius: 6,
                       padding: const EdgeInsets.all(10),
                     ),

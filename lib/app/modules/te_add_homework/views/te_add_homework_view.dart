@@ -21,7 +21,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
   Widget build(BuildContext context) {
     return Obx(
       () => InfixEduScaffold(
-        title: "Add Homework",
+        title: "Add Homework".tr,
         body: CustomBackground(
           customWidget: SingleChildScrollView(
             child: Padding(
@@ -31,8 +31,8 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Select class*',
+                   Text(
+                    '${"Select".tr} ${"Class".tr}*',
                     style: AppTextStyle.fontSize13BlackW400,
                   ),
                   5.verticalSpacing,
@@ -53,8 +53,8 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                         ),
                   10.verticalSpacing,
 
-                  const Text(
-                    'Select subject*',
+                   Text(
+                    '${"Select".tr} ${"Subject".tr}*',
                     style: AppTextStyle.fontSize13BlackW400,
                   ),
                   5.verticalSpacing,
@@ -77,8 +77,8 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                         ),
                   10.verticalSpacing,
 
-                  const Text(
-                    'Select section*',
+                   Text(
+                    '${"Select".tr} ${"Section".tr}*',
                     style: AppTextStyle.fontSize13BlackW400,
                   ),
                   5.verticalSpacing,
@@ -106,7 +106,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     controller: controller.assignDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Assign Date *",
+                    hintText: "${"Assign Date".tr} *",
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
@@ -123,7 +123,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     controller: controller.submissionDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Submission Date *",
+                    hintText: "${"Submission Date".tr} *",
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
@@ -136,18 +136,18 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText:
-                        "${controller.homeworkFile.value.path.isNotEmpty ? controller.homeworkFile : 'Select File'}",
+                        "${controller.homeworkFile.value.path.isNotEmpty ? controller.homeworkFile : 'Select File'.tr}",
                     fillColor: Colors.white,
-                    suffixIcon: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    suffixIcon:  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Browse",
+                            "Browse".tr,
                             style: AppTextStyle.fontSize12lightViolateW400,
                           ),
-                          CustomDivider(
+                          const CustomDivider(
                             width: 42,
                             height: 1,
                             color: AppColors.profileValueColor,
@@ -166,7 +166,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     controller: controller.marksTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Marks",
+                    hintText: "Marks".tr,
                     textInputType: TextInputType.number,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
@@ -179,7 +179,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     controller: controller.descriptionTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Description",
+                    hintText: "Description".tr,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     maxLine: 3,
@@ -191,7 +191,7 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                   controller.loadingController.isLoading
                       ? const Center(child: CircularProgressIndicator())
                       : PrimaryButton(
-                          text: "Save",
+                          text: "Save".tr,
                           onTap: () {
                             if (controller.validation()) {
                               controller.addTeacherHomework();

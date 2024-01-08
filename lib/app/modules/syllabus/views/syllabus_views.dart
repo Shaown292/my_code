@@ -50,7 +50,7 @@ class SyllabusView extends GetView<SyllabusController> {
                                         message: 'No File Available.'.tr);
                               },
                               title: 'Confirmation'.tr,
-                              subTitle: AppText.downloadMessage,
+                              subTitle: AppText.downloadMessage.tr,
                               noText: 'No'.tr,
                               yesText: 'Download'.tr,
                             ),

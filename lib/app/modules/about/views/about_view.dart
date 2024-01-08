@@ -17,7 +17,7 @@ class AboutView extends GetView<AboutController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "About",
+      title: "About".tr,
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
@@ -52,17 +52,17 @@ class AboutView extends GetView<AboutController> {
                         ),
                         20.verticalSpacing,
                         Text(
-                          'Address: ${controller.aboutInformation?.address}',
+                          '${"Address".tr}: ${controller.aboutInformation?.address}',
                           style: AppTextStyle.cardTextStyle14PurpleW500,
                         ),
                         10.verticalSpacing,
                         Text(
-                          'Phone Number: ${controller.aboutInformation?.phoneNo}',
+                          '${"Phone number".tr}: ${controller.aboutInformation?.phoneNo}',
                           style: AppTextStyle.cardTextStyle14PurpleW500,
                         ),
                         10.verticalSpacing,
                         Text(
-                          'Email: ${controller.aboutInformation?.email}',
+                          '${"Email".tr}: ${controller.aboutInformation?.email}',
                           style: AppTextStyle.cardTextStyle14PurpleW500,
                         ),
                         10.verticalSpacing,

@@ -26,7 +26,7 @@ class NoDataAvailableWidget extends StatelessWidget {
           ),
         ),
         Text(
-          message ?? AppText.noDataAvailable,
+          message ?? AppText.noDataAvailable.tr,
           style: AppTextStyle.syllabusFontSize16W500,
         ),
 

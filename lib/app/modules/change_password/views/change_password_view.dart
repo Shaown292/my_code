@@ -14,7 +14,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Change Password",
+      title: "Change Password".tr,
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -25,7 +25,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                  CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
-                  hintText: "Current Password",
+                  hintText: "Current Password".tr,
                   fillColor: Colors.white,
                   controller: controller.currentPasswordController,
                 ),
@@ -33,7 +33,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                  CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
-                  hintText: "New Password",
+                  hintText: "New Password".tr,
                   fillColor: Colors.white,
                    controller: controller.newPasswordController,
                 ),
@@ -41,13 +41,13 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                  CustomTextFormField(
                   enableBorderActive: true,
                   focusBorderActive: true,
-                  hintText: "Confirm Password",
+                  hintText: "Confirm Password".tr,
                   fillColor: Colors.white,
                    controller: controller.confirmPasswordController,
                 ),
                 30.verticalSpacing,
                  PrimaryButton(
-                  title: "Save",
+                  title: "Save".tr,
                   height: Get.height * 0.05,
                   radius: 30,
                 )

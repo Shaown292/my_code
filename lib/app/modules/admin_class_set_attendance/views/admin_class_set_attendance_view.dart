@@ -20,7 +20,7 @@ class AdminClassSetAttendanceView
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Set Attendance",
+      title: "Set Attendance".tr,
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -34,8 +34,8 @@ class AdminClassSetAttendanceView
                       children: [
                         SizedBox(
                           width: Get.width * 0.58,
-                          child: const Text(
-                              "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day"),
+                          child:  Text(
+                              "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day".tr),
                         ),
                         5.horizontalSpacing,
                         Obx(() => controller.holidayLoader.value ? const CircularProgressIndicator(color: AppColors.primaryColor,) : InkWell(
@@ -52,7 +52,7 @@ class AdminClassSetAttendanceView
                               color: AppColors.primaryColor,
                             ),
                             child: Text(
-                              controller.markHoliday.value ? "Unmark Holiday" : "Mark Holiday",
+                              controller.markHoliday.value ? "Unmarked Holiday".tr : "Mark Holiday".tr,
                               style: AppTextStyle.textStyle12WhiteW400,
                             ),
                           ),
@@ -122,7 +122,7 @@ class AdminClassSetAttendanceView
             () => controller.saveLoader.value
             ? const SecondaryLoadingWidget(isBottomNav: true,)
             : BottomNavButton(
-          text: "Save",
+          text: "Save".tr,
           onTap: () {
             controller.dataFiltering();
 

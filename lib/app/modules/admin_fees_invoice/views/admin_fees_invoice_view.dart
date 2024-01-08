@@ -5,9 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/credit_card.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/fees/views/widget/fees_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/column_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 

@@ -67,7 +67,7 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                 ),
               ),
-        title: "Profile",
+        title: "Profile".tr,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -149,12 +149,12 @@ class ProfileView extends GetView<ProfileController> {
                                                     .fontSize18WhiteW500,
                                               ),
                                               Text(
-                                                '${AppText.profileClass} ${controller.profilePersonal?.studentClass ?? ""}  |  ${AppText.profileSection} ${controller.profilePersonal?.section ?? ""}',
+                                                '${AppText.profileClass.tr}: ${controller.profilePersonal?.studentClass ?? ""}  |  ${AppText.profileSection.tr}: ${controller.profilePersonal?.section ?? ""}',
                                                 style: AppTextStyle
                                                     .fontSize14LightPinkW400,
                                               ),
                                               Text(
-                                                '${AppText.profileAdmission} ${controller.profilePersonal?.admissionNo ?? ""}  |  ${AppText.profileRoll} ${controller.profilePersonal?.roll ?? ""}',
+                                                '${AppText.profileAdmission.tr}: ${controller.profilePersonal?.admissionNo ?? ""}  |  ${AppText.profileRoll.tr}: ${controller.profilePersonal?.roll ?? ""}',
                                                 style: AppTextStyle
                                                     .fontSize14LightPinkW400,
                                               ),
@@ -205,31 +205,31 @@ class ProfileView extends GetView<ProfileController> {
                                       children: [
                                         ProfilePersonalWidget(
                                           icon: ImagePath.calender,
-                                          title: AppText.dateOfBirth,
+                                          title: AppText.dateOfBirth.tr,
                                           value:
                                               '${controller.profileDataController.dateOfBirth}',
                                         ),
                                         ProfilePersonalWidget(
                                             icon: ImagePath.age,
-                                            title: AppText.age,
+                                            title: AppText.age.tr,
                                             value: controller
                                                 .profilePersonal?.age
                                                 .toString()),
                                         ProfilePersonalWidget(
-                                          icon: ImagePath.mail,
-                                          title: AppText.phoneNumber,
+                                          icon: ImagePath.phone,
+                                          title: AppText.phoneNumber.tr,
                                           value:
                                               '${controller.profileDataController.phoneNumber}',
                                         ),
                                         ProfilePersonalWidget(
-                                          icon: ImagePath.phone,
-                                          title: AppText.email,
+                                          icon: ImagePath.mail,
+                                          title: AppText.email.tr,
                                           value:
                                               '${controller.profileDataController.email}',
                                         ),
                                         ProfilePersonalWidget(
                                           icon: ImagePath.address,
-                                          title: AppText.presentAddress,
+                                          title: AppText.presentAddress.tr,
                                           value:
                                               '${controller.profileDataController.presentAddress}',
                                         ),
@@ -244,7 +244,7 @@ class ProfileView extends GetView<ProfileController> {
                                         children: [
                                           ParentsInfo(
                                               designation:
-                                                  AppText.profileFather,
+                                                  AppText.profileFather.tr,
                                               icon: ImagePath.parentsProfile,
                                               name: controller.profileParents
                                                       ?.fathersName ??
@@ -259,7 +259,7 @@ class ProfileView extends GetView<ProfileController> {
                                           20.verticalSpacing,
                                           ParentsInfo(
                                               designation:
-                                                  AppText.profileMother,
+                                                  AppText.profileMother.tr,
                                               icon: ImagePath.parentsProfile,
                                               name: controller.profileParents
                                                       ?.mothersName ??
@@ -274,7 +274,7 @@ class ProfileView extends GetView<ProfileController> {
                                           20.verticalSpacing,
                                           GuardianInfo(
                                             designation:
-                                                AppText.profileGuardian,
+                                                AppText.profileGuardian.tr,
                                             icon: ImagePath.parentsProfile,
                                             name: controller.profileParents
                                                     ?.guardiansName ??
@@ -307,27 +307,27 @@ class ProfileView extends GetView<ProfileController> {
                                   : Column(
                                       children: [
                                         TransportWidget(
-                                          title: AppText.transportRoute,
+                                          title: AppText.transportRoute.tr,
                                           value: controller
                                               .profileTransport?.route,
                                         ),
                                         TransportWidget(
-                                          title: AppText.transportVehicleNo,
+                                          title: AppText.transportVehicleNo.tr,
                                           value: controller
                                               .profileTransport?.vehicle,
                                         ),
                                         TransportWidget(
-                                          title: AppText.transportDriverName,
+                                          title: AppText.transportDriverName.tr,
                                           value: controller
                                               .profileTransport?.driver,
                                         ),
                                         TransportWidget(
-                                          title: AppText.transportDriverPhoneNo,
+                                          title: AppText.transportDriverPhoneNo.tr,
                                           value: controller
                                               .profileTransport?.mobile,
                                         ),
                                         TransportWidget(
-                                          title: AppText.transportDormitory,
+                                          title: AppText.transportDormitory.tr,
                                           value: controller
                                               .profileTransport?.dormitory,
                                         ),
@@ -340,40 +340,40 @@ class ProfileView extends GetView<ProfileController> {
                                   : Column(
                                       children: [
                                         OthersTile(
-                                          title: "Height",
+                                          title: "Height".tr,
                                           value: controller
                                                   .profileOthers?.height ??
-                                              AppText.noDataAvailable,
+                                              AppText.noDataAvailable.tr,
                                         ),
                                         OthersTile(
-                                          title: "Weight",
+                                          title: "Weight".tr,
                                           value: controller
                                                   .profileOthers?.weight ??
-                                              AppText.noDataAvailable,
+                                              AppText.noDataAvailable.tr,
                                         ),
                                         OthersTile(
-                                          title: "National ID Number",
+                                          title: "National ID Number".tr,
                                           value: controller.profileOthers
                                                   ?.nationalIdNo ??
-                                              AppText.noDataAvailable,
+                                              AppText.noDataAvailable.tr,
                                         ),
                                         OthersTile(
-                                          title: "Local ID Number",
+                                          title: "Local ID Number".tr,
                                           value: controller
                                                   .profileOthers?.localIdNo ??
-                                              AppText.noDataAvailable,
+                                              AppText.noDataAvailable.tr,
                                         ),
                                         OthersTile(
-                                          title: "Bank Name",
+                                          title: "Bank Name".tr,
                                           value: controller
                                                   .profileOthers?.bankName ??
-                                              AppText.noDataAvailable,
+                                              AppText.noDataAvailable.tr,
                                         ),
                                         OthersTile(
-                                          title: "Bank Account Number",
+                                          title: "Bank Account Number".tr,
                                           value: controller.profileOthers
                                                   ?.bankAccountNo ??
-                                              AppText.noDataAvailable,
+                                              AppText.noDataAvailable.tr,
                                         ),
                                       ],
                                     ),
@@ -420,8 +420,8 @@ class ProfileView extends GetView<ProfileController> {
                                                   ),
                                                 ),
                                                 5.horizontalSpacing,
-                                                const Text(
-                                                  "Upload Document",
+                                                 Text(
+                                                  "Upload Document".tr,
                                                   style: AppTextStyle
                                                       .cardTextStyle14WhiteW500,
                                                 ),

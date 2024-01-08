@@ -21,7 +21,7 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      title: "Apply Leave",
+      title: "Apply Leave".tr,
       body: CustomBackground(
         customWidget: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 30),
@@ -52,7 +52,7 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
                     controller: controller.applyDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Apply Date *",
+                    hintText: "${"Apply Date".tr} *",
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -69,7 +69,7 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
                     controller: controller.fromDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "From Date *",
+                    hintText: "${"From Date".tr} *",
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -86,7 +86,7 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
                     controller: controller.toDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "To Date *",
+                    hintText: "${"To Date".tr} *",
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
@@ -99,18 +99,18 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText:
-                        "${controller.file.value.path.isNotEmpty ? controller.file : 'Select File'}",
+                        "${controller.file.value.path.isNotEmpty ? controller.file : 'Select File'.tr}",
                     fillColor: Colors.white,
-                    suffixIcon: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    suffixIcon:  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Browse",
+                            "Browse".tr,
                             style: AppTextStyle.fontSize12lightViolateW400,
                           ),
-                          CustomDivider(
+                          const CustomDivider(
                             width: 42,
                             height: 1,
                             color: AppColors.profileValueColor,
@@ -129,7 +129,7 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
                     controller: controller.reasonTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
-                    hintText: "Reason",
+                    hintText: "Reason".tr,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     maxLine: 3,
@@ -153,7 +153,7 @@ class TeApplyLeaveView extends GetView<TeApplyLeaveController> {
             controller.applyLeave();
           }
         },
-        text: "Apply",
+        text: "Apply".tr,
       ),
     );
   }
