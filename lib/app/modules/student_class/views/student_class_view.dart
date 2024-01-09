@@ -37,8 +37,7 @@ class StudentClassView extends GetView<StudentClassController> {
                           onTap: () {
                             controller.titleBackgroundColor.value =
                                 !controller.titleBackgroundColor.value;
-                            print(
-                                " ::::: ${controller.titleBackgroundColor.value}");
+                            print(" ::::: ${controller.titleBackgroundColor.value}");
                           },
                           isTapped: controller.titleBackgroundColor.value,
                           onSubTitleTap: (){
