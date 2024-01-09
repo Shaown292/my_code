@@ -15,7 +15,7 @@ class ShowStatusTile extends StatelessWidget {
   final String? firstValue;
   final String? secondValue;
   final String? thirdValue;
-  final String? status;
+  final Function()? onStatusTap;
   final String? activeStatus;
   final Color? activeStatusColor;
 
@@ -24,12 +24,11 @@ class ShowStatusTile extends StatelessWidget {
     this.firstTitle,
     this.secondTitle,
     this.thirdTitle,
-    this.status,
     this.firstValue,
     this.activeStatus,
     this.activeStatusColor,
     this.secondValue,
-    this.thirdValue,
+    this.thirdValue, this.onStatusTap,
   });
 
   @override
@@ -55,29 +54,32 @@ class ShowStatusTile extends StatelessWidget {
               title: thirdTitle,
               value: thirdValue,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                 Text(
-                  "Status".tr,
-                  style: AppTextStyle.fontSize13BlackW400,
-                ),
-                5.verticalSpacing,
-                activeStatus != null
-                    ? Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3),
-                            color: activeStatusColor),
-                        child: Center(
-                          child: Text(
-                            activeStatus ?? "",
-                            style: AppTextStyle.textStyle10WhiteW400,
+            InkWell(
+              onTap: onStatusTap,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   Text(
+                    "Status".tr,
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
+                  5.verticalSpacing,
+                  activeStatus != null
+                      ? Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: activeStatusColor),
+                          child: Center(
+                            child: Text(
+                              activeStatus ?? "",
+                              style: AppTextStyle.textStyle10WhiteW400,
+                            ),
                           ),
-                        ),
-                      )
-                    : const SizedBox(),
-              ],
+                        )
+                      : const SizedBox(),
+                ],
+              ),
             ),
           ],
         ),

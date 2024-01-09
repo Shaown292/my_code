@@ -14,7 +14,7 @@ class PageWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomTabBarItem(
-              title: 'Personal',
+              title: 'Personal'.tr,
               isActive: controller.pageIndex.value == 0 ? true : false,
               onTap: () {
                 controller.pageIndex.value = 0;
@@ -22,7 +22,7 @@ class PageWidget extends StatelessWidget {
               },
             ),
             CustomTabBarItem(
-              title: 'Parents',
+              title: 'Parents'.tr,
               isActive: controller.pageIndex.value == 1 ? true : false,
               onTap: () {
                 controller.pageIndex.value = 1;
@@ -30,7 +30,7 @@ class PageWidget extends StatelessWidget {
               },
             ),
             CustomTabBarItem(
-              title: 'Transport',
+              title: 'Transport'.tr,
               isActive: controller.pageIndex.value == 2 ? true : false,
               onTap: () {
                 controller.pageIndex.value = 2;
@@ -38,7 +38,7 @@ class PageWidget extends StatelessWidget {
               },
             ),
             CustomTabBarItem(
-              title: 'Others',
+              title: 'Others'.tr,
               isActive: controller.pageIndex.value == 3 ? true : false,
               onTap: () {
                 controller.pageIndex.value = 3;
@@ -46,7 +46,7 @@ class PageWidget extends StatelessWidget {
               },
             ),
             CustomTabBarItem(
-              title: 'Documents',
+              title: 'Documents'.tr,
               isActive: controller.pageIndex.value == 4 ? true : false,
               onTap: () {
                 controller.pageIndex.value = 4;

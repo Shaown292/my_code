@@ -195,4 +195,8 @@ class AppTextStyle {
     fontSize: 12,
     fontWeight: FontWeight.w400,
   );
+  static const blueFont14 = TextStyle(
+      color: AppColors.activeExamStatusBlueColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w500);
 }

@@ -200,6 +200,8 @@ import '../modules/teacher/bindings/teacher_binding.dart';
 import '../modules/teacher/views/teacher_view.dart';
 import '../modules/transport/bindings/transport_binding.dart';
 import '../modules/transport/views/transport_view.dart';
+import '../modules/virtual_class_list/bindings/virtual_class_list_binding.dart';
+import '../modules/virtual_class_list/views/virtual_class_list_view.dart';
 
 part 'app_routes.dart';
 
@@ -809,6 +811,11 @@ class AppPages {
       name: _Paths.GROUP_CHAT,
       page: () => const GroupChatView(),
       binding: GroupChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIRTUAL_CLASS_LIST,
+      page: () => const VirtualClassListView(),
+      binding: VirtualClassListBinding(),
     ),
   ];
 }

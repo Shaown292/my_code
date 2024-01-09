@@ -361,6 +361,7 @@ const Map<String, String> ar = {
   "Published": "نشرت",
   "Delete Account": "حذف الحساب",
   "Are you sure,\n you want to delete your account?": "هل انت متأكد انك تريد حذف حسابك؟",
+  "Are you sure,\n you want to delete your document?": "هل أنت متأكد أنك تريد حذف المستند الخاص بك؟",
   "Delete": "يمسح",
   "Waiver": "تنازل",
   "Sub Total": "المجموع الفرعي",

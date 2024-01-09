@@ -120,6 +120,7 @@ abstract class Routes {
   static const PARENT_CHILD = _Paths.PARENT_CHILD;
   static const CHILD_HOME = _Paths.CHILD_HOME;
   static const GROUP_CHAT = _Paths.GROUP_CHAT;
+  static const VIRTUAL_CLASS_LIST = _Paths.VIRTUAL_CLASS_LIST;
 }
 
 abstract class _Paths {
@@ -237,4 +238,5 @@ abstract class _Paths {
   static const PARENT_CHILD = '/parent-child';
   static const CHILD_HOME = '/child-home';
   static const GROUP_CHAT = '/group-chat';
+  static const VIRTUAL_CLASS_LIST = '/virtual-class-list';
 }

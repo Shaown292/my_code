@@ -482,13 +482,13 @@ class ProfileView extends GetView<ProfileController> {
                                                                         .deleteLoader
                                                                         .value,
                                                                 title:
-                                                                    'Confirmation',
+                                                                    'Confirmation'.tr,
                                                                 subTitle: AppText
-                                                                    .deleteDocumentsWarningMsg,
+                                                                    .deleteDocumentsWarningMsg.tr,
                                                                 noText:
-                                                                    'cancel',
+                                                                    'Cancel'.tr,
                                                                 yesText:
-                                                                    'delete',
+                                                                    'Delete'.tr,
                                                               ),
                                                             ),
                                                           ),
