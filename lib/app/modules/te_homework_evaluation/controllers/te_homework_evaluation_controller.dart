@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
@@ -80,6 +81,10 @@ class TeHomeworkEvaluationController extends GetxController {
     file.value = Get.arguments['file'];
   }
 
+
+  void downloadFile({required String url, required String title}) {
+    FileDownloadUtils().downloadFiles(url: url, title: title);
+  }
   @override
   void onInit() {
 

@@ -28,25 +28,31 @@ class StudentClassView extends GetView<StudentClassController> {
                 children: [
                   20.verticalSpacing,
                   Expanded(
-                      child: Column(
-                    children: [
-                      Obx(
-                        () => ClassTile(
-                          onlineClassTitle: "Zoom",
-                          onlineClassSubTitle: "Virtual Class",
-                          onTap: () {
-                            controller.titleBackgroundColor.value =
-                                !controller.titleBackgroundColor.value;
-                            print(" ::::: ${controller.titleBackgroundColor.value}");
-                          },
-                          isTapped: controller.titleBackgroundColor.value,
-                          onSubTitleTap: (){
-                            Get.toNamed(Routes.VIRTUAL_CLASS_LIST);
-                          },
-                        ),
-                      ),
-                    ],
-                  ))
+                    child: ListView.builder(
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return Obx(
+                            () => ClassTile(
+                              onlineClassTitle: "Zoom",
+                              onlineClassSubTitle: "Virtual Class",
+                              onTap: () {
+                                if (controller.previousId != index) {
+                                  controller.titleBackgroundColor.value = index;
+                                } else {
+                                  controller.titleBackgroundColor.value = -1;
+                                }
+                                controller.previousId =
+                                    controller.titleBackgroundColor.value;
+                              },
+                              isTapped: controller.titleBackgroundColor.value ==
+                                  index,
+                              onSubTitleTap: () {
+                                Get.toNamed(Routes.VIRTUAL_CLASS_LIST);
+                              },
+                            ),
+                          );
+                        }),
+                  ),
                 ],
               ),
             ),

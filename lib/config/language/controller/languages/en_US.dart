@@ -384,6 +384,7 @@ const Map<String, String> en_US = {
   "Subject Attendance Search" : "Subject Attendance Search",
   "Available For" : "Available For",
   "Search Class Atten" : "Search Class Atten",
+  "No File Available" : "No File Available",
   "Class Attendance Search" : "Class Attendance Search",
   "Subject Wise Attendance Search" : "Subject Wise Attendance Search",
   "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day" : "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day",
