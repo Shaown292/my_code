@@ -616,7 +616,6 @@ class GroupChatController extends GetxController {
     chatName.value = Get.arguments["name"];
     // groupImage.value = Get.arguments["image"];
     getGroupChatList(groupId: groupId.value);
-    print("GROUP ID :::::::: ${groupId.value}");
     pusherController.chatOpenGroup(
       authUserId: globalRxVariableController.userId.value!,
       chatListId: groupId.value,

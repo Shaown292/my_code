@@ -204,7 +204,6 @@ class ChatController extends GetxController {
           activeStatus.value = activeStatusList[index];
           key.value = activeStatusList[index].key!;
 
-          print("LEN:::::: ${activeStatusList.length}");
           activeColor.value = responseModel.data!.first.color ?? '0xFF12AE01';
         }
 
@@ -253,11 +252,10 @@ class ChatController extends GetxController {
         Get.find<GlobalRxVariableController>().pusherApiKey.value =  chatSettingsResponseModel.chatSettings?.pusherAppKey;
         Get.find<GlobalRxVariableController>().pusherClusterKey.value = chatSettingsResponseModel.chatSettings?.pusherAppCluster;
 
-        print('::::::: ${Get.find<GlobalRxVariableController>().pusherApiKey} :::::::::: ${Get.find<GlobalRxVariableController>().pusherClusterKey}');
 
       }
       else {
-        print(response.reasonPhrase);
+        debugPrint(response.reasonPhrase);
       }
 
 

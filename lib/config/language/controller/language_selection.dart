@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import 'package:get/get.dart';
 
 class LanguageSelection {
   RxString drop = ''.obs;

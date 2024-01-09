@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_internet/internet_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
-import 'package:flutter_single_getx_api_v2/config/global_variable/chat/pusher_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -69,7 +68,7 @@ class Initializer {
     String? url;
     String? baseUrl = AppConfig.domainName;
 
-    if (baseUrl == null) {
+    if (baseUrl == '') {
       url = ConfigEnvironments.getEnvironments()['url'] ?? '';
     } else {
       url = ConfigEnvironments.getEnvironments()['url'] ?? '';

@@ -3,7 +3,6 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/column_tile.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 
 class CreditCard extends StatelessWidget {
   final String? bankName;

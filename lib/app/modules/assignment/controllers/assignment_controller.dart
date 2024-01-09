@@ -67,7 +67,6 @@ class AssignmentController extends GetxController {
 
   @override
   void onInit() {
-    print(':::::::::::::::::::::::::::');
     getStudentAssignmentList();
     super.onInit();
   }

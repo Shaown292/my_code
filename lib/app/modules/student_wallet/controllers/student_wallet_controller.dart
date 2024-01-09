@@ -72,9 +72,10 @@ class StudentWalletController extends GetxController {
           paymentList.add(myWalletModel.data!.first.walletTransactions![i]);
         }
       }
-    } catch (e) {
+    } catch (e, t) {
       isLoading.value = false;
-      print('$e');
+      debugPrint('$e');
+      debugPrint('$t');
     }
 
     return MyWalletModel();
@@ -99,9 +100,10 @@ class StudentWalletController extends GetxController {
         paymentMethodId.value = paymentMethodList.first.id!;
         paymentMethodName.value = paymentMethodList.first.name!;
       }
-    } catch (e) {
+    } catch (e, t) {
       paymentMethodLoader.value = false;
-      print('$e');
+      debugPrint('$e');
+      debugPrint('$t');
     }
 
     return PaymentMethodListResponseModel();
@@ -125,9 +127,10 @@ class StudentWalletController extends GetxController {
         initBankValue.value = bankList.first;
         bankId.value = bankList.first.id!;
       }
-    } catch (e) {
+    } catch (e, t) {
       bankListLoader.value = false;
-      print('$e');
+      debugPrint('$e');
+      debugPrint('$t');
     }
 
     return PaymentMethodListResponseModel();

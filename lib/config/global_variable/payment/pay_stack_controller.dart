@@ -32,7 +32,6 @@ class PayStackController extends GetxController {
     );
 
     if (response.status == true) {
-      print('Response ::::::::: $response');
       paymentHandlerController.paymentSuccessHandler(
         type: 'feesInvoice',
         amount: double.tryParse(amount)!,
@@ -41,7 +40,6 @@ class PayStackController extends GetxController {
         from: from,
       );
     } else {
-      print('Response ::::::::: $response');
       showBasicFailedSnackBar(
         message: response.message.toString(),
       );

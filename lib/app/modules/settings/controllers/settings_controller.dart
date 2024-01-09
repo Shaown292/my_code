@@ -3,7 +3,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_selection.dart';
 import 'package:get/get.dart';
-import 'package:get_cli/core/internationalization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/constants/app_colors.dart';
 import '../../../data/constants/app_text_style.dart';
@@ -49,13 +48,13 @@ class SettingsController extends GetxController{
   //   langName.value = LanguageSelection.instance.langName;
   // }
 
-  @override
-  void onInit() async {
-    super.onInit();
-    // await changeLanguage();
-    // Get.updateLocale(Locale(appLocale!));
-    // update();
-  }
+  // @override
+  // void onInit() async {
+  //   super.onInit();
+  //   // await changeLanguage();
+  //   // Get.updateLocale(Locale(appLocale!));
+  //   // update();
+  // }
 
 
   void showLanguageBottomSheet() {
@@ -96,8 +95,8 @@ class SettingsController extends GetxController{
                       LanguageSelection.instance.drop.value =
                           languages[index].languageValue;
                       final sharedPref = await SharedPreferences.getInstance();
-                      sharedPref.setString('language', languages[index].languageValue ?? '');
-                      sharedPref.setString('language_name', languages[index].languageText ?? '');
+                      sharedPref.setString('language', languages[index].languageValue);
+                      sharedPref.setString('language_name', languages[index].languageText);
 
 
                       languageController.appLocale = languages[index].languageValue;
@@ -110,7 +109,7 @@ class SettingsController extends GetxController{
                         if (element.languageValue ==
                             languages[index].languageValue) {
                           LanguageSelection.instance.langName =
-                              element.languageText ?? '';
+                              element.languageText;
                         }
                       }
                       languageController.langName.value = LanguageSelection.instance.langName;

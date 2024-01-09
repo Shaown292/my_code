@@ -91,7 +91,6 @@ class StripeController extends GetxController {
               from: from,
             ));
 
-        print('Payment Intent ::::: ${paymentIntent?['id']}');
 
         // Delay for 2 seconds and then close the alert dialog
         await Future.delayed(const Duration(seconds: 2));

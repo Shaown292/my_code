@@ -184,7 +184,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                       controller.addAdminVehicle();
                     }
                   },
-                ): SizedBox(),
+                ): const SizedBox(),
         ),
       ),
     );

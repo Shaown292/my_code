@@ -2,9 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
-import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../database/auth_database.dart';
 import '../../../routes/app_pages.dart';
 
