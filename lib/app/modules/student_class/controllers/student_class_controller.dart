@@ -2,5 +2,6 @@ import 'package:get/get.dart';
 
 class StudentClassController extends GetxController {
 
-  RxBool titleBackgroundColor = false.obs;
+  RxInt titleBackgroundColor = (-1).obs;
+  int previousId = -1;
 }

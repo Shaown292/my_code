@@ -27,7 +27,10 @@ class ClassTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
       child: Card(
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8))),
+          borderRadius: BorderRadius.all(
+            Radius.circular(8),
+          ),
+        ),
         child: Column(
           children: [
             InkWell(

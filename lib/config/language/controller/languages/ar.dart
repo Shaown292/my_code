@@ -395,4 +395,5 @@ const Map<String, String> ar = {
   "Class Attendance Search" : "بحث الحضور الصف",
   "Subject Wise Attendance Search" : "موضوع الحضور الحكيم البحث",
   "Student Attendance not done yet.\nSelect Present/Absent/Late/Half Day" : "لم يتم حضور الطالب بعد.\nحدد حضور/غائب/متأخر/نصف يوم",
+  "No File Available" : "لا يوجد ملف متاح",
 };

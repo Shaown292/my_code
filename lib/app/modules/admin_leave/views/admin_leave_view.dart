@@ -20,7 +20,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
     return DefaultTabController(
       length: controller.status.length,
       child: InfixEduScaffold(
-        title: "Leave List",
+        title: "Leave List".tr,
         body: CustomBackground(
           customWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                     (index) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        controller.status[index],
+                        controller.status[index].tr,
                       ),
                     ),
                   ),

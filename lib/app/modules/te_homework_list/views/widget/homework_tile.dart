@@ -13,9 +13,11 @@ class HomeworkTile extends StatelessWidget {
   final String? evaluation;
   final String? marks;
   final String? subject;
-  final Function()? onTap;
+  final Function()? onDetailsTap;
   final Function()? evaluationOnTap;
   final bool isEvaluation;
+  final int? studentClass;
+  final int? studentSection;
 
   const HomeworkTile({
     super.key,
@@ -24,9 +26,9 @@ class HomeworkTile extends StatelessWidget {
     this.evaluation,
     this.marks,
     this.subject,
-    this.onTap,
+    this.onDetailsTap,
     this.evaluationOnTap,
-    this.isEvaluation = false,
+    this.isEvaluation = false, this.studentClass, this.studentSection,
   });
 
   @override
@@ -35,76 +37,116 @@ class HomeworkTile extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                subject ?? "",
-                style: AppTextStyle.fontSize14BlackW500,
-              ),
-              InkWell(
-                onTap: onTap,
-                child: isEvaluation
-                    ? InkWell(
-                        onTap: evaluationOnTap,
-                        child: Image.asset(
-                          ImagePath.download,
-                          scale: 4,
-                          color: AppColors.primaryColor,
-                        ),
-                      )
-                    :  Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Text(
-                          "Evaluation".tr,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.transparent,
-                            // Step 2 SEE HERE
-                            shadows: [
-                              Shadow(
-                                  offset: Offset(0, -5),
-                                  color: AppColors.primaryColor)
-                            ],
-                            decoration: TextDecoration.underline,
+          child: SizedBox(
+            child: Row(
+              children: [
+                Container(
+                  width: Get.width * 0.12,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: AppColors.profileCardBackgroundColor),
+                  child: Center(
+                    child: Text(
+                      studentClass.toString(),
+                      style: AppTextStyle.textStyle12WhiteW400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.04,
+                  child: const VerticalDivider(
+                    color: AppColors.transportDividerColor,
+                    thickness: 1,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  width: Get.width * 0.14,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: AppColors.homeworkStatusGreenColor),
+                  child: Center(
+                    child: Text(
+                      studentSection.toString(),
+                      style: AppTextStyle.textStyle12WhiteW400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.04,
+                  child: const VerticalDivider(
+                    color: AppColors.transportDividerColor,
+                    thickness: 1,
+                  ),
+                ),
+                SizedBox(
+                  width: Get.width * 0.14,
+                  child: Text(
+                    subject ?? "",
+                    style: const TextStyle(
+                      color: AppColors.profileTitleColor,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * 0.04,
+                  child: const VerticalDivider(
+                    color: AppColors.transportDividerColor,
+                    thickness: 1,
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       InkWell(
+                        onTap: onDetailsTap,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: AppColors.appButtonColor,
+                          ),
+                          child: Center(
+                            child: Text(
+                               "Details".tr,
+                              style: AppTextStyle.textStyle12WhiteW400,
+                            ),
                           ),
                         ),
                       ),
-              ),
-            ],
+                      InkWell(
+                        onTap: evaluationOnTap,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: AppColors.appButtonColor,
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Evaluation".tr,
+                              style: AppTextStyle.textStyle12WhiteW400,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ColumnTile(
-                title: "Created".tr,
-                value: createDate,
-              ),
-              ColumnTile(
-                title: "Submission".tr,
-                value: submissionDate,
-              ),
-              ColumnTile(
-                title: "Evaluation".tr,
-                value: evaluation,
-              ),
-              ColumnTile(
-                title: "Marks".tr,
-                value: marks,
-              ),
-            ],
-          ),
-        ),
-        10.verticalSpacing,
-        const CustomDivider(
-          color: AppColors.customDividerColor,
+        CustomDivider(
+          width: Get.width,
+          color: AppColors.transportDividerColor,
         )
       ],
     );
+
   }
 }

@@ -304,26 +304,26 @@ class AdminLeaveController extends GetxController {
               children: [
                 10.verticalSpacing,
                 Text(
-                  "Reason: $reason",
+                  "${"Reason".tr}: $reason",
                   style: AppTextStyle.fontSize14BlackW500,
                 ),
                 20.verticalSpacing,
                 BottomSheetTile(
-                  title: "Leave Type",
+                  title: "Leave Type".tr,
                   value: leaveType,
                   color: AppColors.homeworkWidgetColor,
                 ),
                 BottomSheetTile(
-                  title: "Apply Date",
+                  title: "Apply Date".tr,
                   value: applyDate,
                 ),
                 BottomSheetTile(
-                  title: "Leave From",
+                  title: "Leave From".tr,
                   value: leaveFrom,
                   color: AppColors.homeworkWidgetColor,
                 ),
                 BottomSheetTile(
-                  title: "Leave To",
+                  title: "Leave To".tr,
                   value: leaveTo,
                 ),
                 10.verticalSpacing,
@@ -340,7 +340,7 @@ class AdminLeaveController extends GetxController {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text("Attached File", style: AppTextStyle.textStyle12WhiteW400,),
+                         Text("Attached File".tr, style: AppTextStyle.textStyle12WhiteW400,),
                         10.horizontalSpacing,
                         Image.asset(ImagePath.download, scale: 5, color: Colors.white,),
                       ],
@@ -348,22 +348,21 @@ class AdminLeaveController extends GetxController {
                   ),
                 ),
                 30.verticalSpacing,
-                const Text(
-                  "Leave Status",
+                 Text(
+                  "Leave Status".tr,
                   style: AppTextStyle.fontSize14BlackW500,
                 ),
                 CustomRadioButton(
-                  title: "Pending",
+                  title: "Pending".tr,
                   value: "P",
                   groupValue: selectedOption.value,
                   onChanged: (value) {
                     selectedOption.value = value!;
-                    debugPrint("Value is $selectedOption");
                   },
                   activeColor: AppColors.primaryColor,
                 ),
                 CustomRadioButton(
-                  title: "Approved",
+                  title: "Approved".tr,
                   value: "A",
                   groupValue: selectedOption.value,
                   onChanged: (value) {
@@ -373,7 +372,7 @@ class AdminLeaveController extends GetxController {
                   activeColor: AppColors.primaryColor,
                 ),
                 CustomRadioButton(
-                  title: "Rejected",
+                  title: "Rejected".tr,
                   value: "C",
                   groupValue: selectedOption.value,
                   onChanged: (value) {
@@ -390,7 +389,7 @@ class AdminLeaveController extends GetxController {
                           color: AppColors.primaryColor,
                         ))
                       : PrimaryButton(
-                          text: "Save",
+                          text: "Save".tr,
                           onTap: onTap,
                         ),
                 ),
@@ -409,7 +408,7 @@ class AdminLeaveController extends GetxController {
   void fileDownload({required String url, required String title}) {
     url == ''
         ? showBasicFailedSnackBar(
-      message: 'No File Available',
+      message: 'No File Available'.tr,
     )
         : FileDownloadUtils().downloadFiles(url: url, title: title);
   }

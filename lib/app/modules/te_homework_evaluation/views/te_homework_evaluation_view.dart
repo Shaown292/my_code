@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/te_homework_list/views/widget/homework_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
@@ -24,6 +25,54 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              height: Get.height * 0.09,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(8),
+                  topLeft: Radius.circular(8),
+                ),
+                color: AppColors.profileCardBackgroundColor,
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: Get.width * 0.12,
+                    child: Text(
+                      "Class".tr,
+                      style: AppTextStyle.textStyle12WhiteW500,
+                    ),
+                  ),
+                  const VerticalDivider(
+                    color: AppColors.profileTitleColor,
+                    thickness: 1,
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.14,
+                    child: Text(
+                      "Section".tr,
+                      style: AppTextStyle.textStyle12WhiteW500,
+                    ),
+                  ),
+                  const VerticalDivider(
+                    color: AppColors.profileTitleColor,
+                    thickness: 1,
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.14,
+                    child: Text(
+                      "Subject".tr,
+                      style: AppTextStyle.textStyle12WhiteW500,
+                    ),
+                  ),
+                  const VerticalDivider(
+                    color: AppColors.profileTitleColor,
+                    thickness: 1,
+                  ),
+                ],
+              ),
+            ),
             HomeworkTile(
               evaluationOnTap: () => controller.file.value != null
                   ? FileDownloadUtils().downloadFiles(
@@ -35,7 +84,8 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
               submissionDate: controller.submissionDate.value,
               evaluation: controller.evaluation.value ?? 'N/A',
               marks: controller.marks.value.toString(),
-              isEvaluation: true,
+              studentSection: controller.sectionId.value,
+              studentClass: controller.clasId.value,
             ),
             10.verticalSpacing,
             Obx(
