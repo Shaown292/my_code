@@ -354,6 +354,7 @@ const Map<String, String> en_US = {
   "Published": "Published",
   "Delete Account": "Delete Account",
   "Are you sure,\n you want to delete your account?": "Are you sure,\n you want to delete your account?",
+  "Are you sure,\n you want to delete your document?": "Are you sure,\n you want to delete your document?",
   "Delete": "Delete",
   "Waiver": "Waiver",
   "Sub Total": "Sub Total",
