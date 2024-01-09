@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/student_lesson_plan_details_response_model/students_lesson_plan_details_response_model.dart';
@@ -231,7 +232,7 @@ class StudentLessonPlanController extends GetxController {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         width: Get.width * 0.41,
-                        child:  Text(
+                        child: Text(
                           "Documents".tr,
                           style: AppTextStyle.fontSize12lightViolateW400,
                         ),
@@ -244,7 +245,17 @@ class StudentLessonPlanController extends GetxController {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: InkWell(
                           onTap: () {
-
+                            studentLessonPlanDetailsData.document == null ||
+                                    studentLessonPlanDetailsData.document == ''
+                                ? showBasicFailedSnackBar(
+                                    message: 'No File Available.'.tr)
+                                : FileDownloadUtils().downloadFiles(
+                                    url:
+                                        studentLessonPlanDetailsData.document ??
+                                            '',
+                                    title:
+                                        studentLessonPlanDetailsData.subject ??
+                                            '');
                           },
                           child: Row(
                             children: [
@@ -254,7 +265,7 @@ class StudentLessonPlanController extends GetxController {
                                 color: Color(0xFF3490DC),
                               ),
                               5.horizontalSpacing,
-                               Text(
+                              Text(
                                 "Download".tr,
                                 style: const TextStyle(
                                   color: Color(0xFF3490DC),
@@ -286,7 +297,7 @@ class StudentLessonPlanController extends GetxController {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         width: Get.width * 0.41,
-                        child:  Text(
+                        child: Text(
                           "Status".tr,
                           style: AppTextStyle.fontSize12lightViolateW400,
                         ),
@@ -316,10 +327,8 @@ class StudentLessonPlanController extends GetxController {
     selectTabIndex.value = daysOfWeek.indexOf(today);
   }
 
-
   @override
   void onInit() {
-
     selectTab();
     if (homeController.studentRecordList.isNotEmpty &&
         globalRxVariableController.studentId.value != null) {

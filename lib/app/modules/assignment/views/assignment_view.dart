@@ -63,7 +63,7 @@ class AssignmentView extends GetView<AssignmentController> {
                                                 .studentAssignmentList[
                                                     index]
                                                 .contentTitle!)
-                                        : showBasicSuccessSnackBar(
+                                        : showBasicFailedSnackBar(
                                             message: 'No File Available.'.tr);
                                   },
                                   title: 'Confirmation'.tr,
