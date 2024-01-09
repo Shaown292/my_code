@@ -46,34 +46,12 @@ class HomeController extends GetxController {
 
       if(postRequestResponseModel.success == true){
         await _authDatabase.logOut();
-        // globalRxVariableController.token.value = null;
-        // globalRxVariableController.userId.value = null;
-        // globalRxVariableController.roleId.value = null;
-        //
-        // globalRxVariableController.notificationCount.value = null;
-        // globalRxVariableController.studentRecordId.value = null;
-        // globalRxVariableController.email.value = null;
-        // globalRxVariableController.studentId.value = null;
-        // globalRxVariableController.parentId.value = null;
-        // globalRxVariableController.staffId.value = null;
-        // globalRxVariableController.isStudent.value = false;
 
         Get.offNamedUntil('/splash', (route) => false);
 
         loadingController.isLoading = false;
       } else{
         await _authDatabase.logOut();
-        // globalRxVariableController.token.value = null;
-        // globalRxVariableController.userId.value = null;
-        // globalRxVariableController.roleId.value = null;
-        //
-        // globalRxVariableController.notificationCount.value = null;
-        // globalRxVariableController.studentRecordId.value = null;
-        // globalRxVariableController.email.value = null;
-        // globalRxVariableController.studentId.value = null;
-        // globalRxVariableController.parentId.value = null;
-        // globalRxVariableController.staffId.value = null;
-        // globalRxVariableController.isStudent.value = false;
 
         Get.offNamedUntil('/splash', (route) => false);
         showBasicSuccessSnackBar(message: postRequestResponseModel.message ?? AppText.somethingWentWrong,);

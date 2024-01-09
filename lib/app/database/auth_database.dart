@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
+import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/core/model/profile_ui_model.dart';
 
@@ -28,7 +30,7 @@ class AuthDatabase {
     try {
       final storage = GetStorage(AuthDBKeys.dbName);
       await storage.write(AuthDBKeys.data, jsonEncode(profileInfoModelModel));
-      if (profileInfoModelModel.data.accessToken != null) {
+      if (profileInfoModelModel.data.accessToken != '') {
         await storage.write(AuthDBKeys.token, profileInfoModelModel.data.accessToken);
         await storage.write(AuthDBKeys.notificationCount, profileInfoModelModel.data.unreadNotifications);
 
@@ -118,6 +120,18 @@ class AuthDatabase {
       globalRxVariableController.parentId.value = null;
       globalRxVariableController.staffId.value = null;
       globalRxVariableController.isStudent.value = false;
+
+
+      final sharedPref = await SharedPreferences.getInstance();
+      sharedPref.setString('language', 'en_US');
+      sharedPref.setString('language_name', 'English');
+
+      Get.find<LanguageController>().langName.value = sharedPref.getString('language_name') ?? 'English';
+      language = sharedPref.getString('language') ?? 'en_US';
+
+      Get.find<LanguageController>().appLocale = 'en_US';
+      Get.updateLocale(Locale(Get.find<LanguageController>().appLocale.toString()));
+
 
       return true;
     } catch (e) {

@@ -45,10 +45,7 @@ class CustomAppBar extends GetView<HomeController> {
                       height: 50,
                       width: 50,
                       child: Platform.isAndroid
-                          ? Image.asset(
-                              ImagePath.back,
-                              scale: 3,
-                            )
+                          ? const Icon(Icons.arrow_back, color: Colors.white,)
                           : const Icon(
                               Icons.arrow_back_ios_new_outlined,
                               color: Colors.white,
@@ -80,17 +77,9 @@ class CustomAppBar extends GetView<HomeController> {
                         ),
                       );
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Container(
-                        height: 17,
-                        width: 17,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(ImagePath.logout),
-                              filterQuality: FilterQuality.high),
-                        ),
-                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Icon(Icons.logout_outlined, color: Colors.white,),
                     ),
                   )
                 ],

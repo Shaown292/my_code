@@ -55,7 +55,7 @@ class TeacherHomeworkData {
     subjectName = json['subject_name'];
     assignDate = json['assign_date'];
     submissionDate = json['submission_date'];
-    evaluation = json['evaluation'];
+    evaluation = json['evaluation'].toString();
     marks = json['marks'];
     file = json['file'];
     classId = json['class_id'];

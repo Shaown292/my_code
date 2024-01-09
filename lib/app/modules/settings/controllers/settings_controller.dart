@@ -91,7 +91,7 @@ class SettingsController extends GetxController{
                       // localizationController.setSelectedIndex(index);
                       // langName.value = localizationController.languages[index].languageName;
 
-                      debugPrint(":::::::::::${languages[index].languageValue}");
+                      debugPrint("Selected Language :::::::::::${languages[index].languageValue} ::: ${languages[index].languageText}");
                       LanguageSelection.instance.drop.value =
                           languages[index].languageValue;
                       final sharedPref = await SharedPreferences.getInstance();
