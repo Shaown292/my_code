@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_selection.dart';
+import 'package:flutter_single_getx_api_v2/config/language/controller/languages/amar.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/constants/app_colors.dart';
@@ -78,42 +81,53 @@ class SettingsController extends GetxController{
           30.verticalSpacing,
           Expanded(
             child: ListView.builder(
-                itemCount: languages.length,
+                itemCount: languageList.length,
                 // itemCount: localizationController.languages.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () async {
 
-                      // localizationController.setLanguage(Locale(
-                      //   LanguageConstants.languages[index].languageCode,
-                      //   LanguageConstants.languages[index].countryCode,
-                      // ));
-                      // localizationController.setSelectedIndex(index);
-                      // langName.value = localizationController.languages[index].languageName;
+                      // log('${languageController.keys.keys}');
+                      // languageController.keys.forEach((key, value) {print('${key} :: $value \n\n\n');});
 
-                      debugPrint("Selected Language :::::::::::${languages[index].languageValue} ::: ${languages[index].languageText}");
-                      LanguageSelection.instance.drop.value =
-                          languages[index].languageValue;
-                      final sharedPref = await SharedPreferences.getInstance();
-                      sharedPref.setString('language', languages[index].languageValue);
-                      sharedPref.setString('language_name', languages[index].languageText);
+                      //
+                      // debugPrint("Selected Language :::::::::::${languageList[index].languageLocal} ::: ${languageList[index].languageName}");
+                      // LanguageSelection.instance.drop.value = languageList[index].languageLocal;
+                      // final sharedPref = await SharedPreferences.getInstance();
+                      // sharedPref.setString('language', languageList[index].languageLocal);
+                      // sharedPref.setString('language_name', languageList[index].languageName);
+                      //
+                      //
+                       languageController.appLocale = languageList[index].languageLocal;
 
-
-                      languageController.appLocale = languages[index].languageValue;
-                      Get.updateLocale(Locale(languageController.appLocale.toString()));
+                       print('From Setting ::: ${languageController.appLocale}');
+                       log('${languageController.translationsData[languageController.appLocale]}');
 
 
-                      LanguageSelection.instance.drop.value =
-                          languages[index].languageValue;
-                      for (var element in languages) {
-                        if (element.languageValue ==
-                            languages[index].languageValue) {
-                          LanguageSelection.instance.langName =
-                              element.languageText;
-                        }
-                      }
-                      languageController.langName.value = LanguageSelection.instance.langName;
-                      print('Lang name ::: ${languageController.langName}');
+
+                      Get.updateLocale(Locale(languageController.appLocale));
+
+
+
+
+                      //
+                      // print('Selected lang ::: ${languageController.keys[languageController.appLocale]}');
+                      //
+                      //
+                      // LanguageSelection.instance.drop.value = languageList[index].languageLocal;
+                      //
+                      // for (var element in languageList) {
+                      //   if (element.languageLocal == languageList[index].languageLocal) {
+                      //     print("Elements :::: ${element.languageLocal}");
+                      //     print('Values ::::: ${element.languageLocal} :: ${languageList[index].languageLocal}');
+                      //     LanguageSelection.instance.langName =
+                      //         element.languageName;
+                      //   }
+                      // }
+                      // //languageController.langName.value = LanguageSelection.instance.langName;
+                      // languageController.update();
+                      // print('Lang name ::: ${languageController.langName}');
+                      // log('Lang Keys ::: ${languageController.keys}');
 
 
                     },
@@ -125,7 +139,7 @@ class SettingsController extends GetxController{
                           : Colors.white,
                       child: Center(
                         child: Text(
-                          languages[index].languageText,
+                          languageList[index].languageName,
                           style: AppTextStyle.blackFontSize14W400,
                         ),
                       ),

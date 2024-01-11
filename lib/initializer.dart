@@ -49,7 +49,7 @@ class Initializer {
     final sharedPref = await SharedPreferences.getInstance();
     languageController.langName.value = sharedPref.getString('language_name') ?? 'English';
     language = sharedPref.getString('language') ?? 'en_US';
-    Get.updateLocale(Locale(languageController.appLocale));
+    // Get.updateLocale(Locale(languageController.appLocale));
 
     debugPrint('::::::::::::::::: $language');
   }

@@ -1,4 +1,4 @@
-const Map<String, String> iw_IL = {
+const Map<String, String> iw = {
   "Welcome to": "ברוך הבא ל",
   "InfixEdu": "InfixEdu",
   "Students": "סטודנטים",

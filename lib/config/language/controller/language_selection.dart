@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class LanguageSelection {
   RxString drop = ''.obs;
-  RxString val = 'en_US'.obs;
+  RxString val = 'en'.obs;
 
   String langName = 'English';
 
