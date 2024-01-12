@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app/database/auth_database.dart';
 import 'app/utilities/widgets/loader/loading.controller.dart';
 import 'config.dart';
+import 'config/global_variable/app_settings_controller.dart';
 
 class Initializer {
   static Future<void> init() async {
@@ -27,6 +28,9 @@ class Initializer {
 
   /// global loader
   static void _initGlobalLoading() {
+    final appSettings = AppSettingsController();
+    Get.put(appSettings);
+
     final loading = LoadingController();
     Get.put(loading);
 
@@ -48,8 +52,8 @@ class Initializer {
     LanguageController languageController = Get.find();
     final sharedPref = await SharedPreferences.getInstance();
     languageController.langName.value = sharedPref.getString('language_name') ?? 'English';
-    language = sharedPref.getString('language') ?? 'en_US';
-    // Get.updateLocale(Locale(languageController.appLocale));
+    language = sharedPref.getString('language') ?? 'en';
+    Get.updateLocale(Locale(languageController.appLocale));
 
     debugPrint('::::::::::::::::: $language');
   }

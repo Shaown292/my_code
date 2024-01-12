@@ -1,64 +1,72 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_selection.dart';
-import 'package:flutter_single_getx_api_v2/config/language/controller/languages/amar.dart';
+import 'package:flutter_single_getx_api_v2/config/language/controller/languages/translated_language.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/constants/app_colors.dart';
 import '../../../data/constants/app_text_style.dart';
 import '../../../utilities/widgets/common_widgets/custom_divider.dart';
 
-class SettingsController extends GetxController{
-
+class SettingsController extends GetxController {
   // LocalizationController localizationController = Get.find();
 
   LanguageController languageController = Get.find();
+  RxBool languageLoader = false.obs;
 
-  // String? appLocale;
-  // var langName = "".obs;
+  Future<void> updateLanguage({required int langId}) async {
+    try {
+      languageList.clear();
+      languageLoader.value = false;
 
-  // Map<String, Map<String, String>> get keys => {
-  //   'en': enLang,
-  //   'bn': enLang,
-  //   //......
-  //   //**:: ADD/REMOVE LANGUAGE
-  //   //.....
-  // };
-  //
-  // Future changeLanguage() async {
-  //   print('calling changes');
-  //   if (language == 'en') {
-  //     LanguageSelection.instance.val = 'en';
-  //     LanguageSelection.instance.drop = 'en';
-  //     LanguageSelection.instance.langName = 'English';
-  //     appLocale = 'en';
-  //   } else if (language == 'bn') {
-  //     LanguageSelection.instance.val = 'bn';
-  //     LanguageSelection.instance.drop = 'bn';
-  //     LanguageSelection.instance.langName = 'বাংলা';
-  //     appLocale = 'bn';
-  //   }
-  //   //......
-  //   //**:: ADD/REMOVE LANGUAGE
-  //   //.....
-  //   else {
-  //     appLocale = Get.deviceLocale?.languageCode;
-  //     langValue = true;
-  //   }
-  //   langName.value = LanguageSelection.instance.langName;
-  // }
+      final response = await http.post(Uri.parse(InfixApi.languageList), body: {
+        'lang_id': langId,
+      });
 
-  // @override
-  // void onInit() async {
-  //   super.onInit();
-  //   // await changeLanguage();
-  //   // Get.updateLocale(Locale(appLocale!));
-  //   // update();
-  // }
+      if (response.statusCode == 200) {
+        languageLoader.value = true;
+        Map<String, dynamic> responseData = json.decode(response.body);
+        Map<String, String> translations =
+            Map<String, String>.from(responseData['lang']);
+        for (int i = 0; i < responseData['lang_list'].length; i++) {
+          languageList.add(LanguageModel(
+            id: responseData['lang_list'][i]['id'],
+            languageName: responseData['lang_list'][i]['lang_name'],
+            languageLocal: responseData['lang_list'][i]['locale'],
+            activeStatus: responseData['lang_list'][i]['active_status'],
+          ));
 
+          if (responseData['lang_list'][i]['active_status'] == true) {
+            translatedLanguage.assignAll(translations);
+            Get.find<LanguageController>().langName.value =
+                responseData['lang_list'][i]['lang_name'];
+            Get.find<LanguageController>().appLocale =
+                responseData['lang_list'][i]['locale'];
+            Get.updateLocale(Locale(Get.find<LanguageController>().appLocale));
+          }
+          log('Translation ::: $translations');
+        }
+      } else {
+        languageLoader.value = true;
+
+        throw Exception('Failed to load translations');
+      }
+    } catch (e, t) {
+      languageLoader.value = true;
+
+      debugPrint('$e');
+      debugPrint('$t');
+      throw Exception('Failed to load translations: $e');
+    } finally {
+      languageLoader.value = true;
+    }
+  }
 
   void showLanguageBottomSheet() {
     Get.bottomSheet(Container(
@@ -86,50 +94,34 @@ class SettingsController extends GetxController{
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () async {
+                      updateLanguage(langId: 1).then((value) async {
+                        LanguageSelection.instance.drop.value =
+                            languageList[index].languageLocal;
+                        final sharedPref =
+                            await SharedPreferences.getInstance();
+                        sharedPref.setString(
+                            'language', languageList[index].languageLocal);
+                        sharedPref.setString(
+                            'language_name', languageList[index].languageName);
+                        languageController.appLocale =
+                            languageList[index].languageLocal;
+                        log('${languageController.translationsData[languageController.appLocale]}');
 
-                      // log('${languageController.keys.keys}');
-                      // languageController.keys.forEach((key, value) {print('${key} :: $value \n\n\n');});
+                        Get.updateLocale(Locale(languageController.appLocale));
 
-                      //
-                      // debugPrint("Selected Language :::::::::::${languageList[index].languageLocal} ::: ${languageList[index].languageName}");
-                      // LanguageSelection.instance.drop.value = languageList[index].languageLocal;
-                      // final sharedPref = await SharedPreferences.getInstance();
-                      // sharedPref.setString('language', languageList[index].languageLocal);
-                      // sharedPref.setString('language_name', languageList[index].languageName);
-                      //
-                      //
-                       languageController.appLocale = languageList[index].languageLocal;
+                        LanguageSelection.instance.drop.value =
+                            languageList[index].languageLocal;
 
-                       print('From Setting ::: ${languageController.appLocale}');
-                       log('${languageController.translationsData[languageController.appLocale]}');
-
-
-
-                      Get.updateLocale(Locale(languageController.appLocale));
-
-
-
-
-                      //
-                      // print('Selected lang ::: ${languageController.keys[languageController.appLocale]}');
-                      //
-                      //
-                      // LanguageSelection.instance.drop.value = languageList[index].languageLocal;
-                      //
-                      // for (var element in languageList) {
-                      //   if (element.languageLocal == languageList[index].languageLocal) {
-                      //     print("Elements :::: ${element.languageLocal}");
-                      //     print('Values ::::: ${element.languageLocal} :: ${languageList[index].languageLocal}');
-                      //     LanguageSelection.instance.langName =
-                      //         element.languageName;
-                      //   }
-                      // }
-                      // //languageController.langName.value = LanguageSelection.instance.langName;
-                      // languageController.update();
-                      // print('Lang name ::: ${languageController.langName}');
-                      // log('Lang Keys ::: ${languageController.keys}');
-
-
+                        for (var element in languageList) {
+                          if (element.languageLocal ==
+                              languageList[index].languageLocal) {
+                            LanguageSelection.instance.langName =
+                                element.languageName;
+                          }
+                        }
+                        languageController.langName.value =
+                            LanguageSelection.instance.langName;
+                      });
                     },
                     child: Container(
                       height: Get.height * 0.05,

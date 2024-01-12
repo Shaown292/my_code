@@ -47,13 +47,15 @@ class HomeController extends GetxController {
       if(postRequestResponseModel.success == true){
         await _authDatabase.logOut();
 
-        Get.offNamedUntil('/splash', (route) => false);
+        Get.offNamedUntil('/secondary-splash', (route) => false);
+        // Get.offNamedUntil('/splash', (route) => false);
 
         loadingController.isLoading = false;
       } else{
         await _authDatabase.logOut();
 
-        Get.offNamedUntil('/splash', (route) => false);
+        Get.offNamedUntil('/secondary-splash', (route) => false);
+        // Get.offNamedUntil('/splash', (route) => false);
         showBasicSuccessSnackBar(message: postRequestResponseModel.message ?? AppText.somethingWentWrong,);
 
         loadingController.isLoading = false;
@@ -76,7 +78,8 @@ class HomeController extends GetxController {
       // globalRxVariableController.staffId.value = null;
       // globalRxVariableController.isStudent.value = false;
 
-      Get.offNamedUntil('/splash', (route) => false);
+      Get.offNamedUntil('/secondary-splash', (route) => false);
+      // Get.offNamedUntil('/splash', (route) => false);
 
       loadingController.isLoading = false;
     }

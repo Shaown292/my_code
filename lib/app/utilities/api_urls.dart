@@ -532,6 +532,9 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   /// Payment Gateway Handler
   static String paymentHandler ='${baseApi}handle-payment-request';
 
+  /// Language API
+  static String languageList = '${baseApi}lang';
+
 
 
   //////////////////////////.......................................///////////////////////////////////

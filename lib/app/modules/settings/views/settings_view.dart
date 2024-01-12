@@ -12,61 +12,56 @@ import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return  Obx(() => InfixEduScaffold(
-      title: "Settings".tr,
-      body: CustomBackground(
-        customWidget: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-          child: Column(
-            children: [
-
-              SettingsTile(
-                icon: ImagePath.settingLanguage,
-                title: "Change Language".tr,
-                languageName: controller.languageController.langName.value,
-                isLanguage: true,
-                onTileTap: (){
-                  controller.showLanguageBottomSheet();
-                },
+    return Obx(() => InfixEduScaffold(
+          title: "Settings".tr,
+          body: CustomBackground(
+            customWidget: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+              child: Column(
+                children: [
+                  SettingsTile(
+                    icon: ImagePath.settingLanguage,
+                    title: "Change Language".tr,
+                    languageName: controller.languageController.langName.value,
+                    isLanguage: true,
+                    onTileTap: () {
+                      controller.showLanguageBottomSheet();
+                    },
+                  ),
+                  10.verticalSpacing,
+                  SettingsTile(
+                    icon: ImagePath.changePassword,
+                    title: "Change Password".tr,
+                    isLanguage: false,
+                    onTileTap: () {
+                      Get.toNamed(Routes.CHANGE_PASSWORD);
+                    },
+                  ),
+                  10.verticalSpacing,
+                  SettingsTile(
+                    icon: ImagePath.delete,
+                    title: "Delete Account".tr,
+                    isLanguage: false,
+                    onTileTap: () {
+                      Get.dialog(
+                        CustomPopupDialogue(
+                          onYesTap: () {},
+                          title: 'Confirmation'.tr,
+                          subTitle: AppText.deleteAccountWarningMsg.tr,
+                          noText: 'Cancel'.tr,
+                          yesText: 'Delete'.tr,
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
-
-
-              10.verticalSpacing,
-              SettingsTile(
-                icon: ImagePath.changePassword,
-                title: "Change Password".tr,
-                isLanguage: false,
-                onTileTap: (){
-                  Get.toNamed(Routes.CHANGE_PASSWORD);
-                },
-              ),
-
-              10.verticalSpacing,
-              SettingsTile(
-                icon: ImagePath.delete,
-                title: "Delete Account".tr,
-                isLanguage: false,
-                onTileTap: (){
-                  Get.dialog(
-                    CustomPopupDialogue(
-                      onYesTap: () {
-
-                      },
-                      title: 'Confirmation'.tr,
-                      subTitle: AppText.deleteAccountWarningMsg.tr,
-                      noText: 'Cancel'.tr,
-                      yesText: 'Delete'.tr,
-                    ),
-                  );
-                },
-              ),
-            ],
+            ),
           ),
-        ),
-
-      ),
-    ));
+        ));
   }
 }

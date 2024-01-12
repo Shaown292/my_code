@@ -53,7 +53,8 @@ dynamic returnResponse(http.Response response) {
       showBasicFailedSnackBar(message: json.decode(response.body.toString())["message"]);
       _authDatabase.logOut();
       Future.delayed(const Duration(seconds: 2)).then((val) {
-        Get.offNamedUntil('/splash', (route) => false);
+        Get.offNamedUntil('/secondary-splash', (route) => false);
+        // Get.offNamedUntil('/splash', (route) => false);
       });
 
 

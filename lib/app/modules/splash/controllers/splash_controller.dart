@@ -1,23 +1,16 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/app_functions/functionality.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
-import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
-import 'package:flutter_single_getx_api_v2/config/language/controller/languages/amar.dart';
 import 'package:get/get.dart';
 import '../../../database/auth_database.dart';
 import '../../../routes/app_pages.dart';
-import 'package:http/http.dart' as http;
 
 class SplashController extends GetxController with GetTickerProviderStateMixin {
   GlobalRxVariableController globalRxVariableController = Get.find();
 
   @override
   void onInit() {
-    // getLang();
     _animation();
     navNextPage();
     super.onInit();
@@ -41,7 +34,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
 
   void navNextPage() async {
     AuthDatabase authDatabase = AuthDatabase.instance;
-    await 4000.milliseconds.delay();
+    await 3000.milliseconds.delay();
 
     if (authDatabase.auth()) {
       globalRxVariableController.roleId.value =
@@ -81,57 +74,4 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
       Get.offAndToNamed(Routes.LOGIN);
     }
   }
-
-  // void getLang() async {
-  //   String url = 'https://spondan.com/infixedu/api/v2/lang';
-  //
-  //   try {
-  //     final response = await http.get(Uri.parse(url));
-  //     print('Response ::: ${response.body}');
-  //
-  //     if (response.statusCode == 200) {
-  //       // Parse the response and return the translations
-  //       Map<String, dynamic> responseData = json.decode(response.body);
-  //       Map<String, String> translations = Map<String, String>.from(responseData['lang']);
-  //       // languageList = responseData['lang_list'];
-  //       print('Response Data ::: ${responseData['lang_list'][0]['lang_name']}');
-  //       // print('object ::: ${responseData['lang_list'].length}');
-  //
-  //
-  //       for(int i = 0; i < responseData['lang_list'].length; i++){
-  //         languageList.add(LanguageModel(
-  //           id: responseData['lang_list'][i]['id'],
-  //           languageName: responseData['lang_list'][i]['lang_name'],
-  //           languageLocal: responseData['lang_list'][i]['locale'],
-  //           activeStatus: responseData['lang_list'][i]['active_status'],
-  //         ));
-  //         // Get.find<LanguageController>().keys.assignAll({responseData['lang_list'][i]['locale']: translations});
-  //
-  //         if(responseData['lang_list'][i]['active_status'] == 1){
-  //           Get.find<LanguageController>().setLanguage(translations, responseData['lang_list'][i]['locale']);
-  //           Get.find<LanguageController>().keys[responseData['lang_list'][i]['locale']] = translations;
-  //           Get.find<LanguageController>().keys.update('en', (value) => translations);
-  //         }
-  //
-  //
-  //         log('${Get.find<LanguageController>().keys.keys}');
-  //
-  //         print('Response Data ::: ${languageList[i].languageName}');
-  //       }
-  //
-  //
-  //       // amar = translations;
-  //       print('trans ::: $translations');
-  //
-  //
-  //     } else {
-  //       throw Exception('Failed to load translations');
-  //     }
-  //   } catch (e, t) {
-  //     print(e);
-  //     print(t);
-  //     throw Exception('Failed to load translations: $e');
-  //   }
-  // }
-
 }
