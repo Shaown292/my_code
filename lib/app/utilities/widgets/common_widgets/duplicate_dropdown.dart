@@ -15,6 +15,8 @@ class DuplicateDropdown extends StatelessWidget {
   final TextStyle? textStyle;
   final bool isChat;
   final double? padding;
+  final double? borderRadius;
+
   const DuplicateDropdown({
     super.key,
     this.dropdownValue,
@@ -23,9 +25,12 @@ class DuplicateDropdown extends StatelessWidget {
     this.color,
     this.dropdownColor,
     this.dropdownText = true,
-    this.activeStatusColor, this.hint,
+    this.activeStatusColor,
+    this.hint,
     this.textStyle,
-    this.isChat = false, this.padding,
+    this.isChat = false,
+    this.padding,
+    this.borderRadius,
   });
 
   @override
@@ -33,53 +38,56 @@ class DuplicateDropdown extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(borderRadius ?? 8),
         border: Border.all(
           color: const Color(0xFF635976).withOpacity(0.2),
         ),
       ),
       child: Padding(
-        padding:  EdgeInsets.all(padding ?? 8.0),
+        padding: EdgeInsets.all(padding ?? 8.0),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<dynamic>(
-            hint: Text(hint ?? "", style: AppTextStyle.fontSize13BlackW400,),
+            hint: Text(
+              hint ?? "",
+              style: AppTextStyle.fontSize13BlackW400,
+            ),
             menuMaxHeight: Get.height * 0.4,
             isExpanded: true,
             items: dropdownList!
                 .map(
                   (dynamic item) => DropdownMenuItem<dynamic>(
-
-                value: item,
-                child: dropdownText
-                    ? Text(
-                  item.name ?? "Unknown",
-                  style: textStyle ?? AppTextStyle.fontSize14lightBlackW400,
-                  overflow: TextOverflow.ellipsis,
+                    value: item,
+                    child: dropdownText
+                        ? Text(
+                            item.name ?? "Unknown",
+                            style: textStyle ??
+                                AppTextStyle.fontSize14lightBlackW400,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        : Row(
+                            children: [
+                              Container(
+                                height: 8,
+                                width: 8,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(item.statusColor)),
+                              ),
+                              10.horizontalSpacing,
+                              Text(
+                                item.name!,
+                                style: AppTextStyle.cardTextStyle14WhiteW500,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                  ),
                 )
-                    : Row(
-                  children: [
-                    Container(
-                      height: 8,
-                      width: 8,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(item.statusColor)),
-                    ),
-                    10.horizontalSpacing,
-                    Text(
-                      item.name!,
-                      style: AppTextStyle.cardTextStyle14WhiteW500,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-            )
                 .toList(),
             value: dropdownValue,
             // iconSize: 26,
             dropdownColor: dropdownColor,
-            iconEnabledColor: color ,
+            iconEnabledColor: color,
             onChanged: changeDropdownValue,
           ),
         ),
@@ -87,4 +95,3 @@ class DuplicateDropdown extends StatelessWidget {
     );
   }
 }
-

@@ -197,7 +197,9 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                               controller.addTeacherHomework();
                             }
                           },
-                        )
+                        ),
+
+                  30.verticalSpacing,
                 ],
               ),
             ),

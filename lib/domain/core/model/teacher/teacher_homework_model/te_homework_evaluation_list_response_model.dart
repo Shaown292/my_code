@@ -1,6 +1,6 @@
 class TeHomeworkEvaluationListResponseModel {
   bool? success;
-  Data? data;
+  List<HomeworkList>? data;
   String? message;
 
   TeHomeworkEvaluationListResponseModel(
@@ -8,7 +8,12 @@ class TeHomeworkEvaluationListResponseModel {
 
   TeHomeworkEvaluationListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = <HomeworkList>[];
+      json['data'].forEach((v) {
+        data!.add(HomeworkList.fromJson(v));
+      });
+    }
     message = json['message'];
   }
 
@@ -16,69 +21,42 @@ class TeHomeworkEvaluationListResponseModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     data['message'] = message;
     return data;
   }
 }
 
-class Data {
-  List<EvaluationSubjectData>? subject;
+class HomeworkList {
+  int? studentId;
+  int? admissionNo;
+  bool? evaluated;
+  String? studentName;
+  List<dynamic>? homeworkFiles;
 
-  Data({this.subject});
+  HomeworkList(
+      {this.studentId,
+        this.admissionNo,
+        this.evaluated,
+        this.studentName,
+        this.homeworkFiles});
 
-  Data.fromJson(Map<String, dynamic> json) {
-    if (json['subject'] != null) {
-      subject = <EvaluationSubjectData>[];
-      json['subject'].forEach((v) {
-        subject!.add(EvaluationSubjectData.fromJson(v));
-      });
-    }
+  HomeworkList.fromJson(Map<String, dynamic> json) {
+    studentId = json['student_id'];
+    admissionNo = json['admission_no'];
+    evaluated = json['evaluated'];
+    studentName = json['student_name'];
+    homeworkFiles = json['homework_files'] ?? [];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (subject != null) {
-      data['subject'] = subject!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class EvaluationSubjectData {
-  int? id;
-  String? subjectName;
-  String? evaluateDate;
-  String? file;
-  int? marks;
-  String? submissionDate;
-
-  EvaluationSubjectData(
-      {this.id,
-        this.subjectName,
-        this.evaluateDate,
-        this.file,
-        this.marks,
-        this.submissionDate});
-
-  EvaluationSubjectData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    subjectName = json['subject_name'];
-    evaluateDate = json['evaluate_date'];
-    file = json['file'];
-    marks = json['marks'];
-    submissionDate = json['submission_date'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['subject_name'] = subjectName;
-    data['evaluate_date'] = evaluateDate;
-    data['file'] = file;
-    data['marks'] = marks;
-    data['submission_date'] = submissionDate;
+    data['student_id'] = studentId;
+    data['admission_no'] = admissionNo;
+    data['evaluated'] = evaluated;
+    data['student_name'] = studentName;
+    data['homework_files'] = homeworkFiles;
     return data;
   }
 }
