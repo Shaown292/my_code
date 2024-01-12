@@ -9,6 +9,7 @@ import 'package:flutter_single_getx_api_v2/config/global_variable/global_variabl
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../domain/base_client/base_client.dart';
 import '../../../../domain/core/model/student_apply_leave_model/student_apply_leave_type_response_model.dart';
@@ -19,6 +20,10 @@ class ApplyLeaveController extends GetxController {
   LoadingController loadingController = Get.find();
   GlobalRxVariableController globalRxVariableController = Get.find();
   RxBool isLoading = false.obs;
+
+  DateTime now = DateTime.now();
+  String formattedDate = DateFormat('MM-dd-yyyy').format(DateTime.now());
+
 
   TextEditingController applyDateTextController = TextEditingController();
   TextEditingController fromDateTextController = TextEditingController();
@@ -48,13 +53,13 @@ class ApplyLeaveController extends GetxController {
       );
 
       StudentApplyLeaveTypeResponseModel studentApplyLeaveTypeResponseModel =
-          StudentApplyLeaveTypeResponseModel.fromJson(response);
+      StudentApplyLeaveTypeResponseModel.fromJson(response);
       if (studentApplyLeaveTypeResponseModel.success == true) {
         isLoading.value = false;
         if (studentApplyLeaveTypeResponseModel.data!.leaveType!.isNotEmpty) {
           for (int i = 0;
-              i < studentApplyLeaveTypeResponseModel.data!.leaveType!.length;
-              i++) {
+          i < studentApplyLeaveTypeResponseModel.data!.leaveType!.length;
+          i++) {
             applyLeaveTypeList
                 .add(studentApplyLeaveTypeResponseModel.data!.leaveType![i]);
             leaveTypeDropdownList.add(
@@ -86,7 +91,7 @@ class ApplyLeaveController extends GetxController {
     );
 
     if (dateTime != null) {
-      applyDateTextController.text = dateTime.dd_mm_yyyy;
+      applyDateTextController.text = DateFormat('MM/dd/yyyy').format(DateTime.now());
     }
   }
 
@@ -97,7 +102,7 @@ class ApplyLeaveController extends GetxController {
     );
 
     if (dateTime != null) {
-      fromDateTextController.text = dateTime.dd_mm_yyyy;
+      fromDateTextController.text = DateFormat('MM/dd/yyyy').format(DateTime.now());
     }
   }
 
@@ -106,7 +111,7 @@ class ApplyLeaveController extends GetxController {
         .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
 
     if (dateTime != null) {
-      toDateTextController.text = dateTime.dd_mm_yyyy;
+      toDateTextController.text = DateFormat('MM/dd/yyyy').format(DateTime.now());
     }
   }
 
@@ -150,9 +155,9 @@ class ApplyLeaveController extends GetxController {
       debugPrint(InfixApi.teacherApplyLeave);
       loadingController.isLoading = true;
       final request =
-          http.MultipartRequest('POST', Uri.parse(InfixApi.studentApplyLeave));
+      http.MultipartRequest('POST', Uri.parse(InfixApi.studentApplyLeave));
       request.headers['Authorization'] =
-          globalRxVariableController.token.value!;
+      globalRxVariableController.token.value!;
 
       if (file.value.path.isNotEmpty) {
         request.files.add(
@@ -164,7 +169,7 @@ class ApplyLeaveController extends GetxController {
       request.fields['leave_to'] = toDateTextController.text;
       request.fields['reason'] = reasonTextController.text;
       request.fields['student_id'] =
-          '${globalRxVariableController.studentId.value}';
+      '${globalRxVariableController.studentId.value}';
       request.fields['leave_type'] = '$leaveTypeId';
 
       final response = await request.send();
@@ -175,7 +180,6 @@ class ApplyLeaveController extends GetxController {
       if (response.statusCode == 200) {
         loadingController.isLoading = false;
         showBasicSuccessSnackBar(message: decodedResponse['message']);
-
         applyDateTextController.clear();
         fromDateTextController.clear();
         toDateTextController.clear();
@@ -204,3 +208,4 @@ class ApplyLeaveController extends GetxController {
     super.onInit();
   }
 }
+

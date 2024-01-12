@@ -32,33 +32,30 @@ class TeacherView extends GetView<TeacherController> {
               child: Column(
                 children: [
                   10.verticalSpacing,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: SizedBox(
-                      height: 50,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount:
-                            controller.homeController.studentRecordList.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: StudyButton(
-                              title:
-                                  "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
-                              onItemTap: () {
-                                controller.teacherList.clear();
-                                int recordId = controller
-                                    .homeController.studentRecordList[index].id;
-                                controller.getAllTeacherList(
-                                    recordId: recordId);
-                                controller.selectIndex.value = index;
-                              },
-                              isSelected: controller.selectIndex.value == index,
-                            ),
-                          );
-                        },
-                      ),
+                  SizedBox(
+                    height: 50,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          controller.homeController.studentRecordList.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: StudyButton(
+                            title:
+                                "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
+                            onItemTap: () {
+                              controller.teacherList.clear();
+                              int recordId = controller
+                                  .homeController.studentRecordList[index].id;
+                              controller.getAllTeacherList(
+                                  recordId: recordId);
+                              controller.selectIndex.value = index;
+                            },
+                            isSelected: controller.selectIndex.value == index,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   10.verticalSpacing,

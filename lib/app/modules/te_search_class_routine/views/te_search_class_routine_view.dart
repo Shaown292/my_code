@@ -44,7 +44,7 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
                           controller.adminStudentsSearchController.classValue
                               .value = value!;
                           controller.adminStudentsSearchController
-                              .studentClassId.value = value.groupId;
+                              .studentClassId.value = value.id;
                         },
                       ),
                 20.verticalSpacing,
@@ -65,7 +65,7 @@ class TeSearchClassRoutineView extends GetView<TeSearchClassRoutineController> {
                           controller.adminStudentsSearchController.sectionValue
                               .value = value!;
                           controller.adminStudentsSearchController
-                              .studentSectionId.value = value.groupId;
+                              .studentSectionId.value = value.id;
                         },
                       ),
                 50.verticalSpacing,

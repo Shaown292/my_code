@@ -36,7 +36,7 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                           dropdownList: controller.applyLeaveTypeList,
                           changeDropdownValue: (v) {
                             controller.dropdownValue.value = v!;
-                            controller.leaveTypeId.value = v.groupId;
+                            controller.leaveTypeId.value = v.id;
                           },
                         ),
                   10.verticalSpacing,
