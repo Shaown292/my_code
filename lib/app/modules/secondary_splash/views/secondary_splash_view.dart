@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
-import 'package:flutter_svg/svg.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/secondary_splash_controller.dart';
 
 class SecondarySplashView extends GetView<SecondarySplashController> {
   const SecondarySplashView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +39,6 @@ class SecondarySplashView extends GetView<SecondarySplashController> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
@@ -50,8 +46,7 @@ class SecondarySplashView extends GetView<SecondarySplashController> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:
-              const EdgeInsets.only(bottom: 80.0, left: 40, right: 40),
+              padding: const EdgeInsets.only(bottom: 80.0, left: 40, right: 40),
               child: Container(
                 alignment: Alignment.bottomCenter,
                 child: const LinearProgressIndicator(

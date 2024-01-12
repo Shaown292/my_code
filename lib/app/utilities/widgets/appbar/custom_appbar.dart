@@ -7,7 +7,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:get/get.dart';
 
 import '../../../data/constants/app_text.dart';
-import '../../../data/constants/image_path.dart';
 import '../common_widgets/alert_dialog.dart';
 
 class CustomAppBar extends GetView<HomeController> {

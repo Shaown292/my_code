@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_class/views/widget/class_tile.dart';

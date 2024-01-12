@@ -23,7 +23,7 @@ class Initializer {
     await _initStorage();
     _initGetConnect();
     //Assign publishable key to flutter_stripe
-    Stripe.publishableKey = "pk_test_51OTydVHHgGZ1rB2oCwA3d4UjhW1ajimcjqR65FczIBSZqyYtaGl58N5zHwXxuC6w39UjAQmSBLXmoUoe9CZuxnoP00VWEgjtvZ";
+    Stripe.publishableKey = AppConfig.stripePublishableKey;
   }
 
   /// global loader
@@ -67,7 +67,7 @@ class Initializer {
       tag: 'fcm',
     );
 
-    AuthDatabase authDatabase = AuthDatabase.instance;
+    // AuthDatabase authDatabase = AuthDatabase.instance;
 
     String? url;
     String? baseUrl = AppConfig.domainName;

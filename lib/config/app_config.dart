@@ -18,7 +18,7 @@ class AppConfig {
   static String stripeCurrency = "USD".toUpperCase();
   static const String stripeMerchantID = "merchant.thegreatestmarkeplace";
   static const String stripePublishableKey =
-      "pk_test_51JAWNlKS0igSTFP16dhgcM1fBayh6DStrpu5OA7jjAzYiFX3Bht0X8ARULBpIAVkgmws7PWEliNi4Q35Iyk8ThQL00aoNnF3OE";
+      "pk_test_51OTydVHHgGZ1rB2oCwA3d4UjhW1ajimcjqR65FczIBSZqyYtaGl58N5zHwXxuC6w39UjAQmSBLXmoUoe9CZuxnoP00VWEgjtvZ";
   static const String stripeToken =
       'sk_test_51OTydVHHgGZ1rB2oIpSFP0VPpk92x5vXBC30rGfbjITnq3IfjSYZRqOQ78sqTqEX7opbWgqxGxQkPOWbIjUbmBtL00kbanmzce';
   static const String appPackageName = "com.infix.lms";

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
@@ -9,9 +8,7 @@ import 'package:flutter_single_getx_api_v2/config/language/controller/languages/
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-
 class AppSettingsController extends GetxController {
-
   RxBool languageLoader = false.obs;
 
   void navNextPage() async {
@@ -24,7 +21,6 @@ class AppSettingsController extends GetxController {
     debugPrint('LANG URL :: ${InfixApi.languageList}');
 
     try {
-
       languageList.clear();
       languageLoader.value = false;
 
@@ -33,7 +29,8 @@ class AppSettingsController extends GetxController {
       if (response.statusCode == 200) {
         languageLoader.value = true;
         Map<String, dynamic> responseData = json.decode(response.body);
-        Map<String, String> translations = Map<String, String>.from(responseData['lang']);
+        Map<String, String> translations =
+            Map<String, String>.from(responseData['lang']);
         for (int i = 0; i < responseData['lang_list'].length; i++) {
           languageList.add(LanguageModel(
             id: responseData['lang_list'][i]['id'],
@@ -44,12 +41,12 @@ class AppSettingsController extends GetxController {
 
           if (responseData['lang_list'][i]['active_status'] == true) {
             translatedLanguage.assignAll(translations);
-            Get.find<LanguageController>().langName.value = responseData['lang_list'][i]['lang_name'];
-            Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['locale'];
+            Get.find<LanguageController>().langName.value =
+                responseData['lang_list'][i]['lang_name'];
+            Get.find<LanguageController>().appLocale =
+                responseData['lang_list'][i]['locale'];
             Get.updateLocale(Locale(Get.find<LanguageController>().appLocale));
           }
-          log('Translation ::: $translations');
-
         }
         navNextPage();
       } else {
@@ -63,7 +60,7 @@ class AppSettingsController extends GetxController {
       debugPrint('$e');
       debugPrint('$t');
       throw Exception('Failed to load translations: $e');
-    }finally{
+    } finally {
       languageLoader.value = true;
       navNextPage();
     }

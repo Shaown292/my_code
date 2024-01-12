@@ -51,11 +51,16 @@ dynamic returnResponse(http.Response response) {
       return responseJson;
     case HttpStatus.unauthorized:
       showBasicFailedSnackBar(message: json.decode(response.body.toString())["message"]);
-      _authDatabase.logOut();
-      Future.delayed(const Duration(seconds: 2)).then((val) {
-        Get.offNamedUntil('/secondary-splash', (route) => false);
-        // Get.offNamedUntil('/splash', (route) => false);
-      });
+
+      if(json.decode(response.body.toString())["message"] == 'Unauthenticated.'){
+        _authDatabase.logOut();
+        Future.delayed(const Duration(seconds: 2)).then((val) {
+          Get.offNamedUntil('/secondary-splash', (route) => false);
+          // Get.offNamedUntil('/splash', (route) => false);
+        });
+      }
+
+
 
 
     case HttpStatus.forbidden:

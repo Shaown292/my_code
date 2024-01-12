@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
@@ -26,7 +25,7 @@ class SettingsController extends GetxController {
       languageLoader.value = false;
 
       final response = await http.post(Uri.parse(InfixApi.languageList), body: {
-        'lang_id': langId,
+        'lang_id': langId.toString(),
       });
 
       if (response.statusCode == 200) {
@@ -50,7 +49,6 @@ class SettingsController extends GetxController {
                 responseData['lang_list'][i]['locale'];
             Get.updateLocale(Locale(Get.find<LanguageController>().appLocale));
           }
-          log('Translation ::: $translations');
         }
       } else {
         languageLoader.value = true;
@@ -90,11 +88,10 @@ class SettingsController extends GetxController {
           Expanded(
             child: ListView.builder(
                 itemCount: languageList.length,
-                // itemCount: localizationController.languages.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () async {
-                      updateLanguage(langId: 1).then((value) async {
+                      updateLanguage(langId: languageList[index].id).then((value) async {
                         LanguageSelection.instance.drop.value =
                             languageList[index].languageLocal;
                         final sharedPref =
@@ -105,7 +102,6 @@ class SettingsController extends GetxController {
                             'language_name', languageList[index].languageName);
                         languageController.appLocale =
                             languageList[index].languageLocal;
-                        log('${languageController.translationsData[languageController.appLocale]}');
 
                         Get.updateLocale(Locale(languageController.appLocale));
 
