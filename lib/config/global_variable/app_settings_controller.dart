@@ -69,6 +69,4 @@ class AppSettingsController extends GetxController {
     }
   }
 
-
-
 }
