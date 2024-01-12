@@ -84,6 +84,7 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                                         controller.feesGroupList[index]
                                                 .description ??
                                             '';
+
                                     controller.showUploadDocumentsBottomSheet(
                                       header: "Edit",
                                       bottomSheetBackgroundColor: Colors.white,
@@ -113,6 +114,9 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                                         }
                                       },
                                     );
+
+                                    bool isBottomSheetOpen = Get.isBottomSheetOpen!;
+
                                   },
                                 );
                               },

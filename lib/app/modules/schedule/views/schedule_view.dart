@@ -20,7 +20,11 @@ class ScheduleView extends GetView<ScheduleController> {
       () => InfixEduScaffold(
         title: "Schedule".tr,
         body: RefreshIndicator(
-          onRefresh: () async {},
+          onRefresh: () async {
+            controller.getStudentExamScheduleList(
+                examId: controller.examinationController.examList[0].id!,
+                recordId: controller.homeController.studentRecordList[0].id);
+          },
           child: CustomBackground(
             customWidget: Column(
               children: [
