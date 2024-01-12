@@ -35,6 +35,8 @@ class TeacherHomeworkData {
   String? evaluation;
   int? marks;
   String? file;
+  String? className;
+  String? sectionName;
   int? classId;
   int? sectionId;
 
@@ -48,6 +50,8 @@ class TeacherHomeworkData {
     this.file,
     this.classId,
     this.sectionId,
+    this.className,
+    this.sectionName,
   });
 
   TeacherHomeworkData.fromJson(Map<String, dynamic> json) {
@@ -59,7 +63,9 @@ class TeacherHomeworkData {
     marks = json['marks'];
     file = json['file'];
     classId = json['class_id'];
+    className = json['class_name'];
     sectionId = json['section_id'];
+    sectionName = json['section_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +78,8 @@ class TeacherHomeworkData {
     data['marks'] = marks;
     data['file'] = file;
     data['class_id'] = classId;
+    data['class_name'] = className;
+    data['section_name'] = sectionName;
     data['section_id'] = sectionId;
     return data;
   }

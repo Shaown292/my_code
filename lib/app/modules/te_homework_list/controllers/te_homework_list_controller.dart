@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/te_add_homework/controllers/te_add_homework_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/style/bottom_sheet/bottom_sheet_shpe.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
@@ -16,8 +18,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class TeHomeworkListController extends GetxController {
+  TeAddHomeworkController teAddHomeworkController = Get.put(TeAddHomeworkController());
   LoadingController loadingController = Get.find();
   TextEditingController searchController = TextEditingController();
+
+  RxBool isTapped = false.obs;
 
 
 
@@ -33,7 +38,7 @@ class TeHomeworkListController extends GetxController {
       );
 
       TeacherHomeworkListResponseModel teacherHomeworkListResponseModel =
-          TeacherHomeworkListResponseModel.fromJson(response);
+      TeacherHomeworkListResponseModel.fromJson(response);
 
       if (teacherHomeworkListResponseModel.success == true) {
         loadingController.isLoading = false;
@@ -56,6 +61,44 @@ class TeHomeworkListController extends GetxController {
       loadingController.isLoading = false;
     }
 
+    return TeacherHomeworkListResponseModel();
+  }
+
+  Future<TeacherHomeworkListResponseModel?> searchHomework(int classId, int sectionId, int subjectId) async {
+
+    try {
+
+      teacherHomeworkList.clear();
+      loadingController.isLoading = true;
+
+      final response = await BaseClient().getData(
+        url: InfixApi.getTeacherHomeworkSearch(classId: classId, sectionId: sectionId, subjectId: subjectId),
+        header: GlobalVariable.header,
+      );
+      TeacherHomeworkListResponseModel teacherHomeworkListResponseModel =
+      TeacherHomeworkListResponseModel.fromJson(response);
+
+      if (teacherHomeworkListResponseModel.success == true) {
+        loadingController.isLoading = false;
+        if (teacherHomeworkListResponseModel.data!.isNotEmpty) {
+          for (var element in teacherHomeworkListResponseModel.data!) {
+            teacherHomeworkList.add(element);
+          }
+        }
+      } else {
+        loadingController.isLoading = false;
+        showBasicFailedSnackBar(
+            message: teacherHomeworkListResponseModel.message ??
+                AppText.somethingWentWrong);
+      }
+
+    } catch (e, t) {
+      loadingController.isLoading = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
+      loadingController.isLoading = false;
+    }
     return TeacherHomeworkListResponseModel();
   }
 
@@ -120,7 +163,7 @@ class TeHomeworkListController extends GetxController {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: InkWell(
                         onTap: () {
-
+                          downloadFile(url: teacherHomeworkList[index].file ?? "", title: teacherHomeworkList[index].subjectName ?? "");
                         },
                         child: Row(
                           children: [
@@ -158,6 +201,10 @@ class TeHomeworkListController extends GetxController {
       ),
       shape: defaultBottomSheetShape(),
     );
+  }
+
+  void downloadFile({required String url, required String title}) {
+    FileDownloadUtils().downloadFiles(url: url, title: title);
   }
 
   @override

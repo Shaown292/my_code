@@ -8,6 +8,7 @@ class SearchField extends StatelessWidget {
   final bool isTextFieldEmpty;
   final Widget? icon;
   final TextStyle? hintTextStyle;
+  final double? borderRadius;
 
   const SearchField({
     super.key,
@@ -16,7 +17,7 @@ class SearchField extends StatelessWidget {
     this.isTextFieldEmpty = false,
     this.onTap,
     this.icon,
-    this.hintTextStyle,
+    this.hintTextStyle, this.borderRadius,
   });
 
   @override
@@ -28,13 +29,13 @@ class SearchField extends StatelessWidget {
           suffixIcon: icon,
           focusedBorder: OutlineInputBorder(
             borderSide:
-                BorderSide(color: const Color(0xFF635976).withOpacity(0.2)),
-            borderRadius: BorderRadius.circular(20.0),
+            BorderSide(color: const Color(0xFF635976).withOpacity(0.2)),
+            borderRadius: BorderRadius.circular(borderRadius ?? 20.0),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide:
-                BorderSide(color: const Color(0xFF635976).withOpacity(0.2)),
-            borderRadius: BorderRadius.circular(20.0),
+            BorderSide(color: const Color(0xFF635976).withOpacity(0.2)),
+            borderRadius: BorderRadius.circular(borderRadius ?? 20.0),
           ),
           contentPadding: const EdgeInsets.symmetric(horizontal: 20)),
       controller: controller,
