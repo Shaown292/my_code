@@ -153,7 +153,9 @@ class BookListView extends GetView<BookListController> {
                               .bookSearchList[index].bookNumber,
                           onTap: () => controller
                               .showBookListDetailsBottomSheet(
-                              index: index),
+                              index: index,
+                            bottomSheetBackgroundColor: Colors.white
+                          ),
                         );
                       })
                       : Center(

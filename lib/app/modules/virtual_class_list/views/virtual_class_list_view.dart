@@ -25,21 +25,21 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                   20.verticalSpacing,
                   Expanded(
                     child: ListView.builder(
-                      itemCount: 10,
+                      itemCount: controller.zoomMeetingList.length,
                       itemBuilder: (context, index) {
                         return  Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15.0,),
                           child: ShowStatusTile(
                             firstTitle: "Topic",
-                            firstValue: "Discrete Mathematics",
+                            firstValue: controller.zoomMeetingList[index].topic,
                             secondTitle: "Meeting Id",
-                            secondValue: "15215561",
+                            secondValue: controller.zoomMeetingList[index].meetingId,
                             thirdTitle: "Start Time",
-                            thirdValue: "10:20 AM" ,
+                            thirdValue: controller.zoomMeetingList[index].startTime ,
                             activeStatus: "Join",
                             activeStatusColor: Colors.green,
                             onStatusTap: (){
-                              print("Joined a Meeting $index");
+
                             },
                           ),
                         );
