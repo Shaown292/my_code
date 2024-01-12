@@ -39,14 +39,14 @@ class ResultView extends GetView<ResultController> {
                     children: [
                       10.verticalSpacing,
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 7.0, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 7.0, vertical: 10),
                         child: SizedBox(
                           height: 50,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount:
-                                controller.homeController.studentRecordList.length,
+                            itemCount: controller
+                                .homeController.studentRecordList.length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -56,15 +56,17 @@ class ResultView extends GetView<ResultController> {
                                         "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                     onItemTap: () {
                                       controller.selectIndex.value = index;
-                                      controller
-                                          .examinationController.examDropdownList
-                                          .clear();
-                                      int recordId = controller
-                                          .homeController.studentRecordList[index].id;
                                       controller.examinationController
-                                          .getStudentExamList(recordId: recordId);
+                                          .examDropdownList
+                                          .clear();
+                                      int recordId = controller.homeController
+                                          .studentRecordList[index].id;
+                                      controller.examinationController
+                                          .getStudentExamList(
+                                              recordId: recordId);
                                     },
-                                    isSelected: controller.selectIndex.value == index,
+                                    isSelected:
+                                        controller.selectIndex.value == index,
                                   ),
                                 ),
                               );
@@ -72,18 +74,20 @@ class ResultView extends GetView<ResultController> {
                           ),
                         ),
                       ),
-                      controller.examinationController.loadingController.isLoading
+                      controller
+                              .examinationController.loadingController.isLoading
                           ? const SecondaryLoadingWidget()
                           : Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
                               child: DuplicateDropdown(
                                 dropdownValue: controller
                                     .examinationController.dropdownValue.value,
-                                dropdownList:
-                                    controller.examinationController.dropdownList,
+                                dropdownList: controller
+                                    .examinationController.dropdownList,
                                 changeDropdownValue: (v) {
-                                  controller
-                                      .examinationController.dropdownValue.value = v!;
+                                  controller.examinationController.dropdownValue
+                                      .value = v!;
                                   controller.examResultList.clear();
                                   int examId = v.groupId;
                                   int recordId = controller
@@ -108,15 +112,17 @@ class ResultView extends GetView<ResultController> {
                                     physics: const BouncingScrollPhysics(),
                                     itemBuilder: (context, int index) {
                                       return ResultTile(
-                                        title:
-                                            controller.examResultList[index].examName,
+                                        title: controller
+                                            .examResultList[index].examName,
                                         subject: controller
                                             .examResultList[index].subjectName,
                                         totalMarks: controller
                                             .examResultList[index].totalMarks,
                                         obtainMarks: controller
-                                            .examResultList[index].obtainedMarks,
-                                        grade: controller.examResultList[index].grade,
+                                            .examResultList[index]
+                                            .obtainedMarks,
+                                        grade: controller
+                                            .examResultList[index].grade,
                                         color: index % 2 == 0
                                             ? AppColors.profileCardTextColor
                                             : Colors.white,
