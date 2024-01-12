@@ -22,7 +22,6 @@ class ResultView extends GetView<ResultController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-
             CustomBackground(
               customWidget: Obx(
                 () => RefreshIndicator(
