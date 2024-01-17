@@ -4,6 +4,7 @@ class ImagePath {
   static const  appIcon               = "assets/config/app_icon.jpg";
   static const  appLogo               = "assets/config/app_logo.png";
   static const  appToolbar            = "assets/config/app_toolbar.png";
+  static const  appToolbarBg          = "assets/config/app_toolbar_bg.png";
   static const  favIcon               = "assets/config/favicon.jpg";
   static const  loginBG               = "assets/config/login_bg.png";
   static const  splashBackground      = "assets/config/splash_bg.png";

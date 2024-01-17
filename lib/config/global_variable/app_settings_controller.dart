@@ -110,14 +110,14 @@ class AppSettingsController extends GetxController {
       } else {
         languageLoader.value = true;
         navNextPage();
-        throw Exception('Failed to load translations');
+        // throw Exception('Failed to load translations');
       }
     } catch (e, t) {
       languageLoader.value = true;
       navNextPage();
       debugPrint('$e');
       debugPrint('$t');
-      throw Exception('Failed to load translations: $e');
+      // throw Exception('Failed to load translations: $e');
     } finally {
       languageLoader.value = true;
       navNextPage();

@@ -114,6 +114,8 @@ import '../modules/group_chat/bindings/group_chat_binding.dart';
 import '../modules/group_chat/views/group_chat_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/launch_webview/bindings/launch_webview_binding.dart';
+import '../modules/launch_webview/views/launch_webview_view.dart';
 import '../modules/leave/bindings/leave_binding.dart';
 import '../modules/leave/views/leave_view.dart';
 import '../modules/leave_list/bindings/leave_list_binding.dart';
@@ -817,6 +819,11 @@ class AppPages {
       name: _Paths.VIRTUAL_CLASS_LIST,
       page: () => const VirtualClassListView(),
       binding: VirtualClassListBinding(),
+    ),
+    GetPage(
+      name: _Paths.LAUNCH_WEBVIEW,
+      page: () => const LaunchWebviewView(),
+      binding: LaunchWebviewBinding(),
     ),
   ];
 }

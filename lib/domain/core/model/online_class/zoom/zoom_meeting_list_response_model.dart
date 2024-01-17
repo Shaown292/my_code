@@ -1,6 +1,6 @@
 class ZoomMeetingListResponseModel {
   bool? success;
-  List<ZoomMeetingList>? data;
+  List<ZoomMeetingData>? data;
   String? message;
 
   ZoomMeetingListResponseModel({this.success, this.data, this.message});
@@ -8,9 +8,9 @@ class ZoomMeetingListResponseModel {
   ZoomMeetingListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
-      data = <ZoomMeetingList>[];
+      data = <ZoomMeetingData>[];
       json['data'].forEach((v) {
-        data!.add(ZoomMeetingList.fromJson(v));
+        data!.add(ZoomMeetingData.fromJson(v));
       });
     }
     message = json['message'];
@@ -27,7 +27,7 @@ class ZoomMeetingListResponseModel {
   }
 }
 
-class ZoomMeetingList {
+class ZoomMeetingData {
   String? meetingId;
   String? topic;
   double? duration;
@@ -35,9 +35,9 @@ class ZoomMeetingList {
   String? currentStatus;
   String? joinUrl;
 
-  ZoomMeetingList({this.meetingId, this.topic, this.duration, this.startTime});
+  ZoomMeetingData({this.meetingId, this.topic, this.duration, this.startTime});
 
-  ZoomMeetingList.fromJson(Map<String, dynamic> json) {
+  ZoomMeetingData.fromJson(Map<String, dynamic> json) {
     meetingId = json['meeting_id'];
     topic = json['topic'];
     duration = double.tryParse(json['duration']);

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
@@ -9,10 +11,8 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class VirtualClassListController extends GetxController {
-
-  RxList<ZoomMeetingList> zoomMeetingList = <ZoomMeetingList>[].obs;
+  RxList<ZoomMeetingData> zoomMeetingList = <ZoomMeetingData>[].obs;
   RxBool zoomMeetingLoader = false.obs;
-
 
   /// Get Zoom Meeting List
   Future<ZoomMeetingListResponseModel> getZoomMeetingList() async {
@@ -25,14 +25,13 @@ class VirtualClassListController extends GetxController {
         header: GlobalVariable.header,
       );
 
-      ZoomMeetingListResponseModel zoomMeetingListResponseModel = ZoomMeetingListResponseModel.fromJson(response);
+      ZoomMeetingListResponseModel zoomMeetingListResponseModel =
+          ZoomMeetingListResponseModel.fromJson(response);
 
       if (zoomMeetingListResponseModel.success == true) {
         zoomMeetingLoader.value = false;
         if (zoomMeetingListResponseModel.data!.isNotEmpty) {
-          for (int i = 0;
-          i < zoomMeetingListResponseModel.data!.length;
-          i++) {
+          for (int i = 0; i < zoomMeetingListResponseModel.data!.length; i++) {
             zoomMeetingList.add(zoomMeetingListResponseModel.data![i]);
           }
         }
@@ -54,29 +53,22 @@ class VirtualClassListController extends GetxController {
     return ZoomMeetingListResponseModel();
   }
 
-  Future<void> openZoom({required String meetingId, required String status}) async {
+  Future<void> openZoom(
+      {required String meetingId, required String status}) async {
+    if (status == "JOIN" || status == 'START') {
+      final url = InfixApi.getJoinMeetingUrlApp(meetingID: meetingId);
 
-    if (status == "JOIN" ||
-        status == 'START') {
-      final url = InfixApi.getJoinMeetingUrlApp(
-          meetingID: meetingId);
-
-      // ignore: deprecated_member_use
       if (await canLaunch(url)) {
-    // ignore: deprecated_member_use
-    await launch(url);
-    } else {
-        throw Exception('Could not launch $url');
-        // final webUrl = InfixApi.getJoinMeetingUrlApp(
-        //     meetingID: meetingId);
-        // if (await canLaunch(webUrl)) {
-        //   // ignore: deprecated_member_use
-        //   await launch(webUrl);
-        // }
+        await launch(url);
+      } else {
+        final webUrl = InfixApi.getJoinMeetingUrlWeb(meetingID: meetingId);
+        if (await canLaunch(webUrl)) {
+          await launch(webUrl);
+        } else {
+          throw Exception('Could not launch $url');
+        }
       }
-
-  }
-
+    }
   }
 
   @override
@@ -84,5 +76,4 @@ class VirtualClassListController extends GetxController {
     getZoomMeetingList();
     super.onInit();
   }
-
 }
