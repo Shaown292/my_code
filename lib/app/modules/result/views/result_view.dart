@@ -62,7 +62,6 @@ class ResultView extends GetView<ResultController> {
                   ),
                 ),
               ),
-
               controller
                       .examinationController.loadingController.isLoading
                   ? const SecondaryLoadingWidget()
