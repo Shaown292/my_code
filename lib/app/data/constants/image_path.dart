@@ -13,6 +13,7 @@ class ImagePath {
   static const  messenger             = "assets/config/messenger.png";
 
 
+
   /// Others assets
   static const  logout                = "assets/images/logout.png";
   static const  edit                  = "assets/images/edit.png";
