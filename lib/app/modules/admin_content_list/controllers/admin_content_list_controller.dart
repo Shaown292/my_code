@@ -105,9 +105,9 @@ class AdminContentListController extends GetxController {
             deleteContent(contentId: contentId, index: index);
           },
           isLoading: deleteLoader.value,
-          subTitle: AppText.deleteDocumentsWarningMsg,
-          noText: 'Cancel',
-          yesText: 'Delete',
+          subTitle: AppText.deleteDocumentsWarningMsg.tr,
+          noText: 'Cancel'.tr,
+          yesText: 'Delete'.tr,
         ),
       ),
     );

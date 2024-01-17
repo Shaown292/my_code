@@ -33,8 +33,8 @@ class BookListTile extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  width: Get.width * 0.12,
-                  padding: const EdgeInsets.all(10),
+                  width: Get.width * 0.14,
+                  padding: const EdgeInsets.all(7),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       color: AppColors.profileCardBackgroundColor),
@@ -53,8 +53,8 @@ class BookListTile extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(10),
-                  width: Get.width * 0.19,
+                  padding: const EdgeInsets.all(7),
+                  width: Get.width * 0.2,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       color: AppColors.homeworkStatusGreenColor),
@@ -88,20 +88,18 @@ class BookListTile extends StatelessWidget {
                         ),
                       ),
                       5.horizontalSpacing,
-                      Flexible(
-                        child: InkWell(
-                          onTap: onTap,
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: AppColors.appButtonColor,
-                            ),
-                            child: Center(
-                              child: Text(
-                                view ?? "View".tr,
-                                style: AppTextStyle.textStyle12WhiteW400,
-                              ),
+                      InkWell(
+                        onTap: onTap,
+                        child: Container(
+                          padding: const EdgeInsets.all(7),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: AppColors.appButtonColor,
+                          ),
+                          child: Center(
+                            child: Text(
+                              view ?? "View".tr,
+                              style: AppTextStyle.textStyle12WhiteW400,
                             ),
                           ),
                         ),

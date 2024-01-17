@@ -23,14 +23,14 @@ class LeaveListController extends GetxController {
 
   List<LeaveListData> leaveList = [];
   List<LeaveListPending> pendingList = [];
-  List<LeaveListRejected> rejectedList = [];
+  List<LeaveListCancelled> cancelledList = [];
   List<LeaveListApproved> approvedList = [];
   List<RemainingLeaveListData> remainingLeaveList = [];
 
   List<String> status = <String>[
     'Pending'.tr,
     'Approved'.tr,
-    'Rejected'.tr,
+    'Cancelled'.tr,
   ];
 
   Future<LeaveListResponseModel?> getAllLeaveList(int studentId) async {
@@ -58,7 +58,7 @@ class LeaveListController extends GetxController {
           for (int i = 0;
               i < leaveListResponseModel.data!.rejected!.length;
               i++) {
-            rejectedList.add(leaveListResponseModel.data!.rejected![i]);
+            cancelledList.add(leaveListResponseModel.data!.rejected![i]);
           }
         }
 
@@ -202,27 +202,27 @@ class LeaveListController extends GetxController {
             children: [
               10.verticalSpacing,
               Text(
-                "${"Reason".tr}: ${rejectedList[index].reason}",
+                "${"Reason".tr}: ${cancelledList[index].reason}",
                 style: AppTextStyle.fontSize14BlackW500,
               ),
               20.verticalSpacing,
               BottomSheetTile(
                 title: "Leave Type".tr,
-                value: rejectedList[index].leaveType,
+                value: cancelledList[index].leaveType,
                 color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
                 title: "Apply Date".tr,
-                value: rejectedList[index].applyDate,
+                value: cancelledList[index].applyDate,
               ),
               BottomSheetTile(
                 title: "Leave From".tr,
-                value: rejectedList[index].from,
+                value: cancelledList[index].from,
                 color: AppColors.homeworkWidgetColor,
               ),
               BottomSheetTile(
                 title: "Leave To".tr,
-                value: rejectedList[index].to,
+                value: cancelledList[index].to,
               ),
             ],
           )),

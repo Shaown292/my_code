@@ -281,10 +281,10 @@ class InfixApi {
   static String getAdminStudentSearchList({
     required int classId,
     required int sectionId,
-    required String rollINo,
+    required String rollNo,
     required String name,
   }) =>
-      '${baseApi}student-list-search?class=$classId&section=$sectionId&name=$name&roll_no=$rollINo';
+      '${baseApi}student-list-search?class=$classId&section=$sectionId&name=$name&roll_no=$rollNo';
 
   static String getAdminSubAttenSearchList({
     required int classId,
@@ -473,7 +473,7 @@ class InfixApi {
   static String getTeacherAddHomeworkClassList = '${baseApi}teacher-add-homework-for-class';
   static String getTeacherAddHomeworkSubjectList({required int classId}) => '${baseApi}teacher-add-homework-for-subject?class_id=$classId';
   static String getTeacherAddHomeworkSectionList({required int classId, required int subjectId}) => '${baseApi}teacher-add-homework-for-section?class_id=$classId&subject_id=$subjectId';
-  static String getTeacherHomeworkEvaluationList({required int classId, required int sectionId, required int homeworkId, }) => '${baseApi}teacher-homework-evaluation-list?class_id=$classId&section_id=$sectionId&homework_id=$homeworkId';
+  static String getTeacherHomeworkEvaluationList({required int classId, required int sectionId, required int homeworkId, required String searchKey}) => '${baseApi}teacher-homework-evaluation-list?class_id=$classId&section_id=$sectionId&homework_id=$homeworkId&search=$searchKey';
   static String getTeacherHomeworkSearch({required int classId, required int sectionId, required int subjectId, }) => '${baseApi}teacher-homework-search?class_id=$classId&subject_id=$subjectId&section_id=$sectionId';
 
 

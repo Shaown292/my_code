@@ -4,10 +4,10 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 
 import 'package:get/get.dart';
@@ -37,17 +37,19 @@ class AdminSubjectAttendanceSearchView
                         )
                       : DuplicateDropdown(
                           dropdownValue: controller
-                                  .adminStudentsSearchController.classList.isEmpty
+                                  .adminStudentsSearchController
+                                  .classList
+                                  .isEmpty
                               ? controller.classNullValue.value
-                              : controller
-                                  .adminStudentsSearchController.classValue.value,
-                          dropdownList:
-                              controller.adminStudentsSearchController.classList,
+                              : controller.adminStudentsSearchController
+                                  .classValue.value,
+                          dropdownList: controller
+                              .adminStudentsSearchController.classList,
                           changeDropdownValue: (v) {
                             controller.adminStudentsSearchController.classValue
                                 .value = v!;
                             controller.adminStudentsSearchController
-                                .studentClassId.value = v.groupId;
+                                .studentClassId.value = v.id;
                             controller.adminStudentsSearchController
                                 .getStudentSectionList(
                                     classId: controller
@@ -56,7 +58,7 @@ class AdminSubjectAttendanceSearchView
                                         .value);
                           },
                         ),
-              
+
                   /// Student Section List
                   10.verticalSpacing,
                   controller.adminStudentsSearchController.sectionLoader.value
@@ -64,28 +66,32 @@ class AdminSubjectAttendanceSearchView
                           color: AppColors.primaryColor,
                         )
                       : DuplicateDropdown(
-                          dropdownValue: controller.adminStudentsSearchController
-                                  .sectionList.isEmpty
+                          dropdownValue: controller
+                                  .adminStudentsSearchController
+                                  .sectionList
+                                  .isEmpty
                               ? controller.sectionNullValue.value
                               : controller.adminStudentsSearchController
                                   .sectionValue.value,
                           dropdownList: controller
                               .adminStudentsSearchController.sectionList,
                           changeDropdownValue: (v) {
-                            controller.adminStudentsSearchController.sectionValue
-                                .value = v!;
                             controller.adminStudentsSearchController
-                                .studentSectionId.value = v.groupId;
+                                .sectionValue.value = v!;
+                            controller.adminStudentsSearchController
+                                .studentSectionId.value = v.id;
                             controller.adminStudentsSearchController
                                 .getAdminStudentSubjectList(
                               classId: controller.adminStudentsSearchController
                                   .studentClassId.value,
-                              sectionId: controller.adminStudentsSearchController
-                                  .studentSectionId.value,
+                              sectionId: controller
+                                  .adminStudentsSearchController
+                                  .studentSectionId
+                                  .value,
                             );
                           },
                         ),
-              
+
                   /// Student Subject List
                   10.verticalSpacing,
                   controller.adminStudentsSearchController.subjectLoader.value
@@ -93,18 +99,20 @@ class AdminSubjectAttendanceSearchView
                           color: AppColors.primaryColor,
                         )
                       : DuplicateDropdown(
-                          dropdownValue: controller.adminStudentsSearchController
-                                  .subjectList.isEmpty
+                          dropdownValue: controller
+                                  .adminStudentsSearchController
+                                  .subjectList
+                                  .isEmpty
                               ? controller.subjectNullValue.value
                               : controller.adminStudentsSearchController
                                   .subjectValue.value,
                           dropdownList: controller
                               .adminStudentsSearchController.subjectList,
                           changeDropdownValue: (v) {
-                            controller.adminStudentsSearchController.subjectValue
-                                .value = v!;
                             controller.adminStudentsSearchController
-                                .studentSubjectId.value = v.groupId;
+                                .subjectValue.value = v!;
+                            controller.adminStudentsSearchController
+                                .studentSubjectId.value = v.id;
                           },
                         ),
                   10.verticalSpacing,
@@ -124,27 +132,36 @@ class AdminSubjectAttendanceSearchView
                       color: AppColors.profileValueColor,
                     ),
                   ),
+                  (Get.height * 0.4).verticalSpacing,
+                  PrimaryButton(
+                    text: "Search".tr,
+                    onTap: () {
+                      if (controller.validation()) {
+                        Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST,
+                            arguments: {
+                              'class_id': controller
+                                  .adminStudentsSearchController
+                                  .studentClassId
+                                  .value,
+                              'section_id': controller
+                                  .adminStudentsSearchController
+                                  .studentSectionId
+                                  .value,
+                              'subject_id': controller
+                                  .adminStudentsSearchController
+                                  .studentSubjectId
+                                  .value,
+                              'date':
+                                  controller.selectedDateTextController.text,
+                            }
+                            );
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
           ),
-        ),
-        bottomNavBar:   BottomNavButton(
-          text: "Search".tr,
-          onTap: () {
-            if(controller.validation()){
-              Get.toNamed(Routes.ADMIN_SUBJECT_ATTENDANCE_SEARCH_LIST,
-                  arguments: {
-                    'class_id': controller.adminStudentsSearchController
-                        .studentClassId.value,
-                    'section_id': controller.adminStudentsSearchController
-                        .studentSectionId.value,
-                    'subject_id': controller.adminStudentsSearchController
-                        .studentSubjectId.value,
-                    'date': controller.selectedDateTextController.text,
-                  });
-            }
-          },
         ),
       ),
     );

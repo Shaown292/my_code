@@ -25,7 +25,7 @@ class LeaveListResponseModel {
 class LeaveListData {
   List<LeaveListPending>? pending;
   List<LeaveListApproved>? approved;
-  List<LeaveListRejected>? rejected;
+  List<LeaveListCancelled>? rejected;
 
   LeaveListData({this.pending, this.approved, this.rejected});
 
@@ -43,9 +43,9 @@ class LeaveListData {
       });
     }
     if (json['rejected'] != null) {
-      rejected = <LeaveListRejected>[];
+      rejected = <LeaveListCancelled>[];
       json['rejected'].forEach((v) {
-        rejected!.add(LeaveListRejected.fromJson(v));
+        rejected!.add(LeaveListCancelled.fromJson(v));
       });
     }
   }
@@ -106,7 +106,7 @@ class LeaveListPending {
   }
 }
 
-class LeaveListRejected {
+class LeaveListCancelled {
   int? id;
   String? leaveType;
   String? from;
@@ -115,7 +115,7 @@ class LeaveListRejected {
   String? status;
   String? reason;
 
-  LeaveListRejected(
+  LeaveListCancelled(
       {this.id,
         this.leaveType,
         this.from,
@@ -124,7 +124,7 @@ class LeaveListRejected {
         this.status,
         this.reason});
 
-  LeaveListRejected.fromJson(Map<String, dynamic> json) {
+  LeaveListCancelled.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     leaveType = json['leave_type'];
     from = json['from'];

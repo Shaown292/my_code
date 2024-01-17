@@ -3,10 +3,10 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:get/get.dart';
 import '../controllers/admin_class_attendance_search_individual_controller.dart';
@@ -40,7 +40,7 @@ class AdminClassAttendanceSearchIndividualView
                             controller.adminStudentsSearchController.classValue
                                 .value = v!;
                             controller.adminStudentsSearchController
-                                .studentClassId.value = v.groupId;
+                                .studentClassId.value = v.id;
 
                             controller.adminStudentsSearchController
                                 .getStudentSectionList(
@@ -65,7 +65,7 @@ class AdminClassAttendanceSearchIndividualView
                             controller.adminStudentsSearchController
                                 .sectionValue.value = v!;
                             controller.adminStudentsSearchController
-                                .studentSectionId.value = v.groupId;
+                                .studentSectionId.value = v.id;
                           },
                         ),
                   10.verticalSpacing,
@@ -87,33 +87,37 @@ class AdminClassAttendanceSearchIndividualView
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
-                  50.verticalSpacing,
+                  (Get.height * 0.4).verticalSpacing,
+                  controller.adminStudentsSearchController.searchLoader.value
+                      ? const CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        )
+                      : PrimaryButton(
+                          text: "Search".tr,
+                          onTap: () {
+                            Get.toNamed(
+                              Routes
+                                  .ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST,
+                              arguments: {
+                                'class_id': controller
+                                    .adminStudentsSearchController
+                                    .studentClassId
+                                    .value,
+                                'section_id': controller
+                                    .adminStudentsSearchController
+                                    .studentSectionId
+                                    .value,
+                                'name': controller.nameTextController.text,
+                                'roll_no': controller.rollTextController.text,
+                              },
+                            );
+                          },
+                        ),
                 ],
               ),
             ),
           ),
         ),
-        bottomNavBar:
-            controller.adminStudentsSearchController.searchLoader.value
-                ? const CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  )
-                : BottomNavButton(
-                    text: "Search".tr,
-                    onTap: () {
-                      Get.toNamed(
-                        Routes.ADMIN_CLASS_ATTENDANCE_SEARCH_INDIVIDUAL_LIST,
-                        arguments: {
-                          'class_id': controller.adminStudentsSearchController
-                              .studentClassId.value,
-                          'section_id': controller.adminStudentsSearchController
-                              .studentSectionId.value,
-                          'name': controller.nameTextController.text,
-                          'roll_no': controller.rollTextController.text,
-                        },
-                      );
-                    },
-                  ),
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_butt
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 
@@ -149,7 +150,7 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                               dropdownList: controller.studentList,
                               changeDropdownValue: (value) {
                                 controller.studentDropdownValue.value = value!;
-                                controller.studentId.value = value.groupId;
+                                controller.studentId.value = value.id;
                                 controller.userId.value = value.userId;
                               },
                             )
@@ -165,29 +166,30 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                               dropdownList: controller.parentsList,
                               changeDropdownValue: (value) {
                                 controller.parentsDropdownValue.value = value!;
-                                controller.parentsId.value = value.groupId;
+                                controller.parentsId.value = value.id;
                                 controller.userId.value = value.userId;
                               },
                             )
                       : const SizedBox(),
-                  50.verticalSpacing,
+                  (controller.rolesId.value == 2 || controller.rolesId.value == 3 ? Get.height * 0.3 : Get.height * 0.48).verticalSpacing,
+                  controller.loadingController.isLoading
+                      ? const SecondaryLoadingWidget(
+                    isBottomNav: true,
+                  )
+                      : PrimaryButton(
+                    text: "Save",
+                    onTap: () {
+                      if (controller.validation()) {
+                        controller.adminAddMember();
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
           ),
         ),
-        bottomNavBar: controller.loadingController.isLoading
-            ? const SecondaryLoadingWidget(
-                isBottomNav: true,
-              )
-            : BottomNavButton(
-                text: "Save",
-                onTap: () {
-                  if (controller.validation()) {
-                    controller.adminAddMember();
-                  }
-                },
-              ),
+
       ),
     );
   }

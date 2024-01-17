@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/controllers/profile_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:get/get.dart';
 import 'custom_tab_bar_item.dart';
 
@@ -11,7 +12,7 @@ class PageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomTabBarItem(
               title: 'Personal'.tr,
@@ -21,6 +22,7 @@ class PageWidget extends StatelessWidget {
                 controller.profilePageController.jumpToPage(0);
               },
             ),
+
             CustomTabBarItem(
               title: 'Parents'.tr,
               isActive: controller.pageIndex.value == 1 ? true : false,
@@ -29,6 +31,7 @@ class PageWidget extends StatelessWidget {
                 controller.profilePageController.jumpToPage(1);
               },
             ),
+
             CustomTabBarItem(
               title: 'Transport'.tr,
               isActive: controller.pageIndex.value == 2 ? true : false,
@@ -37,6 +40,7 @@ class PageWidget extends StatelessWidget {
                 controller.profilePageController.jumpToPage(2);
               },
             ),
+
             CustomTabBarItem(
               title: 'Others'.tr,
               isActive: controller.pageIndex.value == 3 ? true : false,
@@ -45,6 +49,7 @@ class PageWidget extends StatelessWidget {
                 controller.profilePageController.jumpToPage(3);
               },
             ),
+
             CustomTabBarItem(
               title: 'Documents'.tr,
               isActive: controller.pageIndex.value == 4 ? true : false,

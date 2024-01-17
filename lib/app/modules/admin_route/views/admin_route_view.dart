@@ -4,10 +4,10 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/alert_dialog.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/delete_tile/delete_tile.dart';
@@ -60,30 +60,44 @@ class AdminRouteView extends GetView<AdminRouteController> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15.0, vertical: 10),
-                      child: Column(
-                        children: [
-                          CustomTextFormField(
-                            controller: controller.routeTitleTextController,
-                            enableBorderActive: true,
-                            focusBorderActive: true,
-                            hintText: "Route Title",
-                            hintTextStyle:
-                                AppTextStyle.fontSize14lightBlackW400,
-                            fillColor: Colors.white,
-                          ),
-                          10.verticalSpacing,
-                          CustomTextFormField(
-                            controller: controller.routeFareTextController,
-                            textInputType: TextInputType.number,
-                            enableBorderActive: true,
-                            focusBorderActive: true,
-                            hintText: "Route fare",
-                            hintTextStyle:
-                                AppTextStyle.fontSize14lightBlackW400,
-                            fillColor: Colors.white,
-                          ),
-                          30.verticalSpacing,
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            CustomTextFormField(
+                              controller: controller.routeTitleTextController,
+                              enableBorderActive: true,
+                              focusBorderActive: true,
+                              hintText: "Route Title",
+                              hintTextStyle:
+                                  AppTextStyle.fontSize14lightBlackW400,
+                              fillColor: Colors.white,
+                            ),
+                            10.verticalSpacing,
+                            CustomTextFormField(
+                              controller: controller.routeFareTextController,
+                              textInputType: TextInputType.number,
+                              enableBorderActive: true,
+                              focusBorderActive: true,
+                              hintText: "Route fare",
+                              hintTextStyle:
+                                  AppTextStyle.fontSize14lightBlackW400,
+                              fillColor: Colors.white,
+                            ),
+                            (Get.height * 0.5).verticalSpacing,
+                            Obx(
+                                  () => controller.saveLoader.value
+                                  ? const  SecondaryLoadingWidget()
+                                  :   PrimaryButton(
+                                text: "Save",
+                                onTap: () {
+                                  if (controller.validation()) {
+                                    controller.addTransportRoute();
+                                  }
+                                },
+                              )
+                            )
+                          ],
+                        ),
                       ),
                     ),
 
@@ -176,18 +190,6 @@ class AdminRouteView extends GetView<AdminRouteController> {
             ],
           ),
         ),
-        bottomNavBar:  Obx(
-          () => controller.saveLoader.value
-              ? const  SecondaryLoadingWidget()
-              :  controller.tabIndex.value == 0 ? BottomNavButton(
-                  text: "Save",
-                  onTap: () {
-                    if (controller.validation()) {
-                      controller.addTransportRoute();
-                    }
-                  },
-                ) : const SizedBox(),
-        ) ,
       ),
     );
   }

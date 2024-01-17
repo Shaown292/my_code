@@ -19,15 +19,7 @@ class AdminAttendanceView extends GetView<AdminAttendanceController> {
         leadingIcon: controller.globalRxVariableController.roleId.value == 1
             ? InkWell(
                 onTap: () => Get.back(),
-                child: Container(
-                  color: Colors.transparent,
-                  height: 50,
-                  width: 50,
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                ),
+                child: const Icon(Icons.arrow_back, color:  Colors.white,),
               )
             : const SizedBox(),
         title: "Attendance".tr,

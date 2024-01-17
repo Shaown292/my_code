@@ -57,17 +57,19 @@ class GuardianInfo extends StatelessWidget {
                           fontWeight: FontWeight.w500),
                     ),
                     Container(
-                      height: 35,
-                      width: 35,
+                      height: Get.height * 0.1,
+                      width: Get.width * 0.115,
                       decoration: BoxDecoration(
                         border: Border.all(
-                            width: 1.5,
+                            width: 1,
                             color: Colors.white
                         ),
                         shape: BoxShape.circle,
                         color: const Color(0xFF556080),
                         image: DecorationImage(
-                            image: AssetImage(icon)),
+                            image: AssetImage(icon),
+                          fit: BoxFit.contain
+                        ),
                       ),
                     ),
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
+import 'package:get/get.dart';
 
 class BottomNavButton extends StatelessWidget {
   final double? height;
@@ -27,29 +29,13 @@ class BottomNavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 105,
-      margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+      height: Get.height * 0.13,
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
       color: Colors.white,
-      child: InkWell(
+      child: PrimaryButton(
+       text: text,
         onTap: onTap,
-        child: Container(
-          height: height ?? 40,
-          width: width,
-          padding: padding,
-          decoration: ShapeDecoration(
-            color: color ?? AppColors.primaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 20),
-            ),
-          ),
-          child: Center(
-            child: Text(
-              text,
-              style: textStyle ?? AppTextStyle.textStyle12WhiteW500,
-            ),
-          ),
-        ),
       ),
     );
   }

@@ -59,6 +59,7 @@ class InfixEduScaffold extends StatelessWidget {
         bottomNavigationBar: bottomNavBar,
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: floatingActionButtonLocation,
+
       ),
     );
   }

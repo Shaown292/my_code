@@ -32,6 +32,7 @@ class SearchChatData {
   String? fullName;
   String? image;
   int? activeStatus;
+  String? statusColor;
   String? lastMessage;
   String? lastMessageTime;
   int? countConversation;
@@ -43,6 +44,7 @@ class SearchChatData {
         this.fullName,
         this.image,
         this.activeStatus,
+        this.statusColor,
         this.lastMessage,
         this.lastMessageTime,
         this.countConversation,
@@ -55,6 +57,7 @@ class SearchChatData {
     fullName = json['full_name'];
     image = json['image'];
     activeStatus = json['active_status'];
+    statusColor = json['status_color'] ?? "0xFFF60003";
     lastMessage = json['last_message'];
     lastMessageTime = json['last_message_time'];
     countConversation = json['count_conversation'];
@@ -67,6 +70,7 @@ class SearchChatData {
     data['full_name'] = fullName;
     data['image'] = image;
     data['active_status'] = activeStatus;
+    data['status_color'] = statusColor;
     data['last_message'] = lastMessage;
     data['last_message_time'] = lastMessageTime;
     data['count_conversation'] = countConversation;

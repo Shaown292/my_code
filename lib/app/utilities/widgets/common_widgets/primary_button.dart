@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../data/constants/app_colors.dart';
 import '../../../data/constants/app_text_style.dart';
@@ -29,7 +30,7 @@ class PrimaryButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: height ?? 40,
+        height: height ?? Get.height * 0.055,
         width: width,
         padding: padding,
         decoration: ShapeDecoration(

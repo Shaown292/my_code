@@ -19,10 +19,14 @@ import 'package:get/get.dart';
 
 class TeHomeworkListController extends GetxController {
   TeAddHomeworkController teAddHomeworkController = Get.put(TeAddHomeworkController());
-  LoadingController loadingController = Get.find();
+
   TextEditingController searchController = TextEditingController();
 
   RxBool isTapped = false.obs;
+  RxBool isDropDownChanged = false.obs;
+  RxBool isLoading = false.obs;
+  RxBool searchHomeworkLoader = false.obs;
+  RxBool homeworkLoader = false.obs;
 
 
 
@@ -31,7 +35,7 @@ class TeHomeworkListController extends GetxController {
   Future<TeacherHomeworkListResponseModel> getTeacherHomeWorkList() async {
     try {
       teacherHomeworkList.clear();
-      loadingController.isLoading = true;
+     homeworkLoader.value = true;
       final response = await BaseClient().getData(
         url: InfixApi.getTeacherHomeworkList,
         header: GlobalVariable.header,
@@ -41,35 +45,36 @@ class TeHomeworkListController extends GetxController {
       TeacherHomeworkListResponseModel.fromJson(response);
 
       if (teacherHomeworkListResponseModel.success == true) {
-        loadingController.isLoading = false;
+        homeworkLoader.value = false;
         if (teacherHomeworkListResponseModel.data!.isNotEmpty) {
           for (var element in teacherHomeworkListResponseModel.data!) {
             teacherHomeworkList.add(element);
           }
         }
       } else {
-        loadingController.isLoading = false;
+        homeworkLoader.value = false;
         showBasicFailedSnackBar(
             message: teacherHomeworkListResponseModel.message ??
                 AppText.somethingWentWrong);
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+      homeworkLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      homeworkLoader.value = false;
     }
 
     return TeacherHomeworkListResponseModel();
   }
 
-  Future<TeacherHomeworkListResponseModel?> searchHomework(int classId, int sectionId, int subjectId) async {
+  Future<TeacherHomeworkListResponseModel?> filterHomework(
+      int classId, int sectionId, int subjectId) async {
 
     try {
 
       teacherHomeworkList.clear();
-      loadingController.isLoading = true;
+      searchHomeworkLoader.value = true;
 
       final response = await BaseClient().getData(
         url: InfixApi.getTeacherHomeworkSearch(classId: classId, sectionId: sectionId, subjectId: subjectId),
@@ -79,25 +84,25 @@ class TeHomeworkListController extends GetxController {
       TeacherHomeworkListResponseModel.fromJson(response);
 
       if (teacherHomeworkListResponseModel.success == true) {
-        loadingController.isLoading = false;
+        searchHomeworkLoader.value = false;
         if (teacherHomeworkListResponseModel.data!.isNotEmpty) {
           for (var element in teacherHomeworkListResponseModel.data!) {
             teacherHomeworkList.add(element);
           }
         }
       } else {
-        loadingController.isLoading = false;
+        searchHomeworkLoader.value = false;
         showBasicFailedSnackBar(
             message: teacherHomeworkListResponseModel.message ??
                 AppText.somethingWentWrong);
       }
 
     } catch (e, t) {
-      loadingController.isLoading = false;
+      searchHomeworkLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      searchHomeworkLoader.value = false;
     }
     return TeacherHomeworkListResponseModel();
   }

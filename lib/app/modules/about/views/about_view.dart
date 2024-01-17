@@ -52,17 +52,17 @@ class AboutView extends GetView<AboutController> {
                         ),
                         20.verticalSpacing,
                         Text(
-                          '${"Address".tr}: ${controller.aboutInformation?.address}',
+                          '${"Address".tr}: ${controller.aboutInformation?.address ?? ""}',
                           style: AppTextStyle.cardTextStyle14PurpleW500,
                         ),
                         10.verticalSpacing,
                         Text(
-                          '${"Phone number".tr}: ${controller.aboutInformation?.phoneNo}',
+                          '${"Phone number".tr}: ${controller.aboutInformation?.phoneNo ?? ""}',
                           style: AppTextStyle.cardTextStyle14PurpleW500,
                         ),
                         10.verticalSpacing,
                         Text(
-                          '${"Email".tr}: ${controller.aboutInformation?.email}',
+                          '${"Email".tr}: ${controller.aboutInformation?.email ?? ""} ',
                           style: AppTextStyle.cardTextStyle14PurpleW500,
                         ),
                         10.verticalSpacing,

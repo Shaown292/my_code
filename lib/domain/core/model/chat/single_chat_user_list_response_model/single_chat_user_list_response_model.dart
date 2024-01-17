@@ -31,7 +31,8 @@ class SingleChatUserListData {
   int? id;
   String? fullName;
   String? image;
-  int? activeStatus;
+  String? activeStatus;
+  String? statusColor;
   String? lastMessage;
   String? lastMessageTime;
   int? countConversation;
@@ -46,6 +47,7 @@ class SingleChatUserListData {
         this.lastMessageTime,
         this.countConversation,
         this.blocked,
+        this.statusColor,
       });
 
   SingleChatUserListData.fromJson(Map<String, dynamic> json) {
@@ -53,6 +55,7 @@ class SingleChatUserListData {
     fullName = json['full_name'];
     image = json['image'];
     activeStatus = json['active_status'];
+    statusColor = json['status_color'];
     lastMessage = json['last_message'];
     lastMessageTime = json['last_message_time'];
     countConversation = json['count_conversation'];
@@ -65,6 +68,7 @@ class SingleChatUserListData {
     data['full_name'] = fullName;
     data['image'] = image;
     data['active_status'] = activeStatus;
+    data['status_color'] = statusColor;
     data['last_message'] = lastMessage;
     data['last_message_time'] = lastMessageTime;
     data['count_conversation'] = countConversation;

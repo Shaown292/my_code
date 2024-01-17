@@ -46,20 +46,22 @@ class TeHomeworkEvaluationController extends GetxController {
 
 
 
-  RxList<HomeworkList> homeworksList = <HomeworkList>[].obs;
+  RxList<HomeworkList> homeworkEvaluationList = <HomeworkList>[].obs;
 
   RxBool isLoading = false.obs;
 
   Future<TeHomeworkEvaluationListResponseModel>
-  getHomeworkEvaluationList() async {
+  getHomeworkEvaluationList(String searchKey) async {
     try {
-      homeworksList.clear();
+      homeworkEvaluationList.clear();
       isLoading.value = true;
       final response = await BaseClient().getData(
         url: InfixApi.getTeacherHomeworkEvaluationList(
           classId: clasId.value,
           sectionId: sectionId.value,
           homeworkId: homeworkId.value,
+          searchKey: searchKey,
+
         ),
         header: GlobalVariable.header,
       );
@@ -73,7 +75,7 @@ class TeHomeworkEvaluationController extends GetxController {
         if (teHomeworkEvaluationListResponseModel.data!.isNotEmpty) {
           for (var element
           in teHomeworkEvaluationListResponseModel.data!) {
-            homeworksList.add(element);
+            homeworkEvaluationList.add(element);
           }
         }
       } else {
@@ -246,8 +248,8 @@ class TeHomeworkEvaluationController extends GetxController {
       PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
-        homeworksList[index].evaluated = true;
-        homeworksList.refresh();
+        homeworkEvaluationList[index].evaluated = true;
+        homeworkEvaluationList.refresh();
         submitEvaluationLoader.value = false;
         Get.back();
         showBasicSuccessSnackBar(
@@ -288,7 +290,7 @@ class TeHomeworkEvaluationController extends GetxController {
   @override
   void onInit() {
     _receiveDataFromTeacherHomeworkListView();
-    getHomeworkEvaluationList();
+    getHomeworkEvaluationList("");
 
     super.onInit();
   }

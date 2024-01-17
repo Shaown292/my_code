@@ -38,21 +38,15 @@ class SingleChatView extends GetView<SingleChatController> {
                 children: [
                   10.horizontalSpacing,
                   InkWell(
-                    onTap: () {
-                      Get.back();
-                      controller.chatController.singleChatList.clear();
-                      controller.chatController.getSingleChatList();
-                    },
-                    child: Container(
-                      height: 20,
-                      width: 20,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(ImagePath.back),
-                            filterQuality: FilterQuality.high),
-                      ),
-                    ),
-                  ),
+                      onTap: () {
+                        Get.back();
+                        controller.chatController.singleChatList.clear();
+                        controller.chatController.getSingleChatList();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      )),
                   15.horizontalSpacing,
                   Stack(
                     alignment: AlignmentDirectional.center,
@@ -76,8 +70,12 @@ class SingleChatView extends GetView<SingleChatController> {
                         child: Container(
                           height: 8,
                           width: 8,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.green),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: controller.isSearchPage.value ? Color(int.parse(
+                                controller.searchChatData!.statusColor!),) : Color(int.parse(
+                                controller.singleChatUserListData!.statusColor!),),
+                          ),
                         ), //Icon
                       ),
                     ], //<Widget>[]
@@ -94,9 +92,16 @@ class SingleChatView extends GetView<SingleChatController> {
                         style: AppTextStyle.cardTextStyle14WhiteW500,
                       ),
                       3.verticalSpacing,
-                      const Text(
-                        "Online now",
-                        style: AppTextStyle.fontSize10GreenW700,
+                       Text(
+                         controller.isSearchPage.value ? controller.searchChatData!.activeStatus.toString() : controller.singleChatUserListData!.activeStatus!,
+                        style:  TextStyle(
+                          color: controller.isSearchPage.value ? Color(int.parse(
+                              controller.searchChatData!.statusColor!),) : Color(int.parse(
+                              controller.singleChatUserListData!.statusColor!),),
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ],
                   ),
@@ -579,18 +584,18 @@ class SingleChatView extends GetView<SingleChatController> {
                                                         Get.back();
                                                         controller.quotedText
                                                             .value = controller
-                                                            .reversedList[
-                                                        index]
-                                                            .message ??
+                                                                .reversedList[
+                                                                    index]
+                                                                .message ??
                                                             "";
                                                         controller.onTapQuote
                                                             .value = true;
-                                                        controller.replyId
-                                                            .value =
                                                         controller
-                                                            .reversedList[
-                                                        index]
-                                                            .messageId!;
+                                                                .replyId.value =
+                                                            controller
+                                                                .reversedList[
+                                                                    index]
+                                                                .messageId!;
                                                       },
                                                       isReceiver: controller
                                                           .reversedList[index]

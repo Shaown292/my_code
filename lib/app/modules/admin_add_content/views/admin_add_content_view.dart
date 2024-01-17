@@ -3,11 +3,11 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_checkbox/custom_checkbox.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/custom_dropdown.dart';
@@ -74,6 +74,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                       controller.isAdminSelected.value
                           ? controller.availableForList.add('admin')
                           : controller.availableForList.remove('admin');
+
                     },
                     shape: const CircleBorder(),
                   ),
@@ -88,6 +89,7 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                       controller.isStudentSelected.value
                           ? controller.availableForList.add('student')
                           : controller.availableForList.remove('student');
+
                     },
                     shape: const CircleBorder(),
                   ),
@@ -130,7 +132,8 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                                 controller.adminStudentsSearchController
                                     .classValue.value = v!;
                                 controller.adminStudentsSearchController
-                                    .studentClassId.value = v.groupId;
+                                    .studentClassId.value = v.id;
+
                               },
                             )
                       : const SizedBox(),
@@ -157,7 +160,8 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                                 controller.adminStudentsSearchController
                                     .sectionValue.value = v!;
                                 controller.adminStudentsSearchController
-                                    .studentSectionId.value = v.groupId;
+                                    .studentSectionId.value = v.id;
+
                               },
                             )
                       : const SizedBox(),
@@ -225,21 +229,21 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     minLine: 1,
                     maxLine: 2,
                   ),
-                  20.verticalSpacing,
+                  (Get.height * 0.1).verticalSpacing,
+                  controller.saveLoader.value
+                      ? const SecondaryLoadingWidget(isBottomNav: true,)
+                      : PrimaryButton(
+                    text: "Save".tr,
+                    onTap: () {
+                      if (controller.validation()) {
+                        controller.uploadContent();
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
           ),
-        ),
-        bottomNavBar: controller.saveLoader.value
-            ? const SecondaryLoadingWidget(isBottomNav: true,)
-            : BottomNavButton(
-          text: "Save".tr,
-          onTap: () {
-            if (controller.validation()) {
-              controller.uploadContent();
-            }
-          },
         ),
       ),
     );

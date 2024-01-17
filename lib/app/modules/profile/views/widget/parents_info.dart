@@ -62,12 +62,12 @@ class ParentsInfo extends StatelessWidget {
                         Container(
                           height: Get.height * 0.1,
                           width: Get.width * 0.15,
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: AppColors.profilePicBackgroundColor,
                             border: Border.all(
-                                width: 1.5,
+                                width: 1,
                                 color: Colors.white
                             ),
                             image: DecorationImage(

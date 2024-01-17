@@ -4,8 +4,6 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/modules/book_list/views/widget/search_field.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/te_homework_list/views/widget/homework_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
@@ -36,12 +34,16 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
                 child: SearchField(
                   borderRadius: 2,
                   controller: controller.searchController,
-                  onChange: (searchKey) {},
+                  onChange: (searchKey) {
+                    controller.getHomeworkEvaluationList(searchKey);
+                  },
                   hintTextStyle: AppTextStyle.fontSize12GreyW400,
                   icon: controller.searchController.text.isNotEmpty
                       ? InkWell(
                     onTap: () {
                       controller.searchController.clear();
+                      controller.homeworkEvaluationList.clear();
+                      controller.getHomeworkEvaluationList("");
                     },
                     child: Icon(
                       Icons.close,
@@ -98,42 +100,42 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
               controller.isLoading.value
                   ? const SecondaryLoadingWidget()
                   : Expanded(
-                child: controller.homeworksList.isNotEmpty
+                child: controller.homeworkEvaluationList.isNotEmpty
                     ? ListView.builder(
-                    itemCount: controller.homeworksList.length,
+                    itemCount: controller.homeworkEvaluationList.length,
                     itemBuilder: (context, index) {
                       return HomeworkTile(
                         widthOfFirstContainer: Get.width * 0.18,
                         widthOfSecondContainer: Get.width * 0.25,
                         onDownloadTap: () {
                           controller.downloadFile(
-                              url: controller.homeworksList[index]
+                              url: controller.homeworkEvaluationList[index]
                                   .homeworkFiles!.first ??
                                   "",
-                              title: controller.homeworksList[index]
+                              title: controller.homeworkEvaluationList[index]
                                   .homeworkFiles!.first ??
                                   "");
                         },
                         studentName: controller
-                            .homeworksList[index].studentName,
+                            .homeworkEvaluationList[index].studentName,
                         admissionNo: controller
-                            .homeworksList[index].admissionNo
+                            .homeworkEvaluationList[index].admissionNo
                             .toString(),
                         downloadContainerColor: controller
-                            .homeworksList[index]
+                            .homeworkEvaluationList[index]
                             .homeworkFiles!
                             .isEmpty
                             ? AppColors.transportDividerColor
                             : AppColors.syllabusTextColorBlack,
                         evaluateContainerColor:
-                        controller.homeworksList[index].evaluated!
+                        controller.homeworkEvaluationList[index].evaluated!
                             ? AppColors.appButtonColor
                             : AppColors.activeStatusGreenColor,
                         onEvaluationTap: () {
                           controller.evaluateStudent(
                               index: index,
                               studentId: controller
-                                  .homeworksList[index].studentId!);
+                                  .homeworkEvaluationList[index].studentId!);
                         },
                         isEvaluation: true,
                       );

@@ -51,8 +51,19 @@ class SetAttendanceTile extends StatelessWidget {
       children: [
         Row(
           children: [
-            isImageEmpty
+             imageUrl == ""
                 ? Container(
+                    height: Get.width * 0.17,
+                    width: Get.width * 0.17,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(ImagePath.dp),
+                      ),
+                    ),
+                  )
+                : Container(
                     height: Get.width * 0.17,
                     width: Get.width * 0.17,
                     decoration: const BoxDecoration(
@@ -62,17 +73,6 @@ class SetAttendanceTile extends StatelessWidget {
                       child: CacheImageView(
                         url: imageUrl,
                         errorImageLocal: ImagePath.dp,
-                      ),
-                    ),
-                  )
-                : Container(
-                    height: Get.width * 0.17,
-                    width: Get.width * 0.17,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage(ImagePath.dp),
                       ),
                     ),
                   ),
@@ -88,7 +88,6 @@ class SetAttendanceTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(studentName ?? ""),
-
                         InkWell(
                           onTap: onAddNoteTap,
                           child: Container(
@@ -96,7 +95,7 @@ class SetAttendanceTile extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
                                 color: AppColors.appButtonColor),
-                            child:  Center(
+                            child: Center(
                               child: Text(
                                 "Add Note".tr,
                                 style: AppTextStyle.textStyle12WhiteW400,
@@ -107,7 +106,8 @@ class SetAttendanceTile extends StatelessWidget {
                       ],
                     ),
                     5.verticalSpacing,
-                    Text("${"Class".tr}: $studentClass  |  ${"Section".tr}: $section"),
+                    Text(
+                        "${"Class".tr}: $studentClass  |  ${"Section".tr}: $section"),
                     8.verticalSpacing,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

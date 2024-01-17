@@ -107,9 +107,9 @@ class TeAddHomeworkController extends GetxController {
           for (var element in teacherSubjectListResponseModel.data!) {
             teacherSubjectList.add(element);
           }
-          teacherSubjectInitialValue.value = teacherSubjectList[0];
+          teacherSubjectInitialValue.value = teacherSubjectList.first;
           teacherSubjectId.value =
-              teacherSubjectListResponseModel.data!.first.id!;
+          teacherSubjectList.first.id!;
         }
       } else {
         subjectLoader.value = false;

@@ -27,7 +27,7 @@ class SecondaryLoadingWidget extends StatelessWidget {
               )
             : const CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation(
-                  AppColors.activeStatusYellowColor,
+                  AppColors.primaryColor,
                 ),
               ),
       ),

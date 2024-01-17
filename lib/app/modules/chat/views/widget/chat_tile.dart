@@ -43,7 +43,6 @@ class ChatTile extends StatelessWidget {
                 Stack(
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
-
                     profileImageUrl == '' ?
                     Container(
                       height: Get.height * 0.1,

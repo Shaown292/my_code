@@ -58,7 +58,6 @@ class AdminStudentsSearchController extends GetxController {
             classList.add(studentClassListResponseModel.data![i]);
           }
           classValue.value = classList[0];
-
           studentClassId.value = classList[0].id!;
         }
       } else {
@@ -102,8 +101,9 @@ class AdminStudentsSearchController extends GetxController {
               i++) {
             sectionList.add(studentSectionListResponseModel.data![i]);
           }
-          sectionValue.value = sectionList[0];
-          studentSectionId.value = sectionList[0].id!;
+          sectionValue.value = sectionList.first;
+          studentSectionId.value = sectionList.first.id!;
+
         }
       } else {
         sectionLoader.value = false;
@@ -186,7 +186,7 @@ class AdminStudentsSearchController extends GetxController {
           url: InfixApi.getAdminStudentSearchList(
             classId: classId,
             sectionId: sectionId,
-            rollINo: rollNo,
+            rollNo: rollNo,
             name: name,
           ),
           header: GlobalVariable.header);

@@ -177,7 +177,6 @@ class ProfileView extends GetView<ProfileController> {
                                   ),
                                 ),
                               ),
-                              10.verticalSpacing,
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30.0),

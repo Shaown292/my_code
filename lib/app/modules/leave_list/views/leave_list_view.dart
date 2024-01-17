@@ -31,7 +31,7 @@ class LeaveListView extends GetView<LeaveListController> {
                   controller.pendingList.clear();
                   controller.remainingLeaveList.clear();
                   controller.approvedList.clear();
-                  controller.rejectedList.clear();
+                  controller.cancelledList.clear();
                   controller.getRemainingLeave(
                     studentId:
                         controller.globalRxVariableController.studentId.value!,
@@ -199,30 +199,32 @@ class LeaveListView extends GetView<LeaveListController> {
                                       ),
                                     ),
 
-                          /// Rejected
+                          /// Cancelled
 
                           controller.loadingController.isLoading
                               ? const LoadingWidget()
-                              : controller.rejectedList.isNotEmpty
+                              : controller.cancelledList.isNotEmpty
                                   ? ListView.builder(
                                       shrinkWrap: true,
-                                      itemCount: controller.rejectedList.length,
+                                      itemCount: controller.cancelledList.length,
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
                                             AppliedLeaveDetailsTile(
                                               leaveType: controller
-                                                  .rejectedList[index]
+                                                  .cancelledList[index]
                                                   .leaveType,
                                               applyDate: controller
-                                                  .rejectedList[index]
+                                                  .cancelledList[index]
                                                   .applyDate,
                                               leaveFrom: controller
-                                                  .rejectedList[index].from,
+                                                  .cancelledList[index].from,
                                               leaveTo: controller
-                                                  .rejectedList[index].to,
+                                                  .cancelledList[index].to,
                                               status: controller
-                                                  .rejectedList[index].status,
+                                                  .cancelledList[index].status,
+                                              statusColor:
+                                              AppColors.activeStatusRedColor,
                                               onTap: () {
                                                 controller
                                                     .showRejectedListDetailsBottomSheet(

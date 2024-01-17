@@ -38,7 +38,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                   tabs: List.generate(
                     controller.status.length,
                     (index) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
                       child: Text(
                         controller.status[index].tr,
                       ),

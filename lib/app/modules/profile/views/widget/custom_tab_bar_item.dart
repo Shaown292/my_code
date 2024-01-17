@@ -13,22 +13,25 @@ class CustomTabBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Text(
-            title,
-            style: textStyle ?? const TextStyle(
-                color: AppColors.profileCardBackgroundColor,
-                fontSize: 10,
-                fontWeight: FontWeight.w700),
-          ),
-          isActive ? const CustomDivider(
-            width: 50,
-            color: AppColors.profileIndicatorColor,
-          ) : const SizedBox(),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          children: [
+            Text(
+              title,
+              style: textStyle ?? const TextStyle(
+                  color: AppColors.profileCardBackgroundColor,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700),
+            ),
+            isActive ? const CustomDivider(
+              width: 50,
+              color: AppColors.profileIndicatorColor,
+            ) : const SizedBox(),
+          ],
+        ),
       ),
     );
   }

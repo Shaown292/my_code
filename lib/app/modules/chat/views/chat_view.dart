@@ -24,22 +24,22 @@ class ChatView extends GetView<ChatController> {
         title: "Chat",
         actions: [
           Obx(() {
-            return  SizedBox(
-                    width: 150,
-                    child: DuplicateDropdown(
-                      padding: 0,
-                      dropdownValue: controller.activeStatus.value,
-                      dropdownList: controller.activeStatusList,
-                      color: Colors.white,
-                      dropdownText: false,
-                      changeDropdownValue: (v) {
-                        controller.activeStatus.value = v!;
-                        controller.key.value = v.key;
-                        controller.changeStatus(statusKey: controller.key.value);
-                      },
-                      dropdownColor: AppColors.activeExamStatusBlueColor,
-                    ),
-                  );
+            return SizedBox(
+              width: 150,
+              child: DuplicateDropdown(
+                padding: 0,
+                dropdownValue: controller.activeStatus.value,
+                dropdownList: controller.activeStatusList,
+                color: Colors.white,
+                dropdownText: false,
+                changeDropdownValue: (v) {
+                  controller.activeStatus.value = v!;
+                  controller.key.value = v.key;
+                  controller.changeStatus(statusKey: controller.key.value);
+                },
+                dropdownColor: AppColors.activeExamStatusBlueColor,
+              ),
+            );
           }),
           10.horizontalSpacing,
           InkWell(
@@ -107,7 +107,6 @@ class ChatView extends GetView<ChatController> {
                                       itemCount:
                                           controller.singleChatList.length,
                                       itemBuilder: (context, index) {
-
                                         return ChatTile(
                                           profileImageUrl: controller
                                               .singleChatList[index].image,
@@ -132,7 +131,6 @@ class ChatView extends GetView<ChatController> {
                                               ? AppColors
                                                   .editProfileTextFieldLabelColor
                                               : AppColors.homeTextColor,
-
                                           onTap: () {
                                             Get.toNamed(Routes.SINGLE_CHAT,
                                                 arguments: {
@@ -140,6 +138,12 @@ class ChatView extends GetView<ChatController> {
                                                       .singleChatList[index]
                                                 });
                                           },
+                                          activeStatusColor: Color(
+                                            int.parse(
+                                              controller.singleChatList[index]
+                                                  .statusColor!,
+                                            ),
+                                          ),
                                         );
                                       })
                                   : const Center(
@@ -157,7 +161,6 @@ class ChatView extends GetView<ChatController> {
                                       itemCount:
                                           controller.groupChatList.length,
                                       itemBuilder: (context, index) {
-
                                         return ChatTile(
                                           profileImageUrl: controller
                                                   .groupChatList[index].image ??
@@ -189,8 +192,11 @@ class ChatView extends GetView<ChatController> {
                                                       .groupChatList[index]
                                                       .groupId,
                                                   'name': controller
-                                                      .groupChatList[index].name,
-                                                  'image' : controller.groupChatList[index].image  ,
+                                                      .groupChatList[index]
+                                                      .name,
+                                                  'image': controller
+                                                      .groupChatList[index]
+                                                      .image,
                                                 });
                                           },
                                         );

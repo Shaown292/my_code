@@ -26,7 +26,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: Get.height * 0.1,
+                height: Get.height * 0.085,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 decoration: const BoxDecoration(
@@ -38,7 +38,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: Get.width * 0.12,
+                      width: Get.width * 0.14,
                       child:  Text(
                         "Book No".tr,
                         style: AppTextStyle.textStyle12WhiteW500,

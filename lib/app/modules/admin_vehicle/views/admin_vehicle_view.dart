@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_butt
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
@@ -24,7 +25,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
       length: controller.tabs.length,
       child: Obx(
         () => InfixEduScaffold(
-          title: "Add Vehicle",
+          title: "Add Vehicle".tr,
           body: SingleChildScrollView(
             child: CustomBackground(
               customWidget: Column(
@@ -68,7 +69,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 controller: controller.vehicleNoTextController,
                                 enableBorderActive: true,
                                 focusBorderActive: true,
-                                hintText: "Vehicle No",
+                                hintText: "Vehicle No".tr,
                                 hintTextStyle:
                                     AppTextStyle.fontSize14lightBlackW400,
                                 fillColor: Colors.white,
@@ -79,7 +80,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                     controller.vehicleModelTextController,
                                 enableBorderActive: true,
                                 focusBorderActive: true,
-                                hintText: "Vehicle Model",
+                                hintText: "Vehicle Model".tr,
                                 hintTextStyle:
                                     AppTextStyle.fontSize14lightBlackW400,
                                 fillColor: Colors.white,
@@ -89,15 +90,15 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 controller: controller.madeYearTextController,
                                 enableBorderActive: true,
                                 focusBorderActive: true,
-                                hintText: "Made Year",
+                                hintText: "Made Year".tr,
                                 hintTextStyle:
                                     AppTextStyle.fontSize14lightBlackW400,
                                 fillColor: Colors.white,
                               ),
                               10.verticalSpacing,
 
-                              const Text(
-                                "Add Driver Name*",
+                               Text(
+                                "Add Driver Name*".tr,
                                 style: AppTextStyle.fontSize13BlackW400,
                               ),
                               5.verticalSpacing,
@@ -112,7 +113,7 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                           controller.adminVehicleDriverList,
                                       changeDropdownValue: (value) {
                                         controller.initialValue.value = value!;
-                                        controller.driverId.value = value.groupId;
+                                        controller.driverId.value = value.id;
                                       },
                                     ),
                               10.verticalSpacing,
@@ -120,12 +121,24 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 controller: controller.noteTextController,
                                 enableBorderActive: true,
                                 focusBorderActive: true,
-                                hintText: "Note",
+                                hintText: "Note".tr,
                                 hintTextStyle:
                                     AppTextStyle.fontSize14lightBlackW400,
                                 fillColor: Colors.white,
                               ),
-                              30.verticalSpacing,
+                              (Get.height * 0.25).verticalSpacing,
+                              controller.saveLoader.value
+                                  ? const SecondaryLoadingWidget(
+                                isBottomNav: true,
+                              )
+                                  : PrimaryButton(
+                                text: "Save".tr,
+                                onTap: () {
+                                  if (controller.validation()) {
+                                    controller.addAdminVehicle();
+                                  }
+                                },
+                              ),
                             ],
                           ),
                         ),
@@ -173,18 +186,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
               ),
             ),
           ),
-          bottomNavBar: controller.saveLoader.value
-              ? const SecondaryLoadingWidget(
-                  isBottomNav: true,
-                )
-              :  controller.tabIndex.value == 0 ?BottomNavButton(
-                  text: "Save",
-                  onTap: () {
-                    if (controller.validation()) {
-                      controller.addAdminVehicle();
-                    }
-                  },
-                ): const SizedBox(),
         ),
       ),
     );
