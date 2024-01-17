@@ -12,6 +12,7 @@ class MyWalletModel {
       json['data'].forEach((v) {
         data!.add(Data.fromJson(v));
       });
+
     }
     message = json['message'];
   }
