@@ -31,7 +31,7 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Directionality(textDirection: TextDirection.ltr, child: Column(
       children: [
         InkWell(
           onTap: onTileTap,
@@ -65,21 +65,21 @@ class SettingsTile extends StatelessWidget {
               ),
               isLanguage
                   ? Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.homeTextColor,
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-                        child: Center(
-                          child: Text(
-                            languageName ?? "English",
-                            style: AppTextStyle.textStyle12WhiteW500,
-                          ),
-                        ),
-                      ),
-                    )
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: AppColors.homeTextColor,
+                ),
+                child: Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                  child: Center(
+                    child: Text(
+                      languageName ?? "English",
+                      style: AppTextStyle.textStyle12WhiteW500,
+                    ),
+                  ),
+                ),
+              )
                   : const SizedBox(),
             ],
           ),
@@ -89,6 +89,6 @@ class SettingsTile extends StatelessWidget {
           width: Get.width,
         )
       ],
-    );
+    ));
   }
 }

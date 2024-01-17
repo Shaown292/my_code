@@ -14,7 +14,7 @@ class LanguageController extends GetxController implements Translations {
   RxString langName = "".obs;
   Map<String, Map<String, String>> translationsData = {
     "en": en,
-    "bn": translatedLanguage,
+    "active": translatedLanguage,
   };
 
   @override

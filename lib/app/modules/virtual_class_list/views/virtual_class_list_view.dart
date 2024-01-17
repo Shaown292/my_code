@@ -5,6 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/show_status_tile/show_status_tile.dart';
 
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/virtual_class_list_controller.dart';
 
@@ -12,7 +13,7 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
   const VirtualClassListView({super.key});
   @override
   Widget build(BuildContext context) {
-    return InfixEduScaffold(
+    return Obx(() => InfixEduScaffold(
       title: "Virtual Class List".tr,
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -36,9 +37,11 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                             secondValue: controller.zoomMeetingList[index].meetingId,
                             thirdTitle: "Start Time",
                             thirdValue: controller.zoomMeetingList[index].startTime ,
-                            activeStatus: "Join",
-                            activeStatusColor: Colors.green,
-                            onStatusTap: (){
+                            activeStatus: controller.zoomMeetingList[index].currentStatus,
+                            activeStatusColor: controller.zoomMeetingList[index].currentStatus == 'JOIN' || controller.zoomMeetingList[index].currentStatus == 'START' ? Colors.green : Colors.red,
+                            onStatusTap: () async {
+
+                              controller.openZoom(meetingId: controller.zoomMeetingList[index].meetingId ?? '', status: controller.zoomMeetingList[index].currentStatus ?? '');
 
                             },
                           ),
@@ -52,6 +55,6 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

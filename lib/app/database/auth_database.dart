@@ -83,7 +83,7 @@ class AuthDatabase {
   String? getToken() {
     try {
       final storage = GetStorage(AuthDBKeys.dbName);
-      debugPrint('Your token is:::: ${storage.read(AuthDBKeys.token)}');
+      // debugPrint('Your token is:::: ${storage.read(AuthDBKeys.token)}');
       return storage.read(AuthDBKeys.token);
     } catch (e) {
       rethrow;

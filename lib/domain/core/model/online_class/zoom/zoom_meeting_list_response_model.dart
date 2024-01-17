@@ -32,14 +32,18 @@ class ZoomMeetingList {
   String? topic;
   double? duration;
   String? startTime;
+  String? currentStatus;
+  String? joinUrl;
 
   ZoomMeetingList({this.meetingId, this.topic, this.duration, this.startTime});
 
   ZoomMeetingList.fromJson(Map<String, dynamic> json) {
     meetingId = json['meeting_id'];
     topic = json['topic'];
-    duration = json['duration'];
+    duration = double.tryParse(json['duration']);
     startTime = json['start_time'];
+    currentStatus = json['current_status'];
+    joinUrl = json['join_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +52,8 @@ class ZoomMeetingList {
     data['topic'] = topic;
     data['duration'] = duration;
     data['start_time'] = startTime;
+    data['current_status'] = currentStatus;
+    data['join_url'] = joinUrl;
     return data;
   }
 }

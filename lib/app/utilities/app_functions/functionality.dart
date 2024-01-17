@@ -240,6 +240,9 @@ class AppFunctions {
       case 'Settings':
         Get.toNamed(Routes.SETTINGS);
         break;
+      case 'Class':
+        Get.toNamed(Routes.STUDENT_CLASS);
+        break;
     }
   }
 

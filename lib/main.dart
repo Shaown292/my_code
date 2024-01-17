@@ -11,9 +11,10 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      textDirection: TextDirection.ltr,
       locale: language == null ? Get.deviceLocale : Locale(language!),
       translations: LanguageController(),
-      fallbackLocale: language != null ? Locale(language!) : const Locale('en_US'),
+      fallbackLocale: language != null ? Locale(language!) : const Locale('en'),
       // translations: Messages(languages: languagesList),
       // fallbackLocale: Locale(LanguageConstants.languages[0].languageCode,
       //     LanguageConstants.languages[0].countryCode),
