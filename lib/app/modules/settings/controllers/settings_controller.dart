@@ -79,6 +79,8 @@ class SettingsController extends GetxController {
     }
   }
 
+
+
   void showLanguageBottomSheet() {
     Get.bottomSheet(Container(
       height: Get.height * 0.4,
