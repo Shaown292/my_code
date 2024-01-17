@@ -107,6 +107,7 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
                                 controller.teAddHomeworkController.teacherSubjectId
                                     .value);
 
+
                             print("object:::: ${controller.teAddHomeworkController.teacherClassId
                                 .value}, ${controller.teAddHomeworkController.teacherSectionId
                                 .value} ${controller.teAddHomeworkController.teacherSubjectId
