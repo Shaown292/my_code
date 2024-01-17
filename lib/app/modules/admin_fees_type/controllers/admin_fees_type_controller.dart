@@ -31,8 +31,6 @@ class AdminFeesTypeController extends GetxController {
   RxBool deleteLoader = false.obs;
   RxBool getFeesLoader = false.obs;
 
-
-
   /// Fees List
   Future<AdminFeesTypeResponseModel> getFeesListList() async {
     try {
@@ -52,7 +50,6 @@ class AdminFeesTypeController extends GetxController {
             feesTypeList.add(feesTypeResponseModel.data!.feesTypes![i]);
           }
         }
-
       } else {
         getFeesLoader.value = false;
         showBasicFailedSnackBar(
@@ -115,7 +112,6 @@ class AdminFeesTypeController extends GetxController {
     }
   }
 
-
   /// Delete Single Fees Type
   Future<void> deleteSingleFeesType(
       {required int feesTypeId, required int index}) async {
@@ -149,41 +145,49 @@ class AdminFeesTypeController extends GetxController {
   }
 
   /// Update or Edit Fees Type
-  Future<void> updateSingleFeesType({required int feesTypeId, required int index, required int feesGroupId}) async {
-    try{
-
+  Future<void> updateSingleFeesType(
+      {required int feesTypeId,
+      required int index,
+      required int feesGroupId}) async {
+    try {
       createUpdateLoader.value = true;
 
-      final response = await BaseClient().postData(url: InfixApi.updateSingleFeesType, header: GlobalVariable.header,
+      final response = await BaseClient().postData(
+        url: InfixApi.updateSingleFeesType,
+        header: GlobalVariable.header,
         payload: {
           "fees_type_id": feesTypeId,
           "name": titleTextController.text,
           "fees_group": feesGroupId,
           "description": descriptionTextController.text,
-        },);
+        },
+      );
 
       AdminFeesTypeResponseModel feesTypeResponseModel =
-      AdminFeesTypeResponseModel.fromJson(response);
-      if(feesTypeResponseModel.success == true){
-        feesTypeList[index].id = feesTypeResponseModel.data!.feesTypes!.first.id;
-        feesTypeList[index].name = feesTypeResponseModel.data!.feesTypes!.first.name;
-        feesTypeList[index].description = feesTypeResponseModel.data!.feesTypes!.first.description;
+          AdminFeesTypeResponseModel.fromJson(response);
+      if (feesTypeResponseModel.success == true) {
+        feesTypeList[index].id =
+            feesTypeResponseModel.data!.feesTypes!.first.id;
+        feesTypeList[index].name =
+            feesTypeResponseModel.data!.feesTypes!.first.name;
+        feesTypeList[index].description =
+            feesTypeResponseModel.data!.feesTypes!.first.description;
 
         titleTextController.clear();
         descriptionTextController.clear();
         createUpdateLoader.value = false;
         feesTypeList.refresh();
         Get.back();
-      } else{
+      } else {
         createUpdateLoader.value = false;
-        showBasicFailedSnackBar(message: feesTypeResponseModel.message ?? 'Something went wrong');
+        showBasicFailedSnackBar(
+            message: feesTypeResponseModel.message ?? 'Something went wrong');
       }
-
-    } catch(e, t){
+    } catch (e, t) {
       createUpdateLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
-    } finally{
+    } finally {
       createUpdateLoader.value = false;
     }
   }
@@ -273,8 +277,8 @@ class AdminFeesTypeController extends GetxController {
 
                                   adminFeesGroupController
                                       .feesGroupInitialValue.value = value;
-                                  adminFeesGroupController.groupId.value = feesGroupData.id!;
-
+                                  adminFeesGroupController.groupId.value =
+                                      feesGroupData.id!;
                                 },
                               ),
                               10.verticalSpacing,
@@ -328,6 +332,7 @@ class AdminFeesTypeController extends GetxController {
       ),
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
+      isDismissible: false,
     );
   }
 

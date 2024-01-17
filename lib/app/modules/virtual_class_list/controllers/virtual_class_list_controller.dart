@@ -6,6 +6,7 @@ import 'package:flutter_single_getx_api_v2/config/global_variable/global_variabl
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/online_class/zoom/zoom_meeting_list_response_model.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VirtualClassListController extends GetxController {
 
@@ -51,6 +52,31 @@ class VirtualClassListController extends GetxController {
     }
 
     return ZoomMeetingListResponseModel();
+  }
+
+  Future<void> openZoom({required String meetingId, required String status}) async {
+
+    if (status == "JOIN" ||
+        status == 'START') {
+      final url = InfixApi.getJoinMeetingUrlApp(
+          meetingID: meetingId);
+
+      // ignore: deprecated_member_use
+      if (await canLaunch(url)) {
+    // ignore: deprecated_member_use
+    await launch(url);
+    } else {
+        throw Exception('Could not launch $url');
+        // final webUrl = InfixApi.getJoinMeetingUrlApp(
+        //     meetingID: meetingId);
+        // if (await canLaunch(webUrl)) {
+        //   // ignore: deprecated_member_use
+        //   await launch(webUrl);
+        // }
+      }
+
+  }
+
   }
 
   @override

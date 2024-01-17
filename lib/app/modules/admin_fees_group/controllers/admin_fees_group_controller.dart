@@ -18,6 +18,7 @@ class AdminFeesGroupController extends GetxController {
   LoadingController loadingController = Get.find();
   RxBool createUpdateLoader = false.obs;
   RxBool deleteLoader = false.obs;
+  RxBool isBottomSheetOpen = true.obs;
 
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
@@ -296,6 +297,7 @@ class AdminFeesGroupController extends GetxController {
       ),
       backgroundColor: Colors.white,
       shape: defaultBottomSheetShape(),
+      isDismissible: false,
     );
   }
 

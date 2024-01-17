@@ -536,11 +536,20 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String paymentHandler ='${baseApi}handle-payment-request';
 
   /// Language API
-  static String languageList = '${baseApi}lang';
+  static String languageList = '${baseApi}language-list';
+  static String activeUserLanguageList = '${baseApi}user-language-list';
+  static String updateLanguage({required langId}) => '${baseApi}language-list?lang_id=$langId';
 
 
 
+
+  /// Class & Language API
   static String zoomMeetingList = '${baseApi}zoom-class-meeting-list';
+
+  static String getJoinMeetingUrlApp({required String meetingID}) => 'zoomus://zoom.us/join?confno=$meetingID'; // android
+
+
+  static String getJoinMeetingUrlWeb({required String meetingID}) => 'https://zoom.us/wc/$meetingID/join?prefer=1';
 
 
 
@@ -679,13 +688,7 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
     return "$baseApi$param/meeting_id/$mid/user_id/$uid";
   }
 
-  static String getJoinMeetingUrlApp({mid}) {
-    return 'zoomus://zoom.us/join?confno=$mid'; // android
-  }
 
-  static String getJoinMeetingUrlWeb({mid}) {
-    return 'https://zoom.us/wc/$mid/join?prefer=1';
-  }
 
   static String feesDataSend(String name, String description) {
     return "${baseApi}fees-group-store?name=$name&description=$description";
