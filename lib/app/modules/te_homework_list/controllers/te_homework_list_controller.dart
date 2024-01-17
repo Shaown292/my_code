@@ -56,6 +56,7 @@ class TeHomeworkListController extends GetxController {
         showBasicFailedSnackBar(
             message: teacherHomeworkListResponseModel.message ??
                 AppText.somethingWentWrong);
+
       }
     } catch (e, t) {
       homeworkLoader.value = false;
