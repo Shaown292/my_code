@@ -65,7 +65,6 @@ class SettingsController extends GetxController {
         }
       } else {
         languageLoader.value = true;
-
         throw Exception('Failed to load translations');
       }
     } catch (e, t) {
