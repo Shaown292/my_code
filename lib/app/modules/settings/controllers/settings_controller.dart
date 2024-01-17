@@ -70,7 +70,6 @@ class SettingsController extends GetxController {
       }
     } catch (e, t) {
       languageLoader.value = true;
-
       debugPrint('$e');
       debugPrint('$t');
       throw Exception('Failed to load translations: $e');
