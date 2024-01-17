@@ -49,6 +49,7 @@ class TeHomeworkListController extends GetxController {
         if (teacherHomeworkListResponseModel.data!.isNotEmpty) {
           for (var element in teacherHomeworkListResponseModel.data!) {
             teacherHomeworkList.add(element);
+
           }
         }
       } else {
