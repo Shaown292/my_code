@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/syllabus/views/widgets/syllabus_topic_wise.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
@@ -25,37 +26,45 @@ class SyllabusView extends GetView<SyllabusController> {
           customWidget: controller.loadingController.isLoading
               ? const LoadingWidget()
               : controller.syllabusList.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: controller.syllabusList.length,
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, int index) => SyllabusTopicWise(
-                        contentTitle:
-                            controller.syllabusList[index].contentTitle ?? '',
-                        topic: controller.syllabusList[index].description ?? '',
-                        date: controller.syllabusList[index].uploadDate ?? '',
-                        onTap: () {
-                          PermissionCheck().checkPermissions(context);
-                          Get.dialog(
-                            CustomPopupDialogue(
-                              onYesTap: () {
-                                Navigator.pop(context);
-                                controller.syllabusList[index].uploadFile!
-                                        .isNotEmpty
-                                    ? FileDownloadUtils().downloadFiles(
-                                        url: controller
-                                            .syllabusList[index].uploadFile!,
-                                        title: controller
-                                            .syllabusList[index].contentTitle!)
-                                    : showBasicSuccessSnackBar(
-                                        message: 'No File Available.'.tr);
-                              },
-                              title: 'Confirmation'.tr,
-                              subTitle: AppText.downloadMessage.tr,
-                              noText: 'No'.tr,
-                              yesText: 'Download'.tr,
-                            ),
-                          );
-                        },
+                  ? RefreshIndicator(
+                      color: AppColors.primaryColor,
+                      onRefresh: () async {
+                        controller.syllabusList.clear();
+                        controller.getSyllabusList();
+                      },
+                      child: ListView.builder(
+                        itemCount: controller.syllabusList.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, int index) => SyllabusTopicWise(
+                          contentTitle:
+                              controller.syllabusList[index].contentTitle ?? '',
+                          topic:
+                              controller.syllabusList[index].description ?? '',
+                          date: controller.syllabusList[index].uploadDate ?? '',
+                          onTap: () {
+                            PermissionCheck().checkPermissions(context);
+                            Get.dialog(
+                              CustomPopupDialogue(
+                                onYesTap: () {
+                                  Navigator.pop(context);
+                                  controller.syllabusList[index].uploadFile!
+                                          .isNotEmpty
+                                      ? FileDownloadUtils().downloadFiles(
+                                          url: controller
+                                              .syllabusList[index].uploadFile!,
+                                          title: controller.syllabusList[index]
+                                              .contentTitle!)
+                                      : showBasicSuccessSnackBar(
+                                          message: 'No File Available.'.tr);
+                                },
+                                title: 'Confirmation'.tr,
+                                subTitle: AppText.downloadMessage.tr,
+                                noText: 'No'.tr,
+                                yesText: 'Download'.tr,
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     )
                   : const NoDataAvailableWidget(),

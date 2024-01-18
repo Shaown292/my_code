@@ -20,77 +20,67 @@ class OtherDownloadsView extends GetView<OtherDownloadsController> {
     return Obx(
       () => InfixEduScaffold(
         title: "Other Downloads".tr,
-        body: RefreshIndicator(
-          onRefresh: () async {
-            controller.studentOthersDownloadList.clear();
-            controller.getStudentOthersDownloadList();
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                CustomBackground(
-                  customWidget: controller.loadingController.isLoading
-                      ? const LoadingWidget()
-                      : controller.studentOthersDownloadList.isNotEmpty
-                          ? ListView.builder(
-                              itemCount:
-                                  controller.studentOthersDownloadList.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, int index) {
-                                return Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: OtherDownloadsTile(
-                                      contentTitle: controller
-                                          .studentOthersDownloadList[index]
-                                          .contentTitle,
-                                      topic: controller
-                                          .studentOthersDownloadList[index]
-                                          .availableFor,
-                                      date: controller
-                                              .studentOthersDownloadList[index]
-                                              .uploadDate ??
-                                          '',
-                                      onTap: () {
-                                        PermissionCheck()
-                                            .checkPermissions(context);
-                                        Get.dialog(
-                                          CustomPopupDialogue(
-                                            onYesTap: () {
-                                              Navigator.pop(context);
-                                              controller
-                                                      .studentOthersDownloadList[
-                                                          index]
-                                                      .uploadFile!
-                                                      .isNotEmpty
-                                                  ? FileDownloadUtils().downloadFiles(
-                                                      url: controller
-                                                          .studentOthersDownloadList[
-                                                              index]
-                                                          .uploadFile!,
-                                                      title: controller
-                                                          .studentOthersDownloadList[
-                                                              index]
-                                                          .contentTitle!)
-                                                  : showBasicSuccessSnackBar(
-                                                      message:
-                                                          'No File Available.'.tr);
-                                            },
-                                            title: 'Confirmation'.tr,
-                                            subTitle: AppText.downloadMessage,
-                                            noText: 'No'.tr,
-                                            yesText: 'Download'.tr,
-                                          ),
-                                        );
+        body: CustomBackground(
+          customWidget: controller.loadingController.isLoading
+              ? const LoadingWidget()
+              : controller.studentOthersDownloadList.isNotEmpty
+                  ? RefreshIndicator(
+                      onRefresh: () async {
+                        controller.studentOthersDownloadList.clear();
+                        controller.getStudentOthersDownloadList();
+                      },
+                      child: ListView.builder(
+                        itemCount: controller.studentOthersDownloadList.length,
+                        itemBuilder: (context, int index) {
+                          return Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: OtherDownloadsTile(
+                                contentTitle: controller
+                                    .studentOthersDownloadList[index]
+                                    .contentTitle,
+                                topic: controller
+                                    .studentOthersDownloadList[index]
+                                    .availableFor,
+                                date: controller
+                                        .studentOthersDownloadList[index]
+                                        .uploadDate ??
+                                    '',
+                                onTap: () {
+                                  PermissionCheck().checkPermissions(context);
+                                  Get.dialog(
+                                    CustomPopupDialogue(
+                                      onYesTap: () {
+                                        Navigator.pop(context);
+                                        controller
+                                                .studentOthersDownloadList[
+                                                    index]
+                                                .uploadFile!
+                                                .isNotEmpty
+                                            ? FileDownloadUtils().downloadFiles(
+                                                url: controller
+                                                    .studentOthersDownloadList[
+                                                        index]
+                                                    .uploadFile!,
+                                                title: controller
+                                                    .studentOthersDownloadList[
+                                                        index]
+                                                    .contentTitle!)
+                                            : showBasicSuccessSnackBar(
+                                                message:
+                                                    'No File Available.'.tr);
                                       },
-                                    ));
-                              },
-                            )
-                          : const NoDataAvailableWidget(),
-                ),
-              ],
-            ),
-          ),
+                                      title: 'Confirmation'.tr,
+                                      subTitle: AppText.downloadMessage,
+                                      noText: 'No'.tr,
+                                      yesText: 'Download'.tr,
+                                    ),
+                                  );
+                                },
+                              ));
+                        },
+                      ),
+                    )
+                  : const NoDataAvailableWidget(),
         ),
       ),
     );
