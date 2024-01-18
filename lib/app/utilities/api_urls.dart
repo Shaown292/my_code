@@ -551,6 +551,8 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
 
   static String getJoinMeetingUrlWeb({required String meetingID}) => 'https://zoom.us/wc/$meetingID/join?prefer=1';
 
+  static String changePassword = '${baseApi}change-password';
+
 
 
   //////////////////////////.......................................///////////////////////////////////
@@ -807,10 +809,10 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   //   return "${baseApi}viewAllNotification/$userID";
   // }
 
-  static String changePassword(String currentPassword, String newPassword,
-      String confirmPassword, String userID) {
-    return "${baseApi}change-password?current_password=$currentPassword&new_password=$newPassword&confirm_password=$confirmPassword&id=$userID";
-  }
+  // static String changePassword(String currentPassword, String newPassword,
+  //     String confirmPassword, String userID) {
+  //   return "${baseApi}change-password?current_password=$currentPassword&new_password=$newPassword&confirm_password=$confirmPassword&id=$userID";
+  // }
 
   static String childFeeBankPayment(
       String amount,

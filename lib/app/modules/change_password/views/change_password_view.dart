@@ -4,6 +4,8 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/button/primary_
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/text_field.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
 
 import 'package:get/get.dart';
 
@@ -46,11 +48,16 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                    controller: controller.confirmPasswordController,
                 ),
                 30.verticalSpacing,
-                 PrimaryButton(
-                  title: "Save".tr,
-                  height: Get.height * 0.05,
-                  radius: 30,
-                )
+                 Obx(() => controller.passLoader.value ? const SecondaryLoadingWidget() : PrimaryButton(
+                   onTap: (){
+                     if(controller.validation()){
+                       controller.changePassword();
+                     }
+                   },
+                   title: "Save".tr,
+                   height: Get.height * 0.05,
+                   radius: 30,
+                 ))
               ],
             ),
           ),
