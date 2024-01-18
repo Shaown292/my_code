@@ -38,15 +38,14 @@ class ClassTile extends StatelessWidget {
               child: AnimatedContainer(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topRight: const Radius.circular(8),
-                      topLeft: const Radius.circular(8),
-                      bottomLeft: Radius.circular(isTapped ? 0 : 8),
-                      bottomRight: Radius.circular(isTapped ? 0 : 8),
-                    ),
-                    color: isTapped
-                        ? AppColors.activeExamStatusBlueColor
-                        : Colors.white),
+                  borderRadius: BorderRadius.only(
+                    topRight: const Radius.circular(8),
+                    topLeft: const Radius.circular(8),
+                    bottomLeft: Radius.circular(isTapped ? 0 : 8),
+                    bottomRight: Radius.circular(isTapped ? 0 : 8),
+                  ),
+                  color: isTapped ? AppColors.primaryColor : Colors.white,
+                ),
                 duration: const Duration(milliseconds: 500),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -57,11 +56,11 @@ class ClassTile extends StatelessWidget {
                         onlineClassTitle ?? "",
                         style: isTapped
                             ? AppTextStyle.cardTextStyle14WhiteW500
-                            : AppTextStyle.blueFont14,
+                            : AppTextStyle.primaryFont14,
                       ),
-                      const Icon(
+                      isTapped ? const SizedBox() : const Icon(
                         Icons.arrow_forward_ios_outlined,
-                        color: AppColors.activeExamStatusBlueColor,
+                        color: AppColors.primaryColor,
                       )
                     ],
                   ),
@@ -79,7 +78,7 @@ class ClassTile extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           onlineClassSubTitle ?? "",
-                          style: AppTextStyle.blueFont14,
+                          style: AppTextStyle.primaryFont14,
                         ),
                       ),
                     ),

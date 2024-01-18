@@ -20,7 +20,6 @@ class ChildHomeView extends GetView<ChildHomeController> {
   @override
   Widget build(BuildContext context) {
     return InfixEduScaffold(
-      // leadingIcon: const SizedBox(),
       appBar: Obx(() => PrimaryAppBar(
         title: controller.globalRxVariableController.roleId.value == 1
             ? 'Welcome to Admin'
@@ -38,12 +37,12 @@ class ChildHomeView extends GetView<ChildHomeController> {
               Get.dialog(
                 CustomPopupDialogue(
                   onYesTap: () {
-                    // controller.logout();
+                    controller.logout();
                   },
                   title: 'Confirmation',
                   subTitle: AppText.logoutWarningMsg,
-                  noText: 'cancel',
-                  yesText: 'logout',
+                  noText: 'Cancel',
+                  yesText: 'Logout',
                 ),
               );
             },
