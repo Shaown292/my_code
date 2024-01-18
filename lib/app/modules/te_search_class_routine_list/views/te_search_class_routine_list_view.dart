@@ -17,6 +17,7 @@ import '../controllers/te_search_class_routine_list_controller.dart';
 class TeSearchClassRoutineListView
     extends GetView<TeSearchClassRoutineListController> {
   const TeSearchClassRoutineListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -25,14 +26,10 @@ class TeSearchClassRoutineListView
       child: InfixEduScaffold(
         title: "Class Routine".tr,
         body: Obx(
-              () => CustomBackground(
+          () => CustomBackground(
             customWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: controller.isLoading.value
-                  ? const Center(
-                child: SecondaryLoadingWidget(),
-              )
-                  : Column(
+              child: Column(
                 children: [
                   Text(
                     controller.formattedDate,
@@ -42,8 +39,7 @@ class TeSearchClassRoutineListView
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                          color: AppColors.profileCardTextColor),
+                      border: Border.all(color: AppColors.profileCardTextColor),
                     ),
                     child: TabBar(
                       isScrollable: true,
@@ -58,7 +54,7 @@ class TeSearchClassRoutineListView
                           color: AppColors.appButtonColor),
                       tabs: List.generate(
                         controller.daysOfWeek.length,
-                            (index) => ShowWeekTile(
+                        (index) => ShowWeekTile(
                           title: controller.daysOfWeek[index],
                         ),
                       ),
@@ -70,29 +66,52 @@ class TeSearchClassRoutineListView
                       controller: controller.tabController,
                       children: List.generate(
                         controller.daysOfWeek.length,
-                            (index) {
-
-                              List<TeacherClassRoutines>? routineList = controller
-                                  .teacherClassRoutineList
-                                  .where((element) =>
-                              element.day?.substring(0, 3) ==
+                        (index) {
+                          List<TeacherClassRoutines>? routineList = controller
+                              .teacherClassRoutineList
+                              .where((element) =>
+                                  element.day?.substring(0, 3) ==
                                   controller.daysOfWeek[index])
-                                  .toList();
+                              .toList();
 
-                          return routineList.isNotEmpty ? ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: routineList.length,
-                            itemBuilder: (context, index) {
-                              return StudentClassDetailsCard(
-                                startingTime: routineList[index].startTime,
-                                subject:routineList[index].subject,
-                                endingTime:routineList[index].endTime,
-                                roomNumber:routineList[index].room,
-                                buildingName: '',
-                                instructorName: routineList[index].teacher,
-                              );
-                            },
-                          ) : const NoDataAvailableWidget();
+                          return controller.isLoading.value
+                              ? const SecondaryLoadingWidget()
+                              : routineList.isNotEmpty
+                                  ? RefreshIndicator(
+                                      color: AppColors.primaryColor,
+                                      onRefresh: () async {
+                                        controller.teacherClassRoutineList
+                                            .clear();
+                                        controller.getTeacherClassRoutineList(
+                                          classId: controller
+                                              .adminStudentsSearchController
+                                              .studentClassId
+                                              .value,
+                                          sectionId: controller
+                                              .adminStudentsSearchController
+                                              .studentSectionId
+                                              .value,
+                                        );
+                                      },
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: routineList.length,
+                                        itemBuilder: (context, index) {
+                                          return StudentClassDetailsCard(
+                                            startingTime:
+                                                routineList[index].startTime,
+                                            subject: routineList[index].subject,
+                                            endingTime:
+                                                routineList[index].endTime,
+                                            roomNumber: routineList[index].room,
+                                            buildingName: '',
+                                            instructorName:
+                                                routineList[index].teacher,
+                                          );
+                                        },
+                                      ),
+                                    )
+                                  : const NoDataAvailableWidget();
                         },
                       ),
                     ),

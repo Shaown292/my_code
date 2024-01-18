@@ -18,7 +18,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class TeHomeworkListController extends GetxController {
-  TeAddHomeworkController teAddHomeworkController = Get.put(TeAddHomeworkController());
+  TeAddHomeworkController teAddHomeworkController =
+      Get.put(TeAddHomeworkController());
 
   TextEditingController searchController = TextEditingController();
 
@@ -28,21 +29,19 @@ class TeHomeworkListController extends GetxController {
   RxBool searchHomeworkLoader = false.obs;
   RxBool homeworkLoader = false.obs;
 
-
-
   RxList<TeacherHomeworkData> teacherHomeworkList = <TeacherHomeworkData>[].obs;
 
   Future<TeacherHomeworkListResponseModel> getTeacherHomeWorkList() async {
     try {
       teacherHomeworkList.clear();
-     homeworkLoader.value = true;
+      homeworkLoader.value = true;
       final response = await BaseClient().getData(
         url: InfixApi.getTeacherHomeworkList,
         header: GlobalVariable.header,
       );
 
       TeacherHomeworkListResponseModel teacherHomeworkListResponseModel =
-      TeacherHomeworkListResponseModel.fromJson(response);
+          TeacherHomeworkListResponseModel.fromJson(response);
 
       if (teacherHomeworkListResponseModel.success == true) {
         homeworkLoader.value = false;
@@ -56,7 +55,6 @@ class TeHomeworkListController extends GetxController {
         showBasicFailedSnackBar(
             message: teacherHomeworkListResponseModel.message ??
                 AppText.somethingWentWrong);
-
       }
     } catch (e, t) {
       homeworkLoader.value = false;
@@ -69,20 +67,25 @@ class TeHomeworkListController extends GetxController {
     return TeacherHomeworkListResponseModel();
   }
 
-  Future<TeacherHomeworkListResponseModel?> filterHomework(
-      int classId, int sectionId, int subjectId) async {
-
+  Future<TeacherHomeworkListResponseModel?> filterHomework({
+    required int classId,
+    required int subjectId,
+    required int sectionId,
+  }) async {
     try {
-
       teacherHomeworkList.clear();
       searchHomeworkLoader.value = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getTeacherHomeworkSearch(classId: classId, sectionId: sectionId, subjectId: subjectId),
+        url: InfixApi.getTeacherHomeworkSearch(
+          classId: classId,
+          subjectId: subjectId,
+          sectionId: sectionId,
+        ),
         header: GlobalVariable.header,
       );
       TeacherHomeworkListResponseModel teacherHomeworkListResponseModel =
-      TeacherHomeworkListResponseModel.fromJson(response);
+          TeacherHomeworkListResponseModel.fromJson(response);
 
       if (teacherHomeworkListResponseModel.success == true) {
         searchHomeworkLoader.value = false;
@@ -97,7 +100,6 @@ class TeHomeworkListController extends GetxController {
             message: teacherHomeworkListResponseModel.message ??
                 AppText.somethingWentWrong);
       }
-
     } catch (e, t) {
       searchHomeworkLoader.value = false;
       debugPrint('$e');
@@ -108,102 +110,110 @@ class TeHomeworkListController extends GetxController {
     return TeacherHomeworkListResponseModel();
   }
 
-  void showHomeworkDetailsBottomSheet({required int index, Color? bottomSheetBackgroundColor}) {
+  void showHomeworkDetailsBottomSheet(
+      {required int index, Color? bottomSheetBackgroundColor}) {
     Get.bottomSheet(
       Container(
         height: Get.height * 0.55,
         color: bottomSheetBackgroundColor,
         child: teacherHomeworkList.isNotEmpty
             ? SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              10.verticalSpacing,
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(teacherHomeworkList[index].subjectName ?? "", style:  AppTextStyle.fontSize14BlackW500,),
-              ),
-              BottomSheetTile(
-                title: "Assign Date".tr,
-                value: teacherHomeworkList[index].assignDate,
-                color: AppColors.homeworkWidgetColor ,
-              ),
-              BottomSheetTile(
-                title: "Submission Date".tr,
-                value: teacherHomeworkList[index].submissionDate,
-                color:  Colors.white,
-              ),
-              BottomSheetTile(
-                title: "Marks".tr,
-                value: teacherHomeworkList[index].marks.toString(),
-                color: AppColors.homeworkWidgetColor ,
-              ),
-              BottomSheetTile(
-                title: "Evaluation".tr,
-                value: teacherHomeworkList[index].evaluation.toString(),
-                color:  Colors.white,
-              ),
-              Container(
-                height: Get.height * 0.06,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.homeworkWidgetColor,
-                  ),
-                  color: AppColors.homeworkWidgetColor ,
-                ),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      width: Get.width * 0.41,
-                      child:  Text(
-                        "Documents".tr,
-                        style: AppTextStyle.fontSize12lightViolateW400,
+                    10.verticalSpacing,
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        teacherHomeworkList[index].subjectName ?? "",
+                        style: AppTextStyle.fontSize14BlackW500,
                       ),
                     ),
-                    VerticalDivider(
-                      color: AppColors.bottomSheetDividerColor,
-                      thickness: 1,
+                    BottomSheetTile(
+                      title: "Assign Date".tr,
+                      value: teacherHomeworkList[index].assignDate,
+                      color: AppColors.homeworkWidgetColor,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: InkWell(
-                        onTap: () {
-                          downloadFile(url: teacherHomeworkList[index].file ?? "", title: teacherHomeworkList[index].subjectName ?? "");
-                        },
-                        child: Row(
-                          children: [
-                            const Icon(
-                              FontAwesomeIcons.download,
-                              size: 15,
-                              color: Color(0xFF3490DC),
-                            ),
-                            5.horizontalSpacing,
-                            Text(
-                              "Download".tr,
-                              style: const TextStyle(
-                                color: Color(0xFF3490DC),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
-                          ],
+                    BottomSheetTile(
+                      title: "Submission Date".tr,
+                      value: teacherHomeworkList[index].submissionDate,
+                      color: Colors.white,
+                    ),
+                    BottomSheetTile(
+                      title: "Marks".tr,
+                      value: teacherHomeworkList[index].marks.toString(),
+                      color: AppColors.homeworkWidgetColor,
+                    ),
+                    BottomSheetTile(
+                      title: "Evaluation".tr,
+                      value: teacherHomeworkList[index].evaluation.toString(),
+                      color: Colors.white,
+                    ),
+                    Container(
+                      height: Get.height * 0.06,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.homeworkWidgetColor,
                         ),
+                        color: AppColors.homeworkWidgetColor,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            width: Get.width * 0.41,
+                            child: Text(
+                              "Documents".tr,
+                              style: AppTextStyle.fontSize12lightViolateW400,
+                            ),
+                          ),
+                          VerticalDivider(
+                            color: AppColors.bottomSheetDividerColor,
+                            thickness: 1,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: InkWell(
+                              onTap: () {
+                                downloadFile(
+                                    url: teacherHomeworkList[index].file ?? "",
+                                    title: teacherHomeworkList[index]
+                                            .subjectName ??
+                                        "");
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    FontAwesomeIcons.download,
+                                    size: 15,
+                                    color: Color(0xFF3490DC),
+                                  ),
+                                  5.horizontalSpacing,
+                                  Text(
+                                    "Download".tr,
+                                    style: const TextStyle(
+                                      color: Color(0xFF3490DC),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
+              )
+            : Center(
+                child: Text(
+                  "No Details Available".tr,
+                  style: AppTextStyle.fontSize16lightBlackW500,
+                ),
               ),
-
-            ],
-          ),
-        )
-            :  Center(
-          child: Text(
-            "No Details Available".tr,
-            style: AppTextStyle.fontSize16lightBlackW500,
-          ),
-        ),
       ),
       shape: defaultBottomSheetShape(),
     );

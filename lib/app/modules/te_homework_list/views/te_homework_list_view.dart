@@ -58,13 +58,14 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
                                     .teAddHomeworkController
                                     .teacherClassId
                                     .value);
-                            // controller.isDropDownChanged.value == true;
-                            // controller.filterHomework(controller.teAddHomeworkController.teacherClassId
-                            //     .value,
-                            //     controller.teAddHomeworkController.teacherClassId
-                            //         .value,
-                            //     controller.teAddHomeworkController.teacherClassId
-                            //         .value);
+                            controller.isDropDownChanged.value == true;
+                            controller.filterHomework(
+                                classId :controller.teAddHomeworkController.teacherClassId
+                                    .value,
+                                sectionId:  controller.teAddHomeworkController.teacherSectionId
+                                    .value,
+                                subjectId : controller.teAddHomeworkController.teacherSubjectId
+                                    .value);
                           },
                         ),
                       ),
@@ -100,18 +101,13 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
                                     .teacherSubjectId
                                     .value);
                             controller.isDropDownChanged.value == true;
-                            controller.filterHomework(controller.teAddHomeworkController.teacherClassId
-                                .value,
-                                controller.teAddHomeworkController.teacherSectionId
+                            controller.filterHomework(
+                                classId :controller.teAddHomeworkController.teacherClassId
                                     .value,
-                                controller.teAddHomeworkController.teacherSubjectId
+                                sectionId:  controller.teAddHomeworkController.teacherSectionId
+                                    .value,
+                                subjectId : controller.teAddHomeworkController.teacherSubjectId
                                     .value);
-
-
-                            print("object:::: ${controller.teAddHomeworkController.teacherClassId
-                                .value}, ${controller.teAddHomeworkController.teacherSectionId
-                                .value} ${controller.teAddHomeworkController.teacherSubjectId
-                                .value}");
                           },
                         ),
                       ),
@@ -135,11 +131,12 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
                             controller.teAddHomeworkController
                                 .teacherSectionId.value = value.id;
                             controller.isDropDownChanged.value == true;
-                            controller.filterHomework(controller.teAddHomeworkController.teacherClassId
-                                .value,
-                                controller.teAddHomeworkController.teacherClassId
+                            controller.filterHomework(
+                                classId :controller.teAddHomeworkController.teacherClassId
                                     .value,
-                                controller.teAddHomeworkController.teacherClassId
+                                sectionId:  controller.teAddHomeworkController.teacherSectionId
+                                    .value,
+                                subjectId : controller.teAddHomeworkController.teacherSubjectId
                                     .value);
                           },
                         ),
@@ -147,9 +144,6 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
                       5.horizontalSpacing,
                     ],
                   ),
-                  // PrimaryButton(text: "Search", onTap: (){
-                  //   controller.searchHomework(controller.teAddHomeworkController.teacherClassId.value, controller.teAddHomeworkController.teacherSectionId.value,controller.teAddHomeworkController.teacherSubjectId.value);
-                  // },),
                   30.verticalSpacing,
                   Container(
                     height: Get.height * 0.09,

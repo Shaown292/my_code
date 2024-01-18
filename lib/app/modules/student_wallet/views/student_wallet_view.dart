@@ -4,6 +4,8 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/show_status_tile/show_status_tile.dart';
 
 import 'package:get/get.dart';
@@ -18,12 +20,12 @@ class StudentWalletView extends GetView<StudentWalletController> {
     return InfixEduScaffold(
       title: "My Wallet".tr,
       body: CustomBackground(
-        customWidget: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-            child: Column(
-              children: [
-                Obx(() => Row(
+        customWidget: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+          child: Column(
+            children: [
+              Obx(
+                () => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PrimaryButton(
@@ -39,32 +41,51 @@ class StudentWalletView extends GetView<StudentWalletController> {
                         color: Colors.white,
                         amountController: controller.amountTextController,
                         noteController: controller.noteTextController,
-                        browseFileTextController: controller.browseFileTextController,
+                        browseFileTextController:
+                            controller.browseFileTextController,
                       ),
                     ),
                   ],
-                ),),
-                20.verticalSpacing,
-                Obx(() => controller.paymentMethodLoader.value ? const Center(child: CircularProgressIndicator()) : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: controller.paymentList.length,
-                    itemBuilder: (context, index) {
-                      return ShowStatusTile(
-                        firstTitle: "Date".tr,
-                        firstValue: DateTime.tryParse(controller.paymentList[index].createdAt ?? '')?.yyyy_mm_dd,
-                        secondTitle: "Method".tr,
-                        secondValue: controller.paymentList[index].paymentMethod,
-                        thirdTitle: "Amount".tr,
-                        thirdValue: controller.paymentList[index].amount.toString(),
-                        activeStatus: controller.paymentList[index].status,
-                        activeStatusColor: AppColors.activeStatusRedColor,
-                      );
-                    })),
-                30.verticalSpacing,
-
-              ],
-            ),
+                ),
+              ),
+              20.verticalSpacing,
+              Obx(() => controller.paymentMethodLoader.value
+                  ? const SecondaryLoadingWidget()
+                  : controller.paymentList.isNotEmpty
+                      ? Expanded(
+                          child: RefreshIndicator(
+                            color: AppColors.primaryColor,
+                            onRefresh: () async {
+                              controller.paymentList.clear();
+                              controller.getPaymentDetails();
+                            },
+                            child: ListView.builder(
+                                itemCount: controller.paymentList.length,
+                                itemBuilder: (context, index) {
+                                  return ShowStatusTile(
+                                    firstTitle: "Date".tr,
+                                    firstValue: DateTime.tryParse(controller
+                                                .paymentList[index].createdAt ??
+                                            '')
+                                        ?.yyyy_mm_dd,
+                                    secondTitle: "Method".tr,
+                                    secondValue: controller
+                                        .paymentList[index].paymentMethod,
+                                    thirdTitle: "Amount".tr,
+                                    thirdValue: controller
+                                        .paymentList[index].amount
+                                        .toString(),
+                                    activeStatus:
+                                        controller.paymentList[index].status,
+                                    activeStatusColor:
+                                        AppColors.activeStatusRedColor,
+                                  );
+                                }),
+                          ),
+                        )
+                      : const NoDataAvailableWidget()),
+              30.verticalSpacing,
+            ],
           ),
         ),
       ),

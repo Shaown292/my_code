@@ -71,9 +71,9 @@ class ChatTextTile extends StatelessWidget {
                           ),
                           5.verticalSpacing,
                           isForwardedText
-                              ? const Text(
+                              ?  Text(
                                   "This is a forwarded message",
-                                  style: AppTextStyle.textStyle12WhiteW500,
+                                  style: forwardedTextStyle,
                                 )
                               : const SizedBox()
                         ],
@@ -157,9 +157,9 @@ class ChatTextTile extends StatelessWidget {
                         style: textStyle,
                       ),
                       isForwardedText
-                          ? const Text(
+                          ?  Text(
                         "This is a forwarded message",
-                        style: AppTextStyle.textStyle12WhiteW500,
+                        style: forwardedTextStyle,
                       )
                           : const SizedBox(),
                     ],

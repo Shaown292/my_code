@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/virtual_class_list/controllers/virtual_class_list_controller.dart';
+import 'package:flutter_single_getx_api_v2/app/modules/virtual_class_list/views/widget/virtual_class_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/show_status_tile/show_status_tile.dart';
 
 import 'package:get/get.dart';
 
@@ -16,71 +17,72 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
   Widget build(BuildContext context) {
     return Obx(() => InfixEduScaffold(
           title: "Virtual Class List".tr,
-          body: SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
-            child: Column(
+          body: CustomBackground(
+            customWidget: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomBackground(
-                  customWidget: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      20.verticalSpacing,
-                      Expanded(
-                        child: controller.zoomMeetingLoader.value
-                            ? const SecondaryLoadingWidget()
-                            : controller.zoomMeetingList.isNotEmpty
-                                ? ListView.builder(
-                                    itemCount:
-                                        controller.zoomMeetingList.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 15.0,
-                                        ),
-                                        child: ShowStatusTile(
-                                          firstTitle: "Topic",
-                                          firstValue: controller
-                                              .zoomMeetingList[index].topic,
-                                          secondTitle: "Meeting Id",
-                                          secondValue: controller
-                                              .zoomMeetingList[index].meetingId,
-                                          thirdTitle: "Start Time",
-                                          thirdValue: controller
-                                              .zoomMeetingList[index].startTime,
-                                          activeStatus: controller
-                                              .zoomMeetingList[index]
-                                              .currentStatus,
-                                          activeStatusColor:
-                                              controller.zoomMeetingList[index]
-                                                              .currentStatus ==
-                                                          'JOIN' ||
-                                                      controller
-                                                              .zoomMeetingList[
-                                                                  index]
-                                                              .currentStatus ==
-                                                          'START'
-                                                  ? Colors.green
-                                                  : Colors.red,
-                                          onStatusTap: () async {
-                                            controller.openZoom(
-                                                meetingId: controller
-                                                        .zoomMeetingList[index]
-                                                        .meetingId ??
-                                                    '',
-                                                status: controller
-                                                        .zoomMeetingList[index]
-                                                        .currentStatus ??
-                                                    '');
-                                          },
-                                        ),
-                                      );
-                                    },
-                                  )
-                                : const NoDataAvailableWidget(),
-                      )
-                    ],
-                  ),
+                20.verticalSpacing,
+                Expanded(
+                  child: controller.zoomMeetingLoader.value
+                      ? const SecondaryLoadingWidget()
+                      : controller.zoomMeetingList.isNotEmpty
+                          ? RefreshIndicator(
+                              color: AppColors.primaryColor,
+                              onRefresh: () async {
+                                controller.zoomMeetingList.clear();
+                                controller.getZoomMeetingList();
+                              },
+                              child: ListView.builder(
+                                itemCount: controller.zoomMeetingList.length,
+                                itemBuilder: (context, index) {
+                                  String colorCode = '';
+                                  if (controller.zoomMeetingList[index]
+                                      .currentStatus?.toUpperCase() ==
+                                      'CLOSED') {
+                                    colorCode = '0xFFF95452';
+                                  } else if (controller.zoomMeetingList[index]
+                                      .currentStatus?.toUpperCase() ==
+                                      'WAITING') {
+                                    colorCode = '0xFFFFBE00';
+                                  }  else {
+                                    colorCode = '0xFF3AC172';
+                                  }
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0,
+                                    ),
+                                    child: VirtualClassTile(
+                                      topic: controller
+                                          .zoomMeetingList[index].topic,
+                                      startingTime: controller
+                                          .zoomMeetingList[index].startTime,
+                                      duration: controller
+                                          .zoomMeetingList[index].duration
+                                          .toString(),
+                                      meetingId: controller
+                                          .zoomMeetingList[index].meetingId,
+                                      activeStatusColor:  Color(int.tryParse(colorCode)!),
+                                      activeStatus: controller
+                                          .zoomMeetingList[index].currentStatus,
+                                      onTap: () async {
+                                        controller.openZoom(
+                                            meetingId: controller
+                                                    .zoomMeetingList[index]
+                                                    .meetingId ??
+                                                '',
+                                            status: controller
+                                                    .zoomMeetingList[index]
+                                                    .currentStatus ??
+                                                '');
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                          : const NoDataAvailableWidget(),
                 ),
+                30.verticalSpacing,
               ],
             ),
           ),

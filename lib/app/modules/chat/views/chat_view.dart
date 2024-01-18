@@ -100,7 +100,10 @@ class ChatView extends GetView<ChatController> {
                           ? const SecondaryLoadingWidget()
                           : RefreshIndicator(
                               color: AppColors.primaryColor,
-                              onRefresh: () async {},
+                              onRefresh: () async {
+                                controller.singleChatList.clear();
+                                controller.getSingleChatList();
+                              },
                               child: controller.singleChatList.isNotEmpty
                                   ? ListView.builder(
                                       shrinkWrap: true,
@@ -155,7 +158,10 @@ class ChatView extends GetView<ChatController> {
                           ? const LoadingWidget()
                           : RefreshIndicator(
                               color: AppColors.primaryColor,
-                              onRefresh: () async {},
+                              onRefresh: () async {
+                                controller.groupChatList.clear();
+                                controller.getGroupChatList();
+                              },
                               child: controller.groupChatList.isNotEmpty
                                   ? ListView.builder(
                                       itemCount:
