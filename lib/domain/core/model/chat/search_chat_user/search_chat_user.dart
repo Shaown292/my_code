@@ -31,7 +31,7 @@ class SearchChatData {
   int? userId;
   String? fullName;
   String? image;
-  int? activeStatus;
+  String? activeStatus;
   String? statusColor;
   String? lastMessage;
   String? lastMessageTime;

@@ -72,9 +72,15 @@ class SingleChatView extends GetView<SingleChatController> {
                           width: 8,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: controller.isSearchPage.value ? Color(int.parse(
-                                controller.searchChatData!.statusColor!),) : Color(int.parse(
-                                controller.singleChatUserListData!.statusColor!),),
+                            color: controller.isSearchPage.value
+                                ? Color(
+                                    int.parse(controller
+                                        .searchChatData!.statusColor!),
+                                  )
+                                : Color(
+                                    int.parse(controller
+                                        .singleChatUserListData!.statusColor!),
+                                  ),
                           ),
                         ), //Icon
                       ),
@@ -92,12 +98,20 @@ class SingleChatView extends GetView<SingleChatController> {
                         style: AppTextStyle.cardTextStyle14WhiteW500,
                       ),
                       3.verticalSpacing,
-                       Text(
-                         controller.isSearchPage.value ? controller.searchChatData!.activeStatus.toString() : controller.singleChatUserListData!.activeStatus!,
-                        style:  TextStyle(
-                          color: controller.isSearchPage.value ? Color(int.parse(
-                              controller.searchChatData!.statusColor!),) : Color(int.parse(
-                              controller.singleChatUserListData!.statusColor!),),
+                      Text(
+                        controller.isSearchPage.value
+                            ? controller.searchChatData!.activeStatus.toString()
+                            : controller.singleChatUserListData!.activeStatus!,
+                        style: TextStyle(
+                          color: controller.isSearchPage.value
+                              ? Color(
+                                  int.parse(
+                                      controller.searchChatData!.statusColor!),
+                                )
+                              : Color(
+                                  int.parse(controller
+                                      .singleChatUserListData!.statusColor!),
+                                ),
                           fontSize: 12,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
@@ -193,12 +207,6 @@ class SingleChatView extends GetView<SingleChatController> {
                                             color: Colors.black,
                                           ),
                                         ),
-                                        30.horizontalSpacing,
-                                        const Text(
-                                          "Sajsdhjashjd",
-                                          style:
-                                              AppTextStyle.fontSize13BlackW400,
-                                        )
                                       ],
                                     ),
                                   ),
@@ -235,9 +243,13 @@ class SingleChatView extends GetView<SingleChatController> {
                   ),
                   PopupMenuItem(
                     value: 2,
-                    child: controller.singleChatUserListData!.blocked!
-                        ? const Text("Unblock User")
-                        : const Text("Block User"),
+                    child: controller.isSearchPage.value
+                        ? controller.searchChatData!.blocked!
+                            ? const Text("Unblock User")
+                            : const Text("Block User")
+                        : controller.singleChatUserListData!.blocked!
+                            ? const Text("Unblock User")
+                            : const Text("Block User"),
                   ),
                 ],
               ),
@@ -617,7 +629,11 @@ class SingleChatView extends GetView<SingleChatController> {
                             },
                           ),
                         )
-                      : const Expanded(child: NoDataAvailableWidget()),
+                      : const Expanded(
+                          child: SingleChildScrollView(
+                            child: NoDataAvailableWidget(),
+                          ),
+                        ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Container(
