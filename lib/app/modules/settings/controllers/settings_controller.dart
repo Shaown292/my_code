@@ -2,12 +2,17 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
+import 'package:flutter_single_getx_api_v2/app/database/auth_database.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_selection.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/languages/translated_language.dart';
+import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/post_request_response_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +23,8 @@ import '../../../utilities/widgets/common_widgets/custom_divider.dart';
 class SettingsController extends GetxController {
   LanguageController languageController = Get.find();
   RxBool languageLoader = false.obs;
+  RxBool accountDeleteLoader = false.obs;
+  final AuthDatabase _authDatabase = AuthDatabase.instance;
 
   Future<void> updateLanguage({required int langId}) async {
     try {
@@ -75,6 +82,40 @@ class SettingsController extends GetxController {
     } finally {
       languageLoader.value = true;
     }
+  }
+
+  Future<PostRequestResponseModel> deleteAccount() async {
+
+    try{
+      accountDeleteLoader.value = true;
+      
+      final response = await BaseClient().postData(url: InfixApi.accountDelete, header: GlobalVariable.header, payload: {
+        'id': Get.find<GlobalRxVariableController>().userId.value.toString(),
+      });
+
+      PostRequestResponseModel responseModel = PostRequestResponseModel.fromJson(response);
+
+      if(responseModel.success == true){
+        accountDeleteLoader.value = false;
+
+        await _authDatabase.logOut();
+
+        Get.offNamedUntil('/secondary-splash', (route) => false);
+
+      } else{
+        accountDeleteLoader.value = false;
+        showBasicFailedSnackBar(message: responseModel.message ?? AppText.somethingWentWrong,);
+      }
+      
+    }catch(e, t){
+      accountDeleteLoader.value = false;
+      debugPrint('$e');
+      debugPrint('$t');
+    }finally{
+      accountDeleteLoader.value = false;
+    }
+
+    return PostRequestResponseModel();
   }
 
   void showLanguageBottomSheet() {
@@ -151,4 +192,6 @@ class SettingsController extends GetxController {
       ),
     ));
   }
+
+
 }

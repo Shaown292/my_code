@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/app/modules/settings/views/widget/set
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import '../../../data/constants/app_text.dart';
 import '../../../routes/app_pages.dart';
@@ -47,9 +48,12 @@ class SettingsView extends GetView<SettingsController> {
                     title: "Delete Account".tr,
                     isLanguage: false,
                     onTileTap: () {
+
                       Get.dialog(
                         CustomPopupDialogue(
-                          onYesTap: () {},
+                          onYesTap: () {
+                            controller.deleteAccount();
+                          },
                           title: 'Confirmation'.tr,
                           subTitle: AppText.deleteAccountWarningMsg.tr,
                           noText: 'Cancel'.tr,

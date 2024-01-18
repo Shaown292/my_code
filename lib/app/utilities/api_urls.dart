@@ -551,7 +551,9 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
 
   static String getJoinMeetingUrlWeb({required String meetingID}) => 'https://zoom.us/wc/$meetingID/join?prefer=1';
 
+  /// Account Related api
   static String changePassword = '${baseApi}change-password';
+  static String accountDelete = '${baseApi}user-delete';
 
 
 
