@@ -52,7 +52,7 @@ class StudentSearchAttendanceController extends GetxController {
               attendanceList[0].attendanceDate!.month,
               attendanceList[0].attendanceDate!.day),
           dot: GlobalVariable.getAttendanceStatus(
-              attendanceList[0].attendanceType ?? ""),
+              attendanceList[0].attendanceType?.toUpperCase() ?? ""),
         )
       ];
     }
@@ -103,7 +103,7 @@ class StudentSearchAttendanceController extends GetxController {
                     attendanceList[i].attendanceDate!.month,
                     attendanceList[i].attendanceDate!.day),
                 dot: GlobalVariable.getAttendanceStatus(
-                    attendanceList[i].attendanceType ?? ""),
+                    attendanceList[i].attendanceType?.toUpperCase() ?? ""),
               ),
 
             ];
@@ -172,7 +172,7 @@ class StudentSearchAttendanceController extends GetxController {
                     attendanceList[i].attendanceDate!.month,
                     attendanceList[i].attendanceDate!.day),
                 dot: GlobalVariable.getAttendanceStatus(
-                    attendanceList[i].attendanceType ?? ""),
+                    attendanceList[i].attendanceType?.toUpperCase() ?? ""),
               )
             ];
           }
@@ -232,7 +232,7 @@ class StudentSearchAttendanceController extends GetxController {
                     attendanceList[i].attendanceDate!.month,
                     attendanceList[i].attendanceDate!.day),
                 dot: GlobalVariable.getAttendanceStatus(
-                    attendanceList[i].attendanceType ?? ""),
+                    attendanceList[i].attendanceType?.toUpperCase() ?? ""),
               )
             ];
           }
@@ -305,7 +305,7 @@ class StudentSearchAttendanceController extends GetxController {
                     attendanceList[i].attendanceDate!.month,
                     attendanceList[i].attendanceDate!.day),
                 dot: GlobalVariable.getAttendanceStatus(
-                    attendanceList[i].attendanceType ?? ""),
+                    attendanceList[i].attendanceType?.toUpperCase() ?? ""),
               )
             ];
           }

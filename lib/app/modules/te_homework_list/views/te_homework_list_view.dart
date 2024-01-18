@@ -144,9 +144,6 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
                       5.horizontalSpacing,
                     ],
                   ),
-                  // PrimaryButton(text: "Search", onTap: (){
-                  //   controller.searchHomework(controller.teAddHomeworkController.teacherClassId.value, controller.teAddHomeworkController.teacherSectionId.value,controller.teAddHomeworkController.teacherSubjectId.value);
-                  // },),
                   30.verticalSpacing,
                   Container(
                     height: Get.height * 0.09,
