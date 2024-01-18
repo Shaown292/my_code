@@ -474,8 +474,7 @@ class InfixApi {
   static String getTeacherAddHomeworkSubjectList({required int classId}) => '${baseApi}teacher-add-homework-for-subject?class_id=$classId';
   static String getTeacherAddHomeworkSectionList({required int classId, required int subjectId}) => '${baseApi}teacher-add-homework-for-section?class_id=$classId&subject_id=$subjectId';
   static String getTeacherHomeworkEvaluationList({required int classId, required int sectionId, required int homeworkId, required String searchKey}) => '${baseApi}teacher-homework-evaluation-list?class_id=$classId&section_id=$sectionId&homework_id=$homeworkId&search=$searchKey';
-  static String getTeacherHomeworkSearch({required int classId, required int sectionId, required int subjectId, }) => '${baseApi}teacher-homework-search?class_id=$classId&subject_id=$subjectId&section_id=$sectionId';
-
+  static String getTeacherHomeworkSearch({required int classId,  required int subjectId, required int sectionId, }) => '${baseApi}teacher-homework-search?class_id=$classId&subject_id=$subjectId&section_id=$sectionId';
 
   /// Teacher Content
   static String getTeacherContentList = '${baseApi}teacher-content-list';
