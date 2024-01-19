@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/virtual_class_list/controllers/virtual_class_list_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/virtual_class_list/views/widget/virtual_class_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/clipboard/custom_clipboard.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -26,24 +27,24 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                 Expanded(
                   child: controller.zoomMeetingLoader.value
                       ? const SecondaryLoadingWidget()
-                      : controller.zoomMeetingList.isNotEmpty
+                      : controller.meetingList.isNotEmpty
                           ? RefreshIndicator(
                               color: AppColors.primaryColor,
                               onRefresh: () async {
-                                controller.zoomMeetingList.clear();
+                                controller.meetingList.clear();
                                 controller.getZoomMeetingList();
                               },
                               child: ListView.builder(
-                                itemCount: controller.zoomMeetingList.length,
+                                itemCount: controller.meetingList.length,
                                 itemBuilder: (context, index) {
                                   String colorCode = '';
                                   if (controller
-                                          .zoomMeetingList[index].currentStatus
+                                          .meetingList[index].currentStatus
                                           ?.toUpperCase() ==
                                       'CLOSED') {
                                     colorCode = '0xFFF95452';
                                   } else if (controller
-                                          .zoomMeetingList[index].currentStatus
+                                          .meetingList[index].currentStatus
                                           ?.toUpperCase() ==
                                       'WAITING') {
                                     colorCode = '0xFFFFBE00';
@@ -56,33 +57,37 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                                     ),
                                     child: VirtualClassTile(
                                       topic: controller
-                                          .zoomMeetingList[index].topic,
+                                          .meetingList[index].topic,
                                       startingTime: controller
-                                          .zoomMeetingList[index].startTime,
+                                          .meetingList[index].startTime,
                                       duration: controller
-                                          .zoomMeetingList[index].duration
+                                          .meetingList[index].duration
                                           .toString(),
                                       meetingPassword: controller
-                                          .zoomMeetingList[index]
+                                          .meetingList[index]
                                           .meetingPassword,
                                       activeStatusColor:
                                           Color(int.tryParse(colorCode)!),
                                       activeStatus: controller
-                                          .zoomMeetingList[index].currentStatus,
+                                          .meetingList[index].currentStatus,
                                       onTap: () async {
-                                        controller.openZoom(
+
+                                       controller.onlineClass.value == "jitsi" ?  Get.toNamed(Routes.LAUNCH_WEBVIEW, arguments: {
+                                         'url':controller.meetingList[index].joinUrl,
+                                         "title" : controller.meetingList[index].topic,
+                                       }) : controller.openZoom(
                                             meetingId: controller
-                                                    .zoomMeetingList[index]
+                                                    .meetingList[index]
                                                     .meetingId ??
                                                 '',
                                             status: controller
-                                                    .zoomMeetingList[index]
+                                                    .meetingList[index]
                                                     .currentStatus ??
                                                 '');
                                       },
                                       onTapForCopy: () {
                                         copyToClipboard(controller
-                                            .zoomMeetingList[index]
+                                            .meetingList[index]
                                             .meetingPassword!);
                                       },
                                     ),

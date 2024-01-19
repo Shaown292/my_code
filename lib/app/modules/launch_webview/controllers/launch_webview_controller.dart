@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class LaunchWebviewController extends GetxController {
 
-  String launchUrl = 'https://pub.dev/packages/flutter_inappwebview/changelog';
+  String launchUrl = '';
   String title = 'Title';
   RxString url = "".obs;
   InAppWebViewController? webViewController;
@@ -32,8 +32,11 @@ class LaunchWebviewController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
+    launchUrl = Get.arguments["url"];
+    title = Get.arguments["title"];
+
     super.onInit();
+
 
     url.value = launchUrl ?? '';
 
