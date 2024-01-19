@@ -27,6 +27,7 @@ class SyllabusView extends GetView<SyllabusController> {
               ? const LoadingWidget()
               : controller.syllabusList.isNotEmpty
                   ? RefreshIndicator(
+
                       color: AppColors.primaryColor,
                       onRefresh: () async {
                         controller.syllabusList.clear();
