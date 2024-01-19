@@ -104,6 +104,7 @@ class SettingsController extends GetxController {
 
         Get.offNamedUntil('/secondary-splash', (route) => false);
 
+
       } else{
         accountDeleteLoader.value = false;
         showBasicFailedSnackBar(message: responseModel.message ?? AppText.somethingWentWrong,);
