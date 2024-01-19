@@ -53,6 +53,7 @@ class SettingsController extends GetxController {
             id: responseData['lang_list'][i]['id'],
             languageName: responseData['lang_list'][i]['lang_name'],
             languageLocal: responseData['lang_list'][i]['locale'],
+            defaultLocale: responseData['lang_list'][i]['default_locale'],
             activeStatus: responseData['lang_list'][i]['active_status'],
           ));
 
@@ -65,8 +66,9 @@ class SettingsController extends GetxController {
 
             Get.find<LanguageController>().langName.value =
                 responseData['lang_list'][i]['lang_name'];
-            Get.find<LanguageController>().appLocale =
-                responseData['lang_list'][i]['locale'];
+            // Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['locale'];
+            Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['default_locale'];
+            print('Local ::: ${Get.find<LanguageController>().appLocale}');
             Get.updateLocale(Locale(Get.find<LanguageController>().appLocale));
           }
         }

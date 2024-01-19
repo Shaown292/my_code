@@ -40,6 +40,7 @@ class AppSettingsController extends GetxController {
             id: responseData['lang_list'][i]['id'],
             languageName: responseData['lang_list'][i]['lang_name'],
             languageLocal: responseData['lang_list'][i]['locale'],
+            defaultLocale: responseData['lang_list'][i]['default_locale'],
             activeStatus: responseData['lang_list'][i]['active_status'],
           ));
 
@@ -48,8 +49,8 @@ class AppSettingsController extends GetxController {
             print('Translated DATA $translatedLanguage');
             Get.find<LanguageController>().langName.value =
                 responseData['lang_list'][i]['lang_name'];
-            Get.find<LanguageController>().appLocale =
-                responseData['lang_list'][i]['locale'];
+            // Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['locale'];
+            Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['default_locale'];
             Get.updateLocale(Locale(responseData['lang_list'][i]['locale']));
           }
         }
@@ -94,6 +95,7 @@ class AppSettingsController extends GetxController {
             id: responseData['lang_list'][i]['id'],
             languageName: responseData['lang_list'][i]['lang_name'],
             languageLocal: responseData['lang_list'][i]['locale'],
+            defaultLocale: responseData['lang_list'][i]['default_locale'],
             activeStatus: responseData['lang_list'][i]['active_status'],
           ));
 
@@ -101,8 +103,8 @@ class AppSettingsController extends GetxController {
             translatedLanguage.assignAll(translations);
             Get.find<LanguageController>().langName.value =
             responseData['lang_list'][i]['lang_name'];
-            Get.find<LanguageController>().appLocale =
-            responseData['lang_list'][i]['locale'];
+            // Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['locale'];
+            Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['default_locale'];
             Get.updateLocale(Locale(Get.find<LanguageController>().appLocale));
           }
         }

@@ -4,6 +4,7 @@ import 'package:flutter_single_getx_api_v2/config/language/controller/languages/
 import 'package:get/get.dart';
 
 import 'language_selection.dart';
+import 'languages/ar.dart';
 
 String? language;
 bool langValue = false;
@@ -23,10 +24,16 @@ class LanguageController extends GetxController implements Translations {
   Future changeLanguage() async {
     for (int i = 0; i < languageList.length; i++) {
       if (languageList[i].languageLocal == language) {
-        LanguageSelection.instance.val.value = languageList[i].languageLocal;
-        LanguageSelection.instance.drop.value = languageList[i].languageLocal;
-        LanguageSelection.instance.langName = languageList[i].languageName;
-        appLocale = languageList[i].languageLocal;
+        // LanguageSelection.instance.val.value = languageList[i].languageLocal;
+        // LanguageSelection.instance.drop.value = languageList[i].languageLocal;
+        // LanguageSelection.instance.langName = languageList[i].languageName;
+        // appLocale = languageList[i].languageLocal;
+
+        LanguageSelection.instance.val.value = languageList[i].defaultLocale;
+        LanguageSelection.instance.drop.value = languageList[i].defaultLocale;
+        LanguageSelection.instance.langName = languageList[i].defaultLocale;
+        appLocale = languageList[i].defaultLocale;
+
       } else {
         appLocale = Get.deviceLocale!.languageCode;
         langValue = true;
@@ -48,13 +55,16 @@ class LanguageModel {
   final int id;
   final String languageName;
   final String languageLocal;
+  final String defaultLocale;
   final bool activeStatus;
 
-  LanguageModel(
-      {required this.id,
-      required this.languageName,
-      required this.languageLocal,
-      required this.activeStatus});
+  LanguageModel({
+    required this.id,
+    required this.languageName,
+    required this.languageLocal,
+    required this.defaultLocale,
+    required this.activeStatus,
+  });
 }
 
 RxList<LanguageModel> languageList = <LanguageModel>[].obs;
