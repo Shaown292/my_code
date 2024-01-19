@@ -227,6 +227,7 @@ class InfixApi {
   static String dormitoryRoomList = '${baseApi}room-list';
   static String getFeesGroupList = '${baseApi}fees-group';
   static String createFeesGroup = '${baseApi}fees-group-store';
+  static String getBankPaymentList = '${baseApi}bank-payment-list';
   static String updateSingleFeesGroup = '${baseApi}fees-group-update';
 
   static String deleteSingleFeesGroup({required int feesId}) =>

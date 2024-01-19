@@ -37,15 +37,17 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                                 itemCount: controller.zoomMeetingList.length,
                                 itemBuilder: (context, index) {
                                   String colorCode = '';
-                                  if (controller.zoomMeetingList[index]
-                                      .currentStatus?.toUpperCase() ==
+                                  if (controller
+                                          .zoomMeetingList[index].currentStatus
+                                          ?.toUpperCase() ==
                                       'CLOSED') {
                                     colorCode = '0xFFF95452';
-                                  } else if (controller.zoomMeetingList[index]
-                                      .currentStatus?.toUpperCase() ==
+                                  } else if (controller
+                                          .zoomMeetingList[index].currentStatus
+                                          ?.toUpperCase() ==
                                       'WAITING') {
                                     colorCode = '0xFFFFBE00';
-                                  }  else {
+                                  } else {
                                     colorCode = '0xFF3AC172';
                                   }
                                   return Padding(
@@ -60,9 +62,11 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                                       duration: controller
                                           .zoomMeetingList[index].duration
                                           .toString(),
-                                      meetingId: controller
-                                          .zoomMeetingList[index].meetingId,
-                                      activeStatusColor:  Color(int.tryParse(colorCode)!),
+                                      meetingPassword: controller
+                                          .zoomMeetingList[index]
+                                          .meetingPassword,
+                                      activeStatusColor:
+                                          Color(int.tryParse(colorCode)!),
                                       activeStatus: controller
                                           .zoomMeetingList[index].currentStatus,
                                       onTap: () async {
@@ -77,16 +81,18 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                                                 '');
                                       },
                                       onTapForCopy: () {
-                                        copyToClipboard(
-                                            controller.zoomMeetingList[index].meetingId!
-                                        );
+                                        copyToClipboard(controller
+                                            .zoomMeetingList[index]
+                                            .meetingPassword!);
                                       },
                                     ),
                                   );
                                 },
                               ),
                             )
-                          : const NoDataAvailableWidget(),
+                          : const Center(
+                              child: NoDataAvailableWidget(),
+                            ),
                 ),
                 30.verticalSpacing,
               ],

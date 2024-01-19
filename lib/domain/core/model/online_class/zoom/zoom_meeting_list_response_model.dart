@@ -29,6 +29,7 @@ class ZoomMeetingListResponseModel {
 
 class ZoomMeetingData {
   String? meetingId;
+  String? meetingPassword;
   String? topic;
   double? duration;
   String? startTime;
@@ -39,6 +40,7 @@ class ZoomMeetingData {
 
   ZoomMeetingData.fromJson(Map<String, dynamic> json) {
     meetingId = json['meeting_id'];
+    meetingPassword = json['meeting_password'];
     topic = json['topic'];
     duration = double.tryParse(json['duration']);
     startTime = json['start_time'];
@@ -49,6 +51,7 @@ class ZoomMeetingData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['meeting_id'] = meetingId;
+    data['meeting_password'] = meetingPassword;
     data['topic'] = topic;
     data['duration'] = duration;
     data['start_time'] = startTime;

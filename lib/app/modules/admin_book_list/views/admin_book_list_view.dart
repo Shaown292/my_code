@@ -17,66 +17,66 @@ class AdminBookListView extends GetView<AdminBookListController> {
   Widget build(BuildContext context) {
     return InfixEduScaffold(
       title: "Book List".tr,
-      body: RefreshIndicator(
-        onRefresh: () async {
-          controller.getAdminBookList();
-        },
-        child: CustomBackground(
-          customWidget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: Get.height * 0.085,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(8),
-                      topLeft: Radius.circular(8)),
-                  color: AppColors.profileCardBackgroundColor,
-                ),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: Get.width * 0.14,
-                      child:  Text(
-                        "Book No".tr,
-                        style: AppTextStyle.textStyle12WhiteW500,
-                      ),
-                    ),
-                    const VerticalDivider(
-                      color: AppColors.profileTitleColor,
-                      thickness: 1,
-                    ),
-                    Container(
-                      width: Get.width * 0.2,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child:  Text(
-                        "Subject".tr,
-                        style: AppTextStyle.textStyle12WhiteW500,
-                      ),
-                    ),
-                    const VerticalDivider(
-                      color: AppColors.profileTitleColor,
-                      thickness: 1,
-                    ),
-                     Text(
-                      "Book Name".tr,
-                      style: AppTextStyle.textStyle12WhiteW500,
-                    )
-                  ],
-                ),
+      body: CustomBackground(
+        customWidget: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: Get.height * 0.085,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(8), topLeft: Radius.circular(8)),
+                color: AppColors.profileCardBackgroundColor,
               ),
-              Obx(
-                () => Expanded(
-                  child: controller.loadingController.isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: Get.width * 0.14,
+                    child: Text(
+                      "Book No".tr,
+                      style: AppTextStyle.textStyle12WhiteW500,
+                    ),
+                  ),
+                  const VerticalDivider(
+                    color: AppColors.profileTitleColor,
+                    thickness: 1,
+                  ),
+                  Container(
+                    width: Get.width * 0.2,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      "Subject".tr,
+                      style: AppTextStyle.textStyle12WhiteW500,
+                    ),
+                  ),
+                  const VerticalDivider(
+                    color: AppColors.profileTitleColor,
+                    thickness: 1,
+                  ),
+                  Text(
+                    "Book Name".tr,
+                    style: AppTextStyle.textStyle12WhiteW500,
+                  )
+                ],
+              ),
+            ),
+            Obx(
+              () => Expanded(
+                child: controller.loadingController.isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
+                      )
+                    : controller.bookList.isNotEmpty
+                        ? RefreshIndicator(
                             color: AppColors.primaryColor,
-                          ),
-                        )
-                      : controller.bookList.isNotEmpty
-                          ? ListView.builder(
+                            onRefresh: () async {
+                              controller.bookList.clear();
+                              controller.getAdminBookList();
+                            },
+                            child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: controller.bookList.length,
                               itemBuilder: (context, index) {
@@ -90,20 +90,19 @@ class AdminBookListView extends GetView<AdminBookListController> {
                                   onTap: () {
                                     controller.showBookListDetailsBottomSheet(
                                       index: index,
-                                      bottomSheetBackgroundColor:
-                                          Colors.white,
+                                      bottomSheetBackgroundColor: Colors.white,
                                     );
                                   },
                                 );
                               },
-                            )
-                          : const Center(
-                              child: NoDataAvailableWidget(),
                             ),
-                ),
+                          )
+                        : const Center(
+                            child: NoDataAvailableWidget(),
+                          ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
