@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/virtual_class_list/controllers/virtual_class_list_controller.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/virtual_class_list/views/widget/virtual_class_tile.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/clipboard/custom_clipboard.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -74,6 +75,11 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                                                     .zoomMeetingList[index]
                                                     .currentStatus ??
                                                 '');
+                                      },
+                                      onTapForCopy: () {
+                                        copyToClipboard(
+                                            controller.zoomMeetingList[index].meetingId!
+                                        );
                                       },
                                     ),
                                   );
