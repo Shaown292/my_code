@@ -11,17 +11,18 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class VirtualClassListController extends GetxController {
-  RxList<ZoomMeetingData> zoomMeetingList = <ZoomMeetingData>[].obs;
+  RxList<MeetingList> meetingList = <MeetingList>[].obs;
   RxBool zoomMeetingLoader = false.obs;
+  RxString onlineClass = "".obs;
 
   /// Get Zoom Meeting List
   Future<ZoomMeetingListResponseModel> getZoomMeetingList() async {
     try {
-      zoomMeetingList.clear();
+      meetingList.clear();
 
       zoomMeetingLoader.value = true;
       final response = await BaseClient().getData(
-        url: InfixApi.zoomMeetingList,
+        url: onlineClass.value == "jitsi" ? InfixApi.jitsiMeetingList : InfixApi.zoomMeetingList,
         header: GlobalVariable.header,
       );
 
@@ -32,7 +33,7 @@ class VirtualClassListController extends GetxController {
         zoomMeetingLoader.value = false;
         if (zoomMeetingListResponseModel.data!.isNotEmpty) {
           for (int i = 0; i < zoomMeetingListResponseModel.data!.length; i++) {
-            zoomMeetingList.add(zoomMeetingListResponseModel.data![i]);
+            meetingList.add(zoomMeetingListResponseModel.data![i]);
           }
         }
       } else {
@@ -73,6 +74,8 @@ class VirtualClassListController extends GetxController {
 
   @override
   void onInit() {
+    onlineClass.value = Get.arguments["online_class"];
+    print(" online class ::::::: ${onlineClass.value}");
     getZoomMeetingList();
     super.onInit();
   }

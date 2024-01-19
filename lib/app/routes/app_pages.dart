@@ -84,6 +84,8 @@ import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
 import '../modules/attendance/bindings/attendance_binding.dart';
 import '../modules/attendance/views/attendance_view.dart';
+import '../modules/bank_payment_list/bindings/bank_payment_list_binding.dart';
+import '../modules/bank_payment_list/views/bank_payment_list_view.dart';
 import '../modules/blocked_users/bindings/blocked_users_binding.dart';
 import '../modules/blocked_users/views/blocked_users_view.dart';
 import '../modules/book_issued/bindings/book_issued_binding.dart';
@@ -824,6 +826,11 @@ class AppPages {
       name: _Paths.LAUNCH_WEBVIEW,
       page: () => const LaunchWebviewView(),
       binding: LaunchWebviewBinding(),
+    ),
+    GetPage(
+      name: _Paths.BANK_PAYMENT_LIST,
+      page: () => const BankPaymentListView(),
+      binding: BankPaymentListBinding(),
     ),
   ];
 }

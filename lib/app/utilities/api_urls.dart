@@ -227,6 +227,7 @@ class InfixApi {
   static String dormitoryRoomList = '${baseApi}room-list';
   static String getFeesGroupList = '${baseApi}fees-group';
   static String createFeesGroup = '${baseApi}fees-group-store';
+  static String getBankPaymentList = '${baseApi}bank-payment-list';
   static String updateSingleFeesGroup = '${baseApi}fees-group-update';
 
   static String deleteSingleFeesGroup({required int feesId}) =>
@@ -544,6 +545,7 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
 
   /// Class & Language API
   static String zoomMeetingList = '${baseApi}zoom-class-meeting-list';
+  static String jitsiMeetingList = '${baseApi}jitsi/virtual-class';
 
   static String getJoinMeetingUrlApp({required String meetingID}) => 'zoomus://zoom.us/join?confno=$meetingID'; // android
 

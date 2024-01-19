@@ -243,6 +243,9 @@ class AppFunctions {
       case 'Class':
         Get.toNamed(Routes.STUDENT_CLASS);
         break;
+        case 'Bank Payment':
+        Get.toNamed(Routes.BANK_PAYMENT_LIST);
+        break;
     }
   }
 

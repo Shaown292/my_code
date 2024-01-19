@@ -12,7 +12,7 @@ class VirtualClassTile extends StatelessWidget {
   final String? duration;
   final String? roomNumber;
   final String? buildingName;
-  final String? meetingId;
+  final String? meetingPassword;
   final String? activeStatus;
   final Color? activeStatusColor;
   final Function()? onTap;
@@ -25,7 +25,7 @@ class VirtualClassTile extends StatelessWidget {
     this.duration,
     this.roomNumber,
     this.buildingName,
-    this.meetingId,
+    this.meetingPassword,
     this.onTap, this.activeStatusColor, this.activeStatus, this.onTapForCopy,
   });
 
@@ -99,7 +99,7 @@ class VirtualClassTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Meeting Passcode: $meetingId" ,
+                    "Meeting Passcode: $meetingPassword" ,
                     style: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   Padding(

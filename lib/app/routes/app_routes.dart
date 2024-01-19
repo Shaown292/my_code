@@ -122,6 +122,7 @@ abstract class Routes {
   static const GROUP_CHAT = _Paths.GROUP_CHAT;
   static const VIRTUAL_CLASS_LIST = _Paths.VIRTUAL_CLASS_LIST;
   static const LAUNCH_WEBVIEW = _Paths.LAUNCH_WEBVIEW;
+  static const BANK_PAYMENT_LIST = _Paths.BANK_PAYMENT_LIST;
 }
 
 abstract class _Paths {
@@ -241,4 +242,5 @@ abstract class _Paths {
   static const GROUP_CHAT = '/group-chat';
   static const VIRTUAL_CLASS_LIST = '/virtual-class-list';
   static const LAUNCH_WEBVIEW = '/launch-webview';
+  static const BANK_PAYMENT_LIST = '/bank-payment-list';
 }
