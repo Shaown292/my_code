@@ -3,6 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dar
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/primary_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/config/app_config.dart';
 import 'package:get/get.dart';
@@ -200,6 +201,21 @@ class LoginView extends GetView<LoginController> {
                                 ],
                               ),
                               60.verticalSpacing,
+                              controller.isLoading.value
+                                  ? const SecondaryLoadingWidget(isBottomNav: true,)
+                                  : PrimaryButton(
+                                onTap: () {
+                                  if (validate()) {
+                                    controller.userLogin(
+                                      email: controller
+                                          .emailTextController.text,
+                                      password: controller
+                                          .passwordTextController.text,
+                                    );
+                                  }
+                                },
+                                text: 'Login',
+                              ),
                             ],
                           ),
                         ),
@@ -209,22 +225,6 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
             ),
-      bottomNavigationBar:  controller.isLoading.value
-          ? const SecondaryLoadingWidget(isBottomNav: true,)
-          : BottomNavButton(
-        onTap: () {
-          if (validate()) {
-            // controller.isLoading.value = true;
-            controller.userLogin(
-              email: controller
-                  .emailTextController.text,
-              password: controller
-                  .passwordTextController.text,
-            );
-          }
-        },
-        text: 'Login',
-      ),
           )
         : const NoInternetConnection());
   }

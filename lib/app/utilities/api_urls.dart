@@ -228,6 +228,7 @@ class InfixApi {
   static String getFeesGroupList = '${baseApi}fees-group';
   static String createFeesGroup = '${baseApi}fees-group-store';
   static String getBankPaymentList = '${baseApi}bank-payment-list';
+  static String getBankPaymentStatusUpdate = '${baseApi}bank-payment-change-status';
   static String updateSingleFeesGroup = '${baseApi}fees-group-update';
 
   static String deleteSingleFeesGroup({required int feesId}) =>

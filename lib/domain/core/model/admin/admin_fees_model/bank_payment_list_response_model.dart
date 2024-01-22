@@ -1,18 +1,13 @@
 class BankPaymentListResponseModel {
   bool? success;
-  List<BankPaymentList>? data;
+  BankPaymentList? data;
   String? message;
 
   BankPaymentListResponseModel({this.success, this.data, this.message});
 
   BankPaymentListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    if (json['data'] != null) {
-      data = <BankPaymentList>[];
-      json['data'].forEach((v) {
-        data!.add(BankPaymentList.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? BankPaymentList.fromJson(json['data']) : null;
     message = json['message'];
   }
 
@@ -20,7 +15,7 @@ class BankPaymentListResponseModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     data['message'] = message;
     return data;
@@ -30,9 +25,10 @@ class BankPaymentListResponseModel {
 class BankPaymentList {
   List<ApproveList>? approve;
   List<PendingList>? pending;
-  List<RejectList>? reject;
+  List<RejectedList>? reject;
+  String? status;
 
-  BankPaymentList({this.approve, this.pending, this.reject});
+  BankPaymentList({this.approve, this.pending, this.reject, this.status});
 
   BankPaymentList.fromJson(Map<String, dynamic> json) {
     if (json['approve'] != null) {
@@ -48,11 +44,12 @@ class BankPaymentList {
       });
     }
     if (json['reject'] != null) {
-      reject = <RejectList>[];
+      reject = <RejectedList>[];
       json['reject'].forEach((v) {
-        reject!.add(RejectList.fromJson(v));
+        reject!.add(RejectedList.fromJson(v));
       });
     }
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -66,11 +63,13 @@ class BankPaymentList {
     if (reject != null) {
       data['reject'] = reject!.map((v) => v.toJson()).toList();
     }
+    data['status'] = status;
     return data;
   }
 }
 
 class ApproveList {
+  int? transactionId;
   String? studentName;
   ViewTransaction? viewTransaction;
   int? amount;
@@ -80,7 +79,8 @@ class ApproveList {
   String? status;
 
   ApproveList(
-      {this.studentName,
+      {this.transactionId,
+        this.studentName,
         this.viewTransaction,
         this.amount,
         this.date,
@@ -89,6 +89,7 @@ class ApproveList {
         this.status});
 
   ApproveList.fromJson(Map<String, dynamic> json) {
+    transactionId = json['transaction_id'];
     studentName = json['student_name'];
     viewTransaction = json['view_transaction'] != null
         ? ViewTransaction.fromJson(json['view_transaction'])
@@ -102,6 +103,7 @@ class ApproveList {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['transaction_id'] = transactionId;
     data['student_name'] = studentName;
     if (viewTransaction != null) {
       data['view_transaction'] = viewTransaction!.toJson();
@@ -114,8 +116,56 @@ class ApproveList {
     return data;
   }
 }
+class RejectedList {
+  int? transactionId;
+  String? studentName;
+  ViewTransaction? viewTransaction;
+  int? amount;
+  String? date;
+  String? note;
+  String? file;
+  String? status;
 
+  RejectedList(
+      {this.transactionId,
+        this.studentName,
+        this.viewTransaction,
+        this.amount,
+        this.date,
+        this.note,
+        this.file,
+        this.status});
+
+  RejectedList.fromJson(Map<String, dynamic> json) {
+    transactionId = json['transaction_id'];
+    studentName = json['student_name'];
+    viewTransaction = json['view_transaction'] != null
+        ? ViewTransaction.fromJson(json['view_transaction'])
+        : null;
+    amount = json['amount'];
+    date = json['date'];
+    note = json['note'];
+    file = json['file'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['transaction_id'] = transactionId;
+    data['student_name'] = studentName;
+    if (viewTransaction != null) {
+      data['view_transaction'] = viewTransaction!.toJson();
+    }
+    data['amount'] = amount;
+    data['date'] = date;
+    data['note'] = note;
+    data['file'] = file;
+    data['status'] = status;
+    return data;
+  }
+}
 class PendingList {
+  int? transactionId;
   String? studentName;
   ViewTransaction? viewTransaction;
   int? amount;
@@ -125,7 +175,8 @@ class PendingList {
   String? status;
 
   PendingList(
-      {this.studentName,
+      {this.transactionId,
+        this.studentName,
         this.viewTransaction,
         this.amount,
         this.date,
@@ -134,6 +185,7 @@ class PendingList {
         this.status});
 
   PendingList.fromJson(Map<String, dynamic> json) {
+    transactionId = json['transaction_id'];
     studentName = json['student_name'];
     viewTransaction = json['view_transaction'] != null
         ? ViewTransaction.fromJson(json['view_transaction'])
@@ -147,51 +199,7 @@ class PendingList {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['student_name'] = studentName;
-    if (viewTransaction != null) {
-      data['view_transaction'] = viewTransaction!.toJson();
-    }
-    data['amount'] = amount;
-    data['date'] = date;
-    data['note'] = note;
-    data['file'] = file;
-    data['status'] = status;
-    return data;
-  }
-}
-
-class RejectList {
-  String? studentName;
-  ViewTransaction? viewTransaction;
-  int? amount;
-  String? date;
-  String? note;
-  String? file;
-  String? status;
-
-  RejectList(
-      {this.studentName,
-        this.viewTransaction,
-        this.amount,
-        this.date,
-        this.note,
-        this.file,
-        this.status});
-
-  RejectList.fromJson(Map<String, dynamic> json) {
-    studentName = json['student_name'];
-    viewTransaction = json['view_transaction'] != null
-        ? ViewTransaction.fromJson(json['view_transaction'])
-        : null;
-    amount = json['amount'];
-    date = json['date'];
-    note = json['note'];
-    file = json['file'];
-    status = json['status'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    data['transaction_id'] = transactionId;
     data['student_name'] = studentName;
     if (viewTransaction != null) {
       data['view_transaction'] = viewTransaction!.toJson();
@@ -223,3 +231,7 @@ class ViewTransaction {
     return data;
   }
 }
+
+
+
+

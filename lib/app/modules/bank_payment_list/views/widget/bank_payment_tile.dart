@@ -2,103 +2,166 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/column_tile.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:get/get.dart';
 
 class BankPaymentTile extends StatelessWidget {
   final Color? color;
-  final Function()? onTap;
+  final Function()? onTapDetails;
+  final Function()? onTapApprove;
+  final Function()? onTapReject;
   final String? studentName;
   final String? date;
   final String? amount;
+  final String? currency;
   final String? status;
+  final String? isPending;
   final Color? statusColor;
 
   const BankPaymentTile({
     super.key,
     this.color,
-    this.onTap,
-    this.studentName, this.date, this.amount, this.status, this.statusColor,
+    this.onTapDetails,
+    this.studentName,
+    this.date,
+    this.amount,
+    this.status,
+    this.statusColor,
+    this.onTapApprove,
+    this.onTapReject,
+    this.currency,
+    this.isPending,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(3.0),
+      ),
       child: Container(
         padding: const EdgeInsets.all(15),
-        color: color,
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.circular(3), color: color),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            status != null
+                ? Container(
+                    width: Get.width * 0.2,
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: statusColor),
+                    child: Center(
+                      child: Text(
+                        status ?? "",
+                        style: AppTextStyle.textStyle10WhiteW400,
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
+            5.verticalSpacing,
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Text(
+                  studentName ?? "",
+                  style: AppTextStyle.fontSize14BlackW500,
+                ),
+                const Spacer(),
                 InkWell(
-                  onTap: onTap,
-                  child: Column(
-                    children: [
-                      Text(
-                        "View".tr,
-                        style: AppTextStyle.homeworkView,
+                  onTap: onTapDetails,
+                  child: Container(
+                    width: Get.width * 0.2,
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: AppColors.primaryColor),
+                    child: const Center(
+                      child: Text(
+                        "Details",
+                        style: AppTextStyle.textStyle10WhiteW400,
                       ),
-                      const CustomDivider(
-                        width: 35,
-                        height: 1,
-                        color: AppColors.homeworkViewColor,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ],
-            ),
-            10.verticalSpacing,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ColumnTile(
-                  title: "Student Name".tr,
-                  value: studentName,
-                  width: Get.width * 0.25,
-                ),
-                ColumnTile(
-                  title: "Date".tr,
-                  value: date,
-                  width: Get.width * 0.2,
-                ),
-                ColumnTile(
-                  title: "Amount".tr,
-                  value: amount,
-                  width: Get.width * 0.2,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Status".tr,
-                      style: AppTextStyle.fontSize13BlackW400,
+                10.horizontalSpacing,
+                isPending == "PENDING" || isPending == "APPROVE" ? InkWell(
+                  onTap: onTapReject,
+                  child: Container(
+                    width: Get.width * 0.09,
+                    height: Get.height * 0.04,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.bankPaymentStatusRedColor,
                     ),
-                    15.verticalSpacing,
-                    status != null
-                        ? Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                color: statusColor),
-                            child: Center(
-                              child: Text(
-                                status ?? "",
-                                style: AppTextStyle.textStyle10WhiteW400,
-                              ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: Get.width * 0.065,
+                          height: Get.height * 0.03,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.bankPaymentStatusRedColor,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: Get.width * 0.045,
                             ),
-                          )
-                        : const SizedBox(),
-                  ],
-                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ) : const SizedBox(),
+                isPending == "PENDING" ? 5.horizontalSpacing : const SizedBox(),
+                isPending == "PENDING" || isPending == "REJECT"  ? InkWell(
+                  onTap: onTapApprove,
+                  child: Container(
+                    width: Get.width * 0.09,
+                    height: Get.height * 0.04,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.bankPaymentStatusGreenColor,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: Get.width * 0.065,
+                          height: Get.height * 0.03,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.bankPaymentStatusGreenColor,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.done,
+                              color: Colors.white,
+                              size: Get.width * 0.045,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ) : const SizedBox(),
               ],
             ),
+            Text(
+              "$currency$amount",
+              style: const TextStyle(
+                  color: Color(0xFF3E4347),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400),
+            )
           ],
         ),
       ),
