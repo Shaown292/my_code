@@ -16,13 +16,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class BankPaymentListController extends GetxController {
-
-
   AdminStudentsSearchController adminStudentsSearchController =
-  Get.put(AdminStudentsSearchController());
+      Get.put(AdminStudentsSearchController());
 
-  TextEditingController selectedDateTextController = TextEditingController(
-      text: DateFormat('yyyy-MM-dd').format(DateTime.now()).toString());
+  TextEditingController selectedDateTextController = TextEditingController();
+      // text: DateFormat('MM-dd-yyyy').format(DateTime.now()).toString());
 
   RxList<ApproveList> approveList = <ApproveList>[].obs;
   RxList<PendingList> pendingList = <PendingList>[].obs;
@@ -31,8 +29,12 @@ class BankPaymentListController extends GetxController {
   RxBool statusUpdateLoaded = false.obs;
   RxString classNullValue = ''.obs;
   RxString sectionNullValue = ''.obs;
+  RxString startDate = "".obs;
+  RxString endDate = "".obs;
 
 
+  RxInt classId = 0.obs;
+  RxInt sectionId = 0.obs;
 
   TabController? tabController;
 
@@ -43,15 +45,24 @@ class BankPaymentListController extends GetxController {
   ];
 
   DateTimeRange dateRange = DateTimeRange(
-    start: DateTime.now(),
-    end: DateTime.now(),
+    start: DateTime(2024, 1, 5),
+    end: DateTime(2025, 12, 10),
   );
-  Future<BankPaymentListResponseModel?> getAllBankPaymentList() async {
+
+  Future<BankPaymentListResponseModel?> getAllBankPaymentList(
+      {required String startDate,
+      required String endDate,
+      required int classId,
+      required int sectionId}) async {
     try {
       isLoading.value = true;
 
       final response = await BaseClient().getData(
-        url: InfixApi.getBankPaymentList,
+        url: InfixApi.getBankPaymentList(
+            startDate: startDate,
+            endDate: endDate,
+            classId: classId,
+            sectionId: sectionId),
         header: GlobalVariable.header,
       );
 
@@ -91,10 +102,14 @@ class BankPaymentListController extends GetxController {
     return BankPaymentListResponseModel();
   }
 
-  Future<void> bankPaymentStatusUpdate({required String transactionId, required String status, required int paidAmount, required int index, required String updatedStatus}) async {
+  Future<void> bankPaymentStatusUpdate(
+      {required String transactionId,
+      required String status,
+      required int paidAmount,
+      required int index,
+      required String updatedStatus}) async {
     try {
       statusUpdateLoaded.value = true;
-
 
       final response = await BaseClient().postData(
         url: InfixApi.getBankPaymentStatusUpdate,
@@ -106,57 +121,53 @@ class BankPaymentListController extends GetxController {
         },
       );
 
-      PostRequestResponseModel postRequestResponseModel = PostRequestResponseModel.fromJson(response);
+      PostRequestResponseModel postRequestResponseModel =
+          PostRequestResponseModel.fromJson(response);
 
-      if(postRequestResponseModel.success == true){
-
+      if (postRequestResponseModel.success == true) {
         statusUpdateLoaded.value = false;
-        if(updatedStatus == "PENDING" ){
+        if (updatedStatus == "PENDING") {
           pendingList.removeAt(index);
           pendingList.refresh();
-          if(status == "reject"){
-            rejectList.add(
-              RejectedList(
-                studentName: approveList[index].studentName,
-              )
-            );
+          if (status == "reject") {
+            rejectList.add(RejectedList(
+              studentName: approveList[index].studentName,
+            ));
           }
         }
 
-         if(updatedStatus == "APPROVE"){
+        if (updatedStatus == "APPROVE") {
           approveList.removeAt(index);
           approveList.refresh();
-          rejectList.add(
-            RejectedList(
-              studentName: approveList[index].studentName,
-              amount: approveList[index].amount,
-              file: approveList[index].file,
-              date: approveList[index].date,
-              status: "REJECT",
-            )
-          );
+          rejectList.add(RejectedList(
+            studentName: approveList[index].studentName,
+            amount: approveList[index].amount,
+            file: approveList[index].file,
+            date: approveList[index].date,
+            status: "REJECT",
+          ));
         }
 
-         if(updatedStatus == "REJECT"){
+        if (updatedStatus == "REJECT") {
           rejectList.removeAt(index);
           rejectList.refresh();
-          approveList.add(
-            ApproveList(
-              studentName: rejectList[index].studentName,
-              amount: rejectList[index].amount,
-              file: rejectList[index].file,
-              date: rejectList[index].date,
-              status: "APPROVE",
-            )
-          );
+          approveList.add(ApproveList(
+            studentName: rejectList[index].studentName,
+            amount: rejectList[index].amount,
+            file: rejectList[index].file,
+            date: rejectList[index].date,
+            status: "APPROVE",
+          ));
         }
-        showBasicSuccessSnackBar(message: postRequestResponseModel.message ?? '');
-      } else{
+        showBasicSuccessSnackBar(
+            message: postRequestResponseModel.message ?? '');
+      } else {
         statusUpdateLoaded.value = false;
-        showBasicSuccessSnackBar(message: postRequestResponseModel.message ?? AppText.somethingWentWrong,);
-
+        showBasicSuccessSnackBar(
+          message:
+              postRequestResponseModel.message ?? AppText.somethingWentWrong,
+        );
       }
-
     } catch (e, t) {
       statusUpdateLoaded.value = false;
       debugPrint('$e');
@@ -207,7 +218,6 @@ class BankPaymentListController extends GetxController {
                 title: "Note".tr,
                 value: note,
               ),
-
             ],
           )),
       backgroundColor: Colors.white,
@@ -215,22 +225,28 @@ class BankPaymentListController extends GetxController {
     );
   }
 
+  Future pickDateRange({required BuildContext context}) async {
+    DateTimeRange? newDateRange = await showDateRangePicker(
+      context: context,
+      initialDateRange: dateRange,
+      firstDate: DateTime(2024),
+      lastDate: DateTime(2026),
+    ).then((value) {
+      startDate.value = DateFormat('MM/dd/yyyy').format(value!.start);
+      endDate.value = DateFormat('MM/dd/yyyy').format(value.end);
+      pendingList.clear();
+      approveList.clear();
+      rejectList.clear();
+      getAllBankPaymentList(startDate: startDate.value, endDate: endDate.value, classId: classId.value, sectionId: sectionId.value,);
+      selectedDateTextController.text = "$startDate - $endDate";
 
-    Future pickDateRange({required BuildContext context}) async {
-      DateTimeRange? newDateRange = await showDateRangePicker(
-        barrierColor: AppColors.activeStatusRedColor,
-        context: context,
-        initialDateRange: dateRange,
-        firstDate: DateTime(2024),
-        lastDate: DateTime(2026),
-      );
-      dateRange = newDateRange ?? dateRange;
-    }
-
+    });
+    dateRange = newDateRange ?? dateRange;
+  }
 
   @override
   void onInit() {
-    getAllBankPaymentList();
+    getAllBankPaymentList(startDate: startDate.value, endDate: endDate.value, classId: classId.value, sectionId: sectionId.value,);
     super.onInit();
   }
 }

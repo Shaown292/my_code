@@ -28,47 +28,50 @@ class StudentClassView extends GetView<StudentClassController> {
                     ClassTile(
                       onlineClassTitle: "Jitsi",
                       onlineClassSubTitle: "Virtual Class",
+                      onlineClassMeeting: "Online meeting",
                       onTap: () {
-                        controller.isTapped.value = !controller.isTapped.value;
+                        controller.isJitsiTapped.value = !controller.isJitsiTapped.value;
                         // Get.to(() => const LaunchWebView(launchUrl: 'https://pub.dev/packages/flutter_inappwebview/changelog', title: 'Title',));
                       },
-                      isTapped: controller.isTapped.value,
+                      isTapped: controller.isJitsiTapped.value,
                       onSubTitleTap: () {
                         Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
                           "online_class" : "jitsi",
                         });
                       },
+                      onMeetingTap: (){},
                     ),
                     20.verticalSpacing,
-                    Expanded(
-                      child: ListView.builder(
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            return Obx(
-                              () => ClassTile(
-                                onlineClassTitle: "Zoom",
-                                onlineClassSubTitle: "Virtual Class",
-                                onTap: () {
-                                  if (controller.previousId != index) {
-                                    controller.titleBackgroundColor.value =
-                                        index;
-                                  } else {
-                                    controller.titleBackgroundColor.value = -1;
-                                  }
-                                  controller.previousId =
-                                      controller.titleBackgroundColor.value;
-                                },
-                                isTapped:
-                                    controller.titleBackgroundColor.value ==
-                                        index,
-                                onSubTitleTap: () {
-                                  Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
-                                    "online_class" : "zoom",
-                                  });
-                                },
-                              ),
-                            );
-                          }),
+                    ClassTile(
+                      onlineClassTitle: "Zoom",
+                      onlineClassSubTitle: "Virtual Class",
+                      onlineClassMeeting: "Online meeting",
+                      onTap: () {
+                        controller.isZoomTapped.value = !controller.isZoomTapped.value;
+                      },
+                      isTapped: controller.isZoomTapped.value,
+                      onSubTitleTap: () {
+                        Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
+                          "online_class" : "zoom",
+                        });
+                      },
+                      onMeetingTap: (){},
+                    ),
+                    20.verticalSpacing,
+                    ClassTile(
+                      onlineClassTitle: "Google Meet",
+                      onlineClassSubTitle: "Virtual Class",
+                      onlineClassMeeting: "Online meeting",
+                      onTap: () {
+                        controller.isZoomTapped.value = !controller.isZoomTapped.value;
+                      },
+                      isTapped: controller.isZoomTapped.value,
+                      onSubTitleTap: () {
+                        Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
+                          "online_class" : "google_meet",
+                        });
+                      },
+                      onMeetingTap: (){},
                     ),
                   ],
                 ),

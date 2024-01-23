@@ -1,4 +1,3 @@
-
 import '../../config/app_config.dart';
 
 class InfixApi {
@@ -109,8 +108,8 @@ class InfixApi {
   static String getStudentLeaveList(int studentId) {
     return '${baseApi}apply-leave?student_id=$studentId';
   }
-  static String getTeacherLeaveList = '${baseApi}teacher-leave-list';
 
+  static String getTeacherLeaveList = '${baseApi}teacher-leave-list';
 
   static String getStudentAttendance(
       {required int recordId, required int studentId}) {
@@ -171,6 +170,7 @@ class InfixApi {
   static String getBookSearch({required String bookName}) {
     return "${baseApi}student-library?book_title=$bookName";
   }
+
   static String getChatUserSearch({required String keyword}) {
     return "${baseApi}admin-chat-user-search?keywords=$keyword";
   }
@@ -196,9 +196,12 @@ class InfixApi {
   }
 
   static String getStudentLessonPlan(
-          {required int studentId, required int recordId, required String date}) =>
+          {required int studentId,
+          required int recordId,
+          required String date}) =>
       '${baseApi}student-lesson-plan?student_id=$studentId&record_id=$recordId&next_date=$date';
-      // '${baseApi}student-lesson-plan?user_id=$userId&record_id=$recordId';
+
+  // '${baseApi}student-lesson-plan?user_id=$userId&record_id=$recordId';
 
   static String getStudentLessonPlanDetails({
     required int lessonPlanId,
@@ -206,14 +209,10 @@ class InfixApi {
       '${baseApi}view-lesson-plan-lesson?lesson_plan_id=$lessonPlanId';
   static String forgetPassword = "${baseApi}forget-password";
 
-
-
   //// Student Wallet
   static String getPaymentList = '${baseApi}my-wallet';
   static String getPaymentMethodList = '${baseApi}add-amount-methods';
   static String getBankList = '${baseApi}add-amount-banks';
-
-
 
   //// .....................................................For Admin Module.....................................................
 
@@ -227,8 +226,15 @@ class InfixApi {
   static String dormitoryRoomList = '${baseApi}room-list';
   static String getFeesGroupList = '${baseApi}fees-group';
   static String createFeesGroup = '${baseApi}fees-group-store';
-  static String getBankPaymentList = '${baseApi}bank-payment-list';
-  static String getBankPaymentStatusUpdate = '${baseApi}bank-payment-change-status';
+
+  static String getBankPaymentList(
+          {required String startDate,
+          required String endDate,
+          required int classId,
+          required int sectionId}) =>
+      '${baseApi}bank-payment-list?start_date=$startDate&end_date=$endDate&class_id=$classId&section_id=$sectionId';
+  static String getBankPaymentStatusUpdate =
+      '${baseApi}bank-payment-change-status';
   static String updateSingleFeesGroup = '${baseApi}fees-group-update';
 
   static String deleteSingleFeesGroup({required int feesId}) =>
@@ -236,7 +242,11 @@ class InfixApi {
 
   static String getFeesTypeList = '${baseApi}fees-type';
   static String getAdminFeesInvoiceList = '${baseApi}fees-invoice';
-  static String searchAdminFeesInvoice({required int classId, required int sectionId, required String studentName}) =>
+
+  static String searchAdminFeesInvoice(
+          {required int classId,
+          required int sectionId,
+          required String studentName}) =>
       '${baseApi}fees-invoice?class_id=$classId&section_id=$sectionId&name=$studentName';
 
   static String deleteFeesType({required feesTypeId}) =>
@@ -251,12 +261,14 @@ class InfixApi {
 
   static String getAdminSectionList({required int classId}) =>
       '${baseApi}section-list?class_id=$classId';
+
   static String getTeacherSectionList({required int classId}) =>
       '${baseApi}teacher-attendance-sections?class_id=$classId';
 
   static String getAdminStudentSubjectList(
           {required int classId, required int sectionId}) =>
       '${baseApi}subject-list?class=$classId&section=$sectionId';
+
   static String getTeacherStudentSubjectList(
           {required int classId, required int sectionId}) =>
       '${baseApi}teacher-attendance-subjects?class=$classId&section=$sectionId';
@@ -266,19 +278,26 @@ class InfixApi {
           required int sectionId,
           required String selectedDate}) =>
       '${baseApi}student-search?class=$classId&section=$sectionId&attendance_date=$selectedDate';
+
   static String getTeacherStudentSearchAttendanceList(
-      {required int classId,
-        required int sectionId,
-        required String selectedDate}) =>
+          {required int classId,
+          required int sectionId,
+          required String selectedDate}) =>
       '${baseApi}teacher-attendance-students?class=$classId&section=$sectionId&attendance_date=$selectedDate';
 
   /// Attendance
-  static String adminSubmitStudentAttendance = '${baseApi}submit-student-class-attendance';
-  static String teacherSubmitStudentAttendance = '${baseApi}teacher-class-attendance-store';
-  static String adminSubmitSubjectWiseStudentAttendance = '${baseApi}subject-wise-attendance-submit';
-  static String teacherSubmitSubjectWiseStudentAttendance = '${baseApi}teacher-subject-attendance-submit';
-  static String adminAttendanceMarkUnMarkHolyDay = '${baseApi}student-attendance-holiday';
-  static String teacherAttendanceMarkUnMarkHolyDay = '${baseApi}teacher-subject-holiday';
+  static String adminSubmitStudentAttendance =
+      '${baseApi}submit-student-class-attendance';
+  static String teacherSubmitStudentAttendance =
+      '${baseApi}teacher-class-attendance-store';
+  static String adminSubmitSubjectWiseStudentAttendance =
+      '${baseApi}subject-wise-attendance-submit';
+  static String teacherSubmitSubjectWiseStudentAttendance =
+      '${baseApi}teacher-subject-attendance-submit';
+  static String adminAttendanceMarkUnMarkHolyDay =
+      '${baseApi}student-attendance-holiday';
+  static String teacherAttendanceMarkUnMarkHolyDay =
+      '${baseApi}teacher-subject-holiday';
 
   static String getAdminStudentSearchList({
     required int classId,
@@ -296,6 +315,7 @@ class InfixApi {
     required String name,
   }) =>
       '${baseApi}subject-wise-students?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&name=$name&roll_no=$rollINo';
+
   static String getTeacherSubAttenSearchList({
     required int classId,
     required int sectionId,
@@ -326,6 +346,7 @@ class InfixApi {
     required int subjectNameId,
   }) =>
       '${baseApi}student-subject-attendance?record_id=$recordId&subject_id=$subjectNameId';
+
   static String getTeacherSubAttenSearchDetailsList({
     required int recordId,
     required int subjectNameId,
@@ -336,6 +357,7 @@ class InfixApi {
     required int studentAttendanceId,
   }) =>
       '${baseApi}student-attendance-report-search?student_attendance_id=$studentAttendanceId';
+
   static String getTeacherStudentSearchDetailsList({
     required int studentAttendanceId,
   }) =>
@@ -348,7 +370,8 @@ class InfixApi {
     required String attendanceDate,
   }) =>
       '${baseApi}subject-attendance-search?class=$classId&section=$sectionId&subject=$subjectId&attendance_date=$attendanceDate';
-      // '${baseApi}subject-attendance-search?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&attendance_date=$attendanceDate';
+
+  // '${baseApi}subject-attendance-search?class_id=$classId&section_id=$sectionId&subject_id=$subjectId&attendance_date=$attendanceDate';
 
   static String getTeacherSubjectSearchAttendanceList({
     required int classId,
@@ -415,11 +438,12 @@ class InfixApi {
   static String getSingleStudentDocumentsData({required int studentId}) =>
       '${baseApi}student-profile-documents?student_id=$studentId';
 
-
   /// Admin Content Module
   static String getAdminContentList = '${baseApi}admin-upload-content-list';
   static String postAdminContent = '${baseApi}store-admin-content';
-  static String adminContentDelete({required int contentId}) => '${baseApi}delete-admin-content?content_id=$contentId';
+
+  static String adminContentDelete({required int contentId}) =>
+      '${baseApi}delete-admin-content?content_id=$contentId';
 
   /// Admin Staff Notice
   static String getAdminStaffNoticeList = '${baseApi}admin-staff-notice-list';
@@ -431,58 +455,94 @@ class InfixApi {
   static String getAdminTransportRouteList = '${baseApi}admin-route-list';
   static String getAdminDriverList = '${baseApi}admin-vehicle-drivers';
   static String postAdminTransportRoute = '${baseApi}admin-route-store';
-  static String getAdminVehicleAssignRouteAndVehicleList = '${baseApi}assign-vehicle-to-route';
-  static String postAdminVehicleAssignRouteAndVehicle = '${baseApi}store-assign-vehicle-to-route';
+  static String getAdminVehicleAssignRouteAndVehicleList =
+      '${baseApi}assign-vehicle-to-route';
+  static String postAdminVehicleAssignRouteAndVehicle =
+      '${baseApi}store-assign-vehicle-to-route';
   static String postAdminRouteUpdate = '${baseApi}admin-route-update';
-  static String deleteRoute({required int routeId}) => '${baseApi}admin-route-delete?route_id=$routeId';
 
+  static String deleteRoute({required int routeId}) =>
+      '${baseApi}admin-route-delete?route_id=$routeId';
 
   /// Library
-  static String getAdminBookCategoryAndSubjectList = '${baseApi}admin-add-book-dropdown-items';
+  static String getAdminBookCategoryAndSubjectList =
+      '${baseApi}admin-add-book-dropdown-items';
   static String postAdminAddBook = '${baseApi}admin-book-store';
-  static String createFeesType= '${baseApi}fees-type-store';
-  static String updateSingleFeesType= '${baseApi}fees-type-update';
+  static String createFeesType = '${baseApi}fees-type-store';
+  static String updateSingleFeesType = '${baseApi}fees-type-update';
 
   /// Admin Library Module
   static String getAdminMemberRolesList = '${baseApi}admin-add-member-roles';
-  static String postAdminLibraryAddMember = '${baseApi}store-admin-library-member';
-  static String getAdminMemberUserNameList({required int roleId}) => '${baseApi}admin-add-member-user-names?role_id=$roleId';
-  static String getAdminMemberClassList({required int roleId}) => '${baseApi}admin-add-member-classes?role_id=$roleId';
-  static String getAdminMemberSectionList({required int classId}) => '${baseApi}admin-add-member-sections?class_id=$classId';
-  static String getAdminMemberStudentList({required int classId, required int sectionId}) => '${baseApi}admin-add-member-students?class=$classId&section=$sectionId';
-  static String getAdminMemberParentList({required int classId, required int sectionId}) => '${baseApi}admin-add-member-parents?class=$classId&section=$sectionId';
+  static String postAdminLibraryAddMember =
+      '${baseApi}store-admin-library-member';
 
+  static String getAdminMemberUserNameList({required int roleId}) =>
+      '${baseApi}admin-add-member-user-names?role_id=$roleId';
 
+  static String getAdminMemberClassList({required int roleId}) =>
+      '${baseApi}admin-add-member-classes?role_id=$roleId';
+
+  static String getAdminMemberSectionList({required int classId}) =>
+      '${baseApi}admin-add-member-sections?class_id=$classId';
+
+  static String getAdminMemberStudentList(
+          {required int classId, required int sectionId}) =>
+      '${baseApi}admin-add-member-students?class=$classId&section=$sectionId';
+
+  static String getAdminMemberParentList(
+          {required int classId, required int sectionId}) =>
+      '${baseApi}admin-add-member-parents?class=$classId&section=$sectionId';
 
   /// Admin Book Module
   static String getAdminBookList = '${baseApi}admin-book-list';
 
-
   /// Teacher academic module
   static String getTeacherSubjectList = '${baseApi}subjects';
-  static String getTeacherMyRoutineList({required int userId}) => '${baseApi}teacher-class-routine?user_id=$userId';
-  static String getTeacherClassRoutineList({required int classId, required int sectionId}) => '${baseApi}class-routine?class_id=$classId&section_id=$sectionId';
 
+  static String getTeacherMyRoutineList({required int userId}) =>
+      '${baseApi}teacher-class-routine?user_id=$userId';
 
-
+  static String getTeacherClassRoutineList(
+          {required int classId, required int sectionId}) =>
+      '${baseApi}class-routine?class_id=$classId&section_id=$sectionId';
 
   ///// ..............>>>>>>>>>>>>>>> Teacher Teacher Teacher Teacher ...................>>>>>>>>>>>>>>>>>>
 
   /// Teacher Homework
   static String getTeacherHomeworkList = '${baseApi}teacher-homework-list';
-  static String submitEvaluation = '${baseApi}teacher-store-homework-evaluation';
+  static String submitEvaluation =
+      '${baseApi}teacher-store-homework-evaluation';
   static String teacherAddHomework = '${baseApi}teacher-add-homework';
-  static String getTeacherAddHomeworkClassList = '${baseApi}teacher-add-homework-for-class';
-  static String getTeacherAddHomeworkSubjectList({required int classId}) => '${baseApi}teacher-add-homework-for-subject?class_id=$classId';
-  static String getTeacherAddHomeworkSectionList({required int classId, required int subjectId}) => '${baseApi}teacher-add-homework-for-section?class_id=$classId&subject_id=$subjectId';
-  static String getTeacherHomeworkEvaluationList({required int classId, required int sectionId, required int homeworkId, required String searchKey}) => '${baseApi}teacher-homework-evaluation-list?class_id=$classId&section_id=$sectionId&homework_id=$homeworkId&search=$searchKey';
-  static String getTeacherHomeworkSearch({required int classId,  required int subjectId, required int sectionId, }) => '${baseApi}teacher-homework-search?class_id=$classId&subject_id=$subjectId&section_id=$sectionId';
+  static String getTeacherAddHomeworkClassList =
+      '${baseApi}teacher-add-homework-for-class';
+
+  static String getTeacherAddHomeworkSubjectList({required int classId}) =>
+      '${baseApi}teacher-add-homework-for-subject?class_id=$classId';
+
+  static String getTeacherAddHomeworkSectionList(
+          {required int classId, required int subjectId}) =>
+      '${baseApi}teacher-add-homework-for-section?class_id=$classId&subject_id=$subjectId';
+
+  static String getTeacherHomeworkEvaluationList(
+          {required int classId,
+          required int sectionId,
+          required int homeworkId,
+          required String searchKey}) =>
+      '${baseApi}teacher-homework-evaluation-list?class_id=$classId&section_id=$sectionId&homework_id=$homeworkId&search=$searchKey';
+
+  static String getTeacherHomeworkSearch({
+    required int classId,
+    required int subjectId,
+    required int sectionId,
+  }) =>
+      '${baseApi}teacher-homework-search?class_id=$classId&subject_id=$subjectId&section_id=$sectionId';
 
   /// Teacher Content
   static String getTeacherContentList = '${baseApi}teacher-content-list';
   static String postTeacherContent = '${baseApi}teacher-create-content';
-  static String teacherContentDelete({required contentId}) => '${baseApi}teacher-delete-content?content_id=$contentId';
 
+  static String teacherContentDelete({required contentId}) =>
+      '${baseApi}teacher-delete-content?content_id=$contentId';
 
   /// Teacher Notice
   static String getTeacherNoticeList = '${baseApi}teacher-notice-list';
@@ -494,17 +554,13 @@ class InfixApi {
   static String getTeacherLeaveType = '${baseApi}teacher-leave-types';
   static String teacherApplyLeave = '${baseApi}teacher-leave-store';
 
-
-
-
   /// .......................................... Parent Module .....................................................
-static String getParentsChildData({required int parentId}) => '${baseApi}parent-childrens?parent_id=$parentId';
-
+  static String getParentsChildData({required int parentId}) =>
+      '${baseApi}parent-childrens?parent_id=$parentId';
 
   /// About
 
   static String getTeacherAbout = '${baseApi}teacher-about';
-
 
   /// ..............................................................................................................
   /// ........................................... Chat Module ......................................................
@@ -513,51 +569,74 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String getGroupChatUserList = '${baseApi}admin-chat-groups';
   static String sendSingleChat = '${baseApi}admin-chat-send';
   static String sendGroupChat = '${baseApi}admin-group-chat-send';
-  static String getSingleChatList({required int userId}) => '${baseApi}admin-chat-list?to_user_id=$userId';
-  static String getGroupChatList({required String groupId}) => '${baseApi}admin-group-chats?group_id=$groupId';
-  static String getSingleChatFileList({required int userID}) => '${baseApi}admin-single-chat-files?user_id=$userID';
-  static String getGroupChatFileList({required String groupId}) => '${baseApi}admin-group-chat-files?group_id=$groupId';
-  static String getGroupChatMemberList({required String groupId}) => '${baseApi}admin-group-members?group_id=$groupId';
-  static String groupLeaveMember({required String groupId}) => '${baseApi}admin-group-leave?group_id=$groupId';
-  static String groupDelete({required String groupId}) => '${baseApi}admin-group-delete?group_id=$groupId';
-  static String groupDeleteSingleChat({required int threadId}) => '${baseApi}admin-group-chat-remove?thread_id=$threadId';
-  static String deleteSingleChat({required int messageId}) => '${baseApi}delete-admin-chat-single-message?message_id=$messageId';
-  static String groupAddMember='${baseApi}admin-add-group-member';
-  static String forwardSingleChat({required int userId, required int messageId}) => '${baseApi}forward-admin-chat-single-message?to_user_id=$userId&message_id=$messageId';
+
+  static String getSingleChatList({required int userId}) =>
+      '${baseApi}admin-chat-list?to_user_id=$userId';
+
+  static String getGroupChatList({required String groupId}) =>
+      '${baseApi}admin-group-chats?group_id=$groupId';
+
+  static String getSingleChatFileList({required int userID}) =>
+      '${baseApi}admin-single-chat-files?user_id=$userID';
+
+  static String getGroupChatFileList({required String groupId}) =>
+      '${baseApi}admin-group-chat-files?group_id=$groupId';
+
+  static String getGroupChatMemberList({required String groupId}) =>
+      '${baseApi}admin-group-members?group_id=$groupId';
+
+  static String groupLeaveMember({required String groupId}) =>
+      '${baseApi}admin-group-leave?group_id=$groupId';
+
+  static String groupDelete({required String groupId}) =>
+      '${baseApi}admin-group-delete?group_id=$groupId';
+
+  static String groupDeleteSingleChat({required int threadId}) =>
+      '${baseApi}admin-group-chat-remove?thread_id=$threadId';
+
+  static String deleteSingleChat({required int messageId}) =>
+      '${baseApi}delete-admin-chat-single-message?message_id=$messageId';
+  static String groupAddMember = '${baseApi}admin-add-group-member';
+
+  static String forwardSingleChat(
+          {required int userId, required int messageId}) =>
+      '${baseApi}forward-admin-chat-single-message?to_user_id=$userId&message_id=$messageId';
   static String forwardGroupChat = '${baseApi}admin-group-chat-forward';
-  static String blockSingleUser({required String type, required int userId}) => '${baseApi}chat-user-block-action?type=$type&user_id=$userId';
-  static String changeActiveStatus({ required int statusKey}) => '${baseApi}change-admin-chat-user-status?status=$statusKey';
 
-  static String chatSetting='${AppConfig.domainName}/api/chat/settings/permission';
-  static String chatStatus='${baseApi}single-user-chat-status';
-  static String blockedChatUser ='${baseApi}blocked-chat-users';
+  static String blockSingleUser({required String type, required int userId}) =>
+      '${baseApi}chat-user-block-action?type=$type&user_id=$userId';
 
+  static String changeActiveStatus({required int statusKey}) =>
+      '${baseApi}change-admin-chat-user-status?status=$statusKey';
+
+  static String chatSetting =
+      '${AppConfig.domainName}/api/chat/settings/permission';
+  static String chatStatus = '${baseApi}single-user-chat-status';
+  static String blockedChatUser = '${baseApi}blocked-chat-users';
 
   /// Payment Gateway Handler
-  static String paymentHandler ='${baseApi}handle-payment-request';
+  static String paymentHandler = '${baseApi}handle-payment-request';
 
   /// Language API
   static String languageList = '${baseApi}language-list';
   static String activeUserLanguageList = '${baseApi}user-language-list';
-  static String updateLanguage({required langId}) => '${baseApi}language-list?lang_id=$langId';
 
-
-
+  static String updateLanguage({required langId}) =>
+      '${baseApi}language-list?lang_id=$langId';
 
   /// Class & Language API
   static String zoomMeetingList = '${baseApi}zoom-class-meeting-list';
   static String jitsiMeetingList = '${baseApi}jitsi/virtual-class';
 
-  static String getJoinMeetingUrlApp({required String meetingID}) => 'zoomus://zoom.us/join?confno=$meetingID'; // android
+  static String getJoinMeetingUrlApp({required String meetingID}) =>
+      'zoomus://zoom.us/join?confno=$meetingID'; // android
 
-
-  static String getJoinMeetingUrlWeb({required String meetingID}) => 'https://zoom.us/wc/$meetingID/join?prefer=1';
+  static String getJoinMeetingUrlWeb({required String meetingID}) =>
+      'https://zoom.us/wc/$meetingID/join?prefer=1';
 
   /// Account Related api
   static String changePassword = '${baseApi}change-password';
   static String accountDelete = '${baseApi}user-delete';
-
-
 
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
@@ -693,8 +772,6 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
   static String getMeetingUrl({mid, uid, param}) {
     return "$baseApi$param/meeting_id/$mid/user_id/$uid";
   }
-
-
 
   static String feesDataSend(String name, String description) {
     return "${baseApi}fees-group-store?name=$name&description=$description";
@@ -842,7 +919,6 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
     return "${baseApi}child-bank-slip-store?amount=$amount&class_id=$classID&section_id=$sectionID&user_id=$userID&fees_type_id=$feeTypeID&payment_mode=$paymentMode&date=$paymentDate";
   }
 
-
   static String bankList = "${baseApi}banks";
 
   static String userLeaveType(id) {
@@ -962,7 +1038,8 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
     return "${baseApi}student-homework?record_id=$recordId";
   }
 
-  static String getStudentHomeWorkUploadFiles = "${baseApi}upload-homework-content";
+  static String getStudentHomeWorkUploadFiles =
+      "${baseApi}upload-homework-content";
 
   static String studentUploadHomework = '${baseApi}student-upload-homework';
 
@@ -1119,7 +1196,9 @@ static String getParentsChildData({required int parentId}) => '${baseApi}parent-
     return "${baseApi}onlineexam/online-exam-result/$studentId/$recordId";
   }
 
-  static String chatBroadCastAuth = "https://spondan.com/infixedu/api/broadcasting/auth";
+  static String chatBroadCastAuth =
+      "https://spondan.com/infixedu/api/broadcasting/auth";
+
   // static String chatBroadCastAuth = "${baseApi}broadcasting/auth";
 
   //Lesson Plan

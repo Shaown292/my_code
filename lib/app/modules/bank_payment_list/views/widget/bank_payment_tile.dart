@@ -14,6 +14,8 @@ class BankPaymentTile extends StatelessWidget {
   final String? amount;
   final String? currency;
   final String? status;
+  final bool isApproved;
+  final bool isRejected;
   final String? isPending;
   final Color? statusColor;
 
@@ -30,6 +32,8 @@ class BankPaymentTile extends StatelessWidget {
     this.onTapReject,
     this.currency,
     this.isPending,
+    this.isApproved = false,
+    this.isRejected = false,
   });
 
   @override
@@ -88,14 +92,14 @@ class BankPaymentTile extends StatelessWidget {
                   ),
                 ),
                 10.horizontalSpacing,
-                isPending == "PENDING" || isPending == "APPROVE" ? InkWell(
+                 InkWell(
                   onTap: onTapReject,
                   child: Container(
                     width: Get.width * 0.09,
                     height: Get.height * 0.04,
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.bankPaymentStatusRedColor,
+                      color: isRejected ? AppColors.disabledColor : AppColors.bankPaymentStatusRedColor,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +109,7 @@ class BankPaymentTile extends StatelessWidget {
                           height: Get.height * 0.03,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColors.bankPaymentStatusRedColor,
+                            color: isRejected ? AppColors.disabledColor : AppColors.bankPaymentStatusRedColor,
                             border: Border.all(color: Colors.white, width: 2),
                           ),
                           child: Center(
@@ -119,16 +123,16 @@ class BankPaymentTile extends StatelessWidget {
                       ],
                     ),
                   ),
-                ) : const SizedBox(),
-                isPending == "PENDING" ? 5.horizontalSpacing : const SizedBox(),
-                isPending == "PENDING" || isPending == "REJECT"  ? InkWell(
+                ) ,
+                5.horizontalSpacing ,
+               InkWell(
                   onTap: onTapApprove,
                   child: Container(
                     width: Get.width * 0.09,
                     height: Get.height * 0.04,
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.bankPaymentStatusGreenColor,
+                      color: isApproved ? AppColors.disabledColor : AppColors.bankPaymentStatusGreenColor,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +142,7 @@ class BankPaymentTile extends StatelessWidget {
                           height: Get.height * 0.03,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColors.bankPaymentStatusGreenColor,
+                            color: isApproved ? AppColors.disabledColor : AppColors.bankPaymentStatusGreenColor,
                             border: Border.all(color: Colors.white, width: 2),
                           ),
                           child: Center(
@@ -152,7 +156,7 @@ class BankPaymentTile extends StatelessWidget {
                       ],
                     ),
                   ),
-                ) : const SizedBox(),
+                ) ,
               ],
             ),
             Text(

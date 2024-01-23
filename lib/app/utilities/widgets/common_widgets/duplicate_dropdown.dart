@@ -14,7 +14,8 @@ class DuplicateDropdown extends StatelessWidget {
   final String? hint;
   final TextStyle? textStyle;
   final bool isChat;
-  final double? padding;
+  final EdgeInsets? padding;
+  final double? sidePadding;
   final double? borderRadius;
 
   const DuplicateDropdown({
@@ -30,13 +31,13 @@ class DuplicateDropdown extends StatelessWidget {
     this.textStyle,
     this.isChat = false,
     this.padding,
-    this.borderRadius,
+    this.borderRadius, this.sidePadding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding:  EdgeInsets.symmetric(horizontal: sidePadding ?? 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius ?? 8),
         border: Border.all(
@@ -44,7 +45,7 @@ class DuplicateDropdown extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(padding ?? 8.0),
+        padding: padding ?? const EdgeInsets.all( 8.0),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<dynamic>(
             hint: Text(
