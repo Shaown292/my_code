@@ -16,13 +16,7 @@ class PrimaryAppBar extends StatelessWidget {
       elevation: 0,
       title: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: InkWell(
-              onTap: ()=> Get.back(),
-              child: const Icon(Icons.arrow_back, color: Colors.white,),
-            ),
-          ),
+          //
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
