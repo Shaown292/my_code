@@ -9,16 +9,18 @@ import 'initializer.dart';
 void main() async {
   await Initializer.init();
   // Map<String, Map<String, String>> languagesList = await dep.init();
-  print('RTL Value ::: ${Get.find<GlobalRxVariableController>().isRtl}');
   runApp(
     Obx(() => GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      textDirection: Get.find<GlobalRxVariableController>().isRtl.value ? TextDirection.rtl : TextDirection.ltr,
-      locale: language == null ? Get.deviceLocale : Locale(language!),
-      translations: LanguageController(),
-      fallbackLocale: language != null ? Locale(language!) : const Locale('en'),
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-    )),
+          debugShowCheckedModeBanner: false,
+          textDirection: Get.find<GlobalRxVariableController>().isRtl.value
+              ? TextDirection.rtl
+              : TextDirection.ltr,
+          locale: language == null ? Get.deviceLocale : Locale(language!),
+          translations: LanguageController(),
+          fallbackLocale:
+              language != null ? Locale(language!) : const Locale('en'),
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.routes,
+        )),
   );
 }
