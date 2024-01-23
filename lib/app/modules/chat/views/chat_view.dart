@@ -27,7 +27,7 @@ class ChatView extends GetView<ChatController> {
             return SizedBox(
               width: 150,
               child: DuplicateDropdown(
-                padding: 0,
+                padding: EdgeInsets.zero,
                 dropdownValue: controller.activeStatus.value,
                 dropdownList: controller.activeStatusList,
                 color: Colors.white,

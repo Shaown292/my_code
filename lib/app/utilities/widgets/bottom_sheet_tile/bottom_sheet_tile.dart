@@ -79,7 +79,6 @@ class BottomSheetTile extends StatelessWidget {
                   child: Text(
                     value ?? "",
                     style: AppTextStyle.blackFontSize12W400,
-                    textAlign: TextAlign.justify,
                   ),
                 ),
               ],

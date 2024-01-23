@@ -7,8 +7,10 @@ class ClassTile extends StatelessWidget {
   final String? onlineClassTitle;
   final TextStyle? onlineClassTitleTextStyle;
   final String? onlineClassSubTitle;
+  final String? onlineClassMeeting;
   final Function()? onTap;
   final Function()? onSubTitleTap;
+  final Function()? onMeetingTap;
   final bool isTapped;
 
   const ClassTile({
@@ -18,7 +20,7 @@ class ClassTile extends StatelessWidget {
     this.onlineClassSubTitle,
     this.onlineClassTitleTextStyle,
     this.isTapped = false,
-    this.onSubTitleTap,
+    this.onSubTitleTap, this.onlineClassMeeting, this.onMeetingTap,
   });
 
   @override
@@ -83,6 +85,23 @@ class ClassTile extends StatelessWidget {
                       ),
                     ),
                   )
+                : const SizedBox(),
+            isTapped
+                ? InkWell(
+              onTap: onMeetingTap,
+              child: Container(
+                width: Get.width,
+                padding: const EdgeInsets.all(8),
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(
+                    onlineClassMeeting ?? "",
+                    style: AppTextStyle.primaryFont14,
+                  ),
+                ),
+              ),
+            )
                 : const SizedBox(),
           ],
         ),
