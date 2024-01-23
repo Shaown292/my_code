@@ -70,6 +70,11 @@ class SettingsController extends GetxController {
             Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['default_locale'];
             print('Local ::: ${Get.find<LanguageController>().appLocale}');
             Get.updateLocale(Locale(Get.find<LanguageController>().appLocale));
+
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setBool('isRtl', responseData['lang_list'][i]['rtl']);
+            Get.find<GlobalRxVariableController>().isRtl.value = responseData['lang_list'][i]['rtl'];
+            print('Is RTL ::: ${Get.find<GlobalRxVariableController>().isRtl}');
           }
         }
       } else {

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1025584632418",
+    "project_id": "infix-edu-v2-test",
+    "storage_bucket": "infix-edu-v2-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025584632418:android:5ce6f055e3f61a2b41b73b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_single_getx_api_v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUooJQB7FqdnVcXvzH8K8wku1_epTDj40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

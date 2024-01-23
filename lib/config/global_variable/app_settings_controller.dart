@@ -8,6 +8,7 @@ import 'package:flutter_single_getx_api_v2/config/language/controller/language_c
 import 'package:flutter_single_getx_api_v2/config/language/controller/languages/translated_language.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSettingsController extends GetxController {
   RxBool languageLoader = false.obs;
@@ -52,6 +53,10 @@ class AppSettingsController extends GetxController {
             // Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['locale'];
             Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['default_locale'];
             Get.updateLocale(Locale(responseData['lang_list'][i]['locale']));
+            Get.find<GlobalRxVariableController>().isRtl.value = responseData['lang_list'][i]['rtl'];
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setBool('isRtl', responseData['lang_list'][i]['rtl']);
+            print('Is RTL ::: ${Get.find<GlobalRxVariableController>().isRtl}');
           }
         }
         navNextPage();
@@ -106,6 +111,10 @@ class AppSettingsController extends GetxController {
             // Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['locale'];
             Get.find<LanguageController>().appLocale = responseData['lang_list'][i]['default_locale'];
             Get.updateLocale(Locale(Get.find<LanguageController>().appLocale));
+            Get.find<GlobalRxVariableController>().isRtl.value = responseData['lang_list'][i]['rtl'];
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setBool('isRtl', responseData['lang_list'][i]['rtl']);
+            print('Is RTL ::: ${Get.find<GlobalRxVariableController>().isRtl}');
           }
         }
         navNextPage();

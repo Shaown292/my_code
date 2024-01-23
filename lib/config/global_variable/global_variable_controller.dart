@@ -67,6 +67,7 @@ class GlobalRxVariableController extends GetxController {
   final staffId = Rxn<int>();
   final userId = Rxn<int>();
   RxBool isStudent = false.obs;
+  RxBool isRtl = false.obs;
 
   final pusherApiKey = Rxn<String>();
   final pusherClusterKey = Rxn<String>();

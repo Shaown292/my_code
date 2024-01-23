@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_internet/internet_controller.dart';
@@ -16,6 +17,7 @@ import 'config/global_variable/app_settings_controller.dart';
 class Initializer {
   static Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
+    Firebase.initializeApp();
     _initGlobalLoading();
     _getStoredLanguage();
     _initRotation();
@@ -54,8 +56,8 @@ class Initializer {
     languageController.langName.value = sharedPref.getString('language_name') ?? 'English';
     language = sharedPref.getString('language') ?? 'en';
     Get.updateLocale(Locale(languageController.appLocale));
-
-    debugPrint('::::::::::::::::: $language');
+    Get.find<GlobalRxVariableController>().isRtl.value = sharedPref.getBool('isRtl') ?? false;
+    debugPrint('::::::::::::::::: $language ::: ${Get.find<GlobalRxVariableController>().isRtl}');
   }
 
   /// http client

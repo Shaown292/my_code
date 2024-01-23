@@ -31,7 +31,7 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(textDirection: TextDirection.ltr, child: Column(
+    return Column(
       children: [
         InkWell(
           onTap: onTileTap,
@@ -89,6 +89,6 @@ class SettingsTile extends StatelessWidget {
           width: Get.width,
         )
       ],
-    ));
+    );
   }
 }

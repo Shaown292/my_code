@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
 import 'config/language/controller/language_controller.dart';
@@ -8,18 +9,16 @@ import 'initializer.dart';
 void main() async {
   await Initializer.init();
   // Map<String, Map<String, String>> languagesList = await dep.init();
+  print('RTL Value ::: ${Get.find<GlobalRxVariableController>().isRtl}');
   runApp(
-    GetMaterialApp(
+    Obx(() => GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      textDirection: TextDirection.ltr,
+      textDirection: Get.find<GlobalRxVariableController>().isRtl.value ? TextDirection.rtl : TextDirection.ltr,
       locale: language == null ? Get.deviceLocale : Locale(language!),
       translations: LanguageController(),
       fallbackLocale: language != null ? Locale(language!) : const Locale('en'),
-      // translations: Messages(languages: languagesList),
-      // fallbackLocale: Locale(LanguageConstants.languages[0].languageCode,
-      //     LanguageConstants.languages[0].countryCode),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
-    ),
+    )),
   );
 }
