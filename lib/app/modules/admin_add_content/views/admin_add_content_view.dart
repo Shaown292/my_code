@@ -56,7 +56,6 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     focusBorderActive: true,
                     hintText: "${"Title".tr}*",
                     fillColor: Colors.white,
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   15.verticalSpacing,
                    Text(
@@ -177,7 +176,6 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "${"Assign Date".tr}*",
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -214,7 +212,6 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     iconOnTap: () {
                       controller.pickFile();
                     },
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   10.verticalSpacing,
 
@@ -225,7 +222,6 @@ class AdminAddContentView extends GetView<AdminAddContentController> {
                     focusBorderActive: true,
                     hintText: "Description".tr,
                     fillColor: Colors.white,
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     minLine: 1,
                     maxLine: 2,
                   ),

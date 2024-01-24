@@ -38,6 +38,7 @@ dependencies:
   firebase_messaging: ^14.6.7
   rxdart: ^0.27.7
   edge_alerts: ^0.0.1
+  iconsax: ^0.0.8
   pdf_flutter:
     git: https://github.com/erluxman/pdf_flutter
 

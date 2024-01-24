@@ -31,7 +31,13 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "${"Select".tr} ${"Class".tr} *",
+                      style: AppTextStyle.fontSize13BlackW400,
+                    ),
+                    10.verticalSpacing,
                     controller.adminStudentsSearchController.loadingController
                             .isLoading
                         ? const SecondaryLoadingWidget()
@@ -59,6 +65,11 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                             },
                           ),
                     20.verticalSpacing,
+                    Text(
+                      "${"Select".tr} ${"Class".tr} *",
+                      style: AppTextStyle.fontSize13BlackW400,
+                    ),
+                    10.verticalSpacing,
                     controller.adminStudentsSearchController.sectionLoader.value
                         ? const SecondaryLoadingWidget()
                         : DuplicateDropdown(

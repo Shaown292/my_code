@@ -88,7 +88,7 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
-                  (Get.height * 0.4).verticalSpacing,
+                  (Get.height * 0.3).verticalSpacing,
                   controller.searchLoader.value
                       ? const SecondaryLoadingWidget(
                           isBottomNav: true,

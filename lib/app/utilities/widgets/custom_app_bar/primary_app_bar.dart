@@ -16,7 +16,6 @@ class PrimaryAppBar extends StatelessWidget {
       elevation: 0,
       title: Row(
         children: [
-          //
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

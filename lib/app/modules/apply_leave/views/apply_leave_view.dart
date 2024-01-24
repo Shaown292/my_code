@@ -56,7 +56,6 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                       ImagePath.calender,
                       color: AppColors.profileValueColor,
                     ),
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   10.verticalSpacing,
                   CustomTextFormField(
@@ -73,7 +72,6 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                       ImagePath.calender,
                       color: AppColors.profileValueColor,
                     ),
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   10.verticalSpacing,
                   CustomTextFormField(
@@ -85,7 +83,6 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "${"To Date".tr} *".tr,
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -120,7 +117,6 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                       controller.pickFile();
                       debugPrint("Browser ::: ${controller.file}");
                     },
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   10.verticalSpacing,
                   CustomTextFormField(
@@ -128,7 +124,6 @@ class ApplyLeaveView extends GetView<ApplyLeaveController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "Reason".tr,
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     maxLine: 3,
 

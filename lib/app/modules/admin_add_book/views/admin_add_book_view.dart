@@ -30,7 +30,6 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   10.verticalSpacing,
-
                   const Text("Add Book Category*", style: AppTextStyle.fontSize13BlackW400,),
                   5.verticalSpacing,
                   /// Book Category dropdown List
@@ -64,7 +63,7 @@ class AdminAddBookView extends GetView<AdminAddBookController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "Title*",
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
+                    // hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                   ),
                   10.verticalSpacing,

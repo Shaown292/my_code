@@ -29,14 +29,14 @@ class MyWalletModel {
 }
 
 class Data {
-  String? myBalance;
+  int? myBalance;
   String? currencySymbol;
   List<WalletTransactions>? walletTransactions;
 
   Data({this.myBalance, this.currencySymbol, this.walletTransactions});
 
   Data.fromJson(Map<String, dynamic> json) {
-    myBalance = json['myBalance'];
+    myBalance = int.parse(json['myBalance']);
     currencySymbol = json['currencySymbol'];
     if (json['walletTransactions'] != null) {
       walletTransactions = <WalletTransactions>[];
