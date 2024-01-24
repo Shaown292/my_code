@@ -120,17 +120,20 @@ class AuthDatabase {
       globalRxVariableController.parentId.value = null;
       globalRxVariableController.staffId.value = null;
       globalRxVariableController.isStudent.value = false;
+      globalRxVariableController.isRtl.value = false;
 
 
       final sharedPref = await SharedPreferences.getInstance();
-      sharedPref.setString('language', 'en_US');
+      sharedPref.setString('language', 'en');
       sharedPref.setString('language_name', 'English');
 
       Get.find<LanguageController>().langName.value = sharedPref.getString('language_name') ?? 'English';
-      language = sharedPref.getString('language') ?? 'en_US';
+      language = sharedPref.getString('language') ?? 'en';
 
-      Get.find<LanguageController>().appLocale = 'en_US';
+
+      Get.find<LanguageController>().appLocale = 'en';
       Get.updateLocale(Locale(Get.find<LanguageController>().appLocale.toString()));
+      sharedPref.clear();
 
 
       return true;
