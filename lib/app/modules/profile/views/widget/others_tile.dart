@@ -32,7 +32,10 @@ class OthersTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: AppTextStyle.fontSize10GreyW500
+                  style: const TextStyle(
+                      color: AppColors.profileValueColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500)
                 ),
                 8.verticalSpacing,
                 CustomDivider(

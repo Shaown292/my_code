@@ -30,7 +30,7 @@ class PrimaryButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: height ?? Get.height * 0.055,
+        height: height ?? 40,
         width: width,
         padding: padding,
         decoration: ShapeDecoration(

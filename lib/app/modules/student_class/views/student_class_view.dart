@@ -25,6 +25,8 @@ class StudentClassView extends GetView<StudentClassController> {
                 customWidget: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
+                    /// Jitsi
                     ClassTile(
                       onlineClassTitle: "Jitsi",
                       onlineClassSubTitle: "Virtual Class",
@@ -42,6 +44,7 @@ class StudentClassView extends GetView<StudentClassController> {
                       onMeetingTap: (){},
                     ),
                     20.verticalSpacing,
+                    /// Zoom
                     ClassTile(
                       onlineClassTitle: "Zoom",
                       onlineClassSubTitle: "Virtual Class",
@@ -58,17 +61,35 @@ class StudentClassView extends GetView<StudentClassController> {
                       onMeetingTap: (){},
                     ),
                     20.verticalSpacing,
+                    /// Google meet
                     ClassTile(
                       onlineClassTitle: "Google Meet",
                       onlineClassSubTitle: "Virtual Class",
                       onlineClassMeeting: "Online meeting",
                       onTap: () {
-                        controller.isZoomTapped.value = !controller.isZoomTapped.value;
+                        controller.isGoogleMeetTap.value = !controller.isGoogleMeetTap.value;
                       },
-                      isTapped: controller.isZoomTapped.value,
+                      isTapped: controller.isGoogleMeetTap.value,
                       onSubTitleTap: () {
                         Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
                           "online_class" : "google_meet",
+                        });
+                      },
+                      onMeetingTap: (){},
+                    ),
+                    20.verticalSpacing,
+                    /// Big Blue Button
+                    ClassTile(
+                      onlineClassTitle: "Big Blue Button",
+                      onlineClassSubTitle: "Virtual Class",
+                      onlineClassMeeting: "Online meeting",
+                      onTap: () {
+                        controller.isBigBlueButtonTap.value = !controller.isBigBlueButtonTap.value;
+                      },
+                      isTapped: controller.isBigBlueButtonTap.value,
+                      onSubTitleTap: () {
+                        Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
+                          "online_class" : "big_blue_button",
                         });
                       },
                       onMeetingTap: (){},

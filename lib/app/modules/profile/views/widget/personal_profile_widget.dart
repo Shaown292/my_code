@@ -26,11 +26,10 @@ class ProfilePersonalWidget extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   height: 15,
                   width: 15,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage(icon ?? ""))),
+                  child: Image.asset(icon ?? "", height: 15, width: 15, color: AppColors.syllabusTextColorBlack,),
                 ),
                 10.horizontalSpacing,
                 Column(

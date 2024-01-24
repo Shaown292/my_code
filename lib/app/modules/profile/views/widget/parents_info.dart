@@ -30,9 +30,10 @@ class ParentsInfo extends StatelessWidget {
       child: Container(
         height: Get.height * 0.17,
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: AppColors.parentsCardBorderColor)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4),
+          border: Border.all(color: AppColors.parentsCardBorderColor),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(5),
           child: Row(
@@ -48,7 +49,7 @@ class ParentsInfo extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(Get.width * 0.02),
                   child: SizedBox(
-                    height: Get.height * 19,
+                    height: Get.height * 0.19,
                     child: Column(
                       children: [
                         10.verticalSpacing,
@@ -66,23 +67,20 @@ class ParentsInfo extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: AppColors.profilePicBackgroundColor,
-                            border: Border.all(
-                                width: 1,
-                                color: Colors.white
-                            ),
+                            border: Border.all(width: 1, color: Colors.white),
                             image: DecorationImage(
-                              image: AssetImage(icon ?? ImagePath.dp),
-                              fit: BoxFit.contain
-                            ),
+                                image: AssetImage(icon ?? ImagePath.dp),
+                                fit: BoxFit.contain),
                           ),
                         ),
-
                       ],
                     ),
                   ),
                 ),
               ),
-             SizedBox(width: Get.width * 0.05,),
+              SizedBox(
+                width: Get.width * 0.05,
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,7 +89,8 @@ class ParentsInfo extends StatelessWidget {
                   10.verticalSpacing,
                   ParentsItemWidget(title: phone ?? AppText.noDataAvailable),
                   10.verticalSpacing,
-                  ParentsItemWidget(title: occupation ?? AppText.noDataAvailable),
+                  ParentsItemWidget(
+                      title: occupation ?? AppText.noDataAvailable),
                 ],
               ),
             ],

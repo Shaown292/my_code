@@ -99,7 +99,7 @@ class GuardianInfo extends StatelessWidget {
                         Text(
                           relation,
                           style:  const TextStyle(
-                              color: AppColors.profileTitleColor,
+                              color: AppColors.profileValueColor,
                               fontSize: 10,
                               fontWeight: FontWeight.w500),
                         ),
@@ -117,7 +117,7 @@ class GuardianInfo extends StatelessWidget {
                         Text(
                           other,
                           style:  const TextStyle(
-                              color: AppColors.profileTitleColor,
+                              color: AppColors.profileValueColor,
                               fontSize: 10,
                               fontWeight: FontWeight.w500),
                         ),

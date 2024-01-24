@@ -14,6 +14,7 @@ class VirtualClassListController extends GetxController {
   RxList<MeetingList> meetingList = <MeetingList>[].obs;
   RxBool zoomMeetingLoader = false.obs;
   RxString onlineClass = "".obs;
+  String url = "";
 
   /// Get Zoom Meeting List
   Future<ZoomMeetingListResponseModel> getZoomMeetingList() async {
@@ -22,7 +23,7 @@ class VirtualClassListController extends GetxController {
 
       zoomMeetingLoader.value = true;
       final response = await BaseClient().getData(
-        url: onlineClass.value == "jitsi" ? InfixApi.jitsiMeetingList : InfixApi.zoomMeetingList,
+        url: url,
         header: GlobalVariable.header,
       );
 
@@ -75,7 +76,17 @@ class VirtualClassListController extends GetxController {
   @override
   void onInit() {
     onlineClass.value = Get.arguments["online_class"];
-    print(" online class ::::::: ${onlineClass.value}");
+    if(onlineClass.value == "jitsi"){
+      url = InfixApi.jitsiMeetingList;
+    }
+    else if(onlineClass.value == "zoom"){
+      url = InfixApi.zoomMeetingList;
+    }
+
+    else if(onlineClass.value == "big_blue_button"){
+      url = InfixApi.bigBlueButtonMeetingList;
+    }
+    print(" online class ::::::: $url");
     getZoomMeetingList();
     super.onInit();
   }

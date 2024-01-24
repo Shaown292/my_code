@@ -23,7 +23,10 @@ class TransportWidget extends StatelessWidget {
               width: Get.width * 0.35,
               child: Text(
                 title ?? AppText.noDataAvailable.tr,
-                style: AppTextStyle.fontSize10GreyW500,
+                style:const TextStyle(
+                    color: AppColors.profileValueColor,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500),
               ),
             ),
             Text(

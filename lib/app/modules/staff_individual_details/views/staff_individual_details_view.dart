@@ -55,7 +55,7 @@ class StaffIndividualDetailsView
                             left: Get.width * 0.1,
                             child: Text(
                               "${controller.staffFirstName} ${controller.staffLastName}",
-                              style: AppTextStyle.fontSize18WhiteW500,
+                              style: AppTextStyle.fontSize18WhiteW700,
                             ),
                           ),
                           Positioned(

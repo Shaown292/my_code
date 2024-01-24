@@ -56,8 +56,8 @@ class AppTextStyle {
       fontSize: 14,
       fontWeight: FontWeight.w400);
 
-  static const fontSize18WhiteW500 =
-      TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500);
+  static const fontSize18WhiteW700 =
+      TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700);
 
   /// Syllabus
   static const fontSize14BlackW500 = TextStyle(
@@ -160,7 +160,7 @@ class AppTextStyle {
       // decoration: TextDecoration.underline,
       fontWeight: FontWeight.w300);
   static const fontSize10GreyW500 = TextStyle(
-      color: AppColors.profileTitleColor,
+      color: Color(0xFF7E7987),
       fontSize: 10,
       fontWeight: FontWeight.w500);
 
@@ -176,6 +176,10 @@ class AppTextStyle {
       color: AppColors.syllabusTextColor635976,
       fontSize: 12,
       fontWeight: FontWeight.w400);
+  static const blackFontSize12W300 = TextStyle(
+      color: AppColors.syllabusTextColor635976,
+      fontSize: 12,
+      fontWeight: FontWeight.w300);
   static const blackFontSize10W400 = TextStyle(
       color: AppColors.syllabusTextColor635976,
       fontSize: 10,

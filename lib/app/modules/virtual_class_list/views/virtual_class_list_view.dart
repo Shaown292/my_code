@@ -70,9 +70,9 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                                           Color(int.tryParse(colorCode)!),
                                       activeStatus: controller
                                           .meetingList[index].currentStatus,
+                                      date: "12 June",
                                       onTap: () async {
-
-                                       controller.onlineClass.value == "jitsi" ?  Get.toNamed(Routes.LAUNCH_WEBVIEW, arguments: {
+                                       controller.onlineClass.value == "big_blue_button" ?  Get.toNamed(Routes.LAUNCH_WEBVIEW, arguments: {
                                          'url':controller.meetingList[index].joinUrl,
                                          "title" : controller.meetingList[index].topic,
                                        }) : controller.openZoom(

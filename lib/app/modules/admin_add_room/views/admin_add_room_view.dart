@@ -89,7 +89,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         controller: controller.descriptionTextController,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       ),
-                      30.verticalSpacing,
+                      150.verticalSpacing,
                       controller.saveLoader.value
                           ? const CircularProgressIndicator(color: AppColors.primaryColor,)
                           : PrimaryButton(

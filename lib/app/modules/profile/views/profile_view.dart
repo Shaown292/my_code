@@ -42,8 +42,8 @@ class ProfileView extends GetView<ProfileController> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Container(
-                      height: 17,
-                      width: 17,
+                      height: 16,
+                      width: 16,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(ImagePath.edit),
@@ -143,10 +143,28 @@ class ProfileView extends GetView<ProfileController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Text(
-                                                '${controller.profileDataController.firstName} ${controller.profileDataController.lastName}',
-                                                style: AppTextStyle
-                                                    .fontSize18WhiteW500,
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '${controller.profileDataController.firstName} ${controller.profileDataController.lastName}',
+                                                    style: AppTextStyle
+                                                        .fontSize18WhiteW700,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(7.0),
+                                                    child: Container(
+                                                      height: 20,
+                                                      width: 18,
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                          image: AssetImage(
+                                                              ImagePath.camera),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                               Text(
                                                 '${AppText.profileClass.tr}: ${controller.profilePersonal?.studentClass ?? ""}  |  ${AppText.profileSection.tr}: ${controller.profilePersonal?.section ?? ""}',
@@ -161,17 +179,7 @@ class ProfileView extends GetView<ProfileController> {
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(7.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                    ImagePath.camera),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+
                                       ],
                                     ),
                                   ),

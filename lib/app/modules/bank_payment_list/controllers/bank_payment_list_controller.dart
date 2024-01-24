@@ -30,7 +30,9 @@ class BankPaymentListController extends GetxController {
   RxString classNullValue = ''.obs;
   RxString sectionNullValue = ''.obs;
   RxString startDate = "".obs;
+  RxString startDateForUI = "".obs;
   RxString endDate = "".obs;
+  RxString endDateForUI = "".obs;
 
 
   RxInt classId = 0.obs;
@@ -232,13 +234,15 @@ class BankPaymentListController extends GetxController {
       firstDate: DateTime(2024),
       lastDate: DateTime(2026),
     ).then((value) {
-      startDate.value = DateFormat('MM/dd/yyyy').format(value!.start);
-      endDate.value = DateFormat('MM/dd/yyyy').format(value.end);
+      startDate.value = DateFormat('MM-dd-yyyy').format(value!.start);
+      endDate.value = DateFormat('MM-dd-yyyy').format(value.end);
+      startDateForUI.value = DateFormat('dd/MM/yyyy').format(value.start);
+      endDateForUI.value = DateFormat('dd/MM/yyyy').format(value.end);
       pendingList.clear();
       approveList.clear();
       rejectList.clear();
       getAllBankPaymentList(startDate: startDate.value, endDate: endDate.value, classId: classId.value, sectionId: sectionId.value,);
-      selectedDateTextController.text = "$startDate - $endDate";
+      selectedDateTextController.text = "$startDateForUI - $endDateForUI";
 
     });
     dateRange = newDateRange ?? dateRange;
