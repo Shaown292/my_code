@@ -63,11 +63,11 @@ class AdminFeesGroupView extends GetView<AdminFeesGroupController> {
                                                   .feesGroupList[index].id!,
                                               index: index);
                                         },
-                                        title: 'Confirmation',
+                                        title: 'Confirmation'.tr,
                                         subTitle:
                                             AppText.deleteFeesGroupWarningMsg,
-                                        noText: 'cancel',
-                                        yesText: 'delete',
+                                        noText: 'Cancel'.tr,
+                                        yesText: 'Delete'.tr,
                                       ),
                                     ),
                                   ),

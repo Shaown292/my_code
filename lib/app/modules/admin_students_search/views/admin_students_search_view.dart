@@ -25,7 +25,13 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
             padding: const EdgeInsets.all(10.0),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    "${"Select".tr} ${"Class".tr} *",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
+                  10.verticalSpacing,
                   /// Student Class List Dropdown
                   controller.loadingController.isLoading
                       ? const CircularProgressIndicator(
@@ -43,8 +49,13 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                             );
                           },
                         ),
-                  10.verticalSpacing,
 
+                  10.verticalSpacing,
+                  Text(
+                    "${"Select".tr} ${"Section".tr} *",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
+                  10.verticalSpacing,
                   /// Student Section List Dropdown
                   controller.sectionLoader.value
                       ? const CircularProgressIndicator(
@@ -79,21 +90,23 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                   ),
                   (Get.height * 0.4).verticalSpacing,
                   controller.searchLoader.value
-                      ? const SecondaryLoadingWidget(isBottomNav: true,)
+                      ? const SecondaryLoadingWidget(
+                          isBottomNav: true,
+                        )
                       : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: PrimaryButton(
-                                            text: "Search".tr,
-                                            onTap: () {
-                        controller.getSearchStudentDataList(
-                          classId: controller.studentClassId.value,
-                          sectionId: controller.studentSectionId.value,
-                          rollNo: controller.rollTextController.text,
-                          name: controller.nameTextController.text,
-                        );
-                                            },
-                                          ),
-                      ),
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: PrimaryButton(
+                            text: "Search".tr,
+                            onTap: () {
+                              controller.getSearchStudentDataList(
+                                classId: controller.studentClassId.value,
+                                sectionId: controller.studentSectionId.value,
+                                rollNo: controller.rollTextController.text,
+                                name: controller.nameTextController.text,
+                              );
+                            },
+                          ),
+                        ),
                 ],
               ),
             ),

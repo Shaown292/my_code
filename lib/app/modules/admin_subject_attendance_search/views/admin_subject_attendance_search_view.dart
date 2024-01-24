@@ -28,7 +28,13 @@ class AdminSubjectAttendanceSearchView
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    "${"Select".tr} ${"Class".tr} *",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
+                  10.verticalSpacing,
                   /// Student Class List
                   controller.adminStudentsSearchController.loadingController
                           .isLoading
@@ -61,6 +67,11 @@ class AdminSubjectAttendanceSearchView
 
                   /// Student Section List
                   10.verticalSpacing,
+                  Text(
+                    "${"Select".tr} ${"Class".tr} *",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
+                  10.verticalSpacing,
                   controller.adminStudentsSearchController.sectionLoader.value
                       ? const CircularProgressIndicator(
                           color: AppColors.primaryColor,
@@ -92,7 +103,13 @@ class AdminSubjectAttendanceSearchView
                           },
                         ),
 
+
                   /// Student Subject List
+                  10.verticalSpacing,
+                  Text(
+                    "${"Select".tr} ${"Subject".tr} *",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
                   10.verticalSpacing,
                   controller.adminStudentsSearchController.subjectLoader.value
                       ? const CircularProgressIndicator(
@@ -132,7 +149,7 @@ class AdminSubjectAttendanceSearchView
                       color: AppColors.profileValueColor,
                     ),
                   ),
-                  (Get.height * 0.4).verticalSpacing,
+                  (Get.height * 0.3).verticalSpacing,
                   PrimaryButton(
                     text: "Search".tr,
                     onTap: () {
