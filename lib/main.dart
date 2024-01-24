@@ -8,7 +8,7 @@ import 'initializer.dart';
 
 void main() async {
   await Initializer.init();
-  // Map<String, Map<String, String>> languagesList = await dep.init();
+
   runApp(
     Obx(() => GetMaterialApp(
           debugShowCheckedModeBanner: false,
