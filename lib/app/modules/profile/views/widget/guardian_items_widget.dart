@@ -16,7 +16,7 @@ class GuardianItemWidget extends StatelessWidget {
         Text(
           title,
           style:  const TextStyle(
-              color: AppColors.profileTitleColor,
+              color: AppColors.profileValueColor,
               fontSize: 10,
               fontWeight: FontWeight.w500),
         ),

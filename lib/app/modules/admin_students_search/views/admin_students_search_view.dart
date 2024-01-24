@@ -80,17 +80,20 @@ class AdminStudentsSearchView extends GetView<AdminStudentsSearchController> {
                   (Get.height * 0.4).verticalSpacing,
                   controller.searchLoader.value
                       ? const SecondaryLoadingWidget(isBottomNav: true,)
-                      : PrimaryButton(
-                    text: "Search".tr,
-                    onTap: () {
-                      controller.getSearchStudentDataList(
-                        classId: controller.studentClassId.value,
-                        sectionId: controller.studentSectionId.value,
-                        rollNo: controller.rollTextController.text,
-                        name: controller.nameTextController.text,
-                      );
-                    },
-                  ),
+                      : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: PrimaryButton(
+                                            text: "Search".tr,
+                                            onTap: () {
+                        controller.getSearchStudentDataList(
+                          classId: controller.studentClassId.value,
+                          sectionId: controller.studentSectionId.value,
+                          rollNo: controller.rollTextController.text,
+                          name: controller.nameTextController.text,
+                        );
+                                            },
+                                          ),
+                      ),
                 ],
               ),
             ),

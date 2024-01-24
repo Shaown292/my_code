@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import '../../../../data/constants/app_colors.dart';
 import '../../../../utilities/widgets/common_widgets/custom_divider.dart';
 
@@ -23,9 +24,10 @@ class CustomTabBarItem extends StatelessWidget {
               title,
               style: textStyle ?? const TextStyle(
                   color: AppColors.profileCardBackgroundColor,
-                  fontSize: 11,
+                  fontSize: 10,
                   fontWeight: FontWeight.w700),
             ),
+            3.verticalSpacing,
             isActive ? const CustomDivider(
               width: 50,
               color: AppColors.profileIndicatorColor,

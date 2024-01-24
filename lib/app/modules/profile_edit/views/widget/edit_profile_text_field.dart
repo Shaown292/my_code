@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 
 import '../../../../data/constants/image_path.dart';
@@ -42,6 +43,10 @@ class EditProfileTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: const TextStyle(
+          color: AppColors.teacherTextColor,
+          fontSize: 12,
+          fontWeight: FontWeight.w400),
       controller: controller,
       obscureText: obsCureText,
       keyboardType: textInputType,
