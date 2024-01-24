@@ -24,22 +24,24 @@ class BookIssuedView extends GetView<BookIssuedController> {
           customWidget: Column(
             children: [
               Container(
-                height: Get.height * 0.09,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                height: 40,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 11,
+                ),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(8),
-                      topLeft: Radius.circular(8)),
+                    topRight: Radius.circular(8),
+                    topLeft: Radius.circular(8),
+                  ),
                   color: AppColors.profileCardBackgroundColor,
                 ),
                 child: Row(
                   children: [
                     SizedBox(
                       width: Get.width * 0.12,
-                      child:  Text(
+                      child: Text(
                         "Book No".tr,
-                        style: AppTextStyle.textStyle12WhiteW500,
+                        style: AppTextStyle.textStyle10WhiteW400,
                       ),
                     ),
                     const VerticalDivider(
@@ -49,7 +51,7 @@ class BookIssuedView extends GetView<BookIssuedController> {
                     Container(
                       width: Get.width * 0.2,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child:  Text(
+                      child: Text(
                         "Subject".tr,
                         style: AppTextStyle.textStyle12WhiteW500,
                       ),
@@ -58,7 +60,7 @@ class BookIssuedView extends GetView<BookIssuedController> {
                       color: AppColors.profileTitleColor,
                       thickness: 1,
                     ),
-                     Text(
+                    Text(
                       "Book Name".tr,
                       style: AppTextStyle.textStyle12WhiteW500,
                     )

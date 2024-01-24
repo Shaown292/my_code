@@ -31,7 +31,6 @@ class TransportTile extends StatelessWidget {
               Container(
                 width: Get.width * 0.13,
                 padding: const EdgeInsets.all(10),
-                color: tileBackgroundColor,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
                     color: AppColors.profileCardBackgroundColor),
@@ -53,8 +52,9 @@ class TransportTile extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 width: Get.width * 0.2,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    color: AppColors.homeworkStatusGreenColor),
+                  borderRadius: BorderRadius.circular(2),
+                  color: const Color(0xFF45AE68),
+                ),
                 child: Center(
                   child: Text(
                     status ?? "",
@@ -78,9 +78,10 @@ class TransportTile extends StatelessWidget {
                       child: Text(
                         route ?? "",
                         style: const TextStyle(
-                            color: AppColors.profileTitleColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400),
+                          color: Color(0xFF635976),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     InkWell(
@@ -88,9 +89,10 @@ class TransportTile extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: AppColors.appButtonColor),
-                        child:  Center(
+                          borderRadius: BorderRadius.circular(2),
+                          color: const Color(0xFF862CFF),
+                        ),
+                        child: Center(
                           child: Text(
                             "View".tr,
                             style: AppTextStyle.textStyle12WhiteW400,

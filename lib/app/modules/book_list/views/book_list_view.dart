@@ -41,7 +41,7 @@ class BookListView extends GetView<BookListController> {
                         controller.bookSearchList.clear();
                         controller.getSearchBook(searchKey);
                       },
-                      hintTextStyle: AppTextStyle.fontSize12GreyW400,
+                      hintTextStyle: AppTextStyle.fontSize10GreyW400,
                       icon: controller.searchController.text.isNotEmpty
                           ? InkWell(
                               onTap: () {
@@ -63,9 +63,10 @@ class BookListView extends GetView<BookListController> {
                     ),
                   ),
                   Container(
-                    height: Get.height * 0.09,
+                    height: 40,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 15),
+                      horizontal: 11,
+                    ),
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(8),
@@ -79,7 +80,7 @@ class BookListView extends GetView<BookListController> {
                           width: Get.width * 0.12,
                           child: Text(
                             "Book No".tr,
-                            style: AppTextStyle.textStyle12WhiteW500,
+                            style: AppTextStyle.textStyle10WhiteW400,
                           ),
                         ),
                         const VerticalDivider(

@@ -18,7 +18,7 @@ class AppTextStyle {
 
   static const textStyle10WhiteW400 = TextStyle(
     color: Colors.white,
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
   );
@@ -118,10 +118,14 @@ class AppTextStyle {
       fontSize: 12,
       fontWeight: FontWeight.w400);
 
-  static const fontSize10GreyW300 = TextStyle(
+  static const fontSize10GreyW400 = TextStyle(
       color: AppColors.profileTitleColor,
       fontSize: 10,
-      fontWeight: FontWeight.w300);
+      fontWeight: FontWeight.w400);
+  static const fontSize10GreyW500 = TextStyle(
+      color: AppColors.profileValueColor,
+      fontSize: 10,
+      fontWeight: FontWeight.w500);
 
   static const fontSize12lightViolateW400 = TextStyle(
       color: AppColors.profileValueColor,
@@ -159,10 +163,7 @@ class AppTextStyle {
       fontSize: 12,
       // decoration: TextDecoration.underline,
       fontWeight: FontWeight.w300);
-  static const fontSize10GreyW500 = TextStyle(
-      color: Color(0xFF7E7987),
-      fontSize: 10,
-      fontWeight: FontWeight.w500);
+
 
   static const fontSize13GreyW500 = TextStyle(
       color: AppColors.teacherTextColor,

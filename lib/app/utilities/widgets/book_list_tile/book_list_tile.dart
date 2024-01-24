@@ -28,12 +28,12 @@ class BookListTile extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 11.0 , vertical: 10),
           child: SizedBox(
             child: Row(
               children: [
                 Container(
-                  width: Get.width * 0.14,
+                  width: Get.width * 0.12,
                   padding: const EdgeInsets.all(7),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
@@ -57,7 +57,7 @@ class BookListTile extends StatelessWidget {
                   width: Get.width * 0.2,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
-                      color: AppColors.homeworkStatusGreenColor),
+                      color: const Color(0xFF45AE68)),
                   child: Center(
                     child: Text(
                       subject ?? "",
@@ -80,8 +80,8 @@ class BookListTile extends StatelessWidget {
                         width: Get.width * 0.25,
                         child: Text(
                           bookName ?? "",
-                          style: const TextStyle(
-                            color: AppColors.profileTitleColor,
+                          style:  const TextStyle(
+                            color: Color(0xFF635976),
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
                           ),
@@ -94,7 +94,7 @@ class BookListTile extends StatelessWidget {
                           padding: const EdgeInsets.all(7),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
-                            color: AppColors.appButtonColor,
+                            color: const Color(0xFF862CFF),
                           ),
                           child: Center(
                             child: Text(

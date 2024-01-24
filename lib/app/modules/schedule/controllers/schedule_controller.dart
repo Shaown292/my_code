@@ -20,6 +20,7 @@ class ScheduleController extends GetxController {
   List<ScheduleData> scheduleList = [];
   RxString dropdownValue = "".obs;
   RxString recordDropdownValue = "".obs;
+
   final selectIndex = RxInt(0);
 
   void getStudentExamScheduleList(
