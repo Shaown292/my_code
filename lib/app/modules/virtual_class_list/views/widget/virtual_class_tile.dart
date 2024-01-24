@@ -10,6 +10,7 @@ class VirtualClassTile extends StatelessWidget {
   final String? topic;
   final String? startingTime;
   final String? duration;
+  final String? date;
   final String? roomNumber;
   final String? buildingName;
   final String? meetingPassword;
@@ -26,7 +27,7 @@ class VirtualClassTile extends StatelessWidget {
     this.roomNumber,
     this.buildingName,
     this.meetingPassword,
-    this.onTap, this.activeStatusColor, this.activeStatus, this.onTapForCopy,
+    this.onTap, this.activeStatusColor, this.activeStatus, this.onTapForCopy, this.date,
   });
 
   @override
@@ -73,29 +74,41 @@ class VirtualClassTile extends StatelessWidget {
                           ],
                         ),
                       ),
-                      InkWell(
-                        onTap: onTap,
-                        child: Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2),
-                                color: activeStatusColor,
-                              ),
-                              child: Text(
-                                activeStatus ?? "",
-                                style: AppTextStyle.textStyle12WhiteW400,
-                              ),
-                            ),
+                      Column(
+                        children: [
+                          Text(
+                            date ?? "",
+                            style: const TextStyle(
+                                color: AppColors.profileValueColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          5.verticalSpacing,
+                          InkWell(
+                            onTap: onTap,
+                            child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(2),
+                                    color: activeStatusColor,
+                                  ),
+                                  child: Text(
+                                    activeStatus ?? "",
+                                    style: AppTextStyle.textStyle12WhiteW400,
+                                  ),
+                                ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
-              10.verticalSpacing,
-              CustomDivider(
+              meetingPassword== null || meetingPassword == "" ? 0.verticalSpacing : 10.verticalSpacing,
+              meetingPassword== null || meetingPassword == "" ? const SizedBox() :  CustomDivider(
                 width: Get.width,
               ),
-              Row(
+             meetingPassword== null || meetingPassword == "" ?  const SizedBox() : Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -110,7 +123,7 @@ class VirtualClassTile extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              ) ,
             ],
           ),
         ),
