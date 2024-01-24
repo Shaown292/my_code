@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
@@ -60,7 +61,7 @@ class CustomTextFormField extends StatelessWidget {
             border: inputBorder,
             fillColor: fillColor ?? const Color(0xFFFDFBFF),
             hintText: hintText ?? 'Enter text',
-            hintStyle: hintTextStyle,
+            hintStyle: hintTextStyle ?? AppTextStyle.blackFontSize12W300 ,
             prefix: prefixIcon,
             suffixIcon: InkWell(
                 onTap: iconOnTap, child: suffixIcon ?? const SizedBox()),
@@ -87,22 +88,4 @@ class CustomTextFormField extends StatelessWidget {
   }
 }
 
-// class CustomTextFormField extends StatelessWidget {
-//   const CustomTextFormField({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextFormField(
-//       decoration: InputDecoration(
-//         filled: true,
-//         fillColor: Color(0xFFF4EBFC), // Light pink background color
-//         hintText: 'Enter text',
-//         suffixIcon: Icon(Icons.email), // Suffix icon
-//         border: OutlineInputBorder(
-//           borderSide: BorderSide.none,
-//           borderRadius: BorderRadius.circular(10.0), // Optional: Add rounded corners
-//         ),
-//       ),
-//     );
-//   }
-// }
+

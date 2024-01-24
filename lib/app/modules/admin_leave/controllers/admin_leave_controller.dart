@@ -34,7 +34,7 @@ class AdminLeaveController extends GetxController {
   List<String> status = <String>[
     'Pending',
     'Approved',
-    'Rejected',
+    'Cancelled',
   ];
 
   RxString selectedOption = "P".obs;

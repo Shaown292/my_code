@@ -74,7 +74,7 @@ class AdminAddDormitoryView extends GetView<AdminAddDormitoryController> {
                         controller: controller.dormitoryDescriptionController,
                         hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       ),
-                      30.verticalSpacing,
+                      200.verticalSpacing,
                       Obx(
                         () => controller.loadingController.isLoading
                             ? const CircularProgressIndicator(

@@ -200,7 +200,7 @@ class AdminLeaveView extends GetView<AdminLeaveController> {
                               : const NoDataAvailableWidget(),
                     ),
 
-                    /// Rejected
+                    /// Cancelled
 
                     Obx(
                       () => controller.loadingController.isLoading

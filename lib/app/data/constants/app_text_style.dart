@@ -176,6 +176,10 @@ class AppTextStyle {
       color: AppColors.syllabusTextColor635976,
       fontSize: 12,
       fontWeight: FontWeight.w400);
+  static const blackFontSize12W300 = TextStyle(
+      color: AppColors.syllabusTextColor635976,
+      fontSize: 12,
+      fontWeight: FontWeight.w300);
   static const blackFontSize10W400 = TextStyle(
       color: AppColors.syllabusTextColor635976,
       fontSize: 10,
