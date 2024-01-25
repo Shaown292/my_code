@@ -19,7 +19,7 @@ class ImagePath {
   static const  edit                  = "assets/images/edit.png";
   static const  editBlack             = "assets/images/edit_black.png";
   static const  back                  = "assets/images/back_arrow.png";
-  static const  errorImage            = "assets/image/production/avatar.png";
+  static const  errorImage            = "assets/images/dp.png";
 
   ///Profile Detail Icon
   static String calender            = "assets/images/calendar.png";

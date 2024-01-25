@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 
 import '../../../data/constants/app_colors.dart';
 
@@ -10,6 +11,7 @@ class CacheImageView extends StatelessWidget {
   final BoxFit fit;
   final Color color;
   final String? errorImageLocal;
+  final BoxShape? boxShape;
 
   const CacheImageView({
     required this.url,
@@ -18,7 +20,7 @@ class CacheImageView extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.color = Colors.transparent,
     this.errorImageLocal,
-    super.key,
+    super.key, this.boxShape,
   });
 
   @override
@@ -31,7 +33,7 @@ class CacheImageView extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           color: color,
-          shape: BoxShape.circle,
+          shape: boxShape ?? BoxShape.circle ,
           image: DecorationImage(
             image: imageProvider,
             fit: fit,
@@ -65,7 +67,7 @@ class CacheImageView extends StatelessWidget {
         decoration:  BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-            image: AssetImage(errorImageLocal ?? 'assets/image/production/galary.png',)
+            image: AssetImage(errorImageLocal ?? ImagePath.dp,)
           )
         ),
 

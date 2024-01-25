@@ -3,6 +3,7 @@ import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/profile/views/widget/parents_item_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/image_view/cache_image_view.dart';
 import 'package:get/get.dart';
 import '../../../../data/constants/app_colors.dart';
 
@@ -12,6 +13,11 @@ class ParentsInfo extends StatelessWidget {
   final String? name;
   final String? phone;
   final String? occupation;
+  final String? imageUrl;
+  final int? permissionForPhoto;
+  final int? permissionForName;
+  final int? permissionForPhone;
+  final int? permissionForOccupation;
 
   const ParentsInfo({
     super.key,
@@ -20,6 +26,11 @@ class ParentsInfo extends StatelessWidget {
     this.name,
     this.phone,
     this.occupation,
+    this.permissionForPhoto,
+    this.permissionForName,
+    this.permissionForPhone,
+    this.permissionForOccupation,
+    this.imageUrl,
   });
 
   @override
@@ -52,7 +63,7 @@ class ParentsInfo extends StatelessWidget {
                     height: Get.height * 0.19,
                     child: Column(
                       children: [
-                        10.verticalSpacing,
+                        5.verticalSpacing,
                         Text(
                           designation ?? AppText.noDataAvailable,
                           style: const TextStyle(
@@ -60,19 +71,37 @@ class ParentsInfo extends StatelessWidget {
                               fontSize: 10,
                               fontWeight: FontWeight.w500),
                         ),
-                        Container(
-                          height: Get.height * 0.1,
-                          width: Get.width * 0.15,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.profilePicBackgroundColor,
-                            border: Border.all(width: 1, color: Colors.white),
-                            image: DecorationImage(
-                                image: AssetImage(icon ?? ImagePath.dp),
-                                fit: BoxFit.contain),
-                          ),
-                        ),
+                        15.verticalSpacing,
+                        permissionForPhoto == 1
+                            ? imageUrl != "" || imageUrl != null
+                                ? SizedBox(
+                                    height: 40,
+                                    width: 40,
+                                    child: ClipRRect(
+                                      borderRadius: 8.circularRadius,
+                                      child: CacheImageView(
+                                        url: imageUrl,
+                                        errorImageLocal: ImagePath.errorImage,
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: Get.height * 0.1,
+                                    width: Get.width * 0.15,
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color:
+                                          AppColors.profilePicBackgroundColor,
+                                      border: Border.all(
+                                          width: 1, color: Colors.white),
+                                      image: DecorationImage(
+                                          image:
+                                              AssetImage(icon ?? ImagePath.dp),
+                                          fit: BoxFit.contain),
+                                    ),
+                                  )
+                            : const SizedBox(),
                       ],
                     ),
                   ),
@@ -85,12 +114,22 @@ class ParentsInfo extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ParentsItemWidget(title: name ?? AppText.noDataAvailable),
-                  10.verticalSpacing,
-                  ParentsItemWidget(title: phone ?? AppText.noDataAvailable),
-                  10.verticalSpacing,
-                  ParentsItemWidget(
-                      title: occupation ?? AppText.noDataAvailable),
+                  permissionForName == 1
+                      ? ParentsItemWidget(
+                          title: name ?? AppText.noDataAvailable)
+                      : const SizedBox(),
+                  permissionForName == 1
+                      ? 10.verticalSpacing : 0.verticalSpacing,
+                  permissionForPhone == 1
+                      ? ParentsItemWidget(
+                          title: phone ?? AppText.noDataAvailable)
+                      : const SizedBox(),
+                  permissionForPhone == 1
+                      ? 10.verticalSpacing : 0.verticalSpacing,
+                  permissionForOccupation == 1
+                      ? ParentsItemWidget(
+                          title: occupation ?? AppText.noDataAvailable)
+                      : const SizedBox(),
                 ],
               ),
             ],

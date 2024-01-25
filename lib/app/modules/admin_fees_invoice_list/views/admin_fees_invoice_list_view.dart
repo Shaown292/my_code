@@ -183,7 +183,7 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                                     balance: controller
                                         .feesInvoiceList[index].balance,
                                     status: controller
-                                        .feesInvoiceList[index].status,
+                                        .feesInvoiceList[index].status?.toUpperCase(),
                                     statusColor:  Color(int.tryParse(colorCode)!),
                                     onTapView: () =>
                                         Get.toNamed(Routes.ADMIN_FEES_INVOICE, arguments: { "invoice_id" : controller.feesInvoiceList[index].id}),

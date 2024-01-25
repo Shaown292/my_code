@@ -34,14 +34,14 @@ class BookListTile extends StatelessWidget {
               children: [
                 Container(
                   width: Get.width * 0.12,
-                  padding: const EdgeInsets.all(7),
+                  padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       color: AppColors.profileCardBackgroundColor),
                   child: Center(
                     child: Text(
                       bookNumber ?? "",
-                      style: AppTextStyle.textStyle12WhiteW400,
+                      style: AppTextStyle.textStyle10WhiteW400,
                     ),
                   ),
                 ),
@@ -61,7 +61,7 @@ class BookListTile extends StatelessWidget {
                   child: Center(
                     child: Text(
                       subject ?? "",
-                      style: AppTextStyle.textStyle12WhiteW400,
+                      style: AppTextStyle.textStyle10WhiteW400,
                     ),
                   ),
                 ),

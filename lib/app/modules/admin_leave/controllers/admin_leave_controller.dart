@@ -305,7 +305,7 @@ class AdminLeaveController extends GetxController {
                 10.verticalSpacing,
                 Text(
                   "${"Reason".tr}: $reason",
-                  style: AppTextStyle.fontSize14BlackW500,
+                  style: AppTextStyle.bottomSheetTitleColor,
                 ),
                 20.verticalSpacing,
                 BottomSheetTile(

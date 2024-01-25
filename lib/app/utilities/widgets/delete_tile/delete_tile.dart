@@ -66,7 +66,7 @@ class DeleteTile extends StatelessWidget {
                         width: Get.width * 0.5,
                         child: Text(
                           subTitle ?? "",
-                          style: AppTextStyle.fontSize13BlackW400,
+                          style: AppTextStyle.fontSize12GreyW400,
                         ),
                       ),
                     ],

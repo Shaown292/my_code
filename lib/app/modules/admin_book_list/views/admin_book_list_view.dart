@@ -22,20 +22,24 @@ class AdminBookListView extends GetView<AdminBookListController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: Get.height * 0.085,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              height: 40,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 11,
+              ),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(8), topLeft: Radius.circular(8)),
+                  topRight: Radius.circular(8),
+                  topLeft: Radius.circular(8),
+                ),
                 color: AppColors.profileCardBackgroundColor,
               ),
               child: Row(
                 children: [
                   SizedBox(
-                    width: Get.width * 0.14,
+                    width: Get.width * 0.12,
                     child: Text(
                       "Book No".tr,
-                      style: AppTextStyle.textStyle12WhiteW500,
+                      style: AppTextStyle.textStyle10WhiteW400,
                     ),
                   ),
                   const VerticalDivider(
