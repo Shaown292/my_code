@@ -47,7 +47,7 @@ class DormitoryView extends GetView<DormitoryController> {
                                       controller.dormitoryList[index].costPerBed,
                                   activeStatus:
                                       controller.dormitoryList[index].status,
-                                  activeStatusColor: Colors.green,
+                                  activeStatusColor: AppColors.primaryColor,
                                 );
                               },
                             ),
