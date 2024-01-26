@@ -68,8 +68,6 @@ class AdminRouteView extends GetView<AdminRouteController> {
                               enableBorderActive: true,
                               focusBorderActive: true,
                               hintText: "Route Title",
-                              hintTextStyle:
-                                  AppTextStyle.fontSize14lightBlackW400,
                               fillColor: Colors.white,
                             ),
                             10.verticalSpacing,
@@ -79,8 +77,6 @@ class AdminRouteView extends GetView<AdminRouteController> {
                               enableBorderActive: true,
                               focusBorderActive: true,
                               hintText: "Route fare",
-                              hintTextStyle:
-                                  AppTextStyle.fontSize14lightBlackW400,
                               fillColor: Colors.white,
                             ),
                             (Get.height * 0.5).verticalSpacing,

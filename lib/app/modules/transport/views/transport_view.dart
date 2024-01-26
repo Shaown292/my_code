@@ -34,7 +34,7 @@ class TransportView extends GetView<TransportController> {
                 Container(
                   height: 40,
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 11,
+                    horizontal: 10,
                   ),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -46,7 +46,7 @@ class TransportView extends GetView<TransportController> {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: Get.width * 0.12,
+                        width: Get.width * 0.13,
                         child: Text(
                           "Vehicle".tr,
                           style: AppTextStyle.textStyle10WhiteW400,
@@ -61,7 +61,7 @@ class TransportView extends GetView<TransportController> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
                           "Status".tr,
-                          style: AppTextStyle.textStyle12WhiteW500,
+                          style: AppTextStyle.textStyle10WhiteW400,
                         ),
                       ),
                       const VerticalDivider(
@@ -70,7 +70,7 @@ class TransportView extends GetView<TransportController> {
                       ),
                       Text(
                         "Route".tr,
-                        style: AppTextStyle.textStyle12WhiteW500,
+                        style: AppTextStyle.textStyle10WhiteW400,
                       )
                     ],
                   ),

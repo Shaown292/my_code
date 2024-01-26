@@ -25,7 +25,7 @@ class SubjectsView extends GetView<SubjectsController> {
               margin: EdgeInsets.zero,
               child: Container(
                 padding: const EdgeInsets.all(15),
-                height: Get.height * 0.09,
+                height: 69,
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8),
@@ -34,34 +34,33 @@ class SubjectsView extends GetView<SubjectsController> {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: Get.width * 0.25,
+                      width: Get.width * 0.3,
                       child:  Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Text(
                           "Subject".tr,
-                          style: AppTextStyle.fontSize14BlackW500,
+                          style: AppTextStyle.fontSize13BlackW500,
                         ),
                       ),
                     ),
                     5.horizontalSpacing,
                     SizedBox(
-                      width: Get.width * 0.25,
+                      width: Get.width * 0.3,
                       child:  Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Text(
                           "Teacher".tr,
-                          style: AppTextStyle.fontSize14BlackW500,
-                        ),
+                          style: AppTextStyle.fontSize13BlackW500,                        ),
                       ),
                     ),
                     5.horizontalSpacing,
-                    SizedBox(
-                      width: Get.width * 0.25,
-                      child:  Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Text(
-                          "Type".tr,
-                          style: AppTextStyle.fontSize14BlackW500,
+                    Flexible(
+                      child: SizedBox(
+                        child:  Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Text(
+                            "Type".tr,
+                            style: AppTextStyle.fontSize13BlackW500,                        ),
                         ),
                       ),
                     ),

@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool readOnly;
   final EdgeInsets? contentPadding;
   final TextStyle? hintTextStyle;
+  final TextStyle? textStyle;
   final InputBorder? inputBorder;
 
   const CustomTextFormField({
@@ -42,7 +43,7 @@ class CustomTextFormField extends StatelessWidget {
     this.contentPadding,
     this.hintTextStyle,
     this.inputBorder,
-    this.prefixIcon,
+    this.prefixIcon, this.textStyle,
   });
 
   @override
@@ -50,6 +51,7 @@ class CustomTextFormField extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: TextFormField(
+        style: textStyle ?? AppTextStyle.customTextFieldTextStyle,
         controller: controller,
         obscureText: obsCureText,
         keyboardType: textInputType,

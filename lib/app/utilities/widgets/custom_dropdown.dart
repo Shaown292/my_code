@@ -61,7 +61,7 @@ class CustomDropdown extends StatelessWidget {
                               Text(
                                 item,
                                 style: AppTextStyle.cardTextStyle14WhiteW500,
-                                overflow: TextOverflow.ellipsis,
+
                               ),
                             ],
                           ),
@@ -71,7 +71,7 @@ class CustomDropdown extends StatelessWidget {
             value: dropdownValue,
             iconSize: 26,
             dropdownColor: dropdownColor,
-            iconEnabledColor: color ?? const Color(0xFFA6ABCE),
+            iconEnabledColor: color ?? const Color(0xFF6B7280),
             onChanged: changeDropdownValue,
           ),
         ),

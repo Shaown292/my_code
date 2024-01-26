@@ -36,7 +36,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         hintText: "Room Name*",
                         fillColor: Colors.white,
                         controller: controller.roomNameTextController,
-                        hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
+
                       ),
                       10.verticalSpacing,
                       CustomTextFormField(
@@ -46,7 +46,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         hintText: "Number of Bed*",
                         fillColor: Colors.white,
                         controller: controller.numberOfBedTextController,
-                        hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
+
                       ),
                       10.verticalSpacing,
                       CustomTextFormField(
@@ -56,7 +56,7 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         hintText: "Cost Per Bed*",
                         fillColor: Colors.white,
                         controller: controller.costPerBedTextController,
-                        hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
+
                       ),
                       10.verticalSpacing,
                       controller.loadingController.isLoading
@@ -87,7 +87,6 @@ class AdminAddRoomView extends GetView<AdminAddRoomController> {
                         hintText: "Description",
                         fillColor: Colors.white,
                         controller: controller.descriptionTextController,
-                        hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                       ),
                       150.verticalSpacing,
                       controller.saveLoader.value

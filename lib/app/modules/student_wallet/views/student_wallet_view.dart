@@ -49,56 +49,57 @@ class StudentWalletView extends GetView<StudentWalletController> {
                 ),
               ),
               20.verticalSpacing,
-              Obx(() => controller.paymentMethodLoader.value
-                  ? const SecondaryLoadingWidget()
-                  : controller.paymentList.isNotEmpty
-                      ? Expanded(
-                          child: RefreshIndicator(
-                            color: AppColors.primaryColor,
-                            onRefresh: () async {
-                              controller.paymentList.clear();
-                              controller.getPaymentDetails();
-                            },
-                            child: ListView.builder(
-                                itemCount: controller.paymentList.length,
-                                itemBuilder: (context, index) {
-                                  String colorCode = '';
-                                  if (controller.paymentList[index].status ==
-                                      'Reject') {
-                                    colorCode = '0xFFE3342F';
-                                  } else if (controller
-                                          .paymentList[index].status ==
-                                      'Approve') {
-                                    colorCode = '0xFF3AC172';
-                                  } else if (controller
-                                          .paymentList[index].status ==
-                                      'Pending') {
-                                    colorCode = '0xFFFFBE00';
-                                  } else {
-                                    colorCode = '0xFF412C56';
-                                  }
-                                  return ShowStatusTile(
-                                    firstTitle: "Date".tr,
-                                    firstValue: DateTime.tryParse(controller
-                                                .paymentList[index].createdAt ??
-                                            '')
-                                        ?.yyyy_mm_dd,
-                                    secondTitle: "Method".tr,
-                                    secondValue: controller
-                                        .paymentList[index].paymentMethod,
-                                    thirdTitle: "Amount".tr,
-                                    thirdValue: controller
-                                        .paymentList[index].amount
-                                        .toString(),
-                                    activeStatus:
-                                        controller.paymentList[index].status,
-                                    activeStatusColor:
-                                        Color(int.tryParse(colorCode)!),
-                                  );
-                                }),
-                          ),
-                        )
-                      : const NoDataAvailableWidget()),
+              Obx(() => Expanded(
+                    child: RefreshIndicator(
+                      color: AppColors.primaryColor,
+                      onRefresh: () async {
+                        controller.paymentList.clear();
+                        controller.getPaymentDetails();
+                      },
+                      child: controller.paymentMethodLoader.value
+                          ? const SecondaryLoadingWidget()
+                          : controller.paymentList.isNotEmpty
+                              ? ListView.builder(
+                                  itemCount: controller.paymentList.length,
+                                  itemBuilder: (context, index) {
+                                    String colorCode = '';
+                                    if (controller.paymentList[index].status ==
+                                        'Reject') {
+                                      colorCode = '0xFFE3342F';
+                                    } else if (controller
+                                            .paymentList[index].status ==
+                                        'Approve') {
+                                      colorCode = '0xFF3AC172';
+                                    } else if (controller
+                                            .paymentList[index].status ==
+                                        'Pending') {
+                                      colorCode = '0xFFFFBE00';
+                                    } else {
+                                      colorCode = '0xFF412C56';
+                                    }
+                                    return ShowStatusTile(
+                                      firstTitle: "Date".tr,
+                                      firstValue: DateTime.tryParse(controller
+                                                  .paymentList[index]
+                                                  .createdAt ??
+                                              '')
+                                          ?.yyyy_mm_dd,
+                                      secondTitle: "Method".tr,
+                                      secondValue: controller
+                                          .paymentList[index].paymentMethod,
+                                      thirdTitle: "Amount".tr,
+                                      thirdValue: controller
+                                          .paymentList[index].amount
+                                          .toString(),
+                                      activeStatus:
+                                          controller.paymentList[index].status,
+                                      activeStatusColor:
+                                          Color(int.tryParse(colorCode)!),
+                                    );
+                                  })
+                              : const NoDataAvailableWidget(),
+                    ),
+                  )),
               30.verticalSpacing,
             ],
           ),

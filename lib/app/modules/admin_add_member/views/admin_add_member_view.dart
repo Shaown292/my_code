@@ -36,7 +36,6 @@ class AdminAddMemberView extends GetView<AdminAddMemberController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "Enter ID",
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                   ),
                   10.verticalSpacing,

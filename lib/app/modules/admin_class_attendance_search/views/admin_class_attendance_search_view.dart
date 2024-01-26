@@ -87,12 +87,12 @@ class AdminClassAttendanceSearchView
                     iconOnTap: () {
                       controller.selectDate();
                     },
+
                     readOnly: true,
                     controller: controller.selectedDateTextController,
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "Select Date *",
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,

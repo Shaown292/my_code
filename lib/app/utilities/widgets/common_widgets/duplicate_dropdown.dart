@@ -62,7 +62,7 @@ class DuplicateDropdown extends StatelessWidget {
                         ? Text(
                             item.name ?? "Unknown",
                             style: textStyle ??
-                                AppTextStyle.fontSize14lightBlackW400,
+                                AppTextStyle.dropdownText,
                             overflow: TextOverflow.ellipsis,
                           )
                         : Row(
@@ -88,7 +88,7 @@ class DuplicateDropdown extends StatelessWidget {
             value: dropdownValue,
             // iconSize: 26,
             dropdownColor: dropdownColor,
-            iconEnabledColor: color,
+            iconEnabledColor: color ?? Color(0xFF6B7280),
             onChanged: changeDropdownValue,
           ),
         ),

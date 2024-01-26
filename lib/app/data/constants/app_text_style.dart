@@ -71,6 +71,12 @@ class AppTextStyle {
       fontSize: 13,
       fontWeight: FontWeight.w400);
 
+  static const fontSize13BlackW500 = TextStyle(
+    color: AppColors.syllabusTextColorBlack,
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+  );
+
   static const blackFontSize14W400 = TextStyle(
       color: Colors.black,
       fontSize: 14,
@@ -136,6 +142,10 @@ class AppTextStyle {
       color: AppColors.profileValueColor,
       fontSize: 14,
       fontWeight: FontWeight.w400);
+  static const dropdownText = TextStyle(
+      color:  Color(0xFF6B7280),
+      fontSize: 12,
+      fontWeight: FontWeight.w400);
 
   static const fontSize16lightBlackW500 = TextStyle(
       color: AppColors.profileValueColor,
@@ -170,7 +180,7 @@ class AppTextStyle {
       fontSize: 13,
       fontWeight: FontWeight.w500);
   static const fontSize13GreyW300 = TextStyle(
-      color: AppColors.teacherTextColor,
+      color: AppColors.syllabusTextColor635976,
       fontSize: 13,
       fontWeight: FontWeight.w300);
   static const blackFontSize12W400 = TextStyle(
@@ -181,10 +191,19 @@ class AppTextStyle {
       color: AppColors.syllabusTextColor635976,
       fontSize: 13,
       fontWeight: FontWeight.w700);
+  static const teacherColor = TextStyle(
+      color: AppColors.syllabusTextColor635976,
+      fontSize: 13,
+      fontWeight: FontWeight.w500);
   static const blackFontSize12W300 = TextStyle(
       color: AppColors.syllabusTextColor635976,
       fontSize: 12,
       fontWeight: FontWeight.w300);
+  static const customTextFieldTextStyle =  TextStyle(
+    color: AppColors.teacherTextColor,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+  );
   static const blackFontSize10W400 = TextStyle(
       color: AppColors.syllabusTextColor635976,
       fontSize: 10,

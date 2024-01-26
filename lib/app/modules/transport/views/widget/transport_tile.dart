@@ -25,19 +25,19 @@ class TransportTile extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
           child: Row(
             children: [
               Container(
                 width: Get.width * 0.13,
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
                     color: AppColors.profileCardBackgroundColor),
                 child: Center(
                   child: Text(
                     vehicle ?? "",
-                    style: AppTextStyle.textStyle12WhiteW400,
+                    style: AppTextStyle.textStyle10WhiteW400,
                   ),
                 ),
               ),
@@ -53,12 +53,12 @@ class TransportTile extends StatelessWidget {
                 width: Get.width * 0.2,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
-                  color: const Color(0xFF45AE68),
+                  color:  const Color(0xFF45AE68),
                 ),
                 child: Center(
                   child: Text(
                     status ?? "",
-                    style: AppTextStyle.textStyle12WhiteW400,
+                    style: AppTextStyle.textStyle10WhiteW400,
                   ),
                 ),
               ),

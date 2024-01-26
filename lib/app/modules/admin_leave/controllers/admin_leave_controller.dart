@@ -362,7 +362,7 @@ class AdminLeaveController extends GetxController {
                   activeColor: AppColors.primaryColor,
                 ),
                 CustomRadioButton(
-                  title: "Approved".tr,
+                  title: "Approve".tr,
                   value: "A",
                   groupValue: selectedOption.value,
                   onChanged: (value) {
@@ -372,7 +372,7 @@ class AdminLeaveController extends GetxController {
                   activeColor: AppColors.primaryColor,
                 ),
                 CustomRadioButton(
-                  title: "Rejected".tr,
+                  title: "Cancel".tr,
                   value: "C",
                   groupValue: selectedOption.value,
                   onChanged: (value) {
