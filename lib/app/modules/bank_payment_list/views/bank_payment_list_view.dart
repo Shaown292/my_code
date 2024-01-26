@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/image_path.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/bank_payment_list/views/widget/bank_payment_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_load
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../controllers/bank_payment_list_controller.dart';
 
@@ -51,10 +51,7 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                             hintText: "Select Date*",
                             filled: true,
                             fillColor: const Color(0xFFFDFBFF),
-                            suffixIcon: const Icon(
-                              Iconsax.calendar_1,
-                              size: 15,
-                            ),
+                            suffixIcon:  Image.asset(ImagePath.calender,),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF635976).withOpacity(0.2),

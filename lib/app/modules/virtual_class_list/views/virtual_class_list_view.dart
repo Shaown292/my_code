@@ -107,6 +107,11 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                               // print('object');
                               controller.join(roomId: controller.meetingList[index].meetingId!,);
                             }
+                            else if (controller
+                                .onlineClass.value ==
+                                'google_meet') {
+                              controller.openGoogleMeet(status: controller.meetingList[index].currentStatus ?? "", url: controller.meetingList[index].joinUrl ?? "");
+                            }
                           }
                         },
                         onTapForCopy: () {

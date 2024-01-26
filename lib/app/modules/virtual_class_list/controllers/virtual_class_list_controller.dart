@@ -97,7 +97,21 @@ class VirtualClassListController extends GetxController {
     jitsiMeet.join(options);
   }
 
-
+  Future<void> openGoogleMeet(
+      {required String status, required String url}) async {
+    if (status == "JOIN" || status == 'START') {
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        final webUrl = url;
+        if (await canLaunch(webUrl)) {
+          await launch(webUrl);
+        } else {
+          throw Exception('Could not launch $url');
+        }
+      }
+    }
+  }
 
   // void join({required String roomId}) async {
   //
