@@ -2,10 +2,10 @@ name: flutter_single_getx_api_v2
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
+environment:
   sdk: '>=3.1.3 <4.0.0'
 
-dependencies: 
+dependencies:
   cupertino_icons: ^1.0.6
   get_cli: ^1.8.4
   get: 4.6.6
@@ -38,15 +38,18 @@ dependencies:
   firebase_messaging: ^14.6.7
   rxdart: ^0.27.7
   edge_alerts: ^0.0.1
+  jitsi_meet_flutter_sdk: ^0.1.9
+  #  eko_jitsi: ^1.3.8
   pdf_flutter:
     git: https://github.com/erluxman/pdf_flutter
 
   # Payment Gateways
   flutter_stripe: ^10.0.0
+  stripe_sdk: ^5.0.0
   flutter_paypal_checkout: ^1.0.1
   flutter_paystack: ^1.0.7
 
-  flutter: 
+  flutter:
     sdk: flutter
 
 dependency_overrides:
@@ -55,12 +58,12 @@ dependency_overrides:
   intl: ^0.18.1
   stripe_android: 9.5.0+1
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
 
-flutter: 
+flutter:
   uses-material-design: true
 
   assets:

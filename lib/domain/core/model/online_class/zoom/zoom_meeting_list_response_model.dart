@@ -31,7 +31,8 @@ class MeetingList {
   String? meetingId;
   String? meetingPassword;
   String? topic;
-  double? duration;
+  String? startDate;
+  String? duration;
   String? startTime;
   String? currentStatus;
   String? joinUrl;
@@ -42,7 +43,8 @@ class MeetingList {
     meetingId = json['meeting_id'];
     meetingPassword = json['meeting_password'];
     topic = json['topic'];
-    duration = double.tryParse(json['duration']);
+    startDate = json['start_date'];
+    duration = json['duration'];
     startTime = json['start_time'];
     currentStatus = json['current_status'];
     joinUrl = json['join_url'];
@@ -53,6 +55,7 @@ class MeetingList {
     data['meeting_id'] = meetingId;
     data['meeting_password'] = meetingPassword;
     data['topic'] = topic;
+    data['start_date'] = startDate;
     data['duration'] = duration;
     data['start_time'] = startTime;
     data['current_status'] = currentStatus;

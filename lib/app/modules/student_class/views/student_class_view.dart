@@ -15,7 +15,7 @@ class StudentClassView extends GetView<StudentClassController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => InfixEduScaffold(
+          () => InfixEduScaffold(
         title: "Class".tr,
         body: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
@@ -30,7 +30,7 @@ class StudentClassView extends GetView<StudentClassController> {
                     ClassTile(
                       onlineClassTitle: "Jitsi",
                       onlineClassSubTitle: "Virtual Class",
-                      onlineClassMeeting: "Online meeting",
+                      onlineClassMeeting: "Virtual meeting",
                       onTap: () {
                         controller.isJitsiTapped.value = !controller.isJitsiTapped.value;
                         // Get.to(() => const LaunchWebView(launchUrl: 'https://pub.dev/packages/flutter_inappwebview/changelog', title: 'Title',));
@@ -48,7 +48,7 @@ class StudentClassView extends GetView<StudentClassController> {
                     ClassTile(
                       onlineClassTitle: "Zoom",
                       onlineClassSubTitle: "Virtual Class",
-                      onlineClassMeeting: "Online meeting",
+                      onlineClassMeeting: "Virtual meeting",
                       onTap: () {
                         controller.isZoomTapped.value = !controller.isZoomTapped.value;
                       },
@@ -65,7 +65,7 @@ class StudentClassView extends GetView<StudentClassController> {
                     ClassTile(
                       onlineClassTitle: "Google Meet",
                       onlineClassSubTitle: "Virtual Class",
-                      onlineClassMeeting: "Online meeting",
+                      onlineClassMeeting: "Virtual meeting",
                       onTap: () {
                         controller.isGoogleMeetTap.value = !controller.isGoogleMeetTap.value;
                       },
@@ -82,7 +82,7 @@ class StudentClassView extends GetView<StudentClassController> {
                     ClassTile(
                       onlineClassTitle: "Big Blue Button",
                       onlineClassSubTitle: "Virtual Class",
-                      onlineClassMeeting: "Online meeting",
+                      onlineClassMeeting: "Virtual meeting",
                       onTap: () {
                         controller.isBigBlueButtonTap.value = !controller.isBigBlueButtonTap.value;
                       },

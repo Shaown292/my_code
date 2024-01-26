@@ -18,91 +18,115 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => InfixEduScaffold(
-          title: "Virtual Class List".tr,
-          body: CustomBackground(
-            customWidget: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                20.verticalSpacing,
-                Expanded(
-                  child: controller.zoomMeetingLoader.value
-                      ? const SecondaryLoadingWidget()
-                      : controller.meetingList.isNotEmpty
-                          ? RefreshIndicator(
-                              color: AppColors.primaryColor,
-                              onRefresh: () async {
-                                controller.meetingList.clear();
-                                controller.getZoomMeetingList();
-                              },
-                              child: ListView.builder(
-                                itemCount: controller.meetingList.length,
-                                itemBuilder: (context, index) {
-                                  String colorCode = '';
-                                  if (controller
-                                          .meetingList[index].currentStatus
-                                          ?.toUpperCase() ==
-                                      'CLOSED') {
-                                    colorCode = '0xFFF95452';
-                                  } else if (controller
-                                          .meetingList[index].currentStatus
-                                          ?.toUpperCase() ==
-                                      'WAITING') {
-                                    colorCode = '0xFFFFBE00';
-                                  } else {
-                                    colorCode = '0xFF3AC172';
-                                  }
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 15.0,
-                                    ),
-                                    child: VirtualClassTile(
-                                      topic: controller
-                                          .meetingList[index].topic,
-                                      startingTime: controller
-                                          .meetingList[index].startTime,
-                                      duration: controller
-                                          .meetingList[index].duration
-                                          .toString(),
-                                      meetingPassword: controller
-                                          .meetingList[index]
-                                          .meetingPassword,
-                                      activeStatusColor:
-                                          Color(int.tryParse(colorCode)!),
-                                      activeStatus: controller
-                                          .meetingList[index].currentStatus,
-                                      date: "12 June",
-                                      onTap: () async {
-                                       controller.onlineClass.value == "big_blue_button" ?  Get.toNamed(Routes.LAUNCH_WEBVIEW, arguments: {
-                                         'url':controller.meetingList[index].joinUrl,
-                                         "title" : controller.meetingList[index].topic,
-                                       }) : controller.openZoom(
-                                            meetingId: controller
-                                                    .meetingList[index]
-                                                    .meetingId ??
-                                                '',
-                                            status: controller
-                                                    .meetingList[index]
-                                                    .currentStatus ??
-                                                '');
-                                      },
-                                      onTapForCopy: () {
-                                        copyToClipboard(controller
-                                            .meetingList[index]
-                                            .meetingPassword!);
-                                      },
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                          : const Center(
-                              child: NoDataAvailableWidget(),
-                            ),
+      title: "Virtual Class List".tr,
+      body: CustomBackground(
+        customWidget: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            20.verticalSpacing,
+            Expanded(
+              child: controller.zoomMeetingLoader.value
+                  ? const SecondaryLoadingWidget()
+                  : controller.meetingList.isNotEmpty
+                  ? RefreshIndicator(
+                color: AppColors.primaryColor,
+                onRefresh: () async {
+                  controller.meetingList.clear();
+                  controller.getZoomMeetingList();
+                },
+                child: ListView.builder(
+                  itemCount: controller.meetingList.length,
+                  itemBuilder: (context, index) {
+                    String colorCode = '';
+                    if (controller
+                        .meetingList[index].currentStatus
+                        ?.toUpperCase() ==
+                        'CLOSED') {
+                      colorCode = '0xFFF95452';
+                    } else if (controller
+                        .meetingList[index].currentStatus
+                        ?.toUpperCase() ==
+                        'WAITING') {
+                      colorCode = '0xFFFFBE00';
+                    } else {
+                      colorCode = '0xFF3AC172';
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                      ),
+                      child: VirtualClassTile(
+                        topic:
+                        controller.meetingList[index].topic,
+                        startingTime: controller
+                            .meetingList[index].startTime,
+                        duration: controller
+                            .meetingList[index].duration
+                            .toString(),
+                        meetingPassword: controller
+                            .meetingList[index].meetingPassword,
+                        activeStatusColor:
+                        Color(int.tryParse(colorCode)!),
+                        activeStatus: controller
+                            .meetingList[index].currentStatus,
+                        date: controller
+                            .meetingList[index].startDate,
+                        onTap: () {
+                          if (controller.meetingList[index]
+                              .currentStatus
+                              ?.toUpperCase() ==
+                              'JOIN' ||
+                              controller.meetingList[index]
+                                  .currentStatus
+                                  ?.toUpperCase() ==
+                                  'START') {
+                            if (controller.onlineClass.value ==
+                                "big_blue_button") {
+                              Get.toNamed(Routes.LAUNCH_WEBVIEW,
+                                  arguments: {
+                                    'url': controller
+                                        .meetingList[index]
+                                        .joinUrl,
+                                    "title": controller
+                                        .meetingList[index].topic,
+                                  });
+                            } else if (controller
+                                .onlineClass.value ==
+                                'zoom') {
+                              controller.openZoom(
+                                meetingId: controller
+                                    .meetingList[index]
+                                    .meetingId ??
+                                    '',
+                                status: controller
+                                    .meetingList[index]
+                                    .currentStatus ??
+                                    '',
+                              );
+                            } else if(controller.onlineClass.value == "jitsi"){
+                              // print('object');
+                              controller.join(roomId: controller.meetingList[index].meetingId!,);
+                            }
+                          }
+                        },
+                        onTapForCopy: () {
+                          copyToClipboard(controller
+                              .meetingList[index]
+                              .meetingPassword!);
+                        },
+                      ),
+                    );
+                  },
                 ),
-                30.verticalSpacing,
-              ],
+              )
+                  : const Center(
+                child: NoDataAvailableWidget(),
+              ),
             ),
-          ),
-        ));
+            30.verticalSpacing,
+          ],
+        ),
+      ),
+    ));
   }
 }
