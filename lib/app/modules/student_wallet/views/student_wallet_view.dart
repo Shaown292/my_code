@@ -62,6 +62,21 @@ class StudentWalletView extends GetView<StudentWalletController> {
                             child: ListView.builder(
                                 itemCount: controller.paymentList.length,
                                 itemBuilder: (context, index) {
+                                  String colorCode = '';
+                                  if (controller.paymentList[index].status ==
+                                      'Reject') {
+                                    colorCode = '0xFFE3342F';
+                                  } else if (controller
+                                          .paymentList[index].status ==
+                                      'Approve') {
+                                    colorCode = '0xFF3AC172';
+                                  } else if (controller
+                                          .paymentList[index].status ==
+                                      'Pending') {
+                                    colorCode = '0xFFFFBE00';
+                                  } else {
+                                    colorCode = '0xFF412C56';
+                                  }
                                   return ShowStatusTile(
                                     firstTitle: "Date".tr,
                                     firstValue: DateTime.tryParse(controller
@@ -78,7 +93,7 @@ class StudentWalletView extends GetView<StudentWalletController> {
                                     activeStatus:
                                         controller.paymentList[index].status,
                                     activeStatusColor:
-                                        AppColors.activeStatusRedColor,
+                                        Color(int.tryParse(colorCode)!),
                                   );
                                 }),
                           ),

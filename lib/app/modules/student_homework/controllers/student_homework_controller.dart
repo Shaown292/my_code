@@ -92,7 +92,7 @@ class StudentHomeworkController extends GetxController {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                               Text(
+                              Text(
                                 "Upload Homework".tr,
                                 style: AppTextStyle.cardTextStyle14WhiteW500,
                               ),
@@ -134,7 +134,7 @@ class StudentHomeworkController extends GetxController {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
                                       color: AppColors.primaryColor),
-                                  child:  Center(
+                                  child: Center(
                                     child: Text(
                                       "Browse".tr,
                                       style: AppTextStyle.textStyle12WhiteW400,
@@ -149,11 +149,17 @@ class StudentHomeworkController extends GetxController {
                           child: Column(
                             children: pickedFileList
                                 .map((element) => Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(element.path.split('/').last),
+                                        SizedBox(
+                                          width: Get.width * 0.7,
+                                          child: Text(
+                                            element.path.split('/').last,
+                                          ),
+                                        ),
                                         const Icon(Icons.cancel_outlined),
                                       ],
                                     ))
@@ -195,7 +201,7 @@ class StudentHomeworkController extends GetxController {
                       ],
                     )
                   : SingleChildScrollView(
-                    child: Column(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
@@ -216,12 +222,14 @@ class StudentHomeworkController extends GetxController {
                               ),
                               BottomSheetTile(
                                 title: "Submission".tr,
-                                value: studentHomeworkList[index].submissionDate,
+                                value:
+                                    studentHomeworkList[index].submissionDate,
                                 color: Colors.white,
                               ),
                               BottomSheetTile(
                                 title: "Evaluation".tr,
-                                value: studentHomeworkList[index].evaluationDate,
+                                value:
+                                    studentHomeworkList[index].evaluationDate,
                                 color: AppColors.homeworkWidgetColor,
                               ),
                               BottomSheetTile(
@@ -248,7 +256,8 @@ class StudentHomeworkController extends GetxController {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Image.asset(
                                           ImagePath.download,
@@ -256,7 +265,7 @@ class StudentHomeworkController extends GetxController {
                                           color: Colors.white,
                                         ),
                                         5.horizontalSpacing,
-                                         Text(
+                                        Text(
                                           "Download".tr,
                                           style: AppTextStyle
                                               .cardTextStyle14WhiteW500,
@@ -275,7 +284,8 @@ class StudentHomeworkController extends GetxController {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Transform.flip(
                                           flipY: true,
@@ -286,7 +296,7 @@ class StudentHomeworkController extends GetxController {
                                           ),
                                         ),
                                         5.horizontalSpacing,
-                                         Text(
+                                        Text(
                                           "Upload".tr,
                                           style: AppTextStyle
                                               .cardTextStyle14WhiteW500,
@@ -300,8 +310,8 @@ class StudentHomeworkController extends GetxController {
                           )
                         ],
                       ),
-                  )
-              :  Center(
+                    )
+              : Center(
                   child: Text(
                     "No Details Available".tr,
                     style: AppTextStyle.fontSize16lightBlackW500,

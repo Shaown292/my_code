@@ -38,7 +38,6 @@ class SyllabusTopicWise extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(7),
-                      width: Get.width * 0.4,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: const Color(0xFFF2F0F6),
@@ -54,7 +53,7 @@ class SyllabusTopicWise extends StatelessWidget {
                       width: Get.width * 0.3,
                       child: Text(
                         "${"Date".tr} : $date",
-                        style: AppTextStyle.blackFontSize14W400,
+                        style: AppTextStyle.fontSize14GreyW400,
                       ),
                     ),
                   ],
@@ -62,7 +61,7 @@ class SyllabusTopicWise extends StatelessWidget {
                 10.verticalSpacing,
                 Text(
                   topic ?? "",
-                  style: AppTextStyle.blackFontSize14W400,
+                  style: AppTextStyle.fontSize16lightBlackW500,
                 ),
                 20.verticalSpacing,
                 PrimaryButton(
