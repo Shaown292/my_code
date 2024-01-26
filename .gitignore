@@ -35,6 +35,7 @@ server/node_modules/
 # Android related
 **/android/**/gradle-wrapper.jar
 .gradle/
+**/android/.gradle/
 **/android/captures/
 **/android/gradlew
 **/android/gradlew.bat
