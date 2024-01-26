@@ -40,7 +40,11 @@ class HomeworkTile extends StatelessWidget {
     this.studentName,
     this.widthOfFirstContainer,
     this.widthOfSecondContainer,
-    this.widthOfThirdContainer, this.downloadContainerColor, this.evaluateContainerColor, this.onDownloadTap, this.admissionNo,
+    this.widthOfThirdContainer,
+    this.downloadContainerColor,
+    this.evaluateContainerColor,
+    this.onDownloadTap,
+    this.admissionNo,
   });
 
   @override
@@ -48,7 +52,7 @@ class HomeworkTile extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
           child: Row(
             children: [
               Container(
@@ -59,7 +63,7 @@ class HomeworkTile extends StatelessWidget {
                     color: AppColors.homeworkWidgetColor),
                 child: Center(
                   child: Text(
-                    isEvaluation ? admissionNo ?? "" :   studentClass.toString(),
+                    isEvaluation ? admissionNo ?? "" : studentClass.toString(),
                     style: AppTextStyle.fontSize13BlackW400,
                   ),
                 ),
@@ -94,27 +98,27 @@ class HomeworkTile extends StatelessWidget {
               isEvaluation
                   ? const SizedBox()
                   : Container(
-                padding: const EdgeInsets.all(7),
-                width: widthOfThirdContainer,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    color: AppColors.activeStatusGreenColor),
-                child: Center(
-                  child: Text(
-                    subject.toString(),
-                    style: AppTextStyle.textStyle12WhiteW500,
-                  ),
-                ),
-              ),
+                      padding: const EdgeInsets.all(7),
+                      width: widthOfThirdContainer,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: AppColors.activeStatusGreenColor),
+                      child: Center(
+                        child: Text(
+                          subject.toString(),
+                          style: AppTextStyle.textStyle12WhiteW500,
+                        ),
+                      ),
+                    ),
               isEvaluation
                   ? const SizedBox()
                   : SizedBox(
-                height: Get.height * 0.04,
-                child: const VerticalDivider(
-                  color: AppColors.transportDividerColor,
-                  thickness: 1,
-                ),
-              ),
+                      height: Get.height * 0.04,
+                      child: const VerticalDivider(
+                        color: AppColors.transportDividerColor,
+                        thickness: 1,
+                      ),
+                    ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: isEvaluation
@@ -123,42 +127,44 @@ class HomeworkTile extends StatelessWidget {
                   children: [
                     isEvaluation
                         ? Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: InkWell(
-                        onTap: onDownloadTap,
-                        child: Container(
-                          padding: const EdgeInsets.all(7),
-                          decoration:  BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: downloadContainerColor),
-                          child: Image.asset(
-                            ImagePath.download,
-                            color: Colors.white,
-                            scale: 4,
-                          ),
-                        ),
-                      ),
-                    )
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: InkWell(
+                              onTap: onDownloadTap,
+                              child: Container(
+                                padding: const EdgeInsets.all(7),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: downloadContainerColor),
+                                child: Image.asset(
+                                  ImagePath.download,
+                                  color: Colors.white,
+                                  scale: 4,
+                                ),
+                              ),
+                            ),
+                          )
                         : InkWell(
-                      onTap: onDetailsTap,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          color: AppColors.profileValueColor,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Details".tr,
-                            style: AppTextStyle.textStyle12WhiteW400,
+                            onTap: onDetailsTap,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 7, horizontal: 4),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: AppColors.profileValueColor,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Details".tr,
+                                  style: AppTextStyle.textStyle12WhiteW400,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                     InkWell(
                       onTap: onEvaluationTap,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 4),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 7, horizontal: 4),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(2),
                           color: evaluateContainerColor,

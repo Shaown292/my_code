@@ -25,7 +25,7 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
           children: [
             20.verticalSpacing,
             Expanded(
-              child: controller.zoomMeetingLoader.value
+              child: controller.meetingLoader.value
                   ? const SecondaryLoadingWidget()
                   : controller.meetingList.isNotEmpty
                   ? RefreshIndicator(

@@ -1,11 +1,11 @@
-class ZoomMeetingListResponseModel {
+class MeetingListResponseModel {
   bool? success;
   List<MeetingList>? data;
   String? message;
 
-  ZoomMeetingListResponseModel({this.success, this.data, this.message});
+  MeetingListResponseModel({this.success, this.data, this.message});
 
-  ZoomMeetingListResponseModel.fromJson(Map<String, dynamic> json) {
+  MeetingListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
       data = <MeetingList>[];

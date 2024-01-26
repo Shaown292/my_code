@@ -45,7 +45,7 @@ class CustomDropdown extends StatelessWidget {
                     child: dropdownText
                         ? Text(
                             item,
-                            style: AppTextStyle.fontSize14lightBlackW400,
+                            style: AppTextStyle.dropdownText,
                             overflow: TextOverflow.ellipsis,
                           )
                         : Row(

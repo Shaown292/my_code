@@ -21,341 +21,383 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () =>
-          InfixEduScaffold(
-            title: "Homework List".tr,
-            body: CustomBackground(
-              customWidget: Column(
-
+      () => InfixEduScaffold(
+        title: "Homework List".tr,
+        body: CustomBackground(
+          customWidget: Column(
+            children: [
+              20.verticalSpacing,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  5.horizontalSpacing,
 
-                  20.verticalSpacing,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      5.horizontalSpacing,
-
-                      /// Class Dropdown
-                      controller.teAddHomeworkController.classLoader.value
-                          ? const Center(child: CircularProgressIndicator())
-                          : SizedBox(
-                        width: Get.width / 3 - 15,
-                        height: Get.height * 0.07,
-                        child: DuplicateDropdown(
-                          borderRadius: 2,
-                          dropdownValue: controller.teAddHomeworkController
-                              .teacherClassInitialValue.value,
-                          dropdownList: controller
-                              .teAddHomeworkController.teacherClassList,
-                          changeDropdownValue: (value) {
-                            controller.teAddHomeworkController
-                                .teacherClassInitialValue.value = value!;
-                            controller.teAddHomeworkController.teacherClassId
-                                .value = value.id;
-                            controller.teAddHomeworkController
-                                .getTeacherSubjectList(
-                                classId: controller
-                                    .teAddHomeworkController
-                                    .teacherClassId
-                                    .value);
-                            controller.isDropDownChanged.value == true;
-                            controller.filterHomework(
-                                classId :controller.teAddHomeworkController.teacherClassId
-                                    .value,
-                                sectionId:  controller.teAddHomeworkController.teacherSectionId
-                                    .value,
-                                subjectId : controller.teAddHomeworkController.teacherSubjectId
-                                    .value);
-                          },
-                        ),
-                      ),
-
-                      5.horizontalSpacing,
-
-                      /// subject Dropdown
-                      controller.teAddHomeworkController.subjectLoader.value
-                          ? const Center(child: CircularProgressIndicator())
-                          : SizedBox(
-                        width: Get.width / 3 - 15,
-                        height: Get.height * 0.07,
-                        child: DuplicateDropdown(
-                          borderRadius: 2,
-                          dropdownValue: controller.teAddHomeworkController
-                              .teacherSubjectInitialValue.value,
-                          dropdownList: controller
-                              .teAddHomeworkController.teacherSubjectList,
-                          changeDropdownValue: (value) {
-                            controller.teAddHomeworkController
-                                .teacherSubjectInitialValue.value = value!;
-                            controller.teAddHomeworkController
-                                .teacherSubjectId.value = value.id;
-
-                            controller.teAddHomeworkController
-                                .getTeacherSectionList(
-                                classId: controller
-                                    .teAddHomeworkController
-                                    .teacherClassId
-                                    .value,
-                                subjectId: controller
-                                    .teAddHomeworkController
-                                    .teacherSubjectId
-                                    .value);
-                            controller.isDropDownChanged.value == true;
-                            controller.filterHomework(
-                                classId :controller.teAddHomeworkController.teacherClassId
-                                    .value,
-                                sectionId:  controller.teAddHomeworkController.teacherSectionId
-                                    .value,
-                                subjectId : controller.teAddHomeworkController.teacherSubjectId
-                                    .value);
-                          },
-                        ),
-                      ),
-
-                      5.horizontalSpacing,
-                      /// Section Dropdown
-                      controller.teAddHomeworkController.sectionLoader.value
-                          ? const Center(child: CircularProgressIndicator())
-                          : SizedBox(
-                        width: Get.width / 3 - 15,
-                        height: Get.height * 0.07,
-                        child: DuplicateDropdown(
-                          borderRadius: 2,
-                          dropdownValue: controller.teAddHomeworkController
-                              .teacherSectionInitialValue.value,
-                          dropdownList: controller
-                              .teAddHomeworkController.teacherSectionList,
-                          changeDropdownValue: (value) {
-                            controller.teAddHomeworkController
-                                .teacherSectionInitialValue.value = value!;
-                            controller.teAddHomeworkController
-                                .teacherSectionId.value = value.id;
-                            controller.isDropDownChanged.value == true;
-                            controller.filterHomework(
-                                classId :controller.teAddHomeworkController.teacherClassId
-                                    .value,
-                                sectionId:  controller.teAddHomeworkController.teacherSectionId
-                                    .value,
-                                subjectId : controller.teAddHomeworkController.teacherSubjectId
-                                    .value);
-                          },
-                        ),
-                      ),
-                      5.horizontalSpacing,
-                    ],
-                  ),
-                  30.verticalSpacing,
-                  Container(
-                    height: Get.height * 0.09,
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 7, vertical: 15),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(8),
-                        topLeft: Radius.circular(8),
-                      ),
-                      color: AppColors.profileCardBackgroundColor,
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          width: Get.width * 0.12,
-                          child: Text(
-                            "Class".tr,
-                            style: AppTextStyle.textStyle12WhiteW500,
+                  /// Class Dropdown
+                  controller.teAddHomeworkController.classLoader.value
+                      ? const Center(child: CircularProgressIndicator())
+                      : SizedBox(
+                          width: Get.width / 3 - 15,
+                          height: Get.height * 0.04,
+                          child: DuplicateDropdown(
+                            borderRadius: 2,
+                            dropdownValue: controller.teAddHomeworkController
+                                .teacherClassInitialValue.value,
+                            dropdownList: controller
+                                .teAddHomeworkController.teacherClassList,
+                            changeDropdownValue: (value) {
+                              controller.teAddHomeworkController
+                                  .teacherClassInitialValue.value = value!;
+                              controller.teAddHomeworkController.teacherClassId
+                                  .value = value.id;
+                              controller.teAddHomeworkController
+                                  .getTeacherSubjectList(
+                                      classId: controller
+                                          .teAddHomeworkController
+                                          .teacherClassId
+                                          .value);
+                              controller.isDropDownChanged.value == true;
+                              controller.filterHomework(
+                                  classId: controller.teAddHomeworkController
+                                      .teacherClassId.value,
+                                  sectionId: controller.teAddHomeworkController
+                                      .teacherSectionId.value,
+                                  subjectId: controller.teAddHomeworkController
+                                      .teacherSubjectId.value);
+                            },
                           ),
                         ),
-                        const VerticalDivider(
-                          color: AppColors.profileTitleColor,
-                          thickness: 1,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          width: Get.width * 0.14,
-                          child: Text(
-                            "Section".tr,
-                            style: AppTextStyle.textStyle12WhiteW500,
-                          ),
-                        ),
-                        const VerticalDivider(
-                          color: AppColors.profileTitleColor,
-                          thickness: 1,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          width: Get.width * 0.15,
-                          child: Text(
-                            "Subject".tr,
-                            style: AppTextStyle.textStyle12WhiteW500,
-                          ),
-                        ),
-                        const VerticalDivider(
-                          color: AppColors.profileTitleColor,
-                          thickness: 1,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Obx(
-                        () =>
-                controller.isDropDownChanged.value ? controller.searchHomeworkLoader.value
-                    ? const Expanded(child: LoadingWidget())
-                    : controller.teacherHomeworkList.isNotEmpty
-                    ? Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.teacherHomeworkList.length,
-                    itemBuilder: (context, index) {
-                      return HomeworkTile(
-                        widthOfFirstContainer: Get.width * 0.12,
-                        widthOfSecondContainer: Get.width * 0.14,
-                        widthOfThirdContainer: Get.width * 0.15,
-                        evaluateContainerColor:
-                        AppColors.appButtonColor,
-                        studentClass: controller
-                            .teacherHomeworkList[index].className,
-                        studentSection: controller
-                            .teacherHomeworkList[index].sectionName,
-                        subject: controller
-                            .teacherHomeworkList[index].subjectName,
-                        onEvaluationTap: () {
-                          if (controller.teacherHomeworkList[index]
-                              .classId ==
-                              null ||
-                              controller.teacherHomeworkList[index]
-                                  .sectionId ==
-                                  null) {
-                            showBasicFailedSnackBar(
-                                message: 'No Evaluation Found.');
-                          } else {
-                            Get.toNamed(Routes.TE_HOMEWORK_EVALUATION,
-                                arguments: {
-                                  'class_id': controller
-                                      .teacherHomeworkList[index]
-                                      .classId,
-                                  'class_name': controller
-                                      .teacherHomeworkList[index]
-                                      .className,
-                                  'section_id': controller
-                                      .teacherHomeworkList[index]
-                                      .sectionId,
-                                  'section_name': controller
-                                      .teacherHomeworkList[index]
-                                      .sectionName,
-                                  'homework_id': controller
-                                      .teacherHomeworkList[index].id,
-                                  'subject_name': controller
-                                      .teacherHomeworkList[index]
-                                      .subjectName,
-                                  'assign_date': controller
-                                      .teacherHomeworkList[index]
-                                      .assignDate,
-                                  'submission_date': controller
-                                      .teacherHomeworkList[index]
-                                      .submissionDate,
-                                  'evaluation': controller
-                                      .teacherHomeworkList[index]
-                                      .evaluation,
-                                  'marks': controller
-                                      .teacherHomeworkList[index]
-                                      .marks,
-                                  'file': controller
-                                      .teacherHomeworkList[index]
-                                      .file,
-                                });
-                          }
-                        },
-                        onDetailsTap: () {
-                          controller.showHomeworkDetailsBottomSheet(
-                              index: index,
-                              bottomSheetBackgroundColor:
-                              Colors.white);
-                        },
-                      );
-                    },
-                  ) ,
-                ) : const NoDataAvailableWidget() :   controller.homeworkLoader.value
-                     ? const Expanded(child: LoadingWidget())
-                     : controller.teacherHomeworkList.isNotEmpty
-                     ? Expanded(
-                   child: ListView.builder(
-                     itemCount: controller.teacherHomeworkList.length,
-                     itemBuilder: (context, index) {
-                       return HomeworkTile(
-                         widthOfFirstContainer: Get.width * 0.12,
-                         widthOfSecondContainer: Get.width * 0.14,
-                         widthOfThirdContainer: Get.width * 0.15,
-                         evaluateContainerColor:
-                         AppColors.appButtonColor,
-                         studentClass: controller
-                             .teacherHomeworkList[index].className,
-                         studentSection: controller
-                             .teacherHomeworkList[index].sectionName,
-                         subject: controller
-                             .teacherHomeworkList[index].subjectName,
-                         onEvaluationTap: () {
-                           if (controller.teacherHomeworkList[index]
-                               .classId ==
-                               null ||
-                               controller.teacherHomeworkList[index]
-                                   .sectionId ==
-                                   null) {
-                             showBasicFailedSnackBar(
-                                 message: 'No Evaluation Found.');
-                           } else {
-                             Get.toNamed(Routes.TE_HOMEWORK_EVALUATION,
-                                 arguments: {
-                                   'class_id': controller
-                                       .teacherHomeworkList[index]
-                                       .classId,
-                                   'class_name': controller
-                                       .teacherHomeworkList[index]
-                                       .className,
-                                   'section_id': controller
-                                       .teacherHomeworkList[index]
-                                       .sectionId,
-                                   'section_name': controller
-                                       .teacherHomeworkList[index]
-                                       .sectionName,
-                                   'homework_id': controller
-                                       .teacherHomeworkList[index].id,
-                                   'subject_name': controller
-                                       .teacherHomeworkList[index]
-                                       .subjectName,
-                                   'assign_date': controller
-                                       .teacherHomeworkList[index]
-                                       .assignDate,
-                                   'submission_date': controller
-                                       .teacherHomeworkList[index]
-                                       .submissionDate,
-                                   'evaluation': controller
-                                       .teacherHomeworkList[index]
-                                       .evaluation,
-                                   'marks': controller
-                                       .teacherHomeworkList[index]
-                                       .marks,
-                                   'file': controller
-                                       .teacherHomeworkList[index]
-                                       .file,
-                                 });
-                           }
-                         },
-                         onDetailsTap: () {
-                           controller.showHomeworkDetailsBottomSheet(
-                               index: index,
-                               bottomSheetBackgroundColor:
-                               Colors.white);
-                         },
-                       );
-                     },
-                   ) ,
-                 ) : const NoDataAvailableWidget(),
 
-                  ),
+                  5.horizontalSpacing,
+
+                  /// subject Dropdown
+                  controller.teAddHomeworkController.subjectLoader.value
+                      ? const Center(child: CircularProgressIndicator())
+                      : SizedBox(
+                          width: Get.width / 3 - 15,
+                          height: Get.height * 0.04,
+                          child: DuplicateDropdown(
+                            borderRadius: 2,
+                            dropdownValue: controller.teAddHomeworkController
+                                .teacherSubjectInitialValue.value,
+                            dropdownList: controller
+                                .teAddHomeworkController.teacherSubjectList,
+                            changeDropdownValue: (value) {
+                              controller.teAddHomeworkController
+                                  .teacherSubjectInitialValue.value = value!;
+                              controller.teAddHomeworkController
+                                  .teacherSubjectId.value = value.id;
+
+                              controller.teAddHomeworkController
+                                  .getTeacherSectionList(
+                                      classId: controller
+                                          .teAddHomeworkController
+                                          .teacherClassId
+                                          .value,
+                                      subjectId: controller
+                                          .teAddHomeworkController
+                                          .teacherSubjectId
+                                          .value);
+                              controller.isDropDownChanged.value == true;
+                              controller.filterHomework(
+                                  classId: controller.teAddHomeworkController
+                                      .teacherClassId.value,
+                                  sectionId: controller.teAddHomeworkController
+                                      .teacherSectionId.value,
+                                  subjectId: controller.teAddHomeworkController
+                                      .teacherSubjectId.value);
+                            },
+                          ),
+                        ),
+
+                  5.horizontalSpacing,
+
+                  /// Section Dropdown
+                  controller.teAddHomeworkController.sectionLoader.value
+                      ? const Center(child: CircularProgressIndicator())
+                      : SizedBox(
+                          width: Get.width / 3 - 15,
+                          height: Get.height * 0.04,
+                          child: DuplicateDropdown(
+                            borderRadius: 2,
+                            dropdownValue: controller.teAddHomeworkController
+                                .teacherSectionInitialValue.value,
+                            dropdownList: controller
+                                .teAddHomeworkController.teacherSectionList,
+                            changeDropdownValue: (value) {
+                              controller.teAddHomeworkController
+                                  .teacherSectionInitialValue.value = value!;
+                              controller.teAddHomeworkController
+                                  .teacherSectionId.value = value.id;
+                              controller.isDropDownChanged.value == true;
+                              controller.filterHomework(
+                                  classId: controller.teAddHomeworkController
+                                      .teacherClassId.value,
+                                  sectionId: controller.teAddHomeworkController
+                                      .teacherSectionId.value,
+                                  subjectId: controller.teAddHomeworkController
+                                      .teacherSubjectId.value);
+                            },
+                          ),
+                        ),
+                  5.horizontalSpacing,
                 ],
               ),
-            ),
+              10.verticalSpacing,
+              Container(
+                height: 40,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(8),
+                    topLeft: Radius.circular(8),
+                  ),
+                  color: AppColors.profileCardBackgroundColor,
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: Get.width * 0.12,
+                      child: Text(
+                        "Class".tr,
+                        style: AppTextStyle.textStyle10WhiteW400,
+                      ),
+                    ),
+                    const VerticalDivider(
+                      color: AppColors.profileTitleColor,
+                      thickness: 1,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: Get.width * 0.14,
+                      child: Text(
+                        "Section".tr,
+                        style: AppTextStyle.textStyle10WhiteW400,
+                      ),
+                    ),
+                    const VerticalDivider(
+                      color: AppColors.profileTitleColor,
+                      thickness: 1,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: Get.width * 0.15,
+                      child: Text(
+                        "Subject".tr,
+                        style: AppTextStyle.textStyle10WhiteW400,
+                      ),
+                    ),
+                    const VerticalDivider(
+                      color: AppColors.profileTitleColor,
+                      thickness: 1,
+                    ),
+                  ],
+                ),
+              ),
+              Obx(
+                () => controller.isDropDownChanged.value
+                    ? controller.searchHomeworkLoader.value
+                        ? const Expanded(child: LoadingWidget())
+                        : controller.teacherHomeworkList.isNotEmpty
+                            ? Expanded(
+                                child: ListView.builder(
+                                  itemCount:
+                                      controller.teacherHomeworkList.length,
+                                  itemBuilder: (context, index) {
+                                    return HomeworkTile(
+                                      widthOfFirstContainer: Get.width * 0.12,
+                                      widthOfSecondContainer: Get.width * 0.14,
+                                      widthOfThirdContainer: Get.width * 0.15,
+                                      evaluateContainerColor:
+                                          AppColors.appButtonColor,
+                                      studentClass: controller
+                                          .teacherHomeworkList[index].className,
+                                      studentSection: controller
+                                          .teacherHomeworkList[index]
+                                          .sectionName,
+                                      subject: controller
+                                          .teacherHomeworkList[index]
+                                          .subjectName,
+                                      onEvaluationTap: () {
+                                        if (controller
+                                                    .teacherHomeworkList[index]
+                                                    .classId ==
+                                                null ||
+                                            controller
+                                                    .teacherHomeworkList[index]
+                                                    .sectionId ==
+                                                null) {
+                                          showBasicFailedSnackBar(
+                                              message: 'No Evaluation Found.');
+                                        } else {
+                                          Get.toNamed(
+                                              Routes.TE_HOMEWORK_EVALUATION,
+                                              arguments: {
+                                                'class_id': controller
+                                                    .teacherHomeworkList[index]
+                                                    .classId,
+                                                'class_name': controller
+                                                    .teacherHomeworkList[index]
+                                                    .className,
+                                                'section_id': controller
+                                                    .teacherHomeworkList[index]
+                                                    .sectionId,
+                                                'section_name': controller
+                                                    .teacherHomeworkList[index]
+                                                    .sectionName,
+                                                'homework_id': controller
+                                                    .teacherHomeworkList[index]
+                                                    .id,
+                                                'subject_name': controller
+                                                    .teacherHomeworkList[index]
+                                                    .subjectName,
+                                                'assign_date': controller
+                                                    .teacherHomeworkList[index]
+                                                    .assignDate,
+                                                'submission_date': controller
+                                                    .teacherHomeworkList[index]
+                                                    .submissionDate,
+                                                'evaluation': controller
+                                                    .teacherHomeworkList[index]
+                                                    .evaluation,
+                                                'marks': controller
+                                                    .teacherHomeworkList[index]
+                                                    .marks,
+                                                'file': controller
+                                                    .teacherHomeworkList[index]
+                                                    .file,
+                                              });
+                                        }
+                                      },
+                                      onDetailsTap: () {
+                                        controller
+                                            .showHomeworkDetailsBottomSheet(
+                                                index: index,
+                                                bottomSheetBackgroundColor:
+                                                    Colors.white);
+                                      },
+                                    );
+                                  },
+                                ),
+                              )
+                            : const NoDataAvailableWidget()
+                    : Expanded(
+                        child: controller.homeworkLoader.value
+                            ? const Expanded(child: LoadingWidget())
+                            : controller.teacherHomeworkList.isNotEmpty
+                                ? RefreshIndicator(
+                                    color: AppColors.primaryColor,
+                                    onRefresh: () async {
+                                      controller.teacherHomeworkList.clear();
+                                      controller.getTeacherHomeWorkList();
+                                    },
+                                    child: ListView.builder(
+                                      itemCount:
+                                          controller.teacherHomeworkList.length,
+                                      itemBuilder: (context, index) {
+                                        return HomeworkTile(
+                                          widthOfFirstContainer:
+                                              Get.width * 0.12,
+                                          widthOfSecondContainer:
+                                              Get.width * 0.14,
+                                          widthOfThirdContainer:
+                                              Get.width * 0.15,
+                                          evaluateContainerColor:
+                                              AppColors.appButtonColor,
+                                          studentClass: controller
+                                              .teacherHomeworkList[index]
+                                              .className,
+                                          studentSection: controller
+                                              .teacherHomeworkList[index]
+                                              .sectionName,
+                                          subject: controller
+                                              .teacherHomeworkList[index]
+                                              .subjectName,
+                                          onEvaluationTap: () {
+                                            if (controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .classId ==
+                                                    null ||
+                                                controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .sectionId ==
+                                                    null) {
+                                              showBasicFailedSnackBar(
+                                                  message:
+                                                      'No Evaluation Found.');
+                                            } else {
+                                              Get.toNamed(
+                                                  Routes.TE_HOMEWORK_EVALUATION,
+                                                  arguments: {
+                                                    'class_id': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .classId,
+                                                    'class_name': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .className,
+                                                    'section_id': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .sectionId,
+                                                    'section_name': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .sectionName,
+                                                    'homework_id': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .id,
+                                                    'subject_name': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .subjectName,
+                                                    'assign_date': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .assignDate,
+                                                    'submission_date': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .submissionDate,
+                                                    'evaluation': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .evaluation,
+                                                    'marks': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .marks,
+                                                    'file': controller
+                                                        .teacherHomeworkList[
+                                                            index]
+                                                        .file,
+                                                  });
+                                            }
+                                          },
+                                          onDetailsTap: () {
+                                            controller
+                                                .showHomeworkDetailsBottomSheet(
+                                                    index: index,
+                                                    bottomSheetBackgroundColor:
+                                                        Colors.white);
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : const NoDataAvailableWidget(),
+                      ),
+              ),
+            ],
           ),
+        ),
+      ),
     );
   }
 }

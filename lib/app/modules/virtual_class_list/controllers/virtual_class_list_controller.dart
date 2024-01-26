@@ -17,33 +17,33 @@ class VirtualClassListController extends GetxController {
   Get.find<GlobalRxVariableController>();
 
   RxList<MeetingList> meetingList = <MeetingList>[].obs;
-  RxBool zoomMeetingLoader = false.obs;
+  RxBool meetingLoader = false.obs;
   RxString onlineClass = "".obs;
   String url = "";
 
   /// Get Zoom Meeting List
-  Future<ZoomMeetingListResponseModel> getZoomMeetingList() async {
+  Future<MeetingListResponseModel> getZoomMeetingList() async {
     try {
       meetingList.clear();
 
-      zoomMeetingLoader.value = true;
+      meetingLoader.value = true;
       final response = await BaseClient().getData(
         url: url,
         header: GlobalVariable.header,
       );
 
-      ZoomMeetingListResponseModel zoomMeetingListResponseModel =
-      ZoomMeetingListResponseModel.fromJson(response);
+      MeetingListResponseModel zoomMeetingListResponseModel =
+      MeetingListResponseModel.fromJson(response);
 
       if (zoomMeetingListResponseModel.success == true) {
-        zoomMeetingLoader.value = false;
+        meetingLoader.value = false;
         if (zoomMeetingListResponseModel.data!.isNotEmpty) {
           for (int i = 0; i < zoomMeetingListResponseModel.data!.length; i++) {
             meetingList.add(zoomMeetingListResponseModel.data![i]);
           }
         }
       } else {
-        zoomMeetingLoader.value = false;
+        meetingLoader.value = false;
         showBasicFailedSnackBar(
           message: zoomMeetingListResponseModel.message ??
               AppText.somethingWentWrong,
@@ -54,10 +54,10 @@ class VirtualClassListController extends GetxController {
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      zoomMeetingLoader.value = false;
+      meetingLoader.value = false;
     }
 
-    return ZoomMeetingListResponseModel();
+    return MeetingListResponseModel();
   }
 
   Future<void> openZoom(
@@ -186,7 +186,7 @@ class VirtualClassListController extends GetxController {
         url = InfixApi.bigBlueButtonMeetingList;
         break;
       case 'google_meet':
-        url = InfixApi.bigBlueButtonMeetingList;
+        url = InfixApi.googleMeetMeetingList;
         break;
     }
   }
@@ -194,7 +194,6 @@ class VirtualClassListController extends GetxController {
   void onInit() {
     onlineClass.value = Get.arguments["online_class"];
     _detectingUrl(onlineClass.value);
-    print(" online class ::::::: $url");
     getZoomMeetingList();
     super.onInit();
   }

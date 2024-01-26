@@ -42,55 +42,64 @@ class LeaveListView extends GetView<LeaveListController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Card(
-                      margin: EdgeInsets.zero,
-                      elevation: 5,
-                      child: Container(
-                        width: Get.width,
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(8),
-                            topLeft: Radius.circular(8),
-                          ),
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                             Text(
-                              "My Remaining Leave".tr,
-                              style: AppTextStyle.fontSize14BlackW500,
+                    controller.globalRxVariableController.roleId.value != 4
+                        ?  Card(
+                            margin: EdgeInsets.zero,
+                            elevation: 5,
+                            child: Container(
+                              width: Get.width,
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(8),
+                                  topLeft: Radius.circular(8),
+                                ),
+                                color: Colors.white,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "My Remaining Leave".tr,
+                                    style: AppTextStyle.fontSize14BlackW500,
+                                  ),
+                                  10.verticalSpacing,
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        controller.remainingLeaveList.length,
+                                    itemBuilder: (context, index) {
+                                      return BottomSheetTile(
+                                        title: controller
+                                            .remainingLeaveList[index]
+                                            .leaveType,
+                                        value: controller
+                                            .remainingLeaveList[index]
+                                            .remainingDays
+                                            .toString(),
+                                        color: index % 2 == 0
+                                            ? AppColors.homeworkWidgetColor
+                                            : Colors.white,
+                                      );
+                                    },
+                                  )
+                                ],
+                              ),
                             ),
-                            10.verticalSpacing,
-                            ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: controller.remainingLeaveList.length,
-                              itemBuilder: (context, index) {
-                                return BottomSheetTile(
-                                  title: controller
-                                      .remainingLeaveList[index].leaveType,
-                                  value: controller
-                                      .remainingLeaveList[index].remainingDays
-                                      .toString(),
-                                  color: index % 2 == 0
-                                      ? AppColors.homeworkWidgetColor
-                                      : Colors.white,
-                                );
-                              },
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    30.verticalSpacing,
-                     Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        "Leave List".tr,
-                        style: AppTextStyle.blackFontSize14W400,
-                      ),
-                    ),
+                          )
+                        : const SizedBox(),
+                    controller.globalRxVariableController.roleId.value != 4
+                        ? 30.verticalSpacing
+                        : 0.verticalSpacing,
+                    controller.globalRxVariableController.roleId.value != 4
+                        ? Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Leave List".tr,
+                              style: AppTextStyle.blackFontSize14W400,
+                            ),
+                          )
+                        : const SizedBox(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: TabBar(
@@ -206,7 +215,8 @@ class LeaveListView extends GetView<LeaveListController> {
                               : controller.cancelledList.isNotEmpty
                                   ? ListView.builder(
                                       shrinkWrap: true,
-                                      itemCount: controller.cancelledList.length,
+                                      itemCount:
+                                          controller.cancelledList.length,
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
@@ -223,8 +233,8 @@ class LeaveListView extends GetView<LeaveListController> {
                                                   .cancelledList[index].to,
                                               status: controller
                                                   .cancelledList[index].status,
-                                              statusColor:
-                                              AppColors.activeStatusRedColor,
+                                              statusColor: AppColors
+                                                  .activeStatusRedColor,
                                               onTap: () {
                                                 controller
                                                     .showRejectedListDetailsBottomSheet(
