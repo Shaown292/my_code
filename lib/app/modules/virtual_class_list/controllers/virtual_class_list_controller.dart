@@ -99,10 +99,6 @@ class VirtualClassListController extends GetxController {
 
 
 
-
-
-
-
   // void join({required String roomId}) async {
   //
   //   try{
