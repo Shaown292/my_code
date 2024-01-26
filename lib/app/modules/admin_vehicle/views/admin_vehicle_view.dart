@@ -69,9 +69,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 enableBorderActive: true,
                                 focusBorderActive: true,
                                 hintText: "Vehicle No".tr,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize14lightBlackW400,
-                                fillColor: Colors.white,
                               ),
                               10.verticalSpacing,
                               CustomTextFormField(
@@ -80,9 +77,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 enableBorderActive: true,
                                 focusBorderActive: true,
                                 hintText: "Vehicle Model".tr,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize14lightBlackW400,
-                                fillColor: Colors.white,
                               ),
                               10.verticalSpacing,
                               CustomTextFormField(
@@ -90,9 +84,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 enableBorderActive: true,
                                 focusBorderActive: true,
                                 hintText: "Made Year".tr,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize14lightBlackW400,
-                                fillColor: Colors.white,
                               ),
                               10.verticalSpacing,
 
@@ -121,9 +112,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 enableBorderActive: true,
                                 focusBorderActive: true,
                                 hintText: "Note".tr,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize14lightBlackW400,
-                                fillColor: Colors.white,
                               ),
                               (Get.height * 0.25).verticalSpacing,
                               controller.saveLoader.value
