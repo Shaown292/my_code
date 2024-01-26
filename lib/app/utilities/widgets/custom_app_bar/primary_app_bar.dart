@@ -24,6 +24,7 @@ class PrimaryAppBar extends StatelessWidget {
                 width: 66,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
+
                     image: AssetImage(ImagePath.appLogo),
                   ),
                 ),
