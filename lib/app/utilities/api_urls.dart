@@ -628,6 +628,7 @@ class InfixApi {
   static String zoomMeetingList = '${baseApi}zoom-class-meeting-list';
   static String jitsiMeetingList = '${baseApi}jitsi/virtual-class';
   static String bigBlueButtonMeetingList = '${baseApi}bbb/virtual-class';
+  static String googleMeetMeetingList = '${baseApi}g-meet/virtual-class';
 
   static String getJoinMeetingUrlApp({required String meetingID}) =>
       'zoomus://zoom.us/join?confno=$meetingID'; // android

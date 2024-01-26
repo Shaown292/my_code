@@ -37,13 +37,13 @@ class TeacherTile extends StatelessWidget {
               children: [
                 Image.asset(
                   ImagePath.teacher,
-                  height: 20,
-                  width: 20,
+                  height: 13,
+                  width: 13,
                 ),
                 10.horizontalSpacing,
                 Text(
                   teachersName ?? AppText.noDataAvailable,
-                  style: AppTextStyle.fontSize13GreyW500,
+                  style: AppTextStyle.teacherColor,
                 )
               ],
             ),
@@ -52,8 +52,8 @@ class TeacherTile extends StatelessWidget {
               children: [
                 Image.asset(
                   ImagePath.mail,
-                  height: 20,
-                  width: 20,
+                  height: 13,
+                  width: 13,
                   color: AppColors.profileValueColor,
                 ),
                 10.horizontalSpacing,
@@ -68,8 +68,8 @@ class TeacherTile extends StatelessWidget {
               children: [
                 Image.asset(
                   ImagePath.phone,
-                  height: 20,
-                  width: 20,
+                  height: 13,
+                  width: 13,
                   color: AppColors.profileValueColor,
                 ),
                 10.horizontalSpacing,

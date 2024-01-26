@@ -29,7 +29,6 @@ class ColumnTile extends StatelessWidget {
             title ?? "",
             style: AppTextStyle.fontSize13BlackW400,
           ),
-          8.verticalSpacing,
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Text(

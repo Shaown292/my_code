@@ -99,25 +99,34 @@ class ScheduleView extends GetView<ScheduleController> {
                       )
                     : controller.scheduleList.isNotEmpty
                         ? Expanded(
-                            child: ListView.builder(
-                              itemCount: controller.scheduleList.length,
-                              itemBuilder: (context, index) {
-                                return ScheduleDetailsTile(
-                                  date:
-                                      controller.scheduleList[index].dateAndDay,
-                                  subject:
-                                      controller.scheduleList[index].subject,
-                                  time: controller.scheduleList[index].time,
-                                  roomNo: controller.scheduleList[index].room,
-                                  section: controller
-                                      .scheduleList[index].classSection,
-                                  teacher:
-                                      controller.scheduleList[index].teacher,
-                                  color: index % 2 == 0
-                                      ? AppColors.profileCardTextColor
-                                      : Colors.white,
-                                );
+                            child: RefreshIndicator(
+                              color: AppColors.primaryColor,
+                              onRefresh: () async {
+                                controller.scheduleList.clear();
+                                controller.getStudentExamScheduleList(examId:  controller
+                                    .examinationController.examId.value, recordId: controller.homeController.studentRecordList[0].id);
                               },
+                              child: ListView.builder(
+                                itemCount: controller.scheduleList.length,
+                                itemBuilder: (context, index) {
+                                  return ScheduleDetailsTile(
+                                    date:
+                                        controller.scheduleList[index].dateAndDay,
+                                    subject:
+                                        controller.scheduleList[index].subject,
+                                    startTime: controller.scheduleList[index].startTime,
+                                    endTime: controller.scheduleList[index].endTime,
+                                    roomNo: controller.scheduleList[index].room,
+                                    section: controller
+                                        .scheduleList[index].classSection,
+                                    teacher:
+                                        controller.scheduleList[index].teacher,
+                                    color: index % 2 == 0
+                                        ? AppColors.profileCardTextColor
+                                        : Colors.white,
+                                  );
+                                },
+                              ),
                             ),
                           )
                         : const NoDataAvailableWidget(),

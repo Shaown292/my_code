@@ -73,6 +73,7 @@ class HomeworkCardTile extends StatelessWidget {
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ColumnTile(
                       title: "Created",
@@ -90,29 +91,33 @@ class HomeworkCardTile extends StatelessWidget {
                       width: Get.width * 0.2,
                     ),
                     Flexible(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Status",
-                            style: AppTextStyle.fontSize13BlackW400,
-                          ),
-                          8.verticalSpacing,
-                          status != null
-                              ? Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(3),
-                                      color: statusColor,),
-                                  child: Center(
-                                    child: Text(
-                                      status ?? "",
-                                      style: AppTextStyle.textStyle10WhiteW400,
-                                    ),
-                                  ),
-                                )
-                              : const SizedBox(),
-                        ],
+                      child:SizedBox(
+                        width:  Get.width * 0.22,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                        const Text(
+                              "Status",
+                              style: AppTextStyle.fontSize13BlackW400,
+                            ),
+                            4.verticalSpacing,
+                            status != null
+                                    ? Container(
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(3),
+                                            color: statusColor,),
+                                        child: Center(
+                                          child: Text(
+                                            status ?? "",
+                                            style: AppTextStyle.textStyle10WhiteW400,
+                                          ),
+                                        ),
+                                      )
+                                    : const SizedBox(),
+                          ],
+                        ),
                       ),
                     ),
                   ],

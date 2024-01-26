@@ -49,11 +49,20 @@ class ProfileController extends GetxController {
   RxBool transportLoader = false.obs;
   RxBool othersLoader = false.obs;
   RxBool documentLoader = false.obs;
+  RxInt permissionForDateOfBirth = 0.obs;
+
 
   ProfilePersonal? profilePersonal;
   ProfileParents? profileParents;
   ProfileTransport? profileTransport;
   ProfileOthers? profileOthers;
+
+
+  ProfilePersonalPermissions ? profilePersonalPermissions;
+  ProfileParentsPermissions? profileParentsPermissions;
+  ProfileTransportPermissions? profileTransportPermissions;
+  ProfileOthersPermissions? profileOthersPermissions;
+  ProfileDocumentsPermissions? profileDocumentsPermissions;
 
   ProfilePersonalModel profilePersonalModel = ProfilePersonalModel();
   ProfileParentsModel profileParentsModel = ProfileParentsModel();
@@ -80,6 +89,7 @@ class ProfileController extends GetxController {
       if (profilePersonalModel.success == true) {
         personalLoader.value = false;
         profilePersonal = profilePersonalModel.data?.profilePersonal;
+        profilePersonalPermissions = profilePersonalModel.data?.showPermission;
 
         profileDataController.firstName.value =
             profilePersonal?.firstName ?? '';
@@ -92,6 +102,7 @@ class ProfileController extends GetxController {
             profilePersonal?.currentAddress ?? '';
         profileDataController.profilePhoto.value =
             profilePersonal?.studentPhoto ?? '';
+        permissionForDateOfBirth.value = profilePersonalPermissions!.dateOfBirth!;
       } else {
         personalLoader.value = false;
         showBasicFailedSnackBar(message: "${profilePersonalModel.message}");
@@ -121,6 +132,7 @@ class ProfileController extends GetxController {
 
       if (profileParentsModel.success == true) {
         profileParents = profileParentsModel.data?.profileParents;
+        profileParentsPermissions = profileParentsModel.data?.showPermission;
         parentLoader.value = false;
       } else {
         parentLoader.value = false;
@@ -151,6 +163,7 @@ class ProfileController extends GetxController {
 
       if (profileTransportModel.success == true) {
         profileTransport = profileTransportModel.data?.profileTransport;
+        profileTransportPermissions = profileTransportModel.data?.showPermission;
         transportLoader.value = false;
       } else {
         transportLoader.value = false;
@@ -179,6 +192,7 @@ class ProfileController extends GetxController {
 
       if (profileOthersModel.success == true) {
         profileOthers = profileOthersModel.data?.profileOthers;
+        profileOthersPermissions = profileOthersModel.data?.showPermission;
         othersLoader.value = false;
       } else {
         othersLoader.value = false;
@@ -220,6 +234,7 @@ class ProfileController extends GetxController {
                 .add(studentDocumentsResponseModel.data!.profileDocuments![i]);
           }
         }
+        profileDocumentsPermissions = studentDocumentsResponseModel.data!.showPermission;
       } else {
         documentLoader.value = false;
         showBasicFailedSnackBar(
@@ -478,6 +493,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     studentIdFromAdmin = Get.arguments['student_id'];
+
 
     globalRxVariableController.roleId.value == 3 ?  fetchProfilePersonalData(studentId: globalRxVariableController.studentId.value!) : fetchProfilePersonalData(studentId: studentIdFromAdmin);
     globalRxVariableController.roleId.value == 3 ?  fetchProfileParentsData(studentId: globalRxVariableController.studentId.value!) : fetchProfileParentsData(studentId: studentIdFromAdmin);

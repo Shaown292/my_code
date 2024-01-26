@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/result/views/widget/flexible_text.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/colum_tile/column_tile.dart';
+import 'package:get/get.dart';
+import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 class VehicleTile extends StatelessWidget {
   final String? model;
@@ -26,42 +30,32 @@ class VehicleTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FlexibleText(
-                text: "Model",
-              ),
-              FlexibleText(
-                text: "Number",
-              ),
-              FlexibleText(
-                text: "Made Year",
-              ),
-              FlexibleText(
-                text: "Note",
-              ),
-            ],
-          ),
-          10.verticalSpacing,
-          Row(
+           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FlexibleText(
-                text: model ?? "",
+             ColumnTile(
+               title: "Model",
+               value: model,
+               width: Get.width * 0.2,
+             ),
+              ColumnTile(
+                title: "Number",
+                value: number,
+                width: Get.width * 0.2,
               ),
-               FlexibleText(
-                text: number ?? "",
+              ColumnTile(
+                title: "Made Year",
+                value: madeYear,
+                width: Get.width * 0.2,
               ),
-              FlexibleText(
-                text: madeYear ?? "",
-              ),
-              FlexibleText(
-                text: note ?? "",
+              ColumnTile(
+                title: "Note",
+                value: note,
               ),
             ],
           ),
+
         ],
       ),
     );

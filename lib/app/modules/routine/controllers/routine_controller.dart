@@ -8,15 +8,12 @@ import '../../../../domain/base_client/base_client.dart';
 import '../../../utilities/api_urls.dart';
 
 class RoutineController extends GetxController {
-
   GlobalRxVariableController globalRxVariableController = Get.find();
 
   TabController? tabController;
   List<ClassRoutine> classRoutineList = [];
   LoadingController loadingController = Get.find();
   RxInt selectIndex = 1.obs;
-
-
 
   List<String> daysOfWeek = <String>[
     'Sat',
@@ -36,11 +33,13 @@ class RoutineController extends GetxController {
       loadingController.isLoading = true;
 
       final response = await BaseClient().getData(
-        url: globalRxVariableController.roleId.value == 2 ? InfixApi.getStudentRoutineList(
-          globalRxVariableController.studentRecordId.value!,
-        ) : InfixApi.getTeacherMyRoutineList(
-          userId: globalRxVariableController.userId.value!,
-        ),
+        url: globalRxVariableController.roleId.value == 4
+            ? InfixApi.getTeacherMyRoutineList(
+                userId: globalRxVariableController.userId.value!,
+              )
+            : InfixApi.getStudentRoutineList(
+                globalRxVariableController.studentRecordId.value!,
+              ),
         header: GlobalVariable.header,
       );
 

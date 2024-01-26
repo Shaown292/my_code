@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/dormitory_card_tile/dormitory_card_tile.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
@@ -26,22 +27,30 @@ class DormitoryView extends GetView<DormitoryController> {
                     )
                   : controller.dormitoryList.isNotEmpty
                       ? Expanded(
-                          child: ListView.builder(
-                            itemCount: controller.dormitoryList.length,
-                            itemBuilder: (context, index) {
-                              return DormitoryCardTile(
-                                dormitoryName: controller
-                                    .dormitoryList[index].dormitoryName,
-                                roomNoName:
-                                    controller.dormitoryList[index].roomNumber,
-                                numberOfBed:
-                                    controller.dormitoryList[index].numberOfBed,
-                                cost:
-                                    controller.dormitoryList[index].costPerBed,
-                                activeStatus:
-                                    controller.dormitoryList[index].status,
-                              );
+                          child: RefreshIndicator(
+                            color: AppColors.primaryColor,
+                            onRefresh: () async {
+                              controller.dormitoryList.clear();
+                              controller.getDormitoryList();
                             },
+                            child: ListView.builder(
+                              itemCount: controller.dormitoryList.length,
+                              itemBuilder: (context, index) {
+                                return DormitoryCardTile(
+                                  dormitoryName: controller
+                                      .dormitoryList[index].dormitoryName,
+                                  roomNoName:
+                                      controller.dormitoryList[index].roomNumber,
+                                  numberOfBed:
+                                      controller.dormitoryList[index].numberOfBed,
+                                  cost:
+                                      controller.dormitoryList[index].costPerBed,
+                                  activeStatus:
+                                      controller.dormitoryList[index].status,
+                                  activeStatusColor: AppColors.primaryColor,
+                                );
+                              },
+                            ),
                           ),
                         )
                       : const NoDataAvailableWidget(),

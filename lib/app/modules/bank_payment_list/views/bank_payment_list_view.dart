@@ -10,6 +10,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_load
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../controllers/bank_payment_list_controller.dart';
 
@@ -51,7 +52,7 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                             filled: true,
                             fillColor: const Color(0xFFFDFBFF),
                             suffixIcon: const Icon(
-                              Icons.date_range,
+                              Iconsax.calendar_1,
                               size: 15,
                             ),
                             focusedBorder: OutlineInputBorder(

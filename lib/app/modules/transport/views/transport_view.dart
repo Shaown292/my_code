@@ -32,48 +32,45 @@ class TransportView extends GetView<TransportController> {
             child: Column(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  height: 40,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(8),
-                        topLeft: Radius.circular(8)),
+                      topRight: Radius.circular(8),
+                      topLeft: Radius.circular(8),
+                    ),
                     color: AppColors.profileCardBackgroundColor,
                   ),
                   child: Row(
                     children: [
                       SizedBox(
                         width: Get.width * 0.13,
-                        child:  Text(
+                        child: Text(
                           "Vehicle".tr,
-                          style: AppTextStyle.textStyle12WhiteW500,
+                          style: AppTextStyle.textStyle10WhiteW400,
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.05,
-                        child: const VerticalDivider(
-                          color: AppColors.profileTitleColor,
-                          thickness: 1,
-                        ),
+                      const VerticalDivider(
+                        color: AppColors.profileTitleColor,
+                        thickness: 1,
                       ),
                       Container(
                         width: Get.width * 0.2,
-                        padding: const EdgeInsets.all(10),
-                        child:  Text(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
                           "Status".tr,
-                          style: AppTextStyle.textStyle12WhiteW500,
+                          style: AppTextStyle.textStyle10WhiteW400,
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.05,
-                        child: const VerticalDivider(
-                          color: AppColors.profileTitleColor,
-                          thickness: 1,
-                        ),
+                      const VerticalDivider(
+                        color: AppColors.profileTitleColor,
+                        thickness: 1,
                       ),
-                       Text(
+                      Text(
                         "Route".tr,
-                        style: AppTextStyle.textStyle12WhiteW500,
+                        style: AppTextStyle.textStyle10WhiteW400,
                       )
                     ],
                   ),

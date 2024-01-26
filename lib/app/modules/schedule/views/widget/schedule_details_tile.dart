@@ -9,7 +9,8 @@ import '../../../../utilities/widgets/colum_tile/column_tile.dart';
 class ScheduleDetailsTile extends StatelessWidget {
   final String? date;
   final String? subject;
-  final String? time;
+  final String? startTime;
+  final String? endTime;
   final String? roomNo;
   final String? section;
   final String? teacher;
@@ -19,11 +20,11 @@ class ScheduleDetailsTile extends StatelessWidget {
     super.key,
     this.date,
     this.subject,
-    this.time,
+    this.startTime,
     this.color,
     this.roomNo,
     this.section,
-    this.teacher,
+    this.teacher, this.endTime,
   });
 
   @override
@@ -45,7 +46,7 @@ class ScheduleDetailsTile extends StatelessWidget {
           ),
           5.verticalSpacing,
           Text(
-            "${"Time".tr}: ${time ?? ""}",
+            "${"Time".tr}: $startTime - $endTime",
             style: AppTextStyle.fontSize14BlackW500,
           ),
           5.verticalSpacing,

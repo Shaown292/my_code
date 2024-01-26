@@ -30,7 +30,7 @@ class SubjectTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: Get.width * 0.25,
+                width: Get.width * 0.3,
                 child:  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Text(
@@ -41,7 +41,7 @@ class SubjectTile extends StatelessWidget {
               ),
               5.horizontalSpacing,
               SizedBox(
-                width: Get.width * 0.25,
+                width: Get.width * 0.3,
                 child:  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Text(
@@ -51,13 +51,14 @@ class SubjectTile extends StatelessWidget {
                 ),
               ),
               5.horizontalSpacing,
-              SizedBox(
-                width: Get.width * 0.25,
-                child:  Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Text(
-                    lectureType ?? "",
-                    style: AppTextStyle.fontSize13BlackW400,
+              Flexible(
+                child: SizedBox(
+                  child:  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Text(
+                      lectureType ?? "",
+                      style: AppTextStyle.fontSize13BlackW400,
+                    ),
                   ),
                 ),
               ),

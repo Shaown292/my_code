@@ -37,7 +37,7 @@ class BottomSheetTile extends StatelessWidget {
                   width: Get.width * 0.41,
                   child: Text(
                     title ?? "",
-                    style: AppTextStyle.fontSize12lightViolateW400,
+                    style: AppTextStyle.fontSize10GreyW500,
                   ),
                 ),
                 VerticalDivider(
@@ -67,7 +67,7 @@ class BottomSheetTile extends StatelessWidget {
                   width: Get.width * 0.41,
                   child: Text(
                     title ?? "",
-                    style: AppTextStyle.fontSize12lightViolateW400,
+                    style: AppTextStyle.fontSize10GreyW500,
                   ),
                 ),
                 VerticalDivider(
@@ -78,7 +78,7 @@ class BottomSheetTile extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
                     value ?? "",
-                    style: AppTextStyle.blackFontSize12W400,
+                    style: AppTextStyle.blackFontSize10W400,
                   ),
                 ),
               ],

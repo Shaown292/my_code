@@ -93,16 +93,16 @@ class FeesView extends GetView<FeesController> {
                                     itemBuilder: (context, index) {
                                       String colorCode = '';
                                       if (controller
-                                          .feesInvoiceList[index].status ==
-                                          'Unpaid') {
+                                          .feesInvoiceList[index].status?.toUpperCase() ==
+                                          'UNPAID') {
                                         colorCode = '0xFFE3342F';
                                       } else if (controller
-                                          .feesInvoiceList[index].status ==
-                                          'Paid') {
+                                          .feesInvoiceList[index].status?.toUpperCase() ==
+                                          'PAID') {
                                         colorCode = '0xFF3AC172';
                                       } else if (controller
-                                          .feesInvoiceList[index].status ==
-                                          'Partial') {
+                                          .feesInvoiceList[index].status?.toUpperCase() ==
+                                          'PARTIAL') {
                                         colorCode = '0xFFFFBE00';
                                       }
                                       return FeesTile(

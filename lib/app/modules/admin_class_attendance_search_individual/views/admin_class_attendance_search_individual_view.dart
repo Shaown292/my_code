@@ -25,7 +25,13 @@ class AdminClassAttendanceSearchIndividualView
             padding: const EdgeInsets.all(10.0),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    "${"Select".tr} ${"Class".tr} *",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
+                  10.verticalSpacing,
                   /// Student Class List Dropdown
                   controller.loadingController.isLoading
                       ? const CircularProgressIndicator(
@@ -50,7 +56,11 @@ class AdminClassAttendanceSearchIndividualView
                           },
                         ),
                   10.verticalSpacing,
-
+                  Text(
+                    "${"Select".tr} ${"Section".tr} *",
+                    style: AppTextStyle.fontSize13BlackW400,
+                  ),
+                  10.verticalSpacing,
                   /// Student Section List Dropdown
                   controller.adminStudentsSearchController.sectionLoader.value
                       ? const CircularProgressIndicator(
@@ -87,7 +97,7 @@ class AdminClassAttendanceSearchIndividualView
                     fillColor: Colors.white,
                     hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
-                  (Get.height * 0.4).verticalSpacing,
+                  (Get.height * 0.3).verticalSpacing,
                   controller.adminStudentsSearchController.searchLoader.value
                       ? const CircularProgressIndicator(
                           color: AppColors.primaryColor,

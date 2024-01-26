@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
@@ -108,8 +107,8 @@ class ProfileView extends GetView<ProfileController> {
                                                         .profilePhoto.value ==
                                                     ''
                                             ? Container(
-                                                height: Get.height * 0.1,
-                                                width: Get.height * 0.1,
+                                          height: 75,
+                                          width: 75,
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
                                                     image: AssetImage(
@@ -120,11 +119,11 @@ class ProfileView extends GetView<ProfileController> {
                                                 ),
                                               )
                                             : SizedBox(
-                                                height: 50,
-                                                width: 50,
+                                          height: 75,
+                                          width: 75,
                                                 child: ClipRRect(
                                                   borderRadius:
-                                                      6.circularRadius,
+                                                      8.circularRadius,
                                                   child: CacheImageView(
                                                     url: controller
                                                         .profileDataController
@@ -132,6 +131,7 @@ class ProfileView extends GetView<ProfileController> {
                                                         .toString(),
                                                     errorImageLocal:
                                                         ImagePath.errorImage,
+                                                    boxShape: BoxShape.rectangle,
                                                   ),
                                                 ),
                                               ),
@@ -144,7 +144,9 @@ class ProfileView extends GetView<ProfileController> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Text(
                                                     '${controller.profileDataController.firstName} ${controller.profileDataController.lastName}',
@@ -152,7 +154,9 @@ class ProfileView extends GetView<ProfileController> {
                                                         .fontSize18WhiteW700,
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(7.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            7.0),
                                                     child: Container(
                                                       height: 20,
                                                       width: 18,
@@ -179,7 +183,6 @@ class ProfileView extends GetView<ProfileController> {
                                             ],
                                           ),
                                         ),
-
                                       ],
                                     ),
                                   ),
@@ -210,36 +213,53 @@ class ProfileView extends GetView<ProfileController> {
                                   ? const SecondaryLoadingWidget()
                                   : Column(
                                       children: [
+                                        controller.profilePersonalPermissions
+                                                    ?.dateOfBirth ==
+                                                1
+                                            ? ProfilePersonalWidget(
+                                                icon: ImagePath.calender,
+                                                title: AppText.dateOfBirth.tr,
+                                                value:
+                                                    '${controller.profileDataController.dateOfBirth}',
+                                              )
+                                            : const SizedBox(),
                                         ProfilePersonalWidget(
-                                          icon: ImagePath.calender,
-                                          title: AppText.dateOfBirth.tr,
-                                          value:
-                                              '${controller.profileDataController.dateOfBirth}',
+                                          icon: ImagePath.age,
+                                          title: AppText.age.tr,
+                                          value: controller.profilePersonal?.age
+                                              .toString(),
                                         ),
-                                        ProfilePersonalWidget(
-                                            icon: ImagePath.age,
-                                            title: AppText.age.tr,
-                                            value: controller
-                                                .profilePersonal?.age
-                                                .toString()),
-                                        ProfilePersonalWidget(
-                                          icon: ImagePath.phone,
-                                          title: AppText.phoneNumber.tr,
-                                          value:
-                                              '${controller.profileDataController.phoneNumber}',
-                                        ),
-                                        ProfilePersonalWidget(
-                                          icon: ImagePath.mail,
-                                          title: AppText.email.tr,
-                                          value:
-                                              '${controller.profileDataController.email}',
-                                        ),
-                                        ProfilePersonalWidget(
-                                          icon: ImagePath.address,
-                                          title: AppText.presentAddress.tr,
-                                          value:
-                                              '${controller.profileDataController.presentAddress}',
-                                        ),
+                                        controller.profilePersonalPermissions
+                                                    ?.phoneNumber ==
+                                                1
+                                            ? ProfilePersonalWidget(
+                                                icon: ImagePath.phone,
+                                                title: AppText.phoneNumber.tr,
+                                                value:
+                                                    '${controller.profileDataController.phoneNumber}',
+                                              )
+                                            : const SizedBox(),
+                                        controller.profilePersonalPermissions
+                                                    ?.emailAddress ==
+                                                1
+                                            ? ProfilePersonalWidget(
+                                                icon: ImagePath.mail,
+                                                title: AppText.email.tr,
+                                                value:
+                                                    '${controller.profileDataController.email}',
+                                              )
+                                            : const SizedBox(),
+                                        controller.profilePersonalPermissions
+                                                    ?.permanentAddress ==
+                                                1
+                                            ? ProfilePersonalWidget(
+                                                icon: ImagePath.address,
+                                                title:
+                                                    AppText.presentAddress.tr,
+                                                value:
+                                                    '${controller.profileDataController.presentAddress}',
+                                              )
+                                            : const SizedBox(),
                                       ],
                                     ),
 
@@ -262,22 +282,34 @@ class ProfileView extends GetView<ProfileController> {
                                               occupation: controller
                                                       .profileParents
                                                       ?.fathersOccupation ??
-                                                  AppText.noDataAvailable),
+                                                  AppText.noDataAvailable,
+                                            permissionForName: controller.profileParentsPermissions?.fathersName,
+                                            permissionForOccupation: controller.profileParentsPermissions?.fathersOccupation,
+                                            permissionForPhone: controller.profileParentsPermissions?.fathersPhone,
+                                            permissionForPhoto: controller.profileParentsPermissions?.fathersName,
+                                            imageUrl: controller.profileParents!.fathersPhoto ,
+                                          ),
                                           20.verticalSpacing,
                                           ParentsInfo(
-                                              designation:
-                                                  AppText.profileMother.tr,
-                                              icon: ImagePath.parentsProfile,
-                                              name: controller.profileParents
-                                                      ?.mothersName ??
-                                                  AppText.noDataAvailable,
-                                              phone: controller.profileParents
-                                                      ?.mothersMobile ??
-                                                  AppText.noDataAvailable,
-                                              occupation: controller
-                                                      .profileParents
-                                                      ?.mothersOccupation ??
-                                                  AppText.noDataAvailable),
+                                            designation:
+                                                AppText.profileMother.tr,
+                                            icon: ImagePath.parentsProfile,
+                                            name: controller.profileParents
+                                                    ?.mothersName ??
+                                                AppText.noDataAvailable,
+                                            phone: controller.profileParents
+                                                    ?.mothersMobile ??
+                                                AppText.noDataAvailable,
+                                            occupation: controller
+                                                    .profileParents
+                                                    ?.mothersOccupation ??
+                                                AppText.noDataAvailable,
+                                            permissionForName: controller.profileParentsPermissions?.mothersName,
+                                            permissionForOccupation: controller.profileParentsPermissions?.mothersOccupation,
+                                            permissionForPhone: controller.profileParentsPermissions?.mothersPhone,
+                                            permissionForPhoto: controller.profileParentsPermissions?.mothersPhoto,
+                                            imageUrl: controller.profileParents!.mothersPhoto ,
+                                          ),
                                           20.verticalSpacing,
                                           GuardianInfo(
                                             designation:
@@ -299,7 +331,15 @@ class ProfileView extends GetView<ProfileController> {
                                             relation: controller.profileParents
                                                     ?.guardiansRelation ??
                                                 AppText.noDataAvailable,
+                                            imageUrl: controller.profileParents!.guardiansPhoto,
                                             other: "Other",
+                                            permissionForName: controller.profileParentsPermissions?.guardiansName,
+                                            permissionForOccupation: controller.profileParentsPermissions?.guardiansOccupation,
+                                            permissionForPhone: controller.profileParentsPermissions?.guardiansPhone,
+                                            permissionForPhoto: controller.profileParentsPermissions?.guardiansPhoto,
+                                            permissionForEmail: controller.profileParentsPermissions?.guardiansEmail ,
+
+
                                           ),
                                           SizedBox(
                                             height: Get.height * 0.3,
@@ -313,31 +353,32 @@ class ProfileView extends GetView<ProfileController> {
                                   ? const LoadingWidget()
                                   : Column(
                                       children: [
-                                        TransportWidget(
+                                       controller.profileTransportPermissions!.route == 1 ? TransportWidget(
                                           title: AppText.transportRoute.tr,
                                           value: controller
                                               .profileTransport?.route,
-                                        ),
-                                        TransportWidget(
+                                        ) : const SizedBox(),
+                                      controller.profileTransportPermissions!.vehicle == 1 ?  TransportWidget(
                                           title: AppText.transportVehicleNo.tr,
                                           value: controller
                                               .profileTransport?.vehicle,
-                                        ),
+                                        ) : const SizedBox(),
                                         TransportWidget(
                                           title: AppText.transportDriverName.tr,
                                           value: controller
                                               .profileTransport?.driver,
                                         ),
                                         TransportWidget(
-                                          title: AppText.transportDriverPhoneNo.tr,
+                                          title:
+                                              AppText.transportDriverPhoneNo.tr,
                                           value: controller
                                               .profileTransport?.mobile,
                                         ),
-                                        TransportWidget(
+                                       controller.profileTransportPermissions!.dormitoryName == 1 ? TransportWidget(
                                           title: AppText.transportDormitory.tr,
                                           value: controller
                                               .profileTransport?.dormitory,
-                                        ),
+                                        ) : const SizedBox(),
                                       ],
                                     ),
 
@@ -346,42 +387,42 @@ class ProfileView extends GetView<ProfileController> {
                                   ? const LoadingWidget()
                                   : Column(
                                       children: [
-                                        OthersTile(
+                                      controller.profileOthersPermissions?.height == 1 ?   OthersTile(
                                           title: "Height".tr,
                                           value: controller
                                                   .profileOthers?.height ??
                                               AppText.noDataAvailable.tr,
-                                        ),
-                                        OthersTile(
+                                        ) : const SizedBox(),
+                                      controller.profileOthersPermissions?.weight == 1 ?   OthersTile(
                                           title: "Weight".tr,
                                           value: controller
                                                   .profileOthers?.weight ??
                                               AppText.noDataAvailable.tr,
-                                        ),
-                                        OthersTile(
+                                        ) : const SizedBox(),
+                                        controller.profileOthersPermissions!.nationalIdNumber == 0 ? OthersTile(
                                           title: "National ID Number".tr,
                                           value: controller.profileOthers
                                                   ?.nationalIdNo ??
                                               AppText.noDataAvailable.tr,
-                                        ),
-                                        OthersTile(
+                                        ) : const SizedBox(),
+                                       controller.profileOthersPermissions!.localIdNumber == 1 ? OthersTile(
                                           title: "Local ID Number".tr,
                                           value: controller
                                                   .profileOthers?.localIdNo ??
                                               AppText.noDataAvailable.tr,
-                                        ),
-                                        OthersTile(
+                                        ) : const SizedBox() ,
+                                       controller.profileOthersPermissions!.bankName == 1 ? OthersTile(
                                           title: "Bank Name".tr,
                                           value: controller
                                                   .profileOthers?.bankName ??
                                               AppText.noDataAvailable.tr,
-                                        ),
-                                        OthersTile(
+                                        ) : const SizedBox(),
+                                      controller.profileOthersPermissions?.bankAccountNumber == 1 ?  OthersTile(
                                           title: "Bank Account Number".tr,
                                           value: controller.profileOthers
                                                   ?.bankAccountNo ??
                                               AppText.noDataAvailable.tr,
-                                        ),
+                                        ) : const SizedBox(),
                                       ],
                                     ),
 
@@ -427,7 +468,7 @@ class ProfileView extends GetView<ProfileController> {
                                                   ),
                                                 ),
                                                 5.horizontalSpacing,
-                                                 Text(
+                                                Text(
                                                   "Upload Document".tr,
                                                   style: AppTextStyle
                                                       .cardTextStyle14WhiteW500,
@@ -489,9 +530,11 @@ class ProfileView extends GetView<ProfileController> {
                                                                         .deleteLoader
                                                                         .value,
                                                                 title:
-                                                                    'Confirmation'.tr,
+                                                                    'Confirmation'
+                                                                        .tr,
                                                                 subTitle: AppText
-                                                                    .deleteDocumentsWarningMsg.tr,
+                                                                    .deleteDocumentsWarningMsg
+                                                                    .tr,
                                                                 noText:
                                                                     'Cancel'.tr,
                                                                 yesText:

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_nav_button/bottom_nav_button.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
@@ -70,9 +69,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 enableBorderActive: true,
                                 focusBorderActive: true,
                                 hintText: "Vehicle No".tr,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize14lightBlackW400,
-                                fillColor: Colors.white,
                               ),
                               10.verticalSpacing,
                               CustomTextFormField(
@@ -81,9 +77,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 enableBorderActive: true,
                                 focusBorderActive: true,
                                 hintText: "Vehicle Model".tr,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize14lightBlackW400,
-                                fillColor: Colors.white,
                               ),
                               10.verticalSpacing,
                               CustomTextFormField(
@@ -91,9 +84,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 enableBorderActive: true,
                                 focusBorderActive: true,
                                 hintText: "Made Year".tr,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize14lightBlackW400,
-                                fillColor: Colors.white,
                               ),
                               10.verticalSpacing,
 
@@ -122,9 +112,6 @@ class AdminVehicleView extends GetView<AdminVehicleController> {
                                 enableBorderActive: true,
                                 focusBorderActive: true,
                                 hintText: "Note".tr,
-                                hintTextStyle:
-                                    AppTextStyle.fontSize14lightBlackW400,
-                                fillColor: Colors.white,
                               ),
                               (Get.height * 0.25).verticalSpacing,
                               controller.saveLoader.value

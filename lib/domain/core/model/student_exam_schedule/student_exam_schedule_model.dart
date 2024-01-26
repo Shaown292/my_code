@@ -33,7 +33,8 @@ class ScheduleData {
   String? subject;
   String? classSection;
   String? teacher;
-  String? time;
+  String? startTime;
+  String? endTime;
   String? duration;
   String? room;
 
@@ -43,7 +44,7 @@ class ScheduleData {
         this.subject,
         this.classSection,
         this.teacher,
-        this.time,
+        this.startTime,
         this.duration,
         this.room});
 
@@ -51,9 +52,10 @@ class ScheduleData {
     id = json['id'];
     dateAndDay = json['date_and_day'];
     subject = json['subject'];
-    classSection = json['class_section'];
+    classSection = json['subject_class_section'];
     teacher = json['teacher'];
-    time = json['time'];
+    startTime = json['start_time'];
+    endTime = json['end_time'];
     duration = json['duration'];
     room = json['room'];
   }
@@ -65,7 +67,8 @@ class ScheduleData {
     data['subject'] = subject;
     data['class_section'] = classSection;
     data['teacher'] = teacher;
-    data['time'] = time;
+    data['start_time'] = startTime;
+    data['end_time'] = endTime;
     data['duration'] = duration;
     data['room'] = room;
     return data;

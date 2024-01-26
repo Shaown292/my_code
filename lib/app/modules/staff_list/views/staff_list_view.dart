@@ -38,7 +38,7 @@ class StaffListView extends GetView<StaffListController> {
                             child: ListView.builder(
                               itemCount: controller.roleWiseStaffList.length,
                               itemBuilder: (context, index) {
-                                return StaffTile(
+                                return StaffTile (
                                   staffName: controller
                                       .roleWiseStaffList[index].firstName,
                                   staffAddress: controller
