@@ -8,7 +8,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/duplicate_dropdown.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
@@ -40,6 +40,7 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
                           height: Get.height * 0.04,
                           child: DuplicateDropdown(
                             borderRadius: 2,
+                            sidePadding: 0,
                             dropdownValue: controller.teAddHomeworkController
                                 .teacherClassInitialValue.value,
                             dropdownList: controller
@@ -198,102 +199,118 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
               ),
               Obx(
                 () => controller.isDropDownChanged.value
-                    ? controller.searchHomeworkLoader.value
-                        ? const Expanded(child: LoadingWidget())
-                        : controller.teacherHomeworkList.isNotEmpty
-                            ? Expanded(
-                                child: ListView.builder(
-                                  itemCount:
-                                      controller.teacherHomeworkList.length,
-                                  itemBuilder: (context, index) {
-                                    return HomeworkTile(
-                                      widthOfFirstContainer: Get.width * 0.12,
-                                      widthOfSecondContainer: Get.width * 0.14,
-                                      widthOfThirdContainer: Get.width * 0.15,
-                                      evaluateContainerColor:
-                                          AppColors.appButtonColor,
-                                      studentClass: controller
-                                          .teacherHomeworkList[index].className,
-                                      studentSection: controller
-                                          .teacherHomeworkList[index]
-                                          .sectionName,
-                                      subject: controller
-                                          .teacherHomeworkList[index]
-                                          .subjectName,
-                                      onEvaluationTap: () {
-                                        if (controller
-                                                    .teacherHomeworkList[index]
-                                                    .classId ==
-                                                null ||
-                                            controller
-                                                    .teacherHomeworkList[index]
-                                                    .sectionId ==
-                                                null) {
-                                          showBasicFailedSnackBar(
-                                              message: 'No Evaluation Found.');
-                                        } else {
-                                          Get.toNamed(
-                                              Routes.TE_HOMEWORK_EVALUATION,
-                                              arguments: {
-                                                'class_id': controller
-                                                    .teacherHomeworkList[index]
-                                                    .classId,
-                                                'class_name': controller
-                                                    .teacherHomeworkList[index]
-                                                    .className,
-                                                'section_id': controller
-                                                    .teacherHomeworkList[index]
-                                                    .sectionId,
-                                                'section_name': controller
-                                                    .teacherHomeworkList[index]
-                                                    .sectionName,
-                                                'homework_id': controller
-                                                    .teacherHomeworkList[index]
-                                                    .id,
-                                                'subject_name': controller
-                                                    .teacherHomeworkList[index]
-                                                    .subjectName,
-                                                'assign_date': controller
-                                                    .teacherHomeworkList[index]
-                                                    .assignDate,
-                                                'submission_date': controller
-                                                    .teacherHomeworkList[index]
-                                                    .submissionDate,
-                                                'evaluation': controller
-                                                    .teacherHomeworkList[index]
-                                                    .evaluation,
-                                                'marks': controller
-                                                    .teacherHomeworkList[index]
-                                                    .marks,
-                                                'file': controller
-                                                    .teacherHomeworkList[index]
-                                                    .file,
-                                              });
-                                        }
-                                      },
-                                      onDetailsTap: () {
-                                        controller
-                                            .showHomeworkDetailsBottomSheet(
-                                                index: index,
-                                                bottomSheetBackgroundColor:
-                                                    Colors.white);
-                                      },
-                                    );
-                                  },
-                                ),
-                              )
-                            : const NoDataAvailableWidget()
-                    : Expanded(
-                        child: controller.homeworkLoader.value
-                            ? const Expanded(child: LoadingWidget())
+                    ? Expanded(
+                        child: controller.searchHomeworkLoader.value
+                            ? const SecondaryLoadingWidget()
                             : controller.teacherHomeworkList.isNotEmpty
-                                ? RefreshIndicator(
-                                    color: AppColors.primaryColor,
-                                    onRefresh: () async {
-                                      controller.teacherHomeworkList.clear();
-                                      controller.getTeacherHomeWorkList();
+                                ? ListView.builder(
+                                    itemCount:
+                                        controller.teacherHomeworkList.length,
+                                    itemBuilder: (context, index) {
+                                      return HomeworkTile(
+                                        widthOfFirstContainer: Get.width * 0.12,
+                                        widthOfSecondContainer:
+                                            Get.width * 0.14,
+                                        widthOfThirdContainer: Get.width * 0.15,
+                                        evaluateContainerColor:
+                                            AppColors.appButtonColor,
+                                        studentClass: controller
+                                            .teacherHomeworkList[index]
+                                            .className,
+                                        studentSection: controller
+                                            .teacherHomeworkList[index]
+                                            .sectionName,
+                                        subject: controller
+                                            .teacherHomeworkList[index]
+                                            .subjectName,
+                                        onEvaluationTap: () {
+                                          if (controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .classId ==
+                                                  null ||
+                                              controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .sectionId ==
+                                                  null) {
+                                            showBasicFailedSnackBar(
+                                                message:
+                                                    'No Evaluation Found.');
+                                          } else {
+                                            Get.toNamed(
+                                                Routes.TE_HOMEWORK_EVALUATION,
+                                                arguments: {
+                                                  'class_id': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .classId,
+                                                  'class_name': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .className,
+                                                  'section_id': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .sectionId,
+                                                  'section_name': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .sectionName,
+                                                  'homework_id': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .id,
+                                                  'subject_name': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .subjectName,
+                                                  'assign_date': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .assignDate,
+                                                  'submission_date': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .submissionDate,
+                                                  'evaluation': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .evaluation,
+                                                  'marks': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .marks,
+                                                  'file': controller
+                                                      .teacherHomeworkList[
+                                                          index]
+                                                      .file,
+                                                });
+                                          }
+                                        },
+                                        onDetailsTap: () {
+                                          controller
+                                              .showHomeworkDetailsBottomSheet(
+                                                  index: index,
+                                                  bottomSheetBackgroundColor:
+                                                      Colors.white);
+                                        },
+                                      );
                                     },
-                                    child: ListView.builder(
+                                  )
+                                : const NoDataAvailableWidget(),
+                      )
+                    : Expanded(
+                        child: RefreshIndicator(
+                          color: AppColors.primaryColor,
+                          onRefresh: () async {
+                            controller.teacherHomeworkList.clear();
+                            controller.getTeacherHomeWorkList();
+                          },
+                          child: controller.homeworkLoader.value
+                              ? const SecondaryLoadingWidget()
+                              : controller.teacherHomeworkList.isNotEmpty
+                                  ? ListView.builder(
                                       itemCount:
                                           controller.teacherHomeworkList.length,
                                       itemBuilder: (context, index) {
@@ -389,9 +406,9 @@ class TeHomeworkListView extends GetView<TeHomeworkListController> {
                                           },
                                         );
                                       },
-                                    ),
-                                  )
-                                : const NoDataAvailableWidget(),
+                                    )
+                                  : const NoDataAvailableWidget(),
+                        ),
                       ),
               ),
             ],

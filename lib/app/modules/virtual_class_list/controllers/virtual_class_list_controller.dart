@@ -182,7 +182,7 @@ class VirtualClassListController extends GetxController {
         title = "Jitsi" ;
         break;
       case 'zoom':
-        url = InfixApi.zoomMeetingList;
+        url = InfixApi.zoomClassList;
         title = "Zoom" ;
         break;
       case 'big_blue_button':

@@ -493,7 +493,7 @@ class CurrencyDetail {
   String? decimalSeparator;
   String? thousandSeparator;
   int? schoolId;
-  Null? academicId;
+  int? academicId;
 
   CurrencyDetail(
       {this.id,

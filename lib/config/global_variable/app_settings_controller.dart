@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppSettingsController extends GetxController {
   RxBool languageLoader = false.obs;
   Rx<GeneralSettingsResponseModel> systemSettings = GeneralSettingsResponseModel().obs;
+  CurrencyDetail? currencyDetail;
 
   void navNextPage() async {
     await 1000.milliseconds.delay();
@@ -147,6 +148,11 @@ class AppSettingsController extends GetxController {
       if (responseModel.success == true) {
 
         systemSettings.value = responseModel;
+
+
+           currencyDetail = responseModel.data!.systemSettings!.currencyDetail;
+
+
 
       }
     } catch (e, t) {

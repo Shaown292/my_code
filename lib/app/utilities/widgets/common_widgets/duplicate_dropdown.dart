@@ -45,7 +45,7 @@ class DuplicateDropdown extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: padding ?? const EdgeInsets.all( 8.0),
+        padding: padding ?? const EdgeInsets.all(6.0),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<dynamic>(
             hint: Text(

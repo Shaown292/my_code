@@ -60,8 +60,9 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
               ),
               5.verticalSpacing,
               Container(
+                height: 40,
                 padding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                const EdgeInsets.symmetric(horizontal: 10),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(8),
@@ -70,13 +71,12 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
                   color: AppColors.profileCardBackgroundColor,
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: Get.width * 0.19,
+                      width:  Get.width * 0.23,
                       child: Text(
                         "Admission No".tr,
-                        style: AppTextStyle.textStyle12WhiteW500,
+                        style: AppTextStyle.textStyle10WhiteW400,
                       ),
                     ),
                     const VerticalDivider(
@@ -84,10 +84,10 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
                       thickness: 1,
                     ),
                     SizedBox(
-                      width: Get.width * 0.25,
+                      width: Get.width * 0.28,
                       child: Text(
                         "Student Name".tr,
-                        style: AppTextStyle.textStyle12WhiteW500,
+                        style: AppTextStyle.textStyle10WhiteW400,
                       ),
                     ),
                     const VerticalDivider(
@@ -105,8 +105,8 @@ class TeHomeworkEvaluationView extends GetView<TeHomeworkEvaluationController> {
                     itemCount: controller.homeworkEvaluationList.length,
                     itemBuilder: (context, index) {
                       return HomeworkTile(
-                        widthOfFirstContainer: Get.width * 0.18,
-                        widthOfSecondContainer: Get.width * 0.25,
+                        widthOfFirstContainer: Get.width * 0.23,
+                        widthOfSecondContainer: Get.width * 0.28,
                         onDownloadTap: () {
                           controller.downloadFile(
                               url: controller.homeworkEvaluationList[index]

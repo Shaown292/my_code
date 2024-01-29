@@ -57,14 +57,14 @@ class HomeworkTile extends StatelessWidget {
             children: [
               Container(
                 width: widthOfFirstContainer,
-                padding: const EdgeInsets.all(7),
+                padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
                     color: AppColors.homeworkWidgetColor),
                 child: Center(
                   child: Text(
                     isEvaluation ? admissionNo ?? "" : studentClass.toString(),
-                    style: AppTextStyle.fontSize13BlackW400,
+                    style: AppTextStyle.notificationText,
                   ),
                 ),
               ),
@@ -84,7 +84,7 @@ class HomeworkTile extends StatelessWidget {
                 child: Center(
                   child: Text(
                     isEvaluation ? studentName ?? "N/A" : studentSection ?? "",
-                    style: AppTextStyle.fontSize13BlackW400,
+                    style: AppTextStyle.notificationText,
                   ),
                 ),
               ),
@@ -98,7 +98,7 @@ class HomeworkTile extends StatelessWidget {
               isEvaluation
                   ? const SizedBox()
                   : Container(
-                      padding: const EdgeInsets.all(7),
+                      padding: const EdgeInsets.all(6),
                       width: widthOfThirdContainer,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(2),
@@ -106,7 +106,7 @@ class HomeworkTile extends StatelessWidget {
                       child: Center(
                         child: Text(
                           subject.toString(),
-                          style: AppTextStyle.textStyle12WhiteW500,
+                          style: AppTextStyle.textStyle10WhiteW400,
                         ),
                       ),
                     ),
@@ -131,7 +131,7 @@ class HomeworkTile extends StatelessWidget {
                             child: InkWell(
                               onTap: onDownloadTap,
                               child: Container(
-                                padding: const EdgeInsets.all(7),
+                                padding: const EdgeInsets.all(6),
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: downloadContainerColor),
@@ -155,7 +155,7 @@ class HomeworkTile extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "Details".tr,
-                                  style: AppTextStyle.textStyle12WhiteW400,
+                                  style: AppTextStyle.textStyle10WhiteW400,
                                 ),
                               ),
                             ),
@@ -172,7 +172,7 @@ class HomeworkTile extends StatelessWidget {
                         child: Center(
                           child: Text(
                             isEvaluation ? "Evaluate".tr : "Evaluation".tr,
-                            style: AppTextStyle.textStyle12WhiteW400,
+                            style: AppTextStyle.textStyle10WhiteW400,
                           ),
                         ),
                       ),

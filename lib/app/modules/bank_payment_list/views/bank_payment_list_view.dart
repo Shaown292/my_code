@@ -206,7 +206,7 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                               .toString(),
                                           status: controller
                                               .pendingList[index].status,
-                                          currency: "\$",
+                                          currency: controller.appSettingsController.currencyDetail!.symbol,
                                           statusColor:
                                               AppColors.activeStatusYellowColor,
                                           onTapDetails: () {
@@ -245,10 +245,7 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                                   .transactionId
                                                   .toString(),
                                               status: "approve",
-                                              paidAmount: controller
-                                                  .pendingList[index]
-                                                  .viewTransaction!
-                                                  .paidAmount!,
+
                                               index: index,
                                               updatedStatus: controller
                                                       .pendingList[index]
@@ -263,10 +260,7 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                                   .transactionId
                                                   .toString(),
                                               status: "reject",
-                                              paidAmount: controller
-                                                  .pendingList[index]
-                                                  .viewTransaction!
-                                                  .paidAmount!,
+
                                               index: index,
                                               updatedStatus: controller
                                                       .pendingList[index]
@@ -352,10 +346,7 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                                   .transactionId
                                                   .toString(),
                                               status: "reject",
-                                              paidAmount: controller
-                                                  .approveList[index]
-                                                  .viewTransaction!
-                                                  .paidAmount!,
+
                                               index: index,
                                               updatedStatus: controller
                                                       .approveList[index]
@@ -442,10 +433,6 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                                   .transactionId
                                                   .toString(),
                                               status: "approve",
-                                              paidAmount: controller
-                                                  .rejectList[index]
-                                                  .viewTransaction!
-                                                  .paidAmount!,
                                               updatedStatus: controller
                                                       .rejectList[index]
                                                       .status ??

@@ -8,6 +8,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
+import 'package:flutter_single_getx_api_v2/config/global_variable/app_settings_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/admin/admin_fees_model/bank_payment_list_response_model.dart';
@@ -16,6 +17,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class BankPaymentListController extends GetxController {
+  AppSettingsController appSettingsController = Get.put(AppSettingsController());
   AdminStudentsSearchController adminStudentsSearchController =
       Get.put(AdminStudentsSearchController());
 
@@ -107,7 +109,6 @@ class BankPaymentListController extends GetxController {
   Future<void> bankPaymentStatusUpdate(
       {required String transactionId,
       required String status,
-      required int paidAmount,
       required int index,
       required String updatedStatus}) async {
     try {
@@ -119,7 +120,7 @@ class BankPaymentListController extends GetxController {
         payload: {
           "change_status": status,
           "transaction_id": transactionId,
-          "paid_amount": paidAmount,
+
         },
       );
 
@@ -139,6 +140,7 @@ class BankPaymentListController extends GetxController {
         }
 
         if (updatedStatus == "APPROVE") {
+          print("approved index $index");
           approveList.removeAt(index);
           approveList.refresh();
           rejectList.add(RejectedList(

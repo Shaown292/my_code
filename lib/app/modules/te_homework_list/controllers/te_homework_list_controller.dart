@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_colors.dart';
 import 'package:flutter_single_getx_api_v2/app/data/constants/app_text.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.exten
 import 'package:flutter_single_getx_api_v2/app/utilities/file_downloader/file_download_utils.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/bottom_sheet_tile/bottom_sheet_tile.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/teacher/teacher_homework_model/teacher_homework_list_response_model.dart';
@@ -146,7 +144,7 @@ class TeHomeworkListController extends GetxController {
                     ),
                     BottomSheetTile(
                       title: "Evaluation".tr,
-                      value: teacherHomeworkList[index].evaluation.toString(),
+                      value: teacherHomeworkList[index].evaluation == null ? "" : teacherHomeworkList[index].evaluation.toString() ,
                       color: Colors.white,
                     ),
                     Container(
