@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget {
   final Function() messengerOnTap;
   final Function() logoutOnTap;
 
+
   const CustomAppBar({
     super.key,
     required this.schoolName,
