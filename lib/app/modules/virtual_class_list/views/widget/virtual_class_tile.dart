@@ -106,6 +106,7 @@ class VirtualClassTile extends StatelessWidget {
               ),
               meetingPassword== null || meetingPassword == "" ? 0.verticalSpacing : 10.verticalSpacing,
               meetingPassword== null || meetingPassword == "" ? const SizedBox() :  CustomDivider(
+                color: AppColors.transportDividerColor,
                 width: Get.width,
               ),
              meetingPassword== null || meetingPassword == "" ?  const SizedBox() : Row(

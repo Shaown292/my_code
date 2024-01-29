@@ -58,6 +58,7 @@ class ScheduleDetailsTile extends StatelessWidget {
               ColumnTile(
                 title: "Room Number".tr,
                 value: roomNo ?? "",
+                width: Get.width * 0.24,
 
               ),
               ColumnTile(

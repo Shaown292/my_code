@@ -58,7 +58,11 @@ class StudentClassView extends GetView<StudentClassController> {
                           "online_class" : "zoom",
                         });
                       },
-                      onMeetingTap: (){},
+                      onMeetingTap: (){
+                        Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
+                          "online_class" : "zoom_meeting",
+                        });
+                      },
                     ),
                     20.verticalSpacing,
                     /// Google meet
@@ -72,10 +76,14 @@ class StudentClassView extends GetView<StudentClassController> {
                       isTapped: controller.isGoogleMeetTap.value,
                       onSubTitleTap: () {
                         Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
-                          "online_class" : "google_meet",
+                          "online_class" : "google_meet_class",
                         });
                       },
-                      onMeetingTap: (){},
+                      onMeetingTap: (){
+                        Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
+                          "online_class" : "google_meet_meeting",
+                        });
+                      },
                     ),
                     20.verticalSpacing,
                     /// Big Blue Button
@@ -92,7 +100,11 @@ class StudentClassView extends GetView<StudentClassController> {
                           "online_class" : "big_blue_button",
                         });
                       },
-                      onMeetingTap: (){},
+                      onMeetingTap: (){
+                        Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
+                          "online_class" : "big_blue_button_meeting",
+                        });
+                      },
                     ),
                   ],
                 ),
