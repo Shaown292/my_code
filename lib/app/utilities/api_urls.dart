@@ -639,6 +639,7 @@ class InfixApi {
   /// Account Related api
   static String changePassword = '${baseApi}change-password';
   static String accountDelete = '${baseApi}user-delete';
+  static String generalSettings = '${baseApi}general-settings';
 
   //////////////////////////.......................................///////////////////////////////////
   //////////////////////////.......................................///////////////////////////////////
@@ -1118,7 +1119,7 @@ class InfixApi {
     }
   }
 
-  static String generalSettings = "${baseApi}general-settings";
+  // static String generalSettings = "${baseApi}general-settings";
 
   static String feesRecordList = "${baseApi}student-record-fees-list";
 

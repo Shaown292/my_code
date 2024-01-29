@@ -6,12 +6,14 @@ import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/languages/translated_language.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/model/settings/general_settings_response_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSettingsController extends GetxController {
   RxBool languageLoader = false.obs;
+  Rx<GeneralSettingsResponseModel> systemSettings = GeneralSettingsResponseModel().obs;
 
   void navNextPage() async {
     await 1000.milliseconds.delay();
@@ -132,6 +134,26 @@ class AppSettingsController extends GetxController {
     } finally {
       languageLoader.value = true;
       navNextPage();
+    }
+  }
+
+  Future<void> getGeneralSettings() async {
+
+    try {
+
+      final response = await http.get(Uri.parse(InfixApi.generalSettings));
+      GeneralSettingsResponseModel responseModel = GeneralSettingsResponseModel.fromJson(json.decode(response.body.toString()));
+
+      if (responseModel.success == true) {
+
+        systemSettings.value = responseModel;
+
+      }
+    } catch (e, t) {
+
+      debugPrint('$e');
+      debugPrint('$t');
+    } finally {
     }
   }
 

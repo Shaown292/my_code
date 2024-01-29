@@ -18,6 +18,7 @@ class SecondarySplashController extends GetxController {
     } else{
       Get.find<AppSettingsController>().getLang();
     }
+    Get.find<AppSettingsController>().getGeneralSettings();
 
 
     super.onInit();
