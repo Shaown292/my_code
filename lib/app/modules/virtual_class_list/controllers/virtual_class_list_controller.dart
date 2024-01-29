@@ -20,6 +20,7 @@ class VirtualClassListController extends GetxController {
   RxBool meetingLoader = false.obs;
   RxString onlineClass = "".obs;
   String url = "";
+  String title = "";
 
   /// Get Zoom Meeting List
   Future<MeetingListResponseModel> getZoomMeetingList() async {
@@ -178,15 +179,31 @@ class VirtualClassListController extends GetxController {
     switch (status) {
       case 'jitsi':
         url = InfixApi.jitsiMeetingList;
+        title = "Jitsi" ;
         break;
       case 'zoom':
         url = InfixApi.zoomMeetingList;
+        title = "Zoom" ;
         break;
       case 'big_blue_button':
-        url = InfixApi.bigBlueButtonMeetingList;
+        url = InfixApi.bigBlueButtonClassList;
+        title = "Big Blue Button" ;
         break;
-      case 'google_meet':
+      case 'big_blue_button_meeting':
+        url = InfixApi.bigBlueButtonMeetingList;
+        title = "Big Blue Button" ;
+        break;
+      case 'google_meet_class':
+        url = InfixApi.googleMeetClassList;
+        title = "Google Meet" ;
+        break;
+        case 'google_meet_meeting':
         url = InfixApi.googleMeetMeetingList;
+        title = "Google Meet" ;
+        break;
+      case 'zoom_meeting':
+        url = InfixApi.zoomMeetingList;
+        title = "Zoom" ;
         break;
     }
   }

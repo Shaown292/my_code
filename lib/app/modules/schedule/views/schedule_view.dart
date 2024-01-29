@@ -22,13 +22,13 @@ class ScheduleView extends GetView<ScheduleController> {
         body: RefreshIndicator(
           onRefresh: () async {
             controller.getStudentExamScheduleList(
-                examId: controller.examinationController.examList[0].id!,
+                examId: controller.examList[0].id!,
                 recordId: controller.homeController.studentRecordList[0].id);
           },
           child: CustomBackground(
             customWidget: Column(
               children: [
-                controller.examinationController.loadingController.isLoading
+                controller.homeController.loadingController.isLoading
                     ? const SizedBox(
                         height: 55,
                         child: LoadingWidget(),
@@ -51,14 +51,11 @@ class ScheduleView extends GetView<ScheduleController> {
                                         "${"Class".tr} ${controller.homeController.studentRecordList[index].studentRecordClass}(${controller.homeController.studentRecordList[index].section})",
                                     onItemTap: () {
                                       controller.selectIndex.value = index;
-                                      controller.examinationController
-                                          .examDropdownList
-                                          .clear();
+                                      controller.examDropdownList.clear();
                                       int recordId = controller.homeController
                                           .studentRecordList[index].id;
-                                      controller.examinationController
-                                          .getStudentExamList(
-                                              recordId: recordId);
+                                      controller.getStudentExamList(
+                                          recordId: recordId);
                                     },
                                     isSelected:
                                         controller.selectIndex.value == index,
@@ -69,53 +66,52 @@ class ScheduleView extends GetView<ScheduleController> {
                           ),
                         ),
                       ),
-                controller.examinationController.loadingController.isLoading
+                controller.examLoader.value
                     ? const SecondaryLoadingWidget()
                     : Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 10),
                         child: DuplicateDropdown(
-                          dropdownValue: controller
-                              .examinationController.dropdownValue.value,
-                          dropdownList:
-                              controller.examinationController.dropdownList,
+                          dropdownValue: controller.dropdownValue.value,
+                          dropdownList: controller.examList,
                           changeDropdownValue: (v) {
-                            controller
-                                .examinationController.dropdownValue.value = v!;
+                            controller.dropdownValue.value = v!;
                             controller.scheduleList.clear();
-                            int examId = v.id;
+                            controller.examinationId.value = v.id;
                             int recordId = controller
                                 .homeController.studentRecordList[0].id;
                             controller.getStudentExamScheduleList(
-                              examId: examId,
+                              examId: controller.examinationId.value,
                               recordId: recordId,
                             );
                           },
                         ),
                       ),
-                controller.loadingController.isLoading
-                    ? const Expanded(
-                        child: LoadingWidget(),
-                      )
-                    : controller.scheduleList.isNotEmpty
-                        ? Expanded(
-                            child: RefreshIndicator(
-                              color: AppColors.primaryColor,
-                              onRefresh: () async {
-                                controller.scheduleList.clear();
-                                controller.getStudentExamScheduleList(examId:  controller
-                                    .examinationController.examId.value, recordId: controller.homeController.studentRecordList[0].id);
-                              },
-                              child: ListView.builder(
+                Expanded(
+                  child: RefreshIndicator(
+                    color: AppColors.primaryColor,
+                    onRefresh: () async {
+                      controller.scheduleList.clear();
+                      controller.getStudentExamScheduleList(
+                          examId: controller.examinationId.value,
+                          recordId: controller
+                              .homeController.studentRecordList[0].id);
+                    },
+                    child: controller.scheduleLoader.value
+                        ? const SecondaryLoadingWidget()
+                        : controller.scheduleList.isNotEmpty
+                            ? ListView.builder(
                                 itemCount: controller.scheduleList.length,
                                 itemBuilder: (context, index) {
                                   return ScheduleDetailsTile(
-                                    date:
-                                        controller.scheduleList[index].dateAndDay,
+                                    date: controller
+                                        .scheduleList[index].dateAndDay,
                                     subject:
                                         controller.scheduleList[index].subject,
-                                    startTime: controller.scheduleList[index].startTime,
-                                    endTime: controller.scheduleList[index].endTime,
+                                    startTime: controller
+                                        .scheduleList[index].startTime,
+                                    endTime:
+                                        controller.scheduleList[index].endTime,
                                     roomNo: controller.scheduleList[index].room,
                                     section: controller
                                         .scheduleList[index].classSection,
@@ -126,10 +122,10 @@ class ScheduleView extends GetView<ScheduleController> {
                                         : Colors.white,
                                   );
                                 },
-                              ),
-                            ),
-                          )
-                        : const NoDataAvailableWidget(),
+                              )
+                            : const NoDataAvailableWidget(),
+                  ),
+                ),
               ],
             ),
           ),

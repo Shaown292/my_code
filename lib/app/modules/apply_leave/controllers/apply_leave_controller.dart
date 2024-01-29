@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.controller.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
@@ -33,11 +32,8 @@ class ApplyLeaveController extends GetxController {
   bool isValidate = false;
   Rx<File> file = File('').obs;
 
-  // List<LeaveType> applyLeaveTypeList = [];
   List<String> leaveTypeDropdownList = [];
 
-  // RxList<LeaveType> leaveTypeDropdownList = <LeaveType>[].obs;
-  // RxString dropdownValue = "".obs;
   RxInt leaveTypeId = 0.obs;
   Rx<LeaveType> dropdownValue = LeaveType(id: -1, name: "leave_type").obs;
 
