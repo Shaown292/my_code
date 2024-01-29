@@ -34,7 +34,6 @@ class HomeController extends GetxController {
   List<int> studentRecordIdList = [];
 
 
-
   // void _getUserInfo() {
   //   profileInfoModel = _authDatabase.getUserInfo()!;
   // }
