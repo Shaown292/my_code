@@ -52,13 +52,15 @@ class LeaveListView extends GetView<LeaveListController> {
                                 10.verticalSpacing,
                                 ListView.builder(
                                   shrinkWrap: true,
-                                  itemCount: controller.remainingLeaveList.length,
+                                  itemCount:
+                                      controller.remainingLeaveList.length,
                                   itemBuilder: (context, index) {
                                     return BottomSheetTile(
                                       title: controller
                                           .remainingLeaveList[index].leaveType,
                                       value: controller
-                                          .remainingLeaveList[index].remainingDays
+                                          .remainingLeaveList[index]
+                                          .remainingDays
                                           .toString(),
                                       color: index % 2 == 0
                                           ? AppColors.homeworkWidgetColor
@@ -90,7 +92,8 @@ class LeaveListView extends GetView<LeaveListController> {
                       indicatorSize: TabBarIndicatorSize.tab,
                       dividerHeight: 0,
                       unselectedLabelColor: Colors.black,
-                      unselectedLabelStyle: AppTextStyle.fontSize12LightGreyW500,
+                      unselectedLabelStyle:
+                          AppTextStyle.fontSize12LightGreyW500,
                       indicatorColor: AppColors.profileIndicatorColor,
                       controller: controller.tabController,
                       tabs: List.generate(
@@ -119,25 +122,27 @@ class LeaveListView extends GetView<LeaveListController> {
                                     onRefresh: () async {
                                       controller.pendingList.clear();
                                       controller.remainingLeaveList.clear();
-                                     if(controller.globalRxVariableController.roleId.value == 2){
-                                       controller.getRemainingLeave(
-                                         studentId: controller
-                                             .globalRxVariableController
-                                             .studentId
-                                             .value!,
-                                       );
-                                       controller.getAllLeaveList(controller
-                                           .globalRxVariableController
-                                           .studentId
-                                           .value!);
-                                     }
-                                     else{
-                                       controller.getAllLeaveList(1);
-                                     }
+                                      if (controller.globalRxVariableController
+                                              .roleId.value ==
+                                          2) {
+                                        controller.getRemainingLeave(
+                                          studentId: controller
+                                              .globalRxVariableController
+                                              .studentId
+                                              .value!,
+                                        );
+                                        controller.getAllLeaveList(controller
+                                            .globalRxVariableController
+                                            .studentId
+                                            .value!);
+                                      } else {
+                                        controller.getAllLeaveList(1);
+                                      }
                                     },
                                     child: ListView.builder(
                                         shrinkWrap: true,
-                                        itemCount: controller.pendingList.length,
+                                        itemCount:
+                                            controller.pendingList.length,
                                         itemBuilder: (context, index) {
                                           return AppliedLeaveDetailsTile(
                                             leaveType: controller
@@ -146,12 +151,12 @@ class LeaveListView extends GetView<LeaveListController> {
                                                 .pendingList[index].applyDate,
                                             leaveFrom: controller
                                                 .pendingList[index].from,
-                                            leaveTo:
-                                                controller.pendingList[index].to,
-                                            status: "${controller
-        .pendingList[index].status} $index",
-                                            statusColor:
-                                                AppColors.activeStatusYellowColor,
+                                            leaveTo: controller
+                                                .pendingList[index].to,
+                                            status: controller
+                                                .pendingList[index].status,
+                                            statusColor: AppColors
+                                                .activeStatusYellowColor,
                                             onTap: () {
                                               controller
                                                   .showPendingListDetailsBottomSheet(
@@ -176,7 +181,9 @@ class LeaveListView extends GetView<LeaveListController> {
                                     onRefresh: () async {
                                       controller.remainingLeaveList.clear();
                                       controller.approvedList.clear();
-                                      if(controller.globalRxVariableController.roleId.value == 2){
+                                      if (controller.globalRxVariableController
+                                              .roleId.value ==
+                                          2) {
                                         controller.getRemainingLeave(
                                           studentId: controller
                                               .globalRxVariableController
@@ -187,30 +194,27 @@ class LeaveListView extends GetView<LeaveListController> {
                                             .globalRxVariableController
                                             .studentId
                                             .value!);
-                                      }
-                                      else{
+                                      } else {
                                         controller.getAllLeaveList(1);
                                       }
                                     },
                                     child: ListView.builder(
                                         shrinkWrap: true,
-                                        itemCount: controller.approvedList.length,
+                                        itemCount:
+                                            controller.approvedList.length,
                                         itemBuilder: (context, index) {
                                           return AppliedLeaveDetailsTile(
                                             leaveType: controller
-                                                .approvedList[index]
-                                                .leaveType,
+                                                .approvedList[index].leaveType,
                                             applyDate: controller
-                                                .approvedList[index]
-                                                .applyDate,
+                                                .approvedList[index].applyDate,
                                             leaveFrom: controller
                                                 .approvedList[index].from,
                                             leaveTo: controller
                                                 .approvedList[index].to,
                                             status: controller
                                                 .approvedList[index].status,
-                                            statusColor:
-                                                AppColors.primaryColor,
+                                            statusColor: AppColors.primaryColor,
                                             onTap: () {
                                               controller
                                                   .showApprovedListDetailsBottomSheet(
@@ -235,7 +239,9 @@ class LeaveListView extends GetView<LeaveListController> {
                                     onRefresh: () async {
                                       controller.remainingLeaveList.clear();
                                       controller.cancelledList.clear();
-                                      if(controller.globalRxVariableController.roleId.value == 2){
+                                      if (controller.globalRxVariableController
+                                              .roleId.value ==
+                                          2) {
                                         controller.getRemainingLeave(
                                           studentId: controller
                                               .globalRxVariableController
@@ -246,14 +252,14 @@ class LeaveListView extends GetView<LeaveListController> {
                                             .globalRxVariableController
                                             .studentId
                                             .value!);
-                                      }
-                                      else{
+                                      } else {
                                         controller.getAllLeaveList(1);
                                       }
                                     },
                                     child: ListView.builder(
                                       shrinkWrap: true,
-                                      itemCount: controller.cancelledList.length,
+                                      itemCount:
+                                          controller.cancelledList.length,
                                       itemBuilder: (context, index) {
                                         return AppliedLeaveDetailsTile(
                                           leaveType: controller
@@ -262,8 +268,8 @@ class LeaveListView extends GetView<LeaveListController> {
                                               .cancelledList[index].applyDate,
                                           leaveFrom: controller
                                               .cancelledList[index].from,
-                                          leaveTo:
-                                              controller.cancelledList[index].to,
+                                          leaveTo: controller
+                                              .cancelledList[index].to,
                                           status: controller
                                               .cancelledList[index].status,
                                           statusColor:
