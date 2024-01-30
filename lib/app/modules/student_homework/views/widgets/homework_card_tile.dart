@@ -79,16 +79,22 @@ class HomeworkCardTile extends StatelessWidget {
                       title: "Created",
                       value: created,
                       width: Get.width * 0.2,
+                      titleTextStyle: AppTextStyle.homeworkTitle,
+                      valueTextStyle: AppTextStyle.homeworkTitle,
                     ),
                     ColumnTile(
                       title: "Submission",
                       value: submission,
                       width: Get.width * 0.22,
+                      titleTextStyle: AppTextStyle.homeworkTitle,
+                      valueTextStyle: AppTextStyle.homeworkTitle,
                     ),
                     ColumnTile(
                       title: "Evaluation",
                       value: evaluation,
                       width: Get.width * 0.2,
+                      titleTextStyle: AppTextStyle.homeworkTitle,
+                      valueTextStyle: AppTextStyle.homeworkTitle,
                     ),
                     Flexible(
                       child:SizedBox(
@@ -99,7 +105,7 @@ class HomeworkCardTile extends StatelessWidget {
                           children: [
                         const Text(
                               "Status",
-                              style: AppTextStyle.fontSize13BlackW400,
+                              style: AppTextStyle.homeworkTitle,
                             ),
                             4.verticalSpacing,
                             status != null
@@ -126,6 +132,8 @@ class HomeworkCardTile extends StatelessWidget {
                 ColumnTile(
                   title: "Marks",
                   value: marks,
+                  titleTextStyle: AppTextStyle.homeworkTitle,
+                  valueTextStyle: AppTextStyle.homeworkTitle,
                 ),
               ],
             ),

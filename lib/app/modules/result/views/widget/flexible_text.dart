@@ -17,7 +17,7 @@ class FlexibleText extends StatelessWidget {
         padding: const EdgeInsets.only(right: 8.0),
         child: Text(
           text ?? "",
-          style: AppTextStyle.homeworkElements,
+          style: AppTextStyle.homeworkTitle,
           textAlign: TextAlign.left,
         ),
       ),

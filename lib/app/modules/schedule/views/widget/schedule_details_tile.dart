@@ -47,7 +47,7 @@ class ScheduleDetailsTile extends StatelessWidget {
           5.verticalSpacing,
           Text(
             "${"Time".tr}: $startTime - $endTime",
-            style: AppTextStyle.fontSize14BlackW500,
+            style: AppTextStyle.fontSize14lightBlackW400,
           ),
           5.verticalSpacing,
 
@@ -59,16 +59,22 @@ class ScheduleDetailsTile extends StatelessWidget {
                 title: "Room Number".tr,
                 value: roomNo ?? "",
                 width: Get.width * 0.24,
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
 
               ),
               ColumnTile(
                 title: "Class (Section)".tr,
                 value: section ?? "",
                 width: Get.width * 0.27,
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
               ),
               ColumnTile(
                 title: "Teacher".tr,
                 value: teacher ?? "",
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
               ),
             ],
           ),

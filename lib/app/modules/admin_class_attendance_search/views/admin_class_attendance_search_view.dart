@@ -50,6 +50,7 @@ class AdminClassAttendanceSearchView
                           changeDropdownValue: (v) {
                             controller.adminStudentsSearchController.classValue
                                 .value = v!;
+                            controller.adminStudentsSearchController.studentClassId.value = v.id;
                             controller.adminStudentsSearchController
                                 .getStudentSectionList(
                                     classId: controller
@@ -80,6 +81,7 @@ class AdminClassAttendanceSearchView
                           changeDropdownValue: (v) {
                             controller.adminStudentsSearchController.sectionValue
                                 .value = v!;
+                            controller.adminStudentsSearchController.studentSectionId.value = v.id;
                           },
                         ),
                   10.verticalSpacing,

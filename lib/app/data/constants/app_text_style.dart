@@ -22,6 +22,12 @@ class AppTextStyle {
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
   );
+  static const textStyle10WhiteW300 = TextStyle(
+    color: Colors.white,
+    fontSize: 10,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w300,
+  );
 
   static const textStyle16WhiteW500 = TextStyle(
     color: Colors.white,
@@ -96,6 +102,11 @@ class AppTextStyle {
       color: AppColors.editProfileTextFieldLabelColor,
       fontSize: 12,
       fontWeight: FontWeight.w400);
+
+  static const homeworkTitle = TextStyle(
+      color: AppColors.editProfileTextFieldLabelColor,
+      fontSize: 11,
+      fontWeight: FontWeight.w300);
 
   ///Homework
   static const homeworkSubject = TextStyle(

@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_single_getx_api_v2/app/modules/student_search_attendance/views/widget/display_dot.dart';
@@ -21,6 +20,7 @@ class GlobalVariable {
   static const lateEvent = DisplayDot(color: Color(0xFFFF6F00));
   static const absentEvent = DisplayDot(color: Color(0xFFF32E21));
   static const holidayEvent = DisplayDot(color: Color(0xFF462564));
+  static const nullEvent = DisplayDot(color: Colors.transparent);
 
   static Map<String, String> header = {
     'Content-Type': 'application/json',
@@ -44,6 +44,9 @@ class GlobalVariable {
     }
     else if (attendanceStatus == "H"){
      return holidayEvent;
+    }
+    else if (attendanceStatus == ""){
+      return nullEvent;
     }
   }
 }

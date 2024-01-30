@@ -41,7 +41,10 @@ class ActiveExamTile extends StatelessWidget {
         children: [
           Text(
             title ?? "",
-            style: AppTextStyle.fontSize14lightBlackW400,
+            style: const TextStyle(
+                color: AppColors.profileValueColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w500),
           ),
           10.verticalSpacing,
           Row(
@@ -51,11 +54,14 @@ class ActiveExamTile extends StatelessWidget {
                 title: "Subject".tr,
                 value: subject,
                 width: Get.width * 0.18,
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
               ),
               TimeAndDateTile(
                 title: "Start".tr,
                 date: startDate ?? "",
                 time: "(${startingTime ?? ''})",
+
               ),
               TimeAndDateTile(
                 title: "End".tr,
@@ -67,14 +73,14 @@ class ActiveExamTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                      Text(
-                      "Status".tr,
-                      style: AppTextStyle.fontSize13BlackW400,
+                      "Active".tr,
+                      style: AppTextStyle.notificationText,
                     ),
                     5.verticalSpacing,
                     activeStatus != null
                         ? Container(
                       width: 60,
-                            padding: const EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(3),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3),
                                 color: activeStatusColor ??
@@ -82,7 +88,7 @@ class ActiveExamTile extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 activeStatus ?? "",
-                                style: AppTextStyle.textStyle10WhiteW400,
+                                style: AppTextStyle.textStyle10WhiteW300,
                               ),
                             ),
                           )

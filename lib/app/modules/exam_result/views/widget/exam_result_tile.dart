@@ -50,6 +50,8 @@ class ExamResultTile extends StatelessWidget {
               ColumnTile(
                 title: "Title".tr,
                 value: title,
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
               ),
               TimeAndDateTile(
                 title: "Start".tr,
@@ -66,12 +68,12 @@ class ExamResultTile extends StatelessWidget {
                 children: [
                    Text(
                     "Status".tr,
-                    style: AppTextStyle.homeworkElements,
+                    style: AppTextStyle.notificationText,
                   ),
                   5.verticalSpacing,
                   Container(
                     width: 60,
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(3),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
                         color: activeStatusColor ??

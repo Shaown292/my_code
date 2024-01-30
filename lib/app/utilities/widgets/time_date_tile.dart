@@ -28,17 +28,17 @@ class TimeAndDateTile extends StatelessWidget {
         children: [
           Text(
             title ?? "",
-            style: AppTextStyle.fontSize13BlackW400,
+            style: AppTextStyle.homeworkTitle,
           ),
           8.verticalSpacing,
           Text(
             date ?? "",
-            style: AppTextStyle.homeworkElements,
+            style: AppTextStyle.homeworkTitle,
           ),
           2.verticalSpacing,
           Text(
             time ?? "",
-            style: AppTextStyle.homeworkElements,
+            style: AppTextStyle.homeworkTitle,
           ),
         ],
       ),
