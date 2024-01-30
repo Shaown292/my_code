@@ -51,7 +51,9 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                             hintText: "Select Date*",
                             filled: true,
                             fillColor: const Color(0xFFFDFBFF),
-                            suffixIcon:  Image.asset(ImagePath.calender,),
+                            suffixIcon: Image.asset(
+                              ImagePath.calender,
+                            ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF635976).withOpacity(0.2),
@@ -99,10 +101,11 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                   controller.classId.value = v.id;
                                   controller.adminStudentsSearchController
                                       .getStudentSectionList(
-                                          classId: controller
-                                              .adminStudentsSearchController
-                                              .studentClassId
-                                              .value);
+                                    classId: controller
+                                        .adminStudentsSearchController
+                                        .studentClassId
+                                        .value,
+                                  );
                                   controller.getAllBankPaymentList(
                                       startDate: controller.startDate.value,
                                       endDate: controller.endDate.value,
@@ -206,7 +209,10 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                               .toString(),
                                           status: controller
                                               .pendingList[index].status,
-                                          currency: controller.appSettingsController.currencyDetail!.symbol,
+                                          currency: controller
+                                              .appSettingsController
+                                              .currencyDetail!
+                                              .symbol,
                                           statusColor:
                                               AppColors.activeStatusYellowColor,
                                           onTapDetails: () {
@@ -245,7 +251,6 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                                   .transactionId
                                                   .toString(),
                                               status: "approve",
-
                                               index: index,
                                               updatedStatus: controller
                                                       .pendingList[index]
@@ -260,7 +265,6 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                                   .transactionId
                                                   .toString(),
                                               status: "reject",
-
                                               index: index,
                                               updatedStatus: controller
                                                       .pendingList[index]
@@ -346,7 +350,6 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                                   .transactionId
                                                   .toString(),
                                               status: "reject",
-
                                               index: index,
                                               updatedStatus: controller
                                                       .approveList[index]
