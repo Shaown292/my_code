@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_single_getx_api_v2/app/data/constants/app_text_style.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_divider.dart';
 import 'package:get/get.dart';
@@ -37,18 +38,12 @@ class ProfilePersonalWidget extends StatelessWidget {
                   children: [
                     Text(
                       title ?? "",
-                      style:  const TextStyle(
-                          color: AppColors.profileTitleColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400),
+                      style:  AppTextStyle.fontSize10GreyW400,
                     ),
                     5.verticalSpacing,
                     Text(
                       value ?? "",
-                      style:  const TextStyle(
-                          color: AppColors.profileValueColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500),
+                      style:  AppTextStyle.fontSize10GreyW500,
                     ),
                   ],
                 ),

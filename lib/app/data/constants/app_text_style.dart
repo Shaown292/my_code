@@ -132,6 +132,10 @@ class AppTextStyle {
       color: AppColors.profileValueColor,
       fontSize: 10,
       fontWeight: FontWeight.w500);
+  static const fontSize10W500 = TextStyle(
+      color: Color(0xFF7E7987),
+      fontSize: 10,
+      fontWeight: FontWeight.w500);
 
   static const fontSize12lightViolateW400 = TextStyle(
       color: AppColors.profileValueColor,

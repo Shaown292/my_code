@@ -627,7 +627,8 @@ class InfixApi {
   /// Class & Language API
   static String zoomClassList = '${baseApi}zoom-class-meeting-list';
   static String zoomMeetingList = '${baseApi}zoom-meeting-list';
-  static String jitsiMeetingList = '${baseApi}jitsi/virtual-class';
+  static String jitsiClassList = '${baseApi}jitsi/virtual-class';
+  static String jitsiMeetingList = '${baseApi}jitsi/meetings';
   static String bigBlueButtonClassList = '${baseApi}bbb/virtual-class';
   static String bigBlueButtonMeetingList = '${baseApi}bbb/meetings';
   static String googleMeetClassList = '${baseApi}g-meet/virtual-class';

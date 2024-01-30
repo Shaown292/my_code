@@ -108,7 +108,9 @@ class VirtualClassListView extends GetView<VirtualClassListController> {
                                             );
                                           } else if (controller
                                                   .onlineClass.value ==
-                                              "jitsi") {
+                                              "jitsi" || controller
+                                              .onlineClass.value ==
+                                              "jitsi_meeting") {
                                             // print('object');
                                             controller.join(
                                               roomId: controller

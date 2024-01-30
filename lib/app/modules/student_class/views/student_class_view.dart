@@ -41,7 +41,11 @@ class StudentClassView extends GetView<StudentClassController> {
                           "online_class" : "jitsi",
                         });
                       },
-                      onMeetingTap: (){},
+                      onMeetingTap: (){
+                        Get.toNamed(Routes.VIRTUAL_CLASS_LIST, arguments: {
+                          "online_class" : "jitsi_meeting",
+                        });
+                      },
                     ),
                     20.verticalSpacing,
                     /// Zoom

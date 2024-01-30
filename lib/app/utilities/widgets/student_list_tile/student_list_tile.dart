@@ -69,7 +69,7 @@ class StudentListTile extends StatelessWidget {
                   children: [
                     Text(
                       studentName ?? AppText.noDataAvailable,
-                      style: AppTextStyle.fontSize14lightBlackW400,
+                      style: AppTextStyle.fontSize10GreyW500,
                     ),
                     3.verticalSpacing,
                     isMultipleSectionAvailable
@@ -79,12 +79,13 @@ class StudentListTile extends StatelessWidget {
                                 classSectionList!
                                     .map((e) => e.classSection.toString())
                                     .join(', '),
+                                style: AppTextStyle.fontSize10GreyW400,
                               ),
                             ],
                           )
                         : Text(
                             classSection ?? '',
-                            style: AppTextStyle.fontSize13BlackW400,
+                            style: AppTextStyle.fontSize10GreyW400,
                           ),
                   ],
                 ),

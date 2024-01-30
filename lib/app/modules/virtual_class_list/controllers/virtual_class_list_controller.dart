@@ -178,7 +178,11 @@ class VirtualClassListController extends GetxController {
   void _detectingUrl(String status) {
     switch (status) {
       case 'jitsi':
-        url = InfixApi.jitsiMeetingList;
+        url = InfixApi.jitsiClassList;
+        title = "Jitsi" ;
+        break;
+        case 'jitsi_meeting':
+        url = InfixApi.jitsiClassList;
         title = "Jitsi" ;
         break;
       case 'zoom':
