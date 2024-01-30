@@ -5,6 +5,10 @@
         <package android:name="us.zoom.videomeetings" />
     </queries>
 
+    <queries>
+        <package android:name="com.google.android.apps.tachyon" />
+    </queries>
+
     <application
         tools:replace="android:label"
         android:label="flutter_single_getx_api_v2"

@@ -9,7 +9,7 @@ import 'package:flutter_single_getx_api_v2/config/global_variable/global_variabl
 import 'package:flutter_single_getx_api_v2/domain/base_client/base_client.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/online_class/zoom/zoom_meeting_list_response_model.dart';
 import 'package:get/get.dart';
-import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
+// import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class VirtualClassListController extends GetxController {
@@ -79,26 +79,42 @@ class VirtualClassListController extends GetxController {
     }
   }
 
-  final jitsiMeet = JitsiMeet();
+  // final jitsiMeet = JitsiMeet();
 
   void join({required String roomId}) async {
-    var options = JitsiMeetConferenceOptions(
-      room: roomId,
-      serverURL: 'https://meet.jit.si/',
-      configOverrides: {
-        "startWithAudioMuted": false,
-        "startWithVideoMuted": false,
-      },
-      featureFlags: {"unsaferoomwarning.enabled": false},
-      userInfo: JitsiMeetUserInfo(
-        displayName: 'name',
-        email: globalRxVariableController.email.value,
-      ),
-    );
-    jitsiMeet.join(options);
+    // var options = JitsiMeetConferenceOptions(
+    //   room: roomId,
+    //   serverURL: 'https://meet.jit.si/',
+    //   configOverrides: {
+    //     "startWithAudioMuted": false,
+    //     "startWithVideoMuted": false,
+    //   },
+    //   featureFlags: {"unsaferoomwarning.enabled": false},
+    //   userInfo: JitsiMeetUserInfo(
+    //     displayName: 'name',
+    //     email: globalRxVariableController.email.value,
+    //   ),
+    // );
+    // jitsiMeet.join(options);
   }
 
   Future<void> openGoogleMeet(
+      {required String status, required String url}) async {
+    if (status == "JOIN" || status == 'START') {
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        final webUrl = url;
+        if (await canLaunch(webUrl)) {
+          await launch(webUrl);
+        } else {
+          throw Exception('Could not launch $url');
+        }
+      }
+    }
+  }
+
+  Future<void> openJitsiMeet(
       {required String status, required String url}) async {
     if (status == "JOIN" || status == 'START') {
       if (await canLaunch(url)) {
@@ -182,7 +198,7 @@ class VirtualClassListController extends GetxController {
         title = "Jitsi" ;
         break;
         case 'jitsi_meeting':
-        url = InfixApi.jitsiClassList;
+        url = InfixApi.jitsiMeetingList;
         title = "Jitsi" ;
         break;
       case 'zoom':
