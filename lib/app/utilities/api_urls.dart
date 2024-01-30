@@ -296,8 +296,8 @@ class InfixApi {
       '${baseApi}teacher-subject-attendance-submit';
   static String adminAttendanceMarkUnMarkHolyDay =
       '${baseApi}student-attendance-holiday';
-  static String teacherAttendanceMarkUnMarkHolyDay =
-      '${baseApi}teacher-subject-holiday';
+  static String teacherSubjectWiseAttendanceMarkUnMarkHolyDay = '${baseApi}teacher-subject-holiday';
+  static String teacherAttendanceMarkUnMarkHolyDay = '${baseApi}teacher-class-attendance-holiday';
 
   static String getAdminStudentSearchList({
     required int classId,

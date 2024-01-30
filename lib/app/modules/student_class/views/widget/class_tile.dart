@@ -12,6 +12,7 @@ class ClassTile extends StatelessWidget {
   final Function()? onSubTitleTap;
   final Function()? onMeetingTap;
   final bool isTapped;
+  final bool isStudent;
 
   const ClassTile({
     super.key,
@@ -20,7 +21,10 @@ class ClassTile extends StatelessWidget {
     this.onlineClassSubTitle,
     this.onlineClassTitleTextStyle,
     this.isTapped = false,
-    this.onSubTitleTap, this.onlineClassMeeting, this.onMeetingTap,
+    this.onSubTitleTap,
+    this.onlineClassMeeting,
+    this.onMeetingTap,
+    this.isStudent = false,
   });
 
   @override
@@ -60,10 +64,12 @@ class ClassTile extends StatelessWidget {
                             ? AppTextStyle.cardTextStyle14WhiteW500
                             : AppTextStyle.primaryFont14,
                       ),
-                      isTapped ? const SizedBox() : const Icon(
-                        Icons.arrow_forward_ios_outlined,
-                        color: AppColors.primaryColor,
-                      )
+                      isTapped
+                          ? const SizedBox()
+                          : const Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              color: AppColors.primaryColor,
+                            )
                     ],
                   ),
                 ),
@@ -86,22 +92,22 @@ class ClassTile extends StatelessWidget {
                     ),
                   )
                 : const SizedBox(),
-            isTapped
-                ? InkWell(
-              onTap: onMeetingTap,
-              child: Container(
-                width: Get.width,
-                padding: const EdgeInsets.all(8),
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    onlineClassMeeting ?? "",
-                    style: AppTextStyle.primaryFont14,
-                  ),
-                ),
-              ),
-            )
+            isTapped && !isStudent
+                ?  InkWell(
+                    onTap: onMeetingTap,
+                    child: Container(
+                      width: Get.width,
+                      padding: const EdgeInsets.all(8),
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Text(
+                          onlineClassMeeting ?? "",
+                          style: AppTextStyle.primaryFont14,
+                        ),
+                      ),
+                    ),
+                  )
                 : const SizedBox(),
           ],
         ),

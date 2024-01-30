@@ -48,7 +48,7 @@ class AdminSubjectAttendanceSearchListView
                                     !controller.markHoliday.value;
                                 controller.markUnMarkHoliday(
                                   purpose: controller.markHoliday.value
-                                      ? 'mark'
+                                      ? ''
                                       : 'unmark',
                                 );
                               },

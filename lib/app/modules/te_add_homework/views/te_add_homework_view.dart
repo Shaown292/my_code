@@ -107,7 +107,6 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "${"Assign Date".tr} *",
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -124,7 +123,6 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "${"Submission Date".tr} *",
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     suffixIcon: Image.asset(
                       ImagePath.calender,
@@ -159,7 +157,6 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                       controller.pickFile();
                       debugPrint("Browser ::: ${controller.homeworkFile}");
                     },
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   10.verticalSpacing,
                   CustomTextFormField(
@@ -168,7 +165,6 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     focusBorderActive: true,
                     hintText: "Marks".tr,
                     textInputType: TextInputType.number,
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     iconOnTap: () {
                       debugPrint("Browser");
@@ -180,7 +176,6 @@ class TeAddHomeworkView extends GetView<TeAddHomeworkController> {
                     enableBorderActive: true,
                     focusBorderActive: true,
                     hintText: "Description".tr,
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                     fillColor: Colors.white,
                     maxLine: 3,
                     iconOnTap: () {

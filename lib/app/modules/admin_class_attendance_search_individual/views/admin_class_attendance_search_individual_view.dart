@@ -85,7 +85,6 @@ class AdminClassAttendanceSearchIndividualView
                     focusBorderActive: true,
                     hintText: "Name".tr,
                     fillColor: Colors.white,
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   10.verticalSpacing,
                   CustomTextFormField(
@@ -95,7 +94,6 @@ class AdminClassAttendanceSearchIndividualView
                     textInputType: TextInputType.number,
                     hintText: "Roll".tr,
                     fillColor: Colors.white,
-                    hintTextStyle: AppTextStyle.fontSize14lightBlackW400,
                   ),
                   (Get.height * 0.3).verticalSpacing,
                   controller.adminStudentsSearchController.searchLoader.value

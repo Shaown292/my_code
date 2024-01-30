@@ -125,8 +125,7 @@ class AdminClassSetAttendanceController extends GetxController {
     }
   }
 
-  Future<PostRequestResponseModel> markUnMarkHoliday(
-      {required String purpose}) async {
+ void markUnMarkHoliday() async {
     try {
       holidayLoader.value = true;
 
@@ -136,7 +135,7 @@ class AdminClassSetAttendanceController extends GetxController {
               : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
           header: GlobalVariable.header,
           payload: {
-            'purpose': purpose,
+            'purpose': markHoliday.value ? "unmark" : "",
             'class_id': attendanceStudentData.classId,
             'section_id': attendanceStudentData.sectionId,
             'attendance_date': attendanceStudentData.date,
@@ -146,6 +145,7 @@ class AdminClassSetAttendanceController extends GetxController {
           PostRequestResponseModel.fromJson(response);
 
       if (postRequestResponseModel.success == true) {
+
         holidayLoader.value = false;
         markHoliday.value = !markHoliday.value;
         for (int i = 0; i < adminClassSetAttendanceList.length; i++) {
@@ -170,7 +170,7 @@ class AdminClassSetAttendanceController extends GetxController {
       holidayLoader.value = false;
     }
 
-    return PostRequestResponseModel();
+    // return PostRequestResponseModel();
   }
 
   void showAddNoteBottomSheet({

@@ -94,7 +94,7 @@ class SetAttendanceTile extends StatelessWidget {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
-                                color: AppColors.appButtonColor),
+                                color: AppColors.primaryColor),
                             child: Center(
                               child: Text(
                                 "Add Note".tr,

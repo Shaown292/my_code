@@ -168,7 +168,7 @@ class AdminClassAttendanceIndividualDetailsController extends GetxController {
                   adminStudentAttendanceList[i].attendanceDate!.day,
                 ),
                 dot: GlobalVariable.getAttendanceStatus(
-                    adminStudentAttendanceList[i].attendanceType ?? ""),
+                    adminStudentAttendanceList[i].attendanceType ?? "l"),
               ),
             ];
           }

@@ -184,7 +184,7 @@ class AdminSubjectAttendanceSearchListController extends GetxController {
       holidayLoader.value = true;
 
       final response = await BaseClient().postData(
-          url: globalRxVariableController.roleId.value == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherAttendanceMarkUnMarkHolyDay,
+          url: globalRxVariableController.roleId.value == 1 ? InfixApi.adminAttendanceMarkUnMarkHolyDay : InfixApi.teacherSubjectWiseAttendanceMarkUnMarkHolyDay,
           header: GlobalVariable.header,
           payload: {
             'purpose': purpose,
