@@ -30,7 +30,7 @@ class TransportTile extends StatelessWidget {
             children: [
               Container(
                 width: Get.width * 0.13,
-                padding: const EdgeInsets.all(6),
+                padding: const EdgeInsets.all(7),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
                     color: AppColors.profileCardBackgroundColor),
@@ -49,7 +49,7 @@ class TransportTile extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(7),
                 width: Get.width * 0.2,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
@@ -87,7 +87,7 @@ class TransportTile extends StatelessWidget {
                     InkWell(
                       onTap: onTap,
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(2),
                           color: const Color(0xFF862CFF),
@@ -95,7 +95,7 @@ class TransportTile extends StatelessWidget {
                         child: Center(
                           child: Text(
                             "View".tr,
-                            style: AppTextStyle.textStyle12WhiteW400,
+                            style: AppTextStyle.textStyle10WhiteW400,
                           ),
                         ),
                       ),

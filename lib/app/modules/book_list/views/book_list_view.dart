@@ -36,6 +36,7 @@ class BookListView extends GetView<BookListController> {
                       vertical: 15,
                     ),
                     child: SearchField(
+                      borderRadius: 2.0,
                       controller: controller.searchController,
                       onChange: (searchKey) {
                         controller.bookSearchList.clear();
@@ -92,7 +93,7 @@ class BookListView extends GetView<BookListController> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
                             "Subject".tr,
-                            style: AppTextStyle.textStyle12WhiteW500,
+                            style: AppTextStyle.textStyle10WhiteW400,
                           ),
                         ),
                         const VerticalDivider(
@@ -101,7 +102,7 @@ class BookListView extends GetView<BookListController> {
                         ),
                         Text(
                           "Book Name".tr,
-                          style: AppTextStyle.textStyle12WhiteW500,
+                          style: AppTextStyle.textStyle10WhiteW400,
                         )
                       ],
                     ),

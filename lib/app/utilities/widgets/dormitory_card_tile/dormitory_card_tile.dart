@@ -53,29 +53,37 @@ class DormitoryCardTile extends StatelessWidget {
                 title: isAdminRoomList ? "Room Name".tr : "Room no".tr,
                 value: roomNoName ?? "",
                 width: Get.width * 0.22,
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
               ),
               ColumnTile(
                 title: "No. Of Bed".tr,
                 value: "${numberOfBed ?? ""}",
                 width: Get.width * 0.22,
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
               ),
               ColumnTile(
                 title: "Cost".tr,
                 value: "${cost ?? ""}",
                 width: Get.width * 0.18,
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
               ),
               isAdminRoomList
                   ? ColumnTile(
                       title: "Room Type".tr,
                       value: roomType ?? "",
                       width: Get.width * 0.2,
+                titleTextStyle: AppTextStyle.homeworkTitle,
+                valueTextStyle: AppTextStyle.homeworkTitle,
                     )
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                          Text(
                           "Status".tr,
-                           style: AppTextStyle.fontSize13BlackW400,
+                           style: AppTextStyle.notificationText,
                         ),
                         3.verticalSpacing,
                         Container(

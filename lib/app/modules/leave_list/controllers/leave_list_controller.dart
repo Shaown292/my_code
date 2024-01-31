@@ -18,7 +18,9 @@ class LeaveListController extends GetxController {
   GlobalRxVariableController globalRxVariableController = Get.find();
   TabController? tabController;
   int selectedIndex = 0;
-  LoadingController loadingController = Get.find();
+
+  RxBool leaveListLoader = false.obs;
+  RxBool remainingLeaveListLoader = false.obs;
   HomeController homeController = Get.find();
 
   List<LeaveListData> leaveList = [];
@@ -35,7 +37,7 @@ class LeaveListController extends GetxController {
 
   Future<LeaveListResponseModel?> getAllLeaveList(int studentId) async {
     try {
-      loadingController.isLoading = true;
+     leaveListLoader.value = true;
 
       final response = await BaseClient().getData(
         url: globalRxVariableController.roleId.value == 4 ? InfixApi.getTeacherLeaveList : InfixApi.getStudentLeaveList(studentId),
@@ -45,7 +47,7 @@ class LeaveListController extends GetxController {
       LeaveListResponseModel leaveListResponseModel =
           LeaveListResponseModel.fromJson(response);
       if (leaveListResponseModel.success == true) {
-        loadingController.isLoading = false;
+        leaveListLoader.value= false;
         if (leaveListResponseModel.data!.pending!.isNotEmpty) {
           for (int i = 0;
               i < leaveListResponseModel.data!.pending!.length;
@@ -71,11 +73,11 @@ class LeaveListController extends GetxController {
         }
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+     leaveListLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      leaveListLoader.value = false;
     }
     return LeaveListResponseModel();
   }
@@ -83,7 +85,7 @@ class LeaveListController extends GetxController {
   Future<RemainingLeaveResponseModel?> getRemainingLeave(
       {required int studentId}) async {
     try {
-      loadingController.isLoading = true;
+      remainingLeaveListLoader.value = true;
 
       final response = await BaseClient().getData(
         url: InfixApi.getStudentRemainingLeave(studentId),
@@ -93,7 +95,7 @@ class LeaveListController extends GetxController {
       RemainingLeaveResponseModel remainingLeaveResponseModel =
           RemainingLeaveResponseModel.fromJson(response);
       if (remainingLeaveResponseModel.success == true) {
-        loadingController.isLoading = false;
+        remainingLeaveListLoader.value = false;
         if (remainingLeaveResponseModel.data!.isNotEmpty) {
           for (int i = 0; i < remainingLeaveResponseModel.data!.length; i++) {
             remainingLeaveList.add(remainingLeaveResponseModel.data![i]);
@@ -101,11 +103,11 @@ class LeaveListController extends GetxController {
         }
       }
     } catch (e, t) {
-      loadingController.isLoading = false;
+     remainingLeaveListLoader.value = false;
       debugPrint('$e');
       debugPrint('$t');
     } finally {
-      loadingController.isLoading = false;
+      remainingLeaveListLoader.value = false;
     }
 
     return RemainingLeaveResponseModel();

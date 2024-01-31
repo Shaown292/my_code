@@ -5,7 +5,7 @@ import 'package:flutter_single_getx_api_v2/app/utilities/widgets/applied_leave_d
 import 'package:flutter_single_getx_api_v2/app/utilities/extensions/widget.extensions.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_background.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/common_widgets/custom_scaffold_widget.dart';
-import 'package:flutter_single_getx_api_v2/app/utilities/widgets/loader/loading.widget.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/widgets/customised_loading_widget/customised_loading_widget.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/widgets/no_data_available/no_data_available_widget.dart';
 
 import 'package:get/get.dart';
@@ -50,24 +50,27 @@ class LeaveListView extends GetView<LeaveListController> {
                                   style: AppTextStyle.fontSize14BlackW500,
                                 ),
                                 10.verticalSpacing,
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      controller.remainingLeaveList.length,
-                                  itemBuilder: (context, index) {
-                                    return BottomSheetTile(
-                                      title: controller
-                                          .remainingLeaveList[index].leaveType,
-                                      value: controller
-                                          .remainingLeaveList[index]
-                                          .remainingDays
-                                          .toString(),
-                                      color: index % 2 == 0
-                                          ? AppColors.homeworkWidgetColor
-                                          : Colors.white,
-                                    );
-                                  },
-                                )
+                                controller.remainingLeaveListLoader.value
+                                    ? const  SecondaryLoadingWidget()
+                                    : ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: controller
+                                            .remainingLeaveList.length,
+                                        itemBuilder: (context, index) {
+                                          return BottomSheetTile(
+                                            title: controller
+                                                .remainingLeaveList[index]
+                                                .leaveType,
+                                            value: controller
+                                                .remainingLeaveList[index]
+                                                .remainingDays
+                                                .toString(),
+                                            color: index % 2 == 0
+                                                ? AppColors.homeworkWidgetColor
+                                                : Colors.white,
+                                          );
+                                        },
+                                      )
                               ],
                             ),
                           ),
@@ -114,67 +117,62 @@ class LeaveListView extends GetView<LeaveListController> {
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         ///Pending
-                        controller.loadingController.isLoading
-                            ? const LoadingWidget()
-                            : controller.pendingList.isNotEmpty
-                                ? RefreshIndicator(
-                                    color: AppColors.primaryColor,
-                                    onRefresh: () async {
-                                      controller.pendingList.clear();
-                                      controller.remainingLeaveList.clear();
-                                      if (controller.globalRxVariableController
-                                              .roleId.value ==
-                                          2) {
-                                        controller.getRemainingLeave(
-                                          studentId: controller
-                                              .globalRxVariableController
-                                              .studentId
-                                              .value!,
+                        RefreshIndicator(
+                          color: AppColors.primaryColor,
+                          onRefresh: () async {
+                            controller.pendingList.clear();
+                            controller.remainingLeaveList.clear();
+                            if (controller
+                                    .globalRxVariableController.roleId.value ==
+                                2) {
+                              controller.getRemainingLeave(
+                                studentId: controller.globalRxVariableController
+                                    .studentId.value!,
+                              );
+                              controller.getAllLeaveList(controller
+                                  .globalRxVariableController.studentId.value!);
+                            } else {
+                              controller.getAllLeaveList(1);
+                            }
+                          },
+                          child: controller.leaveListLoader.value
+                              ? const SecondaryLoadingWidget()
+                              : controller.pendingList.isNotEmpty
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: controller.pendingList.length,
+                                      itemBuilder: (context, index) {
+                                        return AppliedLeaveDetailsTile(
+                                          leaveType: controller
+                                              .pendingList[index].leaveType,
+                                          applyDate: controller
+                                              .pendingList[index].applyDate,
+                                          leaveFrom: controller
+                                              .pendingList[index].from,
+                                          leaveTo:
+                                              controller.pendingList[index].to,
+                                          status: controller
+                                              .pendingList[index].status,
+                                          statusColor:
+                                              AppColors.activeStatusYellowColor,
+                                          onTap: () {
+                                            controller
+                                                .showPendingListDetailsBottomSheet(
+                                                    index: index);
+                                          },
                                         );
-                                        controller.getAllLeaveList(controller
-                                            .globalRxVariableController
-                                            .studentId
-                                            .value!);
-                                      } else {
-                                        controller.getAllLeaveList(1);
-                                      }
-                                    },
-                                    child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount:
-                                            controller.pendingList.length,
-                                        itemBuilder: (context, index) {
-                                          return AppliedLeaveDetailsTile(
-                                            leaveType: controller
-                                                .pendingList[index].leaveType,
-                                            applyDate: controller
-                                                .pendingList[index].applyDate,
-                                            leaveFrom: controller
-                                                .pendingList[index].from,
-                                            leaveTo: controller
-                                                .pendingList[index].to,
-                                            status: controller
-                                                .pendingList[index].status,
-                                            statusColor: AppColors
-                                                .activeStatusYellowColor,
-                                            onTap: () {
-                                              controller
-                                                  .showPendingListDetailsBottomSheet(
-                                                      index: index);
-                                            },
-                                          );
-                                        }),
-                                  )
-                                : const Center(
-                                    child: SingleChildScrollView(
-                                      child: NoDataAvailableWidget(),
+                                      })
+                                  : const Center(
+                                      child: SingleChildScrollView(
+                                        child: NoDataAvailableWidget(),
+                                      ),
                                     ),
-                                  ),
+                        ),
 
                         /// Approved
 
-                        controller.loadingController.isLoading
-                            ? const LoadingWidget()
+                        controller.leaveListLoader.value
+                            ? const SecondaryLoadingWidget()
                             : controller.approvedList.isNotEmpty
                                 ? RefreshIndicator(
                                     color: AppColors.primaryColor,
@@ -231,8 +229,8 @@ class LeaveListView extends GetView<LeaveListController> {
 
                         /// Cancelled
 
-                        controller.loadingController.isLoading
-                            ? const LoadingWidget()
+                        controller.leaveListLoader.value
+                            ? const SecondaryLoadingWidget()
                             : controller.cancelledList.isNotEmpty
                                 ? RefreshIndicator(
                                     color: AppColors.primaryColor,
