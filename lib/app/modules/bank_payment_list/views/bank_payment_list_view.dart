@@ -81,6 +81,7 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                               child: DuplicateDropdown(
                                 sidePadding: 0,
                                 borderRadius: 2,
+
                                 padding: const EdgeInsets.only(left: 10),
                                 textStyle: AppTextStyle.blackFontSize10W400,
                                 dropdownValue: controller
