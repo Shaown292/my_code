@@ -81,7 +81,6 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                               child: DuplicateDropdown(
                                 sidePadding: 0,
                                 borderRadius: 2,
-
                                 padding: const EdgeInsets.only(left: 10),
                                 textStyle: AppTextStyle.blackFontSize10W400,
                                 dropdownValue: controller
@@ -280,7 +279,9 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                       );
                                     }),
                               )
-                            : const NoDataAvailableWidget(),
+                            : const SingleChildScrollView(
+                                child: NoDataAvailableWidget(),
+                              ),
 
                     /// Approve List
                     controller.isLoading.value
@@ -365,7 +366,9 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                       );
                                     }),
                               )
-                            : const NoDataAvailableWidget(),
+                            : const SingleChildScrollView(
+                      child: NoDataAvailableWidget(),
+                    ),
 
                     /// Reject List
                     controller.isLoading.value
@@ -450,7 +453,9 @@ class BankPaymentListView extends GetView<BankPaymentListController> {
                                       );
                                     }),
                               )
-                            : const NoDataAvailableWidget(),
+                            : const SingleChildScrollView(
+                      child: NoDataAvailableWidget(),
+                    ),
                   ]),
                 ),
               ],

@@ -51,7 +51,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       "Subject".tr,
-                      style: AppTextStyle.textStyle12WhiteW500,
+                      style: AppTextStyle.textStyle10WhiteW400,
                     ),
                   ),
                   const VerticalDivider(
@@ -60,7 +60,7 @@ class AdminBookListView extends GetView<AdminBookListController> {
                   ),
                   Text(
                     "Book Name".tr,
-                    style: AppTextStyle.textStyle12WhiteW500,
+                    style: AppTextStyle.textStyle10WhiteW400,
                   )
                 ],
               ),
