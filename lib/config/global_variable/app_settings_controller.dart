@@ -3,16 +3,30 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_single_getx_api_v2/app/routes/app_pages.dart';
 import 'package:flutter_single_getx_api_v2/app/utilities/api_urls.dart';
+import 'package:flutter_single_getx_api_v2/app/utilities/message/snack_bars.dart';
 import 'package:flutter_single_getx_api_v2/config/global_variable/global_variable_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/language_controller.dart';
 import 'package:flutter_single_getx_api_v2/config/language/controller/languages/translated_language.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/exceptions/conflict_exception.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/exceptions/default.exception.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/exceptions/forbidden.exception.dart';
+import 'package:flutter_single_getx_api_v2/domain/core/exceptions/unprocessable_exception.dart';
 import 'package:flutter_single_getx_api_v2/domain/core/model/settings/general_settings_response_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSettingsController extends GetxController {
+
+  /// Loader
   RxBool languageLoader = false.obs;
+  RxBool serviceLoader = false.obs;
+
+  RxBool isConnected = false.obs;
+  RxBool connectedStatus = false.obs;
+  RxString serverMessage = 'Something Went wrong.\n Restart your app.'.obs;
+  RxString errorMsg = "".obs;
+
   Rx<GeneralSettingsResponseModel> systemSettings =
       GeneralSettingsResponseModel().obs;
   CurrencyDetail? currencyDetail;
@@ -157,5 +171,53 @@ class AppSettingsController extends GetxController {
     } finally {}
   }
 
+  Future<void> loadData() async {
+    try {
+      debugPrint('Url ::: ${InfixApi.service}');
+      serviceLoader.value = true;
+
+      final response = await http.get(Uri.parse(InfixApi.service),
+          headers: {'Accept': 'application/json'});
+      var decode = jsonDecode(response.body);
+      debugPrint('Service Check Response::::::: ${response.body}');
+
+      if (response.statusCode == 200) {
+        serviceLoader.value = false;
+        isConnected.value = decode;
+        // return connected.value;
+      } else {
+        serviceLoader.value = false;
+        connectedStatus.value = true;
+        serverMessage.value = decode['message'];
+      }
+    } on UnProcessableException catch (e) {
+      showBasicFailedSnackBar(message: e.message);
+    } on ForbiddenException catch (e) {
+      showBasicFailedSnackBar(message: e.message);
+    } on ConflictException catch (e) {
+      showBasicFailedSnackBar(message: e.message);
+    } on DefaultException catch (e) {
+      showBasicFailedSnackBar(message: e.message);
+    } catch (e, t) {
+      print('$e');
+      print('$t');
+      connectedStatus.value = true;
+      serverMessage.value = 'Something Went wrong.\n Restart your app.';
+      serviceLoader.value = false;
+      errorMsg.value = e.toString();
+      throw e.toString();
+    } finally {
+      serviceLoader.value = false;
+      print('Connected Status ::: $connectedStatus :: $isConnected');
+      print('Server msg ::: $serverMessage');
+    }
+
+  }
+
+  // @override
+  // void onInit() {
+  //   loadData();
+  //   super.onInit();
+  // }
 
 }

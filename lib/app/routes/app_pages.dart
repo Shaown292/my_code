@@ -148,6 +148,8 @@ import '../modules/schedule/bindings/schedule_binding.dart';
 import '../modules/schedule/views/schedule_view.dart';
 import '../modules/secondary_splash/bindings/secondary_splash_binding.dart';
 import '../modules/secondary_splash/views/secondary_splash_view.dart';
+import '../modules/service_error/bindings/service_error_binding.dart';
+import '../modules/service_error/views/service_error_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
 import '../modules/single_chat/bindings/single_chat_binding.dart';
@@ -831,6 +833,11 @@ class AppPages {
       name: _Paths.BANK_PAYMENT_LIST,
       page: () => const BankPaymentListView(),
       binding: BankPaymentListBinding(),
+    ),
+    GetPage(
+      name: _Paths.SERVICE_ERROR,
+      page: () => const ServiceErrorView(),
+      binding: ServiceErrorBinding(),
     ),
   ];
 }

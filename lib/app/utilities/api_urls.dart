@@ -16,7 +16,7 @@ class InfixApi {
   static String createVirtualClass = "zoom/create-virtual-class";
   static String createVirtualClassUrl = "zoom-class-room";
   static String zoomMakeMeeting = "zoom-make-meeting";
-  static String service = '${baseApi}service/check';
+  static String service = '${AppConfig.domainName}/api/service/check';
   static String zoomMakeMeetingUrl = "zoom-meeting-room";
 
   // static String login(String email, String password) {

@@ -123,6 +123,7 @@ abstract class Routes {
   static const VIRTUAL_CLASS_LIST = _Paths.VIRTUAL_CLASS_LIST;
   static const LAUNCH_WEBVIEW = _Paths.LAUNCH_WEBVIEW;
   static const BANK_PAYMENT_LIST = _Paths.BANK_PAYMENT_LIST;
+  static const SERVICE_ERROR = _Paths.SERVICE_ERROR;
 }
 
 abstract class _Paths {
@@ -243,4 +244,5 @@ abstract class _Paths {
   static const VIRTUAL_CLASS_LIST = '/virtual-class-list';
   static const LAUNCH_WEBVIEW = '/launch-webview';
   static const BANK_PAYMENT_LIST = '/bank-payment-list';
+  static const SERVICE_ERROR = '/service-error';
 }
