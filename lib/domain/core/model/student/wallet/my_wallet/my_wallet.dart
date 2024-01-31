@@ -62,7 +62,7 @@ class WalletTransactions {
   int? id;
   String? createdAt;
   String? paymentMethod;
-  int? amount;
+  double? amount;
   String? status;
 
   WalletTransactions(

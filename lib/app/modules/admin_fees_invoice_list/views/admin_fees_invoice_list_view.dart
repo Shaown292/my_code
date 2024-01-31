@@ -96,6 +96,7 @@ class AdminFeesInvoiceListView extends GetView<AdminFeesInvoiceListController> {
                 padding: const EdgeInsets.all(15),
                 child: SearchField(
                   controller: controller.searchController,
+                  fillColor: Colors.white,
                   onChange: (searchKey) {
                     controller.feesInvoiceList.clear();
                     controller.searchFeesInvoice(

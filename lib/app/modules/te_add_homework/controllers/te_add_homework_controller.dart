@@ -241,7 +241,7 @@ class TeAddHomeworkController extends GetxController {
     try {
       loadingController.isLoading = true;
 
-      debugPrint('${Uri.parse(InfixApi.postAdminContent)}');
+
       final request =
           http.MultipartRequest('POST', Uri.parse(InfixApi.teacherAddHomework));
       request.headers.addAll(GlobalVariable.header);

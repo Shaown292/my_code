@@ -21,7 +21,7 @@ class ApplyLeaveController extends GetxController {
   RxBool isLoading = false.obs;
 
   DateTime now = DateTime.now();
-  String formattedDate = DateFormat('MM-dd-yyyy').format(DateTime.now());
+
 
 
   TextEditingController applyDateTextController = TextEditingController();
@@ -87,7 +87,7 @@ class ApplyLeaveController extends GetxController {
     );
 
     if (dateTime != null) {
-      applyDateTextController.text = DateFormat('MM/dd/yyyy').format(DateTime.now());
+      applyDateTextController.text = DateFormat('MM/dd/yyyy').format(dateTime);
     }
   }
 
@@ -98,7 +98,7 @@ class ApplyLeaveController extends GetxController {
     );
 
     if (dateTime != null) {
-      fromDateTextController.text = DateFormat('MM/dd/yyyy').format(DateTime.now());
+      fromDateTextController.text = DateFormat('MM/dd/yyyy').format(dateTime);
     }
   }
 
@@ -107,7 +107,7 @@ class ApplyLeaveController extends GetxController {
         .pickDate(canSelectPastDate: true, canSelectFutureDate: true);
 
     if (dateTime != null) {
-      toDateTextController.text = DateFormat('MM/dd/yyyy').format(DateTime.now());
+      toDateTextController.text = DateFormat('MM/dd/yyyy').format(dateTime);
     }
   }
 
@@ -148,7 +148,7 @@ class ApplyLeaveController extends GetxController {
 
   void applyLeave() async {
     try {
-      debugPrint(InfixApi.teacherApplyLeave);
+
       loadingController.isLoading = true;
       final request =
       http.MultipartRequest('POST', Uri.parse(InfixApi.studentApplyLeave));

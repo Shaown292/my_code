@@ -76,13 +76,11 @@ class TransportView extends GetView<TransportController> {
                   ),
                 ),
                 Obx(
-                  () => controller.loadingController.isLoading
-                      ? const Expanded(
-                          child: LoadingWidget(),
-                        )
-                      : controller.transportDataList.isNotEmpty
-                          ? Expanded(
-                              child: ListView.builder(
+                  () => Expanded(
+                    child: controller.loadingController.isLoading
+                        ? const LoadingWidget()
+                        : controller.transportDataList.isNotEmpty
+                            ? ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: controller.transportDataList.length,
                                 itemBuilder: (context, index) {
@@ -101,11 +99,11 @@ class TransportView extends GetView<TransportController> {
                                                 Colors.white),
                                   );
                                 },
+                              )
+                            : const Center(
+                                child: NoDataAvailableWidget(),
                               ),
-                            )
-                          : const Center(
-                              child: NoDataAvailableWidget(),
-                            ),
+                  ),
                 ),
               ],
             ),
