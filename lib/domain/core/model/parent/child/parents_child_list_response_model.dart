@@ -5,7 +5,6 @@ class ParentsChildListResponseModel {
 
   ParentsChildListResponseModel({this.success, this.data, this.message});
 
-
   ParentsChildListResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
