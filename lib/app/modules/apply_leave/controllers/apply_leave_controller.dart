@@ -21,7 +21,7 @@ class ApplyLeaveController extends GetxController {
   RxBool isLoading = false.obs;
 
   DateTime now = DateTime.now();
-  String formattedDate = DateFormat('MM-dd-yyyy').format(DateTime.now());
+
 
 
   TextEditingController applyDateTextController = TextEditingController();

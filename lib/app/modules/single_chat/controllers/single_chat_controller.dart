@@ -79,7 +79,7 @@ class SingleChatController extends GetxController {
     try {
       singleChatSendLoader.value = true;
 
-      debugPrint('${Uri.parse(InfixApi.sendSingleChat)}');
+      // debugPrint('${Uri.parse(InfixApi.sendSingleChat)}');
       final request =
           http.MultipartRequest('POST', Uri.parse(InfixApi.sendSingleChat));
       request.headers.addAll(GlobalVariable.header);
