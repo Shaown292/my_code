@@ -6,4 +6,4 @@ A new Flutter project for an interview for SteadFast It. It's a weather App wher
 
 Started with the figma file. It has mesmerizing UI design. Used Open weather API from https://www.weatherapi.com/ and showed necessary data. 
 
-![alt text](http://url/to/img.png)
+![alt text](https://postimg.cc/XBWdSd8z)
